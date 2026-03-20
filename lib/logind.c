@@ -14,7 +14,7 @@
 
 #include <systemd/sd-login.h>
 
-int get_session_host (char **out, pid_t main_pid)
+int get_session_host(char **out, pid_t main_pid)
 {
 	char *host = NULL;
 	char *session = NULL;
@@ -24,7 +24,7 @@ int get_session_host (char **out, pid_t main_pid)
 	if (ret < 0) {
 		return ret;
 	}
-	ret = sd_session_get_remote_host (session, &host);
+	ret = sd_session_get_remote_host(session, &host);
 	if (ret < 0) {
 		goto done;
 	}
@@ -32,7 +32,7 @@ int get_session_host (char **out, pid_t main_pid)
 	*out = host;
 
 done:
-	free (session);
+	free(session);
 	return ret;
 }
 

@@ -38,7 +38,7 @@ static FILE *ports;
  *	A match returns 0, failure returns non-zero.
  */
 
-static int portcmp (const char *pattern, const char *port)
+static int portcmp(const char *pattern, const char *port)
 {
 	const char *orig = port;
 
@@ -63,12 +63,12 @@ static int portcmp (const char *pattern, const char *port)
  *	opened for reading.
  */
 
-static void setportent (void)
+static void setportent(void)
 {
 	if (NULL != ports) {
-		rewind (ports);
+		rewind(ports);
 	} else {
-		ports = fopen (PORTS, "r");
+		ports = fopen(PORTS, "r");
 	}
 }
 
@@ -80,10 +80,10 @@ static void setportent (void)
  *	open.
  */
 
-static void endportent (void)
+static void endportent(void)
 {
 	if (NULL != ports) {
-		(void) fclose (ports);
+		(void) fclose(ports);
 	}
 
 	ports = NULL;
@@ -121,7 +121,7 @@ getportent(void)
 	 */
 
 	if (NULL == ports) {
-		setportent ();
+		setportent();
 	}
 
 	if (NULL == ports) {
@@ -261,7 +261,7 @@ next:
 		 * representing the times of day.
 		 */
 
-		for (dtime = 0; isdigit (cp[i]); i++) {
+		for (dtime = 0; isdigit(cp[i]); i++) {
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
@@ -271,7 +271,7 @@ next:
 		port.pt_times[j].t_start = dtime;
 		cp = cp + i + 1;
 
-		for (dtime = 0, i = 0; isdigit (cp[i]); i++) {
+		for (dtime = 0, i = 0; isdigit(cp[i]); i++) {
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
@@ -341,7 +341,7 @@ end:
  *	the user name and TTY given.
  */
 
-bool isttytime (const char *id, const char *port, time_t when)
+bool isttytime(const char *id, const char *port, time_t when)
 {
 	int i;
 	int dtime;
@@ -354,7 +354,7 @@ bool isttytime (const char *id, const char *port, time_t when)
 	 * entry to match all users.
 	 */
 
-	pp = getttyuser (port, id);
+	pp = getttyuser(port, id);
 	if (NULL == pp) {
 		return true;
 	}
@@ -373,7 +373,7 @@ bool isttytime (const char *id, const char *port, time_t when)
 	 * comparison against the time values in the TTY entry.
 	 */
 
-	tm = localtime (&when);
+	tm = localtime(&when);
 	dtime = tm->tm_hour * 100 + tm->tm_min;
 
 	/*
@@ -384,7 +384,7 @@ bool isttytime (const char *id, const char *port, time_t when)
 	 */
 
 	for (i = 0; pp->pt_times[i].t_start != -1; i++) {
-		if (!(pp->pt_times[i].t_days & PORT_DAY (tm->tm_wday))) {
+		if (!(pp->pt_times[i].t_days & PORT_DAY(tm->tm_wday))) {
 			continue;
 		}
 

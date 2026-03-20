@@ -20,7 +20,7 @@
  *	failure() creates a new (struct faillog) entry or updates an
  *	existing one with the current failed login information.
  */
-extern void failure (uid_t, const char *, struct faillog *);
+extern void failure(uid_t, const char *, struct faillog *);
 
 /*
  * failcheck - check for failures > allowable
@@ -30,7 +30,7 @@ extern void failure (uid_t, const char *, struct faillog *);
  *	returns FALSE to indicate that the login should be denied even though
  *	the password is valid.
  */
-extern int failcheck (uid_t uid, struct faillog *fl, bool failed);
+extern int failcheck(uid_t uid, struct faillog *fl, bool failed);
 
 /*
  * failprint - print line of failure information
@@ -38,7 +38,7 @@ extern int failcheck (uid_t uid, struct faillog *fl, bool failed);
  *	failprint takes a (struct faillog) entry and formats it into a
  *	message which is displayed at login time.
  */
-extern void failprint (const struct faillog *);
+extern void failprint(const struct faillog *);
 
 #endif
 

@@ -30,7 +30,7 @@
  *	is used to indicate that a dummy salt must be used to encrypt the
  *	password anyway.
  */
-bool valid (const char *password, const struct passwd *ent)
+bool valid(const char *password, const struct passwd *ent)
 {
 	const char *encrypted;
 	/*@observer@*/const char *salt;
@@ -67,7 +67,7 @@ bool valid (const char *password, const struct passwd *ent)
 	 * looking at execution time.
 	 */
 
-	encrypted = pw_encrypt (password, salt);
+	encrypted = pw_encrypt(password, salt);
 
 	/*
 	 * One last time we must deal with there being no password file

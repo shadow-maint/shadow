@@ -34,7 +34,7 @@
 
 
 /* local function prototypes */
-NORETURN static void usage (int status);
+NORETURN static void usage(int status);
 static void print_one (/*@null@*/const struct passwd *pw, bool force);
 static void set_locktime (long locktime);
 static bool set_locktime_one (uid_t uid, long locktime);
@@ -69,26 +69,26 @@ static struct stat statbuf;	/* fstat buffer for file size */
 
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -a, --all                     display faillog records for all users\n"), usageout);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -l, --lock-secs SEC           after failed login lock account for SEC seconds\n"), usageout);
-	(void) fputs (_("  -m, --maximum MAX             set maximum failed login counters to MAX\n"), usageout);
-	(void) fputs (_("  -r, --reset                   reset the counters of login failures\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -t, --time DAYS               display faillog records more recent than DAYS\n"), usageout);
-	(void) fputs (_("  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
-	                "                                counters and limits (if used with -r, -m,\n"
+	(void) fputs(_("  -a, --all                     display faillog records for all users\n"), usageout);
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -l, --lock-secs SEC           after failed login lock account for SEC seconds\n"), usageout);
+	(void) fputs(_("  -m, --maximum MAX             set maximum failed login counters to MAX\n"), usageout);
+	(void) fputs(_("  -r, --reset                   reset the counters of login failures\n"), usageout);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -t, --time DAYS               display faillog records more recent than DAYS\n"), usageout);
+	(void) fputs(_("  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
+	                "                                counters and limits(if used with -r, -m,\n"
 	                "                                or -l) only for the specified LOGIN(s)\n"), usageout);
-	(void) fputs ("\n", usageout);
-	exit (status);
+	(void) fputs("\n", usageout);
+	exit(status);
 }
 
 /*
@@ -116,7 +116,7 @@ static off_t lookup_faillog(struct faillog *fl, uid_t uid)
 		 * entered for this user, which should be able to get the
 		 * empty entry in this case.
 		 */
-		if (fread(fl, sizeof(*fl), 1, fail) != 1) {
+		if (fread(fl, sizeof (*fl), 1, fail) != 1) {
 			fprintf(stderr,
 			        _("%s: Failed to get the entry for UID %lu\n"),
 			        Prog, (unsigned long)uid);
@@ -128,7 +128,7 @@ static off_t lookup_faillog(struct faillog *fl, uid_t uid)
 		 * as if we were reading an non existing entry in the
 		 * sparse faillog file).
 		 */
-		memzero(fl, sizeof(*fl));
+		memzero(fl, sizeof (*fl));
 	}
 
 	return offset;
@@ -165,38 +165,38 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 
 	/* Print the header only once */
 	if (!once) {
-		puts (_("Login       Failures Maximum Latest                   On\n"));
+		puts(_("Login       Failures Maximum Latest                   On\n"));
 		once = true;
 	}
 
-	tm = localtime (&fl.fail_time);
+	tm = localtime(&fl.fail_time);
 	if (!tm) {
-		fprintf (stderr, "Cannot read time from faillog.\n");
+		fprintf(stderr, "Cannot read time from faillog.\n");
 		return;
 	}
 	strftime_a(ptime, "%D %H:%M:%S %z", tm);
 	cp = ptime;
 
-	printf ("%-9s   %5d    %5d   ",
+	printf("%-9s   %5d    %5d   ",
 	        pw->pw_name, fl.fail_cnt, fl.fail_max);
-	printf ("%s  %s", cp, fl.fail_line);
+	printf("%s  %s", cp, fl.fail_line);
 	if (0 != fl.fail_locktime) {
 		if (   ((fl.fail_time + fl.fail_locktime) > now)
 		    && (0 != fl.fail_cnt)) {
-			printf (_(" [%lus left]"),
+			printf(_(" [%lus left]"),
 			        (unsigned long) fl.fail_time + fl.fail_locktime - now);
 		} else {
-			printf (_(" [%lds lock]"),
+			printf(_(" [%lds lock]"),
 			        fl.fail_locktime);
 		}
 	}
-	putchar ('\n');
+	putchar('\n');
 }
 
-static void print (void)
+static void print(void)
 {
 	if (uflg && has_umin && has_umax && (umin==umax)) {
-		print_one (getpwuid (umin), true);
+		print_one(getpwuid(umin), true);
 	} else {
 		/* We only print records for existing users.
 		 * Loop based on the user database instead of reading the
@@ -206,16 +206,16 @@ static void print (void)
 		 */
 		struct passwd *pwent;
 
-		setpwent ();
-		while ( (pwent = getpwent ()) != NULL ) {
+		setpwent();
+		while ( (pwent = getpwent()) != NULL ) {
 			if (   uflg
 			    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
 			        || (has_umax && (pwent->pw_uid > (uid_t)umax)))) {
 				continue;
 			}
-			print_one (pwent, aflg);
+			print_one(pwent, aflg);
 		}
-		endpwent ();
+		endpwent();
 	}
 }
 
@@ -224,7 +224,7 @@ static void print (void)
  *
  * This returns a boolean indicating if an error occurred.
  */
-static bool reset_one (uid_t uid)
+static bool reset_one(uid_t uid)
 {
 	off_t offset;
 	struct faillog fl;
@@ -245,29 +245,29 @@ static bool reset_one (uid_t uid)
 
 	fl.fail_cnt = 0;
 
-	if (   (fseeko (fail, offset, SEEK_SET) == 0)
-	    && (fwrite(&fl, sizeof(fl), 1, fail) == 1)) {
-		(void) fflush (fail);
+	if (   (fseeko(fail, offset, SEEK_SET) == 0)
+	    && (fwrite(&fl, sizeof (fl), 1, fail) == 1)) {
+		(void) fflush(fail);
 		return false;
 	}
 
-	fprintf (stderr,
+	fprintf(stderr,
 	         _("%s: Failed to reset fail count for UID %lu\n"),
 	         Prog, (unsigned long)uid);
 	return true;
 }
 
-static void reset (void)
+static void reset(void)
 {
 	if (uflg && has_umin && has_umax && (umin==umax)) {
-		if (reset_one (umin)) {
+		if (reset_one(umin)) {
 			errors = true;
 		}
 	} else {
 		/* There is no need to reset outside of the faillog
 		 * database.
 		 */
-		uid_t uidmax = statbuf.st_size / sizeof(struct faillog);
+		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
 		if (uidmax > 1) {
 			uidmax--;
 		}
@@ -299,18 +299,18 @@ static void reset (void)
 			 */
 			struct passwd *pwent;
 
-			setpwent ();
-			while ( (pwent = getpwent ()) != NULL ) {
+			setpwent();
+			while ( (pwent = getpwent()) != NULL ) {
 				if (   uflg
 				    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
 				        || (pwent->pw_uid > uidmax))) {
 					continue;
 				}
-				if (reset_one (pwent->pw_uid)) {
+				if (reset_one(pwent->pw_uid)) {
 					errors = true;
 				}
 			}
-			endpwent ();
+			endpwent();
 		}
 	}
 }
@@ -320,7 +320,7 @@ static void reset (void)
  *
  * This returns a boolean indicating if an error occurred.
  */
-static bool setmax_one (uid_t uid, short max)
+static bool setmax_one(uid_t uid, short max)
 {
 	off_t offset;
 	struct faillog fl;
@@ -341,22 +341,22 @@ static bool setmax_one (uid_t uid, short max)
 
 	fl.fail_max = max;
 
-	if (   (fseeko (fail, offset, SEEK_SET) == 0)
-	    && (fwrite(&fl, sizeof(fl), 1, fail) == 1)) {
-		(void) fflush (fail);
+	if (   (fseeko(fail, offset, SEEK_SET) == 0)
+	    && (fwrite(&fl, sizeof (fl), 1, fail) == 1)) {
+		(void) fflush(fail);
 		return false;
 	}
 
-	fprintf (stderr,
+	fprintf(stderr,
 	         _("%s: Failed to set max for UID %lu\n"),
 	         Prog, (unsigned long)uid);
 	return true;
 }
 
-static void setmax (short max)
+static void setmax(short max)
 {
 	if (uflg && has_umin && has_umax && (umin==umax)) {
-		if (setmax_one (umin, max)) {
+		if (setmax_one(umin, max)) {
 			errors = true;
 		}
 	} else {
@@ -373,7 +373,7 @@ static void setmax (short max)
 			/* The default umax value is based on the size of the
 			 * faillog database.
 			 */
-			uid_t uidmax = statbuf.st_size / sizeof(struct faillog);
+			uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
 			if (uidmax > 1) {
 				uidmax--;
 			}
@@ -397,18 +397,18 @@ static void setmax (short max)
 			 */
 			struct passwd *pwent;
 
-			setpwent ();
-			while ( (pwent = getpwent ()) != NULL ) {
+			setpwent();
+			while ( (pwent = getpwent()) != NULL ) {
 				if (   uflg
 				    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
 				        || (has_umax && (pwent->pw_uid > (uid_t)umax)))) {
 					continue;
 				}
-				if (setmax_one (pwent->pw_uid, max)) {
+				if (setmax_one(pwent->pw_uid, max)) {
 					errors = true;
 				}
 			}
-			endpwent ();
+			endpwent();
 		}
 	}
 }
@@ -418,7 +418,7 @@ static void setmax (short max)
  *
  * This returns a boolean indicating if an error occurred.
  */
-static bool set_locktime_one (uid_t uid, long locktime)
+static bool set_locktime_one(uid_t uid, long locktime)
 {
 	off_t offset;
 	struct faillog fl;
@@ -439,22 +439,22 @@ static bool set_locktime_one (uid_t uid, long locktime)
 
 	fl.fail_locktime = locktime;
 
-	if (   (fseeko (fail, offset, SEEK_SET) == 0)
-	    && (fwrite(&fl, sizeof(fl), 1, fail) == 1)) {
-		(void) fflush (fail);
+	if (   (fseeko(fail, offset, SEEK_SET) == 0)
+	    && (fwrite(&fl, sizeof (fl), 1, fail) == 1)) {
+		(void) fflush(fail);
 		return false;
 	}
 
-	fprintf (stderr,
+	fprintf(stderr,
 	         _("%s: Failed to set locktime for UID %lu\n"),
 	         Prog, (unsigned long)uid);
 	return true;
 }
 
-static void set_locktime (long locktime)
+static void set_locktime(long locktime)
 {
 	if (uflg && has_umin && has_umax && (umin==umax)) {
-		if (set_locktime_one (umin, locktime)) {
+		if (set_locktime_one(umin, locktime)) {
 			errors = true;
 		}
 	} else {
@@ -471,7 +471,7 @@ static void set_locktime (long locktime)
 			/* The default umax value is based on the size of the
 			 * faillog database.
 			 */
-			uid_t uidmax = statbuf.st_size / sizeof(struct faillog);
+			uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
 			if (uidmax > 1) {
 				uidmax--;
 			}
@@ -495,23 +495,23 @@ static void set_locktime (long locktime)
 			 */
 			struct passwd *pwent;
 
-			setpwent ();
-			while ( (pwent = getpwent ()) != NULL ) {
+			setpwent();
+			while ( (pwent = getpwent()) != NULL ) {
 				if (   uflg
 				    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
 				        || (has_umax && (pwent->pw_uid > (uid_t)umax)))) {
 					continue;
 				}
-				if (set_locktime_one (pwent->pw_uid, locktime)) {
+				if (set_locktime_one(pwent->pw_uid, locktime)) {
 					errors = true;
 				}
 			}
-			endpwent ();
+			endpwent();
 		}
 	}
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	long fail_locktime = 0;
 	short fail_max = 0; // initialize to silence compiler warning
@@ -520,11 +520,11 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
 	{
 		int c;
@@ -539,14 +539,14 @@ int main (int argc, char **argv)
 			{"user",      required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
-		while ((c = getopt_long (argc, argv, "ahl:m:rR:t:u:",
+		while ((c = getopt_long(argc, argv, "ahl:m:rR:t:u:",
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':
 				aflg = true;
 				break;
 			case 'h':
-				usage (E_SUCCESS);
+				usage(E_SUCCESS);
 				/*@notreached@*/break;
 			case 'l':
 				if (str2sl(&fail_locktime, optarg) == -1) {
@@ -575,10 +575,10 @@ int main (int argc, char **argv)
 				break;
 			case 't':
 				if (str2sl(&days, optarg) == -1) {
-					fprintf (stderr,
+					fprintf(stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					exit (E_BAD_ARG);
+					exit(E_BAD_ARG);
 				}
 				seconds = (time_t) days * DAY;
 				tflg = true;
@@ -633,15 +633,15 @@ int main (int argc, char **argv)
 
 	/* Open the faillog database */
 	if (lflg || mflg || rflg) {
-		fail = fopen (FAILLOG_FILE, "r+");
+		fail = fopen(FAILLOG_FILE, "r+");
 	} else {
-		fail = fopen (FAILLOG_FILE, "r");
+		fail = fopen(FAILLOG_FILE, "r");
 	}
 	if (NULL == fail) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: Cannot open %s: %s\n"),
 		        Prog, FAILLOG_FILE, strerrno());
-		exit (E_NOPERM);
+		exit(E_NOPERM);
 	}
 
 	/* Get the size of the faillog */

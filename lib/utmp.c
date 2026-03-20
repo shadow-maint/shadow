@@ -60,12 +60,12 @@ is_my_tty(const char tty[UTX_LINESIZE])
 
 	stpcpy(full_tty, "");
 	if (tty[0] != '/')
-		strcpy (full_tty, "/dev/");
+		strcpy(full_tty, "/dev/");
 	strncat(full_tty, tty, UTX_LINESIZE);
 
 	if (ttyname_ra(STDIN_FILENO, my_tty) != 0) {
-		(void) puts (_("Unable to determine your tty name."));
-		exit (EXIT_FAILURE);
+		(void) puts(_("Unable to determine your tty name."));
+		exit(EXIT_FAILURE);
 	}
 
 	return streq(full_tty, my_tty);
@@ -89,7 +89,7 @@ failtmp(const char *username, const struct utmpx *failent)
 	 * in login.defs, don't do this.
 	 */
 
-	ftmp = getdef_str ("FTMP_FILE");
+	ftmp = getdef_str("FTMP_FILE");
 	if (NULL == ftmp) {
 		return;
 	}
@@ -99,7 +99,7 @@ failtmp(const char *username, const struct utmpx *failent)
 	 * feature to be used.
 	 */
 
-	fd = open (ftmp, O_WRONLY | O_APPEND);
+	fd = open(ftmp, O_WRONLY | O_APPEND);
 	if (-1 == fd) {
 		if (errno != ENOENT) {
 			SYSLOG(LOG_WARN,
@@ -113,11 +113,11 @@ failtmp(const char *username, const struct utmpx *failent)
 	 * Append the new failure record and close the log file.
 	 */
 
-	if (write_full(fd, failent, sizeof(*failent)) == -1) {
+	if (write_full(fd, failent, sizeof (*failent)) == -1) {
 		goto err_write;
 	}
 
-	if (close (fd) != 0 && errno != EINTR) {
+	if (close(fd) != 0 && errno != EINTR) {
 		goto err_close;
 	}
 
@@ -126,7 +126,7 @@ failtmp(const char *username, const struct utmpx *failent)
 err_write:
 	{
 		int saved_errno = errno;
-		(void) close (fd);
+		(void) close(fd);
 		errno = saved_errno;
 	}
 err_close:
@@ -228,10 +228,10 @@ updwtmpx(const char *filename, const struct utmpx *ut)
 {
 	int fd;
 
-	fd = open (filename, O_APPEND | O_WRONLY, 0);
+	fd = open(filename, O_APPEND | O_WRONLY, 0);
 	if (fd >= 0) {
-		write_full(fd, ut, sizeof(*ut));
-		close (fd);
+		write_full(fd, ut, sizeof (*ut));
+		close(fd);
 	}
 }
 #endif
@@ -264,8 +264,8 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	struct utmpx    *utent;
 	struct timeval  tv;
 
-	assert (NULL != name);
-	assert (NULL != line);
+	assert(NULL != name);
+	assert(NULL != line);
 
 
 
@@ -301,10 +301,10 @@ prepare_utmp(const char *name, const char *line, const char *host,
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
 		utent->ut_syslen = MIN(strlen(hostname),
-		                       sizeof(utent->ut_host));
+		                       sizeof (utent->ut_host));
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
-		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
+		if (getaddrinfo(hostname, NULL, NULL, &info) == 0) {
 			/* getaddrinfo might not be reliable.
 			 * Just try to log what may be useful.
 			 */
@@ -319,16 +319,16 @@ prepare_utmp(const char *name, const char *line, const char *host,
 			} else if (info->ai_family == AF_INET6) {
 				struct sockaddr_in6 *sa =
 					(struct sockaddr_in6 *) info->ai_addr;
-				memcpy (utent->ut_addr_v6,
+				memcpy(utent->ut_addr_v6,
 				        &(sa->sin6_addr),
-				        MIN(sizeof(utent->ut_addr_v6),
-				            sizeof(sa->sin6_addr)));
+				        MIN(sizeof (utent->ut_addr_v6),
+				            sizeof (sa->sin6_addr)));
 # endif
 			}
-			freeaddrinfo (info);
+			freeaddrinfo(info);
 		}
 #endif
-		free (hostname);
+		free(hostname);
 	}
 	/* ut_exit is only for DEAD_PROCESS */
 	utent->ut_session = getsid (0);
@@ -357,7 +357,7 @@ setutmp(struct utmpx *ut)
 {
 	int err = 0;
 
-	assert (NULL != ut);
+	assert(NULL != ut);
 
 	setutxent();
 	if (pututxline(ut) == NULL) {
@@ -398,13 +398,13 @@ record_failure(const char *failent_user, const char *tty, const char *hostname,
 {
 	struct utmpx  *utent, *failent;
 
-	if (getdef_str ("FTMP_FILE") != NULL) {
+	if (getdef_str("FTMP_FILE") != NULL) {
 		utent = get_current_utmp(main_pid);
 		failent = prepare_utmp(failent_user, tty, hostname, utent,
 		                       main_pid);
-		failtmp (failent_user, failent);
-		free (utent);
-		free (failent);
+		failtmp(failent_user, failent);
+		free(utent);
+		free(failent);
 	}
 }
 

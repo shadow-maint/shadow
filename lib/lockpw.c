@@ -19,7 +19,7 @@
 /*
  * lckpwdf - lock the password files
  */
-int lckpwdf (void)
+int lckpwdf(void)
 {
 	int i;
 
@@ -28,10 +28,10 @@ int lckpwdf (void)
 	 */
 
 	for (i = 0; i < 15; i++)
-		if (pw_lock ())
+		if (pw_lock())
 			break;
 		else
-			sleep (1);
+			sleep(1);
 
 	/*
 	 * Did we run out of time?
@@ -46,17 +46,17 @@ int lckpwdf (void)
 	 */
 
 	for (; i < 15; i++)
-		if (spw_lock ())
+		if (spw_lock())
 			break;
 		else
-			sleep (1);
+			sleep(1);
 
 	/*
 	 * Out of time yet?
 	 */
 
 	if (i == 15) {
-		pw_unlock (true);
+		pw_unlock(true);
 		return -1;
 	}
 
@@ -71,14 +71,14 @@ int lckpwdf (void)
  * ulckpwdf - unlock the password files
  */
 
-int ulckpwdf (void)
+int ulckpwdf(void)
 {
 
 	/*
 	 * Unlock both files.
 	 */
 
-	return (pw_unlock (true) && spw_unlock (true))? 0 : -1;
+	return (pw_unlock(true) && spw_unlock(true))? 0 : -1;
 }
 #else
 extern int ISO_C_forbids_an_empty_translation_unit;

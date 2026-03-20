@@ -100,29 +100,29 @@ static void check_flags (void);
  */
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options] GROUP\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -f, --force                   exit successfully if the group already exists,\n"
+	(void) fputs(_("  -f, --force                   exit successfully if the group already exists,\n"
 	                "                                and cancel -g if the GID is already used\n"), usageout);
-	(void) fputs (_("  -g, --gid GID                 use GID for the new group\n"), usageout);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), usageout);
-	(void) fputs (_("  -o, --non-unique              allow to create groups with duplicate\n"
+	(void) fputs(_("  -g, --gid GID                 use GID for the new group\n"), usageout);
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), usageout);
+	(void) fputs(_("  -o, --non-unique              allow to create groups with duplicate\n"
 	                "                                (non-unique) GID\n"), usageout);
-	(void) fputs (_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), usageout);
-	(void) fputs (_("  -r, --system                  create a system account\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
-	(void) fputs (_("  -U, --users USERS             comma-separated list of users to add as\n"
+	(void) fputs(_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), usageout);
+	(void) fputs(_("  -r, --system                  create a system account\n"), usageout);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
+	(void) fputs(_("  -U, --users USERS             comma-separated list of users to add as\n"
 			"	                         members of this group\n"), usageout);
-	(void) fputs ("\n", usageout);
-	exit (status);
+	(void) fputs("\n", usageout);
+	exit(status);
 }
 
 static void fail_exit(int status)
@@ -131,7 +131,7 @@ static void fail_exit(int status)
 	audit_logger(AUDIT_ADD_GROUP, "add-group", group_name,
 				 AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
-	exit (status);
+	exit(status);
 }
 
 /*
@@ -140,9 +140,9 @@ static void fail_exit(int status)
  *	new_grent() takes all of the values that have been entered and fills
  *	in a (struct group) with them.
  */
-static void new_grent (struct group *grent)
+static void new_grent(struct group *grent)
 {
-	memzero(grent, sizeof(*grent));
+	memzero(grent, sizeof (*grent));
 	grent->gr_name = group_name;
 	if (pflg) {
 		grent->gr_passwd = group_passwd;
@@ -160,9 +160,9 @@ static void new_grent (struct group *grent)
  *	new_sgent() takes all of the values that have been entered and fills
  *	in a (struct sgrp) with them.
  */
-static void new_sgent (struct sgrp *sgent)
+static void new_sgent(struct sgrp *sgent)
 {
-	memzero(sgent, sizeof(*sgent));
+	memzero(sgent, sizeof (*sgent));
 	sgent->sg_namp = group_name;
 	if (pflg) {
 		sgent->sg_passwd = group_passwd;
@@ -192,7 +192,7 @@ grp_update(void)
 	 * To add the group, we need to update /etc/group.
 	 * Make sure failures will be reported.
 	 */
-	add_cleanup (cleanup_report_add_group_group, group_name);
+	add_cleanup(cleanup_report_add_group_group, group_name);
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		/* We also need to update /etc/gshadow */
@@ -203,9 +203,9 @@ grp_update(void)
 	/*
 	 * Create the initial entries for this new group.
 	 */
-	new_grent (&grp);
+	new_grent(&grp);
 #ifdef	SHADOWGRP
-	new_sgent (&sgrp);
+	new_sgent(&sgrp);
 	if (is_shadow_grp && pflg) {
 		grp.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 	}
@@ -232,21 +232,21 @@ grp_update(void)
 	/*
 	 * Write out the new group file entry.
 	 */
-	if (gr_update (&grp) == 0) {
-		fprintf (stderr,
+	if (gr_update(&grp) == 0) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, gr_dbname (), grp.gr_name);
-		fail_exit (E_GRP_UPDATE);
+		         Prog, gr_dbname(), grp.gr_name);
+		fail_exit(E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	/*
 	 * Write out the new shadow group entries as well.
 	 */
-	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr,
+	if (is_shadow_grp && (sgr_update(&sgrp) == 0)) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, sgr_dbname (), sgrp.sg_namp);
-		fail_exit (E_GRP_UPDATE);
+		         Prog, sgr_dbname(), sgrp.sg_namp);
+		fail_exit(E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
 }
@@ -264,7 +264,7 @@ check_new_name(void)
 		fprintf(stderr, _("%s: '%s' is not a valid group name\n"),
 			Prog, group_name);
 
-		fail_exit (E_BAD_ARG);
+		fail_exit(E_BAD_ARG);
 	}
 
 	return;
@@ -304,23 +304,23 @@ static void close_files(const struct option_flags *flags)
 	/* Now, write the changes in the shadow database */
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
+		if (sgr_close(process_selinux) == 0) {
+			fprintf(stderr,
 			         _("%s: failure while writing changes to %s\n"),
-			         Prog, sgr_dbname ());
-			fail_exit (E_GRP_UPDATE);
+			         Prog, sgr_dbname());
+			fail_exit(E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_GRP_MGMT,
+		audit_logger(AUDIT_GRP_MGMT,
 		              "add-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG(LOG_INFO, "group added to %s: name=%s",
 		       sgr_dbname(), group_name);
-		del_cleanup (cleanup_report_add_group_gshadow);
+		del_cleanup(cleanup_report_add_group_gshadow);
 
-		cleanup_unlock_gshadow (&process_selinux);
-		del_cleanup (cleanup_unlock_gshadow);
+		cleanup_unlock_gshadow(&process_selinux);
+		del_cleanup(cleanup_unlock_gshadow);
 	}
 #endif				/* SHADOWGRP */
 
@@ -366,7 +366,7 @@ static void open_files(const struct option_flags *flags)
 	 * Now if the group is not added, it's our fault.
 	 * Make sure failures will be reported.
 	 */
-	add_cleanup (cleanup_report_add_group, group_name);
+	add_cleanup(cleanup_report_add_group, group_name);
 
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
@@ -393,7 +393,7 @@ static void open_files(const struct option_flags *flags)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -414,7 +414,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "fg:hK:op:rR:P:U:",
+	while ((c = getopt_long(argc, argv, "fg:hK:op:rR:P:U:",
 		                 long_options, NULL)) != -1) {
 		switch (c) {
 		case 'f':
@@ -431,14 +431,14 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			gflg = true;
 			if (   (get_gid(optarg, &group_id) == -1)
 			    || (group_id == (gid_t)-1)) {
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: invalid group ID '%s'\n"),
 				         Prog, optarg);
-				exit (E_BAD_ARG);
+				exit(E_BAD_ARG);
 			}
 			break;
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'K':
 			/*
@@ -448,13 +448,13 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			 */
 			cp = stpsep(optarg, "=");
 			if (NULL == cp) {
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: -K requires KEY=VALUE\n"),
 				         Prog);
-				exit (E_BAD_ARG);
+				exit(E_BAD_ARG);
 			}
-			if (putdef_str (optarg, cp, NULL) < 0) {
-				exit (E_BAD_ARG);
+			if (putdef_str(optarg, cp, NULL) < 0) {
+				exit(E_BAD_ARG);
 			}
 			break;
 		case 'o':
@@ -477,7 +477,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			user_list = optarg;
 			break;
 		default:
-			usage (E_USAGE);
+			usage(E_USAGE);
 		}
 	}
 
@@ -485,11 +485,11 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	 * Check the flags consistency
 	 */
 	if (optind != argc - 1) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 	group_name = argv[optind];
 
-	check_flags ();
+	check_flags();
 }
 
 /*
@@ -497,7 +497,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *
  *	It will not return if an error is encountered.
  */
-static void check_flags (void)
+static void check_flags(void)
 {
 	/* -o does not make sense without -g */
 	if (oflg && !gflg) {
@@ -535,10 +535,10 @@ static void check_flags (void)
 			/* Turn off -g, we can use any GID */
 			gflg = false;
 		} else {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: GID '%lu' already exists\n"),
 			         Prog, (unsigned long) group_id);
-			fail_exit (E_GID_IN_USE);
+			fail_exit(E_GID_IN_USE);
 		}
 	}
 }
@@ -546,68 +546,68 @@ static void check_flags (void)
 /*
  * main - groupadd command
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
-	prefix = process_prefix_flag ("-P", argc, argv);
+	process_root_flag("-R", argc, argv);
+	prefix = process_prefix_flag("-P", argc, argv);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 #ifdef WITH_AUDIT
-	audit_help_open ();
+	audit_help_open();
 #endif
 
-	if (atexit (do_cleanups) != 0) {
-		fprintf (stderr,
+	if (atexit(do_cleanups) != 0) {
+		fprintf(stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
 		         Prog);
-		fail_exit (1);
+		fail_exit(1);
 	}
 
 	/*
 	 * Parse the command line options.
 	 */
-	process_flags (argc, argv, &flags);
+	process_flags(argc, argv, &flags);
 
-	if (run_parts ("/etc/shadow-maint/groupadd-pre.d", group_name,
+	if (run_parts("/etc/shadow-maint/groupadd-pre.d", group_name,
 			Prog)) {
 		exit(1);
 	}
 
 #ifdef SHADOWGRP
-	is_shadow_grp = sgr_file_present ();
+	is_shadow_grp = sgr_file_present();
 #endif
 
 	/*
 	 * Do the hard stuff - open the files, create the group entries,
 	 * then close and update the files.
 	 */
-	open_files (&flags);
+	open_files(&flags);
 
 	if (!gflg) {
-		if (find_new_gid (rflg, &group_id, NULL) < 0) {
-			fail_exit (E_GID_IN_USE);
+		if (find_new_gid(rflg, &group_id, NULL) < 0) {
+			fail_exit(E_GID_IN_USE);
 		}
 	}
 
-	grp_update ();
-	close_files (&flags);
-	if (run_parts ("/etc/shadow-maint/groupadd-post.d", group_name,
+	grp_update();
+	close_files(&flags);
+	if (run_parts("/etc/shadow-maint/groupadd-post.d", group_name,
 			Prog)) {
 		exit(1);
 	}
 
 
-	nscd_flush_cache ("group");
-	sssd_flush_cache (SSSD_DB_GROUP);
+	nscd_flush_cache("group");
+	sssd_flush_cache(SSSD_DB_GROUP);
 
 	return E_SUCCESS;
 }

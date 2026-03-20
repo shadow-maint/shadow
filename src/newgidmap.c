@@ -113,7 +113,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 	 * is write-once, so attempting to write after it's already written to will
 	 * fail.
 	 */
-	if (read(setgroups_fd, policy_buffer, sizeof(policy_buffer)) < 0) {
+	if (read(setgroups_fd, policy_buffer, sizeof (policy_buffer)) < 0) {
 		fprintf(stderr, _("%s: failed to read setgroups: %s\n"),
 			Prog, strerrno());
 		exit(EXIT_FAILURE);
@@ -177,12 +177,12 @@ int main(int argc, char **argv)
 			usage();
 	}
 	/* Who am I? */
-	pw = get_my_pwent ();
+	pw = get_my_pwent();
 	if (NULL == pw) {
-		fprintf (stderr,
+		fprintf(stderr,
 			_("%s: Cannot determine your user name.\n"),
 			Prog);
-		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller(UID %lu)",
 		       (unsigned long) getuid());
 		return EXIT_FAILURE;
 	}
@@ -211,7 +211,7 @@ int main(int argc, char **argv)
 	}
 
 	if (want_subgid_file() && !sub_gid_open(O_RDONLY)) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: cannot open %s: %s\n"),
 		         Prog, sub_gid_dbname(), strerrno());
 		return EXIT_FAILURE;

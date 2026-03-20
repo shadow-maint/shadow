@@ -79,11 +79,11 @@ static void get_old_fields (const char *gecos);
 /*
  * fail_exit - exit with an error and do some cleanup
  */
-static void fail_exit (int code, bool process_selinux)
+static void fail_exit(int code, bool process_selinux)
 {
 	if (pw_locked) {
-		if (pw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		if (pw_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
@@ -100,23 +100,23 @@ static void fail_exit (int code, bool process_selinux)
  */
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options] [LOGIN]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -f, --full-name FULL_NAME     change user's full name\n"), usageout);
-	(void) fputs (_("  -h, --home-phone HOME_PHONE   change user's home phone number\n"), usageout);
-	(void) fputs (_("  -o, --other OTHER_INFO        change user's other GECOS information\n"), usageout);
-	(void) fputs (_("  -r, --room ROOM_NUMBER        change user's room number\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -u, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -w, --work-phone WORK_PHONE   change user's office phone number\n"), usageout);
-	(void) fputs ("\n", usageout);
-	exit (status);
+	(void) fputs(_("  -f, --full-name FULL_NAME     change user's full name\n"), usageout);
+	(void) fputs(_("  -h, --home-phone HOME_PHONE   change user's home phone number\n"), usageout);
+	(void) fputs(_("  -o, --other OTHER_INFO        change user's other GECOS information\n"), usageout);
+	(void) fputs(_("  -r, --room ROOM_NUMBER        change user's room number\n"), usageout);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -u, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -w, --work-phone WORK_PHONE   change user's office phone number\n"), usageout);
+	(void) fputs("\n", usageout);
+	exit(status);
 }
 
 /*
@@ -129,7 +129,7 @@ usage (int status)
  *
  *	Return true if the user can change the field and false otherwise.
  */
-static bool may_change_field (int field)
+static bool may_change_field(int field)
 {
 	const char *cp;
 
@@ -154,7 +154,7 @@ static bool may_change_field (int field)
 		return true;
 	}
 
-	cp = getdef_str ("CHFN_RESTRICT");
+	cp = getdef_str("CHFN_RESTRICT");
 	if (NULL == cp) {
 		cp = "";
 	} else if (streq(cp, "yes")) {
@@ -175,36 +175,36 @@ static bool may_change_field (int field)
  * prompt the user for each of the four fields and fill in the fields from
  * the user's response, or leave alone if nothing was entered.
  */
-static void new_fields (void)
+static void new_fields(void)
 {
-	puts (_("Enter the new value, or press ENTER for the default"));
+	puts(_("Enter the new value, or press ENTER for the default"));
 
-	if (may_change_field ('f')) {
-		change_field(fullnm, sizeof(fullnm), _("Full Name"));
+	if (may_change_field('f')) {
+		change_field(fullnm, sizeof (fullnm), _("Full Name"));
 	} else {
-		printf (_("\t%s: %s\n"), _("Full Name"), fullnm);
+		printf(_("\t%s: %s\n"), _("Full Name"), fullnm);
 	}
 
-	if (may_change_field ('r')) {
-		change_field(roomno, sizeof(roomno), _("Room Number"));
+	if (may_change_field('r')) {
+		change_field(roomno, sizeof (roomno), _("Room Number"));
 	} else {
-		printf (_("\t%s: %s\n"), _("Room Number"), roomno);
+		printf(_("\t%s: %s\n"), _("Room Number"), roomno);
 	}
 
-	if (may_change_field ('w')) {
-		change_field(workph, sizeof(workph), _("Work Phone"));
+	if (may_change_field('w')) {
+		change_field(workph, sizeof (workph), _("Work Phone"));
 	} else {
-		printf (_("\t%s: %s\n"), _("Work Phone"), workph);
+		printf(_("\t%s: %s\n"), _("Work Phone"), workph);
 	}
 
-	if (may_change_field ('h')) {
-		change_field(homeph, sizeof(homeph), _("Home Phone"));
+	if (may_change_field('h')) {
+		change_field(homeph, sizeof (homeph), _("Home Phone"));
 	} else {
-		printf (_("\t%s: %s\n"), _("Home Phone"), homeph);
+		printf(_("\t%s: %s\n"), _("Home Phone"), homeph);
 	}
 
 	if (amroot) {
-		change_field(slop, sizeof(slop), _("Other"));
+		change_field(slop, sizeof (slop), _("Other"));
 	}
 }
 
@@ -213,7 +213,7 @@ static void new_fields (void)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	int c;		/* flag currently being processed    */
 	static struct option long_options[] = {
@@ -234,46 +234,46 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	 * environment and must agree with the real UID. Also, the UID will
 	 * be checked for any commands which are restricted to root only.
 	 */
-	while ((c = getopt_long (argc, argv, "f:h:o:r:R:uw:",
+	while ((c = getopt_long(argc, argv, "f:h:o:r:R:uw:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'f':
-			if (!may_change_field ('f')) {
-				fprintf (stderr,
+			if (!may_change_field('f')) {
+				fprintf(stderr,
 				         _("%s: Permission denied.\n"), Prog);
-				exit (E_NOPERM);
+				exit(E_NOPERM);
 			}
 			fflg = true;
 			strtcpy_a(fullnm, optarg);
 			break;
 		case 'h':
-			if (!may_change_field ('h')) {
-				fprintf (stderr,
+			if (!may_change_field('h')) {
+				fprintf(stderr,
 				         _("%s: Permission denied.\n"), Prog);
-				exit (E_NOPERM);
+				exit(E_NOPERM);
 			}
 			hflg = true;
 			strtcpy_a(homeph, optarg);
 			break;
 		case 'o':
 			if (!amroot) {
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: Permission denied.\n"), Prog);
-				exit (E_NOPERM);
+				exit(E_NOPERM);
 			}
 			oflg = true;
-			if (strlen (optarg) > (unsigned int) 80) {
-				fprintf (stderr,
+			if (strlen(optarg) > (unsigned int) 80) {
+				fprintf(stderr,
 				         _("%s: fields too long\n"), Prog);
-				exit (E_NOPERM);
+				exit(E_NOPERM);
 			}
 			strtcpy_a(slop, optarg);
 			break;
 		case 'r':
-			if (!may_change_field ('r')) {
-				fprintf (stderr,
+			if (!may_change_field('r')) {
+				fprintf(stderr,
 				         _("%s: Permission denied.\n"), Prog);
-				exit (E_NOPERM);
+				exit(E_NOPERM);
 			}
 			rflg = true;
 			strtcpy_a(roomno, optarg);
@@ -285,16 +285,16 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			usage (E_SUCCESS);
 			/*@notreached@*/break;
 		case 'w':
-			if (!may_change_field ('w')) {
-				fprintf (stderr,
+			if (!may_change_field('w')) {
+				fprintf(stderr,
 				         _("%s: Permission denied.\n"), Prog);
-				exit (E_NOPERM);
+				exit(E_NOPERM);
 			}
 			wflg = true;
 			strtcpy_a(workph, optarg);
 			break;
 		default:
-			usage (E_USAGE);
+			usage(E_USAGE);
 		}
 	}
 }
@@ -309,7 +309,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *
  *	It will not return if the user is not allowed.
  */
-static void check_perms (const struct passwd *pw)
+static void check_perms(const struct passwd *pw)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
@@ -321,21 +321,21 @@ static void check_perms (const struct passwd *pw)
 	 * Non-privileged users are only allowed to change the gecos field
 	 * if the UID of the user matches the current real UID.
 	 */
-	if (!amroot && pw->pw_uid != getuid ()) {
-		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-		closelog ();
-		exit (E_NOPERM);
+	if (!amroot && pw->pw_uid != getuid()) {
+		fprintf(stderr, _("%s: Permission denied.\n"), Prog);
+		closelog();
+		exit(E_NOPERM);
 	}
 #ifdef WITH_SELINUX
 	/*
 	 * If the UID of the user does not match the current real UID,
 	 * check if the change is allowed by SELinux policy.
 	 */
-	if ((pw->pw_uid != getuid ())
-	    && (check_selinux_permit (Prog) != 0)) {
-		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-		closelog ();
-		exit (E_NOPERM);
+	if ((pw->pw_uid != getuid())
+	    && (check_selinux_permit(Prog) != 0)) {
+		fprintf(stderr, _("%s: Permission denied.\n"), Prog);
+		closelog();
+		exit(E_NOPERM);
 	}
 #endif
 
@@ -346,7 +346,7 @@ static void check_perms (const struct passwd *pw)
 	 * any changes can be made. Idea from util-linux chfn/chsh.
 	 * --marekm
 	 */
-	if (!amroot && getdef_bool ("CHFN_AUTH")) {
+	if (!amroot && getdef_bool("CHFN_AUTH")) {
 		passwd_check(pw->pw_name, pw->pw_passwd);
 	}
 
@@ -401,28 +401,28 @@ static void update_gecos(const char *user, char *gecos, const struct option_flag
 	 * against unexpected signals. Any keyboard signals are set to be
 	 * ignored.
 	 */
-	if (setuid (0) != 0) {
-		fputs (_("Cannot change ID to root.\n"), stderr);
+	if (setuid(0) != 0) {
+		fputs(_("Cannot change ID to root.\n"), stderr);
 		SYSLOG(LOG_ERR, "can't setuid(0)");
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
-	pwd_init ();
+	pwd_init();
 
 	/*
 	 * The passwd entry is now ready to be committed back to the
 	 * password file. Get a lock on the file and open it.
 	 */
-	if (pw_lock () == 0) {
-		fprintf (stderr,
+	if (pw_lock() == 0) {
+		fprintf(stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, pw_dbname ());
-		fail_exit (E_NOPERM, process_selinux);
+		         Prog, pw_dbname());
+		fail_exit(E_NOPERM, process_selinux);
 	}
 	pw_locked = true;
-	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		fail_exit (E_NOPERM, process_selinux);
+	if (pw_open(O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr,
+		         _("%s: cannot open %s\n"), Prog, pw_dbname());
+		fail_exit(E_NOPERM, process_selinux);
 	}
 
 	/*
@@ -431,12 +431,12 @@ static void update_gecos(const char *user, char *gecos, const struct option_flag
 	 * the shadow password if (despite the warnings) someone enables
 	 * AUTOSHADOW (or SHADOW_COMPAT in libc).  --marekm
 	 */
-	pw = pw_locate (user);
+	pw = pw_locate(user);
 	if (NULL == pw) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: user '%s' does not exist in %s\n"),
-		         Prog, user, pw_dbname ());
-		fail_exit (E_NOPERM, process_selinux);
+		         Prog, user, pw_dbname());
+		fail_exit(E_NOPERM, process_selinux);
 	}
 
 	/*
@@ -450,23 +450,23 @@ static void update_gecos(const char *user, char *gecos, const struct option_flag
 	 * Update the passwd file entry. If there is a DBM file, update that
 	 * entry as well.
 	 */
-	if (pw_update (&pwent) == 0) {
-		fprintf (stderr,
+	if (pw_update(&pwent) == 0) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, pw_dbname (), pwent.pw_name);
-		fail_exit (E_NOPERM, process_selinux);
+		         Prog, pw_dbname(), pwent.pw_name);
+		fail_exit(E_NOPERM, process_selinux);
 	}
 
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-	if (pw_close (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+	if (pw_close(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
-	if (pw_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+	if (pw_unlock(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
@@ -477,7 +477,7 @@ static void update_gecos(const char *user, char *gecos, const struct option_flag
  * get_old_fields - parse the old gecos and use the old value for the fields
  *                  which are not set on the command line
  */
-static void get_old_fields (const char *gecos)
+static void get_old_fields(const char *gecos)
 {
 	char        *p;
 	char        old_gecos[BUFSIZ];
@@ -512,42 +512,42 @@ static void get_old_fields (const char *gecos)
  *
  *	It will not return if a field is not valid.
  */
-static void check_fields (bool process_selinux)
+static void check_fields(bool process_selinux)
 {
 	int err;
-	err = valid_field (fullnm, ":,=\n");
+	err = valid_field(fullnm, ":,=\n");
 	if (err > 0) {
-		fprintf (stderr, _("%s: name with non-ASCII characters: '%s'\n"), Prog, fullnm);
+		fprintf(stderr, _("%s: name with non-ASCII characters: '%s'\n"), Prog, fullnm);
 	} else if (err < 0) {
-		fprintf (stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
-		fail_exit (E_NOPERM, process_selinux);
+		fprintf(stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
+		fail_exit(E_NOPERM, process_selinux);
 	}
-	err = valid_field (roomno, ":,=\n");
+	err = valid_field(roomno, ":,=\n");
 	if (err > 0) {
-		fprintf (stderr, _("%s: room number with non-ASCII characters: '%s'\n"), Prog, roomno);
+		fprintf(stderr, _("%s: room number with non-ASCII characters: '%s'\n"), Prog, roomno);
 	} else if (err < 0) {
-		fprintf (stderr, _("%s: invalid room number: '%s'\n"),
+		fprintf(stderr, _("%s: invalid room number: '%s'\n"),
 		         Prog, roomno);
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
-	if (valid_field (workph, ":,=\n") != 0) {
-		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
+	if (valid_field(workph, ":,=\n") != 0) {
+		fprintf(stderr, _("%s: invalid work phone: '%s'\n"),
 		         Prog, workph);
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
-	if (valid_field (homeph, ":,=\n") != 0) {
-		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
+	if (valid_field(homeph, ":,=\n") != 0) {
+		fprintf(stderr, _("%s: invalid home phone: '%s'\n"),
 		         Prog, homeph);
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
-	err = valid_field (slop, ":\n");
+	err = valid_field(slop, ":\n");
 	if (err > 0) {
-		fprintf (stderr, _("%s: '%s' contains non-ASCII characters\n"), Prog, slop);
+		fprintf(stderr, _("%s: '%s' contains non-ASCII characters\n"), Prog, slop);
 	} else if (err < 0) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: '%s' contains illegal characters\n"),
 		         Prog, slop);
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
 }
 
@@ -567,7 +567,7 @@ static void check_fields (bool process_selinux)
  *
  *	(*) requires root permission to execute.
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	char                 new_gecos[80];
 	char                 *user, *p, *e;
@@ -575,25 +575,25 @@ int main (int argc, char **argv)
 	struct option_flags  flags = {.chroot = false};
 	bool                 process_selinux;
 
-	sanitize_env ();
-	check_fds ();
+	sanitize_env();
+	check_fds();
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
 	/*
 	 * This command behaves different for root and non-root
 	 * users.
 	 */
-	amroot = (getuid () == 0);
+	amroot = (getuid() == 0);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
 	/* parse the command line options */
 	process_flags (argc, argv, &flags);
@@ -604,51 +604,51 @@ int main (int argc, char **argv)
 	 * name, or the name getlogin() returns.
 	 */
 	if (optind < argc) {
-		if (!is_valid_user_name (argv[optind])) {
-			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
-			fail_exit (E_NOPERM, process_selinux);
+		if (!is_valid_user_name(argv[optind])) {
+			fprintf(stderr, _("%s: Provided user name is not a valid name\n"), Prog);
+			fail_exit(E_NOPERM, process_selinux);
 		}
 		user = argv[optind];
-		pw = xgetpwnam (user);
+		pw = xgetpwnam(user);
 		if (NULL == pw) {
-			fprintf (stderr, _("%s: user '%s' does not exist\n"), Prog,
+			fprintf(stderr, _("%s: user '%s' does not exist\n"), Prog,
 			         user);
-			fail_exit (E_NOPERM, process_selinux);
+			fail_exit(E_NOPERM, process_selinux);
 		}
 	} else {
-		pw = get_my_pwent ();
+		pw = get_my_pwent();
 		if (NULL == pw) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+			SYSLOG(LOG_WARN, "Cannot determine the user name of the caller(UID %lu)",
 			       (unsigned long) getuid());
-			fail_exit (E_NOPERM, process_selinux);
+			fail_exit(E_NOPERM, process_selinux);
 		}
-		user = xstrdup (pw->pw_name);
+		user = xstrdup(pw->pw_name);
 	}
 
 	/* Check that the caller is allowed to change the gecos of the
 	 * specified user */
-	check_perms (pw);
+	check_perms(pw);
 
 	/* If some fields were not set on the command line, load the value from
 	 * the old gecos fields. */
-	get_old_fields (pw->pw_gecos);
+	get_old_fields(pw->pw_gecos);
 
 	/*
 	 * If none of the fields were changed from the command line, let the
 	 * user interactively change them.
 	 */
 	if (!fflg && !rflg && !wflg && !hflg && !oflg) {
-		printf (_("Changing the user information for %s\n"), user);
-		new_fields ();
+		printf(_("Changing the user information for %s\n"), user);
+		new_fields();
 	}
 
 	/*
 	 * Check all of the fields for valid information
 	 */
-	check_fields (process_selinux);
+	check_fields(process_selinux);
 
 	/* Build the new GECOS field by plastering all the pieces together.  */
 	p = new_gecos;
@@ -666,14 +666,14 @@ int main (int argc, char **argv)
 	}
 
 	/* Rewrite the user's gecos in the passwd file */
-	update_gecos (user, new_gecos, &flags);
+	update_gecos(user, new_gecos, &flags);
 
 	SYSLOG(LOG_INFO, "changed user '%s' information", user);
 
-	nscd_flush_cache ("passwd");
-	sssd_flush_cache (SSSD_DB_PASSWD);
+	nscd_flush_cache("passwd");
+	sssd_flush_cache(SSSD_DB_PASSWD);
 
-	closelog ();
-	exit (E_SUCCESS);
+	closelog();
+	exit(E_SUCCESS);
 }
 

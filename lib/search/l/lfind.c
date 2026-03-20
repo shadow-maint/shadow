@@ -10,4 +10,4 @@
 
 
 extern inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp);
+    typeof (int(const void *k, const void *elt)) *cmp);

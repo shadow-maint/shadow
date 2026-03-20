@@ -66,7 +66,7 @@ static const char *const noslash[] = {
 /*
  * initenv() must be called once before using addenv().
  */
-void initenv (void)
+void initenv(void)
 {
 	newenvp = xmalloc_T(NEWENVP_STEP, char *);
 	*newenvp = NULL;
@@ -89,7 +89,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 	 * just ignore the whole string.
 	 */
 
-	cp = strchr (newstring, '=');
+	cp = strchr(newstring, '=');
 	if (NULL == cp) {
 		free(newstring);
 		return;
@@ -101,7 +101,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 	 * If this environment variable is already set, change its value.
 	 */
 	for (i = 0; i < newenvc; i++) {
-		if (   (strncmp (newstring, newenvp[i], n) == 0)
+		if (   (strncmp(newstring, newenvp[i], n) == 0)
 		    && (('=' == newenvp[i][n]) || ('\0' == newenvp[i][n]))) {
 			break;
 		}
@@ -157,14 +157,14 @@ void addenv (const char *string, /*@null@*/const char *value)
 /*
  * set_env - copy command line arguments into the environment
  */
-void set_env (int argc, char *const *argv)
+void set_env(int argc, char *const *argv)
 {
 	int   noname = 1;
 	char  variable[1024];
 	char  *cp;
 
 	for (; argc > 0; argc--, argv++) {
-		if (strlen(*argv) >= sizeof(variable)) {
+		if (strlen(*argv) >= sizeof (variable)) {
 			continue;	/* ignore long entries */
 		}
 
@@ -203,7 +203,7 @@ void set_env (int argc, char *const *argv)
  * but... I feel better with that silly precaution. -j.
  */
 
-void sanitize_env (void)
+void sanitize_env(void)
 {
 	char **envp = environ;
 	const char *const *bad;

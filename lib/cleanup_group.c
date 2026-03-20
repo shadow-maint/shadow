@@ -21,13 +21,13 @@
  *
  * It should be registered when it is decided to add a group to the system.
  */
-void cleanup_report_add_group (void *group_name)
+void cleanup_report_add_group(void *group_name)
 {
 	const char *name = group_name;
 
 	SYSLOG(LOG_ERR, "failed to add group %s", name);
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP,
+	audit_logger(AUDIT_ADD_GROUP,
 	              "",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -39,27 +39,27 @@ void cleanup_report_add_group (void *group_name)
  *
  * It should be registered when it is decided to remove a group from the system.
  */
-void cleanup_report_del_group (void *group_name)
+void cleanup_report_del_group(void *group_name)
 {
 	const char *name = group_name;
 
 	SYSLOG(LOG_ERR, "failed to remove group %s", name);
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_DEL_GROUP,
+	audit_logger(AUDIT_DEL_GROUP,
 	              "",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
 #endif
 }
 
-void cleanup_report_mod_group (void *cleanup_info)
+void cleanup_report_mod_group(void *cleanup_info)
 {
 	const struct cleanup_info_mod *info;
 	info = (const struct cleanup_info_mod *)cleanup_info;
 
-	SYSLOG(LOG_ERR, "failed to change %s (%s)", gr_dbname(), info->action);
+	SYSLOG(LOG_ERR, "failed to change %s(%s)", gr_dbname(), info->action);
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_GRP_MGMT,
+	audit_logger(AUDIT_GRP_MGMT,
 	              info->audit_msg,
 	              info->name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -67,14 +67,14 @@ void cleanup_report_mod_group (void *cleanup_info)
 }
 
 #ifdef SHADOWGRP
-void cleanup_report_mod_gshadow (void *cleanup_info)
+void cleanup_report_mod_gshadow(void *cleanup_info)
 {
 	const struct cleanup_info_mod *info;
 	info = (const struct cleanup_info_mod *)cleanup_info;
 
-	SYSLOG(LOG_ERR, "failed to change %s (%s)", sgr_dbname(), info->action);
+	SYSLOG(LOG_ERR, "failed to change %s(%s)", sgr_dbname(), info->action);
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_GRP_MGMT,
+	audit_logger(AUDIT_GRP_MGMT,
 	              info->audit_msg,
 	              info->name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -88,13 +88,13 @@ void cleanup_report_mod_gshadow (void *cleanup_info)
  * It should be registered when it is decided to add a group to the
  * group database.
  */
-void cleanup_report_add_group_group (void *group_name)
+void cleanup_report_add_group_group(void *group_name)
 {
 	const char *name = group_name;
 
 	SYSLOG(LOG_ERR, "failed to add group %s to %s", name, gr_dbname());
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP,
+	audit_logger(AUDIT_ADD_GROUP,
 	              "adding-group",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -108,13 +108,13 @@ void cleanup_report_add_group_group (void *group_name)
  * It should be registered when it is decided to add a group to the
  * gshadow database.
  */
-void cleanup_report_add_group_gshadow (void *group_name)
+void cleanup_report_add_group_gshadow(void *group_name)
 {
 	const char *name = group_name;
 
 	SYSLOG(LOG_ERR, "failed to add group %s to %s", name, sgr_dbname());
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_GRP_MGMT,
+	audit_logger(AUDIT_GRP_MGMT,
 	              "adding-shadow-group",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -129,13 +129,13 @@ void cleanup_report_add_group_gshadow (void *group_name)
  * It should be registered when it is decided to remove a group from the
  * regular group database.
  */
-void cleanup_report_del_group_group (void *group_name)
+void cleanup_report_del_group_group(void *group_name)
 {
 	const char *name = group_name;
 
 	SYSLOG(LOG_ERR, "failed to remove group %s from %s", name, gr_dbname());
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_DEL_GROUP,
+	audit_logger(AUDIT_DEL_GROUP,
 	              "removing-group",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -150,13 +150,13 @@ void cleanup_report_del_group_group (void *group_name)
  * It should be registered when it is decided to remove a group from the
  * gshadow database.
  */
-void cleanup_report_del_group_gshadow (void *group_name)
+void cleanup_report_del_group_gshadow(void *group_name)
 {
 	const char *name = group_name;
 
 	SYSLOG(LOG_ERR, "failed to remove group %s from %s", name, sgr_dbname());
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_GRP_MGMT,
+	audit_logger(AUDIT_GRP_MGMT,
 	              "removing-shadow-group",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -169,17 +169,17 @@ void cleanup_report_del_group_gshadow (void *group_name)
  *
  * It should be registered after the group file is successfully locked.
  */
-void cleanup_unlock_group (void *process_selinux)
+void cleanup_unlock_group(void *process_selinux)
 {
 	bool process = *((bool *) process_selinux);
 
-	if (gr_unlock (process) == 0) {
-		fprintf (log_get_logfd(),
+	if (gr_unlock(process) == 0) {
+		fprintf(log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
-		         log_get_progname(), gr_dbname ());
+		         log_get_progname(), gr_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 #ifdef WITH_AUDIT
-		audit_logger_message ("unlocking-group",
+		audit_logger_message("unlocking-group",
 		                      SHADOW_AUDIT_FAILURE);
 #endif
 	}
@@ -191,17 +191,17 @@ void cleanup_unlock_group (void *process_selinux)
  *
  * It should be registered after the gshadow file is successfully locked.
  */
-void cleanup_unlock_gshadow (void *process_selinux)
+void cleanup_unlock_gshadow(void *process_selinux)
 {
 	bool process = *((bool *) process_selinux);
 
-	if (sgr_unlock (process) == 0) {
-		fprintf (log_get_logfd(),
+	if (sgr_unlock(process) == 0) {
+		fprintf(log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
-		         log_get_progname(), sgr_dbname ());
+		         log_get_progname(), sgr_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 #ifdef WITH_AUDIT
-		audit_logger_message ("unlocking-gshadow",
+		audit_logger_message("unlocking-gshadow",
 		                      SHADOW_AUDIT_FAILURE);
 #endif
 	}

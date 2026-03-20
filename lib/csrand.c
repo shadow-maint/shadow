@@ -43,7 +43,7 @@ csrand(void)
 
 #ifdef HAVE_GETRANDOM
 	/* Likewise getrandom.  */
-	if (getrandom(&r, sizeof(r), 0) == sizeof(r))
+	if (getrandom(&r, sizeof (r), 0) == sizeof (r))
 		return r;
 #endif
 
@@ -58,7 +58,7 @@ csrand(void)
 	if (fd == -1)
 		goto fail;
 
-	if (read(fd, &r, sizeof(r)) != sizeof(r)) {
+	if (read(fd, &r, sizeof (r)) != sizeof (r)) {
 		close(fd);
 		goto fail;
 	}

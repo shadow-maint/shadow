@@ -58,7 +58,7 @@ struct commonio_ops {
 	 * Write the object to the file (this calls putpwent()
 	 * for struct passwd, for example).
 	 */
-	int (*cio_put)(const void *, FILE *);
+	int(*cio_put)(const void *, FILE *);
 
 	/*
 	 * open_hook and close_hook.
@@ -115,12 +115,12 @@ struct commonio_db {
 	bool setname:1;
 };
 
-extern int commonio_setname (struct commonio_db *, const char *);
-extern bool commonio_present (const struct commonio_db *db);
-extern int commonio_lock (struct commonio_db *);
-extern int commonio_lock_nowait (struct commonio_db *, bool log);
-extern int do_fcntl_lock (const char *file, bool log, short type);
-extern int commonio_open (struct commonio_db *, int);
+extern int commonio_setname(struct commonio_db *, const char *);
+extern bool commonio_present(const struct commonio_db *db);
+extern int commonio_lock(struct commonio_db *);
+extern int commonio_lock_nowait(struct commonio_db *, bool log);
+extern int do_fcntl_lock(const char *file, bool log, short type);
+extern int commonio_open(struct commonio_db *, int);
 extern /*@observer@*/ /*@null@*/const void *commonio_locate (struct commonio_db *, const char *);
 extern int commonio_update (struct commonio_db *, const void *);
 #ifdef ENABLE_SUBIDS
@@ -129,13 +129,13 @@ extern int commonio_append (struct commonio_db *, const void *);
 extern int commonio_remove (struct commonio_db *, const char *);
 extern int commonio_rewind (struct commonio_db *);
 extern /*@observer@*/ /*@null@*/const void *commonio_next (struct commonio_db *);
-extern int commonio_close (struct commonio_db *, bool);
-extern int commonio_unlock (struct commonio_db *, bool);
-extern void commonio_del_entry (struct commonio_db *,
+extern int commonio_close(struct commonio_db *, bool);
+extern int commonio_unlock(struct commonio_db *, bool);
+extern void commonio_del_entry(struct commonio_db *,
                                 const struct commonio_entry *);
-extern int commonio_sort_wrt (struct commonio_db *shadow,
+extern int commonio_sort_wrt(struct commonio_db *shadow,
                               const struct commonio_db *passwd);
-extern int commonio_sort (struct commonio_db *db,
-                          int (*cmp) (const void *, const void *));
+extern int commonio_sort(struct commonio_db *db,
+                          int(*cmp) (const void *, const void *));
 
 #endif

@@ -27,7 +27,7 @@
  *	with TTYPERM modes
  */
 
-void chown_tty (const struct passwd *info)
+void chown_tty(const struct passwd *info)
 {
 	struct group *grent;
 	gid_t gid;
@@ -37,10 +37,10 @@ void chown_tty (const struct passwd *info)
 	 * ID.  Otherwise, use the user's primary group ID.
 	 */
 
-	grent = getgr_nam_gid (getdef_str ("TTYGROUP"));
+	grent = getgr_nam_gid(getdef_str("TTYGROUP"));
 	if (NULL != grent) {
 		gid = grent->gr_gid;
-		gr_free (grent);
+		gr_free(grent);
 	} else {
 		gid = info->pw_gid;
 	}
@@ -50,19 +50,19 @@ void chown_tty (const struct passwd *info)
 	 * the group as determined above.
 	 */
 
-	if (   (fchown (STDIN_FILENO, info->pw_uid, gid) != 0)
-	    || (fchmod (STDIN_FILENO, getdef_num ("TTYPERM", 0600)) != 0)) {
+	if (   (fchown(STDIN_FILENO, info->pw_uid, gid) != 0)
+	    || (fchmod(STDIN_FILENO, getdef_num("TTYPERM", 0600)) != 0)) {
 		int err = errno;
 
-		fprintf (log_get_logfd(),
+		fprintf(log_get_logfd(),
 		         _("Unable to change owner or mode of tty stdin: %s"),
-		         strerror (err));
+		         strerror(err));
 		SYSLOG(LOG_WARN,
 		       "unable to change owner or mode of tty stdin for user `%s': %s\n",
 		       info->pw_name, strerror(err));
 		if (EROFS != err) {
-			closelog ();
-			exit (EXIT_FAILURE);
+			closelog();
+			exit(EXIT_FAILURE);
 		}
 	}
 #ifdef __linux__

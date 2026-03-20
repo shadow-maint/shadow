@@ -109,8 +109,8 @@ static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *pre
 	unsigned long rounds;
 
 	if (NULL == prefered_rounds) {
-		long min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
-		long max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
+		long min_rounds = getdef_long("SHA_CRYPT_MIN_ROUNDS", -1);
+		long max_rounds = getdef_long("SHA_CRYPT_MAX_ROUNDS", -1);
 
 		if ((-1 == min_rounds) && (-1 == max_rounds)) {
 			rounds = SHA_ROUNDS_DEFAULT;
@@ -128,7 +128,7 @@ static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *pre
 				max_rounds = min_rounds;
 			}
 
-			rounds = csrand_interval (min_rounds, max_rounds);
+			rounds = csrand_interval(min_rounds, max_rounds);
 		}
 	} else if (0 == *prefered_rounds) {
 		rounds = SHA_ROUNDS_DEFAULT;
@@ -170,9 +170,9 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long round
 	 *    00000000011111111
 	 *    12345678901234567
 	 */
-	assert (GENSALT_SETTING_SIZE > buf_begin + 17);
+	assert(GENSALT_SETTING_SIZE > buf_begin + 17);
 
-	(void) snprintf (buf + buf_begin, 18, "rounds=%lu$", rounds);
+	(void) snprintf(buf + buf_begin, 18, "rounds=%lu$", rounds);
 }
 
 #ifdef USE_BCRYPT
@@ -182,8 +182,8 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *
 	unsigned long rounds;
 
 	if (NULL == prefered_rounds) {
-		long min_rounds = getdef_long ("BCRYPT_MIN_ROUNDS", -1);
-		long max_rounds = getdef_long ("BCRYPT_MAX_ROUNDS", -1);
+		long min_rounds = getdef_long("BCRYPT_MIN_ROUNDS", -1);
+		long max_rounds = getdef_long("BCRYPT_MAX_ROUNDS", -1);
 
 		if ((-1 == min_rounds) && (-1 == max_rounds)) {
 			rounds = B_ROUNDS_DEFAULT;
@@ -200,7 +200,7 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *
 				max_rounds = min_rounds;
 			}
 
-			rounds = csrand_interval (min_rounds, max_rounds);
+			rounds = csrand_interval(min_rounds, max_rounds);
 		}
 	} else if (0 == *prefered_rounds) {
 		rounds = B_ROUNDS_DEFAULT;
@@ -248,9 +248,9 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long ro
 	 *    000
 	 *    123
 	 */
-	assert (GENSALT_SETTING_SIZE > buf_begin + 3);
+	assert(GENSALT_SETTING_SIZE > buf_begin + 3);
 
-	(void) snprintf (buf + buf_begin, 4, "%2.2lu$", rounds);
+	(void) snprintf(buf + buf_begin, 4, "%2.2lu$", rounds);
 }
 #endif /* USE_BCRYPT */
 
@@ -261,7 +261,7 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 	unsigned long cost;
 
 	if (NULL == prefered_cost) {
-		cost = getdef_num ("YESCRYPT_COST_FACTOR", Y_COST_DEFAULT);
+		cost = getdef_num("YESCRYPT_COST_FACTOR", Y_COST_DEFAULT);
 	} else if (0 == *prefered_cost) {
 		cost = Y_COST_DEFAULT;
 	} else {
@@ -297,7 +297,7 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long co
 	 *    0000
 	 *    1234
 	 */
-	assert (GENSALT_SETTING_SIZE > buf_begin + 4);
+	assert(GENSALT_SETTING_SIZE > buf_begin + 4);
 
 	p = &buf[buf_begin];
 	p = stpcpy(p, "j");
@@ -412,14 +412,14 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	/* Should not happen, but... */
 	if (NULL == retval) {
-		fprintf (log_get_logfd(),
+		fprintf(log_get_logfd(),
 			 _("Unable to generate a salt from setting "
 			   "\"%s\", check your settings in "
 			   "ENCRYPT_METHOD and the corresponding "
 			   "configuration for your selected hash "
 			   "method.\n"), result);
 
-		exit (1);
+		exit(1);
 	}
 
 	return retval;
@@ -428,8 +428,8 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	assert (GENSALT_SETTING_SIZE > strlen (result) + salt_len);
 
 	/* Concatenate a pseudo random salt. */
-	strncat (result, gensalt (salt_len),
-		 GENSALT_SETTING_SIZE - strlen (result) - 1);
+	strncat(result, gensalt(salt_len),
+		 GENSALT_SETTING_SIZE - strlen(result) - 1);
 
 	return result;
 #endif /* USE_XCRYPT_GENSALT */

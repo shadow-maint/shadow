@@ -12,16 +12,16 @@
 #include <syslog.h>
 #include <unistd.h>
 
-int main (void)
+int main(void)
 {
 	const char *user, *tty;
 	uid_t uid;
 
-	tty = ttyname (0);
+	tty = ttyname(0);
 	if (NULL == tty) {
 		tty = "UNKNOWN";
 	}
-	user = getlogin ();
+	user = getlogin();
 	if (NULL == user) {
 		user = "UNKNOWN";
 	}

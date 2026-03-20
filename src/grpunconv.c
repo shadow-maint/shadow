@@ -70,8 +70,8 @@ static void fail_exit (int status, bool process_selinux)
 	}
 
 	if (sgr_locked) {
-		if (sgr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+		if (sgr_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
@@ -99,7 +99,7 @@ static void usage (int status)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -111,26 +111,26 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "hR:",
+	while ((c = getopt_long(argc, argv, "hR:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			flags->chroot = true;
 			break;
 		default:
-			usage (E_USAGE);
+			usage(E_USAGE);
 		}
 	}
 
 	if (optind != argc) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	const struct group *gr;
 	struct group grent;
@@ -141,18 +141,18 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
-	process_flags (argc, argv, &flags);
+	process_flags(argc, argv, &flags);
 	process_selinux = !flags.chroot;
 
-	if (sgr_file_present () == 0) {
+	if (sgr_file_present() == 0) {
 		exit (0);	/* no /etc/gshadow, nothing to do */
 	}
 
@@ -185,9 +185,9 @@ int main (int argc, char **argv)
 	/*
 	 * Update group passwords if non-shadow password is "x".
 	 */
-	(void) gr_rewind ();
+	(void) gr_rewind();
 	while (NULL != (gr = gr_next())) {
-		sg = sgr_locate (gr->gr_name);
+		sg = sgr_locate(gr->gr_name);
 		if (   (NULL != sg)
 		    && streq(gr->gr_passwd, SHADOW_PASSWD_STRING)) {
 			/* add password to /etc/group */
@@ -204,24 +204,24 @@ int main (int argc, char **argv)
 
 	(void) sgr_close (process_selinux); /* was only open O_RDONLY */
 
-	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
+	if (gr_close(process_selinux) == 0) {
+		fprintf(stderr,
 		         _("%s: failure while writing changes to %s\n"),
-		         Prog, gr_dbname ());
+		         Prog, gr_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
-		fail_exit (3, process_selinux);
+		fail_exit(3, process_selinux);
 	}
 
 	if (unlink(_PATH_GSHADOW) != 0) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: cannot delete %s\n"),
 		         Prog, _PATH_GSHADOW);
 		SYSLOG(LOG_ERR, "cannot delete %s", _PATH_GSHADOW);
-		fail_exit (3, process_selinux);
+		fail_exit(3, process_selinux);
 	}
 
-	if (gr_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+	if (gr_unlock(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 		/* continue */
 	}
@@ -232,8 +232,8 @@ int main (int argc, char **argv)
 		/* continue */
 	}
 
-	nscd_flush_cache ("group");
-	sssd_flush_cache (SSSD_DB_GROUP);
+	nscd_flush_cache("group");
+	sssd_flush_cache(SSSD_DB_GROUP);
 
 	return 0;
 }
@@ -241,9 +241,9 @@ int main (int argc, char **argv)
 int
 main(MAYBE_UNUSED int _1, char **argv)
 {
-	fprintf (stderr,
+	fprintf(stderr,
 		 "%s: not configured for shadow group support.\n", argv[0]);
-	exit (1);
+	exit(1);
 }
 #endif				/* !SHADOWGRP */
 

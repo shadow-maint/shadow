@@ -85,11 +85,11 @@ putsgent(const struct sgrp *sgrp, FILE *fp)
 	stpcpy(cp, "\n");
 
 	if (fputs(buf, fp) == EOF) {
-		free (buf);
+		free(buf);
 		return -1;
 	}
 
-	free (buf);
+	free(buf);
 	return 0;
 }
 #endif

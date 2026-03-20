@@ -22,7 +22,7 @@
 /*
  * sulog - log a SU command execution result
  */
-void sulog (const char *tty, bool success, const char *oldname, const char *name)
+void sulog(const char *tty, bool success, const char *oldname, const char *name)
 {
 	const char *sulog_file;
 	time_t now;
@@ -37,16 +37,16 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 		SYSLOG(LOG_NOTICE, "FAILED su for %s by %s", name, oldname);
 	}
 
-	sulog_file = getdef_str ("SULOG_FILE");
+	sulog_file = getdef_str("SULOG_FILE");
 	if (NULL == sulog_file) {
 		return;
 	}
 
-	oldgid = getgid ();
-	oldmask = umask (077);
+	oldgid = getgid();
+	oldmask = umask(077);
 	/* Switch to group root to avoid creating the sulog file with
 	 * the wrong group ownership. */
-	if ((oldgid != 0) && (setgid (0) != 0)) {
+	if ((oldgid != 0) && (setgid(0) != 0)) {
 		SYSLOG(LOG_INFO, "su session not logged to %s", sulog_file);
 		/* Continue, but do not switch back to oldgid later */
 		oldgid = 0;
@@ -57,7 +57,7 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 		perror ("setgid");
 		SYSLOG(LOG_ERR, "can't switch back to group `%d' in sulog", oldgid);
 		/* Do not return if the group permission were raised. */
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	if (fp == NULL) {
 		return;		/* can't open or create logfile */

@@ -25,27 +25,27 @@
 #include "string/strcmp/streq.h"
 
 
-static int remove_tree_at (int at_fd, const char *path, bool remove_root)
+static int remove_tree_at(int at_fd, const char *path, bool remove_root)
 {
 	DIR *dir;
 	const struct dirent *ent;
 	int dir_fd, rc = 0;
 
-	dir_fd = openat (at_fd, path, O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC);
+	dir_fd = openat(at_fd, path, O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC);
 	if (dir_fd < 0) {
 		return -1;
 	}
 
-	dir = fdopendir (dir_fd);
+	dir = fdopendir(dir_fd);
 	if (!dir) {
-		(void) close (dir_fd);
+		(void) close(dir_fd);
 		return -1;
 	}
 
 	/*
 	 * Open the source directory and delete each entry.
 	 */
-	while ((ent = readdir (dir))) {
+	while ((ent = readdir(dir))) {
 		struct stat ent_sb;
 
 		/*
@@ -56,16 +56,16 @@ static int remove_tree_at (int at_fd, const char *path, bool remove_root)
 			continue;
 		}
 
-		rc = fstatat (dirfd(dir), ent->d_name, &ent_sb, AT_SYMLINK_NOFOLLOW);
+		rc = fstatat(dirfd(dir), ent->d_name, &ent_sb, AT_SYMLINK_NOFOLLOW);
 		if (rc < 0) {
 			break;
 		}
 
-		if (S_ISDIR (ent_sb.st_mode)) {
+		if (S_ISDIR(ent_sb.st_mode)) {
 			/*
 			 * Recursively delete this directory.
 			 */
-			if (remove_tree_at (dirfd(dir), ent->d_name, true) != 0) {
+			if (remove_tree_at(dirfd(dir), ent->d_name, true) != 0) {
 				rc = -1;
 				break;
 			}
@@ -73,17 +73,17 @@ static int remove_tree_at (int at_fd, const char *path, bool remove_root)
 			/*
 			 * Delete the file.
 			 */
-			if (unlinkat (dirfd(dir), ent->d_name, 0) != 0) {
+			if (unlinkat(dirfd(dir), ent->d_name, 0) != 0) {
 				rc = -1;
 				break;
 			}
 		}
 	}
 
-	(void) closedir (dir);
+	(void) closedir(dir);
 
 	if (remove_root && (0 == rc)) {
-		if (unlinkat (at_fd, path, AT_REMOVEDIR) != 0) {
+		if (unlinkat(at_fd, path, AT_REMOVEDIR) != 0) {
 			rc = -1;
 		}
 	}
@@ -98,7 +98,7 @@ static int remove_tree_at (int at_fd, const char *path, bool remove_root)
  *	and directories.
  *	At the end, it deletes the root directory itself.
  */
-int remove_tree (const char *root, bool remove_root)
+int remove_tree(const char *root, bool remove_root)
 {
-	return remove_tree_at (AT_FDCWD, root, remove_root);
+	return remove_tree_at(AT_FDCWD, root, remove_root);
 }

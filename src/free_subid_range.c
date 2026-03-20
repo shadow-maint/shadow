@@ -17,7 +17,7 @@ static const char Prog[] = "free_subid_range";
 static void usage(void)
 {
 	fprintf(stderr, "Usage: %s [-g] user start count\n", Prog);
-	fprintf(stderr, "    Release a user's subuid (or with -g, subgid) range\n");
+	fprintf(stderr, "    Release a user's subuid(or with -g, subgid) range\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	if (!subid_init(Prog, stderr))
 		fprintf(stderr, "subid_init: %s\n", strerrno());
 	while ((c = getopt(argc, argv, "g")) != EOF) {
-		switch(c) {
+		switch (c) {
 		case 'g': group = true; break;
 		default: usage();
 		}

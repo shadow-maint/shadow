@@ -41,9 +41,9 @@
 /* Really, I could do with a few const char's here defining all the
  * strings output to the user or the syslog. -- chris
  */
-static int applies (const char *, char *);
+static int applies(const char *, char *);
 
-static int isgrp (const char *, const char *);
+static int isgrp(const char *, const char *);
 
 static intmax_t lines = 0;
 
@@ -57,7 +57,7 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 	char *from_users;
 	char *action;
 
-	if (!(authfile_fd = fopen (SUAUTHFILE, "r"))) {
+	if (!(authfile_fd = fopen(SUAUTHFILE, "r"))) {
 		int err = errno;
 		/*
 		 * If the file doesn't exist - default to the standard su
@@ -100,39 +100,39 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 			continue;
 		}
 
-		if (!applies (wanted_id, to_users))
+		if (!applies(wanted_id, to_users))
 			continue;
-		if (!applies (actual_id, from_users))
+		if (!applies(actual_id, from_users))
 			continue;
 		if (streq(action, "DENY")) {
 			SYSLOG(su_to_root ? LOG_WARN : LOG_NOTICE,
 				"DENIED su from '%s' to '%s' (%s)\n",
 				actual_id, wanted_id, SUAUTHFILE);
-			fputs (_("Access to su to that account DENIED.\n"),
+			fputs(_("Access to su to that account DENIED.\n"),
 			       stderr);
-			fclose (authfile_fd);
+			fclose(authfile_fd);
 			return DENY;
 		} else if (streq(action, "NOPASS")) {
 			SYSLOG(su_to_root ? LOG_NOTICE : LOG_INFO,
 				"NO password asked for su from '%s' to '%s' (%s)\n",
 				actual_id, wanted_id, SUAUTHFILE);
-			fputs (_("Password authentication bypassed.\n"),stderr);
-			fclose (authfile_fd);
+			fputs(_("Password authentication bypassed.\n"),stderr);
+			fclose(authfile_fd);
 			return NOPWORD;
 		} else if (streq(action, "OWNPASS")) {
 			SYSLOG(su_to_root ? LOG_NOTICE : LOG_INFO,
-				"su from '%s' to '%s': asking for user's own password (%s)\n",
+				"su from '%s' to '%s': asking for user's own password(%s)\n",
 				actual_id, wanted_id, SUAUTHFILE);
-			fputs (_("Please enter your OWN password as authentication.\n"),
+			fputs(_("Please enter your OWN password as authentication.\n"),
 			       stderr);
-			fclose (authfile_fd);
+			fclose(authfile_fd);
 			return OWNPWORD;
 		} else {
 			SYSLOG(LOG_ERR, "%s, line %jd: unrecognized action!\n",
 				SUAUTHFILE, lines);
 		}
 	}
-	fclose (authfile_fd);
+	fclose(authfile_fd);
 	return NOACTION;
 }
 
@@ -182,7 +182,7 @@ applies(const char *single, char *list)
 					return 0;
 				break;
 			case 3:	/* Group */
-				if (isgrp (single, tok))
+				if (isgrp(single, tok))
 					return 1;
 				break;
 			case 4:	/* All except group */
@@ -197,7 +197,7 @@ applies(const char *single, char *list)
 	return 0;
 }
 
-static int isgrp (const char *name, const char *group)
+static int isgrp(const char *name, const char *group)
 {
 	struct group *grp;
 

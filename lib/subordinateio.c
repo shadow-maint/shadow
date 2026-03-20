@@ -92,7 +92,7 @@ subordinate_parse(const char *line)
 	 * Copy the string to a temporary buffer so the substrings can
 	 * be modified to be NULL terminated.
 	 */
-	if (strlen(line) >= sizeof(rangebuf))
+	if (strlen(line) >= sizeof (rangebuf))
 		return NULL;	/* fail if too long */
 	strcpy (rangebuf, line);
 
@@ -122,7 +122,7 @@ subordinate_parse(const char *line)
  *
  * Returns 0 on success, -1 on error.
  */
-static int subordinate_put (const void *ent, FILE * file)
+static int subordinate_put(const void *ent, FILE * file)
 {
 	const struct subordinate_range *range = ent;
 
@@ -308,7 +308,7 @@ void free_subordinate_ranges(struct subordinate_range **ranges, int count)
  * equal) if the owning uid in p1 is lower than p2's.  Return 1 if p1's
  * range or owning uid is great than p2's.
  */
-static int subordinate_range_cmp (const void *p1, const void *p2)
+static int subordinate_range_cmp(const void *p1, const void *p2)
 {
 	const struct commonio_entry *const *ce1;
 	const struct commonio_entry *const *ce2;
@@ -358,7 +358,7 @@ static unsigned long find_free_range(struct commonio_db *db,
 		goto fail;
 
 	/* Sort by range then by owner */
-	commonio_sort (db, subordinate_range_cmp);
+	commonio_sort(db, subordinate_range_cmp);
 	commonio_rewind(db);
 
 	low = min;
@@ -430,7 +430,7 @@ static int add_range(struct commonio_db *db,
  * Returns 0 on failure, 1 on success.  Failure means that we needed to
  * create a new range to represent the new limits, and failed doing so.
  */
-static int remove_range (struct commonio_db *db,
+static int remove_range(struct commonio_db *db,
                          const char *owner,
                          unsigned long start, unsigned long count)
 {
@@ -471,7 +471,7 @@ static int remove_range (struct commonio_db *db,
 				 * range:           [first, last] */
 				/* entry completely contained in the
 				 * range to remove */
-				commonio_del_entry (db, ent);
+				commonio_del_entry(db, ent);
 			} else {
 				/* to be removed: [start,  end]
 				 * range:           [first, last] */
@@ -501,7 +501,7 @@ static int remove_range (struct commonio_db *db,
 				tail.start = end + 1;
 				tail.count = (last - tail.start) + 1;
 
-				if (commonio_append (db, &tail) == 0) {
+				if (commonio_append(db, &tail) == 0) {
 					return 0;
 				}
 
@@ -569,7 +569,7 @@ static bool have_range(struct commonio_db *db,
 	}
 
 	end = start + count - 1;
-	range = find_range (db, owner, start);
+	range = find_range(db, owner, start);
 	while (range) {
 		unsigned long last;
 
@@ -594,9 +594,9 @@ static bool have_range(struct commonio_db *db,
 	return ret;
 }
 
-int sub_uid_setdbname (const char *filename)
+int sub_uid_setdbname(const char *filename)
 {
-	return commonio_setname (&subordinate_uid_db, filename);
+	return commonio_setname(&subordinate_uid_db, filename);
 }
 
 /*@observer@*/const char *sub_uid_dbname (void)
@@ -645,13 +645,13 @@ bool have_sub_uids(const char *owner, uid_t start, unsigned long count)
  * Return 1 if the range is already present or on success.  On error
  * return 0 and set errno appropriately.
  */
-int sub_uid_add (const char *owner, uid_t start, unsigned long count)
+int sub_uid_add(const char *owner, uid_t start, unsigned long count)
 {
 	if (get_subid_nss_handle()) {
 		errno = EOPNOTSUPP;
 		return 0;
 	}
-	return add_range (&subordinate_uid_db, owner, start, count);
+	return add_range(&subordinate_uid_db, owner, start, count);
 }
 
 /* Return 1 on success.  on failure, return 0 and set errno appropriately */
@@ -742,19 +742,19 @@ int sub_gid_setdbname (const char *filename)
 	return subordinate_gid_db.filename;
 }
 
-bool sub_gid_file_present (void)
+bool sub_gid_file_present(void)
 {
-	return commonio_present (&subordinate_gid_db);
+	return commonio_present(&subordinate_gid_db);
 }
 
-int sub_gid_lock (void)
+int sub_gid_lock(void)
 {
-	return commonio_lock (&subordinate_gid_db);
+	return commonio_lock(&subordinate_gid_db);
 }
 
-int sub_gid_open (int mode)
+int sub_gid_open(int mode)
 {
-	return commonio_open (&subordinate_gid_db, mode);
+	return commonio_open(&subordinate_gid_db, mode);
 }
 
 bool have_sub_gids(const char *owner, gid_t start, unsigned long count)
@@ -774,7 +774,7 @@ bool have_sub_gids(const char *owner, gid_t start, unsigned long count)
 
 bool local_sub_gid_assigned(const char *owner)
 {
-	return range_exists (&subordinate_gid_db, owner);
+	return range_exists(&subordinate_gid_db, owner);
 }
 
 /*
@@ -783,13 +783,13 @@ bool local_sub_gid_assigned(const char *owner)
  * Return 1 if the range is already present or on success.  On error
  * return 0 and set errno appropriately.
  */
-int sub_gid_add (const char *owner, gid_t start, unsigned long count)
+int sub_gid_add(const char *owner, gid_t start, unsigned long count)
 {
 	if (get_subid_nss_handle()) {
 		errno = EOPNOTSUPP;
 		return 0;
 	}
-	return add_range (&subordinate_gid_db, owner, start, count);
+	return add_range(&subordinate_gid_db, owner, start, count);
 }
 
 /* Return 1 on success.  on failure, return 0 and set errno appropriately */

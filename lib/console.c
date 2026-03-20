@@ -40,7 +40,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 	 * fallback to default.
 	 */
 
-	cons = getdef_str (cfgin);
+	cons = getdef_str(cfgin);
 	if (NULL == cons) {
 		return def;
 	}
@@ -68,7 +68,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 	 * console - otherwise root will never be allowed to login.
 	 */
 
-	fp = fopen (cons, "r");
+	fp = fopen(cons, "r");
 	if (NULL == fp) {
 		return def;
 	}
@@ -80,7 +80,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 	while (fgets_a(buf, fp) != NULL) {
 		stpsep(buf, "\n");
 		if (streq(buf, tty)) {
-			(void) fclose (fp);
+			(void) fclose(fp);
 			return true;
 		}
 	}
@@ -89,7 +89,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 	 * This tty isn't a console.
 	 */
 
-	(void) fclose (fp);
+	(void) fclose(fp);
 	return false;
 }
 
@@ -103,10 +103,10 @@ is_listed(const char *cfgin, const char *tty, bool def)
  * that would allow an unauthorized root login.
  */
 
-bool console (const char *tty)
+bool console(const char *tty)
 {
 	tty = strprefix(tty, "/dev/") ?: tty;
 
-	return is_listed ("CONSOLE", tty, true);
+	return is_listed("CONSOLE", tty, true);
 }
 

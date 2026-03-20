@@ -103,7 +103,7 @@ nss_init(const char *nsswitch_path) {
 		goto null_subid;
 	}
 	if (strlen(p) > 50) {
-		fprintf(log_get_logfd(), "Subid NSS module name too long (longer than 50 characters): %s\n", p);
+		fprintf(log_get_logfd(), "Subid NSS module name too long(longer than 50 characters): %s\n", p);
 		fprintf(log_get_logfd(), "Using files\n");
 		goto null_subid;
 	}

@@ -21,15 +21,15 @@
 extern int sgr_close (bool process_selinux);
 extern bool sgr_file_present (void);
 extern /*@observer@*/ /*@null@*/const struct sgrp *sgr_locate (const char *name);
-extern int sgr_lock (void);
-extern int sgr_setdbname (const char *filename);
+extern int sgr_lock(void);
+extern int sgr_setdbname(const char *filename);
 extern /*@observer@*/const char *sgr_dbname (void);
 extern /*@null@*/const struct sgrp *sgr_next (void);
-extern int sgr_open (int mode);
-extern int sgr_remove (const char *name);
-extern int sgr_rewind (void);
-extern int sgr_unlock (bool process_selinux);
-extern int sgr_update (const struct sgrp *sg);
-extern int sgr_sort (void);
+extern int sgr_open(int mode);
+extern int sgr_remove(const char *name);
+extern int sgr_rewind(void);
+extern int sgr_unlock(bool process_selinux);
+extern int sgr_update(const struct sgrp *sg);
+extern int sgr_sort(void);
 
 #endif

@@ -40,34 +40,34 @@ shadow_free(/*@only@*/void *ent)
 {
 	struct spwd *sp = ent;
 
-	spw_free (sp);
+	spw_free(sp);
 }
 
-static const char *shadow_getname (const void *ent)
+static const char *shadow_getname(const void *ent)
 {
 	const struct spwd *sp = ent;
 
 	return sp->sp_namp;
 }
 
-static void *shadow_parse (const char *line)
+static void *shadow_parse(const char *line)
 {
-	return sgetspent (line);
+	return sgetspent(line);
 }
 
-static int shadow_put (const void *ent, FILE * file)
+static int shadow_put(const void *ent, FILE * file)
 {
 	const struct spwd *sp = ent;
 
 	if (   (NULL == sp)
-	    || (valid_field (sp->sp_namp, ":\n") == -1)
-	    || (valid_field (sp->sp_pwdp, ":\n") == -1)
-	    || (strlen (sp->sp_namp) + strlen (sp->sp_pwdp) +
+	    || (valid_field(sp->sp_namp, ":\n") == -1)
+	    || (valid_field(sp->sp_pwdp, ":\n") == -1)
+	    || (strlen(sp->sp_namp) + strlen(sp->sp_pwdp) +
 	        1000 > PASSWD_ENTRY_MAX_LENGTH)) {
 		return -1;
 	}
 
-	return (putspent (sp, file) == -1) ? -1 : 0;
+	return (putspent(sp, file) == -1) ? -1 : 0;
 }
 
 static struct commonio_ops shadow_ops = {
@@ -110,50 +110,50 @@ int spw_setdbname (const char *filename)
 	return shadow_db.filename;
 }
 
-bool spw_file_present (void)
+bool spw_file_present(void)
 {
-	if (getdef_bool ("FORCE_SHADOW"))
+	if (getdef_bool("FORCE_SHADOW"))
 		return true;
-	return commonio_present (&shadow_db);
+	return commonio_present(&shadow_db);
 }
 
-int spw_lock (void)
+int spw_lock(void)
 {
 #ifdef WITH_TCB
 	int retval = 0;
 
-	if (!getdef_bool ("USE_TCB")) {
+	if (!getdef_bool("USE_TCB")) {
 #endif				/* WITH_TCB */
-		return commonio_lock (&shadow_db);
+		return commonio_lock(&shadow_db);
 #ifdef WITH_TCB
 	}
-	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
+	if (shadowtcb_drop_priv() == SHADOWTCB_FAILURE) {
 		return 0;
 	}
-	if (lckpwdf_tcb (shadow_db.filename) == 0) {
+	if (lckpwdf_tcb(shadow_db.filename) == 0) {
 		shadow_db.locked = 1;
 		retval = 1;
 	}
-	if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
+	if (shadowtcb_gain_priv() == SHADOWTCB_FAILURE) {
 		return 0;
 	}
 	return retval;
 #endif				/* WITH_TCB */
 }
 
-int spw_open (int mode)
+int spw_open(int mode)
 {
 	int retval = 0;
 #ifdef WITH_TCB
-	bool use_tcb = getdef_bool ("USE_TCB");
+	bool use_tcb = getdef_bool("USE_TCB");
 
-	if (use_tcb && (shadowtcb_drop_priv () == SHADOWTCB_FAILURE)) {
+	if (use_tcb && (shadowtcb_drop_priv() == SHADOWTCB_FAILURE)) {
 		return 0;
 	}
 #endif				/* WITH_TCB */
-	retval = commonio_open (&shadow_db, mode);
+	retval = commonio_open(&shadow_db, mode);
 #ifdef WITH_TCB
-	if (use_tcb && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
+	if (use_tcb && (shadowtcb_gain_priv() == SHADOWTCB_FAILURE)) {
 		return 0;
 	}
 #endif				/* WITH_TCB */
@@ -182,60 +182,60 @@ int spw_rewind (void)
 
 /*@observer@*/ /*@null@*/const struct spwd *spw_next (void)
 {
-	return commonio_next (&shadow_db);
+	return commonio_next(&shadow_db);
 }
 
-int spw_close (bool process_selinux)
+int spw_close(bool process_selinux)
 {
 	int retval = 0;
 #ifdef WITH_TCB
-	bool use_tcb = getdef_bool ("USE_TCB");
+	bool use_tcb = getdef_bool("USE_TCB");
 
-	if (use_tcb && (shadowtcb_drop_priv () == SHADOWTCB_FAILURE)) {
+	if (use_tcb && (shadowtcb_drop_priv() == SHADOWTCB_FAILURE)) {
 		return 0;
 	}
 #endif				/* WITH_TCB */
-	retval = commonio_close (&shadow_db, process_selinux);
+	retval = commonio_close(&shadow_db, process_selinux);
 #ifdef WITH_TCB
-	if (use_tcb && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
+	if (use_tcb && (shadowtcb_gain_priv() == SHADOWTCB_FAILURE)) {
 		return 0;
 	}
 #endif				/* WITH_TCB */
 	return retval;
 }
 
-int spw_unlock (bool process_selinux)
+int spw_unlock(bool process_selinux)
 {
 #ifdef WITH_TCB
 	int retval = 0;
 
-	if (!getdef_bool ("USE_TCB")) {
+	if (!getdef_bool("USE_TCB")) {
 #endif				/* WITH_TCB */
-		return commonio_unlock (&shadow_db, process_selinux);
+		return commonio_unlock(&shadow_db, process_selinux);
 #ifdef WITH_TCB
 	}
-	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
+	if (shadowtcb_drop_priv() == SHADOWTCB_FAILURE) {
 		return 0;
 	}
-	if (ulckpwdf_tcb () == 0) {
+	if (ulckpwdf_tcb() == 0) {
 		shadow_db.locked = 0;
 		retval = 1;
 	}
-	if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
+	if (shadowtcb_gain_priv() == SHADOWTCB_FAILURE) {
 		return 0;
 	}
 	return retval;
 #endif				/* WITH_TCB */
 }
 
-struct commonio_entry *__spw_get_head (void)
+struct commonio_entry *__spw_get_head(void)
 {
 	return shadow_db.head;
 }
 
-void __spw_del_entry (const struct commonio_entry *ent)
+void __spw_del_entry(const struct commonio_entry *ent)
 {
-	commonio_del_entry (&shadow_db, ent);
+	commonio_del_entry(&shadow_db, ent);
 }
 
 /* Sort with respect to passwd ordering. */

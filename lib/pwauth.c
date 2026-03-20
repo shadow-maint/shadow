@@ -34,9 +34,9 @@
 
 
 #ifdef __linux__		/* standard password prompt by default */
-static const char *PROMPT = gettext_noop ("Password: ");
+static const char *PROMPT = gettext_noop("Password: ");
 #else
-static const char *PROMPT = gettext_noop ("%s's Password: ");
+static const char *PROMPT = gettext_noop("%s's Password: ");
 #endif
 
 
@@ -92,7 +92,7 @@ pw_auth(const char *cipher, const char *user)
 #  define skeychallenge(s,u,c) skeychallenge(s,u,c,sizeof(c))
 # endif
 
-	if (skeychallenge (&skey, user, challenge_info) == 0) {
+	if (skeychallenge(&skey, user, challenge_info) == 0) {
 		use_skey = true;
 	}
 #endif
@@ -101,13 +101,13 @@ pw_auth(const char *cipher, const char *user)
 	 * Prompt for the password as required.
 	 */
 
-	cp = getdef_str ("LOGIN_STRING");
+	cp = getdef_str("LOGIN_STRING");
 	if (NULL == cp) {
 		cp = _(PROMPT);
 	}
 #ifdef	SKEY
 	if (use_skey) {
-		printf ("[%s]\n", challenge_info);
+		printf("[%s]\n", challenge_info);
 	}
 #endif
 
@@ -122,9 +122,9 @@ pw_auth(const char *cipher, const char *user)
 	 * the results there as well.
 	 */
 
-	encrypted = pw_encrypt (input, cipher);
+	encrypted = pw_encrypt(input, cipher);
 	if (NULL != encrypted) {
-		retval = strcmp (encrypted, cipher);
+		retval = strcmp(encrypted, cipher);
 	} else {
 		retval = -1;
 	}
@@ -146,7 +146,7 @@ pw_auth(const char *cipher, const char *user)
 	if ((0 != retval) && use_skey) {
 		int passcheck = -1;
 
-		if (skeyverify (&skey, input) == 0) {
+		if (skeyverify(&skey, input) == 0) {
 			passcheck = skey.n;
 		}
 		if (passcheck > 0) {

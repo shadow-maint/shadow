@@ -60,28 +60,28 @@ static bool is_shadow_grp;
 #define E_GRP_UPDATE	10	/* can't update group file */
 
 /* local function prototypes */
-NORETURN static void usage (int status);
-static void grp_update (void);
+NORETURN static void usage(int status);
+static void grp_update(void);
 static void close_files(const struct option_flags *flags);
 static void open_files(const struct option_flags *flags);
-static void group_busy (gid_t gid);
-static void process_flags (int argc, char **argv, struct option_flags *flags);
+static void group_busy(gid_t gid);
+static void process_flags(int argc, char **argv, struct option_flags *flags);
 
 /*
  * usage - display usage message and exit
  */
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options] GROUP\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files\n"), usageout);
 	(void) fputs (_("  -f, --force                   delete group even if it is the primary group of a user\n"), usageout);
 	(void) fputs ("\n", usageout);
@@ -102,13 +102,13 @@ static void fail_exit(int status)
  *
  *	grp_update() writes the new records to the group files.
  */
-static void grp_update (void)
+static void grp_update(void)
 {
 	/*
 	 * To add the group, we need to update /etc/group.
 	 * Make sure failures will be reported.
 	 */
-	add_cleanup (cleanup_report_del_group_group, group_name);
+	add_cleanup(cleanup_report_del_group_group, group_name);
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		/* We also need to update /etc/gshadow */
@@ -119,23 +119,23 @@ static void grp_update (void)
 	/*
 	 * Delete the group entry.
 	 */
-	if (gr_remove (group_name) == 0) {
-		fprintf (stderr,
+	if (gr_remove(group_name) == 0) {
+		fprintf(stderr,
 		         _("%s: cannot remove entry '%s' from %s\n"),
-		         Prog, group_name, gr_dbname ());
-		fail_exit (E_GRP_UPDATE);
+		         Prog, group_name, gr_dbname());
+		fail_exit(E_GRP_UPDATE);
 	}
 
 #ifdef	SHADOWGRP
 	/*
 	 * Delete the shadow group entries as well.
 	 */
-	if (is_shadow_grp && (sgr_locate (group_name) != NULL)) {
-		if (sgr_remove (group_name) == 0) {
-			fprintf (stderr,
+	if (is_shadow_grp && (sgr_locate(group_name) != NULL)) {
+		if (sgr_remove(group_name) == 0) {
+			fprintf(stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
-			         Prog, group_name, sgr_dbname ());
-			fail_exit (E_GRP_UPDATE);
+			         Prog, group_name, sgr_dbname());
+			fail_exit(E_GRP_UPDATE);
 		}
 	}
 #endif				/* SHADOWGRP */
@@ -176,28 +176,28 @@ static void close_files(const struct option_flags *flags)
 	/* Then, write the changes in the shadow database */
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
+		if (sgr_close(process_selinux) == 0) {
+			fprintf(stderr,
 			         _("%s: failure while writing changes to %s\n"),
-			         Prog, sgr_dbname ());
-			fail_exit (E_GRP_UPDATE);
+			         Prog, sgr_dbname());
+			fail_exit(E_GRP_UPDATE);
 		}
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_GRP_MGMT,
+		audit_logger(AUDIT_GRP_MGMT,
 		              "delete-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG(LOG_INFO, "group '%s' removed from %s", group_name, sgr_dbname());
-		del_cleanup (cleanup_report_del_group_gshadow);
+		del_cleanup(cleanup_report_del_group_gshadow);
 
-		cleanup_unlock_gshadow (&process_selinux);
-		del_cleanup (cleanup_unlock_gshadow);
+		cleanup_unlock_gshadow(&process_selinux);
+		del_cleanup(cleanup_unlock_gshadow);
 	}
 #endif				/* SHADOWGRP */
 
 	SYSLOG(LOG_INFO, "group '%s' removed\n", group_name);
-	del_cleanup (cleanup_report_del_group);
+	del_cleanup(cleanup_report_del_group);
 }
 
 /*
@@ -235,7 +235,7 @@ static void open_files(const struct option_flags *flags)
 	 * Now, if the group is not removed, it's our fault.
 	 * Make sure failures will be reported.
 	 */
-	add_cleanup (cleanup_report_del_group, group_name);
+	add_cleanup(cleanup_report_del_group, group_name);
 
 	/* An now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
@@ -265,7 +265,7 @@ static void open_files(const struct option_flags *flags)
  *	for any user.  You must remove all users before you remove
  *	the group.
  */
-static void group_busy (gid_t gid)
+static void group_busy(gid_t gid)
 {
 	struct passwd *pwd;
 
@@ -273,11 +273,11 @@ static void group_busy (gid_t gid)
 	 * Nice slow linear search.
 	 */
 
-	prefix_setpwent ();
+	prefix_setpwent();
 
-	while ( ((pwd = prefix_getpwent ()) != NULL) && (pwd->pw_gid != gid) );
+	while ( ((pwd = prefix_getpwent()) != NULL) && (pwd->pw_gid != gid) );
 
-	prefix_endpwent ();
+	prefix_endpwent();
 
 	/*
 	 * If pwd isn't NULL, it stopped because the gid's matched.
@@ -290,10 +290,10 @@ static void group_busy (gid_t gid)
 	/*
 	 * Can't remove the group.
 	 */
-	fprintf (stderr,
+	fprintf(stderr,
 	         _("%s: cannot remove the primary group of user '%s'\n"),
 	         Prog, pwd->pw_name);
-	fail_exit (E_GROUP_BUSY);
+	fail_exit(E_GROUP_BUSY);
 }
 
 /*
@@ -301,7 +301,7 @@ static void group_busy (gid_t gid)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -315,11 +315,11 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "hfR:P:",
+	while ((c = getopt_long(argc, argv, "hfR:P:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			flags->chroot = true;
@@ -351,37 +351,37 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *	The named group will be deleted.
  */
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
-	prefix = process_prefix_flag ("-P", argc, argv);
+	process_root_flag("-R", argc, argv);
+	prefix = process_prefix_flag("-P", argc, argv);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 #ifdef WITH_AUDIT
-	audit_help_open ();
+	audit_help_open();
 #endif
 
-	if (atexit (do_cleanups) != 0) {
-		fprintf (stderr,
+	if (atexit(do_cleanups) != 0) {
+		fprintf(stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
 		         Prog);
-		fail_exit (1);
+		fail_exit(1);
 	}
 
-	process_flags (argc, argv, &flags);
+	process_flags(argc, argv, &flags);
 
 
 #ifdef SHADOWGRP
-	is_shadow_grp = sgr_file_present ();
+	is_shadow_grp = sgr_file_present();
 #endif
 
 	{
@@ -404,10 +404,10 @@ int main (int argc, char **argv)
 	 * Make sure this isn't the primary group of anyone.
 	 */
 	if (check_group_busy) {
-		group_busy (group_id);
+		group_busy(group_id);
 	}
 
-	if (run_parts ("/etc/shadow-maint/groupdel-pre.d", group_name,
+	if (run_parts("/etc/shadow-maint/groupdel-pre.d", group_name,
 			Prog)) {
 		exit(1);
 	}
@@ -416,19 +416,19 @@ int main (int argc, char **argv)
 	 * Do the hard stuff - open the files, delete the group entries,
 	 * then close and update the files.
 	 */
-	open_files (&flags);
+	open_files(&flags);
 
-	grp_update ();
+	grp_update();
 
-	close_files (&flags);
+	close_files(&flags);
 
-	if (run_parts ("/etc/shadow-maint/groupdel-post.d", group_name,
+	if (run_parts("/etc/shadow-maint/groupdel-post.d", group_name,
 			Prog)) {
 		exit(1);
 	}
 
-	nscd_flush_cache ("group");
-	sssd_flush_cache (SSSD_DB_GROUP);
+	nscd_flush_cache("group");
+	sssd_flush_cache(SSSD_DB_GROUP);
 
 	return E_SUCCESS;
 }

@@ -75,37 +75,37 @@ static bool sort_mode = false;
 static bool silence_warnings = false;
 
 /* local function prototypes */
-static void fail_exit (int status, bool process_selinux);
-NORETURN static void usage (int status);
-static void delete_member (char **, const char *);
-static void process_flags (int argc, char **argv, struct option_flags *flags);
-static void open_files (bool process_selinux);
+static void fail_exit(int status, bool process_selinux);
+NORETURN static void usage(int status);
+static void delete_member(char **, const char *);
+static void process_flags(int argc, char **argv, struct option_flags *flags);
+static void open_files(bool process_selinux);
 static void close_files(bool changed, const struct option_flags *flags);
-static int check_members (const char *groupname,
+static int check_members(const char *groupname,
                           char **members,
                           const char *fmt_info,
                           const char *fmt_prompt,
                           const char *fmt_syslog,
                           bool *errors);
-static void check_grp_file (bool *errors, bool *changed,
+static void check_grp_file(bool *errors, bool *changed,
                             const struct option_flags *flags);
 #ifdef SHADOWGRP
-static void compare_members_lists (const char *groupname,
+static void compare_members_lists(const char *groupname,
                                    char **members,
                                    char **other_members,
                                    const char *file,
                                    const char *other_file);
-static void check_sgr_file (bool *errors, bool *changed);
+static void check_sgr_file(bool *errors, bool *changed);
 #endif
 
 /*
  * fail_exit - exit with an error code after unlocking files
  */
-static void fail_exit (int status, bool process_selinux)
+static void fail_exit(int status, bool process_selinux)
 {
 	if (gr_locked) {
-		if (gr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		if (gr_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
@@ -121,9 +121,9 @@ static void fail_exit (int status, bool process_selinux)
 	}
 #endif
 
-	closelog ();
+	closelog();
 
-	exit (status);
+	exit(status);
 }
 
 /*
@@ -131,30 +131,30 @@ static void fail_exit (int status, bool process_selinux)
  */
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 #ifdef	SHADOWGRP
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options] [group [gshadow]]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
 #else				/* !SHADOWGRP */
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options] [group]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
 #endif				/* !SHADOWGRP */
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -r, --read-only               display errors and warnings\n"
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -r, --read-only               display errors and warnings\n"
 	                "                                but do not change files\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -s, --sort                    sort entries by UID\n"), usageout);
-	(void) fputs (_("  -S, --silence-warnings        silence controversial/paranoid warnings\n"), usageout);
-	(void) fputs ("\n", usageout);
-	exit (status);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -s, --sort                    sort entries by UID\n"), usageout);
+	(void) fputs(_("  -S, --silence-warnings        silence controversial/paranoid warnings\n"), usageout);
+	(void) fputs("\n", usageout);
+	exit(status);
 }
 
 /*
@@ -164,7 +164,7 @@ usage (int status)
  * The member is defined by its address, no string comparison are
  * performed.
  */
-static void delete_member (char **list, const char *member)
+static void delete_member(char **list, const char *member)
 {
 	int i;
 
@@ -184,7 +184,7 @@ static void delete_member (char **list, const char *member)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -200,11 +200,11 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	/*
 	 * Parse the command line arguments
 	 */
-	while ((c = getopt_long (argc, argv, "hqrR:sS",
+	while ((c = getopt_long(argc, argv, "hqrR:sS",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'q':
 			/* quiet - ignored for now */
@@ -240,7 +240,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	if (argc > (optind + 1))
 #endif
 	{
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 
 	/*
@@ -249,17 +249,17 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	 */
 	if (optind != argc) {
 		grp_file = argv[optind];
-		gr_setdbname (grp_file);
+		gr_setdbname(grp_file);
 		use_system_grp_file = false;
 	}
 #ifdef	SHADOWGRP
 	if ((optind + 2) == argc) {
 		sgr_file = argv[optind + 1];
-		sgr_setdbname (sgr_file);
+		sgr_setdbname(sgr_file);
 		is_shadow = true;
 		use_system_sgr_file = false;
 	} else if (optind == argc) {
-		is_shadow = sgr_file_present ();
+		is_shadow = sgr_file_present();
 	}
 #endif
 }
@@ -270,26 +270,26 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *	In read-only mode, the databases are not locked and are opened
  *	only for reading.
  */
-static void open_files (bool process_selinux)
+static void open_files(bool process_selinux)
 {
 	/*
 	 * Lock the files if we aren't in "read-only" mode
 	 */
 	if (!read_only) {
-		if (gr_lock () == 0) {
-			fprintf (stderr,
+		if (gr_lock() == 0) {
+			fprintf(stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, grp_file);
-			fail_exit (E_CANT_LOCK, process_selinux);
+			fail_exit(E_CANT_LOCK, process_selinux);
 		}
 		gr_locked = true;
 #ifdef	SHADOWGRP
 		if (is_shadow) {
-			if (sgr_lock () == 0) {
-				fprintf (stderr,
+			if (sgr_lock() == 0) {
+				fprintf(stderr,
 				         _("%s: cannot lock %s; try again later.\n"),
 				         Prog, sgr_file);
-				fail_exit (E_CANT_LOCK, process_selinux);
+				fail_exit(E_CANT_LOCK, process_selinux);
 			}
 			sgr_locked = true;
 		}
@@ -300,22 +300,22 @@ static void open_files (bool process_selinux)
 	 * Open the files. Use O_RDONLY if we are in read_only mode,
 	 * O_RDWR otherwise.
 	 */
-	if (gr_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
+	if (gr_open(read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr, _("%s: cannot open %s\n"), Prog,
 		         grp_file);
 		if (use_system_grp_file) {
 			SYSLOG(LOG_WARN, "cannot open %s", grp_file);
 		}
-		fail_exit (E_CANT_OPEN, process_selinux);
+		fail_exit(E_CANT_OPEN, process_selinux);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow && (sgr_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
+	if (is_shadow && (sgr_open(read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0)) {
+		fprintf(stderr, _("%s: cannot open %s\n"), Prog,
 		         sgr_file);
 		if (use_system_sgr_file) {
 			SYSLOG(LOG_WARN, "cannot open %s", sgr_file);
 		}
-		fail_exit (E_CANT_OPEN, process_selinux);
+		fail_exit(E_CANT_OPEN, process_selinux);
 	}
 #endif
 }
@@ -338,16 +338,16 @@ static void close_files(bool changed, const struct option_flags *flags)
 	 * changes to the files.
 	 */
 	if (changed) {
-		if (gr_close (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
+		if (gr_close(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, grp_file);
-			fail_exit (E_CANT_UPDATE, process_selinux);
+			fail_exit(E_CANT_UPDATE, process_selinux);
 		}
 #ifdef	SHADOWGRP
-		if (is_shadow && (sgr_close (process_selinux) == 0)) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
+		if (is_shadow && (sgr_close(process_selinux) == 0)) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_file);
-			fail_exit (E_CANT_UPDATE, process_selinux);
+			fail_exit(E_CANT_UPDATE, process_selinux);
 		}
 #endif
 	}
@@ -357,8 +357,8 @@ static void close_files(bool changed, const struct option_flags *flags)
 	 */
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
-		if (sgr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+		if (sgr_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
@@ -394,7 +394,7 @@ static void close_files(bool changed, const struct option_flags *flags)
  *	  * fmt_syslog must contain two string flags (%s): for the
  *	    group's name and the missing member.
  */
-static int check_members (const char *groupname,
+static int check_members(const char *groupname,
                           char **members,
                           const char *fmt_info,
                           const char *fmt_prompt,
@@ -417,16 +417,16 @@ static int check_members (const char *groupname,
 		 * from the list.
 		 */
 		*errors = true;
-		printf (fmt_info, groupname, members[i]);
-		printf (fmt_prompt, members[i]);
+		printf(fmt_info, groupname, members[i]);
+		printf(fmt_prompt, members[i]);
 
-		if (!yes_or_no (read_only)) {
+		if (!yes_or_no(read_only)) {
 			continue;
 		}
 
 		SYSLOG(LOG_INFO, fmt_syslog, members[i], groupname);
 		members_changed = 1;
-		delete_member (members, members[i]);
+		delete_member(members, members[i]);
 
 		/* Rewind in case of removal */
 		i--;
@@ -446,7 +446,7 @@ static int check_members (const char *groupname,
  *
  *	TODO: no changes are performed on the lists.
  */
-static void compare_members_lists (const char *groupname,
+static void compare_members_lists(const char *groupname,
                                    char **members,
                                    char **other_members,
                                    const char *file,
@@ -486,7 +486,7 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 	/*
 	 * Loop through the entire group file.
 	 */
-	for (gre = __gr_get_head (); NULL != gre; gre = gre->next) {
+	for (gre = __gr_get_head(); NULL != gre; gre = gre->next) {
 		/*
 		 * Skip all NIS entries.
 		 */
@@ -506,14 +506,14 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			(void) puts (_("invalid group file entry"));
-			printf (_("delete line '%s'? "), gre->line);
+			(void) puts(_("invalid group file entry"));
+			printf(_("delete line '%s'? "), gre->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no (read_only)) {
+			if (!yes_or_no(read_only)) {
 				continue;
 			}
 
@@ -527,7 +527,7 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 			SYSLOG(LOG_INFO, "delete group line '%s'", gre->line);
 			*changed = true;
 
-			__gr_del_entry (gre);
+			__gr_del_entry(gre);
 			continue;
 		}
 
@@ -539,7 +539,7 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-		for (tgre = __gr_get_head (); NULL != tgre; tgre = tgre->next) {
+		for (tgre = __gr_get_head(); NULL != tgre; tgre = tgre->next) {
 
 			const struct group *ent = tgre->eptr;
 
@@ -565,14 +565,14 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			(void) puts (_("duplicate group entry"));
-			printf (_("delete line '%s'? "), gre->line);
+			(void) puts(_("duplicate group entry"));
+			printf(_("delete line '%s'? "), gre->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only)) {
+			if (yes_or_no(read_only)) {
 				goto delete_gr;
 			}
 		}
@@ -580,16 +580,16 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 		/*
 		 * Check for invalid group names.  --marekm
 		 */
-		if (!is_valid_group_name (grp->gr_name)) {
+		if (!is_valid_group_name(grp->gr_name)) {
 			*errors = true;
-			printf (_("invalid group name '%s'\n"), grp->gr_name);
+			printf(_("invalid group name '%s'\n"), grp->gr_name);
 		}
 
 		/*
 		 * Check for invalid group ID.
 		 */
 		if (grp->gr_gid == (gid_t)-1) {
-			printf (_("invalid group ID '%lu'\n"), (long unsigned int)grp->gr_gid);
+			printf(_("invalid group ID '%lu'\n"), (long unsigned int)grp->gr_gid);
 			*errors = true;
 		}
 
@@ -605,14 +605,14 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 			grp->gr_mem[0] = NULL;
 		}
 
-		if (check_members (grp->gr_name, grp->gr_mem,
+		if (check_members(grp->gr_name, grp->gr_mem,
 		                   _("group %s: no user %s\n"),
 		                   _("delete member '%s'? "),
 		                   "delete member '%s' from group '%s'",
 		                   errors) == 1) {
 			*changed = true;
 			gre->changed = true;
-			__gr_set_changed ();
+			__gr_set_changed();
 		}
 
 #ifdef	SHADOWGRP
@@ -621,14 +621,14 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 		 */
 
 		if (is_shadow) {
-			sgr = sgr_locate (grp->gr_name);
+			sgr = sgr_locate(grp->gr_name);
 			if (sgr == NULL) {
-				printf (_("no matching group file entry in %s\n"),
+				printf(_("no matching group file entry in %s\n"),
 				        sgr_file);
-				printf (_("add group '%s' in %s? "),
+				printf(_("add group '%s' in %s? "),
 				        grp->gr_name, sgr_file);
 				*errors = true;
-				if (yes_or_no (read_only)) {
+				if (yes_or_no(read_only)) {
 					struct sgrp sg;
 					struct group gr;
 					static char *empty = NULL;
@@ -641,20 +641,20 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 					       grp->gr_name, sgr_file);
 					*changed = true;
 
-					if (sgr_update (&sg) == 0) {
-						fprintf (stderr,
+					if (sgr_update(&sg) == 0) {
+						fprintf(stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
-						         Prog, sgr_dbname (), sg.sg_namp);
-						fail_exit (E_CANT_UPDATE, process_selinux);
+						         Prog, sgr_dbname(), sg.sg_namp);
+						fail_exit(E_CANT_UPDATE, process_selinux);
 					}
 					/* remove password from /etc/group */
 					gr = *grp;
 					gr.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-					if (gr_update (&gr) == 0) {
-						fprintf (stderr,
+					if (gr_update(&gr) == 0) {
+						fprintf(stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
-						         Prog, gr_dbname (), gr.gr_name);
-						fail_exit (E_CANT_UPDATE, process_selinux);
+						         Prog, gr_dbname(), gr.gr_name);
+						fail_exit(E_CANT_UPDATE, process_selinux);
 					}
 				}
 			} else {
@@ -662,7 +662,7 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 				 * Verify that all the members defined in /etc/group are also
 				 * present in /etc/gshadow.
 				 */
-				compare_members_lists (grp->gr_name,
+				compare_members_lists(grp->gr_name,
 				                       grp->gr_mem, sgr->sg_mem,
 				                       grp_file, sgr_file);
 
@@ -670,7 +670,7 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 				 * Make sure no passwords are in group.
 				 */
 				if (!streq(grp->gr_passwd, SHADOW_PASSWD_STRING)) {
-					printf (_("group %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
+					printf(_("group %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
 					        grp->gr_name, sgr_file, grp_file);
 					*errors = true;
 				}
@@ -685,7 +685,7 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 /*
  * check_sgr_file - check the content of the shadowed group file (gshadow)
  */
-static void check_sgr_file (bool *errors, bool *changed)
+static void check_sgr_file(bool *errors, bool *changed)
 {
 	const struct group *grp;
 	struct commonio_entry *sge, *tsge;
@@ -694,7 +694,7 @@ static void check_sgr_file (bool *errors, bool *changed)
 	/*
 	 * Loop through the entire shadow group file.
 	 */
-	for (sge = __sgr_get_head (); NULL != sge; sge = sge->next) {
+	for (sge = __sgr_get_head(); NULL != sge; sge = sge->next) {
 
 		/*
 		 * Start with the entries that are completely corrupt. They
@@ -707,14 +707,14 @@ static void check_sgr_file (bool *errors, bool *changed)
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			(void) puts (_("invalid shadow group file entry"));
-			printf (_("delete line '%s'? "), sge->line);
+			(void) puts(_("invalid shadow group file entry"));
+			printf(_("delete line '%s'? "), sge->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no (read_only)) {
+			if (!yes_or_no(read_only)) {
 				continue;
 			}
 
@@ -728,7 +728,7 @@ static void check_sgr_file (bool *errors, bool *changed)
 			SYSLOG(LOG_INFO, "delete shadow line '%s'", sge->line);
 			*changed = true;
 
-			__sgr_del_entry (sge);
+			__sgr_del_entry(sge);
 			continue;
 		}
 
@@ -740,7 +740,7 @@ static void check_sgr_file (bool *errors, bool *changed)
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-		for (tsge = __sgr_get_head (); NULL != tsge; tsge = tsge->next) {
+		for (tsge = __sgr_get_head(); NULL != tsge; tsge = tsge->next) {
 
 			const struct sgrp *ent = tsge->eptr;
 
@@ -766,14 +766,14 @@ static void check_sgr_file (bool *errors, bool *changed)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			(void) puts (_("duplicate shadow group entry"));
-			printf (_("delete line '%s'? "), sge->line);
+			(void) puts(_("duplicate shadow group entry"));
+			printf(_("delete line '%s'? "), sge->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only)) {
+			if (yes_or_no(read_only)) {
 				goto delete_sg;
 			}
 		}
@@ -781,13 +781,13 @@ static void check_sgr_file (bool *errors, bool *changed)
 		/*
 		 * Make sure this entry exists in the /etc/group file.
 		 */
-		grp = gr_locate (sgr->sg_namp);
+		grp = gr_locate(sgr->sg_namp);
 		if (grp == NULL) {
-			printf (_("no matching group file entry in %s\n"),
+			printf(_("no matching group file entry in %s\n"),
 			        grp_file);
-			printf (_("delete line '%s'? "), sge->line);
+			printf(_("delete line '%s'? "), sge->line);
 			*errors = true;
-			if (yes_or_no (read_only)) {
+			if (yes_or_no(read_only)) {
 				goto delete_sg;
 			}
 		} else {
@@ -795,7 +795,7 @@ static void check_sgr_file (bool *errors, bool *changed)
 			 * Verify that the all members defined in /etc/gshadow are also
 			 * present in /etc/group.
 			 */
-			compare_members_lists (sgr->sg_namp,
+			compare_members_lists(sgr->sg_namp,
 			                       sgr->sg_mem, grp->gr_mem,
 			                       sgr_file, grp_file);
 		}
@@ -803,27 +803,27 @@ static void check_sgr_file (bool *errors, bool *changed)
 		/*
 		 * Make sure each administrator exists
 		 */
-		if (check_members (sgr->sg_namp, sgr->sg_adm,
+		if (check_members(sgr->sg_namp, sgr->sg_adm,
 		                   _("shadow group %s: no administrative user %s\n"),
 		                   _("delete administrative member '%s'? "),
 		                   "delete admin '%s' from shadow group '%s'",
 		                   errors) == 1) {
 			*changed = true;
 			sge->changed = true;
-			__sgr_set_changed ();
+			__sgr_set_changed();
 		}
 
 		/*
 		 * Make sure each member exists
 		 */
-		if (check_members (sgr->sg_namp, sgr->sg_mem,
+		if (check_members(sgr->sg_namp, sgr->sg_mem,
 		                   _("shadow group %s: no user %s\n"),
 		                   _("delete member '%s'? "),
 		                   "delete member '%s' from shadow group '%s'",
 		                   errors) == 1) {
 			*changed = true;
 			sge->changed = true;
-			__sgr_set_changed ();
+			__sgr_set_changed();
 		}
 	}
 }
@@ -832,7 +832,7 @@ static void check_sgr_file (bool *errors, bool *changed)
 /*
  * grpck - verify group file integrity
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	bool errors = false;
 	bool changed = false;
@@ -842,13 +842,13 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
 	/* Parse the command line arguments */
 	process_flags (argc, argv, &flags);
@@ -874,11 +874,11 @@ int main (int argc, char **argv)
 	}
 
 	/* Commit the change in the database if needed */
-	close_files (changed, &flags);
+	close_files(changed, &flags);
 
 	if (!read_only && changed) {
-		nscd_flush_cache ("group");
-		sssd_flush_cache (SSSD_DB_GROUP);
+		nscd_flush_cache("group");
+		sssd_flush_cache(SSSD_DB_GROUP);
 	}
 
 	/*
@@ -886,9 +886,9 @@ int main (int argc, char **argv)
 	 */
 	if (errors) {
 		if (changed) {
-			printf (_("%s: the files have been updated\n"), Prog);
+			printf(_("%s: the files have been updated\n"), Prog);
 		} else {
-			printf (_("%s: no changes\n"), Prog);
+			printf(_("%s: no changes\n"), Prog);
 		}
 	}
 

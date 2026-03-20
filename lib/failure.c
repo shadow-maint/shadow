@@ -31,20 +31,20 @@
  *	failure() creates a new (struct faillog) entry or updates an
  *	existing one with the current failed login information.
  */
-void failure (uid_t uid, const char *tty, struct faillog *fl)
+void failure(uid_t uid, const char *tty, struct faillog *fl)
 {
 	int fd;
-	off_t offset_uid = (off_t) sizeof(*fl) * uid;
+	off_t offset_uid = (off_t) sizeof (*fl) * uid;
 
 	/*
 	 * Don't do anything if failure logging isn't set up.
 	 */
 
-	if (access (FAILLOG_FILE, F_OK) != 0) {
+	if (access(FAILLOG_FILE, F_OK) != 0) {
 		return;
 	}
 
-	fd = open (FAILLOG_FILE, O_RDWR);
+	fd = open(FAILLOG_FILE, O_RDWR);
 	if (fd < 0) {
 		SYSLOG(LOG_WARN,
 		       "Can't write faillog entry for UID %lu in %s: %m",
@@ -58,8 +58,8 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 * share just about everything else ...
 	 */
 
-	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (read(fd, fl, sizeof(*fl)) != (ssize_t) sizeof(*fl))) {
+	if (   (lseek(fd, offset_uid, SEEK_SET) != offset_uid)
+	    || (read(fd, fl, sizeof (*fl)) != (ssize_t) sizeof (*fl))) {
 		/* This is not necessarily a failure. The file is
 		 * initially zero length.
 		 *
@@ -67,7 +67,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 		 * might reset the counter. But the new failure will be
 		 * logged.
 		 */
-		memzero(fl, sizeof(*fl));
+		memzero(fl, sizeof (*fl));
 	}
 
 	/*
@@ -91,12 +91,12 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 * seem that great.
 	 */
 
-	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write_full(fd, fl, sizeof(*fl)) == -1)) {
+	if (   (lseek(fd, offset_uid, SEEK_SET) != offset_uid)
+	    || (write_full(fd, fl, sizeof (*fl)) == -1)) {
 		goto err_write;
 	}
 
-	if (close (fd) != 0 && errno != EINTR) {
+	if (close(fd) != 0 && errno != EINTR) {
 		goto err_close;
 	}
 
@@ -105,7 +105,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 err_write:
 	{
 		int saved_errno = errno;
-		(void) close (fd);
+		(void) close(fd);
 		errno = saved_errno;
 	}
 err_close:
@@ -114,7 +114,7 @@ err_close:
 	       (unsigned long) uid, FAILLOG_FILE);
 }
 
-static bool too_many_failures (const struct faillog *fl)
+static bool too_many_failures(const struct faillog *fl)
 {
 	time_t now;
 
@@ -146,24 +146,24 @@ static bool too_many_failures (const struct faillog *fl)
  *	       validated.
  */
 
-int failcheck (uid_t uid, struct faillog *fl, bool failed)
+int failcheck(uid_t uid, struct faillog *fl, bool failed)
 {
 	int fd;
 	struct faillog fail;
-	off_t offset_uid = (off_t) sizeof(*fl) * uid;
+	off_t offset_uid = (off_t) sizeof (*fl) * uid;
 
 	/*
 	 * Suppress the check if the log file isn't there.
 	 */
 
-	if (access (FAILLOG_FILE, F_OK) != 0) {
+	if (access(FAILLOG_FILE, F_OK) != 0) {
 		return 1;
 	}
 
-	fd = open (FAILLOG_FILE, failed?O_RDONLY:O_RDWR);
+	fd = open(FAILLOG_FILE, failed?O_RDONLY:O_RDWR);
 	if (fd < 0) {
 		SYSLOG(LOG_WARN,
-		       "Can't open the faillog file (%s) to check UID %lu: %m; "
+		       "Can't open the faillog file(%s) to check UID %lu: %m; "
 		       "User access authorized.",
 		       FAILLOG_FILE, (unsigned long) uid);
 		return 1;
@@ -181,14 +181,14 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 	 * no need to reset the count.
 	 */
 
-	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (read(fd, fl, sizeof(*fl)) != (ssize_t) sizeof(*fl))) {
-		(void) close (fd);
+	if (   (lseek(fd, offset_uid, SEEK_SET) != offset_uid)
+	    || (read(fd, fl, sizeof (*fl)) != (ssize_t) sizeof (*fl))) {
+		(void) close(fd);
 		return 1;
 	}
 
-	if (too_many_failures (fl)) {
-		(void) close (fd);
+	if (too_many_failures(fl)) {
+		(void) close(fd);
 		return 0;
 	}
 
@@ -203,16 +203,16 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 		fail = *fl;
 		fail.fail_cnt = 0;
 
-		if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-		    || (write_full(fd, &fail, sizeof(fail)) == -1)) {
+		if (   (lseek(fd, offset_uid, SEEK_SET) != offset_uid)
+		    || (write_full(fd, &fail, sizeof (fail)) == -1)) {
 			    goto err_write;
 		}
 
-		if (close (fd) != 0 && errno != EINTR) {
+		if (close(fd) != 0 && errno != EINTR) {
 			goto err_close;
 		}
 	} else {
-		(void) close (fd);
+		(void) close(fd);
 	}
 
 	return 1;
@@ -220,7 +220,7 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 err_write:
 	{
 		int saved_errno = errno;
-		(void) close (fd);
+		(void) close(fd);
 		errno = saved_errno;
 	}
 err_close:
@@ -237,7 +237,7 @@ err_close:
  *	message which is displayed at login time.
  */
 
-void failprint (const struct faillog *fail)
+void failprint(const struct faillog *fail)
 {
 	struct tm *tp;
 	char lasttimeb[256];
@@ -247,7 +247,7 @@ void failprint (const struct faillog *fail)
 		return;
 	}
 
-	tp = localtime (&(fail->fail_time));
+	tp = localtime(&(fail->fail_time));
 
 	/*
 	 * Print all information we have.

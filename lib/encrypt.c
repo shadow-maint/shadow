@@ -37,7 +37,7 @@
 
 	/* Some crypt() do not return NULL if the algorithm is not
 	 * supported, and return a DES encrypted password. */
-	if ((NULL != salt) && strprefix(salt, "$") && (strlen (cp) <= 13))
+	if ((NULL != salt) && strprefix(salt, "$") && (strlen(cp) <= 13))
 	{
 		/*@observer@*/const char *method;
 		switch (salt[1])
@@ -75,7 +75,7 @@
 		return cp;	/* nonstandard crypt() in libc, better bail out */
 	}
 
-	strcpy (cipher, cp);
+	strcpy(cipher, cp);
 
 	return cipher;
 }

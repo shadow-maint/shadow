@@ -38,7 +38,7 @@ static /*@null@*/ /*@only@*/void *group_dup (const void *ent)
 {
 	const struct group *gr = ent;
 
-	return __gr_dup (gr);
+	return __gr_dup(gr);
 }
 
 static void
@@ -76,16 +76,16 @@ static int group_put (const void *ent, FILE * file)
 	if (NULL != gr->gr_mem) {
 		size_t i;
 		for (i = 0; NULL != gr->gr_mem[i]; i++) {
-			if (valid_field (gr->gr_mem[i], ",:\n") == -1) {
+			if (valid_field(gr->gr_mem[i], ",:\n") == -1) {
 				return -1;
 			}
 		}
 	}
 
-	return (putgrent (gr, file) == -1) ? -1 : 0;
+	return (putgrent(gr, file) == -1) ? -1 : 0;
 }
 
-static int group_close_hook (void)
+static int group_close_hook(void)
 {
 	unsigned int max_members = getdef_unum("MAX_MEMBERS_PER_GROUP", 0);
 
@@ -93,7 +93,7 @@ static int group_close_hook (void)
 		return 1;
 	}
 
-	return split_groups (max_members);
+	return split_groups(max_members);
 }
 
 static struct commonio_ops group_ops = {
@@ -126,9 +126,9 @@ static /*@owned@*/struct commonio_db group_db = {
 	false			/* setname */
 };
 
-int gr_setdbname (const char *filename)
+int gr_setdbname(const char *filename)
 {
-	return commonio_setname (&group_db, filename);
+	return commonio_setname(&group_db, filename);
 }
 
 /*@observer@*/const char *gr_dbname (void)
@@ -148,7 +148,7 @@ int gr_open (int mode)
 
 /*@observer@*/ /*@null@*/const struct group *gr_locate (const char *name)
 {
-	return commonio_locate (&group_db, name);
+	return commonio_locate(&group_db, name);
 }
 
 /*@observer@*/ /*@null@*/const struct group *gr_locate_gid (gid_t gid)
@@ -180,20 +180,20 @@ int gr_rewind (void)
 
 /*@observer@*/ /*@null@*/const struct group *gr_next (void)
 {
-	return commonio_next (&group_db);
+	return commonio_next(&group_db);
 }
 
-int gr_close (bool process_selinux)
+int gr_close(bool process_selinux)
 {
-	return commonio_close (&group_db, process_selinux);
+	return commonio_close(&group_db, process_selinux);
 }
 
-int gr_unlock (bool process_selinux)
+int gr_unlock(bool process_selinux)
 {
-	return commonio_unlock (&group_db, process_selinux);
+	return commonio_unlock(&group_db, process_selinux);
 }
 
-void __gr_set_changed (void)
+void __gr_set_changed(void)
 {
 	group_db.changed = true;
 }
@@ -208,12 +208,12 @@ void __gr_set_changed (void)
 	return &group_db;
 }
 
-void __gr_del_entry (const struct commonio_entry *ent)
+void __gr_del_entry(const struct commonio_entry *ent)
 {
-	commonio_del_entry (&group_db, ent);
+	commonio_del_entry(&group_db, ent);
 }
 
-static int gr_cmp (const void *p1, const void *p2)
+static int gr_cmp(const void *p1, const void *p2)
 {
 	const struct commonio_entry *const *ce1;
 	const struct commonio_entry *const *ce2;
@@ -271,7 +271,7 @@ static int group_open_hook (void)
 				/* Both group entries refer to the same
 				 * group. It is a split group. Merge the
 				 * members. */
-				gr1 = merge_group_entries (gr1, gr2);
+				gr1 = merge_group_entries(gr1, gr2);
 				if (NULL == gr1)
 					return 0;
 				/* Unlink gr2 */
@@ -279,11 +279,11 @@ static int group_open_hook (void)
 					gr2->next->prev = gr2->prev;
 				}
 				/* gr2 does not start with head */
-				assert (NULL != gr2->prev);
+				assert(NULL != gr2->prev);
 				gr2->prev->next = gr2->next;
 			}
 		}
-		assert (NULL != gr1);
+		assert(NULL != gr1);
 	}
 
 	return 1;
@@ -382,7 +382,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
  *
  * Return 0 on failure (errno set) and 1 on success.
  */
-static int split_groups (unsigned int max_members)
+static int split_groups(unsigned int max_members)
 {
 	struct commonio_entry *gr;
 
@@ -421,18 +421,18 @@ static int split_groups (unsigned int max_members)
 
 		/* Enforce the maximum number of members on gptr */
 		for (i = max_members; NULL != gptr->gr_mem[i]; i++) {
-			free (gptr->gr_mem[i]);
+			free(gptr->gr_mem[i]);
 			gptr->gr_mem[i] = NULL;
 		}
 		/* Shift all the members */
 		/* The number of members in new_gptr will be check later */
 		for (i = 0; NULL != new_gptr->gr_mem[i + max_members]; i++) {
-			free (new_gptr->gr_mem[i]);
+			free(new_gptr->gr_mem[i]);
 			new_gptr->gr_mem[i] = new_gptr->gr_mem[i + max_members];
 			new_gptr->gr_mem[i + max_members] = NULL;
 		}
 		for (; NULL != new_gptr->gr_mem[i]; i++) {
-			free (new_gptr->gr_mem[i]);
+			free(new_gptr->gr_mem[i]);
 			new_gptr->gr_mem[i] = NULL;
 		}
 

@@ -13,12 +13,12 @@
 
 #define is_unsigned(x)                                                        \
 (                                                                             \
-	(typeof(x)) -1 > 1                                                    \
+	(typeof (x)) -1 > 1                                                    \
 )
 
 #define is_signed(x)                                                          \
 (                                                                             \
-	(typeof(x)) -1 < 1                                                    \
+	(typeof (x)) -1 < 1                                                    \
 )
 
 
@@ -50,13 +50,13 @@
 
 #define is_same_typeof(a, b)                                                  \
 (                                                                             \
-	is_same_type(typeof(a), typeof(b))                                    \
+	is_same_type(typeof (a), typeof (b))                                    \
 )
 
 
 #define QChar_of(s)  typeof                                           \
 (                                                                     \
-	_Generic(s,                                                   \
+	_Generic (s,                                                   \
 		const char *:  (const char){0},                       \
 		const void *:  (const char){0},                       \
 		char *:        (char){0},                             \

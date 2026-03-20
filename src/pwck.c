@@ -87,11 +87,11 @@ extern int allow_bad_names;
 /*
  * fail_exit - do some cleanup and exit with the given error code
  */
-static void fail_exit (int code, bool process_selinux)
+static void fail_exit(int code, bool process_selinux)
 {
 	if (spw_locked) {
-		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		if (spw_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			if (use_system_spw_file) {
 				SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			}
@@ -109,21 +109,21 @@ static void fail_exit (int code, bool process_selinux)
 		}
 	}
 
-	closelog ();
+	closelog();
 
-	exit (code);
+	exit(code);
 }
 /*
  * usage - print syntax message and exit
  */
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 #ifdef WITH_TCB
-	if (getdef_bool ("USE_TCB")) {
-		(void) fprintf (usageout,
+	if (getdef_bool("USE_TCB")) {
+		(void) fprintf(usageout,
 		                _("Usage: %s [options] [passwd]\n"
 		                  "\n"
 		                  "Options:\n"),
@@ -131,26 +131,26 @@ usage (int status)
 	} else
 #endif				/* WITH_TCB */
 	{
-		(void) fprintf (usageout,
+		(void) fprintf(usageout,
 		                _("Usage: %s [options] [passwd [shadow]]\n"
 		                  "\n"
 		                  "Options:\n"),
 		                Prog);
 	}
-	(void) fputs (_("  -b, --badname                 allow bad names\n"), usageout);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -q, --quiet                   report errors only\n"), usageout);
-	(void) fputs (_("  -r, --read-only               display errors and warnings\n"
+	(void) fputs(_("  -b, --badname                 allow bad names\n"), usageout);
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -q, --quiet                   report errors only\n"), usageout);
+	(void) fputs(_("  -r, --read-only               display errors and warnings\n"
 	                "                                but do not change files\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 #ifdef WITH_TCB
-	if (!getdef_bool ("USE_TCB"))
+	if (!getdef_bool("USE_TCB"))
 #endif				/* !WITH_TCB */
 	{
-		(void) fputs (_("  -s, --sort                    sort entries by UID\n"), usageout);
+		(void) fputs(_("  -s, --sort                    sort entries by UID\n"), usageout);
 	}
-	(void) fputs ("\n", usageout);
-	exit (status);
+	(void) fputs("\n", usageout);
+	exit(status);
 }
 
 /*
@@ -158,7 +158,7 @@ usage (int status)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -174,14 +174,14 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	/*
 	 * Parse the command line arguments
 	 */
-	while ((c = getopt_long (argc, argv, "behqrR:s",
+	while ((c = getopt_long(argc, argv, "behqrR:s",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'b':
 			allow_bad_names = true;
 			break;
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'e':	/* added for Debian shadow-961025-2 compatibility */
 		case 'q':
@@ -210,7 +210,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	 * Make certain we have the right number of arguments
 	 */
 	if (argc > (optind + 2)) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 
 	/*
@@ -218,23 +218,23 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	 * and shadow password filenames.
 	 */
 	if (optind != argc) {
-		pw_setdbname (argv[optind]);
+		pw_setdbname(argv[optind]);
 		use_system_pw_file = false;
 	}
 	if ((optind + 2) == argc) {
 #ifdef WITH_TCB
-		if (getdef_bool ("USE_TCB")) {
-			fprintf (stderr,
+		if (getdef_bool("USE_TCB")) {
+			fprintf(stderr,
 			         _("%s: no alternative shadow file allowed when USE_TCB is enabled.\n"),
 			         Prog);
-			usage (E_USAGE);
+			usage(E_USAGE);
 		}
 #endif				/* WITH_TCB */
-		spw_setdbname (argv[optind + 1]);
+		spw_setdbname(argv[optind + 1]);
 		is_shadow = true;
 		use_system_spw_file = false;
 	} else if (optind == argc) {
-		is_shadow = spw_file_present ();
+		is_shadow = spw_file_present();
 	}
 }
 
@@ -248,7 +248,7 @@ static void open_files(const struct option_flags *flags)
 {
 	bool use_tcb = false;
 #ifdef WITH_TCB
-	use_tcb = getdef_bool ("USE_TCB");
+	use_tcb = getdef_bool("USE_TCB");
 #endif				/* WITH_TCB */
 	bool process_selinux;
 
@@ -258,19 +258,19 @@ static void open_files(const struct option_flags *flags)
 	 * Lock the files if we aren't in "read-only" mode
 	 */
 	if (!read_only) {
-		if (pw_lock () == 0) {
-			fprintf (stderr,
+		if (pw_lock() == 0) {
+			fprintf(stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, pw_dbname ());
-			fail_exit (E_CANTLOCK, process_selinux);
+			         Prog, pw_dbname());
+			fail_exit(E_CANTLOCK, process_selinux);
 		}
 		pw_locked = true;
 		if (is_shadow && !use_tcb) {
-			if (spw_lock () == 0) {
-				fprintf (stderr,
+			if (spw_lock() == 0) {
+				fprintf(stderr,
 				         _("%s: cannot lock %s; try again later.\n"),
-				         Prog, spw_dbname ());
-				fail_exit (E_CANTLOCK, process_selinux);
+				         Prog, spw_dbname());
+				fail_exit(E_CANTLOCK, process_selinux);
 			}
 			spw_locked = true;
 		}
@@ -280,22 +280,22 @@ static void open_files(const struct option_flags *flags)
 	 * Open the files. Use O_RDONLY if we are in read_only mode, O_RDWR
 	 * otherwise.
 	 */
-	if (pw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"),
-		         Prog, pw_dbname ());
+	if (pw_open(read_only ? O_RDONLY : O_RDWR) == 0) {
+		fprintf(stderr, _("%s: cannot open %s\n"),
+		         Prog, pw_dbname());
 		if (use_system_pw_file) {
 			SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 		}
-		fail_exit (E_CANTOPEN, process_selinux);
+		fail_exit(E_CANTOPEN, process_selinux);
 	}
 	if (is_shadow && !use_tcb) {
-		if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
-			fprintf (stderr, _("%s: cannot open %s\n"),
-			         Prog, spw_dbname ());
+		if (spw_open(read_only ? O_RDONLY : O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"),
+			         Prog, spw_dbname());
 			if (use_system_spw_file) {
 				SYSLOG(LOG_WARN, "cannot open %s", spw_dbname());
 			}
-			fail_exit (E_CANTOPEN, process_selinux);
+			fail_exit(E_CANTOPEN, process_selinux);
 		}
 		spw_opened = true;
 	}
@@ -319,27 +319,27 @@ static void close_files(bool changed, const struct option_flags *flags)
 	 * changes to the files.
 	 */
 	if (changed) {
-		if (pw_close (process_selinux) == 0) {
-			fprintf (stderr,
+		if (pw_close(process_selinux) == 0) {
+			fprintf(stderr,
 			         _("%s: failure while writing changes to %s\n"),
-			         Prog, pw_dbname ());
+			         Prog, pw_dbname());
 			if (use_system_pw_file) {
 				SYSLOG(LOG_ERR,
 				       "failure while writing changes to %s",
 				       pw_dbname());
 			}
-			fail_exit (E_CANTUPDATE, process_selinux);
+			fail_exit(E_CANTUPDATE, process_selinux);
 		}
-		if (spw_opened && (spw_close (process_selinux) == 0)) {
-			fprintf (stderr,
+		if (spw_opened && (spw_close(process_selinux) == 0)) {
+			fprintf(stderr,
 			         _("%s: failure while writing changes to %s\n"),
-			         Prog, spw_dbname ());
+			         Prog, spw_dbname());
 			if (use_system_spw_file) {
 				SYSLOG(LOG_ERR,
 				       "failure while writing changes to %s",
 				       spw_dbname());
 			}
-			fail_exit (E_CANTUPDATE, process_selinux);
+			fail_exit(E_CANTUPDATE, process_selinux);
 		}
 		spw_opened = false;
 	}
@@ -348,10 +348,10 @@ static void close_files(bool changed, const struct option_flags *flags)
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
 	if (spw_locked) {
-		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr,
+		if (spw_unlock(process_selinux) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to unlock %s\n"),
-			         Prog, spw_dbname ());
+			         Prog, spw_dbname());
 			if (use_system_spw_file) {
 				SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			}
@@ -381,8 +381,8 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
 	const struct spwd *spw;
-	uid_t min_sys_id = getdef_ulong ("SYS_UID_MIN", 101UL);
-	uid_t max_sys_id = getdef_ulong ("SYS_UID_MAX", 999UL);
+	uid_t min_sys_id = getdef_ulong("SYS_UID_MIN", 101UL);
+	uid_t max_sys_id = getdef_ulong("SYS_UID_MAX", 999UL);
 	bool process_selinux;
 
 	process_selinux = !flags->chroot;
@@ -390,7 +390,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 	/*
 	 * Loop through the entire password file.
 	 */
-	for (pfe = __pw_get_head (); NULL != pfe; pfe = pfe->next) {
+	for (pfe = __pw_get_head(); NULL != pfe; pfe = pfe->next) {
 		/*
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
@@ -409,14 +409,14 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			puts (_("invalid password file entry"));
-			printf (_("delete line '%s'? "), pfe->line);
+			puts(_("invalid password file entry"));
+			printf(_("delete line '%s'? "), pfe->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no (read_only)) {
+			if (!yes_or_no(read_only)) {
 				continue;
 			}
 
@@ -433,7 +433,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 			}
 			*changed = true;
 
-			__pw_del_entry (pfe);
+			__pw_del_entry(pfe);
 			continue;
 		}
 
@@ -445,7 +445,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-		for (tpfe = __pw_get_head (); NULL != tpfe; tpfe = tpfe->next) {
+		for (tpfe = __pw_get_head(); NULL != tpfe; tpfe = tpfe->next) {
 			const struct passwd *ent = tpfe->eptr;
 
 			/*
@@ -470,14 +470,14 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			puts (_("duplicate password entry"));
-			printf (_("delete line '%s'? "), pfe->line);
+			puts(_("duplicate password entry"));
+			printf(_("delete line '%s'? "), pfe->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only)) {
+			if (yes_or_no(read_only)) {
 				goto delete_pw;
 			}
 		}
@@ -501,7 +501,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 		 * Check for invalid user ID.
 		 */
 		if (pwd->pw_uid == (uid_t)-1) {
-			printf (_("invalid user ID '%lu'\n"), (long unsigned int)pwd->pw_uid);
+			printf(_("invalid user ID '%lu'\n"), (long unsigned int)pwd->pw_uid);
 			*errors = true;
 		}
 
@@ -515,7 +515,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 			 * No primary group, just give a warning
 			 */
 
-			printf (_("user '%s': no group %lu\n"),
+			printf(_("user '%s': no group %lu\n"),
 			        pwd->pw_name, (unsigned long) pwd->pw_gid);
 			*errors = true;
 		}
@@ -527,14 +527,14 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 			/*
 			 * Make sure the home directory exists
 			 */
-			if (!quiet && (access (pwd->pw_dir, F_OK) != 0)) {
+			if (!quiet && (access(pwd->pw_dir, F_OK) != 0)) {
 				const char *nonexistent = getdef_str("NONEXISTENT");
 
 				/*
 				 * Home directory does not exist, give a warning (unless intentional)
 				 */
 				if (NULL == nonexistent || !streq(pwd->pw_dir, nonexistent)) {
-					printf (_("user '%s': directory '%s' does not exist\n"),
+					printf(_("user '%s': directory '%s' does not exist\n"),
 							pwd->pw_name, pwd->pw_dir);
 					*errors = true;
 				}
@@ -546,12 +546,12 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 		 */
 		if (   !quiet
 		    && !streq(pwd->pw_shell, "")
-		    && (access (pwd->pw_shell, F_OK) != 0)) {
+		    && (access(pwd->pw_shell, F_OK) != 0)) {
 
 			/*
 			 * Login shell doesn't exist, give a warning
 			 */
-			printf (_("user '%s': program '%s' does not exist\n"),
+			printf(_("user '%s': program '%s' does not exist\n"),
 			        pwd->pw_name, pwd->pw_shell);
 			*errors = true;
 		}
@@ -562,40 +562,40 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 
 		if (is_shadow) {
 #ifdef WITH_TCB
-			if (getdef_bool ("USE_TCB")) {
-				if (shadowtcb_set_user (pwd->pw_name) == SHADOWTCB_FAILURE) {
-					printf (_("no tcb directory for %s\n"),
+			if (getdef_bool("USE_TCB")) {
+				if (shadowtcb_set_user(pwd->pw_name) == SHADOWTCB_FAILURE) {
+					printf(_("no tcb directory for %s\n"),
 					        pwd->pw_name);
-					printf (_("create tcb directory for %s?"),
+					printf(_("create tcb directory for %s?"),
 					        pwd->pw_name);
 					*errors = true;
-					if (yes_or_no (read_only)) {
-						if (shadowtcb_create (pwd->pw_name, pwd->pw_uid) == SHADOWTCB_FAILURE) {
+					if (yes_or_no(read_only)) {
+						if (shadowtcb_create(pwd->pw_name, pwd->pw_uid) == SHADOWTCB_FAILURE) {
 							*errors = true;
-							printf (_("failed to create tcb directory for %s\n"), pwd->pw_name);
+							printf(_("failed to create tcb directory for %s\n"), pwd->pw_name);
 							continue;
 						}
 					} else {
 						continue;
 					}
 				}
-				if (spw_lock () == 0) {
+				if (spw_lock() == 0) {
 					*errors = true;
-					fprintf (stderr,
+					fprintf(stderr,
 					         _("%s: cannot lock %s.\n"),
-					         Prog, spw_dbname ());
+					         Prog, spw_dbname());
 					continue;
 				}
 				spw_locked = true;
-				if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
-					fprintf (stderr,
+				if (spw_open(read_only ? O_RDONLY : O_RDWR) == 0) {
+					fprintf(stderr,
 					         _("%s: cannot open %s\n"),
-					         Prog, spw_dbname ());
+					         Prog, spw_dbname());
 					*errors = true;
-					if (spw_unlock (process_selinux) == 0) {
-						fprintf (stderr,
+					if (spw_unlock(process_selinux) == 0) {
+						fprintf(stderr,
 						         _("%s: failed to unlock %s\n"),
-						         Prog, spw_dbname ());
+						         Prog, spw_dbname());
 						if (use_system_spw_file) {
 							SYSLOG(LOG_ERR,
 							       "failed to unlock %s",
@@ -607,29 +607,29 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 				spw_opened = true;
 			}
 #endif				/* WITH_TCB */
-			spw = spw_locate (pwd->pw_name);
+			spw = spw_locate(pwd->pw_name);
 			if (NULL == spw) {
-				printf (_("no matching password file entry in %s\n"),
-				        spw_dbname ());
-				printf (_("add user '%s' in %s? "),
-				        pwd->pw_name, spw_dbname ());
+				printf(_("no matching password file entry in %s\n"),
+				        spw_dbname());
+				printf(_("add user '%s' in %s? "),
+				        pwd->pw_name, spw_dbname());
 				*errors = true;
-				if (yes_or_no (read_only)) {
+				if (yes_or_no(read_only)) {
 					struct spwd sp;
 					struct passwd pw;
 
 					sp.sp_namp   = pwd->pw_name;
 					sp.sp_pwdp   = pwd->pw_passwd;
 					sp.sp_min    =
-					    getdef_num ("PASS_MIN_DAYS", -1);
+					    getdef_num("PASS_MIN_DAYS", -1);
 					sp.sp_max    =
-					    getdef_num ("PASS_MAX_DAYS", -1);
+					    getdef_num("PASS_MAX_DAYS", -1);
 					sp.sp_warn   =
-					    getdef_num ("PASS_WARN_AGE", -1);
+					    getdef_num("PASS_WARN_AGE", -1);
 					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
 					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
-					sp.sp_lstchg = gettime () / DAY;
+					sp.sp_lstchg = gettime() / DAY;
 					if (0 == sp.sp_lstchg) {
 						/* Better disable aging than
 						 * requiring a password change
@@ -638,20 +638,20 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 					}
 					*changed = true;
 
-					if (spw_update (&sp) == 0) {
-						fprintf (stderr,
+					if (spw_update(&sp) == 0) {
+						fprintf(stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
-						         Prog, spw_dbname (), sp.sp_namp);
-						fail_exit (E_CANTUPDATE, process_selinux);
+						         Prog, spw_dbname(), sp.sp_namp);
+						fail_exit(E_CANTUPDATE, process_selinux);
 					}
 					/* remove password from /etc/passwd */
 					pw = *pwd;
 					pw.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-					if (pw_update (&pw) == 0) {
-						fprintf (stderr,
+					if (pw_update(&pw) == 0) {
+						fprintf(stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
-						         Prog, pw_dbname (), pw.pw_name);
-						fail_exit (E_CANTUPDATE, process_selinux);
+						         Prog, pw_dbname(), pw.pw_name);
+						fail_exit(E_CANTUPDATE, process_selinux);
 					}
 				}
 			} else {
@@ -660,18 +660,18 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 				 */
 				if (   !quiet
 				    && !streq(pwd->pw_passwd, SHADOW_PASSWD_STRING)) {
-					printf (_("user %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
-					        pwd->pw_name, spw_dbname (), pw_dbname ());
+					printf(_("user %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
+					        pwd->pw_name, spw_dbname(), pw_dbname());
 					*errors = true;
 				}
 			}
 		}
 #ifdef WITH_TCB
-		if (getdef_bool ("USE_TCB") && spw_locked) {
-			if (spw_opened && (spw_close (process_selinux) == 0)) {
-				fprintf (stderr,
+		if (getdef_bool("USE_TCB") && spw_locked) {
+			if (spw_opened && (spw_close(process_selinux) == 0)) {
+				fprintf(stderr,
 				         _("%s: failure while writing changes to %s\n"),
-				         Prog, spw_dbname ());
+				         Prog, spw_dbname());
 				if (use_system_spw_file) {
 					SYSLOG(LOG_ERR,
 					       "failure while writing changes to %s",
@@ -680,10 +680,10 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 			} else {
 				spw_opened = false;
 			}
-			if (spw_unlock (process_selinux) == 0) {
-				fprintf (stderr,
+			if (spw_unlock(process_selinux) == 0) {
+				fprintf(stderr,
 				         _("%s: failed to unlock %s\n"),
-				         Prog, spw_dbname ());
+				         Prog, spw_dbname());
 				if (use_system_spw_file) {
 					SYSLOG(LOG_ERR, "failed to unlock %s",
 					       spw_dbname());
@@ -699,7 +699,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 /*
  * check_spw_file - check the content of the shadowed password file (shadow)
  */
-static void check_spw_file (bool *errors, bool *changed)
+static void check_spw_file(bool *errors, bool *changed)
 {
 	struct commonio_entry *spe, *tspe;
 	struct spwd *spw;
@@ -707,7 +707,7 @@ static void check_spw_file (bool *errors, bool *changed)
 	/*
 	 * Loop through the entire shadow password file.
 	 */
-	for (spe = __spw_get_head (); NULL != spe; spe = spe->next) {
+	for (spe = __spw_get_head(); NULL != spe; spe = spe->next) {
 		/*
 		 * Do not treat lines which were missing in shadow
 		 * and were added earlier.
@@ -734,14 +734,14 @@ static void check_spw_file (bool *errors, bool *changed)
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			puts (_("invalid shadow password file entry"));
-			printf (_("delete line '%s'? "), spe->line);
+			puts(_("invalid shadow password file entry"));
+			printf(_("delete line '%s'? "), spe->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no (read_only)) {
+			if (!yes_or_no(read_only)) {
 				continue;
 			}
 
@@ -758,7 +758,7 @@ static void check_spw_file (bool *errors, bool *changed)
 			}
 			*changed = true;
 
-			__spw_del_entry (spe);
+			__spw_del_entry(spe);
 			continue;
 		}
 
@@ -770,7 +770,7 @@ static void check_spw_file (bool *errors, bool *changed)
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-		for (tspe = __spw_get_head (); NULL != tspe; tspe = tspe->next) {
+		for (tspe = __spw_get_head(); NULL != tspe; tspe = tspe->next) {
 			const struct spwd *ent = tspe->eptr;
 
 			/*
@@ -795,14 +795,14 @@ static void check_spw_file (bool *errors, bool *changed)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			puts (_("duplicate shadow password entry"));
-			printf (_("delete line '%s'? "), spe->line);
+			puts(_("duplicate shadow password entry"));
+			printf(_("delete line '%s'? "), spe->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only)) {
+			if (yes_or_no(read_only)) {
 				goto delete_spw;
 			}
 		}
@@ -811,20 +811,20 @@ static void check_spw_file (bool *errors, bool *changed)
 		 * Make sure this entry exists in the /etc/passwd
 		 * file.
 		 */
-		if (pw_locate (spw->sp_namp) == NULL) {
+		if (pw_locate(spw->sp_namp) == NULL) {
 			/*
 			 * Tell the user this entry has no matching
 			 * /etc/passwd entry and ask them to delete it.
 			 */
-			printf (_("no matching password file entry in %s\n"),
-			        pw_dbname ());
-			printf (_("delete line '%s'? "), spe->line);
+			printf(_("no matching password file entry in %s\n"),
+			        pw_dbname());
+			printf(_("delete line '%s'? "), spe->line);
 			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only)) {
+			if (yes_or_no(read_only)) {
 				goto delete_spw;
 			}
 		}
@@ -833,10 +833,10 @@ static void check_spw_file (bool *errors, bool *changed)
 		 * Warn if last password change in the future.  --marekm
 		 */
 		if (!quiet) {
-			time_t t = time (NULL);
+			time_t t = time(NULL);
 			if (   (t != 0)
 			    && (spw->sp_lstchg > t / DAY)) {
-				printf (_("user %s: last password change in the future\n"),
+				printf(_("user %s: last password change in the future\n"),
 			                spw->sp_namp);
 				*errors = true;
 			}
@@ -847,7 +847,7 @@ static void check_spw_file (bool *errors, bool *changed)
 /*
  * pwck - verify password file integrity
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	bool errors = false;
 	bool changed = false;
@@ -857,13 +857,13 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
 	/* Parse the command line arguments */
 	process_flags (argc, argv, &flags);
@@ -906,12 +906,12 @@ int main (int argc, char **argv)
 	 * Tell the user what we did and exit.
 	 */
 	if (errors) {
-		printf (changed ?
+		printf(changed ?
 		        _("%s: the files have been updated\n") :
 		        _("%s: no changes\n"), Prog);
 	}
 
-	closelog ();
+	closelog();
 	return (errors ? E_BADENTRY : E_OKAY);
 }
 

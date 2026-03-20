@@ -47,10 +47,10 @@ void reset_selinux_handle (void)
  *	Callers may have to Reset SELinux to create files with default
  *	contexts with reset_selinux_file_context
  */
-int set_selinux_file_context (const char *dst_name, mode_t mode)
+int set_selinux_file_context(const char *dst_name, mode_t mode)
 {
 	if (!selinux_checked) {
-		selinux_enabled = is_selinux_enabled () > 0;
+		selinux_enabled = is_selinux_enabled() > 0;
 		selinux_checked = true;
 	}
 
@@ -63,7 +63,7 @@ int set_selinux_file_context (const char *dst_name, mode_t mode)
 		if (selabel_hnd == NULL) {
 			selabel_hnd = selabel_open(SELABEL_CTX_FILE, NULL, 0);
 			if (selabel_hnd == NULL) {
-				return security_getenforce () != 0;
+				return security_getenforce() != 0;
 			}
 			(void) atexit(cleanup);
 		}
@@ -79,10 +79,10 @@ int set_selinux_file_context (const char *dst_name, mode_t mode)
 		}
 
 		/* Set the security context for the next created file */
-		r = setfscreatecon_raw (fcontext_raw);
-		freecon (fcontext_raw);
+		r = setfscreatecon_raw(fcontext_raw);
+		freecon(fcontext_raw);
 		if (r < 0) {
-			return security_getenforce () != 0;
+			return security_getenforce() != 0;
 		}
 	}
 	return 0;
@@ -95,15 +95,15 @@ int set_selinux_file_context (const char *dst_name, mode_t mode)
  *	reset_selinux_file_context () should be called after the context
  *	was changed with set_selinux_file_context ()
  */
-int reset_selinux_file_context (void)
+int reset_selinux_file_context(void)
 {
 	if (!selinux_checked) {
-		selinux_enabled = is_selinux_enabled () > 0;
+		selinux_enabled = is_selinux_enabled() > 0;
 		selinux_checked = true;
 	}
 	if (selinux_enabled) {
-		if (setfscreatecon_raw (NULL) != 0) {
-			return security_getenforce () != 0;
+		if (setfscreatecon_raw(NULL) != 0) {
+			return security_getenforce() != 0;
 		}
 	}
 	return 0;
@@ -113,22 +113,22 @@ int reset_selinux_file_context (void)
  *  Log callback for libselinux internal error reporting.
  */
 format_attr(printf, 2, 3)
-static int selinux_log_cb (int type, const char *fmt, ...) {
+static int selinux_log_cb(int type, const char *fmt, ...) {
 	va_list ap;
 	char *buf;
 #ifdef WITH_AUDIT
 	static int selinux_audit_fd = -2;
 #endif
 
-	va_start (ap, fmt);
+	va_start(ap, fmt);
 	buf = vaprintf(fmt, ap);
-	va_end (ap);
+	va_end(ap);
 	if (buf == NULL)
 		return 0;
 
 #ifdef WITH_AUDIT
 	if (-2 == selinux_audit_fd) {
-		selinux_audit_fd = audit_open ();
+		selinux_audit_fd = audit_open();
 
 		if (-1 == selinux_audit_fd) {
 			/* You get these only when the kernel doesn't have
@@ -137,7 +137,7 @@ static int selinux_log_cb (int type, const char *fmt, ...) {
 			    && (errno != EPROTONOSUPPORT)
 			    && (errno != EAFNOSUPPORT)) {
 
-			    (void) fputs (_("Cannot open audit interface.\n"),
+			    (void) fputs(_("Cannot open audit interface.\n"),
 			              log_get_logfd());
 			    SYSLOG(LOG_WARN, "Cannot open audit interface.");
 			}
@@ -146,13 +146,13 @@ static int selinux_log_cb (int type, const char *fmt, ...) {
 
 	if (-1 != selinux_audit_fd) {
 		if (SELINUX_AVC == type) {
-			if (audit_log_user_avc_message (selinux_audit_fd,
+			if (audit_log_user_avc_message(selinux_audit_fd,
 			    AUDIT_USER_AVC, buf, NULL, NULL,
 			    NULL, 0) > 0) {
 				goto skip_syslog;
 			}
 		} else if (SELINUX_ERROR == type) {
-			if (audit_log_user_avc_message (selinux_audit_fd,
+			if (audit_log_user_avc_message(selinux_audit_fd,
 			    AUDIT_USER_SELINUX_ERR, buf, NULL, NULL,
 			    NULL, 0) > 0) {
 				goto skip_syslog;
@@ -164,7 +164,7 @@ static int selinux_log_cb (int type, const char *fmt, ...) {
 	SYSLOG(LOG_WARN, "libselinux: %s", buf);
 
 skip_syslog:
-	free (buf);
+	free(buf);
 
 	return 0;
 }
@@ -179,29 +179,29 @@ skip_syslog:
  *                  or something failed but running in
  *                  permissive mode
  */
-int check_selinux_permit (const char *perm_name)
+int check_selinux_permit(const char *perm_name)
 {
 	char *user_context_raw;
 	int r;
 
-	if (0 == is_selinux_enabled ()) {
+	if (0 == is_selinux_enabled()) {
 		return 0;
 	}
 
-	selinux_set_callback (SELINUX_CB_LOG, (union selinux_callback) { .func_log = selinux_log_cb });
+	selinux_set_callback(SELINUX_CB_LOG, (union selinux_callback) { .func_log = selinux_log_cb });
 
-	if (getprevcon_raw (&user_context_raw) != 0) {
-		fprintf (log_get_logfd(),
+	if (getprevcon_raw(&user_context_raw) != 0) {
+		fprintf(log_get_logfd(),
 		    _("%s: can not get previous SELinux process context: %s\n"),
 		    log_get_progname(), strerrno());
 		SYSLOG(LOG_WARN,
 		       "can not get previous SELinux process context: %s",
 		       strerrno());
-		return (security_getenforce () != 0);
+		return (security_getenforce() != 0);
 	}
 
-	r = selinux_check_access (user_context_raw, user_context_raw, "passwd", perm_name, NULL);
-	freecon (user_context_raw);
+	r = selinux_check_access(user_context_raw, user_context_raw, "passwd", perm_name, NULL);
+	freecon(user_context_raw);
 	return r;
 }
 

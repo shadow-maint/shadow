@@ -44,15 +44,15 @@
 	sg->sg_namp = strdup (sgent->sg_namp);
 	/*@=mustfreeonly@*/
 	if (NULL == sg->sg_namp) {
-		free (sg);
+		free(sg);
 		return NULL;
 	}
 	/*@-mustfreeonly@*/
 	sg->sg_passwd = strdup (sgent->sg_passwd);
 	/*@=mustfreeonly@*/
 	if (NULL == sg->sg_passwd) {
-		free (sg->sg_namp);
-		free (sg);
+		free(sg->sg_namp);
+		free(sg);
 		return NULL;
 	}
 
@@ -61,21 +61,21 @@
 	sg->sg_adm = malloc_T(i + 1, char *);
 	/*@=mustfreeonly@*/
 	if (NULL == sg->sg_adm) {
-		free (sg->sg_passwd);
-		free (sg->sg_namp);
-		free (sg);
+		free(sg->sg_passwd);
+		free(sg->sg_namp);
+		free(sg);
 		return NULL;
 	}
 	for (i = 0; NULL != sgent->sg_adm[i]; i++) {
-		sg->sg_adm[i] = strdup (sgent->sg_adm[i]);
+		sg->sg_adm[i] = strdup(sgent->sg_adm[i]);
 		if (NULL == sg->sg_adm[i]) {
 			for (i = 0; NULL != sg->sg_adm[i]; i++) {
-				free (sg->sg_adm[i]);
+				free(sg->sg_adm[i]);
 			}
-			free (sg->sg_adm);
-			free (sg->sg_passwd);
-			free (sg->sg_namp);
-			free (sg);
+			free(sg->sg_adm);
+			free(sg->sg_passwd);
+			free(sg->sg_namp);
+			free(sg);
 			return NULL;
 		}
 	}
@@ -87,28 +87,28 @@
 	/*@=mustfreeonly@*/
 	if (NULL == sg->sg_mem) {
 		for (i = 0; NULL != sg->sg_adm[i]; i++) {
-			free (sg->sg_adm[i]);
+			free(sg->sg_adm[i]);
 		}
-		free (sg->sg_adm);
-		free (sg->sg_passwd);
-		free (sg->sg_namp);
-		free (sg);
+		free(sg->sg_adm);
+		free(sg->sg_passwd);
+		free(sg->sg_namp);
+		free(sg);
 		return NULL;
 	}
 	for (i = 0; NULL != sgent->sg_mem[i]; i++) {
-		sg->sg_mem[i] = strdup (sgent->sg_mem[i]);
+		sg->sg_mem[i] = strdup(sgent->sg_mem[i]);
 		if (NULL == sg->sg_mem[i]) {
 			for (i = 0; NULL != sg->sg_mem[i]; i++) {
-				free (sg->sg_mem[i]);
+				free(sg->sg_mem[i]);
 			}
-			free (sg->sg_mem);
+			free(sg->sg_mem);
 			for (i = 0; NULL != sg->sg_adm[i]; i++) {
-				free (sg->sg_adm[i]);
+				free(sg->sg_adm[i]);
 			}
-			free (sg->sg_adm);
-			free (sg->sg_passwd);
-			free (sg->sg_namp);
-			free (sg);
+			free(sg->sg_adm);
+			free(sg->sg_passwd);
+			free(sg->sg_namp);
+			free(sg);
 			return NULL;
 		}
 	}
@@ -129,7 +129,7 @@ gshadow_free(/*@only@*/void *ent)
 {
 	struct sgrp *sg = ent;
 
-	sgr_free (sg);
+	sgr_free(sg);
 }
 
 void
@@ -177,7 +177,7 @@ static int gshadow_put (const void *ent, FILE * file)
 	if (NULL != sg->sg_adm) {
 		size_t i;
 		for (i = 0; NULL != sg->sg_adm[i]; i++) {
-			if (valid_field (sg->sg_adm[i], ",:\n") == -1) {
+			if (valid_field(sg->sg_adm[i], ",:\n") == -1) {
 				return -1;
 			}
 		}
@@ -226,9 +226,9 @@ static struct commonio_db gshadow_db = {
 	false			/* setname */
 };
 
-int sgr_setdbname (const char *filename)
+int sgr_setdbname(const char *filename)
 {
-	return commonio_setname (&gshadow_db, filename);
+	return commonio_setname(&gshadow_db, filename);
 }
 
 /*@observer@*/const char *sgr_dbname (void)
@@ -255,22 +255,22 @@ int sgr_open (int mode)
 
 /*@observer@*/ /*@null@*/const struct sgrp *sgr_locate (const char *name)
 {
-	return commonio_locate (&gshadow_db, name);
+	return commonio_locate(&gshadow_db, name);
 }
 
-int sgr_update (const struct sgrp *sg)
+int sgr_update(const struct sgrp *sg)
 {
-	return commonio_update (&gshadow_db, sg);
+	return commonio_update(&gshadow_db, sg);
 }
 
-int sgr_remove (const char *name)
+int sgr_remove(const char *name)
 {
-	return commonio_remove (&gshadow_db, name);
+	return commonio_remove(&gshadow_db, name);
 }
 
-int sgr_rewind (void)
+int sgr_rewind(void)
 {
-	return commonio_rewind (&gshadow_db);
+	return commonio_rewind(&gshadow_db);
 }
 
 /*@null@*/const struct sgrp *sgr_next (void)
@@ -298,9 +298,9 @@ void __sgr_set_changed (void)
 	return gshadow_db.head;
 }
 
-void __sgr_del_entry (const struct commonio_entry *ent)
+void __sgr_del_entry(const struct commonio_entry *ent)
 {
-	commonio_del_entry (&gshadow_db, ent);
+	commonio_del_entry(&gshadow_db, ent);
 }
 
 /* Sort with respect to group ordering. */

@@ -16,15 +16,15 @@
 extern int spw_close (bool process_selinux);
 extern bool spw_file_present (void);
 extern /*@observer@*/ /*@null@*/const struct spwd *spw_locate (const char *name);
-extern int spw_lock (void);
-extern int spw_setdbname (const char *filename);
+extern int spw_lock(void);
+extern int spw_setdbname(const char *filename);
 extern /*@observer@*/const char *spw_dbname (void);
 extern /*@observer@*/ /*@null@*/const struct spwd *spw_next (void);
-extern int spw_open (int mode);
-extern int spw_remove (const char *name);
-extern int spw_rewind (void);
-extern int spw_unlock (bool process_selinux);
-extern int spw_update (const struct spwd *sp);
-extern int spw_sort (void);
+extern int spw_open(int mode);
+extern int spw_remove(const char *name);
+extern int spw_rewind(void);
+extern int spw_unlock(bool process_selinux);
+extern int spw_update(const struct spwd *sp);
+extern int spw_sort(void);
 
 #endif

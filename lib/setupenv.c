@@ -44,13 +44,13 @@ addenv_path(const char *varname, const char *dirname, const char *filename)
 	free(buf);
 }
 
-static void read_env_file (const char *filename)
+static void read_env_file(const char *filename)
 {
 	FILE *fp;
 	char buf[1024];
 	char *cp, *name, *val;
 
-	fp = fopen (filename, "r");
+	fp = fopen(filename, "r");
 	if (NULL == fp) {
 		return;
 	}
@@ -78,9 +78,9 @@ static void read_env_file (const char *filename)
 		 * XXX - should handle quotes, backslash escapes, etc.
 		 * like the shell does.
 		 */
-		addenv (name, val);
+		addenv(name, val);
 	}
-	(void) fclose (fp);
+	(void) fclose(fp);
 }
 #endif				/* USE_PAM */
 
@@ -91,7 +91,7 @@ static void read_env_file (const char *filename)
  *	variables.
  */
 
-void setup_env (struct passwd *info)
+void setup_env(struct passwd *info)
 {
 #ifndef USE_PAM
 	const char *envf;
@@ -109,58 +109,58 @@ void setup_env (struct passwd *info)
 	 * this a configurable option.  --marekm
 	 */
 
-	if (chdir (info->pw_dir) == -1) {
-		if (!getdef_bool ("DEFAULT_HOME") || chdir ("/") == -1) {
-			fprintf (log_get_logfd(), _("Unable to cd to '%s'\n"),
+	if (chdir(info->pw_dir) == -1) {
+		if (!getdef_bool("DEFAULT_HOME") || chdir("/") == -1) {
+			fprintf(log_get_logfd(), _("Unable to cd to '%s'\n"),
 				 info->pw_dir);
 			SYSLOG(LOG_WARN,
 				"unable to cd to `%s' for user `%s'\n",
 				info->pw_dir, info->pw_name);
-			closelog ();
-			exit (EXIT_FAILURE);
+			closelog();
+			exit(EXIT_FAILURE);
 		}
-		(void) puts (_("No directory, logging in with HOME=/"));
-		free (info->pw_dir);
-		info->pw_dir = xstrdup ("/");
+		(void) puts(_("No directory, logging in with HOME=/"));
+		free(info->pw_dir);
+		info->pw_dir = xstrdup("/");
 	}
 
 	/*
 	 * Create the HOME environmental variable and export it.
 	 */
 
-	addenv ("HOME", info->pw_dir);
+	addenv("HOME", info->pw_dir);
 
 	/*
 	 * Create the SHELL environmental variable and export it.
 	 */
 
 	if ((NULL == info->pw_shell) || streq(info->pw_shell, "")) {
-		free (info->pw_shell);
-		info->pw_shell = xstrdup (SHELL);
+		free(info->pw_shell);
+		info->pw_shell = xstrdup(SHELL);
 	}
 
-	addenv ("SHELL", info->pw_shell);
+	addenv("SHELL", info->pw_shell);
 
 	/*
 	 * Export the user name.  For BSD derived systems, it's "USER", for
 	 * all others it's "LOGNAME".  We set both of them.
 	 */
 
-	addenv ("USER", info->pw_name);
-	addenv ("LOGNAME", info->pw_name);
+	addenv("USER", info->pw_name);
+	addenv("LOGNAME", info->pw_name);
 
 	/*
 	 * Create the PATH environmental variable and export it.
 	 */
 
-	cp = getdef_str ((info->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+	cp = getdef_str((info->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 
 	if (NULL == cp) {
 		/* not specified, use a minimal default */
 		addenv ((info->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
 	} else if (strchr(cp, '=')) {
 		/* specified as name=value (PATH=...) */
-		addenv (cp, NULL);
+		addenv(cp, NULL);
 	} else {
 		/* only value specified without "PATH=" */
 		addenv ("PATH", cp);
@@ -172,19 +172,19 @@ void setup_env (struct passwd *info)
 	 * knows the prefix.
 	 */
 
-	if (getdef_bool ("MAIL_CHECK_ENAB")) {
-		cp = getdef_str ("MAIL_DIR");
+	if (getdef_bool("MAIL_CHECK_ENAB")) {
+		cp = getdef_str("MAIL_DIR");
 		if (NULL != cp) {
-			addenv_path ("MAIL", cp, info->pw_name);
+			addenv_path("MAIL", cp, info->pw_name);
 		} else {
-			cp = getdef_str ("MAIL_FILE");
+			cp = getdef_str("MAIL_FILE");
 			if (NULL != cp) {
-				addenv_path ("MAIL", info->pw_dir, cp);
+				addenv_path("MAIL", info->pw_dir, cp);
 			} else {
 #if defined(MAIL_SPOOL_FILE)
-				addenv_path ("MAIL", info->pw_dir, MAIL_SPOOL_FILE);
+				addenv_path("MAIL", info->pw_dir, MAIL_SPOOL_FILE);
 #elif defined(MAIL_SPOOL_DIR)
-				addenv_path ("MAIL", MAIL_SPOOL_DIR, info->pw_name);
+				addenv_path("MAIL", MAIL_SPOOL_DIR, info->pw_name);
 #endif
 			}
 		}
@@ -193,9 +193,9 @@ void setup_env (struct passwd *info)
 	/*
 	 * Read environment from optional config file.  --marekm
 	 */
-	envf = getdef_str ("ENVIRON_FILE");
+	envf = getdef_str("ENVIRON_FILE");
 	if (NULL != envf) {
-		read_env_file (envf);
+		read_env_file(envf);
 	}
 #endif				/* !USE_PAM */
 }

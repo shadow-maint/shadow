@@ -10,7 +10,7 @@
  * sssd_flush_cache - flush specified service buffer in sssd cache
  */
 #ifdef	USE_SSSD
-extern int sssd_flush_cache (int dbflags);
+extern int sssd_flush_cache(int dbflags);
 #else
 static inline int
 sssd_flush_cache(MAYBE_UNUSED int _1)

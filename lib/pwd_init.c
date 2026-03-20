@@ -24,33 +24,33 @@
  * values.  Call this before modifying password files, so that
  * it is less likely to fail in the middle of operation.
  */
-void pwd_init (void)
+void pwd_init(void)
 {
 	struct rlimit rlim;
 
 	rlim.rlim_cur = rlim.rlim_max = 0;
-	setrlimit (RLIMIT_CORE, &rlim);
+	setrlimit(RLIMIT_CORE, &rlim);
 
 	rlim.rlim_cur = rlim.rlim_max = RLIM_INFINITY;
-	setrlimit (RLIMIT_AS, &rlim);
+	setrlimit(RLIMIT_AS, &rlim);
 
-	setrlimit (RLIMIT_CPU, &rlim);
-	setrlimit (RLIMIT_DATA, &rlim);
-	setrlimit (RLIMIT_FSIZE, &rlim);
-	setrlimit (RLIMIT_NOFILE, &rlim);
+	setrlimit(RLIMIT_CPU, &rlim);
+	setrlimit(RLIMIT_DATA, &rlim);
+	setrlimit(RLIMIT_FSIZE, &rlim);
+	setrlimit(RLIMIT_NOFILE, &rlim);
 #ifdef RLIMIT_RSS
-	setrlimit (RLIMIT_RSS, &rlim);
+	setrlimit(RLIMIT_RSS, &rlim);
 #endif
-	setrlimit (RLIMIT_STACK, &rlim);
+	setrlimit(RLIMIT_STACK, &rlim);
 
-	signal (SIGALRM, SIG_IGN);
-	signal (SIGHUP, SIG_IGN);
-	signal (SIGINT, SIG_IGN);
-	signal (SIGPIPE, SIG_IGN);
-	signal (SIGQUIT, SIG_IGN);
-	signal (SIGTERM, SIG_IGN);
-	signal (SIGTSTP, SIG_IGN);
-	signal (SIGTTOU, SIG_IGN);
+	signal(SIGALRM, SIG_IGN);
+	signal(SIGHUP, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
 
-	umask (077);
+	umask(077);
 }

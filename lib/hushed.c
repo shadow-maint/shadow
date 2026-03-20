@@ -33,7 +33,7 @@
  * Look in the hushed-logins file (or user's home directory) to see
  * if the user is to receive the login-time messages.
  */
-bool hushed (const char *username)
+bool hushed(const char *username)
 {
 	bool           found;
 	char           buf[BUFSIZ];
@@ -46,12 +46,12 @@ bool hushed (const char *username)
 	 * defined, default to a noisy login.
 	 */
 
-	hushfile = getdef_str ("HUSHLOGIN_FILE");
+	hushfile = getdef_str("HUSHLOGIN_FILE");
 	if (NULL == hushfile) {
 		return false;
 	}
 
-	pw = getpwnam (username);
+	pw = getpwnam(username);
 	if (NULL == pw) {
 		return false;
 	}
@@ -63,7 +63,7 @@ bool hushed (const char *username)
 
 	if (hushfile[0] != '/') {
 		stprintf_a(buf, "%s/%s", pw->pw_dir, hushfile);
-		return (access (buf, F_OK) == 0);
+		return (access(buf, F_OK) == 0);
 	}
 
 	/*
@@ -71,7 +71,7 @@ bool hushed (const char *username)
 	 * and see if this user, or its shell is in there.
 	 */
 
-	fp = fopen (hushfile, "r");
+	fp = fopen(hushfile, "r");
 	if (NULL == fp) {
 		return false;
 	}
@@ -80,7 +80,7 @@ bool hushed (const char *username)
 		found = streq(buf, pw->pw_shell) ||
 		        streq(buf, pw->pw_name);
 	}
-	(void) fclose (fp);
+	(void) fclose(fp);
 	return found;
 }
 

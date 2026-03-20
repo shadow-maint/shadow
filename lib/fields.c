@@ -65,8 +65,8 @@ change_field(char *buf, size_t maxsize, const char *prompt)
 	char *cp;
 	char  newf[MIN(200, maxsize)];
 
-	printf ("\t%s [%s]: ", prompt, buf);
-	(void) fflush (stdout);
+	printf("\t%s [%s]: ", prompt, buf);
+	(void) fflush(stdout);
 	if (fgets_a(newf, stdin) == NULL)
 		return;
 
@@ -81,6 +81,6 @@ change_field(char *buf, size_t maxsize, const char *prompt)
 		 */
 		stpcpy(stprspn(newf, " \t"), "");
 		cp = stpspn(newf, " \t");
-		strcpy (buf, cp);
+		strcpy(buf, cp);
 	}
 }

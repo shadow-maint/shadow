@@ -91,7 +91,7 @@ NORETURN static void fail_exit (int code, bool process_selinux);
 static char *whoami (void)
 {
 	/* local, no need for xgetgrgid */
-	struct group *grp = getgrgid (getgid ());
+	struct group *grp = getgrgid(getgid());
 	/* local, no need for xgetpwuid */
 	struct passwd *usr = getpwuid (getuid ());
 
@@ -107,7 +107,7 @@ static char *whoami (void)
 /*
  * add_user - Add a user to the specified group
  */
-static void add_user (const char *user,
+static void add_user(const char *user,
                       const struct group *grp,
                       bool process_selinux)
 {
@@ -130,11 +130,11 @@ static void add_user (const char *user,
 	}
 
 	/* Add the user to the /etc/group group */
-	newgrp->gr_mem = add_list (newgrp->gr_mem, user);
+	newgrp->gr_mem = add_list(newgrp->gr_mem, user);
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		const struct sgrp *sg = sgr_locate (newgrp->gr_name);
+		const struct sgrp *sg = sgr_locate(newgrp->gr_name);
 		struct sgrp *newsg;
 
 		if (NULL == sg) {
@@ -151,39 +151,39 @@ static void add_user (const char *user,
 
 			newsg = &sgrent;
 		} else {
-			newsg = __sgr_dup (sg);
+			newsg = __sgr_dup(sg);
 			if (NULL == newsg) {
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: Out of memory. Cannot update %s.\n"),
-				         Prog, sgr_dbname ());
-				fail_exit (13, process_selinux);
+				         Prog, sgr_dbname());
+				fail_exit(13, process_selinux);
 			}
 			/* Add the user to the members */
 			newsg->sg_mem = add_list (newsg->sg_mem, user);
 			/* Do not touch the administrators */
 		}
 
-		if (sgr_update (newsg) == 0) {
-			fprintf (stderr,
+		if (sgr_update(newsg) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), newsg->sg_namp);
-			fail_exit (13, process_selinux);
+			         Prog, sgr_dbname(), newsg->sg_namp);
+			fail_exit(13, process_selinux);
 		}
 	}
 #endif
 
-	if (gr_update (newgrp) == 0) {
-		fprintf (stderr,
+	if (gr_update(newgrp) == 0) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, gr_dbname (), newgrp->gr_name);
-		fail_exit (13, process_selinux);
+		         Prog, gr_dbname(), newgrp->gr_name);
+		fail_exit(13, process_selinux);
 	}
 }
 
 /*
  * remove_user - Remove a user from a given group
  */
-static void remove_user (const char *user,
+static void remove_user(const char *user,
                          const struct group *grp,
                          bool process_selinux)
 {
@@ -206,11 +206,11 @@ static void remove_user (const char *user,
 	}
 
 	/* Remove the user from the /etc/group group */
-	newgrp->gr_mem = del_list (newgrp->gr_mem, user);
+	newgrp->gr_mem = del_list(newgrp->gr_mem, user);
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		const struct sgrp *sg = sgr_locate (newgrp->gr_name);
+		const struct sgrp *sg = sgr_locate(newgrp->gr_name);
 		struct sgrp *newsg;
 
 		if (NULL == sg) {
@@ -227,48 +227,48 @@ static void remove_user (const char *user,
 
 			newsg = &sgrent;
 		} else {
-			newsg = __sgr_dup (sg);
+			newsg = __sgr_dup(sg);
 			if (NULL == newsg) {
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: Out of memory. Cannot update %s.\n"),
-				         Prog, sgr_dbname ());
-				fail_exit (13, process_selinux);
+				         Prog, sgr_dbname());
+				fail_exit(13, process_selinux);
 			}
 			/* Remove the user from the members */
 			newsg->sg_mem = del_list (newsg->sg_mem, user);
 			/* Remove the user from the administrators */
-			newsg->sg_adm = del_list (newsg->sg_adm, user);
+			newsg->sg_adm = del_list(newsg->sg_adm, user);
 		}
 
-		if (sgr_update (newsg) == 0) {
-			fprintf (stderr,
+		if (sgr_update(newsg) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), newsg->sg_namp);
-			fail_exit (13, process_selinux);
+			         Prog, sgr_dbname(), newsg->sg_namp);
+			fail_exit(13, process_selinux);
 		}
 	}
 #endif
 
-	if (gr_update (newgrp) == 0) {
-		fprintf (stderr,
+	if (gr_update(newgrp) == 0) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, gr_dbname (), newgrp->gr_name);
-		fail_exit (13, process_selinux);
+		         Prog, gr_dbname(), newgrp->gr_name);
+		fail_exit(13, process_selinux);
 	}
 }
 
 /*
  * purge_members - Remove every members of the specified group
  */
-static void purge_members (const struct group *grp, bool process_selinux)
+static void purge_members(const struct group *grp, bool process_selinux)
 {
-	struct group *newgrp = __gr_dup (grp);
+	struct group *newgrp = __gr_dup(grp);
 
 	if (NULL == newgrp) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: Out of memory. Cannot update %s.\n"),
-		         Prog, gr_dbname ());
-		fail_exit (13, process_selinux);
+		         Prog, gr_dbname());
+		fail_exit(13, process_selinux);
 	}
 
 	/* Remove all the members of the /etc/group group */
@@ -282,7 +282,7 @@ static void purge_members (const struct group *grp, bool process_selinux)
 		if (NULL == sg) {
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
-			sgrent.sg_namp = xstrdup (newgrp->gr_name);
+			sgrent.sg_namp = xstrdup(newgrp->gr_name);
 			sgrent.sg_mem = xmalloc_T(1, char *);
 			sgrent.sg_mem[0] = NULL;
 			sgrent.sg_adm = xmalloc_T(1, char *);
@@ -309,65 +309,65 @@ static void purge_members (const struct group *grp, bool process_selinux)
 			newsg->sg_adm[0] = NULL;
 		}
 
-		if (sgr_update (newsg) == 0) {
-			fprintf (stderr,
+		if (sgr_update(newsg) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), newsg->sg_namp);
-			fail_exit (13, process_selinux);
+			         Prog, sgr_dbname(), newsg->sg_namp);
+			fail_exit(13, process_selinux);
 		}
 	}
 #endif
 
-	if (gr_update (newgrp) == 0) {
-		fprintf (stderr,
+	if (gr_update(newgrp) == 0) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, gr_dbname (), newgrp->gr_name);
-		fail_exit (13, process_selinux);
+		         Prog, gr_dbname(), newgrp->gr_name);
+		fail_exit(13, process_selinux);
 	}
 }
 
-static void display_members (const char *const *members)
+static void display_members(const char *const *members)
 {
 	int i;
 
 	for (i = 0; NULL != members[i]; i++) {
-		printf ("%s ", members[i]);
+		printf("%s ", members[i]);
 
 		if (NULL == members[i + 1]) {
-			printf ("\n");
+			printf("\n");
 		} else {
-			printf (" ");
+			printf(" ");
 		}
 	}
 }
 
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (EXIT_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options] [action]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -g, --group groupname         change groupname instead of the user's group\n"
+	(void) fputs(_("  -g, --group groupname         change groupname instead of the user's group\n"
 	                "                                (root only)\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("\n"), usageout);
-	(void) fputs (_("Actions:\n"), usageout);
-	(void) fputs (_("  -a, --add username            add username to the members of the group\n"), usageout);
-	(void) fputs (_("  -d, --delete username         remove username from the members of the group\n"), usageout);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -p, --purge                   purge all members from the group\n"), usageout);
-	(void) fputs (_("  -l, --list                    list the members of the group\n"), usageout);
-	exit (status);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("\n"), usageout);
+	(void) fputs(_("Actions:\n"), usageout);
+	(void) fputs(_("  -a, --add username            add username to the members of the group\n"), usageout);
+	(void) fputs(_("  -d, --delete username         remove username from the members of the group\n"), usageout);
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -p, --purge                   purge all members from the group\n"), usageout);
+	(void) fputs(_("  -l, --list                    list the members of the group\n"), usageout);
+	exit(status);
 }
 
 /*
  * process_flags - perform command line argument setting
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -381,22 +381,22 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "a:d:g:hlpR:",
+	while ((c = getopt_long(argc, argv, "a:d:g:hlpR:",
 	                         long_options, NULL)) != EOF) {
 		switch (c) {
 		case 'a':
-			adduser = xstrdup (optarg);
+			adduser = xstrdup(optarg);
 			++exclusive;
 			break;
 		case 'd':
-			deluser = xstrdup (optarg);
+			deluser = xstrdup(optarg);
 			++exclusive;
 			break;
 		case 'g':
-			thisgroup = xstrdup (optarg);
+			thisgroup = xstrdup(optarg);
 			break;
 		case 'h':
-			usage (EXIT_SUCCESS);
+			usage(EXIT_SUCCESS);
 			/*@notreached@*/break;
 		case 'l':
 			list = true;
@@ -410,12 +410,12 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			flags->chroot = true;
 			break;
 		default:
-			usage (EXIT_USAGE);
+			usage(EXIT_USAGE);
 		}
 	}
 
 	if ((exclusive > 1) || (optind < argc)) {
-		usage (EXIT_USAGE);
+		usage(EXIT_USAGE);
 	}
 
 	/* local, no need for xgetpwnam */
@@ -439,43 +439,43 @@ check_perms(MAYBE_UNUSED bool process_selinux)
 
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 		if (NULL == pampw) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			fail_exit (1, process_selinux);
+			fail_exit(1, process_selinux);
 		}
 
-		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
+		retval = pam_start(Prog, pampw->pw_name, &conv, &pamh);
 
 		if (PAM_SUCCESS == retval) {
-			retval = pam_authenticate (pamh, 0);
+			retval = pam_authenticate(pamh, 0);
 		}
 
 		if (PAM_SUCCESS == retval) {
-			retval = pam_acct_mgmt (pamh, 0);
+			retval = pam_acct_mgmt(pamh, 0);
 		}
 
 		if (PAM_SUCCESS != retval) {
-			fprintf (stderr, _("%s: PAM: %s\n"),
-			         Prog, pam_strerror (pamh, retval));
+			fprintf(stderr, _("%s: PAM: %s\n"),
+			         Prog, pam_strerror(pamh, retval));
 			SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 			if (NULL != pamh) {
-				(void) pam_end (pamh, retval);
+				(void) pam_end(pamh, retval);
 			}
-			fail_exit (1, process_selinux);
+			fail_exit(1, process_selinux);
 		}
-		(void) pam_end (pamh, retval);
+		(void) pam_end(pamh, retval);
 #endif
 	}
 }
 
-static void fail_exit (int code, bool process_selinux)
+static void fail_exit(int code, bool process_selinux)
 {
 	if (gr_locked) {
-		if (gr_unlock (process_selinux) == 0) {
-			fprintf (stderr,
+		if (gr_unlock(process_selinux) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to unlock %s\n"),
-			         Prog, gr_dbname ());
+			         Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
@@ -493,43 +493,43 @@ static void fail_exit (int code, bool process_selinux)
 	}
 #endif
 
-	exit (code);
+	exit(code);
 }
 
-static void open_files (bool process_selinux)
+static void open_files(bool process_selinux)
 {
 	if (!list) {
-		if (gr_lock () == 0) {
-			fprintf (stderr,
+		if (gr_lock() == 0) {
+			fprintf(stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, gr_dbname ());
-			fail_exit (EXIT_GROUP_FILE, process_selinux);
+			         Prog, gr_dbname());
+			fail_exit(EXIT_GROUP_FILE, process_selinux);
 		}
 		gr_locked = true;
 
 #ifdef SHADOWGRP
 		if (is_shadowgrp) {
-			if (sgr_lock () == 0) {
-				fprintf (stderr,
+			if (sgr_lock() == 0) {
+				fprintf(stderr,
 				         _("%s: cannot lock %s; try again later.\n"),
-				         Prog, sgr_dbname ());
-				fail_exit (EXIT_GROUP_FILE, process_selinux);
+				         Prog, sgr_dbname());
+				fail_exit(EXIT_GROUP_FILE, process_selinux);
 			}
 			sgr_locked = true;
 		}
 #endif
 	}
 
-	if (gr_open (list ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		fail_exit (EXIT_GROUP_FILE, process_selinux);
+	if (gr_open(list ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr, _("%s: cannot open %s\n"), Prog, gr_dbname());
+		fail_exit(EXIT_GROUP_FILE, process_selinux);
 	}
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_open (list ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
-			fail_exit (EXIT_GROUP_FILE, process_selinux);
+		if (sgr_open(list ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname());
+			fail_exit(EXIT_GROUP_FILE, process_selinux);
 		}
 	}
 #endif
@@ -541,14 +541,14 @@ static void close_files(const struct option_flags *flags)
 
 	process_selinux = !flags->chroot;
 
-	if ((gr_close (process_selinux) == 0) && !list) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+	if ((gr_close(process_selinux) == 0) && !list) {
+		fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
-		fail_exit (EXIT_GROUP_FILE, process_selinux);
+		fail_exit(EXIT_GROUP_FILE, process_selinux);
 	}
 	if (gr_locked) {
-		if (gr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		if (gr_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
@@ -574,7 +574,7 @@ static void close_files(const struct option_flags *flags)
 #endif
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	char *name;
 	const struct group *grp;
@@ -584,58 +584,58 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
 #ifdef SHADOWGRP
-	is_shadowgrp = sgr_file_present ();
+	is_shadowgrp = sgr_file_present();
 #endif
 
-	process_flags (argc, argv, &flags);
+	process_flags(argc, argv, &flags);
 	process_selinux = !flags.chroot;
 
 	if (NULL == thisgroup) {
-		name = whoami ();
+		name = whoami();
 		if (!list && (NULL == name)) {
-			fprintf (stderr, _("%s: your groupname does not match your username\n"), Prog);
-			fail_exit (EXIT_NOT_PRIMARY, process_selinux);
+			fprintf(stderr, _("%s: your groupname does not match your username\n"), Prog);
+			fail_exit(EXIT_NOT_PRIMARY, process_selinux);
 		}
 	} else {
 		name = thisgroup;
-		if (!list && !isroot ()) {
-			fprintf (stderr, _("%s: only root can use the -g/--group option\n"), Prog);
-			fail_exit (EXIT_NOT_ROOT, process_selinux);
+		if (!list && !isroot()) {
+			fprintf(stderr, _("%s: only root can use the -g/--group option\n"), Prog);
+			fail_exit(EXIT_NOT_ROOT, process_selinux);
 		}
 	}
 
-	check_perms (process_selinux);
+	check_perms(process_selinux);
 
-	open_files (process_selinux);
+	open_files(process_selinux);
 
-	grp = gr_locate (name);
+	grp = gr_locate(name);
 	if (NULL == grp) {
-		fprintf (stderr, _("%s: group '%s' does not exist in %s\n"),
-		         Prog, name, gr_dbname ());
-		fail_exit (EXIT_INVALID_GROUP, process_selinux);
+		fprintf(stderr, _("%s: group '%s' does not exist in %s\n"),
+		         Prog, name, gr_dbname());
+		fail_exit(EXIT_INVALID_GROUP, process_selinux);
 	}
 
 	if (list) {
-		display_members ((const char *const *)grp->gr_mem);
+		display_members((const char *const *)grp->gr_mem);
 	} else if (NULL != adduser) {
-		add_user (adduser, grp, process_selinux);
+		add_user(adduser, grp, process_selinux);
 	} else if (NULL != deluser) {
-		remove_user (deluser, grp, process_selinux);
+		remove_user(deluser, grp, process_selinux);
 	} else if (purge) {
-		purge_members (grp, process_selinux);
+		purge_members(grp, process_selinux);
 	}
 
-	close_files (&flags);
+	close_files(&flags);
 
-	exit (EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
 

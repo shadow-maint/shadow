@@ -22,7 +22,7 @@
 	                                                              \
 	p_ = strcaseprefix_(s, prefix);                               \
 	                                                              \
-	_Generic(s,                                                   \
+	_Generic (s,                                                   \
 		const char *:                     p_,                 \
 		const void *:                     p_,                 \
 		char *:        const_cast(char *, p_),                \

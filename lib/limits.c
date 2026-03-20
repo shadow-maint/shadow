@@ -50,7 +50,7 @@
  *	value - string value to be read
  *	multiplier - value*multiplier is the actual limit
  */
-static int setrlimit_value (unsigned int resource,
+static int setrlimit_value(unsigned int resource,
                             const char *value,
                             unsigned int multiplier)
 {
@@ -80,7 +80,7 @@ static int setrlimit_value (unsigned int resource,
 
 	rlim.rlim_cur = limit;
 	rlim.rlim_max = limit;
-	if (setrlimit (resource, &rlim) != 0) {
+	if (setrlimit(resource, &rlim) != 0) {
 		return LOGIN_ERROR_RLIMIT;
 	}
 	return 0;
@@ -95,7 +95,7 @@ set_prio(const char *value)
 	if (str2si(&prio, value) == -1)
 		return 0;
 
-	if (setpriority (PRIO_PROCESS, 0, prio) != 0) {
+	if (setpriority(PRIO_PROCESS, 0, prio) != 0) {
 		return LOGIN_ERROR_RLIMIT;
 	}
 	return 0;
@@ -110,7 +110,7 @@ set_umask(const char *value)
 	if (str2i(mode_t, &mask, value) == -1)
 		return 0;
 
-	(void) umask (mask);
+	(void) umask(mask);
 	return 0;
 }
 
@@ -136,7 +136,7 @@ static int check_logins (const char *name, const char *maxlogins)
 	count = active_sessions_count(name, limit);
 
 	if (count > limit) {
-		SYSLOG(LOG_WARN, "Too many logins (max %lu) for %s\n", limit, name);
+		SYSLOG(LOG_WARN, "Too many logins(max %lu) for %s\n", limit, name);
 		return LOGIN_ERROR_LOGIN;
 	}
 	return 0;
@@ -177,7 +177,7 @@ static int check_logins (const char *name, const char *maxlogins)
  * buf - the limits string
  * name - the username
  */
-static int do_user_limits (const char *buf, const char *name)
+static int do_user_limits(const char *buf, const char *name)
 {
 	const char *pp;
 	int retval = 0;
@@ -209,7 +209,7 @@ static int do_user_limits (const char *buf, const char *name)
 		case 'c':
 		case 'C':
 			/* RLIMIT_CORE - max core file size (KB) */
-			retval |= setrlimit_value (RLIMIT_CORE, pp, 1024);
+			retval |= setrlimit_value(RLIMIT_CORE, pp, 1024);
 			break;
 		case 'd':
 		case 'D':
@@ -219,7 +219,7 @@ static int do_user_limits (const char *buf, const char *name)
 		case 'f':
 		case 'F':
 			/* RLIMIT_FSIZE - Maximum filesize (KB) */
-			retval |= setrlimit_value (RLIMIT_FSIZE, pp, 1024);
+			retval |= setrlimit_value(RLIMIT_FSIZE, pp, 1024);
 			break;
 #ifdef RLIMIT_NICE
 		case 'i':
@@ -235,7 +235,7 @@ static int do_user_limits (const char *buf, const char *name)
 		case 'l':
 		case 'L':
 			/* LIMIT the number of concurrent logins */
-			retval |= check_logins (name, pp);
+			retval |= check_logins(name, pp);
 			break;
 #ifdef RLIMIT_MEMLOCK
 		case 'm':
@@ -247,7 +247,7 @@ static int do_user_limits (const char *buf, const char *name)
 		case 'n':
 		case 'N':
 			/* RLIMIT_NOFILE - max number of open files */
-			retval |= setrlimit_value (RLIMIT_NOFILE, pp, 1);
+			retval |= setrlimit_value(RLIMIT_NOFILE, pp, 1);
 			break;
 #ifdef RLIMIT_RTPRIO
 		case 'o':
@@ -264,7 +264,7 @@ static int do_user_limits (const char *buf, const char *name)
 		case 'r':
 		case 'R':
 			/* RLIMIT_RSS - max resident set size (KB) */
-			retval |= setrlimit_value (RLIMIT_RSS, pp, 1024);
+			retval |= setrlimit_value(RLIMIT_RSS, pp, 1024);
 			break;
 #endif
 		case 's':
@@ -275,7 +275,7 @@ static int do_user_limits (const char *buf, const char *name)
 		case 't':
 		case 'T':
 			/* RLIMIT_CPU - max CPU time (MIN) */
-			retval |= setrlimit_value (RLIMIT_CPU, pp, 60);
+			retval |= setrlimit_value(RLIMIT_CPU, pp, 60);
 			break;
 #ifdef RLIMIT_NPROC
 		case 'u':
@@ -315,7 +315,7 @@ static int do_user_limits (const char *buf, const char *name)
  * Returns true when user is in the group, false when not.
  * Any error is treated as false.
  */
-static bool user_in_group (const char *uname, const char *gname)
+static bool user_in_group(const char *uname, const char *gname)
 {
 	struct group *groupdata;
 
@@ -326,16 +326,16 @@ static bool user_in_group (const char *uname, const char *gname)
 	/* We are not claiming to be re-entrant!
 	 * In case of paranoia or a multithreaded login program,
 	 * one needs to add some mess for getgrnam_r. */
-	groupdata = getgrnam (gname);
+	groupdata = getgrnam(gname);
 	if (NULL == groupdata) {
 		SYSLOG(LOG_WARN, "Nonexisting group `%s' in limits file.", gname);
 		return false;
 	}
 
-	return is_on_list (groupdata->gr_mem, uname);
+	return is_on_list(groupdata->gr_mem, uname);
 }
 
-static int setup_user_limits (const char *uname)
+static int setup_user_limits(const char *uname)
 {
 	FILE *fil;
 	char buf[1024];
@@ -352,7 +352,7 @@ static int setup_user_limits (const char *uname)
 	memzero_a(tempbuf);
 
 	/* start the checks */
-	fil = fopen (LIMITS_FILE, "r");
+	fil = fopen(LIMITS_FILE, "r");
 	if (fil == NULL) {
 		return 0;
 	}
@@ -387,25 +387,25 @@ static int setup_user_limits (const char *uname)
 		 * the last encountered entry for a matching group rules.
 		 * If there is no matching group entry, the default limits rule.
 		 */
-		if (sscanf (buf, "%s%[ACDFIKLMNOPRSTUacdfiklmnoprstu0-9 \t-]",
+		if (sscanf(buf, "%s%[ACDFIKLMNOPRSTUacdfiklmnoprstu0-9 \t-]",
 		            name, tempbuf) == 2) {
 			if (streq(name, uname)) {
-				strcpy (limits, tempbuf);
+				strcpy(limits, tempbuf);
 				break;
 			} else if (streq(name, "*")) {
-				strcpy (deflimits, tempbuf);
+				strcpy(deflimits, tempbuf);
 			} else if (strprefix(name, "@")) {
 				/* If the user is in the group, the group
 				 * limits apply unless later a line for
 				 * the specific user is found.
 				 */
-				if (user_in_group (uname, name+1)) {
-					strcpy (limits, tempbuf);
+				if (user_in_group(uname, name+1)) {
+					strcpy(limits, tempbuf);
 				}
 			}
 		}
 	}
-	(void) fclose (fil);
+	(void) fclose(fil);
 	if (streq(limits, "")) {
 		/* no user specific limits */
 		if (streq(deflimits, "")) {	/* no default limits */
@@ -443,12 +443,12 @@ static void setup_usergroups (const struct passwd *info)
  *	set the process nice, ulimit, and umask from the password file entry
  */
 
-void setup_limits (const struct passwd *info)
+void setup_limits(const struct passwd *info)
 {
 	char *cp;
 
-	if (getdef_bool ("USERGROUPS_ENAB")) {
-		setup_usergroups (info);
+	if (getdef_bool("USERGROUPS_ENAB")) {
+		setup_usergroups(info);
 	}
 
 	/*
@@ -457,10 +457,10 @@ void setup_limits (const struct passwd *info)
 	 * values the defaults for this login session.
 	 */
 
-	if (getdef_bool ("QUOTAS_ENAB")) {
+	if (getdef_bool("QUOTAS_ENAB")) {
 		if (info->pw_uid != 0) {
-			if ((setup_user_limits (info->pw_name) & LOGIN_ERROR_LOGIN) != 0) {
-				(void) fputs (_("Too many logins.\n"), log_get_logfd());
+			if ((setup_user_limits(info->pw_name) & LOGIN_ERROR_LOGIN) != 0) {
+				(void) fputs(_("Too many logins.\n"), log_get_logfd());
 				(void) sleep (2); /* XXX: should be FAIL_DELAY */
 				exit (EXIT_FAILURE);
 			}
@@ -495,7 +495,7 @@ void setup_limits (const struct passwd *info)
 				int  blocks;
 
 				if (   (str2si(&blocks, val) == -1)
-				    || (set_filesize_limit (blocks) != 0)) {
+				    || (set_filesize_limit(blocks) != 0)) {
 					SYSLOG(LOG_WARN,
 					       "Can't set the ulimit for user %s",
 					       info->pw_name);
@@ -512,7 +512,7 @@ void setup_limits (const struct passwd *info)
 					       "Can't set umask value for user %s",
 					       info->pw_name);
 				} else {
-					(void) umask (mask);
+					(void) umask(mask);
 				}
 
 				continue;

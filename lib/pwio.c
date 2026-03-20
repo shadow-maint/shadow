@@ -33,40 +33,40 @@ passwd_free(/*@only@*/void *ent)
 {
 	struct passwd *pw = ent;
 
-	pw_free (pw);
+	pw_free(pw);
 }
 
-static const char *passwd_getname (const void *ent)
+static const char *passwd_getname(const void *ent)
 {
 	const struct passwd *pw = ent;
 
 	return pw->pw_name;
 }
 
-static void *passwd_parse (const char *line)
+static void *passwd_parse(const char *line)
 {
-	return sgetpwent (line);
+	return sgetpwent(line);
 }
 
-static int passwd_put (const void *ent, FILE * file)
+static int passwd_put(const void *ent, FILE * file)
 {
 	const struct passwd *pw = ent;
 
 	if (   (NULL == pw)
-	    || (valid_field (pw->pw_name, ":\n") == -1)
-	    || (valid_field (pw->pw_passwd, ":\n") == -1)
+	    || (valid_field(pw->pw_name, ":\n") == -1)
+	    || (valid_field(pw->pw_passwd, ":\n") == -1)
 	    || (pw->pw_uid == (uid_t)-1)
 	    || (pw->pw_gid == (gid_t)-1)
-	    || (valid_field (pw->pw_gecos, ":\n") == -1)
-	    || (valid_field (pw->pw_dir, ":\n") == -1)
-	    || (valid_field (pw->pw_shell, ":\n") == -1)
-	    || (strlen (pw->pw_name) + strlen (pw->pw_passwd) +
-	        strlen (pw->pw_gecos) + strlen (pw->pw_dir) +
-	        strlen (pw->pw_shell) + 100 > PASSWD_ENTRY_MAX_LENGTH)) {
+	    || (valid_field(pw->pw_gecos, ":\n") == -1)
+	    || (valid_field(pw->pw_dir, ":\n") == -1)
+	    || (valid_field(pw->pw_shell, ":\n") == -1)
+	    || (strlen(pw->pw_name) + strlen(pw->pw_passwd) +
+	        strlen(pw->pw_gecos) + strlen(pw->pw_dir) +
+	        strlen(pw->pw_shell) + 100 > PASSWD_ENTRY_MAX_LENGTH)) {
 		return -1;
 	}
 
-	return (putpwent (pw, file) == -1) ? -1 : 0;
+	return (putpwent(pw, file) == -1) ? -1 : 0;
 }
 
 static struct commonio_ops passwd_ops = {
@@ -109,14 +109,14 @@ int pw_setdbname (const char *filename)
 	return passwd_db.filename;
 }
 
-int pw_lock (void)
+int pw_lock(void)
 {
-	return commonio_lock (&passwd_db);
+	return commonio_lock(&passwd_db);
 }
 
-int pw_open (int mode)
+int pw_open(int mode)
 {
-	return commonio_open (&passwd_db, mode);
+	return commonio_open(&passwd_db, mode);
 }
 
 /*@observer@*/ /*@null@*/const struct passwd *pw_locate (const char *name)
@@ -128,27 +128,27 @@ int pw_open (int mode)
 {
 	const struct passwd *pwd;
 
-	pw_rewind ();
-	while (   ((pwd = pw_next ()) != NULL)
+	pw_rewind();
+	while (   ((pwd = pw_next()) != NULL)
 	       && (pwd->pw_uid != uid)) {
 	}
 
 	return pwd;
 }
 
-int pw_update (const struct passwd *pw)
+int pw_update(const struct passwd *pw)
 {
-	return commonio_update (&passwd_db, pw);
+	return commonio_update(&passwd_db, pw);
 }
 
-int pw_remove (const char *name)
+int pw_remove(const char *name)
 {
-	return commonio_remove (&passwd_db, name);
+	return commonio_remove(&passwd_db, name);
 }
 
-int pw_rewind (void)
+int pw_rewind(void)
 {
-	return commonio_rewind (&passwd_db);
+	return commonio_rewind(&passwd_db);
 }
 
 /*@observer@*/ /*@null@*/const struct passwd *pw_next (void)
@@ -171,17 +171,17 @@ int pw_unlock (bool process_selinux)
 	return passwd_db.head;
 }
 
-void __pw_del_entry (const struct commonio_entry *ent)
+void __pw_del_entry(const struct commonio_entry *ent)
 {
-	commonio_del_entry (&passwd_db, ent);
+	commonio_del_entry(&passwd_db, ent);
 }
 
-struct commonio_db *__pw_get_db (void)
+struct commonio_db *__pw_get_db(void)
 {
 	return &passwd_db;
 }
 
-static int pw_cmp (const void *p1, const void *p2)
+static int pw_cmp(const void *p1, const void *p2)
 {
 	const struct commonio_entry *const *ce1;
 	const struct commonio_entry *const *ce2;

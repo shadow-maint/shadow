@@ -39,15 +39,15 @@
 	 * the original user, like getlogin() does).  Does this matter?
 	 */
 	if ((NULL != cp) && !streq(cp, "")) {
-		pw = xgetpwnam (cp);
+		pw = xgetpwnam(cp);
 		if ((NULL != pw) && (pw->pw_uid == ruid)) {
 			return pw;
 		}
 		if (NULL != pw) {
-			pw_free (pw);
+			pw_free(pw);
 		}
 	}
 
-	return xgetpwuid (ruid);
+	return xgetpwuid(ruid);
 }
 

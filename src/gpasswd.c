@@ -90,25 +90,25 @@ static uid_t bywho;
 
 /* local function prototypes */
 NORETURN static void failure(void);
-static void usage (int status);
-static void catch_signals (int killed);
-static bool is_valid_user_list (const char *users);
-static void process_flags (int argc, char **argv, struct option_flags *flags);
-static void check_flags (int argc, int opt_index);
+static void usage(int status);
+static void catch_signals(int killed);
+static bool is_valid_user_list(const char *users);
+static void process_flags(int argc, char **argv, struct option_flags *flags);
+static void check_flags(int argc, int opt_index);
 static void open_files(const struct option_flags *flags);
 static void close_files(const struct option_flags *flags);
 #ifdef SHADOWGRP
 static void get_group(struct group *gr, struct sgrp *sg, const struct option_flags *flags);
 static void check_perms(const struct sgrp *sg);
-static void update_group (struct group *gr, struct sgrp *sg);
-static void change_passwd (struct group *gr, struct sgrp *sg);
+static void update_group(struct group *gr, struct sgrp *sg);
+static void change_passwd(struct group *gr, struct sgrp *sg);
 #else
 static void get_group(struct group *gr, const struct option_flags *flags);
 static void check_perms(void);
-static void update_group (struct group *gr);
-static void change_passwd (struct group *gr);
+static void update_group(struct group *gr);
+static void change_passwd(struct group *gr);
 #endif
-static void log_gpasswd_failure (const char *suffix);
+static void log_gpasswd_failure(const char *suffix);
 static void log_gpasswd_failure_system (/*@null@*/MAYBE_UNUSED void *_1);
 static void log_gpasswd_failure_group (/*@null@*/MAYBE_UNUSED void *_1);
 #ifdef SHADOWGRP
@@ -121,29 +121,29 @@ static void log_gpasswd_success_group (/*@null@*/MAYBE_UNUSED void *_1);
 /*
  * usage - display usage message
  */
-static void usage (int status)
+static void usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [option] GROUP\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -a, --add USER                add USER to GROUP\n"), usageout);
-	(void) fputs (_("  -d, --delete USER             remove USER from GROUP\n"), usageout);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -Q, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -r, --remove-password         remove the GROUP's password\n"), usageout);
-	(void) fputs (_("  -R, --restrict                restrict access to GROUP to its members\n"), usageout);
-	(void) fputs (_("  -M, --members USER,...        set the list of members of GROUP\n"), usageout);
+	(void) fputs(_("  -a, --add USER                add USER to GROUP\n"), usageout);
+	(void) fputs(_("  -d, --delete USER             remove USER from GROUP\n"), usageout);
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -Q, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -r, --remove-password         remove the GROUP's password\n"), usageout);
+	(void) fputs(_("  -R, --restrict                restrict access to GROUP to its members\n"), usageout);
+	(void) fputs(_("  -M, --members USER,...        set the list of members of GROUP\n"), usageout);
 #ifdef SHADOWGRP
-	(void) fputs (_("  -A, --administrators ADMIN,...\n"
+	(void) fputs(_("  -A, --administrators ADMIN,...\n"
 	                "                                set the list of administrators for GROUP\n"), usageout);
-	(void) fputs (_("Except for the -A and -M options, the options cannot be combined.\n"), usageout);
+	(void) fputs(_("Except for the -A and -M options, the options cannot be combined.\n"), usageout);
 #else
-	(void) fputs (_("The options cannot be combined.\n"), usageout);
+	(void) fputs(_("The options cannot be combined.\n"), usageout);
 #endif
-	exit (status);
+	exit(status);
 }
 
 /*
@@ -154,19 +154,19 @@ static void usage (int status)
  *	calls catch_signals() with a signal number, the terminal modes are
  *	then reset.
  */
-static void catch_signals (int killed)
+static void catch_signals(int killed)
 {
 	static TERMIO sgtty;
 
 	if (0 != killed) {
-		STTY (0, &sgtty);
+		STTY(0, &sgtty);
 	} else {
-		GTTY (0, &sgtty);
+		GTTY(0, &sgtty);
 	}
 
 	if (0 != killed) {
-		(void) write (STDOUT_FILENO, "\n", 1);
-		_exit (killed);
+		(void) write(STDOUT_FILENO, "\n", 1);
+		_exit(killed);
 	}
 }
 
@@ -178,7 +178,7 @@ static void catch_signals (int killed)
  *
  *	It returns true if the list of users is valid.
  */
-static bool is_valid_user_list (const char *users)
+static bool is_valid_user_list(const char *users)
 {
 	bool is_valid = true;
 	char  *dup, *tmpusers;
@@ -217,7 +217,7 @@ static void failure(void)
 /*
  * process_flags - process the command line options and arguments
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -232,18 +232,18 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 		};
 
-	while ((c = getopt_long (argc, argv, "a:A:d:ghM:Q:rR",
+	while ((c = getopt_long(argc, argv, "a:A:d:ghM:Q:rR",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'a':	/* add a user */
 			aflg = true;
 			user = optarg;
 			/* local, no need for xgetpwnam */
-			if (getpwnam (user) == NULL) {
-				fprintf (stderr,
+			if (getpwnam(user) == NULL) {
+				fprintf(stderr,
 				         _("%s: user '%s' does not exist\n"),
 				         Prog, user);
-				exit (E_BAD_ARG);
+				exit(E_BAD_ARG);
 			}
 			break;
 #ifdef SHADOWGRP
@@ -272,8 +272,8 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			break;
 		case 'M':	/* set the list of members */
 			members = optarg;
-			if (!is_valid_user_list (members)) {
-				exit (E_BAD_ARG);
+			if (!is_valid_user_list(members)) {
+				exit(E_BAD_ARG);
 			}
 			Mflg = true;
 			break;
@@ -294,13 +294,13 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	/* Get the name of the group that is being affected. */
 	group = argv[optind];
 
-	check_flags (argc, optind);
+	check_flags(argc, optind);
 }
 
 /*
  * check_flags - check the validity of options
  */
-static void check_flags (int argc, int opt_index)
+static void check_flags(int argc, int opt_index)
 {
 	int exclusive = 0;
 	/*
@@ -322,14 +322,14 @@ static void check_flags (int argc, int opt_index)
 		exclusive++;
 	}
 	if (exclusive > 1) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 
 	/*
 	 * Make sure one (and only one) group was provided
 	 */
 	if ((argc != (opt_index+1)) || (NULL == group)) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 }
 
@@ -344,60 +344,60 @@ static void open_files(const struct option_flags *flags)
 
 	process_selinux = !flags->chroot;
 
-	if (gr_lock () == 0) {
-		fprintf (stderr,
+	if (gr_lock() == 0) {
+		fprintf(stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, gr_dbname ());
-		exit (E_NOPERM);
+		         Prog, gr_dbname());
+		exit(E_NOPERM);
 	}
-	add_cleanup (cleanup_unlock_group, &process_selinux);
+	add_cleanup(cleanup_unlock_group, &process_selinux);
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_lock () == 0) {
-			fprintf (stderr,
+		if (sgr_lock() == 0) {
+			fprintf(stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, sgr_dbname ());
-			exit (E_NOPERM);
+			         Prog, sgr_dbname());
+			exit(E_NOPERM);
 		}
-		add_cleanup (cleanup_unlock_gshadow, &process_selinux);
+		add_cleanup(cleanup_unlock_gshadow, &process_selinux);
 	}
 #endif				/* SHADOWGRP */
 
-	add_cleanup (log_gpasswd_failure_system, NULL);
+	add_cleanup(log_gpasswd_failure_system, NULL);
 
-	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
+	if (gr_open(O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr,
 		         _("%s: cannot open %s\n"),
-		         Prog, gr_dbname ());
+		         Prog, gr_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
-		exit (E_NOPERM);
+		exit(E_NOPERM);
 	}
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
+		if (sgr_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr,
 			         _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
+			         Prog, sgr_dbname());
 			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
-			exit (E_NOPERM);
+			exit(E_NOPERM);
 		}
-		add_cleanup (log_gpasswd_failure_gshadow, NULL);
+		add_cleanup(log_gpasswd_failure_gshadow, NULL);
 	}
 #endif				/* SHADOWGRP */
 
-	add_cleanup (log_gpasswd_failure_group, NULL);
-	del_cleanup (log_gpasswd_failure_system);
+	add_cleanup(log_gpasswd_failure_group, NULL);
+	del_cleanup(log_gpasswd_failure_system);
 }
 
-static void log_gpasswd_failure (const char *suffix)
+static void log_gpasswd_failure(const char *suffix)
 {
 	if (aflg) {
 		SYSLOG(LOG_ERR, "%s failed to add user %s to group %s%s",
 		       myname, user, group, suffix);
 #ifdef WITH_AUDIT
-		audit_logger_with_group (AUDIT_USER_MGMT,
+		audit_logger_with_group(AUDIT_USER_MGMT,
 		              "add-user-to-group",
 		              user, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_FAILURE);
@@ -406,7 +406,7 @@ static void log_gpasswd_failure (const char *suffix)
 		SYSLOG(LOG_ERR, "%s failed to remove user %s from group %s%s",
 		       myname, user, group, suffix);
 #ifdef WITH_AUDIT
-		audit_logger_with_group (AUDIT_USER_MGMT,
+		audit_logger_with_group(AUDIT_USER_MGMT,
 		              "delete-user-from-group",
 		              user, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_FAILURE);
@@ -415,7 +415,7 @@ static void log_gpasswd_failure (const char *suffix)
 		SYSLOG(LOG_ERR, "%s failed to remove password of group %s%s",
 		       myname, group, suffix);
 #ifdef WITH_AUDIT
-		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
+		audit_logger_with_group(AUDIT_GRP_CHAUTHTOK,
 		              "delete-group-password",
 		              myname, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_FAILURE);
@@ -424,7 +424,7 @@ static void log_gpasswd_failure (const char *suffix)
 		SYSLOG(LOG_ERR, "%s failed to restrict access to group %s%s",
 		       myname, group, suffix);
 #ifdef WITH_AUDIT
-		audit_logger_with_group (AUDIT_GRP_MGMT,
+		audit_logger_with_group(AUDIT_GRP_MGMT,
 		              "restrict-group",
 		              myname, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_FAILURE);
@@ -436,7 +436,7 @@ static void log_gpasswd_failure (const char *suffix)
 			       "%s failed to set the administrators of group %s to %s%s",
 			       myname, group, admins, suffix);
 #ifdef WITH_AUDIT
-			audit_logger_with_group (AUDIT_GRP_MGMT,
+			audit_logger_with_group(AUDIT_GRP_MGMT,
 			              "set-admins-of-group",
 			              admins, AUDIT_NO_ID, "grp", group,
 			              SHADOW_AUDIT_FAILURE);
@@ -448,7 +448,7 @@ static void log_gpasswd_failure (const char *suffix)
 			       "%s failed to set the members of group %s to %s%s",
 			       myname, group, members, suffix);
 #ifdef WITH_AUDIT
-			audit_logger_with_group (AUDIT_USER_MGMT,
+			audit_logger_with_group(AUDIT_USER_MGMT,
 			              "add-users-to-group",
 			              members, AUDIT_NO_ID, "grp", group,
 			              SHADOW_AUDIT_FAILURE);
@@ -458,7 +458,7 @@ static void log_gpasswd_failure (const char *suffix)
 		SYSLOG(LOG_ERR, "%s failed to change password of group %s%s",
 		       myname, group, suffix);
 #ifdef WITH_AUDIT
-		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
+		audit_logger_with_group(AUDIT_GRP_CHAUTHTOK,
 		              "change-password",
 		              myname, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_FAILURE);
@@ -469,7 +469,7 @@ static void log_gpasswd_failure (const char *suffix)
 static void
 log_gpasswd_failure_system(MAYBE_UNUSED void *_1)
 {
-	log_gpasswd_failure ("");
+	log_gpasswd_failure("");
 }
 
 static void
@@ -478,7 +478,7 @@ log_gpasswd_failure_group(MAYBE_UNUSED void *_1)
 	char  buf[1024];
 
 	stprintf_a(buf, " in %s", gr_dbname());
-	log_gpasswd_failure (buf);
+	log_gpasswd_failure(buf);
 }
 
 #ifdef SHADOWGRP
@@ -488,11 +488,11 @@ log_gpasswd_failure_gshadow(MAYBE_UNUSED void *_1)
 	char  buf[1024];
 
 	stprintf_a(buf, " in %s", sgr_dbname());
-	log_gpasswd_failure (buf);
+	log_gpasswd_failure(buf);
 }
 #endif				/* SHADOWGRP */
 
-static void log_gpasswd_success (const char *suffix)
+static void log_gpasswd_success(const char *suffix)
 {
 #ifdef WITH_AUDIT
 	char  buf[1024];
@@ -502,7 +502,7 @@ static void log_gpasswd_success (const char *suffix)
 		SYSLOG(LOG_INFO, "user %s added by %s to group %s%s",
 		       user, myname, group, suffix);
 #ifdef WITH_AUDIT
-		audit_logger_with_group (AUDIT_USER_MGMT,
+		audit_logger_with_group(AUDIT_USER_MGMT,
 		              "add-user-to-group",
 		              user, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_SUCCESS);
@@ -511,7 +511,7 @@ static void log_gpasswd_success (const char *suffix)
 		SYSLOG(LOG_INFO, "user %s removed by %s from group %s%s",
 		       user, myname, group, suffix);
 #ifdef WITH_AUDIT
-		audit_logger_with_group (AUDIT_USER_MGMT,
+		audit_logger_with_group(AUDIT_USER_MGMT,
 		              "delete-user-from-group",
 		              user, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_SUCCESS);
@@ -522,7 +522,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		stprintf_a(buf, "password of group %s removed by %s%s",
 		         group, myname, suffix);
-		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
+		audit_logger_with_group(AUDIT_GRP_CHAUTHTOK,
 		              "delete-group-password",
 		              myname, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_SUCCESS);
@@ -533,7 +533,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		stprintf_a(buf, "access to group %s restricted by %s%s",
 		         group, myname, suffix);
-		audit_logger_with_group (AUDIT_GRP_MGMT,
+		audit_logger_with_group(AUDIT_GRP_MGMT,
 		              "restrict-group",
 		              myname, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_SUCCESS);
@@ -544,7 +544,7 @@ static void log_gpasswd_success (const char *suffix)
 			SYSLOG(LOG_INFO, "administrators of group %s set by %s to %s%s",
 			       group, myname, admins, suffix);
 #ifdef WITH_AUDIT
-			audit_logger_with_group (AUDIT_GRP_MGMT,
+			audit_logger_with_group(AUDIT_GRP_MGMT,
 			              "set-admins-of-group",
 			              admins, AUDIT_NO_ID, "grp", group,
 			              SHADOW_AUDIT_SUCCESS);
@@ -555,7 +555,7 @@ static void log_gpasswd_success (const char *suffix)
 			SYSLOG(LOG_INFO, "members of group %s set by %s to %s%s",
 			       group, myname, members, suffix);
 #ifdef WITH_AUDIT
-			audit_logger_with_group (AUDIT_USER_MGMT,
+			audit_logger_with_group(AUDIT_USER_MGMT,
 			              "add-users-to-group",
 			              members, AUDIT_NO_ID, "grp", group,
 			              SHADOW_AUDIT_SUCCESS);
@@ -565,7 +565,7 @@ static void log_gpasswd_success (const char *suffix)
 		SYSLOG(LOG_INFO, "password of group %s changed by %s%s",
 		       group, myname, suffix);
 #ifdef WITH_AUDIT
-		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
+		audit_logger_with_group(AUDIT_GRP_CHAUTHTOK,
 		              "change-password",
 		              myname, AUDIT_NO_ID, "grp", group,
 		              SHADOW_AUDIT_SUCCESS);
@@ -576,7 +576,7 @@ static void log_gpasswd_success (const char *suffix)
 static void
 log_gpasswd_success_system(MAYBE_UNUSED void *_1)
 {
-	log_gpasswd_success ("");
+	log_gpasswd_success("");
 }
 
 static void
@@ -585,7 +585,7 @@ log_gpasswd_success_group(MAYBE_UNUSED void *_1)
 	char  buf[1024];
 
 	stprintf_a(buf, " in %s", gr_dbname());
-	log_gpasswd_success (buf);
+	log_gpasswd_success(buf);
 }
 
 /*
@@ -601,35 +601,35 @@ static void close_files(const struct option_flags *flags)
 
 	process_selinux = !flags->chroot;
 
-	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
+	if (gr_close(process_selinux) == 0) {
+		fprintf(stderr,
 		         _("%s: failure while writing changes to %s\n"),
-		         Prog, gr_dbname ());
-		exit (E_NOPERM);
+		         Prog, gr_dbname());
+		exit(E_NOPERM);
 	}
-	add_cleanup (log_gpasswd_success_group, NULL);
-	del_cleanup (log_gpasswd_failure_group);
+	add_cleanup(log_gpasswd_success_group, NULL);
+	del_cleanup(log_gpasswd_failure_group);
 
-	cleanup_unlock_group (&process_selinux);
-	del_cleanup (cleanup_unlock_group);
+	cleanup_unlock_group(&process_selinux);
+	del_cleanup(cleanup_unlock_group);
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
+		if (sgr_close(process_selinux) == 0) {
+			fprintf(stderr,
 			         _("%s: failure while writing changes to %s\n"),
-			         Prog, sgr_dbname ());
-			exit (E_NOPERM);
+			         Prog, sgr_dbname());
+			exit(E_NOPERM);
 		}
-		del_cleanup (log_gpasswd_failure_gshadow);
+		del_cleanup(log_gpasswd_failure_gshadow);
 
-		cleanup_unlock_gshadow (&process_selinux);
-		del_cleanup (cleanup_unlock_gshadow);
+		cleanup_unlock_gshadow(&process_selinux);
+		del_cleanup(cleanup_unlock_gshadow);
 	}
 #endif				/* SHADOWGRP */
 
-	log_gpasswd_success_system (NULL);
-	del_cleanup (log_gpasswd_success_group);
+	log_gpasswd_success_system(NULL);
+	del_cleanup(log_gpasswd_success_group);
 }
 
 /*
@@ -639,16 +639,16 @@ static void close_files(const struct option_flags *flags)
  *	It only returns if the user is allowed.
  */
 #ifdef SHADOWGRP
-static void check_perms (const struct sgrp *sg)
+static void check_perms(const struct sgrp *sg)
 #else
-static void check_perms (void)
+static void check_perms(void)
 #endif
 {
 	/*
 	 * Only root can use the -M and -A options.
 	 */
 	if (!amroot && (Aflg || Mflg)) {
-		failure ();
+		failure();
 	}
 
 #ifdef SHADOWGRP
@@ -660,8 +660,8 @@ static void check_perms (void)
 		 * Administrative members can do anything to a group that
 		 * the root user can.
 		 */
-		if (!amroot && !is_on_list (sg->sg_adm, myname)) {
-			failure ();
+		if (!amroot && !is_on_list(sg->sg_adm, myname)) {
+			failure();
 		}
 	} else
 #endif				/* SHADOWGRP */
@@ -673,23 +673,23 @@ static void check_perms (void)
  * update_group - Update the group information in the databases
  */
 #ifdef SHADOWGRP
-static void update_group (struct group *gr, struct sgrp *sg)
+static void update_group(struct group *gr, struct sgrp *sg)
 #else
-static void update_group (struct group *gr)
+static void update_group(struct group *gr)
 #endif
 {
-	if (gr_update (gr) == 0) {
-		fprintf (stderr,
+	if (gr_update(gr) == 0) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, gr_dbname (), gr->gr_name);
-		exit (1);
+		         Prog, gr_dbname(), gr->gr_name);
+		exit(1);
 	}
 #ifdef SHADOWGRP
-	if (is_shadowgrp && (sgr_update (sg) == 0)) {
-		fprintf (stderr,
+	if (is_shadowgrp && (sgr_update(sg) == 0)) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, sgr_dbname (), sg->sg_namp);
-		exit (1);
+		         Prog, sgr_dbname(), sg->sg_namp);
+		exit(1);
 	}
 #endif				/* SHADOWGRP */
 }
@@ -716,52 +716,52 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 
 	process_selinux = !flags->chroot;
 
-	if (gr_open (O_RDONLY) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+	if (gr_open(O_RDONLY) == 0) {
+		fprintf(stderr, _("%s: cannot open %s\n"), Prog, gr_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
-		exit (E_NOPERM);
+		exit(E_NOPERM);
 	}
 
-	tmpgr = gr_locate (group);
+	tmpgr = gr_locate(group);
 	if (NULL == tmpgr) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: group '%s' does not exist in %s\n"),
-		         Prog, group, gr_dbname ());
-		exit (E_BAD_ARG);
+		         Prog, group, gr_dbname());
+		exit(E_BAD_ARG);
 	}
 
 	*gr = *tmpgr;
-	gr->gr_name = xstrdup (tmpgr->gr_name);
-	gr->gr_passwd = xstrdup (tmpgr->gr_passwd);
-	gr->gr_mem = dup_list (tmpgr->gr_mem);
+	gr->gr_name = xstrdup(tmpgr->gr_name);
+	gr->gr_passwd = xstrdup(tmpgr->gr_passwd);
+	gr->gr_mem = dup_list(tmpgr->gr_mem);
 
-	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
+	if (gr_close(process_selinux) == 0) {
+		fprintf(stderr,
 		         _("%s: failure while closing read-only %s\n"),
-		         Prog, gr_dbname ());
+		         Prog, gr_dbname());
 		SYSLOG(LOG_ERR, "failure while closing read-only %s", gr_dbname());
-		exit (E_NOPERM);
+		exit(E_NOPERM);
 	}
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_open (O_RDONLY) == 0) {
-			fprintf (stderr,
+		if (sgr_open(O_RDONLY) == 0) {
+			fprintf(stderr,
 			         _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
+			         Prog, sgr_dbname());
 			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
-			exit (E_NOPERM);
+			exit(E_NOPERM);
 		}
-		tmpsg = sgr_locate (group);
+		tmpsg = sgr_locate(group);
 		if (NULL != tmpsg) {
 			*sg = *tmpsg;
-			sg->sg_namp = xstrdup (tmpsg->sg_namp);
-			sg->sg_passwd = xstrdup (tmpsg->sg_passwd);
+			sg->sg_namp = xstrdup(tmpsg->sg_namp);
+			sg->sg_passwd = xstrdup(tmpsg->sg_passwd);
 
-			sg->sg_mem = dup_list (tmpsg->sg_mem);
-			sg->sg_adm = dup_list (tmpsg->sg_adm);
+			sg->sg_mem = dup_list(tmpsg->sg_mem);
+			sg->sg_adm = dup_list(tmpsg->sg_adm);
 		} else {
-			sg->sg_namp = xstrdup (group);
+			sg->sg_namp = xstrdup(group);
 			sg->sg_passwd = gr->gr_passwd;
 			gr->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 
@@ -792,9 +792,9 @@ static void get_group(struct group *gr, const struct option_flags *flags)
  *	It will call exit in case of error.
  */
 #ifdef SHADOWGRP
-static void change_passwd (struct group *gr, struct sgrp *sg)
+static void change_passwd(struct group *gr, struct sgrp *sg)
 #else
-static void change_passwd (struct group *gr)
+static void change_passwd(struct group *gr)
 #endif
 {
 	char *cp;
@@ -808,48 +808,48 @@ static void change_passwd (struct group *gr)
 	 * identical. There is no need to validate the old password since
 	 * the invoker is either the group owner, or root.
 	 */
-	printf (_("Changing the password for group %s\n"), group);
+	printf(_("Changing the password for group %s\n"), group);
 
 	for (retries = 0; retries < RETRIES; retries++) {
-		cp = agetpass (_("New Password: "));
+		cp = agetpass(_("New Password: "));
 		if (NULL == cp) {
-			exit (1);
+			exit(1);
 		}
 
 		strtcpy_a(pass, cp);
-		erase_pass (cp);
-		cp = agetpass (_("Re-enter new password: "));
+		erase_pass(cp);
+		cp = agetpass(_("Re-enter new password: "));
 		if (NULL == cp) {
 			memzero_a(pass);
-			exit (1);
+			exit(1);
 		}
 
 		if (streq(pass, cp)) {
-			erase_pass (cp);
+			erase_pass(cp);
 			break;
 		}
 
-		erase_pass (cp);
+		erase_pass(cp);
 		memzero_a(pass);
 
 		if (retries + 1 < RETRIES) {
-			puts (_("They don't match; try again"));
+			puts(_("They don't match; try again"));
 		}
 	}
 
 	if (retries == RETRIES) {
-		fprintf (stderr, _("%s: Try again later\n"), Prog);
-		exit (1);
+		fprintf(stderr, _("%s: Try again later\n"), Prog);
+		exit(1);
 	}
 
-	salt = crypt_make_salt (NULL, NULL);
-	cp = pw_encrypt (pass, salt);
+	salt = crypt_make_salt(NULL, NULL);
+	cp = pw_encrypt(pass, salt);
 	memzero_a(pass);
 	if (NULL == cp) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: failed to crypt password with salt '%s': %s\n"),
 		        Prog, salt, strerrno());
-		exit (1);
+		exit(1);
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
@@ -865,7 +865,7 @@ static void change_passwd (struct group *gr)
 /*
  * gpasswd - administer the /etc/group file
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	struct group grent;
 #ifdef SHADOWGRP
@@ -874,12 +874,12 @@ int main (int argc, char **argv)
 	struct passwd *pw = NULL;
 	struct option_flags  flags = {.chroot = false};
 
-	sanitize_env ();
-	check_fds ();
+	sanitize_env();
+	check_fds();
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
 	/*
 	 * Make a note of whether or not this command was invoked by root.
@@ -888,22 +888,22 @@ int main (int argc, char **argv)
 	 * prevent the invoker from issuing signals which would interfere
 	 * with this command.
 	 */
-	bywho = getuid ();
+	bywho = getuid();
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 #ifdef WITH_AUDIT
-	audit_help_open ();
+	audit_help_open();
 #endif
 
-	setbuf (stdout, NULL);
-	setbuf (stderr, NULL);
+	setbuf(stdout, NULL);
+	setbuf(stderr, NULL);
 
-	process_root_flag ("-Q", argc, argv);
+	process_root_flag("-Q", argc, argv);
 
 #ifdef SHADOWGRP
-	is_shadowgrp = sgr_file_present ();
+	is_shadowgrp = sgr_file_present();
 #endif
 
 	/*
@@ -912,24 +912,24 @@ int main (int argc, char **argv)
 	 * can be executed and so many ways to trip up the routines that
 	 * report the user name.
 	 */
-	pw = get_my_pwent ();
+	pw = get_my_pwent();
 	if (NULL == pw) {
-		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
+		fprintf(stderr, _("%s: Cannot determine your user name.\n"),
 		         Prog);
 		SYSLOG(LOG_WARN,
-		       "Cannot determine the user name of the caller (UID %lu)",
+		       "Cannot determine the user name of the caller(UID %lu)",
 		       (unsigned long) getuid());
-		exit (E_NOPERM);
+		exit(E_NOPERM);
 	}
-	myname = xstrdup (pw->pw_name);
+	myname = xstrdup(pw->pw_name);
 
 	/*
 	 * Register an exit function to warn for any inconsistency that we
 	 * could create.
 	 */
-	if (atexit (do_cleanups) != 0) {
+	if (atexit(do_cleanups) != 0) {
 		fprintf(stderr, "%s: cannot set exit function\n", Prog);
-		exit (1);
+		exit(1);
 	}
 
 	/* Parse the options */
@@ -939,9 +939,9 @@ int main (int argc, char **argv)
 	 * Replicate the group so it can be modified later on.
 	 */
 #ifdef SHADOWGRP
-	get_group (&grent, &sgent, &flags);
+	get_group(&grent, &sgent, &flags);
 #else
-	get_group (&grent, &flags);
+	get_group(&grent, &flags);
 #endif
 
 	/*
@@ -990,11 +990,11 @@ int main (int argc, char **argv)
 	 * well. Call the appropriate routine and split.
 	 */
 	if (aflg) {
-		printf (_("Adding user %s to group %s\n"), user, group);
-		grent.gr_mem = add_list (grent.gr_mem, user);
+		printf(_("Adding user %s to group %s\n"), user, group);
+		grent.gr_mem = add_list(grent.gr_mem, user);
 #ifdef SHADOWGRP
 		if (is_shadowgrp) {
-			sgent.sg_mem = add_list (sgent.sg_mem, user);
+			sgent.sg_mem = add_list(sgent.sg_mem, user);
 		}
 #endif
 		goto output;
@@ -1007,25 +1007,25 @@ int main (int argc, char **argv)
 	if (dflg) {
 		bool removed = false;
 
-		printf (_("Removing user %s from group %s\n"), user, group);
+		printf(_("Removing user %s from group %s\n"), user, group);
 
-		if (is_on_list (grent.gr_mem, user)) {
+		if (is_on_list(grent.gr_mem, user)) {
 			removed = true;
-			grent.gr_mem = del_list (grent.gr_mem, user);
+			grent.gr_mem = del_list(grent.gr_mem, user);
 		}
 #ifdef SHADOWGRP
 		if (is_shadowgrp) {
-			if (is_on_list (sgent.sg_mem, user)) {
+			if (is_on_list(sgent.sg_mem, user)) {
 				removed = true;
-				sgent.sg_mem = del_list (sgent.sg_mem, user);
+				sgent.sg_mem = del_list(sgent.sg_mem, user);
 			}
 		}
 #endif
 		if (!removed) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: user '%s' is not a member of '%s'\n"),
 			         Prog, user, group);
-			exit (E_BAD_ARG);
+			exit(E_BAD_ARG);
 		}
 		goto output;
 	}
@@ -1036,7 +1036,7 @@ int main (int argc, char **argv)
 	 * in place.
 	 */
 	if (Aflg) {
-		sgent.sg_adm = comma_to_list (admins);
+		sgent.sg_adm = comma_to_list(admins);
 		if (!Mflg) {
 			goto output;
 		}
@@ -1050,9 +1050,9 @@ int main (int argc, char **argv)
 	 */
 	if (Mflg) {
 #ifdef SHADOWGRP
-		sgent.sg_mem = comma_to_list (members);
+		sgent.sg_mem = comma_to_list(members);
 #endif
-		grent.gr_mem = comma_to_list (members);
+		grent.gr_mem = comma_to_list(members);
 		goto output;
 	}
 
@@ -1061,9 +1061,9 @@ int main (int argc, char **argv)
 	 * be a tty. The typical keyboard signals are caught so the termio
 	 * modes can be restored.
 	 */
-	if ((isatty (0) == 0) || (isatty (1) == 0)) {
-		fprintf (stderr, _("%s: Not a tty\n"), Prog);
-		exit (E_NOPERM);
+	if ((isatty(0) == 0) || (isatty(1) == 0)) {
+		fprintf(stderr, _("%s: Not a tty\n"), Prog);
+		exit(E_NOPERM);
 	}
 
 	catch_signals (0);	/* save tty modes */
@@ -1076,9 +1076,9 @@ int main (int argc, char **argv)
 
 	/* Prompt for the new password */
 #ifdef SHADOWGRP
-	change_passwd (&grent, &sgent);
+	change_passwd(&grent, &sgent);
 #else
-	change_passwd (&grent);
+	change_passwd(&grent);
 #endif
 
 	/*
@@ -1088,26 +1088,26 @@ int main (int argc, char **argv)
 	 * output, etc.
 	 */
       output:
-	if (setuid (0) != 0) {
-		fputs (_("Cannot change ID to root.\n"), stderr);
+	if (setuid(0) != 0) {
+		fputs(_("Cannot change ID to root.\n"), stderr);
 		SYSLOG(LOG_ERR, "can't setuid(0)");
-		closelog ();
-		exit (E_NOPERM);
+		closelog();
+		exit(E_NOPERM);
 	}
-	pwd_init ();
+	pwd_init();
 
-	open_files (&flags);
+	open_files(&flags);
 
 #ifdef SHADOWGRP
-	update_group (&grent, &sgent);
+	update_group(&grent, &sgent);
 #else
-	update_group (&grent);
+	update_group(&grent);
 #endif
 
-	close_files (&flags);
+	close_files(&flags);
 
-	nscd_flush_cache ("group");
-	sssd_flush_cache (SSSD_DB_GROUP);
+	nscd_flush_cache("group");
+	sssd_flush_cache(SSSD_DB_GROUP);
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
@@ -1116,6 +1116,6 @@ int main (int argc, char **argv)
 	}
 #endif
 	free(grent.gr_mem);
-	exit (E_SUCCESS);
+	exit(E_SUCCESS);
 }
 

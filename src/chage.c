@@ -79,27 +79,27 @@ static long inactdays;
 static long expdate;
 
 /* local function prototypes */
-NORETURN static void usage (int status);
-static int new_fields (void);
-static void print_day_as_date (long day);
-static void list_fields (void);
-static void process_flags (int argc, char **argv, struct option_flags *flags);
-static void check_flags (int argc, int opt_index);
+NORETURN static void usage(int status);
+static int new_fields(void);
+static void print_day_as_date(long day);
+static void list_fields(void);
+static void process_flags(int argc, char **argv, struct option_flags *flags);
+static void check_flags(int argc, int opt_index);
 static void check_perms(const struct option_flags *flags);
 static void open_files(bool readonly, const struct option_flags *flags);
 static void close_files(const struct option_flags *flags);
-NORETURN static void fail_exit (int code, bool process_selinux);
+NORETURN static void fail_exit(int code, bool process_selinux);
 
 /*
  * fail_exit - do some cleanup and exit with the given error code
  */
 NORETURN
 static void
-fail_exit (int code, bool process_selinux)
+fail_exit(int code, bool process_selinux)
 {
 	if (spw_locked) {
-		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		if (spw_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
@@ -111,16 +111,16 @@ fail_exit (int code, bool process_selinux)
 			/* continue */
 		}
 	}
-	closelog ();
+	closelog();
 
 #ifdef WITH_AUDIT
 	if (E_SUCCESS != code) {
-		audit_logger (AUDIT_USER_MGMT,
+		audit_logger(AUDIT_USER_MGMT,
 		              "change-age", user_name, user_uid, SHADOW_AUDIT_FAILURE);
 	}
 #endif
 
-	exit (code);
+	exit(code);
 }
 
 /*
@@ -128,30 +128,30 @@ fail_exit (int code, bool process_selinux)
  */
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options] LOGIN\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"), usageout);
-	(void) fputs (_("  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"), usageout);
-	(void) fputs (_("  -I, --inactive INACTIVE       set password inactive after expiration\n"
+	(void) fputs(_("  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"), usageout);
+	(void) fputs(_("  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"), usageout);
+	(void) fputs(_("  -I, --inactive INACTIVE       set password inactive after expiration\n"
 	                "                                to INACTIVE\n"), usageout);
-	(void) fputs (_("  -l, --list                    show account aging information\n"), usageout);
-	(void) fputs (_("  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
+	(void) fputs(_("  -l, --list                    show account aging information\n"), usageout);
+	(void) fputs(_("  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 	                "                                change to MIN_DAYS\n"), usageout);
-	(void) fputs (_("  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
+	(void) fputs(_("  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 	                "                                change to MAX_DAYS\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
-	(void) fputs (_("  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
-	(void) fputs ("\n", usageout);
-	exit (status);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
+	(void) fputs(_("  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
+	(void) fputs("\n", usageout);
+	exit(status);
 }
 
 /*
@@ -163,20 +163,20 @@ usage (int status)
  * any other negative value is an error. very large positive values will
  * be handled elsewhere.
  */
-static int new_fields (void)
+static int new_fields(void)
 {
 	char  buf[200];
 
-	(void) puts (_("Enter the new value, or press ENTER for the default"));
-	(void) puts ("");
+	(void) puts(_("Enter the new value, or press ENTER for the default"));
+	(void) puts("");
 
 	stprintf_a(buf, "%ld", mindays);
-	change_field(buf, sizeof(buf), _("Minimum Password Age"));
+	change_field(buf, sizeof (buf), _("Minimum Password Age"));
 	if (a2sl(&mindays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	stprintf_a(buf, "%ld", maxdays);
-	change_field(buf, sizeof(buf), _("Maximum Password Age"));
+	change_field(buf, sizeof (buf), _("Maximum Password Age"));
 	if (a2sl(&maxdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
@@ -185,24 +185,24 @@ static int new_fields (void)
 	else
 		day_to_str_a(buf, lstchgdate);
 
-	change_field(buf, sizeof(buf), _("Last Password Change (YYYY-MM-DD)"));
+	change_field(buf, sizeof (buf), _("Last Password Change(YYYY-MM-DD)"));
 
 	if (streq(buf, "-1")) {
 		lstchgdate = -1;
 	} else {
-		lstchgdate = strtoday (buf);
+		lstchgdate = strtoday(buf);
 		if (lstchgdate <= -1) {
 			return 0;
 		}
 	}
 
 	stprintf_a(buf, "%ld", warndays);
-	change_field(buf, sizeof(buf), _("Password Expiration Warning"));
+	change_field(buf, sizeof (buf), _("Password Expiration Warning"));
 	if (a2sl(&warndays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	stprintf_a(buf, "%ld", inactdays);
-	change_field(buf, sizeof(buf), _("Password Inactive"));
+	change_field(buf, sizeof (buf), _("Password Inactive"));
 	if (a2sl(&inactdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
@@ -211,13 +211,13 @@ static int new_fields (void)
 	else
 		day_to_str_a(buf, expdate);
 
-	change_field(buf, sizeof(buf),
-	              _("Account Expiration Date (YYYY-MM-DD)"));
+	change_field(buf, sizeof (buf),
+	              _("Account Expiration Date(YYYY-MM-DD)"));
 
 	if (streq(buf, "-1")) {
 		expdate = -1;
 	} else {
-		expdate = strtoday (buf);
+		expdate = strtoday(buf);
 		if (expdate <= -1) {
 			return 0;
 		}
@@ -253,7 +253,7 @@ print_day_as_date(long day)
 		return;
 	}
 
-	(void) puts (buf);
+	(void) puts(buf);
 }
 
 
@@ -264,15 +264,15 @@ print_day_as_date(long day)
  * values will be displayed as a calendar date, or the word "never" if
  * the date is 1/1/70, which is day number 0.
  */
-static void list_fields (void)
+static void list_fields(void)
 {
 	/*
 	 * The "last change" date is either "never" or the date the password
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
-	(void) fputs (_("Last password change\t\t\t\t\t: "), stdout);
+	(void) fputs(_("Last password change\t\t\t\t\t: "), stdout);
 	if (lstchgdate == 0) {
-		(void) puts (_("password must be changed"));
+		(void) puts(_("password must be changed"));
 	} else {
 		print_day_as_date(lstchgdate);
 	}
@@ -281,14 +281,14 @@ static void list_fields (void)
 	 * The password expiration date is determined from the last change
 	 * date plus the number of days the password is valid for.
 	 */
-	(void) fputs (_("Password expires\t\t\t\t\t: "), stdout);
+	(void) fputs(_("Password expires\t\t\t\t\t: "), stdout);
 	if (lstchgdate == 0) {
-		(void) puts (_("password must be changed"));
+		(void) puts(_("password must be changed"));
 	} else if (   (lstchgdate < 0)
 	           || (maxdays < 0)
 	           || (LONG_MAX - lstchgdate < maxdays))
 	{
-		(void) puts (_("never"));
+		(void) puts(_("never"));
 	} else {
 		print_day_as_date(lstchgdate + maxdays);
 	}
@@ -299,16 +299,16 @@ static void list_fields (void)
 	 * number of inactive days is added. The resulting date is when the
 	 * active will be disabled.
 	 */
-	(void) fputs (_("Password inactive\t\t\t\t\t: "), stdout);
+	(void) fputs(_("Password inactive\t\t\t\t\t: "), stdout);
 	if (lstchgdate == 0) {
-		(void) puts (_("password must be changed"));
+		(void) puts(_("password must be changed"));
 	} else if (   (lstchgdate < 0)
 	           || (inactdays < 0)
 	           || (maxdays < 0)
 	           || (LONG_MAX - inactdays < maxdays)
 	           || (LONG_MAX - lstchgdate < maxdays + inactdays))
 	{
-		(void) puts (_("never"));
+		(void) puts(_("never"));
 	} else {
 		print_day_as_date(lstchgdate + maxdays + inactdays);
 	}
@@ -317,7 +317,7 @@ static void list_fields (void)
 	 * The account will expire on the given date regardless of the
 	 * password expiring or not.
 	 */
-	(void) fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
+	(void) fputs(_("Account expires\t\t\t\t\t\t: "), stdout);
 	print_day_as_date(expdate);
 
 	/*
@@ -327,11 +327,11 @@ static void list_fields (void)
 	 * expires that the user is told, and the number of days after the
 	 * password expires that the account becomes unusable.
 	 */
-	printf (_("Minimum number of days between password change\t\t: %ld\n"),
+	printf(_("Minimum number of days between password change\t\t: %ld\n"),
 	        mindays);
-	printf (_("Maximum number of days between password change\t\t: %ld\n"),
+	printf(_("Maximum number of days between password change\t\t: %ld\n"),
 	        maxdays);
-	printf (_("Number of days of warning before password expires\t: %ld\n"),
+	printf(_("Number of days of warning before password expires\t: %ld\n"),
 	        warndays);
 }
 
@@ -340,7 +340,7 @@ static void list_fields (void)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -361,31 +361,31 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "d:E:hiI:lm:M:R:P:W:",
+	while ((c = getopt_long(argc, argv, "d:E:hiI:lm:M:R:P:W:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'd':
 			dflg = true;
-			lstchgdate = strtoday (optarg);
+			lstchgdate = strtoday(optarg);
 			if (lstchgdate < -1) {
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);
-				usage (E_USAGE);
+				usage(E_USAGE);
 			}
 			break;
 		case 'E':
 			Eflg = true;
-			expdate = strtoday (optarg);
+			expdate = strtoday(optarg);
 			if (expdate < -1) {
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);
-				usage (E_USAGE);
+				usage(E_USAGE);
 			}
 			break;
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'i':
 			iflg = true;
@@ -448,7 +448,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *
  *	It will not return if an error is encountered.
  */
-static void check_flags (int argc, int opt_index)
+static void check_flags(int argc, int opt_index)
 {
 	/*
 	 * Make certain the flags do not conflict and that there is a user
@@ -456,14 +456,14 @@ static void check_flags (int argc, int opt_index)
 	 */
 
 	if (argc != opt_index + 1) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 
 	if (lflg && (mflg || Mflg || dflg || Wflg || Iflg || Eflg)) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: do not include \"l\" with other flags\n"),
 		         Prog);
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 }
 
@@ -489,8 +489,8 @@ static void check_perms(const struct option_flags *flags)
 	 */
 
 	if (!amroot && !lflg) {
-		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-		fail_exit (E_NOPERM, process_selinux);
+		fprintf(stderr, _("%s: Permission denied.\n"), Prog);
+		fail_exit(E_NOPERM, process_selinux);
 	}
 }
 
@@ -512,18 +512,18 @@ static void open_files(bool readonly, const struct option_flags *flags)
 	 * file entry for the requested user.
 	 */
 	if (!readonly) {
-		if (pw_lock () == 0) {
-			fprintf (stderr,
+		if (pw_lock() == 0) {
+			fprintf(stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, pw_dbname ());
-			fail_exit (E_NOPERM, process_selinux);
+			         Prog, pw_dbname());
+			fail_exit(E_NOPERM, process_selinux);
 		}
 		pw_locked = true;
 	}
-	if (pw_open (readonly ? O_RDONLY: O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
+	if (pw_open(readonly ? O_RDONLY: O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr, _("%s: cannot open %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
 
 	/*
@@ -533,19 +533,19 @@ static void open_files(bool readonly, const struct option_flags *flags)
 	 * for this user if one does not exist already.
 	 */
 	if (!readonly) {
-		if (spw_lock () == 0) {
-			fprintf (stderr,
+		if (spw_lock() == 0) {
+			fprintf(stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, spw_dbname ());
-			fail_exit (E_NOPERM, process_selinux);
+			         Prog, spw_dbname());
+			fail_exit(E_NOPERM, process_selinux);
 		}
 		spw_locked = true;
 	}
-	if (spw_open (readonly ? O_RDONLY: O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
+	if (spw_open(readonly ? O_RDONLY: O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr,
+		         _("%s: cannot open %s\n"), Prog, spw_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", spw_dbname());
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
 }
 
@@ -562,24 +562,24 @@ static void close_files(const struct option_flags *flags)
 	 * Now close the shadow password file, which will cause all of the
 	 * entries to be re-written.
 	 */
-	if (spw_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
+	if (spw_close(process_selinux) == 0) {
+		fprintf(stderr,
+		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
 
 	/*
 	 * Close the password file. If any entries were modified, the file
 	 * will be re-written.
 	 */
-	if (pw_close (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+	if (pw_close(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
-		fail_exit (E_NOPERM, process_selinux);
+		fail_exit(E_NOPERM, process_selinux);
 	}
-	if (spw_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+	if (spw_unlock(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 		/* continue */
 	}
@@ -611,7 +611,7 @@ static void update_age (/*@null@*/const struct spwd *sp,
 	if (NULL == sp) {
 		struct passwd pwent = *pw;
 
-		memzero(&spwent, sizeof(spwent));
+		memzero(&spwent, sizeof (spwent));
 		spwent.sp_namp = pwent.pw_name;
 		spwent.sp_pwdp = pwent.pw_passwd;
 		spwent.sp_flag = SHADOW_SP_FLAG_UNSET;
@@ -640,10 +640,10 @@ static void update_age (/*@null@*/const struct spwd *sp,
 	spwent.sp_inact = inactdays;
 	spwent.sp_expire = expdate;
 
-	if (spw_update (&spwent) == 0) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"), Prog, spw_dbname (), spwent.sp_namp);
-		fail_exit (E_NOPERM, process_selinux);
+	if (spw_update(&spwent) == 0) {
+		fprintf(stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"), Prog, spw_dbname(), spwent.sp_namp);
+		fail_exit(E_NOPERM, process_selinux);
 	}
 
 }
@@ -723,7 +723,7 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
  *	either seconds or days.
  */
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	const struct spwd *sp;
 	uid_t ruid;
@@ -732,48 +732,48 @@ int main (int argc, char **argv)
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
 
-	sanitize_env ();
-	check_fds ();
+	sanitize_env();
+	check_fds();
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
-	prefix = process_prefix_flag ("-P", argc, argv);
+	process_root_flag("-R", argc, argv);
+	prefix = process_prefix_flag("-P", argc, argv);
 
 #ifdef WITH_AUDIT
-	audit_help_open ();
+	audit_help_open();
 #endif
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
-	ruid = getuid ();
-	rgid = getgid ();
+	ruid = getuid();
+	rgid = getgid();
 	amroot = (ruid == 0);
 #ifdef WITH_SELINUX
 	if (amroot) {
-		amroot = (check_selinux_permit ("rootok") == 0);
+		amroot = (check_selinux_permit("rootok") == 0);
 	}
 #endif
 
-	process_flags (argc, argv, &flags);
+	process_flags(argc, argv, &flags);
 	process_selinux = !flags.chroot && !flags.prefix;
 
-	check_perms (&flags);
+	check_perms(&flags);
 
-	if (!spw_file_present ()) {
-		fprintf (stderr,
+	if (!spw_file_present()) {
+		fprintf(stderr,
 		         _("%s: the shadow password file is not present\n"),
 		         Prog);
 		SYSLOG(LOG_WARN, "can't find the shadow password file");
-		closelog ();
-		exit (E_SHADOW_NOTFOUND);
+		closelog();
+		exit(E_SHADOW_NOTFOUND);
 	}
 
-	open_files (lflg, &flags);
+	open_files(lflg, &flags);
 	/* Drop privileges */
 	if (lflg && (   (setregid (rgid, rgid) != 0)
 	             || (setreuid (ruid, ruid) != 0))) {
@@ -807,8 +807,8 @@ int main (int argc, char **argv)
 	 */
 	if (lflg) {
 		if (!amroot && (ruid != user_uid)) {
-			fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-			fail_exit (E_NOPERM, process_selinux);
+			fprintf(stderr, _("%s: Permission denied.\n"), Prog);
+			fail_exit(E_NOPERM, process_selinux);
 		}
 		/* Displaying fields is not of interest to audit */
 		list_fields ();
@@ -820,16 +820,16 @@ int main (int argc, char **argv)
 	 * user interactively change them.
 	 */
 	if (!mflg && !Mflg && !dflg && !Wflg && !Iflg && !Eflg) {
-		printf (_("Changing the aging information for %s\n"),
+		printf(_("Changing the aging information for %s\n"),
 		        user_name);
-		if (new_fields () == 0) {
-			fprintf (stderr, _("%s: error changing fields\n"),
+		if (new_fields() == 0) {
+			fprintf(stderr, _("%s: error changing fields\n"),
 			         Prog);
-			fail_exit (E_NOPERM, process_selinux);
+			fail_exit(E_NOPERM, process_selinux);
 		}
 #ifdef WITH_AUDIT
 		else {
-			audit_logger (AUDIT_USER_MGMT,
+			audit_logger(AUDIT_USER_MGMT,
 			              "change-all-aging-information",
 			              user_name, user_uid, SHADOW_AUDIT_SUCCESS);
 		}
@@ -837,43 +837,43 @@ int main (int argc, char **argv)
 	} else {
 #ifdef WITH_AUDIT
 		if (Mflg) {
-			audit_logger (AUDIT_USER_MGMT,
+			audit_logger(AUDIT_USER_MGMT,
 			              "change-max-age", user_name, user_uid, SHADOW_AUDIT_SUCCESS);
 		}
 		if (mflg) {
-			audit_logger (AUDIT_USER_MGMT,
+			audit_logger(AUDIT_USER_MGMT,
 			              "change-min-age", user_name, user_uid, 1);
 		}
 		if (dflg) {
-			audit_logger (AUDIT_USER_MGMT,
+			audit_logger(AUDIT_USER_MGMT,
 			              "change-last-change-date",
 			              user_name, user_uid, 1);
 		}
 		if (Wflg) {
-			audit_logger (AUDIT_USER_MGMT,
+			audit_logger(AUDIT_USER_MGMT,
 			              "change-passwd-warning",
 			              user_name, user_uid, 1);
 		}
 		if (Iflg) {
-			audit_logger (AUDIT_USER_MGMT,
+			audit_logger(AUDIT_USER_MGMT,
 			              "change-inactive-days",
 			              user_name, user_uid, 1);
 		}
 		if (Eflg) {
-			audit_logger (AUDIT_USER_MGMT,
+			audit_logger(AUDIT_USER_MGMT,
 			              "change-passwd-expiration",
 			              user_name, user_uid, 1);
 		}
 #endif
 	}
 
-	update_age (sp, pw, process_selinux);
+	update_age(sp, pw, process_selinux);
 
-	close_files (&flags);
+	close_files(&flags);
 
 	SYSLOG(LOG_INFO, "changed password expiry for %s", user_name);
 
-	closelog ();
-	exit (E_SUCCESS);
+	closelog();
+	exit(E_SUCCESS);
 }
 

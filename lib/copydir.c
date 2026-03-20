@@ -57,31 +57,31 @@ struct path_info {
 	const char *name;
 };
 
-static int copy_entry (const struct path_info *src, const struct path_info *dst,
+static int copy_entry(const struct path_info *src, const struct path_info *dst,
                        uid_t old_uid, uid_t new_uid,
                        gid_t old_gid, gid_t new_gid);
-static int copy_dir (const struct path_info *src, const struct path_info *dst,
+static int copy_dir(const struct path_info *src, const struct path_info *dst,
                      const struct stat *statp, const struct timespec mt[],
                      uid_t old_uid, uid_t new_uid,
                      gid_t old_gid, gid_t new_gid);
-static int copy_symlink (const struct path_info *src, const struct path_info *dst,
+static int copy_symlink(const struct path_info *src, const struct path_info *dst,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid);
-static int copy_hardlink (const struct path_info *dst,
+static int copy_hardlink(const struct path_info *dst,
                           struct link_name *lp);
-static int copy_special (const struct path_info *src, const struct path_info *dst,
+static int copy_special(const struct path_info *src, const struct path_info *dst,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid);
-static int copy_file (const struct path_info *src, const struct path_info *dst,
+static int copy_file(const struct path_info *src, const struct path_info *dst,
                       const struct stat *statp, const struct timespec mt[],
                       uid_t old_uid, uid_t new_uid,
                       gid_t old_gid, gid_t new_gid);
-static int chownat_if_needed (const struct path_info *dst, const struct stat *statp,
+static int chownat_if_needed(const struct path_info *dst, const struct stat *statp,
                             uid_t old_uid, uid_t new_uid,
                             gid_t old_gid, gid_t new_gid);
-static int fchown_if_needed (int fdst, const struct stat *statp,
+static int fchown_if_needed(int fdst, const struct stat *statp,
                              uid_t old_uid, uid_t new_uid,
                              gid_t old_gid, gid_t new_gid);
 
@@ -102,13 +102,13 @@ error_acl(MAYBE_UNUSED struct error_context *_1, const char *fmt, ...)
 		return;
 	}
 
-	va_start (ap, fmt);
-	(void) fprintf (log_get_logfd(), _("%s: "), log_get_progname());
-	if (vfprintf (log_get_logfd(), fmt, ap) != 0) {
-		(void) fputs (_(": "), log_get_logfd());
+	va_start(ap, fmt);
+	(void) fprintf(log_get_logfd(), _("%s: "), log_get_progname());
+	if (vfprintf(log_get_logfd(), fmt, ap) != 0) {
+		(void) fputs(_(": "), log_get_logfd());
 	}
 	(void) fprintf(log_get_logfd(), "%s\n", strerrno());
-	va_end (ap);
+	va_end(ap);
 }
 
 static struct error_context ctx = {
@@ -130,13 +130,13 @@ static int perm_copy_path(const struct path_info *src,
 
 	dst_fd = openat(dst->dirfd, dst->name, O_RDONLY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC);
 	if (dst_fd < 0) {
-		(void) close (src_fd);
+		(void) close(src_fd);
 		return -1;
 	}
 
 	ret = perm_copy_fd(src->full_path, src_fd, dst->full_path, dst_fd, errctx);
-	(void) close (src_fd);
-	(void) close (dst_fd);
+	(void) close(src_fd);
+	(void) close(dst_fd);
 	return ret;
 }
 #endif				/* WITH_ACL */
@@ -180,8 +180,8 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 	struct link_name  *lp;
 
 	/* copy_tree () must be the entry point */
-	assert (NULL != src_orig);
-	assert (NULL != dst_orig);
+	assert(NULL != src_orig);
+	assert(NULL != dst_orig);
 
 	for (lp = links; NULL != lp; lp = lp->ln_next) {
 		if ((lp->ln_dev == sb->st_dev) && (lp->ln_ino == sb->st_ino)) {
@@ -204,7 +204,7 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 	return NULL;
 }
 
-static int copy_tree_impl (const struct path_info *src, const struct path_info *dst,
+static int copy_tree_impl(const struct path_info *src, const struct path_info *dst,
                bool copy_root,
                uid_t old_uid, uid_t new_uid,
                gid_t old_gid, gid_t new_gid)
@@ -217,23 +217,23 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 	if (copy_root) {
 		struct stat sb;
 
-		if (   fstatat (dst->dirfd, dst->name, &sb, 0) == 0
+		if (   fstatat(dst->dirfd, dst->name, &sb, 0) == 0
 		    || errno != ENOENT) {
 			return -1;
 		}
 
-		if (fstatat (src->dirfd, src->name, &sb, AT_SYMLINK_NOFOLLOW) == -1) {
+		if (fstatat(src->dirfd, src->name, &sb, AT_SYMLINK_NOFOLLOW) == -1) {
 			return -1;
 		}
 
-		if (!S_ISDIR (sb.st_mode)) {
-			fprintf (log_get_logfd(),
+		if (!S_ISDIR(sb.st_mode)) {
+			fprintf(log_get_logfd(),
 			         "%s: %s is not a directory",
 			         log_get_progname(), src->full_path);
 			return -1;
 		}
 
-		return copy_entry (src, dst, old_uid, new_uid, old_gid, new_gid);
+		return copy_entry(src, dst, old_uid, new_uid, old_gid, new_gid);
 	}
 
 	/*
@@ -242,14 +242,14 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 	 * target is created.  It assumes the target directory exists.
 	 */
 
-	src_fd = openat (src->dirfd, src->name, O_DIRECTORY | O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
+	src_fd = openat(src->dirfd, src->name, O_DIRECTORY | O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
 	if (src_fd < 0) {
 		return -1;
 	}
 
-	dst_fd = openat (dst->dirfd, dst->name, O_DIRECTORY | O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
+	dst_fd = openat(dst->dirfd, dst->name, O_DIRECTORY | O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
 	if (dst_fd < 0) {
-		(void) close (src_fd);
+		(void) close(src_fd);
 		return -1;
 	}
 
@@ -260,10 +260,10 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 	 * regular files (and directories ...) are copied, and no file
 	 * is made set-ID.
 	 */
-	dir = fdopendir (src_fd);
+	dir = fdopendir(src_fd);
 	if (NULL == dir) {
-		(void) close (src_fd);
-		(void) close (dst_fd);
+		(void) close(src_fd);
+		(void) close(dst_fd);
 		return -1;
 	}
 
@@ -311,8 +311,8 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 skip:
 		free(src_name);
 	}
-	(void) closedir (dir);
-	(void) close (dst_fd);
+	(void) closedir(dir);
+	(void) close(dst_fd);
 
 	if (set_orig) {
 		src_orig = NULL;
@@ -332,7 +332,7 @@ skip:
 	 * be called recursively (hence the context is set on the
 	 * sub-functions of copy_entry).
 	 */
-	if (reset_selinux_file_context () != 0) {
+	if (reset_selinux_file_context() != 0) {
 		err = -1;
 	}
 #endif				/* WITH_SELINUX */
@@ -359,7 +359,7 @@ skip:
  *	old_gid) will be modified, unless old_uid (resp. old_gid) is set
  *	to -1.
  */
-static int copy_entry (const struct path_info *src, const struct path_info *dst,
+static int copy_entry(const struct path_info *src, const struct path_info *dst,
                        uid_t old_uid, uid_t new_uid,
                        gid_t old_gid, gid_t new_gid)
 {
@@ -397,8 +397,8 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 	* Copy any symbolic links
 	*/
 
-	else if (S_ISLNK (sb.st_mode)) {
-		err = copy_symlink (src, dst, &sb, mt,
+	else if (S_ISLNK(sb.st_mode)) {
+		err = copy_symlink(src, dst, &sb, mt,
 				    old_uid, new_uid, old_gid, new_gid);
 	}
 
@@ -406,8 +406,8 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 	* See if this is a previously copied link
 	*/
 
-	else if ((lp = check_link (src->full_path, &sb)) != NULL) {
-		err = copy_hardlink (dst, lp);
+	else if ((lp = check_link(src->full_path, &sb)) != NULL) {
+		err = copy_hardlink(dst, lp);
 	}
 
 	/*
@@ -416,8 +416,8 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 	* would be nice to copy everything ...
 	*/
 
-	else if (!S_ISREG (sb.st_mode)) {
-		err = copy_special (src, dst, &sb, mt,
+	else if (!S_ISREG(sb.st_mode)) {
+		err = copy_special(src, dst, &sb, mt,
 				    old_uid, new_uid, old_gid, new_gid);
 	}
 
@@ -427,7 +427,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 	*/
 
 	else {
-		err = copy_file (src, dst, &sb, mt,
+		err = copy_file(src, dst, &sb, mt,
 				 old_uid, new_uid, old_gid, new_gid);
 	}
 
@@ -444,7 +444,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
  *
  *	Return 0 on success, -1 on error.
  */
-static int copy_dir (const struct path_info *src, const struct path_info *dst,
+static int copy_dir(const struct path_info *src, const struct path_info *dst,
                      const struct stat *statp, const struct timespec mt[],
                      uid_t old_uid, uid_t new_uid,
                      gid_t old_gid, gid_t new_gid)
@@ -458,7 +458,7 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
 	 */
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (dst->full_path, S_IFDIR) != 0) {
+	if (set_selinux_file_context(dst->full_path, S_IFDIR) != 0) {
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
@@ -467,21 +467,21 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
 	 * but copy into it (recursively).
 	 */
 	if (fstatat(dst->dirfd, dst->name, &dst_sb, AT_SYMLINK_NOFOLLOW) == 0 && S_ISDIR(dst_sb.st_mode)) {
-		return (copy_tree_impl (src, dst, false,
+		return (copy_tree_impl(src, dst, false,
 		               old_uid, new_uid, old_gid, new_gid) != 0);
 	}
 
-	if (   (mkdirat (dst->dirfd, dst->name, 0700) != 0)
-	    || (chownat_if_needed (dst, statp,
+	if (   (mkdirat(dst->dirfd, dst->name, 0700) != 0)
+	    || (chownat_if_needed(dst, statp,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
-	    || (fchmodat (dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) != 0)
+	    || (fchmodat(dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) != 0)
 #ifdef WITH_ACL
-	    || (   (perm_copy_path (src, dst, &ctx) != 0)
+	    || (   (perm_copy_path(src, dst, &ctx) != 0)
 	        && (errno != 0))
 #endif				/* WITH_ACL */
-	    || (copy_tree_impl (src, dst, false,
+	    || (copy_tree_impl(src, dst, false,
 	                   old_uid, new_uid, old_gid, new_gid) != 0)
-	    || (utimensat (dst->dirfd, dst->name, mt, AT_SYMLINK_NOFOLLOW) != 0)) {
+	    || (utimensat(dst->dirfd, dst->name, mt, AT_SYMLINK_NOFOLLOW) != 0)) {
 		err = -1;
 	}
 
@@ -498,7 +498,7 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
  *
  *	Return 0 on success, -1 on error.
  */
-static int copy_symlink (const struct path_info *src, const struct path_info *dst,
+static int copy_symlink(const struct path_info *src, const struct path_info *dst,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid)
@@ -534,13 +534,13 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
 	}
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (dst->full_path, S_IFLNK) != 0) {
-		free (oldlink);
+	if (set_selinux_file_context(dst->full_path, S_IFLNK) != 0) {
+		free(oldlink);
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
-	if (   (symlinkat (oldlink, dst->dirfd, dst->name) != 0)
-	    || (chownat_if_needed (dst, statp,
+	if (   (symlinkat(oldlink, dst->dirfd, dst->name) != 0)
+	    || (chownat_if_needed(dst, statp,
 	                          old_uid, new_uid, old_gid, new_gid) != 0)) {
 		/* FIXME: there are no modes on symlinks, right?
 		 *        ACL could be copied, but this would be much more
@@ -549,12 +549,12 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
 		 *        We currently only document that ACL and Extended
 		 *        Attributes are not copied.
 		 */
-		free (oldlink);
+		free(oldlink);
 		return -1;
 	}
-	free (oldlink);
+	free(oldlink);
 
-	if (utimensat (dst->dirfd, dst->name, mt, AT_SYMLINK_NOFOLLOW) != 0) {
+	if (utimensat(dst->dirfd, dst->name, mt, AT_SYMLINK_NOFOLLOW) != 0) {
 		return -1;
 	}
 
@@ -568,7 +568,7 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
  *
  *	Return 0 on success, -1 on error.
  */
-static int copy_hardlink (const struct path_info *dst,
+static int copy_hardlink(const struct path_info *dst,
                           struct link_name *lp)
 {
 	/* FIXME: selinux, ACL, Extended Attributes needed? */
@@ -581,7 +581,7 @@ static int copy_hardlink (const struct path_info *dst,
 	 * and forget about this link if it was the last reference */
 	lp->ln_count--;
 	if (lp->ln_count <= 0) {
-		remove_link (lp);
+		remove_link(lp);
 	}
 
 	return 0;
@@ -639,7 +639,7 @@ copy_special(MAYBE_UNUSED const struct path_info *src, const struct path_info *d
  *
  *	Return 0 on success, -1 on error.
  */
-static int copy_file (const struct path_info *src, const struct path_info *dst,
+static int copy_file(const struct path_info *src, const struct path_info *dst,
                       const struct stat *statp, const struct timespec mt[],
                       uid_t old_uid, uid_t new_uid,
                       gid_t old_gid, gid_t new_gid)
@@ -648,30 +648,30 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 	int ifd;
 	int ofd;
 
-	ifd = openat (src->dirfd, src->name, O_RDONLY|O_NOFOLLOW|O_CLOEXEC);
+	ifd = openat(src->dirfd, src->name, O_RDONLY|O_NOFOLLOW|O_CLOEXEC);
 	if (ifd < 0) {
 		return -1;
 	}
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (dst->full_path, S_IFREG) != 0) {
-		(void) close (ifd);
+	if (set_selinux_file_context(dst->full_path, S_IFREG) != 0) {
+		(void) close(ifd);
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
-	ofd = openat (dst->dirfd, dst->name, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC | O_NOFOLLOW | O_CLOEXEC, 0600);
+	ofd = openat(dst->dirfd, dst->name, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC | O_NOFOLLOW | O_CLOEXEC, 0600);
 	if (   (ofd < 0)
-	    || (fchown_if_needed (ofd, statp,
+	    || (fchown_if_needed(ofd, statp,
 	                          old_uid, new_uid, old_gid, new_gid) != 0)
-	    || (fchmod (ofd, statp->st_mode & 07777) != 0)
+	    || (fchmod(ofd, statp->st_mode & 07777) != 0)
 #ifdef WITH_ACL
-	    || (   (perm_copy_fd (src->full_path, ifd, dst->full_path, ofd, &ctx) != 0)
+	    || (   (perm_copy_fd(src->full_path, ifd, dst->full_path, ofd, &ctx) != 0)
 	        && (errno != 0))
 #endif				/* WITH_ACL */
 	   ) {
 		if (ofd >= 0) {
-			(void) close (ofd);
+			(void) close(ofd);
 		}
-		(void) close (ifd);
+		(void) close(ifd);
 		return -1;
 	}
 
@@ -679,13 +679,13 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 		char buf[8192];
 		ssize_t cnt;
 
-		cnt = read(ifd, buf, sizeof(buf));
+		cnt = read(ifd, buf, sizeof (buf));
 		if (cnt < 0) {
 			if (errno == EINTR) {
 				continue;
 			}
-			(void) close (ofd);
-			(void) close (ifd);
+			(void) close(ofd);
+			(void) close(ifd);
 			return -1;
 		}
 		if (cnt == 0) {
@@ -693,18 +693,18 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 		}
 
 		if (write_full(ofd, buf, cnt) == -1) {
-			(void) close (ofd);
-			(void) close (ifd);
+			(void) close(ofd);
+			(void) close(ifd);
 			return -1;
 		}
 	}
 
-	(void) close (ifd);
-	if (close (ofd) != 0 && errno != EINTR) {
+	(void) close(ifd);
+	if (close(ofd) != 0 && errno != EINTR) {
 		return -1;
 	}
 
-	if (utimensat (dst->dirfd, dst->name, mt, AT_SYMLINK_NOFOLLOW) != 0) {
+	if (utimensat(dst->dirfd, dst->name, mt, AT_SYMLINK_NOFOLLOW) != 0) {
 		return -1;
 	}
 
@@ -712,7 +712,7 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 }
 
 #define def_chown_if_needed(chown_function, type_dst)                  \
-static int chown_function ## _if_needed (type_dst dst,                 \
+static int chown_function ## _if_needed(type_dst dst,                 \
                                          const struct stat *statp,     \
                                          uid_t old_uid, uid_t new_uid, \
                                          gid_t old_gid, gid_t new_gid) \
@@ -738,12 +738,12 @@ static int chown_function ## _if_needed (type_dst dst,                 \
 		tmpgid = statp->st_gid;                                \
 	}                                                              \
 	                                                               \
-	return chown_function (dst, tmpuid, tmpgid);                   \
+	return chown_function(dst, tmpuid, tmpgid);                   \
 }
 
-def_chown_if_needed (fchown, int)
+def_chown_if_needed(fchown, int)
 
-static int chownat_if_needed (const struct path_info *dst,
+static int chownat_if_needed(const struct path_info *dst,
 							  const struct stat *statp,
                               uid_t old_uid, uid_t new_uid,
                               gid_t old_gid, gid_t new_gid)
@@ -769,7 +769,7 @@ static int chownat_if_needed (const struct path_info *dst,
 		tmpgid = statp->st_gid;
 	}
 
-	return fchownat (dst->dirfd, dst->name, tmpuid, tmpgid, AT_SYMLINK_NOFOLLOW);
+	return fchownat(dst->dirfd, dst->name, tmpuid, tmpgid, AT_SYMLINK_NOFOLLOW);
 }
 
 /*
@@ -786,7 +786,7 @@ static int chownat_if_needed (const struct path_info *dst,
  *	The same logic applies for the group-ownership and
  *	old_gid/new_gid.
  */
-int copy_tree (const char *src_root, const char *dst_root,
+int copy_tree(const char *src_root, const char *dst_root,
                bool copy_root,
                uid_t old_uid, uid_t new_uid,
                gid_t old_gid, gid_t new_gid)

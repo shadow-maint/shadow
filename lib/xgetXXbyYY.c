@@ -113,8 +113,8 @@
 #endif
 
 oom:
-	fprintf (log_get_logfd(), _("%s: out of memory\n"),
+	fprintf(log_get_logfd(), _("%s: out of memory\n"),
 		 "x" STRINGIZE(FUNCTION_NAME));
-	exit (13);
+	exit(13);
 }
 

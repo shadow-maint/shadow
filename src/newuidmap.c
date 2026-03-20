@@ -111,12 +111,12 @@ int main(int argc, char **argv)
 	}
 
 	/* Who am I? */
-	pw = get_my_pwent ();
+	pw = get_my_pwent();
 	if (NULL == pw) {
-		fprintf (stderr,
+		fprintf(stderr,
 			_("%s: Cannot determine your user name.\n"),
 			Prog);
-		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller(UID %lu)",
 			(unsigned long) getuid());
 		return EXIT_FAILURE;
 	}
@@ -145,7 +145,7 @@ int main(int argc, char **argv)
 	}
 
 	if (want_subuid_file() && !sub_uid_open(O_RDONLY)) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: cannot open %s: %s\n"),
 		        Prog, sub_uid_dbname(), strerrno());
 		return EXIT_FAILURE;

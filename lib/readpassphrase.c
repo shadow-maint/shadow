@@ -62,7 +62,7 @@ readpassphrase(const char *prompt, char *buf, size_t bufsiz, int flags)
 	/* I suppose we could alloc on demand in this case (XXX). */
 	if (bufsiz == 0) {
 		errno = EINVAL;
-		return(NULL);
+		return (NULL);
 	}
 
 restart:
@@ -79,7 +79,7 @@ restart:
 	    (input = output = open(_PATH_TTY, O_RDWR)) == -1) {
 		if (flags & RPP_REQUIRE_TTY) {
 			errno = ENOTTY;
-			return(NULL);
+			return (NULL);
 		}
 		input = STDIN_FILENO;
 		output = STDERR_FILENO;
@@ -100,9 +100,9 @@ restart:
 #endif
 		(void)tcsetattr(input, TCSAFLUSH|TCSASOFT, &term);
 	} else {
-		memset(&term, 0, sizeof(term));
+		memset(&term, 0, sizeof (term));
 		term.c_lflag |= ECHO;
-		memset(&oterm, 0, sizeof(oterm));
+		memset(&oterm, 0, sizeof (oterm));
 		oterm.c_lflag |= ECHO;
 	}
 
@@ -147,7 +147,7 @@ restart:
 		(void)write(output, "\n", 1);
 
 	/* Restore old terminal settings and signals. */
-	if (memcmp(&term, &oterm, sizeof(term)) != 0) {
+	if (memcmp(&term, &oterm, sizeof (term)) != 0) {
 		const int sigttou = signo[SIGTTOU];
 
 		/* Ignore SIGTTOU generated when we are not the fg pgrp. */
@@ -188,7 +188,7 @@ restart:
 
 	if (save_errno)
 		errno = save_errno;
-	return(nr == -1 ? NULL : buf);
+	return (nr == -1 ? NULL : buf);
 }
 
 static void handler(int s)

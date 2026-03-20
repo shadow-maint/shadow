@@ -31,7 +31,7 @@
  *	UID is extracted from the global (struct passwd) entry and the
  *	TTY information is gotten from the (struct utmpx).
  */
-void dolastlog (
+void dolastlog(
 	struct lastlog *ll,
 	const struct passwd *pw,
 	/*@unique@*/const char *line,
@@ -56,13 +56,13 @@ void dolastlog (
 	 * for this UID.  Negative UID's will create problems, but ...
 	 */
 
-	offset = (off_t) pw->pw_uid * sizeof(newlog);
+	offset = (off_t) pw->pw_uid * sizeof (newlog);
 
-	if (lseek (fd, offset, SEEK_SET) != offset) {
+	if (lseek(fd, offset, SEEK_SET) != offset) {
 		SYSLOG(LOG_WARN,
 		       "Can't read last lastlog entry for UID %lu in %s. Entry not updated.",
 		       (unsigned long) pw->pw_uid, _PATH_LASTLOG);
-		(void) close (fd);
+		(void) close(fd);
 		return;
 	}
 
@@ -72,8 +72,8 @@ void dolastlog (
 	 * the way we read the old one in.
 	 */
 
-	if (read(fd, &newlog, sizeof(newlog)) != (ssize_t) sizeof(newlog)) {
-		memzero(&newlog, sizeof(newlog));
+	if (read(fd, &newlog, sizeof (newlog)) != (ssize_t) sizeof (newlog)) {
+		memzero(&newlog, sizeof (newlog));
 	}
 	if (NULL != ll) {
 		*ll = newlog;
@@ -86,12 +86,12 @@ void dolastlog (
 #if HAVE_LL_HOST
 	strncpy_a(newlog.ll_host, host);
 #endif
-	if (   (lseek (fd, offset, SEEK_SET) != offset)
-	    || (write_full(fd, &newlog, sizeof(newlog)) == -1)) {
+	if (   (lseek(fd, offset, SEEK_SET) != offset)
+	    || (write_full(fd, &newlog, sizeof (newlog)) == -1)) {
 		goto err_write;
 	}
 
-	if (close (fd) != 0 && errno != EINTR) {
+	if (close(fd) != 0 && errno != EINTR) {
 		goto err_close;
 	}
 
@@ -100,7 +100,7 @@ void dolastlog (
 err_write:
 	{
 		int saved_errno = errno;
-		(void) close (fd);
+		(void) close(fd);
 		errno = saved_errno;
 	}
 err_close:

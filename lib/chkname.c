@@ -119,11 +119,11 @@ is_valid_group_name(const char *name)
 	 * HP-UX 10 limits to 16 characters
 	 */
 	if (   (GROUP_NAME_MAX_LENGTH > 0)
-	    && (strlen (name) > GROUP_NAME_MAX_LENGTH))
+	    && (strlen(name) > GROUP_NAME_MAX_LENGTH))
 	{
 		errno = EOVERFLOW;
 		return false;
 	}
 
-	return is_valid_name (name);
+	return is_valid_name(name);
 }

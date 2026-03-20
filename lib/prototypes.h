@@ -67,13 +67,13 @@ extern int chown_tree (const char *root,
                        gid_t old_gid, gid_t new_gid);
 
 /* chowntty.c */
-extern void chown_tty (const struct passwd *);
+extern void chown_tty(const struct passwd *);
 
 /* cleanup.c */
 typedef /*@null@*/void (*cleanup_function) (/*@null@*/void *arg);
 void add_cleanup (/*@notnull@*/cleanup_function pcf, /*@null@*/void *arg);
 void del_cleanup (/*@notnull@*/cleanup_function pcf);
-void do_cleanups (void);
+void do_cleanups(void);
 
 /* cleanup_group.c */
 struct cleanup_info_mod {
@@ -81,30 +81,30 @@ struct cleanup_info_mod {
 	char *action;
 	/*@observer@*/const char *name;
 };
-void cleanup_report_add_group (void *group_name);
-void cleanup_report_add_group_group (void *group_name);
+void cleanup_report_add_group(void *group_name);
+void cleanup_report_add_group_group(void *group_name);
 #ifdef SHADOWGRP
-void cleanup_report_add_group_gshadow (void *group_name);
+void cleanup_report_add_group_gshadow(void *group_name);
 #endif
-void cleanup_report_del_group (void *group_name);
-void cleanup_report_del_group_group (void *group_name);
+void cleanup_report_del_group(void *group_name);
+void cleanup_report_del_group_group(void *group_name);
 #ifdef SHADOWGRP
-void cleanup_report_del_group_gshadow (void *group_name);
+void cleanup_report_del_group_gshadow(void *group_name);
 #endif
-void cleanup_report_mod_passwd (void *cleanup_info);
-void cleanup_report_mod_group (void *cleanup_info);
-void cleanup_report_mod_gshadow (void *cleanup_info);
-void cleanup_unlock_group (void *process_selinux);
+void cleanup_report_mod_passwd(void *cleanup_info);
+void cleanup_report_mod_group(void *cleanup_info);
+void cleanup_report_mod_gshadow(void *cleanup_info);
+void cleanup_unlock_group(void *process_selinux);
 #ifdef SHADOWGRP
-void cleanup_unlock_gshadow (void *process_selinux);
+void cleanup_unlock_gshadow(void *process_selinux);
 #endif
-void cleanup_unlock_passwd (void *process_selinux);
+void cleanup_unlock_passwd(void *process_selinux);
 
 /* console.c */
 extern bool console (const char *);
 
 /* copydir.c */
-extern int copy_tree (const char *src_root, const char *dst_root,
+extern int copy_tree(const char *src_root, const char *dst_root,
                       bool copy_root,
                       uid_t old_uid, uid_t new_uid,
                       gid_t old_gid, gid_t new_gid);
@@ -114,26 +114,26 @@ extern /*@exposed@*//*@null@*/char *pw_encrypt (const char *, const char *);
 
 /* env.c */
 extern void addenv (const char *, /*@null@*/const char *);
-extern void initenv (void);
-extern void set_env (int, char *const *);
-extern void sanitize_env (void);
+extern void initenv(void);
+extern void set_env(int, char *const *);
+extern void sanitize_env(void);
 
 /* fd.c */
 extern void check_fds (void);
 
 /* find_new_gid.c */
-extern int find_new_gid (bool sys_group,
+extern int find_new_gid(bool sys_group,
                          gid_t *gid,
                          /*@null@*/gid_t const *preferred_gid);
 
 /* find_new_uid.c */
-extern int find_new_uid (bool sys_user,
+extern int find_new_uid(bool sys_user,
                          uid_t *uid,
                          /*@null@*/uid_t const *preferred_uid);
 
 #ifdef ENABLE_SUBIDS
 /* find_new_sub_gids.c */
-extern int find_new_sub_gids (id_t *range_start, unsigned long *range_count);
+extern int find_new_sub_gids(id_t *range_start, unsigned long *range_count);
 
 /* find_new_sub_uids.c */
 extern int find_new_sub_uids (id_t *range_start, unsigned long *range_count);
@@ -152,7 +152,7 @@ extern int getrange (const char *range,
                      unsigned long *max, bool *has_max);
 
 /* gettime.c */
-extern time_t gettime (void);
+extern time_t gettime(void);
 
 /* groupio.c */
 extern void __gr_del_entry (const struct commonio_entry *ent);
@@ -171,7 +171,7 @@ extern bool hushed (const char *username);
 /* audit_help.c */
 #ifdef WITH_AUDIT
 extern int audit_fd;
-extern void audit_help_open (void);
+extern void audit_help_open(void);
 /* Use AUDIT_NO_ID when a name is provided to audit_logger instead of an ID */
 #define AUDIT_NO_ID	((unsigned int) -1)
 typedef enum {
@@ -188,20 +188,20 @@ void audit_logger_with_group(int type, const char *op, const char *name,
 
 /* limits.c */
 #ifndef USE_PAM
-extern void setup_limits (const struct passwd *);
+extern void setup_limits(const struct passwd *);
 #endif
 
 /* list.c */
 extern /*@only@*/char **add_list (/*@returned@*/ /*@only@*/char **, const char *);
 extern /*@only@*/char **del_list (/*@returned@*/ /*@only@*/char **, const char *);
 extern /*@only@*/char **dup_list (char *const *);
-extern void free_list (char **);
-extern bool is_on_list (char *const *list, const char *member);
+extern void free_list(char **);
+extern bool is_on_list(char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
 
 #ifdef ENABLE_LASTLOG
 /* log.c */
-extern void dolastlog (
+extern void dolastlog(
 	struct lastlog *ll,
 	const struct passwd *pw,
 	/*@unique@*/const char *line,
@@ -212,7 +212,7 @@ extern void dolastlog (
 extern int login_access (const char *user, const char *from);
 
 /* loginprompt.c */
-extern void login_prompt (char *, int);
+extern void login_prompt(char *, int);
 
 /* mail.c */
 extern void mailcheck (void);
@@ -241,7 +241,7 @@ struct subid_nss_ops {
 	 * returns success if the module was able to determine an answer (true or false),
 	 * else an error status.
 	 */
-	enum subid_status (*has_range)(const char *owner, unsigned long start, unsigned long count, enum subid_type idtype, bool *result);
+	enum subid_status(*has_range)(const char *owner, unsigned long start, unsigned long count, enum subid_type idtype, bool *result);
 
 	/*
 	 * nss_list_owner_ranges: list the subid ranges delegated to a user.
@@ -256,7 +256,7 @@ struct subid_nss_ops {
 	 * returns success if the module was able to determine an answer,
 	 * else an error status.
 	 */
-	enum subid_status (*list_owner_ranges)(const char *owner, enum subid_type id_type, struct subid_range **ranges, int *count);
+	enum subid_status(*list_owner_ranges)(const char *owner, enum subid_type id_type, struct subid_range **ranges, int *count);
 
 	/*
 	 * nss_find_subid_owners: find uids who own a given subuid or subgid.
@@ -270,7 +270,7 @@ struct subid_nss_ops {
 	 * returns success if the module was able to determine an answer,
 	 * else an error status.
 	 */
-	enum subid_status (*find_subid_owners)(unsigned long id, enum subid_type id_type, uid_t **uids, int *count);
+	enum subid_status(*find_subid_owners)(unsigned long id, enum subid_type id_type, uid_t **uids, int *count);
 
 	/*
 	 * nss_free: free a memory block allocated by a subid plugin.
@@ -283,7 +283,7 @@ struct subid_nss_ops {
 	 * pointer is set to free(3) for backward compatibility. However, it is
 	 * strongly recommended to define this routine explicitly.
 	 */
-	void (*free)(void *ptr);
+	void(*free)(void *ptr);
 
 	/* The dlsym handle to close */
 	void *handle;
@@ -294,7 +294,7 @@ extern struct subid_nss_ops *get_subid_nss_handle(void);
 
 /* pam_pass_non_interactive.c */
 #ifdef USE_PAM
-extern int do_pam_passwd_non_interactive (const char *pam_service,
+extern int do_pam_passwd_non_interactive(const char *pam_service,
                                            const char *username,
                                            const char* password);
 #endif				/* USE_PAM */
@@ -305,14 +305,14 @@ extern void obscure_get_range(int *, int *);
 
 /* pam_pass.c */
 #ifdef USE_PAM
-extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
+extern void do_pam_passwd(const char *user, bool silent, bool change_expired);
 #endif
 
 /* port.c */
 extern bool isttytime (const char *, const char *, time_t);
 
 /* prefix_flag.c */
-extern const char* process_prefix_flag (const char* short_opt, int argc, char **argv);
+extern const char* process_prefix_flag(const char* short_opt, int argc, char **argv);
 extern struct group *prefix_getgrnam(const char *name);
 extern struct group *prefix_getgrgid(gid_t gid);
 extern struct passwd *prefix_getpwuid(uid_t uid);
@@ -342,8 +342,8 @@ extern void passwd_check(const char *, const char *);
 extern void pwd_init (void);
 
 /* pwio.c */
-extern void __pw_del_entry (const struct commonio_entry *ent);
-extern struct commonio_db *__pw_get_db (void);
+extern void __pw_del_entry(const struct commonio_entry *ent);
+extern struct commonio_db *__pw_get_db(void);
 extern /*@dependent@*/ /*@null@*/struct commonio_entry *__pw_get_head (void);
 
 /* pwmem.c */
@@ -356,7 +356,7 @@ unsigned long csrand_uniform (unsigned long n);
 unsigned long csrand_interval (unsigned long min, unsigned long max);
 
 /* remove_tree.c */
-extern int remove_tree (const char *root, bool remove_root);
+extern int remove_tree(const char *root, bool remove_root);
 
 /* root_flag.c */
 extern void process_root_flag (const char* short_opt, int argc, char **argv);
@@ -366,10 +366,10 @@ extern /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const 
 
 /* selinux.c */
 #ifdef WITH_SELINUX
-extern int set_selinux_file_context (const char *dst_name, mode_t mode);
-extern void reset_selinux_handle (void);
-extern int reset_selinux_file_context (void);
-extern int check_selinux_permit (const char *perm_name);
+extern int set_selinux_file_context(const char *dst_name, mode_t mode);
+extern void reset_selinux_handle(void);
+extern int reset_selinux_file_context(void);
+extern int check_selinux_permit(const char *perm_name);
 #endif
 
 /* semanage.c */
@@ -379,30 +379,30 @@ extern int del_seuser(const char *login_name);
 #endif
 
 /* setugid.c */
-extern int setup_groups (const struct passwd *info);
-extern int change_uid (const struct passwd *info);
+extern int setup_groups(const struct passwd *info);
+extern int change_uid(const struct passwd *info);
 #if !defined(USE_PAM)
-extern int setup_uid_gid (const struct passwd *info, bool is_console);
+extern int setup_uid_gid(const struct passwd *info, bool is_console);
 #else
-extern int setup_uid_gid (const struct passwd *info);
+extern int setup_uid_gid(const struct passwd *info);
 #endif
 
 /* setup.c */
 extern void setup (struct passwd *);
 
 /* setupenv.c */
-extern void setup_env (struct passwd *);
+extern void setup_env(struct passwd *);
 
 /* sgroupio.c */
 extern void __sgr_del_entry (const struct commonio_entry *ent);
 extern /*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent);
 extern void sgr_free(/*@only@*/struct sgrp *sgent);
 extern /*@dependent@*/ /*@null@*/struct commonio_entry *__sgr_get_head (void);
-extern void __sgr_set_changed (void);
+extern void __sgr_set_changed(void);
 
 /* shadowio.c */
 extern /*@dependent@*/ /*@null@*/struct commonio_entry *__spw_get_head (void);
-extern void __spw_del_entry (const struct commonio_entry *ent);
+extern void __spw_del_entry(const struct commonio_entry *ent);
 
 /* shadowmem.c */
 extern /*@null@*/ /*@only@*/struct spwd *__spw_dup (const struct spwd *spent);
@@ -417,7 +417,7 @@ extern int run_command(const char *cmd, const char *argv[],
                        /*@null@*/const char *envp[], int *restrict status);
 
 /* strtoday.c */
-extern long strtoday (const char *);
+extern long strtoday(const char *);
 
 /* suauth.c */
 extern int check_su_auth (const char *actual_id,
@@ -425,7 +425,7 @@ extern int check_su_auth (const char *actual_id,
                           bool su_to_root);
 
 /* sulog.c */
-extern void sulog (const char *tty,
+extern void sulog(const char *tty,
                    bool success,
                    const char *oldname,
                    const char *name);
@@ -434,7 +434,7 @@ extern void sulog (const char *tty,
 extern void subsystem (const struct passwd *);
 
 /* ttytype.c */
-extern void ttytype (const char *);
+extern void ttytype(const char *);
 
 /* tz.c */
 #ifndef USE_PAM
@@ -445,7 +445,7 @@ extern /*@observer@*/const char *tz (const char *);
 extern int set_filesize_limit (int blocks);
 
 /* user_busy.c */
-extern int user_busy (const char *name, uid_t uid);
+extern int user_busy(const char *name, uid_t uid);
 
 /*
  * Session management: utmp.c or logind.c
@@ -461,7 +461,7 @@ extern int user_busy (const char *name, uid_t uid);
  * @return 0 or a positive integer if the host was obtained properly,
  *         another value on error.
  */
-extern int get_session_host (char **out, pid_t main_pid);
+extern int get_session_host(char **out, pid_t main_pid);
 #ifndef ENABLE_LOGIND
 /**
  * @brief Update or create an utmp entry in utmp, wtmp, utmpw, or wtmpx
@@ -475,7 +475,7 @@ extern int get_session_host (char **out, pid_t main_pid);
  * @return 0 if utmp was updated properly,
  *         1 on error.
  */
-extern int update_utmp (const char *user,
+extern int update_utmp(const char *user,
                         const char *tty,
                         const char *host,
                         pid_t main_pid);

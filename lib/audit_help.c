@@ -29,9 +29,9 @@
 
 int audit_fd;
 
-void audit_help_open (void)
+void audit_help_open(void)
 {
-	audit_fd = audit_open ();
+	audit_fd = audit_open();
 	if (audit_fd < 0) {
 		/* You get these only when the kernel doesn't have
 		 * audit compiled in. */
@@ -40,9 +40,9 @@ void audit_help_open (void)
 		    || (errno == EAFNOSUPPORT)) {
 			return;
 		}
-		(void) fputs (_("Cannot open audit interface - aborting.\n"),
+		(void) fputs(_("Cannot open audit interface - aborting.\n"),
 		              log_get_logfd());
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -61,14 +61,14 @@ void audit_help_open (void)
  * id  -  uid or gid that the operation is being performed on. This is used
  *	  only when user is NULL.
  */
-void audit_logger (int type, const char *op,
+void audit_logger(int type, const char *op,
                    const char *name, unsigned int id,
                    shadow_audit_result result)
 {
 	if (audit_fd < 0) {
 		return;
 	} else {
-		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
+		audit_log_acct_message(audit_fd, type, NULL, op, name, id,
 		                        NULL, NULL, NULL, result);
 	}
 }
@@ -102,7 +102,7 @@ audit_logger_with_group(int type, const char *op, const char *name,
 	if (audit_fd < 0)
 		return;
 
-	len = strnlen(grp, sizeof(enc_group)/2);
+	len = strnlen(grp, sizeof (enc_group)/2);
 	if (audit_value_needs_encoding(grp, len)) {
 		stprintf_a(buf, "%s %s=%s", op, grp_type,
 			audit_encode_value(enc_group, grp, len));
@@ -114,12 +114,12 @@ audit_logger_with_group(int type, const char *op, const char *name,
 		               NULL, NULL, NULL, result);
 }
 
-void audit_logger_message (const char *message, shadow_audit_result result)
+void audit_logger_message(const char *message, shadow_audit_result result)
 {
 	if (audit_fd < 0) {
 		return;
 	} else {
-		audit_log_user_message (audit_fd,
+		audit_log_user_message(audit_fd,
 		                        AUDIT_USYS_CONFIG,
 		                        message,
 		                        NULL, /* hostname */

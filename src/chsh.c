@@ -79,11 +79,11 @@ static void update_shell (const char *user, char *loginsh,
  */
 NORETURN
 static void
-fail_exit (int code, bool process_selinux)
+fail_exit(int code, bool process_selinux)
 {
 	if (pw_locked) {
-		if (pw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		if (pw_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
@@ -99,19 +99,19 @@ fail_exit (int code, bool process_selinux)
  */
 NORETURN
 static void
-usage (int status)
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (usageout,
+	(void) fprintf(usageout,
 	                _("Usage: %s [options] [LOGIN]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -s, --shell SHELL             new login shell for the user account\n"), usageout);
-	(void) fputs ("\n", usageout);
-	exit (status);
+	(void) fputs(_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs(_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs(_("  -s, --shell SHELL             new login shell for the user account\n"), usageout);
+	(void) fputs("\n", usageout);
+	exit(status);
 }
 
 /*
@@ -120,24 +120,24 @@ usage (int status)
  * prompt the user for the login shell and change it according to the
  * response, or leave it alone if nothing was entered.
  */
-static void new_fields (void)
+static void new_fields(void)
 {
-	puts (_("Enter the new value, or press ENTER for the default"));
-	change_field(loginsh, sizeof(loginsh), _("Login Shell"));
+	puts(_("Enter the new value, or press ENTER for the default"));
+	change_field(loginsh, sizeof (loginsh), _("Login Shell"));
 }
 
 /*
  * is_restricted_shell - return true if the shell is restricted
  *
  */
-static bool is_restricted_shell (const char *sh, bool process_selinux)
+static bool is_restricted_shell(const char *sh, bool process_selinux)
 {
 	/*
 	 * Shells not listed in /etc/shells are considered to be restricted.
 	 * Changed this to avoid confusion with "rc" (the plan9 shell - not
 	 * restricted despite the name starting with 'r').  --marekm
 	 */
-	return !shell_is_listed (sh, process_selinux);
+	return !shell_is_listed(sh, process_selinux);
 }
 
 /*
@@ -152,7 +152,7 @@ static bool is_restricted_shell (const char *sh, bool process_selinux)
  */
 
 #ifdef HAVE_VENDORDIR
-static bool shell_is_listed (const char *sh, bool process_selinux)
+static bool shell_is_listed(const char *sh, bool process_selinux)
 {
 	bool found = false;
 
@@ -169,19 +169,19 @@ static bool shell_is_listed (const char *sh, bool process_selinux)
 			       "", /* key only */
 			       "#" /* comment */);
 	if (error) {
-		fprintf (stderr,
+		fprintf(stderr,
 			 _("Cannot parse shell files: %s"),
 			 econf_errString(error));
-		fail_exit (1, process_selinux);
+		fail_exit(1, process_selinux);
 	}
 
 	error = econf_getKeys(key_file, NULL, &size, &keys);
 	if (error) {
-		fprintf (stderr,
+		fprintf(stderr,
 			 _("Cannot evaluate entries in shell files: %s"),
 			 econf_errString(error));
-		econf_free (key_file);
-		fail_exit (1, process_selinux);
+		econf_free(key_file);
+		fail_exit(1, process_selinux);
 	}
 
 	for (size_t i = 0; i < size; i++) {
@@ -190,27 +190,27 @@ static bool shell_is_listed (const char *sh, bool process_selinux)
 			break;
 		}
 	}
-	econf_free (keys);
-	econf_free (key_file);
+	econf_free(keys);
+	econf_free(key_file);
 
 	return found;
 }
 
 #else /* without HAVE_VENDORDIR */
 
-static bool shell_is_listed (const char *sh, MAYBE_UNUSED bool _1)
+static bool shell_is_listed(const char *sh, MAYBE_UNUSED bool _1)
 {
 	bool found = false;
 	char *cp;
 
-	setusershell ();
-	while ((cp = getusershell ())) {
+	setusershell();
+	while ((cp = getusershell())) {
 		if (streq(cp, sh)) {
 			found = true;
 			break;
 		}
 	}
-	endusershell ();
+	endusershell();
 
 	return found;
 }
@@ -221,7 +221,7 @@ static bool shell_is_listed (const char *sh, MAYBE_UNUSED bool _1)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -231,11 +231,11 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "hR:s:",
+	while ((c = getopt_long(argc, argv, "hR:s:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			flags->chroot = true;
@@ -245,7 +245,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			strtcpy_a(loginsh, optarg);
 			break;
 		default:
-			usage (E_USAGE);
+			usage(E_USAGE);
 		}
 	}
 
@@ -254,7 +254,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	 * be the user's name.
 	 */
 	if (argc > (optind + 1)) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 }
 
@@ -283,37 +283,37 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 	 * Non-privileged users are only allowed to change the shell if the
 	 * UID of the user matches the current real UID.
 	 */
-	if (!amroot && pw->pw_uid != getuid ()) {
+	if (!amroot && pw->pw_uid != getuid()) {
 		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		fail_exit (1, process_selinux);
+		fail_exit(1, process_selinux);
 	}
 
 	/*
 	 * Non-privileged users are only allowed to change the shell if it
 	 * is not a restricted one.
 	 */
-	if (!amroot && is_restricted_shell (pw->pw_shell, process_selinux)) {
+	if (!amroot && is_restricted_shell(pw->pw_shell, process_selinux)) {
 		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		fail_exit (1, process_selinux);
+		fail_exit(1, process_selinux);
 	}
 #ifdef WITH_SELINUX
 	/*
 	 * If the UID of the user does not match the current real UID,
 	 * check if the change is allowed by SELinux policy.
 	 */
-	if ((pw->pw_uid != getuid ())
+	if ((pw->pw_uid != getuid())
 	    && (check_selinux_permit(Prog) != 0)) {
 		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		fail_exit (1, process_selinux);
+		fail_exit(1, process_selinux);
 	}
 #endif
 
@@ -324,7 +324,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 	 * before any changes can be made. Idea from util-linux
 	 * chfn/chsh.  --marekm
 	 */
-	if (!amroot && getdef_bool ("CHSH_AUTH")) {
+	if (!amroot && getdef_bool("CHSH_AUTH")) {
 		passwd_check(pw->pw_name, pw->pw_passwd);
 	}
 
@@ -367,7 +367,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
  *
  *	It will not return in case of error.
  */
-static void update_shell (const char *user, char *newshell, const struct option_flags *flags)
+static void update_shell(const char *user, char *newshell, const struct option_flags *flags)
 {
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct passwd pwent;		/* New password entry                */
@@ -381,27 +381,27 @@ static void update_shell (const char *user, char *newshell, const struct option_
 	 * to root to protect against unexpected signals. Any
 	 * keyboard signals are set to be ignored.
 	 */
-	if (setuid (0) != 0) {
+	if (setuid(0) != 0) {
 		SYSLOG(LOG_ERR, "can't setuid(0)");
-		fputs (_("Cannot change ID to root.\n"), stderr);
-		fail_exit (1, process_selinux);
+		fputs(_("Cannot change ID to root.\n"), stderr);
+		fail_exit(1, process_selinux);
 	}
-	pwd_init ();
+	pwd_init();
 
 	/*
 	 * The passwd entry is now ready to be committed back to
 	 * the password file. Get a lock on the file and open it.
 	 */
-	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock %s; try again later.\n"),
-		         Prog, pw_dbname ());
-		fail_exit (1, process_selinux);
+	if (pw_lock() == 0) {
+		fprintf(stderr, _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname());
+		fail_exit(1, process_selinux);
 	}
 	pw_locked = true;
-	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
+	if (pw_open(O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr, _("%s: cannot open %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
-		fail_exit (1, process_selinux);
+		fail_exit(1, process_selinux);
 	}
 
 	/*
@@ -410,12 +410,12 @@ static void update_shell (const char *user, char *newshell, const struct option_
 	 * contain the shadow password if (despite the warnings) someone
 	 * enables AUTOSHADOW (or SHADOW_COMPAT in libc).  --marekm
 	 */
-	pw = pw_locate (user);
+	pw = pw_locate(user);
 	if (NULL == pw) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: user '%s' does not exist in %s\n"),
-		         Prog, user, pw_dbname ());
-		fail_exit (1, process_selinux);
+		         Prog, user, pw_dbname());
+		fail_exit(1, process_selinux);
 	}
 
 	/*
@@ -429,23 +429,23 @@ static void update_shell (const char *user, char *newshell, const struct option_
 	 * Update the passwd file entry. If there is a DBM file, update
 	 * that entry as well.
 	 */
-	if (pw_update (&pwent) == 0) {
-		fprintf (stderr,
+	if (pw_update(&pwent) == 0) {
+		fprintf(stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, pw_dbname (), pwent.pw_name);
-		fail_exit (1, process_selinux);
+		         Prog, pw_dbname(), pwent.pw_name);
+		fail_exit(1, process_selinux);
 	}
 
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-	if (pw_close (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+	if (pw_close(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
-		fail_exit (1, process_selinux);
+		fail_exit(1, process_selinux);
 	}
-	if (pw_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+	if (pw_unlock(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
@@ -458,31 +458,31 @@ static void update_shell (const char *user, char *newshell, const struct option_
  *	The only supported option is -s which permits the the login shell to
  *	be set from the command line.
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	char *user;		/* User name                         */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
 
-	sanitize_env ();
-	check_fds ();
+	sanitize_env();
+	check_fds();
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
 	/*
 	 * This command behaves different for root and non-root users.
 	 */
-	amroot = (getuid () == 0);
+	amroot = (getuid() == 0);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
 	/* parse the command line options */
 	process_flags (argc, argv, &flags);
@@ -493,31 +493,31 @@ int main (int argc, char **argv)
 	 * name, or the name getlogin() returns.
 	 */
 	if (optind < argc) {
-		if (!is_valid_user_name (argv[optind])) {
-			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
-			fail_exit (1, process_selinux);
+		if (!is_valid_user_name(argv[optind])) {
+			fprintf(stderr, _("%s: Provided user name is not a valid name\n"), Prog);
+			fail_exit(1, process_selinux);
 		}
 		user = argv[optind];
-		pw = xgetpwnam (user);
+		pw = xgetpwnam(user);
 		if (NULL == pw) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: user '%s' does not exist\n"), Prog, user);
-			fail_exit (1, process_selinux);
+			fail_exit(1, process_selinux);
 		}
 	} else {
-		pw = get_my_pwent ();
+		pw = get_my_pwent();
 		if (NULL == pw) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+			SYSLOG(LOG_WARN, "Cannot determine the user name of the caller(UID %lu)",
 			       (unsigned long) getuid());
-			fail_exit (1, process_selinux);
+			fail_exit(1, process_selinux);
 		}
-		user = xstrdup (pw->pw_name);
+		user = xstrdup(pw->pw_name);
 	}
 
-	check_perms (pw, &flags);
+	check_perms(pw, &flags);
 
 	/*
 	 * Now get the login shell. Either get it from the password
@@ -532,8 +532,8 @@ int main (int argc, char **argv)
 	 * interactively change it.
 	 */
 	if (!sflg) {
-		printf (_("Changing the login shell for %s\n"), user);
-		new_fields ();
+		printf(_("Changing the login shell for %s\n"), user);
+		new_fields();
 	}
 
 	/*
@@ -542,41 +542,41 @@ int main (int argc, char **argv)
 	 * users are restricted to using the shells in /etc/shells.
 	 * The shell must be executable by the user.
 	 */
-	if (valid_field (loginsh, ":,=\n") != 0) {
-		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
-		fail_exit (1, process_selinux);
+	if (valid_field(loginsh, ":,=\n") != 0) {
+		fprintf(stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
+		fail_exit(1, process_selinux);
 	}
 	if (!streq(loginsh, "")
 	    && (loginsh[0] != '/'
-	        || is_restricted_shell (loginsh, process_selinux)
-	        || (access (loginsh, X_OK) != 0)))
+	        || is_restricted_shell(loginsh, process_selinux)
+	        || (access(loginsh, X_OK) != 0)))
 	{
 		if (amroot) {
-			fprintf (stderr, _("%s: Warning: %s is an invalid shell\n"), Prog, loginsh);
+			fprintf(stderr, _("%s: Warning: %s is an invalid shell\n"), Prog, loginsh);
 		} else {
-			fprintf (stderr, _("%s: %s is an invalid shell\n"), Prog, loginsh);
-			fail_exit (1, process_selinux);
+			fprintf(stderr, _("%s: %s is an invalid shell\n"), Prog, loginsh);
+			fail_exit(1, process_selinux);
 		}
 	}
 
 	/* Even for root, warn if an invalid shell is specified. */
 	if (!streq(loginsh, "")) {
 		/* But not if an empty string is given, documented as meaning the default shell */
-		if (access (loginsh, F_OK) != 0) {
-			fprintf (stderr, _("%s: Warning: %s does not exist\n"), Prog, loginsh);
-		} else if (access (loginsh, X_OK) != 0) {
-			fprintf (stderr, _("%s: Warning: %s is not executable\n"), Prog, loginsh);
+		if (access(loginsh, F_OK) != 0) {
+			fprintf(stderr, _("%s: Warning: %s does not exist\n"), Prog, loginsh);
+		} else if (access(loginsh, X_OK) != 0) {
+			fprintf(stderr, _("%s: Warning: %s is not executable\n"), Prog, loginsh);
 		}
 	}
 
-	update_shell (user, loginsh, &flags);
+	update_shell(user, loginsh, &flags);
 
 	SYSLOG(LOG_INFO, "changed user '%s' shell to '%s'", user, loginsh);
 
-	nscd_flush_cache ("passwd");
-	sssd_flush_cache (SSSD_DB_PASSWD);
+	nscd_flush_cache("passwd");
+	sssd_flush_cache(SSSD_DB_PASSWD);
 
-	closelog ();
-	exit (E_SUCCESS);
+	closelog();
+	exit(E_SUCCESS);
 }
 

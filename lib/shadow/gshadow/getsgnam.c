@@ -29,10 +29,10 @@ getsgnam(const char *name)
 {
 	struct sgrp *sgrp;
 
-	setsgent ();
+	setsgent();
 
-	while (NULL != (sgrp = getsgent ())) {
-		if (strcmp (name, sgrp->sg_namp) == 0) {
+	while (NULL != (sgrp = getsgent())) {
+		if (strcmp(name, sgrp->sg_namp) == 0) {
 			break;
 		}
 	}

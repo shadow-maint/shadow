@@ -97,7 +97,7 @@ login_access(const char *user, const char *from)
 	 * mandatory. The first field should be a "+" or "-" character. A
 	 * non-existing table means no access control.
 	 */
-	fp = fopen (TABLE, "r");
+	fp = fopen(TABLE, "r");
 	if (NULL != fp) {
 		intmax_t lineno = 0;	/* for diagnostics */
 		while (   !match
@@ -146,7 +146,7 @@ login_access(const char *user, const char *from)
 
 /* list_match - match an item against a list of tokens with exceptions */
 static bool
-list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
+list_match(char *list, const char *item, bool(*match_fn)(char *, const char*))
 {
 	char *tok;
 	bool inclusion = true;
@@ -191,18 +191,18 @@ static char *myhostname (void)
 #if HAVE_INNETGR
 /* netgroup_match - match group against machine or user */
 static bool
-netgroup_match (const char *group, const char *machine, const char *user)
+netgroup_match(const char *group, const char *machine, const char *user)
 {
 	static char *mydomain = NULL;
 
 	if (mydomain == NULL) {
 		static char domain[MAXHOSTNAMELEN + 1];
 
-		getdomainname (domain, MAXHOSTNAMELEN);
+		getdomainname(domain, MAXHOSTNAMELEN);
 		mydomain = domain;
 	}
 
-	return (innetgr (group, machine, user, mydomain) != 0);
+	return (innetgr(group, machine, user, mydomain) != 0);
 }
 #endif
 
@@ -226,7 +226,7 @@ static bool user_match (char *tok, const char *string)
 		return user_match(tok, string) && from_match(host, myhostname());
 #if HAVE_INNETGR
 	} else if (strprefix(tok, "@")) {	/* netgroup */
-		return (netgroup_match (tok + 1, NULL, string));
+		return (netgroup_match(tok + 1, NULL, string));
 #endif
 	} else if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
@@ -287,7 +287,7 @@ static const char *resolve_hostname (const char *string)
 
 /* from_match - match a host or tty against a list of tokens */
 
-static bool from_match (char *tok, const char *string)
+static bool from_match(char *tok, const char *string)
 {
 	/*
 	 * If a token has the magic value "ALL" the match always succeeds. Return
@@ -324,7 +324,7 @@ static bool from_match (char *tok, const char *string)
 }
 
 /* string_match - match a string against one token */
-static bool string_match (const char *tok, const char *string)
+static bool string_match(const char *tok, const char *string)
 {
 
 	/*

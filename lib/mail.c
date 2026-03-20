@@ -19,46 +19,46 @@
 #include "string/sprintf/aprintf.h"
 
 
-void mailcheck (void)
+void mailcheck(void)
 {
 	struct stat statbuf;
 	char *mailbox;
 
-	if (!getdef_bool ("MAIL_CHECK_ENAB")) {
+	if (!getdef_bool("MAIL_CHECK_ENAB")) {
 		return;
 	}
 
 	/*
 	 * Check incoming mail in Maildir format - J.
 	 */
-	mailbox = getenv ("MAILDIR");
+	mailbox = getenv("MAILDIR");
 	if (NULL != mailbox) {
 		char  *newmail;
 
 		newmail = xaprintf("%s/new", mailbox);
 
-		if (stat (newmail, &statbuf) != -1 && statbuf.st_size != 0) {
+		if (stat(newmail, &statbuf) != -1 && statbuf.st_size != 0) {
 			if (statbuf.st_mtime > statbuf.st_atime) {
 				free(newmail);
-				(void) puts (_("You have new mail."));
+				(void) puts(_("You have new mail."));
 				return;
 			}
 		}
 		free(newmail);
 	}
 
-	mailbox = getenv ("MAIL");
+	mailbox = getenv("MAIL");
 	if (NULL == mailbox) {
 		return;
 	}
 
-	if (   (stat (mailbox, &statbuf) == -1)
+	if (   (stat(mailbox, &statbuf) == -1)
 	    || (statbuf.st_size == 0)) {
-		(void) puts (_("No mail."));
+		(void) puts(_("No mail."));
 	} else if (statbuf.st_atime > statbuf.st_mtime) {
-		(void) puts (_("You have mail."));
+		(void) puts(_("You have mail."));
 	} else {
-		(void) puts (_("You have new mail."));
+		(void) puts(_("You have new mail."));
 	}
 }
 

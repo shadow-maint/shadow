@@ -33,8 +33,8 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	int i;
 	char **tmp;
 
-	assert (NULL != member);
-	assert (NULL != list);
+	assert(NULL != member);
+	assert(NULL != list);
 
 	/*
 	 * Scan the list for the new name.  Return the original list
@@ -64,7 +64,7 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 		tmp[i] = list[i];
 	}
 
-	tmp[i] = xstrdup (member);
+	tmp[i] = xstrdup(member);
 	tmp[i+1] = NULL;
 
 	return tmp;
@@ -84,8 +84,8 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	int i, j;
 	char **tmp;
 
-	assert (NULL != member);
-	assert (NULL != list);
+	assert(NULL != member);
+	assert(NULL != list);
 
 	/*
 	 * Scan the list for the old name.  Return the original list
@@ -173,10 +173,10 @@ free_list(char **list)
  * function with list of members, the list elements are not enforced to be
  * constant strings here.
  */
-bool is_on_list (char *const *list, const char *member)
+bool is_on_list(char *const *list, const char *member)
 {
-	assert (NULL != member);
-	assert (NULL != list);
+	assert(NULL != member);
+	assert(NULL != list);
 
 	while (NULL != *list) {
 		if (streq(*list, member)) {
@@ -205,7 +205,7 @@ comma_to_list(const char *comma)
 	 * Make a copy since we are going to be modifying the list
 	 */
 
-	members = xstrdup (comma);
+	members = xstrdup(comma);
 
 	/*
 	 * Allocate the array we're going to store the pointers into.
@@ -221,7 +221,7 @@ comma_to_list(const char *comma)
 
 	if (streq(members, "")) {
 		*array = NULL;
-		free (members);
+		free(members);
 		return array;
 	}
 

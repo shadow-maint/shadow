@@ -57,15 +57,15 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * able to figure out what we are up to without too much
 	 * grief.
 	 */
-	(void) execle (file, arg, (char *) NULL, envp);
+	(void) execle(file, arg, (char *) NULL, envp);
 	err = errno;
 
-	if (access (file, R_OK|X_OK) == 0) {
+	if (access(file, R_OK|X_OK) == 0) {
 		/*
 		 * Assume this is a shell script (with no shebang).
 		 * Interpret it with /bin/sh
 		 */
-		(void) execle (SHELL, "sh", "-", file, (char *) NULL, envp);
+		(void) execle(SHELL, "sh", "-", file, (char *) NULL, envp);
 		err = errno;
 	}
 
@@ -76,7 +76,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 */
 	stprintf_a(arg0, _("Cannot execute %s"), file);
 	errno = err;
-	perror (arg0);
+	perror(arg0);
 	return err;
 }
 

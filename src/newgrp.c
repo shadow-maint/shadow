@@ -59,21 +59,21 @@ static char audit_buf[80];
 #endif
 
 /* local function prototypes */
-static void usage (void);
-static void check_perms (const struct group *grp,
+static void usage(void);
+static void check_perms(const struct group *grp,
                          struct passwd *pwd,
                          const char *groupname);
-static void syslog_sg (const char *name, const char *group);
+static void syslog_sg(const char *name, const char *group);
 
 /*
  * usage - print command usage message
  */
-static void usage (void)
+static void usage(void)
 {
 	if (is_newgrp) {
-		(void) fputs (_("Usage: newgrp [-] [group]\n"), stderr);
+		(void) fputs(_("Usage: newgrp [-] [group]\n"), stderr);
 	} else {
-		(void) fputs (_("Usage: sg [-] group [[-c] command]\n"), stderr);
+		(void) fputs(_("Usage: sg [-] group [[-c] command]\n"), stderr);
 	}
 }
 
@@ -114,7 +114,7 @@ static /*@null@*/struct group *find_matching_group (const char *name, struct gro
 		if (ingroup(name, gr))
 			break;
 	}
-	endgrent ();
+	endgrent();
 	return gr;
 }
 
@@ -125,7 +125,7 @@ static /*@null@*/struct group *find_matching_group (const char *name, struct gro
  *
  *	It will not return if the user could not be authenticated.
  */
-static void check_perms (const struct group *grp,
+static void check_perms(const struct group *grp,
                          struct passwd *pwd,
                          const char *groupname)
 {
@@ -144,7 +144,7 @@ static void check_perms (const struct group *grp,
 	 *
 	 */
 	if (   (grp->gr_gid != pwd->pw_gid)
-	    && !is_on_list (grp->gr_mem, pwd->pw_name)) {
+	    && !is_on_list(grp->gr_mem, pwd->pw_name)) {
 		needspasswd = true;
 	}
 
@@ -153,10 +153,10 @@ static void check_perms (const struct group *grp,
 	 * password, and the group has a password, she needs to give the
 	 * group password.
 	 */
-	spwd = xgetspnam (pwd->pw_name);
+	spwd = xgetspnam(pwd->pw_name);
 	if (NULL != spwd) {
-		pwd->pw_passwd = xstrdup (spwd->sp_pwdp);
-		spw_free (spwd);
+		pwd->pw_passwd = xstrdup(spwd->sp_pwdp);
+		spw_free(spwd);
 	}
 
 	if (streq(pwd->pw_passwd, "") && !streq(grp->gr_passwd, "")) {
@@ -169,12 +169,12 @@ static void check_perms (const struct group *grp,
 	 * the password. Otherwise I ask for a password if she flunked one
 	 * of the tests above.
 	 */
-	if ((getuid () != 0) && needspasswd) {
+	if ((getuid() != 0) && needspasswd) {
 		/*
 		 * get the password from her, and set the salt for
 		 * the decryption from the group file.
 		 */
-		cp = agetpass (_("Password: "));
+		cp = agetpass(_("Password: "));
 		if (NULL == cp) {
 			goto failure;
 		}
@@ -184,11 +184,11 @@ static void check_perms (const struct group *grp,
 		 * password in the group file. The result of this encryption
 		 * must match the previously encrypted value in the file.
 		 */
-		cpasswd = pw_encrypt (cp, grp->gr_passwd);
-		erase_pass (cp);
+		cpasswd = pw_encrypt(cp, grp->gr_passwd);
+		erase_pass(cp);
 
 		if (NULL == cpasswd) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: failed to crypt password with previous salt: %s\n"),
 			        Prog, strerrno());
 			SYSLOG(LOG_INFO,
@@ -202,21 +202,21 @@ static void check_perms (const struct group *grp,
 #ifdef WITH_AUDIT
 			stprintf_a(audit_buf, "authentication new_gid=%lu",
 			         (unsigned long) grp->gr_gid);
-			audit_logger (AUDIT_GRP_AUTH,
-			              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
+			audit_logger(AUDIT_GRP_AUTH,
+			              audit_buf, NULL, getuid(), SHADOW_AUDIT_FAILURE);
 #endif
 			SYSLOG(LOG_INFO,
 				"Invalid password for group '%s' from '%s'",
 				groupname, pwd->pw_name);
-			(void) sleep (1);
-			(void) fputs (_("Invalid password.\n"), stderr);
+			(void) sleep(1);
+			(void) fputs(_("Invalid password.\n"), stderr);
 			goto failure;
 		}
 #ifdef WITH_AUDIT
 		stprintf_a(audit_buf, "authentication new_gid=%lu",
 		         (unsigned long) grp->gr_gid);
-		audit_logger (AUDIT_GRP_AUTH,
-		              audit_buf, NULL, getuid (), SHADOW_AUDIT_SUCCESS);
+		audit_logger(AUDIT_GRP_AUTH,
+		              audit_buf, NULL, getuid(), SHADOW_AUDIT_SUCCESS);
 #endif
 	}
 
@@ -226,8 +226,8 @@ failure:
 	/* The closelog is probably unnecessary, but it does no
 	 * harm.  -- JWP
 	 */
-	closelog ();
-	exit (EXIT_FAILURE);
+	closelog();
+	exit(EXIT_FAILURE);
 }
 
 /*
@@ -236,18 +236,18 @@ failure:
  *	The logout will also be logged when the user will quit the
  *	sg/newgrp session.
  */
-static void syslog_sg (const char *name, const char *group)
+static void syslog_sg(const char *name, const char *group)
 {
-	const char *loginname = getlogin ();
-	const char *tty = ttyname (0);
+	const char *loginname = getlogin();
+	const char *tty = ttyname(0);
 	char *free_login = NULL, *free_tty = NULL;
 
 	if (loginname != NULL) {
-		free_login = xstrdup (loginname);
+		free_login = xstrdup(loginname);
 		loginname = free_login;
 	}
 	if (tty != NULL) {
-		free_tty = xstrdup (tty);
+		free_tty = xstrdup(tty);
 		tty = free_tty;
 	}
 
@@ -283,19 +283,19 @@ static void syslog_sg (const char *name, const char *group)
 
 		/* Ignore these signals. The signal handlers will later be
 		 * restored to the default handlers. */
-		(void) signal (SIGINT, SIG_IGN);
-		(void) signal (SIGQUIT, SIG_IGN);
-		(void) signal (SIGHUP, SIG_IGN);
-		(void) signal (SIGTSTP, SIG_IGN);
-		(void) signal (SIGTTIN, SIG_IGN);
-		(void) signal (SIGTTOU, SIG_IGN);
+		(void) signal(SIGINT, SIG_IGN);
+		(void) signal(SIGQUIT, SIG_IGN);
+		(void) signal(SIGHUP, SIG_IGN);
+		(void) signal(SIGTSTP, SIG_IGN);
+		(void) signal(SIGTTIN, SIG_IGN);
+		(void) signal(SIGTTOU, SIG_IGN);
 		/* set SIGCHLD to default for waitpid */
 		(void) signal(SIGCHLD, SIG_DFL);
 
 		child = fork ();
 		if ((pid_t)-1 == child) {
 			/* error in fork() */
-			fprintf (stderr, _("%s: failure forking: %s\n"),
+			fprintf(stderr, _("%s: failure forking: %s\n"),
 				is_newgrp ? "newgrp" : "sg", strerrno());
 #ifdef WITH_AUDIT
 			if (group) {
@@ -303,12 +303,12 @@ static void syslog_sg (const char *name, const char *group)
 							getuid(), "new_group", group,
 							SHADOW_AUDIT_FAILURE);
 			} else {
-				audit_logger (AUDIT_CHGRP_ID,
+				audit_logger(AUDIT_CHGRP_ID,
 				              "changing", NULL, getuid(),
 				              SHADOW_AUDIT_FAILURE);
 			}
 #endif
-			exit (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		} else if (child != 0) {
 			/* parent - wait for child to finish, then log session close */
 			int cst = 0;
@@ -322,7 +322,7 @@ static void syslog_sg (const char *name, const char *group)
 				if ((pid == child) && (WIFSTOPPED (cst) != 0)) {
 					/* The child (shell) was suspended.
 					 * Suspend sg/newgrp. */
-					kill (getpid (), SIGSTOP);
+					kill(getpid(), SIGSTOP);
 					/* wake child when resumed */
 					kill (child, SIGCONT);
 				}
@@ -345,9 +345,9 @@ static void syslog_sg (const char *name, const char *group)
 				       "unknown GID '%lu' used by user '%s'",
 				       (unsigned long) gid, name);
 			}
-			closelog ();
-			exit ((0 != WIFEXITED (cst)) ? WEXITSTATUS (cst)
-			                             : WTERMSIG (cst) + 128);
+			closelog();
+			exit((0 != WIFEXITED(cst)) ? WEXITSTATUS(cst)
+			                             : WTERMSIG(cst) + 128);
 		}
 
 		/* child - restore signals to their default state */
@@ -366,7 +366,7 @@ static void syslog_sg (const char *name, const char *group)
 /*
  * newgrp - change the invokers current real and effective group id
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	bool initflag = false;
 	bool is_member = false;
@@ -421,32 +421,32 @@ int main (int argc, char **argv)
 	 * injecting arbitrary strings into our stderr/stdout, as this can
 	 * be an exploit vector.
 	 */
-	is_newgrp = streq(Basename (argv[0]), "newgrp");
+	is_newgrp = streq(Basename(argv[0]), "newgrp");
 	Prog = is_newgrp ? "newgrp" : "sg";
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 #ifdef WITH_AUDIT
-	audit_help_open ();
+	audit_help_open();
 #endif
 	argc--;
 	argv++;
 
-	initenv ();
+	initenv();
 
-	pwd = get_my_pwent ();
+	pwd = get_my_pwent();
 	if (NULL == pwd) {
-		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
+		fprintf(stderr, _("%s: Cannot determine your user name.\n"),
 		         Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_CHGRP_ID,
-		              "changing", NULL, getuid (), SHADOW_AUDIT_FAILURE);
+		audit_logger(AUDIT_CHGRP_ID,
+		              "changing", NULL, getuid(), SHADOW_AUDIT_FAILURE);
 #endif
-		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller(UID %lu)",
 		       (unsigned long) getuid());
-		closelog ();
-		exit (EXIT_FAILURE);
+		closelog();
+		exit(EXIT_FAILURE);
 	}
 	name = pwd->pw_name;
 
@@ -480,8 +480,8 @@ int main (int argc, char **argv)
 		 * not "newgrp".
 		 */
 		if ((argc > 0) && (argv[0][0] != '-')) {
-			if (!is_valid_group_name (argv[0])) {
-				fprintf (
+			if (!is_valid_group_name(argv[0])) {
+				fprintf(
 					stderr, _("%s: provided group is not a valid group name\n"),
 					Prog);
 				goto failure;
@@ -490,9 +490,9 @@ int main (int argc, char **argv)
 			argc--;
 			argv++;
 		} else {
-			usage ();
-			closelog ();
-			exit (EXIT_FAILURE);
+			usage();
+			closelog();
+			exit(EXIT_FAILURE);
 		}
 		if (argc > 0) {
 
@@ -513,11 +513,11 @@ int main (int argc, char **argv)
 		 * there aren't any flags and getting the new group name.
 		 */
 		if ((argc > 0) && strprefix(argv[0], "-")) {
-			usage ();
+			usage();
 			goto failure;
 		} else if (argv[0] != NULL) {
-			if (!is_valid_group_name (argv[0])) {
-				fprintf (
+			if (!is_valid_group_name(argv[0])) {
+				fprintf(
 					stderr, _("%s: provided group is not a valid group name\n"),
 					Prog);
 				goto failure;
@@ -531,9 +531,9 @@ int main (int argc, char **argv)
 			 * Perhaps in the past, but the default behavior now depends on the
 			 * group entry, so it had better exist.  -- JWP
 			 */
-			grp = xgetgrgid (pwd->pw_gid);
+			grp = xgetgrgid(pwd->pw_gid);
 			if (NULL == grp) {
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: GID '%lu' does not exist\n"),
 				         Prog, (unsigned long) pwd->pw_gid);
 				SYSLOG(LOG_CRIT, "GID '%lu' does not exist",
@@ -624,7 +624,7 @@ int main (int argc, char **argv)
 	 * membership of the current user.
 	 */
 	if (!is_member) {
-		grp = find_matching_group (name, grp);
+		grp = find_matching_group(name, grp);
 		if (NULL == grp) {
 			/*
 			 * No matching group found. As we already know that
@@ -633,12 +633,12 @@ int main (int argc, char **argv)
 			 *
 			 * Re-read the group entry for further processing.
 			 */
-			grp = xgetgrnam (group);
-			assert (NULL != grp);
+			grp = xgetgrnam(group);
+			assert(NULL != grp);
 		}
 	}
 #ifdef SHADOWGRP
-	sgrp = getsgnam (group);
+	sgrp = getsgnam(group);
 	if (NULL != sgrp) {
 		grp->gr_passwd = sgrp->sg_passwd;
 		grp->gr_mem = sgrp->sg_mem;
@@ -649,15 +649,15 @@ int main (int argc, char **argv)
 	 * Check if the user is allowed to access this group.
 	 */
 	if (!is_member) {
-		check_perms (grp, pwd, group);
+		check_perms(grp, pwd, group);
 	}
 
 	/*
 	 * all successful validations pass through this point. The group id
 	 * will be set, and the group added to the concurrent groupset.
 	 */
-	if (getdef_bool ("SYSLOG_SG_ENAB")) {
-		syslog_sg (name, group);
+	if (getdef_bool("SYSLOG_SG_ENAB")) {
+		syslog_sg(name, group);
 	}
 
 	gid = grp->gr_gid;
@@ -681,36 +681,36 @@ int main (int argc, char **argv)
 	 * The needed structure should have been copied before, or
 	 * permission to read the database will be required.
 	 */
-	endspent ();
+	endspent();
 #ifdef	SHADOWGRP
-	endsgent ();
+	endsgent();
 #endif
-	endpwent ();
-	endgrent ();
+	endpwent();
+	endgrent();
 
 	/*
 	 * Set the effective GID to the new group id and the effective UID
 	 * to the real UID. For root, this also sets the real GID to the
 	 * new group id.
 	 */
-	if (setgid (gid) != 0) {
-		perror ("setgid");
+	if (setgid(gid) != 0) {
+		perror("setgid");
 #ifdef WITH_AUDIT
 		stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
-		audit_logger (AUDIT_CHGRP_ID,
-		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
+		audit_logger(AUDIT_CHGRP_ID,
+		              audit_buf, NULL, getuid(), SHADOW_AUDIT_FAILURE);
 #endif
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
-	if (setuid (getuid ()) != 0) {
-		perror ("setuid");
+	if (setuid(getuid()) != 0) {
+		perror("setuid");
 #ifdef WITH_AUDIT
 		stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
-		audit_logger (AUDIT_CHGRP_ID,
-		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
+		audit_logger(AUDIT_CHGRP_ID,
+		              audit_buf, NULL, getuid(), SHADOW_AUDIT_FAILURE);
 #endif
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 	/*
@@ -718,15 +718,15 @@ int main (int argc, char **argv)
 	 * command for her using the argument that followed the "-c" flag.
 	 */
 	if (cflag) {
-		closelog ();
-		execl (SHELL, "sh", "-c", command, (char *) NULL);
+		closelog();
+		execl(SHELL, "sh", "-c", command, (char *) NULL);
 #ifdef WITH_AUDIT
 		stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
-		audit_logger (AUDIT_CHGRP_ID,
-		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
+		audit_logger(AUDIT_CHGRP_ID,
+		              audit_buf, NULL, getuid(), SHADOW_AUDIT_FAILURE);
 #endif
-		perror (SHELL);
-		exit ((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+		perror(SHELL);
+		exit((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	}
 
 	/*
@@ -746,7 +746,7 @@ int main (int argc, char **argv)
 	 * problem, try using $SHELL as a workaround; also please notify me
 	 * at jparmele@wildbear.com -- JWP
 	 */
-	cp = getenv ("SHELL");
+	cp = getenv("SHELL");
 	if (!initflag && (NULL != cp)) {
 		prog = cp;
 	} else if ((NULL != pwd->pw_shell) && !streq(pwd->pw_shell, "")) {
@@ -759,15 +759,15 @@ int main (int argc, char **argv)
 	 * Now I try to find the basename of the login shell. This will
 	 * become argv[0] of the spawned command.
 	 */
-	progbase = Basename (prog);
+	progbase = Basename(prog);
 
 	/*
 	 * Switch back to her home directory if I am doing login
 	 * initialization.
 	 */
 	if (initflag) {
-		if (chdir (pwd->pw_dir) != 0) {
-			perror ("chdir");
+		if (chdir(pwd->pw_dir) != 0) {
+			perror("chdir");
 		}
 
 		while (NULL != *envp) {
@@ -776,29 +776,29 @@ int main (int argc, char **argv)
 			    strprefix(*envp, "SHELL=") ||
 			    strprefix(*envp, "TERM="))
 			{
-				addenv (*envp, NULL);
+				addenv(*envp, NULL);
 			}
 
 			envp++;
 		}
 	} else {
 		while (NULL != *envp) {
-			addenv (*envp, NULL);
+			addenv(*envp, NULL);
 			envp++;
 		}
 	}
 
 #ifdef WITH_AUDIT
 	stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
-	audit_logger (AUDIT_CHGRP_ID,
-	              audit_buf, NULL, getuid (), SHADOW_AUDIT_SUCCESS);
+	audit_logger(AUDIT_CHGRP_ID,
+	              audit_buf, NULL, getuid(), SHADOW_AUDIT_SUCCESS);
 #endif
 	/*
 	 * Exec the login shell and go away. We are trying to get back to
 	 * the previous environment which should be the user's login shell.
 	 */
-	err = shell (prog, initflag ? NULL : progbase, newenvp);
-	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+	err = shell(prog, initflag ? NULL : progbase, newenvp);
+	exit((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	/*@notreached@*/
       failure:
 
@@ -812,17 +812,17 @@ int main (int argc, char **argv)
 	 * process. The closelog is probably unnecessary, but it does no
 	 * harm.  -- JWP
 	 */
-	closelog ();
+	closelog();
 #ifdef WITH_AUDIT
 	if (NULL != group) {
 		audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
 					getuid(), "new_group", group,
 					SHADOW_AUDIT_FAILURE);
 	} else {
-		audit_logger (AUDIT_CHGRP_ID,
-		              "changing", NULL, getuid (), 0);
+		audit_logger(AUDIT_CHGRP_ID,
+		              "changing", NULL, getuid(), 0);
 	}
 #endif
-	exit (EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 

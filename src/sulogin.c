@@ -45,14 +45,14 @@ extern char **newenvp;
 #endif
 
 
-static void catch_signals (int);
+static void catch_signals(int);
 static int pw_entry(const char *name, struct passwd *pwent);
 
 
 static void
 catch_signals(MAYBE_UNUSED int _1)
 {
-	_exit (1);
+	_exit(1);
 }
 
 
@@ -69,17 +69,17 @@ main(int argc, char *argv[])
 #endif
 
 
-	tcgetattr (0, &termio);
+	tcgetattr(0, &termio);
 	termio.c_iflag |= (ICRNL | IXON);
 	termio.c_oflag |= (CREAD);
 	termio.c_lflag |= (ECHO | ECHOE | ECHOK | ICANON | ISIG);
-	tcsetattr (0, TCSANOW, &termio);
+	tcsetattr(0, TCSANOW, &termio);
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
 	initenv();
 	if (argc > 1) {
@@ -98,17 +98,17 @@ main(int argc, char *argv[])
 	}
 #if !defined(DEBUG) && defined(SULOGIN_ONLY_INIT)
 	if (getppid () != 1) {	/* parent must be INIT */
-		exit (1);
+		exit(1);
 	}
 #endif
-	if ((isatty (0) == 0) || (isatty (1) == 0) || (isatty (2) == 0)) {
+	if ((isatty(0) == 0) || (isatty(1) == 0) || (isatty(2) == 0)) {
 		exit (1);	/* must be a terminal */
 	}
 	/* If we were init, we need to start a new session */
 	if (getppid() == 1) {
 		setsid();
 		if (ioctl(0, TIOCSCTTY, 1) != 0) {
-			(void) fputs (_("TIOCSCTTY failed"), stderr);
+			(void) fputs(_("TIOCSCTTY failed"), stderr);
 		}
 	}
 	while (NULL != *envp) {		/* add inherited environment, */
@@ -117,11 +117,11 @@ main(int argc, char *argv[])
 	}
 
 #ifndef USE_PAM
-	env = getdef_str ("ENV_TZ");
+	env = getdef_str("ENV_TZ");
 	if (NULL != env) {
 		addenv(strprefix(env, "/") ? tz(env) : env, NULL);
 	}
-	env = getdef_str ("ENV_HZ");
+	env = getdef_str("ENV_HZ");
 	if (NULL != env) {
 		addenv (env, NULL);	/* set the default $HZ, if one */
 	}
@@ -157,31 +157,31 @@ main(int argc, char *argv[])
 		 * --marekm
 		 */
 		if ((NULL == pass) || streq(pass, "")) {
-			erase_pass (pass);
-			(void) puts ("");
+			erase_pass(pass);
+			(void) puts("");
 #ifdef	TELINIT
-			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) NULL);
+			execl(PATH_TELINIT, "telinit", RUNLEVEL, (char *) NULL);
 #endif
-			exit (0);
+			exit(0);
 		}
 
 		done = valid(pass, &pwent);
-		erase_pass (pass);
+		erase_pass(pass);
 
 		if (!done) {	/* check encrypted passwords ... */
 			/* ... encrypted passwords did not match */
-			sleep (2);
-			(void) puts (_("Login incorrect"));
+			sleep(2);
+			(void) puts(_("Login incorrect"));
 		}
 	} while (!done);
-	(void) alarm (0);
-	(void) signal (SIGALRM, SIG_DFL);
+	(void) alarm(0);
+	(void) signal(SIGALRM, SIG_DFL);
 	environ = newenvp;	/* make new environment active */
 
 	(void) puts (_("Entering System Maintenance Mode"));
 
 	/* exec the shell finally. */
-	err = shell (pwent.pw_shell, NULL, environ);
+	err = shell(pwent.pw_shell, NULL, environ);
 
 	return ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 }

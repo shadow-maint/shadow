@@ -52,7 +52,7 @@ static FILE* fp_grent = NULL;
  *
  * The audit, syslog, or locale files shall be open before
  */
-extern const char* process_prefix_flag (const char* short_opt, int argc, char **argv)
+extern const char* process_prefix_flag(const char* short_opt, int argc, char **argv)
 {
 	const char *prefix = NULL;
 
@@ -66,19 +66,19 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		    || streq(argv[i], short_opt))
 		{
 			if (NULL != prefix) {
-				fprintf (log_get_logfd(),
+				fprintf(log_get_logfd(),
 				         _("%s: multiple --prefix options\n"),
 				         log_get_progname());
-				exit (E_BAD_ARG);
+				exit(E_BAD_ARG);
 			}
 
 			if (val) {
 				prefix = val;
 			} else if (i + 1 == argc) {
-				fprintf (log_get_logfd(),
+				fprintf(log_get_logfd(),
 				         _("%s: option '%s' requires an argument\n"),
 				         log_get_progname(), argv[i]);
-				exit (E_BAD_ARG);
+				exit(E_BAD_ARG);
 			} else {
 				prefix = argv[++ i];
 			}

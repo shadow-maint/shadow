@@ -34,7 +34,7 @@ motd(void)
 	char *mb;
 	int c;
 
-	motdfile = getdef_str ("MOTD_FILE");
+	motdfile = getdef_str("MOTD_FILE");
 	if (NULL == motdfile)
 		return 0;
 
@@ -44,7 +44,7 @@ motd(void)
 
 	mb = motdlist;
 	while (NULL != (motdfile = strsep(&mb, ":"))) {
-		fp = fopen (motdfile, "r");
+		fp = fopen(motdfile, "r");
 		if (fp == NULL)
 			continue;
 
@@ -53,8 +53,8 @@ motd(void)
 		}
 		fclose(fp);
 	}
-	fflush (stdout);
+	fflush(stdout);
 
-	free (motdlist);
+	free(motdlist);
 	return 0;
 }

@@ -115,17 +115,17 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	offset = (off_t) pw->pw_uid * sizeof (ll);
 	if (offset + ssizeof(ll) <= statbuf.st_size) {
 		/* fseeko errors are not really relevant for us. */
-		int err = fseeko (lastlogfile, offset, SEEK_SET);
-		assert (0 == err);
+		int err = fseeko(lastlogfile, offset, SEEK_SET);
+		assert(0 == err);
 		/* lastlog is a sparse file. Even if no entries were
 		 * entered for this user, which should be able to get the
 		 * empty entry in this case.
 		 */
-		if (fread(&ll, sizeof(ll), 1, lastlogfile) != 1) {
-			fprintf (stderr,
+		if (fread(&ll, sizeof (ll), 1, lastlogfile) != 1) {
+			fprintf(stderr,
 			         _("%s: Failed to get the entry for UID %lu\n"),
 			         Prog, (unsigned long)pw->pw_uid);
-			exit (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 	} else {
 		/* Outsize of the lastlog file.
@@ -133,7 +133,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 		 * as if we were reading an non existing entry in the
 		 * sparse lastlog file).
 		 */
-		memzero(&ll, sizeof(ll));
+		memzero(&ll, sizeof (ll));
 	}
 
 	/* Filter out entries that do not match with the -t or -b options */
@@ -148,15 +148,15 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	/* Print the header only once */
 	if (!once) {
 #ifdef HAVE_LL_HOST
-		printf (_("Username         Port     From%*sLatest\n"), maxIPv6Addrlen-4, " ");
+		printf(_("Username         Port     From%*sLatest\n"), maxIPv6Addrlen-4, " ");
 #else
-		puts (_("Username                Port     Latest"));
+		puts(_("Username                Port     Latest"));
 #endif
 		once = true;
 	}
 
 	ll_time = ll.ll_time;
-	tm = localtime (&ll_time);
+	tm = localtime(&ll_time);
 	if (tm == NULL) {
 		cp = "(unknown)";
 	} else {
@@ -219,7 +219,7 @@ static void update_one (/*@null@*/const struct passwd *pw)
 		return;
 	}
 
-	offset = (off_t) pw->pw_uid * sizeof(ll);
+	offset = (off_t) pw->pw_uid * sizeof (ll);
 	/* fseeko errors are not really relevant for us. */
 	err = fseeko (lastlogfile, offset, SEEK_SET);
 	assert (0 == err);
@@ -262,37 +262,37 @@ static void update (void)
 	if (!uflg) /* safety measure */
 		return;
 
-	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
+	lastlog_uid_max = getdef_ulong("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
 	if (   (has_umin && umin > lastlog_uid_max)
 	    || (has_umax && umax > lastlog_uid_max)) {
-		fprintf (stderr, _("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+		fprintf(stderr, _("%s: Selected uid(s) are higher than LASTLOG_UID_MAX(%lu),\n"
 				   "\tthey will not be updated.\n"), Prog, lastlog_uid_max);
 		return;
 	}
 
 	if (has_umin && has_umax && (umin == umax)) {
-		update_one (getpwuid (umin));
+		update_one(getpwuid(umin));
 	} else {
-		setpwent ();
-		while ( (pwent = getpwent ()) != NULL ) {
+		setpwent();
+		while ( (pwent = getpwent()) != NULL ) {
 			if ((has_umin && (pwent->pw_uid < (uid_t)umin))
 				|| (has_umax && (pwent->pw_uid > (uid_t)umax))) {
 				continue;
 			}
-			update_one (pwent);
+			update_one(pwent);
 		}
-		endpwent ();
+		endpwent();
 	}
 
-	if (fflush (lastlogfile) != 0 || fsync (fileno (lastlogfile)) != 0) {
-			fprintf (stderr,
+	if (fflush(lastlogfile) != 0 || fsync(fileno(lastlogfile)) != 0) {
+			fprintf(stderr,
 			         _("%s: Failed to update the lastlog file\n"),
 			         Prog);
-			exit (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 	}
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	/*
 	 * Get the program name. The program name is used as a prefix to
@@ -301,14 +301,14 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
 #ifdef WITH_AUDIT
-	audit_help_open ();
+	audit_help_open();
 #endif
 
 	{
@@ -325,17 +325,17 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c = getopt_long (argc, argv, "b:ChR:St:u:a", longopts,
+		while ((c = getopt_long(argc, argv, "b:ChR:St:u:a", longopts,
 		                         NULL)) != -1) {
 			switch (c) {
 			case 'b':
 			{
 				unsigned long inverse_days;
 				if (str2ul(&inverse_days, optarg) == -1) {
-					fprintf (stderr,
+					fprintf(stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					exit (EXIT_FAILURE);
+					exit(EXIT_FAILURE);
 				}
 				inverse_seconds = (time_t) inverse_days * DAY;
 				bflg = true;
@@ -347,7 +347,7 @@ int main (int argc, char **argv)
 				break;
 			}
 			case 'h':
-				usage (EXIT_SUCCESS);
+				usage(EXIT_SUCCESS);
 				/*@notreached@*/break;
 			case 'R': /* no-op, handled in process_root_flag () */
 				break;
@@ -360,10 +360,10 @@ int main (int argc, char **argv)
 			{
 				unsigned long days;
 				if (str2ul(&days, optarg) == -1) {
-					fprintf (stderr,
+					fprintf(stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					exit (EXIT_FAILURE);
+					exit(EXIT_FAILURE);
 				}
 				seconds = (time_t) days * DAY;
 				tflg = true;
@@ -410,29 +410,29 @@ int main (int argc, char **argv)
 			}
 		}
 		if (argc > optind) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: unexpected argument: %s\n"),
 			         Prog, argv[optind]);
-			usage (EXIT_FAILURE);
+			usage(EXIT_FAILURE);
 		}
 		if (Cflg && Sflg) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: Option -C cannot be used together with option -S\n"),
 			         Prog);
-			usage (EXIT_FAILURE);
+			usage(EXIT_FAILURE);
 		}
 		if ((Cflg || Sflg) && !uflg) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: Options -C and -S require option -u to specify the user\n"),
 			         Prog);
-			usage (EXIT_FAILURE);
+			usage(EXIT_FAILURE);
 		}
 	}
 
 	lastlogfile = fopen(_PATH_LASTLOG, (Cflg || Sflg)?"r+":"r");
 	if (NULL == lastlogfile) {
 		perror(_PATH_LASTLOG);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 	/* Get the lastlog size */

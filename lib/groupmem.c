@@ -56,7 +56,7 @@
 		return NULL;
 	}
 	for (i = 0; grent->gr_mem[i]; i++) {
-		gr->gr_mem[i] = strdup (grent->gr_mem[i]);
+		gr->gr_mem[i] = strdup(grent->gr_mem[i]);
 		if (NULL == gr->gr_mem[i]) {
 			gr_free(gr);
 			return NULL;
@@ -67,14 +67,14 @@
 	return gr;
 }
 
-void gr_free_members (struct group *grent)
+void gr_free_members(struct group *grent)
 {
 	if (NULL != grent->gr_mem) {
 		size_t i;
 		for (i = 0; NULL != grent->gr_mem[i]; i++) {
-			free (grent->gr_mem[i]);
+			free(grent->gr_mem[i]);
 		}
-		free (grent->gr_mem);
+		free(grent->gr_mem);
 		grent->gr_mem = NULL;
 	}
 }

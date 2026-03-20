@@ -96,8 +96,8 @@ static void fail_exit (int status, bool process_selinux)
 	}
 
 	if (spw_locked) {
-		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		if (spw_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
@@ -125,7 +125,7 @@ static void usage (int status)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -137,26 +137,26 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "hR:",
+	while ((c = getopt_long(argc, argv, "hR:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			flags->chroot = true;
 			break;
 		default:
-			usage (E_USAGE);
+			usage(E_USAGE);
 		}
 	}
 
 	if (optind != argc) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	const struct passwd *pw;
 	struct passwd pwent;
@@ -168,67 +168,67 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
-	process_flags (argc, argv, &flags);
+	process_flags(argc, argv, &flags);
 	process_selinux = !flags.chroot;
 
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
-		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
-		exit (E_FAILURE);
+		fprintf(stderr, _("%s: can't work with tcb enabled\n"), Prog);
+		exit(E_FAILURE);
 	}
 #endif				/* WITH_TCB */
 
-	if (pw_lock () == 0) {
-		fprintf (stderr,
+	if (pw_lock() == 0) {
+		fprintf(stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, pw_dbname ());
-		fail_exit (E_PWDBUSY, process_selinux);
+		         Prog, pw_dbname());
+		fail_exit(E_PWDBUSY, process_selinux);
 	}
 	pw_locked = true;
-	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		fail_exit (E_MISSING, process_selinux);
+	if (pw_open(O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr,
+		         _("%s: cannot open %s\n"), Prog, pw_dbname());
+		fail_exit(E_MISSING, process_selinux);
 	}
 
-	if (spw_lock () == 0) {
-		fprintf (stderr,
+	if (spw_lock() == 0) {
+		fprintf(stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, spw_dbname ());
-		fail_exit (E_PWDBUSY, process_selinux);
+		         Prog, spw_dbname());
+		fail_exit(E_PWDBUSY, process_selinux);
 	}
 	spw_locked = true;
-	if (spw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
-		fail_exit (E_FAILURE, process_selinux);
+	if (spw_open(O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr,
+		         _("%s: cannot open %s\n"), Prog, spw_dbname());
+		fail_exit(E_FAILURE, process_selinux);
 	}
 
 	/*
 	 * Remove /etc/shadow entries for users not in /etc/passwd.
 	 */
-	(void) spw_rewind ();
+	(void) spw_rewind();
 	while (NULL != (sp = spw_next())) {
-		if (pw_locate (sp->sp_namp) != NULL) {
+		if (pw_locate(sp->sp_namp) != NULL) {
 			continue;
 		}
 
-		if (spw_remove (sp->sp_namp) == 0) {
+		if (spw_remove(sp->sp_namp) == 0) {
 			/*
 			 * This shouldn't happen (the entry exists) but...
 			 */
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
-			         Prog, sp->sp_namp, spw_dbname ());
-			fail_exit (E_FAILURE, process_selinux);
+			         Prog, sp->sp_namp, spw_dbname());
+			fail_exit(E_FAILURE, process_selinux);
 		}
 		(void) spw_rewind();
 	}
@@ -237,9 +237,9 @@ int main (int argc, char **argv)
 	 * Update shadow entries which don't have "x" as pw_passwd. Add any
 	 * missing shadow entries.
 	 */
-	(void) pw_rewind ();
+	(void) pw_rewind();
 	while (NULL != (pw = pw_next())) {
-		sp = spw_locate (pw->pw_name);
+		sp = spw_locate(pw->pw_name);
 		if (NULL != sp) {
 			/* do we need to update this entry? */
 			if (streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
@@ -265,37 +265,37 @@ int main (int argc, char **argv)
 			 * change */
 			spent.sp_lstchg = -1;
 		}
-		if (spw_update (&spent) == 0) {
-			fprintf (stderr,
+		if (spw_update(&spent) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, spw_dbname (), spent.sp_namp);
-			fail_exit (E_FAILURE, process_selinux);
+			         Prog, spw_dbname(), spent.sp_namp);
+			fail_exit(E_FAILURE, process_selinux);
 		}
 
 		/* remove password from /etc/passwd */
 		pwent = *pw;
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-		if (pw_update (&pwent) == 0) {
-			fprintf (stderr,
+		if (pw_update(&pwent) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, pw_dbname (), pwent.pw_name);
-			fail_exit (E_FAILURE, process_selinux);
+			         Prog, pw_dbname(), pwent.pw_name);
+			fail_exit(E_FAILURE, process_selinux);
 		}
 	}
 
-	if (spw_close (process_selinux) == 0) {
-		fprintf (stderr,
+	if (spw_close(process_selinux) == 0) {
+		fprintf(stderr,
 		         _("%s: failure while writing changes to %s\n"),
-		         Prog, spw_dbname ());
+		         Prog, spw_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
-		fail_exit (E_FAILURE, process_selinux);
+		fail_exit(E_FAILURE, process_selinux);
 	}
-	if (pw_close (process_selinux) == 0) {
-		fprintf (stderr,
+	if (pw_close(process_selinux) == 0) {
+		fprintf(stderr,
 		         _("%s: failure while writing changes to %s\n"),
-		         Prog, pw_dbname ());
+		         Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
-		fail_exit (E_FAILURE, process_selinux);
+		fail_exit(E_FAILURE, process_selinux);
 	}
 
 	/* /etc/passwd- (backup file) */
@@ -308,8 +308,8 @@ int main (int argc, char **argv)
 		/* continue */
 	}
 
-	if (pw_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+	if (pw_unlock(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
@@ -320,8 +320,8 @@ int main (int argc, char **argv)
 		/* continue */
 	}
 
-	nscd_flush_cache ("passwd");
-	sssd_flush_cache (SSSD_DB_PASSWD);
+	nscd_flush_cache("passwd");
+	sssd_flush_cache(SSSD_DB_PASSWD);
 
 	return E_SUCCESS;
 }

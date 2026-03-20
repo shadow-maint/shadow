@@ -16,7 +16,7 @@ static const char Prog[] = "new_subid_range";
 static void usage(void)
 {
 	fprintf(stderr, "Usage: %s [-g] [-n] user count\n", Prog);
-	fprintf(stderr, "    Find a subuid (or with -g, subgid) range for user\n");
+	fprintf(stderr, "    Find a subuid(or with -g, subgid) range for user\n");
 	fprintf(stderr, "    If -n is given, a new range will be created even if one exists\n");
 	fprintf(stderr, "    count defaults to 65536\n");
 	exit(EXIT_FAILURE);
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	if (!subid_init(Prog, stderr))
 		fprintf(stderr, "subid_init: %s\n", strerrno());
 	while ((c = getopt(argc, argv, "gn")) != EOF) {
-		switch(c) {
+		switch (c) {
 		case 'n': makenew = true; break;
 		case 'g': group = true; break;
 		default: usage();

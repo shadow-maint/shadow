@@ -22,7 +22,7 @@
  *	information in the pointed-to (struct passwd).
  */
 
-struct spwd *pwd_to_spwd (const struct passwd *pw)
+struct spwd *pwd_to_spwd(const struct passwd *pw)
 {
 	static struct spwd sp;
 

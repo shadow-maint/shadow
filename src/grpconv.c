@@ -71,8 +71,8 @@ static void fail_exit (int status, bool process_selinux)
 	}
 
 	if (sgr_locked) {
-		if (sgr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+		if (sgr_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
@@ -100,7 +100,7 @@ static void usage (int status)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv, struct option_flags *flags)
+static void process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -112,26 +112,26 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "hR:",
+	while ((c = getopt_long(argc, argv, "hR:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			flags->chroot = true;
 			break;
 		default:
-			usage (E_USAGE);
+			usage(E_USAGE);
 		}
 	}
 
 	if (optind != argc) {
-		usage (E_USAGE);
+		usage(E_USAGE);
 	}
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	const struct group *gr;
 	struct group grent;
@@ -143,69 +143,69 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
+	process_root_flag("-R", argc, argv);
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
-	process_flags (argc, argv, &flags);
+	process_flags(argc, argv, &flags);
 	process_selinux = !flags.chroot;
 
-	if (gr_lock () == 0) {
-		fprintf (stderr,
+	if (gr_lock() == 0) {
+		fprintf(stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, gr_dbname ());
-		fail_exit (5, process_selinux);
+		         Prog, gr_dbname());
+		fail_exit(5, process_selinux);
 	}
 	gr_locked = true;
-	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		fail_exit (1, process_selinux);
+	if (gr_open(O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr, _("%s: cannot open %s\n"), Prog, gr_dbname());
+		fail_exit(1, process_selinux);
 	}
 
-	if (sgr_lock () == 0) {
-		fprintf (stderr,
+	if (sgr_lock() == 0) {
+		fprintf(stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, sgr_dbname ());
-		fail_exit (5, process_selinux);
+		         Prog, sgr_dbname());
+		fail_exit(5, process_selinux);
 	}
 	sgr_locked = true;
-	if (sgr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
-		fail_exit (1, process_selinux);
+	if (sgr_open(O_CREAT | O_RDWR) == 0) {
+		fprintf(stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname());
+		fail_exit(1, process_selinux);
 	}
 
 	/*
 	 * Remove /etc/gshadow entries for groups not in /etc/group.
 	 */
-	(void) sgr_rewind ();
+	(void) sgr_rewind();
 	while (NULL != (sg = sgr_next())) {
-		if (gr_locate (sg->sg_namp) != NULL) {
+		if (gr_locate(sg->sg_namp) != NULL) {
 			continue;
 		}
 
-		if (sgr_remove (sg->sg_namp) == 0) {
+		if (sgr_remove(sg->sg_namp) == 0) {
 			/*
 			 * This shouldn't happen (the entry exists) but...
 			 */
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
-			         Prog, sg->sg_namp, sgr_dbname ());
-			fail_exit (3, process_selinux);
+			         Prog, sg->sg_namp, sgr_dbname());
+			fail_exit(3, process_selinux);
 		}
-		(void) sgr_rewind ();
+		(void) sgr_rewind();
 	}
 
 	/*
 	 * Update shadow group passwords if non-shadow password is not "x".
 	 * Add any missing shadow group entries.
 	 */
-	(void) gr_rewind ();
-	while ((gr = gr_next ()) != NULL) {
-		sg = sgr_locate (gr->gr_name);
+	(void) gr_rewind();
+	while ((gr = gr_next()) != NULL) {
+		sg = sgr_locate(gr->gr_name);
 		if (NULL != sg) {
 			/* update existing shadow group entry */
 			sgent = *sg;
@@ -215,7 +215,7 @@ int main (int argc, char **argv)
 			static char *empty = NULL;
 
 			/* add new shadow group entry */
-			bzero(&sgent, sizeof(sgent));
+			bzero(&sgent, sizeof (sgent));
 			sgent.sg_namp = gr->gr_name;
 			sgent.sg_passwd = gr->gr_passwd;
 			sgent.sg_adm = &empty;
@@ -228,39 +228,39 @@ int main (int argc, char **argv)
 		 */
 		sgent.sg_mem = gr->gr_mem;
 
-		if (sgr_update (&sgent) == 0) {
-			fprintf (stderr,
+		if (sgr_update(&sgent) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), sgent.sg_namp);
-			fail_exit (3, process_selinux);
+			         Prog, sgr_dbname(), sgent.sg_namp);
+			fail_exit(3, process_selinux);
 		}
 		/* remove password from /etc/group */
 		grent = *gr;
 		grent.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-		if (gr_update (&grent) == 0) {
-			fprintf (stderr,
+		if (gr_update(&grent) == 0) {
+			fprintf(stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, gr_dbname (), grent.gr_name);
-			fail_exit (3, process_selinux);
+			         Prog, gr_dbname(), grent.gr_name);
+			fail_exit(3, process_selinux);
 		}
 	}
 
-	if (sgr_close (process_selinux) == 0) {
-		fprintf (stderr,
+	if (sgr_close(process_selinux) == 0) {
+		fprintf(stderr,
 		         _("%s: failure while writing changes to %s\n"),
-		         Prog, sgr_dbname ());
+		         Prog, sgr_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
-		fail_exit (3, process_selinux);
+		fail_exit(3, process_selinux);
 	}
-	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
+	if (gr_close(process_selinux) == 0) {
+		fprintf(stderr,
 		         _("%s: failure while writing changes to %s\n"),
-		         Prog, gr_dbname ());
+		         Prog, gr_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
-		fail_exit (3, process_selinux);
+		fail_exit(3, process_selinux);
 	}
-	if (sgr_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+	if (sgr_unlock(process_selinux) == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 		/* continue */
 	}
@@ -270,8 +270,8 @@ int main (int argc, char **argv)
 		/* continue */
 	}
 
-	nscd_flush_cache ("group");
-	sssd_flush_cache (SSSD_DB_GROUP);
+	nscd_flush_cache("group");
+	sssd_flush_cache(SSSD_DB_GROUP);
 
 	return 0;
 }
@@ -279,9 +279,9 @@ int main (int argc, char **argv)
 int
 main(MAYBE_UNUSED int _1, char **argv)
 {
-	fprintf (stderr,
+	fprintf(stderr,
 		 "%s: not configured for shadow group support.\n", argv[0]);
-	exit (1);
+	exit(1);
 }
 #endif				/* !SHADOWGRP */
 

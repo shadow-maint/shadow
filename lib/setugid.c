@@ -33,18 +33,18 @@
  *
  * Returns 0 on success, or -1 on failure.
  */
-int setup_groups (const struct passwd *info)
+int setup_groups(const struct passwd *info)
 {
 	/*
 	 * Set the real group ID to the primary group ID in the password
 	 * file.
 	 */
-	if (setgid (info->pw_gid) == -1) {
+	if (setgid(info->pw_gid) == -1) {
 		int err = errno;
-		perror ("setgid");
+		perror("setgid");
 		SYSLOG(LOG_ERR, "bad group ID `%d' for user `%s': %s\n",
 		       info->pw_gid, info->pw_name, strerror(err));
-		closelog ();
+		closelog();
 		return -1;
 	}
 
@@ -52,12 +52,12 @@ int setup_groups (const struct passwd *info)
 	 * For systems which support multiple concurrent groups, go get
 	 * the group set from the /etc/group file.
 	 */
-	if (initgroups (info->pw_name, info->pw_gid) == -1) {
+	if (initgroups(info->pw_name, info->pw_gid) == -1) {
 		int err = errno;
-		perror ("initgroups");
+		perror("initgroups");
 		SYSLOG(LOG_ERR, "initgroups failed for user `%s': %s\n",
 		       info->pw_name, strerror(err));
-		closelog ();
+		closelog();
 		return -1;
 	}
 
@@ -69,17 +69,17 @@ int setup_groups (const struct passwd *info)
  *
  * Returns 0 on success, or -1 on failure.
  */
-int change_uid (const struct passwd *info)
+int change_uid(const struct passwd *info)
 {
 	/*
 	 * Set the real UID to the UID value in the password file.
 	 */
-	if (setuid (info->pw_uid) != 0) {
+	if (setuid(info->pw_uid) != 0) {
 		int err = errno;
-		perror ("setuid");
+		perror("setuid");
 		SYSLOG(LOG_ERR, "bad user ID `%d' for user `%s': %s\n",
 		       (int) info->pw_uid, info->pw_name, strerror(err));
-		closelog ();
+		closelog();
 		return -1;
 	}
 	return 0;
@@ -97,26 +97,26 @@ int change_uid (const struct passwd *info)
  */
 
 #if !defined(USE_PAM)
-int setup_uid_gid (const struct passwd *info, bool is_console)
+int setup_uid_gid(const struct passwd *info, bool is_console)
 #else
-int setup_uid_gid (const struct passwd *info)
+int setup_uid_gid(const struct passwd *info)
 #endif
 {
-	if (setup_groups (info) < 0) {
+	if (setup_groups(info) < 0) {
 		return -1;
 	}
 
 #if !defined(USE_PAM)
 	if (is_console) {
-		const char *cp = getdef_str ("CONSOLE_GROUPS");
+		const char *cp = getdef_str("CONSOLE_GROUPS");
 
-		if ((NULL != cp) && (add_groups (cp) != 0)) {
-			perror ("Warning: add_groups");
+		if ((NULL != cp) && (add_groups(cp) != 0)) {
+			perror("Warning: add_groups");
 		}
 	}
 #endif  // !USE_PAM
 
-	if (change_uid (info) < 0) {
+	if (change_uid(info) < 0) {
 		return -1;
 	}
 

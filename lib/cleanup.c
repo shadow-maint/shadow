@@ -43,7 +43,7 @@ static pid_t cleanup_pid = 0;
  * It is intended to be used as:
  *     atexit (do_cleanups);
  */
-void do_cleanups (void)
+void do_cleanups(void)
 {
 	unsigned int i;
 

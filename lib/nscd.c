@@ -17,14 +17,14 @@
 /*
  * nscd_flush_cache - flush specified service buffer in nscd cache
  */
-int nscd_flush_cache (const char *service)
+int nscd_flush_cache(const char *service)
 {
 	int status, code;
 	const char *cmd = "/usr/sbin/nscd";
 	const char *spawnedArgs[] = {"nscd", "-i", service, NULL};
 	const char *spawnedEnv[] = {NULL};
 
-	if (run_command (cmd, spawnedArgs, spawnedEnv, &status) != 0) {
+	if (run_command(cmd, spawnedArgs, spawnedEnv, &status) != 0) {
 		/* run_command writes its own more detailed message. */
 		(void) fprintf (log_get_logfd(), _(MSG_NSCD_FLUSH_CACHE_FAILED), log_get_progname());
 		return -1;

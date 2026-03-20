@@ -36,16 +36,16 @@
 
 
 #ifdef __linux__
-static int check_status (const char *name, const char *sname, uid_t uid);
-static int user_busy_processes (const char *name, uid_t uid);
+static int check_status(const char *name, const char *sname, uid_t uid);
+static int user_busy_processes(const char *name, uid_t uid);
 #else				/* !__linux__ */
-static int user_busy_utmp (const char *name);
+static int user_busy_utmp(const char *name);
 #endif				/* !__linux__ */
 
 /*
  * user_busy - check if a user is currently running processes
  */
-int user_busy (const char *name, uid_t uid)
+int user_busy(const char *name, uid_t uid)
 {
 	/* There are no standard ways to get the list of processes.
 	 * An option could be to run an external tool (ps).
@@ -56,7 +56,7 @@ int user_busy (const char *name, uid_t uid)
 #else				/* !__linux__ */
 	/* If we cannot rely on /proc, check if there is a record in utmp
 	 * indicating that the user is still logged in */
-	return user_busy_utmp (name);
+	return user_busy_utmp(name);
 #endif				/* !__linux__ */
 }
 
@@ -76,11 +76,11 @@ user_busy_utmp(const char *name)
 		if (!strneq_a(utent->ut_user, name))
 			continue;
 
-		if (kill (utent->ut_pid, 0) != 0) {
+		if (kill(utent->ut_pid, 0) != 0) {
 			continue;
 		}
 
-		fprintf (log_get_logfd(),
+		fprintf(log_get_logfd(),
 		         _("%s: user %s is currently logged in\n"),
 		         log_get_progname(), name);
 		return 1;
@@ -94,7 +94,7 @@ user_busy_utmp(const char *name)
 #ifdef __linux__
 #ifdef ENABLE_SUBIDS
 #define in_parentuid_range(uid) ((uid) >= parentuid && (uid) < parentuid + range)
-static int different_namespace (const char *sname)
+static int different_namespace(const char *sname)
 {
 	/* 41: /proc/xxxxxxxxxx/task/xxxxxxxxxx/ns/user + \0 */
 	char     path[41];
@@ -116,7 +116,7 @@ static int different_namespace (const char *sname)
 #endif                          /* ENABLE_SUBIDS */
 
 
-static int check_status (const char *name, const char *sname, uid_t uid)
+static int check_status(const char *name, const char *sname, uid_t uid)
 {
 	/* 40: /proc/xxxxxxxxxx/task/xxxxxxxxxx/status + \0 */
 	char  status[40];
@@ -158,11 +158,11 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 			return 0;
 		}
 	}
-	(void) fclose (sfile);
+	(void) fclose(sfile);
 	return 0;
 }
 
-static int user_busy_processes (const char *name, uid_t uid)
+static int user_busy_processes(const char *name, uid_t uid)
 {
 	DIR            *proc;
 	DIR            *task_dir;
@@ -217,7 +217,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 
 		/* Check if the process is in our chroot */
 		stprintf_a(root_path, "/proc/%lu/root", (unsigned long) pid);
-		if (stat (root_path, &sbroot_process) != 0) {
+		if (stat(root_path, &sbroot_process) != 0) {
 			continue;
 		}
 		if (   (sbroot.st_dev != sbroot_process.st_dev)
@@ -225,19 +225,19 @@ static int user_busy_processes (const char *name, uid_t uid)
 			continue;
 		}
 
-		if (check_status (name, tmp_d_name, uid) != 0) {
-			(void) closedir (proc);
+		if (check_status(name, tmp_d_name, uid) != 0) {
+			(void) closedir(proc);
 #ifdef ENABLE_SUBIDS
 			sub_uid_close(true);
 #endif
-			fprintf (log_get_logfd(),
+			fprintf(log_get_logfd(),
 			         _("%s: user %s is currently used by process %d\n"),
 			         log_get_progname(), name, pid);
 			return 1;
 		}
 
 		stprintf_a(task_path, "/proc/%lu/task", (unsigned long) pid);
-		task_dir = opendir (task_path);
+		task_dir = opendir(task_path);
 		if (task_dir != NULL) {
 			while (NULL != (ent = readdir(task_dir))) {
 				pid_t tid;
@@ -247,19 +247,19 @@ static int user_busy_processes (const char *name, uid_t uid)
 				if (tid == pid) {
 					continue;
 				}
-				if (check_status (name, task_path+6, uid) != 0) {
-					(void) closedir (proc);
-					(void) closedir (task_dir);
+				if (check_status(name, task_path+6, uid) != 0) {
+					(void) closedir(proc);
+					(void) closedir(task_dir);
 #ifdef ENABLE_SUBIDS
 					sub_uid_close(true);
 #endif
-					fprintf (log_get_logfd(),
+					fprintf(log_get_logfd(),
 					         _("%s: user %s is currently used by process %d\n"),
 					         log_get_progname(), name, pid);
 					return 1;
 				}
 			}
-			(void) closedir (task_dir);
+			(void) closedir(task_dir);
 		} else {
 			/* Ignore errors. This is just a best effort */
 		}

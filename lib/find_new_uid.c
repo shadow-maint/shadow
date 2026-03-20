@@ -34,7 +34,7 @@
  * preferred_min: the special-case minimum value for a specifically-
  * requested ID, which may be lower than the standard min_id
  */
-static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
+static int get_ranges(bool sys_user, uid_t *min_id, uid_t *max_id,
 			uid_t *preferred_min)
 {
 	uid_t uid_def_max = 0;
@@ -52,8 +52,8 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
 		 * If SYS_UID_MAX is unspecified, we should assume it to be one
 		 * less than the UID_MIN (which is reserved for non-system accounts)
 		 */
-		uid_def_max = getdef_ulong ("UID_MIN", 1000UL) - 1;
-		*max_id = getdef_ulong ("SYS_UID_MAX", uid_def_max);
+		uid_def_max = getdef_ulong("UID_MIN", 1000UL) - 1;
+		*max_id = getdef_ulong("SYS_UID_MAX", uid_def_max);
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
@@ -76,8 +76,8 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
 		/* Non-system users */
 
 		/* Get the values from login.defs or use reasonable defaults */
-		*min_id = getdef_ulong ("UID_MIN", 1000UL);
-		*max_id = getdef_ulong ("UID_MAX", 60000UL);
+		*min_id = getdef_ulong("UID_MIN", 1000UL);
+		*max_id = getdef_ulong("UID_MAX", 60000UL);
 
 		/*
 		 * The preferred minimum should match the standard ID minimum
@@ -174,7 +174,7 @@ int find_new_uid(bool sys_user,
 	 * First, figure out what ID range is appropriate for
 	 * automatic assignment
 	 */
-	result = get_ranges (sys_user, &uid_min, &uid_max, &preferred_min);
+	result = get_ranges(sys_user, &uid_min, &uid_max, &preferred_min);
 	if (result == EINVAL) {
 		return -1;
 	}
@@ -186,7 +186,7 @@ int find_new_uid(bool sys_user,
 			/*
 			 * Make sure the UID isn't queued for use already
 			 */
-			if (pw_locate_uid (*preferred_uid) == NULL) {
+			if (pw_locate_uid(*preferred_uid) == NULL) {
 				*uid = *preferred_uid;
 				return 0;
 			}
@@ -209,10 +209,10 @@ int find_new_uid(bool sys_user,
 			 * more likely to want to stop and address the
 			 * issue.
 			 */
-			fprintf (log_get_logfd(),
+			fprintf(log_get_logfd(),
 				_("%s: Encountered error attempting to use "
 				  "preferred UID: %s\n"),
-				log_get_progname(), strerror (result));
+				log_get_progname(), strerror(result));
 			return -1;
 		}
 	}
@@ -246,7 +246,7 @@ int find_new_uid(bool sys_user,
 	}
 
 	/* First look for the lowest and highest value in the local database */
-	(void) pw_rewind ();
+	(void) pw_rewind();
 	highest_found = uid_min;
 	lowest_found = uid_max;
 	while (NULL != (pwd = pw_next())) {
@@ -305,7 +305,7 @@ int find_new_uid(bool sys_user,
 			if (result == 0) {
 				/* This UID is available. Return it. */
 				*uid = id;
-				free (used_uids);
+				free(used_uids);
 				return 0;
 			} else if (result == EEXIST || result == EINVAL) {
 				/*
@@ -321,10 +321,10 @@ int find_new_uid(bool sys_user,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (log_get_logfd(),
-						_("%s: Can't get unique system UID (%s). "
+					fprintf(log_get_logfd(),
+						_("%s: Can't get unique system UID(%s). "
 						  "Suppressing additional messages.\n"),
-						log_get_progname(), strerror (result));
+						log_get_progname(), strerror(result));
 					SYSLOG(LOG_ERR,
 						"Error checking available UIDs: %s",
 						strerror(result));
@@ -347,7 +347,7 @@ int find_new_uid(bool sys_user,
 		 */
 		if (lowest_found != uid_max) {
 			for (id = uid_max; id >= uid_min; id--) {
-				result = check_uid (id, uid_min, uid_max, used_uids);
+				result = check_uid(id, uid_min, uid_max, used_uids);
 				if (result == 0) {
 					/* This UID is available. Return it. */
 					*uid = id;
@@ -367,10 +367,10 @@ int find_new_uid(bool sys_user,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (log_get_logfd(),
-							_("%s: Can't get unique system UID (%s). "
+						fprintf(log_get_logfd(),
+							_("%s: Can't get unique system UID(%s). "
 							  "Suppressing additional messages.\n"),
-							log_get_progname(), strerror (result));
+							log_get_progname(), strerror(result));
 						SYSLOG(LOG_ERR,
 							"Error checking available UIDs: %s",
 							strerror(result));
@@ -414,7 +414,7 @@ int find_new_uid(bool sys_user,
 			if (result == 0) {
 				/* This UID is available. Return it. */
 				*uid = id;
-				free (used_uids);
+				free(used_uids);
 				return 0;
 			} else if (result == EEXIST || result == EINVAL) {
 				/*
@@ -430,10 +430,10 @@ int find_new_uid(bool sys_user,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (log_get_logfd(),
-						_("%s: Can't get unique UID (%s). "
+					fprintf(log_get_logfd(),
+						_("%s: Can't get unique UID(%s). "
 						  "Suppressing additional messages.\n"),
-						log_get_progname(), strerror (result));
+						log_get_progname(), strerror(result));
 					SYSLOG(LOG_ERR,
 						"Error checking available UIDs: %s",
 						strerror(result));
@@ -456,7 +456,7 @@ int find_new_uid(bool sys_user,
 		 */
 		if (highest_found != uid_min) {
 			for (id = uid_min; id <= uid_max; id++) {
-				result = check_uid (id, uid_min, uid_max, used_uids);
+				result = check_uid(id, uid_min, uid_max, used_uids);
 				if (result == 0) {
 					/* This UID is available. Return it. */
 					*uid = id;
@@ -476,10 +476,10 @@ int find_new_uid(bool sys_user,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (log_get_logfd(),
-							_("%s: Can't get unique UID (%s). "
+						fprintf(log_get_logfd(),
+							_("%s: Can't get unique UID(%s). "
 							  "Suppressing additional messages.\n"),
-							log_get_progname(), strerror (result));
+							log_get_progname(), strerror(result));
 						SYSLOG(LOG_ERR,
 							"Error checking available UIDs: %s",
 							strerror(result));

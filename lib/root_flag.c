@@ -32,7 +32,7 @@ static void change_root (const char* newroot);
  *
  * The audit, syslog, or locale files shall be open before
  */
-extern void process_root_flag (const char* short_opt, int argc, char **argv)
+extern void process_root_flag(const char* short_opt, int argc, char **argv)
 {
 	const char *newroot = NULL;
 
@@ -46,19 +46,19 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 		    || streq(argv[i], short_opt))
 		{
 			if (NULL != newroot) {
-				fprintf (log_get_logfd(),
+				fprintf(log_get_logfd(),
 				         _("%s: multiple --root options\n"),
 				         log_get_progname());
-				exit (E_BAD_ARG);
+				exit(E_BAD_ARG);
 			}
 
 			if (val) {
 				newroot = val;
 			} else if (i + 1 == argc) {
-				fprintf (log_get_logfd(),
+				fprintf(log_get_logfd(),
 				         _("%s: option '%s' requires an argument\n"),
 				         log_get_progname(), argv[i]);
-				exit (E_BAD_ARG);
+				exit(E_BAD_ARG);
 			} else {
 				newroot = argv[++ i];
 			}
@@ -66,11 +66,11 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 	}
 
 	if (NULL != newroot) {
-		change_root (newroot);
+		change_root(newroot);
 	}
 }
 
-static void change_root (const char* newroot)
+static void change_root(const char* newroot)
 {
 	/* Drop privileges */
 	if (   (setregid (getgid (), getgid ()) != 0)

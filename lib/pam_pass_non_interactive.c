@@ -116,31 +116,31 @@ failed_conversation:
  *
  * Return 0 on success, 1 on failure.
  */
-int do_pam_passwd_non_interactive (const char *pam_service,
+int do_pam_passwd_non_interactive(const char *pam_service,
                                     const char *username,
                                     const char* password)
 {
 	pam_handle_t *pamh = NULL;
 	int ret;
 
-	ret = pam_start (pam_service, username, &non_interactive_pam_conv, &pamh);
+	ret = pam_start(pam_service, username, &non_interactive_pam_conv, &pamh);
 	if (ret != PAM_SUCCESS) {
-		fprintf (log_get_logfd(),
+		fprintf(log_get_logfd(),
 		         _("%s: (user %s) pam_start failure %d\n"),
 		         log_get_progname(), username, ret);
 		return 1;
 	}
 
 	non_interactive_password = password;
-	ret = pam_chauthtok (pamh, 0);
+	ret = pam_chauthtok(pamh, 0);
 	if (ret != PAM_SUCCESS) {
-		fprintf (log_get_logfd(),
+		fprintf(log_get_logfd(),
 		         _("%s: (user %s) pam_chauthtok() failed, error:\n"
 		           "%s\n"),
-		         log_get_progname(), username, pam_strerror (pamh, ret));
+		         log_get_progname(), username, pam_strerror(pamh, ret));
 	}
 
-	(void) pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end(pamh, PAM_SUCCESS);
 
 	return ((PAM_SUCCESS == ret) ? 0 : 1);
 }

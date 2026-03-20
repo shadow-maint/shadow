@@ -38,7 +38,7 @@ palindrome(const char *new)
 {
 	size_t i, j;
 
-	i = strlen (new);
+	i = strlen(new);
 
 	for (j = 0; j < i; j++) {
 		if (new[i - j - 1] != new[j]) {
@@ -63,7 +63,7 @@ static bool similar (/*@notnull@*/const char *old, /*@notnull@*/const char *new)
 	 * the new password is long enough.  Please feel free to suggest
 	 * something better...  --marekm
 	 */
-	if (strlen (new) >= 8) {
+	if (strlen(new) >= 8) {
 		return false;
 	}
 
@@ -120,8 +120,8 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 	char *new1, *old1;
 	const char *msg;
 
-	oldlen = strlen (old);
-	newlen = strlen (new);
+	oldlen = strlen(old);
+	newlen = strlen(new);
 
 	obscure_get_range(&minlen, &maxlen);
 
@@ -132,7 +132,7 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 	/*
 	 * Remaining checks are optional.
 	 */
-	if (!getdef_bool ("OBSCURE_CHECKS_ENAB")) {
+	if (!getdef_bool("OBSCURE_CHECKS_ENAB")) {
 		return NULL;
 	}
 
@@ -156,8 +156,8 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 		return NULL;
 	}
 
-	new1 = xstrdup (new);
-	old1 = xstrdup (old);
+	new1 = xstrdup(new);
+	old1 = xstrdup(old);
 	if (newlen > (size_t) maxlen)
 		stpcpy(&new1[maxlen], "");
 	if (oldlen > (size_t) maxlen)
@@ -165,8 +165,8 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 
 	msg = password_check(old1, new1);
 
-	freezero (new1, newlen);
-	freezero (old1, oldlen);
+	freezero(new1, newlen);
+	freezero(old1, oldlen);
 
 	return msg;
 }
@@ -185,7 +185,7 @@ obscure(const char *old, const char *new)
 	const char *msg = obscure_msg(old, new);
 
 	if (NULL != msg) {
-		printf (_("Bad password: %s.  "), msg);
+		printf(_("Bad password: %s.  "), msg);
 		return false;
 	}
 	return true;
@@ -214,7 +214,7 @@ obscure_get_range(int *minlen, int *maxlen)
 		return;
 	}
 
-	method = getdef_str ("ENCRYPT_METHOD");
+	method = getdef_str("ENCRYPT_METHOD");
 	if (NULL != method) {
 		if (   streq(method, "MD5")
 		    || streq(method, "SHA256")
@@ -229,5 +229,5 @@ obscure_get_range(int *minlen, int *maxlen)
 			return;
 		}
 	}
-	*maxlen = getdef_num ("PASS_MAX_LEN", 8);
+	*maxlen = getdef_num("PASS_MAX_LEN", 8);
 }

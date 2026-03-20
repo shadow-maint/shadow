@@ -118,15 +118,15 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 #ifndef USE_PAM
 static struct faillog faillog;
 
-static void bad_time_notify (void);
-static void check_nologin (bool login_to_root);
+static void bad_time_notify(void);
+static void check_nologin(bool login_to_root);
 #else
-static void get_pam_user (char **ptr_pam_user);
+static void get_pam_user(char **ptr_pam_user);
 #endif
 
-static void init_env (void);
-static void alarm_handler (int);
-static void exit_handler (int);
+static void init_env(void);
+static void alarm_handler(int);
+static void exit_handler(int);
 
 /*
  * usage - print login command usage and exit
@@ -135,17 +135,17 @@ static void exit_handler (int);
  * login -h hostname	(for telnetd, etc.)
  * login -f name	(for pre-authenticated login: datakit, xterm, etc.)
  */
-static void usage (void)
+static void usage(void)
 {
-	fprintf (stderr, _("Usage: %s [-p] [name]\n"), Prog);
+	fprintf(stderr, _("Usage: %s [-p] [name]\n"), Prog);
 	if (!amroot) {
-		exit (1);
+		exit(1);
 	}
-	fprintf (stderr, _("       %s [-p] [-h host] [-f name]\n"), Prog);
-	exit (1);
+	fprintf(stderr, _("       %s [-p] [-h host] [-f name]\n"), Prog);
+	exit(1);
 }
 
-static void setup_tty (void)
+static void setup_tty(void)
 {
 	TERMIO termio;
 
@@ -178,23 +178,23 @@ static void setup_tty (void)
 		 * getdef_num cannot validate this.
 		 */
 		if (erasechar != (int) termio.c_cc[VERASE]) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("configuration error - cannot parse %s value: '%d'"),
 			         "ERASECHAR", erasechar);
-			exit (1);
+			exit(1);
 		}
 		if (killchar != (int) termio.c_cc[VKILL]) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("configuration error - cannot parse %s value: '%d'"),
 			         "KILLCHAR", killchar);
-			exit (1);
+			exit(1);
 		}
 
 		/*
 		 * ttymon invocation prefers this, but these settings
 		 * won't come into effect after the first username login
 		 */
-		(void) STTY (0, &termio);
+		(void) STTY(0, &termio);
 	}
 }
 
@@ -203,13 +203,13 @@ static void setup_tty (void)
 /*
  * Tell the user that this is not the right time to login at this tty
  */
-static void bad_time_notify (void)
+static void bad_time_notify(void)
 {
-	(void) puts (_("Invalid login time"));
-	(void) fflush (stdout);
+	(void) puts(_("Invalid login time"));
+	(void) fflush(stdout);
 }
 
-static void check_nologin (bool login_to_root)
+static void check_nologin(bool login_to_root)
 {
 	const char *fname;
 
@@ -220,28 +220,28 @@ static void check_nologin (bool login_to_root)
 	 * out for root so she knows to remove the file if she's
 	 * forgotten about it ...
 	 */
-	fname = getdef_str ("NOLOGINS_FILE");
-	if ((NULL != fname) && (access (fname, F_OK) == 0)) {
+	fname = getdef_str("NOLOGINS_FILE");
+	if ((NULL != fname) && (access(fname, F_OK) == 0)) {
 		FILE *nlfp;
 
 		/*
 		 * Cat the file if it can be opened, otherwise just
 		 * print a default message
 		 */
-		nlfp = fopen (fname, "r");
+		nlfp = fopen(fname, "r");
 		if (NULL != nlfp) {
 			int c;
-			while ((c = getc (nlfp)) != EOF) {
+			while ((c = getc(nlfp)) != EOF) {
 				if (c == '\n') {
-					(void) putchar ('\r');
+					(void) putchar('\r');
 				}
 
-				(void) putchar (c);
+				(void) putchar(c);
 			}
-			(void) fflush (stdout);
-			(void) fclose (nlfp);
+			(void) fflush(stdout);
+			(void) fclose(nlfp);
 		} else {
-			(void) puts (_("\nSystem closed for routine maintenance"));
+			(void) puts(_("\nSystem closed for routine maintenance"));
 		}
 		/*
 		 * Non-root users must exit. Root gets the message, but
@@ -249,15 +249,15 @@ static void check_nologin (bool login_to_root)
 		 */
 
 		if (!login_to_root) {
-			closelog ();
-			exit (0);
+			closelog();
+			exit(0);
 		}
-		(void) puts (_("\n[Disconnect bypassed -- root login allowed.]"));
+		(void) puts(_("\n[Disconnect bypassed -- root login allowed.]"));
 	}
 }
 #endif				/* !USE_PAM */
 
-static void process_flags (int argc, char *const *argv)
+static void process_flags(int argc, char *const *argv)
 {
 	int arg;
 	int flag;
@@ -269,7 +269,7 @@ static void process_flags (int argc, char *const *argv)
 	 */
 	for (arg = 1; arg < argc; arg++) {
 		if (strprefix(argv[arg], "-") && strlen(argv[arg]) > 2) {
-			usage ();
+			usage();
 		}
 		if (streq(argv[arg], "--")) {
 			break; /* stop checking on a "--" */
@@ -279,7 +279,7 @@ static void process_flags (int argc, char *const *argv)
 	/*
 	 * Process options.
 	 */
-	while ((flag = getopt (argc, argv, "d:fh:pr:")) != EOF) {
+	while ((flag = getopt(argc, argv, "d:fh:pr:")) != EOF) {
 		switch (flag) {
 		case 'd':
 			/* "-d device" ignored for compatibility */
@@ -304,50 +304,50 @@ static void process_flags (int argc, char *const *argv)
 	 */
 
 	if ((fflg || hflg) && !amroot) {
-		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-		exit (1);
+		fprintf(stderr, _("%s: Permission denied.\n"), Prog);
+		exit(1);
 	}
 
 	/*
 	 *  Get the user name.
 	 */
 	if (optind < argc) {
-		assert (NULL == username);
-		username = xstrdup (argv[optind]);
-		strzero (argv[optind]);
+		assert(NULL == username);
+		username = xstrdup(argv[optind]);
+		strzero(argv[optind]);
 		++optind;
 	}
 
 	if (fflg && (NULL == username)) {
-		usage ();
+		usage();
 	}
 
 }
 
 
-static void init_env (void)
+static void init_env(void)
 {
 #ifndef USE_PAM
 	const char *cp;
 #endif
 	char *tmp;
 
-	tmp = getenv ("LANG");
+	tmp = getenv("LANG");
 	if (NULL != tmp) {
-		addenv ("LANG", tmp);
+		addenv("LANG", tmp);
 	}
 
 	/*
 	 * Add the timezone environmental variable so that time functions
 	 * work correctly.
 	 */
-	tmp = getenv ("TZ");
+	tmp = getenv("TZ");
 	if (NULL != tmp) {
-		addenv ("TZ", tmp);
+		addenv("TZ", tmp);
 	}
 #ifndef USE_PAM
 	else {
-		cp = getdef_str ("ENV_TZ");
+		cp = getdef_str("ENV_TZ");
 		if (NULL != cp) {
 			addenv(strprefix(cp, "/") ? tz(cp) : cp, NULL);
 		}
@@ -357,15 +357,15 @@ static void init_env (void)
 	 * Add the clock frequency so that profiling commands work
 	 * correctly.
 	 */
-	tmp = getenv ("HZ");
+	tmp = getenv("HZ");
 	if (NULL != tmp) {
-		addenv ("HZ", tmp);
+		addenv("HZ", tmp);
 	}
 #ifndef USE_PAM
 	else {
-		cp = getdef_str ("ENV_HZ");
+		cp = getdef_str("ENV_HZ");
 		if (NULL != cp) {
-			addenv (cp, NULL);
+			addenv(cp, NULL);
 		}
 	}
 #endif				/* !USE_PAM */
@@ -374,7 +374,7 @@ static void init_env (void)
 static void
 exit_handler(MAYBE_UNUSED int _1)
 {
-	_exit (0);
+	_exit(0);
 }
 
 static void
@@ -391,19 +391,19 @@ alarm_handler(MAYBE_UNUSED int _1)
  *
  * ptr_pam_user shall point to a malloc'ed string (or NULL).
  */
-static void get_pam_user (char **ptr_pam_user)
+static void get_pam_user(char **ptr_pam_user)
 {
 	int         retcode;
 	const void  *ptr_user;
 
-	assert (NULL != ptr_pam_user);
+	assert(NULL != ptr_pam_user);
 
-	retcode = pam_get_item (pamh, PAM_USER, &ptr_user);
+	retcode = pam_get_item(pamh, PAM_USER, &ptr_user);
 	PAM_FAIL_CHECK;
 
-	free (*ptr_pam_user);
+	free(*ptr_pam_user);
 	if (NULL != ptr_user) {
-		*ptr_pam_user = xstrdup (ptr_user);
+		*ptr_pam_user = xstrdup(ptr_user);
 	} else {
 		*ptr_pam_user = NULL;
 	}
@@ -450,7 +450,7 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
  *	-f - do not perform authentication, user is preauthenticated
  *	-h - the name of the remote host
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int            err;
 	bool           subroot = false;
@@ -484,26 +484,26 @@ int main (int argc, char **argv)
 	 * Some quick initialization.
 	 */
 
-	sanitize_env ();
+	sanitize_env();
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
-	initenv ();
+	initenv();
 
-	amroot = (getuid () == 0);
+	amroot = (getuid() == 0);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
 	if (geteuid() != 0) {
-		fprintf (stderr, _("%s: Cannot possibly work without effective root\n"), Prog);
-		exit (1);
+		fprintf(stderr, _("%s: Cannot possibly work without effective root\n"), Prog);
+		exit(1);
 	}
 
-	process_flags (argc, argv);
+	process_flags(argc, argv);
 
-	if ((isatty (0) == 0) || (isatty (1) == 0) || (isatty (2) == 0)) {
+	if ((isatty(0) == 0) || (isatty(1) == 0) || (isatty(2) == 0)) {
 		exit (1);	/* must be a terminal */
 	}
 
@@ -517,17 +517,17 @@ int main (int argc, char **argv)
 		SYSLOG(LOG_ERR,
 		       "No session entry, error %d.  You must exec \"login\" from the lowest level \"sh\"",
 		       err);
-		exit (1);
+		exit(1);
 	}
 
-	tmptty = ttyname (0);
+	tmptty = ttyname(0);
 	if (NULL == tmptty) {
 		tmptty = "UNKNOWN";
 	}
 	strtcpy_a(tty, tmptty);
 
 #ifndef USE_PAM
-	is_console = console (tty);
+	is_console = console(tty);
 #endif
 
 	if (hflg) {
@@ -535,18 +535,18 @@ int main (int argc, char **argv)
 		 * Add remote hostname to the environment. I think
 		 * (not sure) I saw it once on Irix.  --marekm
 		 */
-		addenv ("REMOTEHOST", hostname);
+		addenv("REMOTEHOST", hostname);
 	}
 	if (fflg) {
 		preauth_flag = true;
 	}
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
-	setup_tty ();
+	setup_tty();
 
 #ifndef USE_PAM
-	(void) umask (getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
+	(void) umask(getdef_num("UMASK", GETDEF_DEFAULT_UMASK));
 
 	{
 		/*
@@ -555,10 +555,10 @@ int main (int argc, char **argv)
 		 * user may have one for themselves, but otherwise,
 		 * just take what you get.
 		 */
-		long limit = getdef_long ("ULIMIT", -1L);
+		long limit = getdef_long("ULIMIT", -1L);
 
 		if (limit != -1) {
-			set_filesize_limit (limit);
+			set_filesize_limit(limit);
 		}
 	}
 
@@ -585,7 +585,7 @@ int main (int argc, char **argv)
 	init_env ();
 
 	if (optind < argc) {	/* now set command line variables */
-		set_env (argc - optind, &argv[optind]);
+		set_env(argc - optind, &argv[optind]);
 	}
 
 	if (hflg) {
@@ -613,17 +613,17 @@ int main (int argc, char **argv)
 	}
 
 	environ = newenvp;	/* make new environment active */
-	delay   = getdef_unum ("FAIL_DELAY", 1);
-	retries = getdef_unum ("LOGIN_RETRIES", RETRIES);
+	delay   = getdef_unum("FAIL_DELAY", 1);
+	retries = getdef_unum("LOGIN_RETRIES", RETRIES);
 
 #ifdef USE_PAM
-	retcode = pam_start (Prog, username, &conv, &pamh);
+	retcode = pam_start(Prog, username, &conv, &pamh);
 	if (retcode != PAM_SUCCESS) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("login: PAM Failure, aborting: %s\n"),
-		         pam_strerror (pamh, retcode));
+		         pam_strerror(pamh, retcode));
 		SYSLOG(LOG_ERR, "Couldn't initialize PAM: %s", pam_strerror(pamh, retcode));
-		exit (99);
+		exit(99);
 	}
 
 	/*
@@ -634,12 +634,12 @@ int main (int argc, char **argv)
 	 * PAM_RHOST and PAM_TTY are used for authentication, only use
 	 * information coming from login or from the caller (e.g. no utmp)
 	 */
-	retcode = pam_set_item (pamh, PAM_RHOST, hostname);
+	retcode = pam_set_item(pamh, PAM_RHOST, hostname);
 	PAM_FAIL_CHECK;
-	retcode = pam_set_item (pamh, PAM_TTY, tty);
+	retcode = pam_set_item(pamh, PAM_TTY, tty);
 	PAM_FAIL_CHECK;
 #ifdef HAVE_PAM_FAIL_DELAY
-	retcode = pam_fail_delay (pamh, 1000000 * delay);
+	retcode = pam_fail_delay(pamh, 1000000 * delay);
 	PAM_FAIL_CHECK;
 #endif
 	/* if fflg, then the user has already been authenticated */
@@ -649,20 +649,20 @@ int main (int argc, char **argv)
 		unsigned int  failcount = 0;
 
 		/* Make the login prompt look like we want it */
-		if (gethostname(hostn, sizeof(hostn)) == 0) {
+		if (gethostname(hostn, sizeof (hostn)) == 0) {
 			stprintf_a(loginprompt, _("%s login: "), hostn);
 		} else {
 			strtcpy_a(loginprompt, _("login: "));
 		}
 
-		retcode = pam_set_item (pamh, PAM_USER_PROMPT, loginprompt);
+		retcode = pam_set_item(pamh, PAM_USER_PROMPT, loginprompt);
 		PAM_FAIL_CHECK;
 
 		/* if we didn't get a user on the command line,
 		   set it to NULL */
-		get_pam_user (&pam_user);
+		get_pam_user(&pam_user);
 		if ((NULL != pam_user) && streq(pam_user, "")) {
-			retcode = pam_set_item (pamh, PAM_USER, NULL);
+			retcode = pam_set_item(pamh, PAM_USER, NULL);
 			PAM_FAIL_CHECK;
 		}
 
@@ -686,17 +686,17 @@ int main (int argc, char **argv)
 			}
 #endif
 
-			retcode = pam_authenticate (pamh, 0);
+			retcode = pam_authenticate(pamh, 0);
 
-			get_pam_user (&pam_user);
-			failent_user = get_failent_user (pam_user);
+			get_pam_user(&pam_user);
+			failent_user = get_failent_user(pam_user);
 
 			if (retcode == PAM_MAXTRIES) {
 				SYSLOG(LOG_NOTICE,
-				       "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
+				       "TOO MANY LOGIN TRIES(%u)%s FOR '%s'",
 				       failcount, fromhost, failent_user);
-				fprintf (stderr,
-				         _("Maximum number of tries exceeded (%u)\n"),
+				fprintf(stderr,
+				         _("Maximum number of tries exceeded(%u)\n"),
 				         failcount);
 				PAM_END;
 				exit(0);
@@ -729,18 +729,18 @@ int main (int argc, char **argv)
 			                        NULL,    /* addr */
 			                        tty,
 			                        0);      /* result */
-			close (audit_fd);
+			close(audit_fd);
 #endif				/* WITH_AUDIT */
 
-			(void) puts ("");
-			(void) puts (_("Login incorrect"));
+			(void) puts("");
+			(void) puts(_("Login incorrect"));
 
 			if (failcount >= retries) {
 				SYSLOG(LOG_NOTICE,
-				       "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
+				       "TOO MANY LOGIN TRIES(%u)%s FOR '%s'",
 				       failcount, fromhost, failent_user);
-				fprintf (stderr,
-				         _("Maximum number of tries exceeded (%u)\n"),
+				fprintf(stderr,
+				         _("Maximum number of tries exceeded(%u)\n"),
 				         failcount);
 				PAM_END;
 				exit(0);
@@ -751,7 +751,7 @@ int main (int argc, char **argv)
 			 * Even if a username was given on the command
 			 * line, prompt again for the username.
 			 */
-			retcode = pam_set_item (pamh, PAM_USER, NULL);
+			retcode = pam_set_item(pamh, PAM_USER, NULL);
 			PAM_FAIL_CHECK;
 		}
 
@@ -760,9 +760,9 @@ int main (int argc, char **argv)
 	}
 
 	/* Check the account validity */
-	retcode = pam_acct_mgmt (pamh, 0);
+	retcode = pam_acct_mgmt(pamh, 0);
 	if (retcode == PAM_NEW_AUTHTOK_REQD) {
-		retcode = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
+		retcode = pam_chauthtok(pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
 	}
 	PAM_FAIL_CHECK;
 
@@ -777,29 +777,29 @@ int main (int argc, char **argv)
 	 * From now on, we will discard changes of the user (PAM_USER) by
 	 * PAM APIs.
 	 */
-	get_pam_user (&pam_user);
-	free (username);
-	username = xstrdup (pam_user);
-	failent_user = get_failent_user (username);
+	get_pam_user(&pam_user);
+	free(username);
+	username = xstrdup(pam_user);
+	failent_user = get_failent_user(username);
 
-	pwd = xgetpwnam (username);
+	pwd = xgetpwnam(username);
 	if (NULL == pwd) {
 		SYSLOG(LOG_ERR, "cannot find user %s", failent_user);
-		fprintf (stderr,
-		         _("Cannot find user (%s)\n"),
+		fprintf(stderr,
+		         _("Cannot find user(%s)\n"),
 		         username);
-		exit (1);
+		exit(1);
 	}
 
 	/* This set up the process credential (group) and initialize the
 	 * supplementary group access list.
 	 * This has to be done before pam_setcred
 	 */
-	if (setup_groups (pwd) != 0) {
-		exit (1);
+	if (setup_groups(pwd) != 0) {
+		exit(1);
 	}
 
-	retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
+	retcode = pam_setcred(pamh, PAM_ESTABLISH_CRED);
 	PAM_FAIL_CHECK;
 	/* Note: if pam_setcred changes PAM_USER, this will not be taken
 	 * into account.
@@ -817,11 +817,11 @@ int main (int argc, char **argv)
 		/* Do some cleanup to avoid keeping entries we do not need
 		 * anymore. */
 		if (NULL != pwd) {
-			pw_free (pwd);
+			pw_free(pwd);
 			pwd = NULL;
 		}
 		if (NULL != spwd) {
-			spw_free (spwd);
+			spw_free(spwd);
 			spwd = NULL;
 		}
 
@@ -831,8 +831,8 @@ int main (int argc, char **argv)
 
 			max_size = login_name_max_size();
 			if (subroot) {
-				closelog ();
-				exit (1);
+				closelog();
+				exit(1);
 			}
 			preauth_flag = false;
 			username = xmalloc_T(max_size, char);
@@ -846,9 +846,9 @@ int main (int argc, char **argv)
 			}
 		}
 		/* Get the username to be used to log failures */
-		failent_user = get_failent_user (username);
+		failent_user = get_failent_user(username);
 
-		pwd = xgetpwnam (username);
+		pwd = xgetpwnam(username);
 		if (NULL == pwd) {
 			preauth_flag = false;
 			failed = true;
@@ -881,7 +881,7 @@ int main (int argc, char **argv)
 		}
 
 		if (streq(user_passwd, SHADOW_PASSWD_STRING)) {
-			spwd = xgetspnam (username);
+			spwd = xgetspnam(username);
 			if (NULL != spwd) {
 				user_passwd = spwd->sp_pwdp;
 			} else {
@@ -930,8 +930,8 @@ int main (int argc, char **argv)
 			failed = true;
 		}
 		if (   (NULL != pwd)
-		    && getdef_bool ("FAILLOG_ENAB")
-		    && !failcheck (pwd->pw_uid, &faillog, failed)) {
+		    && getdef_bool("FAILLOG_ENAB")
+		    && !failcheck(pwd->pw_uid, &faillog, failed)) {
 			SYSLOG(LOG_CRIT, "exceeded failure limit for '%s' %s",
 			       username, fromhost);
 			failed = true;
@@ -968,7 +968,7 @@ int main (int argc, char **argv)
 		 * Authentication of this user failed.
 		 * The username must be confirmed in the next try.
 		 */
-		free (username);
+		free(username);
 		username = NULL;
 
 		/*
@@ -977,10 +977,10 @@ int main (int argc, char **argv)
 		 * before the sleep() below completes, login will exit.
 		 */
 		if (delay > 0) {
-			(void) sleep (delay);
+			(void) sleep(delay);
 		}
 
-		(void) puts (_("Login incorrect"));
+		(void) puts(_("Login incorrect"));
 
 		/* allow only one attempt with -f */
 		if (fflg || (retries <= 0)) {
@@ -989,8 +989,8 @@ int main (int argc, char **argv)
 		}
 	}			/* while (true) */
 #endif				/* ! USE_PAM */
-	assert (NULL != username);
-	assert (NULL != pwd);
+	assert(NULL != username);
+	assert(NULL != pwd);
 
 	(void) alarm (0);		/* turn off alarm clock */
 
@@ -1000,16 +1000,16 @@ int main (int argc, char **argv)
 	 * authenticated. now prints a message, as suggested
 	 * by Ivan Nejgebauer <ian@unsux.ns.ac.yu>.  --marekm
 	 */
-	if (   getdef_bool ("PORTTIME_CHECKS_ENAB")
-	    && !isttytime (username, tty, time (NULL))) {
+	if (   getdef_bool("PORTTIME_CHECKS_ENAB")
+	    && !isttytime(username, tty, time(NULL))) {
 		SYSLOG(LOG_WARN, "invalid login time for '%s'%s",
 		       username, fromhost);
-		closelog ();
-		bad_time_notify ();
-		exit (1);
+		closelog();
+		bad_time_notify();
+		exit(1);
 	}
 
-	check_nologin (pwd->pw_uid == 0);
+	check_nologin(pwd->pw_uid == 0);
 #endif
 
 	if (getenv ("IFS")) {	/* don't export user IFS ... */
@@ -1041,13 +1041,13 @@ int main (int argc, char **argv)
 	                        NULL,    /* addr */
 	                        tty,
 	                        1);      /* result */
-	close (audit_fd);
+	close(audit_fd);
 #endif				/* WITH_AUDIT */
 
 #ifndef USE_PAM			/* pam_lastlog handles this */
 #ifdef ENABLE_LASTLOG
-	if (   getdef_bool ("LASTLOG_ENAB")
-	    && pwd->pw_uid <= (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL)) {
+	if (   getdef_bool("LASTLOG_ENAB")
+	    && pwd->pw_uid <= (uid_t) getdef_ulong("LASTLOG_UID_MAX", 0xFFFFFFFFUL)) {
 		/* give last login and log this one */
 		dolastlog (&ll, pwd, tty, hostname);
 	}
@@ -1067,16 +1067,16 @@ int main (int argc, char **argv)
 			 * entry for a long time, and there might be other
 			 * getxxyyy in between.
 			 */
-			pw_free (pwd);
-			pwd = xgetpwnam (username);
+			pw_free(pwd);
+			pwd = xgetpwnam(username);
 			if (NULL == pwd) {
 				SYSLOG(LOG_ERR,
 				       "cannot find user %s after update of expired password",
 				       username);
-				exit (1);
+				exit(1);
 			}
-			spw_free (spwd);
-			spwd = xgetspnam (username);
+			spw_free(spwd);
+			spwd = xgetspnam(username);
 		}
 	}
 	setup_limits (pwd);	/* nice, ulimit etc. */
@@ -1088,8 +1088,8 @@ int main (int argc, char **argv)
 	 * We must fork before setuid() because we need to call
 	 * pam_close_session() as root.
 	 */
-	(void) signal (SIGINT, SIG_IGN);
-	child = fork ();
+	(void) signal(SIGINT, SIG_IGN);
+	child = fork();
 	if (child < 0) {
 		/* error in fork() */
 		fprintf(stderr, _("%s: failure forking: %s"), Prog, strerrno());
@@ -1100,9 +1100,9 @@ int main (int argc, char **argv)
 		 * parent - wait for child to finish, then cleanup
 		 * session
 		 */
-		wait (NULL);
+		wait(NULL);
 		PAM_END;
-		exit (0);
+		exit(0);
 	}
 	/* child */
 #endif
@@ -1111,7 +1111,7 @@ int main (int argc, char **argv)
 	if (1 == initial_pid) {
 		setsid();
 		if (ioctl(0, TIOCSCTTY, 1) != 0) {
-			fprintf (stderr, _("TIOCSCTTY failed on %s"), tty);
+			fprintf(stderr, _("TIOCSCTTY failed on %s"), tty);
 		}
 	}
 
@@ -1144,10 +1144,10 @@ int main (int argc, char **argv)
 	/* The group privileges were already dropped.
 	 * See setup_groups() above.
 	 */
-	if (change_uid (pwd))
+	if (change_uid(pwd))
 #endif
 	{
-		exit (1);
+		exit(1);
 	}
 
 	setup_env (pwd);	/* set env vars, cd to the home dir */
@@ -1179,9 +1179,9 @@ int main (int argc, char **argv)
 		if (motd() == -1)
 			exit(EXIT_FAILURE);
 
-		if (   getdef_bool ("FAILLOG_ENAB")
+		if (   getdef_bool("FAILLOG_ENAB")
 		    && (0 != faillog.fail_cnt)) {
-			failprint (&faillog);
+			failprint(&faillog);
 			/* Reset the lockout times if logged in */
 			if (   (0 != faillog.fail_max)
 			    && (faillog.fail_cnt >= faillog.fail_max)) {
@@ -1217,10 +1217,10 @@ int main (int argc, char **argv)
 		mailcheck ();	/* report on the status of mail */
 #endif				/* !USE_PAM */
 	} else {
-		addenv ("HUSHLOGIN=TRUE", NULL);
+		addenv("HUSHLOGIN=TRUE", NULL);
 	}
 
-	ttytype (tty);
+	ttytype(tty);
 
 	(void) signal (SIGQUIT, SIG_DFL);	/* default quit signal */
 	(void) signal (SIGTERM, SIG_DFL);	/* default terminate signal */

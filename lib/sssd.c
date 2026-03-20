@@ -52,7 +52,7 @@ sssd_flush_cache(int dbflags)
 
 	spawnedArgs[1] = sss_cache_args;
 
-	rv = run_command (cmd, spawnedArgs, spawnedEnv, &status);
+	rv = run_command(cmd, spawnedArgs, spawnedEnv, &status);
 	free(sss_cache_args);
 	if (rv != 0) {
 		/* run_command writes its own more detailed message. */

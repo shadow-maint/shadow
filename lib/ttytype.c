@@ -27,7 +27,7 @@
 /*
  * ttytype - set ttytype from port to terminal type mapping database
  */
-void ttytype (const char *line)
+void ttytype(const char *line)
 {
 	FILE *fp;
 	char buf[BUFSIZ];
@@ -35,18 +35,18 @@ void ttytype (const char *line)
 	char type[1024] = "";
 	char port[1024];
 
-	if (getenv ("TERM") != NULL) {
+	if (getenv("TERM") != NULL) {
 		return;
 	}
-	typefile = getdef_str ("TTYTYPE_FILE");
+	typefile = getdef_str("TTYTYPE_FILE");
 	if (NULL == typefile) {
 		return;
 	}
 
-	fp = fopen (typefile, "r");
+	fp = fopen(typefile, "r");
 	if (NULL == fp) {
 		if (errno != ENOENT)
-			perror (typefile);
+			perror(typefile);
 		return;
 	}
 	while (fgets_a(buf, fp) != NULL) {
@@ -56,15 +56,15 @@ void ttytype (const char *line)
 
 		stpsep(buf, "\n");
 
-		if (   (sscanf (buf, "%1023s %1023s", type, port) == 2)
+		if (   (sscanf(buf, "%1023s %1023s", type, port) == 2)
 		    && streq(line, port)) {
 			break;
 		}
 	}
 	if ((feof(fp) == 0) && (ferror(fp) == 0) && !streq(type, "")) {
-		addenv ("TERM", type);
+		addenv("TERM", type);
 	}
 
-	(void) fclose (fp);
+	(void) fclose(fp);
 }
 

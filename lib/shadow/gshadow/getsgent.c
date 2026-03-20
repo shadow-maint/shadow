@@ -24,7 +24,7 @@ struct sgrp *
 getsgent(void)
 {
 	if (NULL == gshadow) {
-		setsgent ();
+		setsgent();
 	}
 	return fgetsgent(gshadow);
 }

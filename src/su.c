@@ -139,22 +139,22 @@ static void set_environment (struct passwd *pw);
  *	with die() as the signal handler. If signal later calls die() with a
  *	signal number, the terminal modes are then reset.
  */
-static void die (int killed)
+static void die(int killed)
 {
 	static TERMIO sgtty;
 
 	if (killed != 0) {
-		STTY (0, &sgtty);
+		STTY(0, &sgtty);
 	} else {
-		GTTY (0, &sgtty);
+		GTTY(0, &sgtty);
 	}
 
 	if (killed != 0) {
-		_exit (128+killed);
+		_exit(128+killed);
 	}
 }
 
-static bool iswheel (const char *username)
+static bool iswheel(const char *username)
 {
 	struct group *grp;
 
@@ -183,7 +183,7 @@ set_timeout(int)
 #endif				/* USE_PAM */
 
 /* borrowed from GNU sh-utils' "su.c" */
-static bool restricted_shell (const char *shellname)
+static bool restricted_shell(const char *shellname)
 {
 	/*@observer@*/const char *line;
 
@@ -203,17 +203,17 @@ static void
 su_failure (const char *tty, bool su_to_root)
 {
 	sulog (tty, false, caller_name, name);	/* log failed attempt */
-	if (getdef_bool ("SYSLOG_SU_ENAB")) {
+	if (getdef_bool("SYSLOG_SU_ENAB")) {
 		SYSLOG(su_to_root ? LOG_NOTICE : LOG_INFO,
 		       "- %s %s:%s", tty,
 		       ('\0' != caller_name[0]) ? caller_name : "???",
 		       ('\0' != name[0]) ? name : "???");
 	}
-	closelog ();
+	closelog();
 
 #ifdef WITH_AUDIT
-	audit_fd = audit_open ();
-	audit_log_acct_message (audit_fd,
+	audit_fd = audit_open();
+	audit_log_acct_message(audit_fd,
 				AUDIT_USER_ROLE_CHANGE,
 				NULL,    /* Prog. name */
 				"su",
@@ -233,15 +233,15 @@ su_failure (const char *tty, bool su_to_root)
  * execve_shell - Execute a shell with execve, or interpret it with
  * /bin/sh
  */
-static void execve_shell (const char *shellname,
+static void execve_shell(const char *shellname,
                           char *args[],
                           char *const envp[])
 {
 	int err;
-	(void) execve (shellname, args, envp);
+	(void) execve(shellname, args, envp);
 	err = errno;
 
-	if (access (shellname, R_OK|X_OK) == 0) {
+	if (access(shellname, R_OK|X_OK) == 0) {
 		/*
 		 * Assume this is a shell script (with no shebang).
 		 * Interpret it with /bin/sh
@@ -254,14 +254,14 @@ static void execve_shell (const char *shellname,
 		targs = xmalloc_T(n_args + 3, char *);
 		targs[0] = "sh";
 		targs[1] = "-";
-		targs[2] = xstrdup (shellname);
+		targs[2] = xstrdup(shellname);
 		targs[n_args+2] = NULL;
 		while (1 != n_args) {
 			targs[n_args+1] = args[n_args - 1];
 			n_args--;
 		}
 
-		(void) execve (SHELL, targs, envp);
+		(void) execve(SHELL, targs, envp);
 	} else {
 		errno = err;
 	}
@@ -280,7 +280,7 @@ static void catch_signals (int sig)
  *	Only the child returns. The parent will wait for the child to
  *	terminate and exit.
  */
-static void prepare_pam_close_session (void)
+static void prepare_pam_close_session(void)
 {
 	sigset_t ourset;
 	int status;
@@ -302,48 +302,48 @@ static void prepare_pam_close_session (void)
 		/* Only the child returns. See above. */
 	}
 
-	pid_child = fork ();
+	pid_child = fork();
 	if (pid_child == 0) {	/* child shell */
 		return; /* Only the child will return from pam_create_session */
 	} else if ((pid_t)-1 == pid_child) {
-		(void) fprintf (stderr,
+		(void) fprintf(stderr,
 		                _("%s: Cannot fork user shell\n"),
 		                Prog);
 		SYSLOG(LOG_WARN, "Cannot execute %s", shellstr);
-		closelog ();
-		exit (1);
+		closelog();
+		exit(1);
 		/* Only the child returns. See above. */
 	}
 
 	/* parent only */
-	sigfillset (&ourset);
-	if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
-		(void) fprintf (stderr,
+	sigfillset(&ourset);
+	if (sigprocmask(SIG_BLOCK, &ourset, NULL) != 0) {
+		(void) fprintf(stderr,
 		                _("%s: signal malfunction\n"),
 		                Prog);
 		caught = SIGTERM;
 	}
 	if (0 == caught) {
 		action.sa_handler = catch_signals;
-		sigemptyset (&ourset);
+		sigemptyset(&ourset);
 
-		if (   (sigaddset (&ourset, SIGTERM) != 0)
-		    || (sigaddset (&ourset, SIGALRM) != 0)
-		    || (sigaction (SIGTERM, &action, NULL) != 0)
+		if (   (sigaddset(&ourset, SIGTERM) != 0)
+		    || (sigaddset(&ourset, SIGALRM) != 0)
+		    || (sigaction(SIGTERM, &action, NULL) != 0)
 		    || (   !doshell /* handle SIGINT (Ctrl-C), SIGQUIT
 		                     * (Ctrl-\), and SIGTSTP (Ctrl-Z)
 		                     * since the child will not control
 		                     * the tty.
 		                     */
-		        && (   (sigaddset (&ourset, SIGINT)  != 0)
-		            || (sigaddset (&ourset, SIGQUIT) != 0)
-		            || (sigaddset (&ourset, SIGTSTP) != 0)
-		            || (sigaction (SIGINT,  &action, NULL) != 0)
-		            || (sigaction (SIGQUIT, &action, NULL) != 0)
-		            || (sigaction (SIGTSTP,  &action, NULL) != 0)))
-		    || (sigprocmask (SIG_UNBLOCK, &ourset, NULL) != 0)
+		        && (   (sigaddset(&ourset, SIGINT)  != 0)
+		            || (sigaddset(&ourset, SIGQUIT) != 0)
+		            || (sigaddset(&ourset, SIGTSTP) != 0)
+		            || (sigaction(SIGINT,  &action, NULL) != 0)
+		            || (sigaction(SIGQUIT, &action, NULL) != 0)
+		            || (sigaction(SIGTSTP,  &action, NULL) != 0)))
+		    || (sigprocmask(SIG_UNBLOCK, &ourset, NULL) != 0)
 		    ) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: signal masking malfunction\n"),
 			         Prog);
 			caught = SIGTERM;
@@ -358,7 +358,7 @@ static void prepare_pam_close_session (void)
 			stop = true;
 
 			do {
-				pid = waitpid (-1, &status, WUNTRACED);
+				pid = waitpid(-1, &status, WUNTRACED);
 			} while (pid != -1 && pid != pid_child);
 
 			/* When interrupted by signal, the signal will be
@@ -374,13 +374,13 @@ static void prepare_pam_close_session (void)
 				 * We will SIGSTOP ourself on the next
 				 * waitpid round.
 				 */
-				kill (pid_child, SIGSTOP);
+				kill(pid_child, SIGSTOP);
 				stop = false;
 			} else if (   ((pid_t)-1 != pid)
-			           && (0 != WIFSTOPPED (status))) {
+			           && (0 != WIFSTOPPED(status))) {
 				/* The child (shell) was suspended.
 				 * Suspend su. */
-				kill (getpid (), SIGSTOP);
+				kill(getpid(), SIGSTOP);
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 				stop = false;
@@ -398,24 +398,24 @@ static void prepare_pam_close_session (void)
 
 		/* Any signals other than SIGCHLD and SIGALRM will no longer have any effect,
 		 * so it's time to block all of them. */
-		sigfillset (&ourset);
-		if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
-			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
+		sigfillset(&ourset);
+		if (sigprocmask(SIG_BLOCK, &ourset, NULL) != 0) {
+			fprintf(stderr, _("%s: signal masking malfunction\n"), Prog);
 			kill_child(pid_child);
 			/* Never reached (exit called). */
 		}
 
 		/* Send SIGKILL to the child if it doesn't
 		 * exit within 2 seconds (after SIGTERM) */
-		(void) signal (SIGALRM, set_timeout);
-		(void) signal (SIGCHLD, catch_signals);
-		(void) alarm (2);
+		(void) signal(SIGALRM, set_timeout);
+		(void) signal(SIGCHLD, catch_signals);
+		(void) alarm(2);
 
-		(void) sigdelset (&ourset, SIGALRM);
-		(void) sigdelset (&ourset, SIGCHLD);
+		(void) sigdelset(&ourset, SIGALRM);
+		(void) sigdelset(&ourset, SIGCHLD);
 
-		while (0 == waitpid (pid_child, &status, WNOHANG)) {
-			sigsuspend (&ourset);
+		while (0 == waitpid(pid_child, &status, WNOHANG)) {
+			sigsuspend(&ourset);
 			if (timeout) {
 				kill_child(pid_child);
 				/* Never reached (exit called). */
@@ -445,10 +445,10 @@ static void prepare_pam_close_session (void)
  * usage - print command line syntax and exit
  */
 NORETURN
-static void usage (int status)
+static void usage(int status)
 {
 	(void)
-	fputs (_("Usage: su [options] [-] [username [args]]\n"
+	fputs(_("Usage: su [options] [-] [username [args]]\n"
 	         "\n"
 	         "Options:\n"
 	         "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -460,51 +460,51 @@ static void usage (int status)
 	         "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
 	         "\n"
 	         "If no username is given, assume root.\n"), (E_SUCCESS != status) ? stderr : stdout);
-	exit (status);
+	exit(status);
 }
 
 #ifdef USE_PAM
-static void check_perms_pam (const struct passwd *pw)
+static void check_perms_pam(const struct passwd *pw)
 {
 	int ret;
-	ret = pam_authenticate (pamh, 0);
+	ret = pam_authenticate(pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(pw->pw_uid ? LOG_NOTICE : LOG_WARN, "pam_authenticate: %s",
 		       pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		(void) pam_end (pamh, ret);
-		su_failure (caller_tty, 0 == pw->pw_uid);
+		fprintf(stderr, _("%s: %s\n"), Prog, pam_strerror(pamh, ret));
+		(void) pam_end(pamh, ret);
+		su_failure(caller_tty, 0 == pw->pw_uid);
 	}
 
-	ret = pam_acct_mgmt (pamh, 0);
+	ret = pam_acct_mgmt(pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		if (caller_is_root) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: %s\n(Ignored)\n"),
-			         Prog, pam_strerror (pamh, ret));
+			         Prog, pam_strerror(pamh, ret));
 		} else if (PAM_NEW_AUTHTOK_REQD == ret) {
-			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
+			ret = pam_chauthtok(pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
 			if (PAM_SUCCESS != ret) {
 				SYSLOG(LOG_ERR, "pam_chauthtok: %s",
 				       pam_strerror(pamh, ret));
-				fprintf (stderr,
+				fprintf(stderr,
 				         _("%s: %s\n"),
-				         Prog, pam_strerror (pamh, ret));
-				(void) pam_end (pamh, ret);
-				su_failure (caller_tty, 0 == pw->pw_uid);
+				         Prog, pam_strerror(pamh, ret));
+				(void) pam_end(pamh, ret);
+				su_failure(caller_tty, 0 == pw->pw_uid);
 			}
 		} else {
 			SYSLOG(LOG_ERR, "pam_acct_mgmt: %s", pam_strerror(pamh, ret));
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: %s\n"),
-			         Prog, pam_strerror (pamh, ret));
-			(void) pam_end (pamh, ret);
-			su_failure (caller_tty, 0 == pw->pw_uid);
+			         Prog, pam_strerror(pamh, ret));
+			(void) pam_end(pamh, ret);
+			su_failure(caller_tty, 0 == pw->pw_uid);
 		}
 	}
 }
 #else				/* !USE_PAM */
-static void check_perms_nopam (const struct passwd *pw)
+static void check_perms_nopam(const struct passwd *pw)
 {
 	/*@observer@*/const struct spwd *spwd = NULL;
 	/*@observer@*/const char *password = pw->pw_passwd;
@@ -549,12 +549,12 @@ static void check_perms_nopam (const struct passwd *pw)
 	 */
 
 	if (   (0 == pw->pw_uid)
-	    && getdef_bool ("SU_WHEEL_ONLY")
-	    && !iswheel (caller_name)) {
-		fprintf (stderr,
+	    && getdef_bool("SU_WHEEL_ONLY")
+	    && !iswheel(caller_name)) {
+		fprintf(stderr,
 		         _("You are not authorized to su %s\n"),
 		         name);
-		exit (1);
+		exit(1);
 	}
 	spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
 #ifdef SU_ACCESS
@@ -575,17 +575,17 @@ static void check_perms_nopam (const struct passwd *pw)
 		password = caller_pass;
 		break;
 	default:	/* access denied (-1) or unexpected value */
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("You are not authorized to su %s\n"),
 		         name);
-		exit (1);
+		exit(1);
 	}
 #endif				/* SU_ACCESS */
 	/*
 	 * Set up a signal handler in case the user types QUIT.
 	 */
-	die (0);
-	oldsig = signal (SIGQUIT, die);
+	die(0);
+	oldsig = signal(SIGQUIT, die);
 
 	/*
 	 * See if the system defined authentication method is being used.
@@ -596,9 +596,9 @@ static void check_perms_nopam (const struct passwd *pw)
 		SYSLOG(pw->pw_uid ? LOG_NOTICE : LOG_WARN,
 		       "Authentication failed for %s", name);
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
-		su_failure (caller_tty, 0 == pw->pw_uid);
+		su_failure(caller_tty, 0 == pw->pw_uid);
 	}
-	(void) signal (SIGQUIT, oldsig);
+	(void) signal(SIGQUIT, oldsig);
 
 	/*
 	 * Check to see if the account is expired. root gets to ignore any
@@ -606,7 +606,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	 * expired password.
 	 */
 	if (NULL != spwd) {
-		(void) expire (pw, spwd);
+		(void) expire(pw, spwd);
 	}
 
 	/*
@@ -615,13 +615,13 @@ static void check_perms_nopam (const struct passwd *pw)
 	 * there is a "SU" entry in the /etc/porttime file denying access to
 	 * the account.
 	 */
-	if (!isttytime (name, "SU", time (NULL))) {
+	if (!isttytime(name, "SU", time(NULL))) {
 		SYSLOG(pw->pw_uid ? LOG_WARN : LOG_CRIT,
 		       "SU by %s to restricted account %s", caller_name, name);
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: You are not authorized to su at that time\n"),
 		         Prog);
-		su_failure (caller_tty, 0 == pw->pw_uid);
+		su_failure(caller_tty, 0 == pw->pw_uid);
 	}
 }
 #endif				/* !USE_PAM */
@@ -658,19 +658,19 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	 * The password file entries for the user is gotten and the account
 	 * validated.
 	 */
-	struct passwd *pw = xgetpwnam (name);
+	struct passwd *pw = xgetpwnam(name);
 	if (NULL == pw) {
-		(void) fprintf (stderr,
+		(void) fprintf(stderr,
 		                _("No passwd entry for user '%s'\n"), name);
 		SYSLOG(LOG_NOTICE, "No passwd entry for user '%s'", name);
-		su_failure (caller_tty, true);
+		su_failure(caller_tty, true);
 	}
 
-	(void) signal (SIGINT, SIG_IGN);
-	(void) signal (SIGQUIT, SIG_IGN);
+	(void) signal(SIGINT, SIG_IGN);
+	(void) signal(SIGQUIT, SIG_IGN);
 
 #ifdef USE_PAM
-	check_perms_pam (pw);
+	check_perms_pam(pw);
 	/* PAM authentication can request a change of account */
 	ret = pam_get_item(pamh, PAM_USER, &item);
 	if (ret != PAM_SUCCESS) {
@@ -745,27 +745,27 @@ save_caller_context(void)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	caller_uid = getuid ();
+	caller_uid = getuid();
 	caller_is_root = (caller_uid == 0);
 
 	/*
 	 * Get the tty name. Entries will be logged indicating that the user
 	 * tried to change to the named new user from the current terminal.
 	 */
-	caller_tty = ttyname (0);
-	if ((isatty (0) != 0) && (NULL != caller_tty)) {
+	caller_tty = ttyname(0);
+	if ((isatty(0) != 0) && (NULL != caller_tty)) {
 #ifndef USE_PAM
-		caller_on_console = console (caller_tty);
+		caller_on_console = console(caller_tty);
 #endif				/* !USE_PAM */
 	} else {
 		/*
 		 * Be more paranoid, like su from SimplePAMApps.  --marekm
 		 */
 		if (!caller_is_root) {
-			fprintf (stderr,
+			fprintf(stderr,
 			         _("%s: must be run from a terminal\n"),
 			         Prog);
-			exit (1);
+			exit(1);
 		}
 		caller_tty = "???";
 	}
@@ -774,12 +774,12 @@ save_caller_context(void)
 	 * Get the user's real name. The current UID is used to determine
 	 * who has executed su. That user ID must exist.
 	 */
-	pw = get_my_pwent ();
+	pw = get_my_pwent();
 	if (NULL == pw) {
-		fprintf (stderr,
+		fprintf(stderr,
 		         _("%s: Cannot determine your user name.\n"),
 		         Prog);
-		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller(UID %lu)",
 		       (unsigned long) caller_uid);
 		su_failure (caller_tty, true); /* unknown target UID*/
 	}
@@ -793,16 +793,16 @@ save_caller_context(void)
 	 */
 	password = pw->pw_passwd;
 	if (streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
-		const struct spwd *spwd = getspnam (caller_name);
+		const struct spwd *spwd = getspnam(caller_name);
 		if (NULL != spwd) {
 			password = spwd->sp_pwdp;
 		}
 	}
-	free (caller_pass);
-	caller_pass = xstrdup (password);
+	free(caller_pass);
+	caller_pass = xstrdup(password);
 #endif				/* SU_ACCESS */
 #endif				/* !USE_PAM */
-	pw_free (pw);
+	pw_free(pw);
 }
 
 
@@ -813,7 +813,7 @@ save_caller_context(void)
  *	the values that the user will be created with accordingly. The
  *	values are checked for sanity.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags(int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
@@ -825,14 +825,14 @@ static void process_flags (int argc, char **argv)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "c:hlmps:",
+	while ((c = getopt_long(argc, argv, "c:hlmps:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'c':
 			command = optarg;
 			break;
 		case 'h':
-			usage (E_SUCCESS);
+			usage(E_SUCCESS);
 			break;
 		case 'l':
 			fakelogin = true;
@@ -881,7 +881,7 @@ static void process_flags (int argc, char **argv)
 	}
 }
 
-static void set_environment (struct passwd *pw)
+static void set_environment(struct passwd *pw)
 {
 	const char *cp;
 	/*
@@ -893,9 +893,9 @@ static void set_environment (struct passwd *pw)
 		 * The terminal type will be left alone if it is present in
 		 * the environment already.
 		 */
-		cp = getenv ("TERM");
+		cp = getenv("TERM");
 		if (NULL != cp) {
-			addenv ("TERM", cp);
+			addenv("TERM", cp);
 		}
 
 		/*
@@ -906,13 +906,13 @@ static void set_environment (struct passwd *pw)
 		 * is also of use when running GNU screen since it sets
 		 * TERM to "screen" but doesn't touch COLORTERM.
 		 */
-		cp = getenv ("COLORTERM");
+		cp = getenv("COLORTERM");
 		if (NULL != cp) {
-			addenv ("COLORTERM", cp);
+			addenv("COLORTERM", cp);
 		}
 
 #ifndef USE_PAM
-		cp = getdef_str ("ENV_TZ");
+		cp = getdef_str("ENV_TZ");
 		if (NULL != cp) {
 			addenv(strprefix(cp, "/") ? tz(cp) : cp, NULL);
 		}
@@ -920,7 +920,7 @@ static void set_environment (struct passwd *pw)
 		/*
 		 * The clock frequency will be reset to the login value if required
 		 */
-		cp = getdef_str ("ENV_HZ");
+		cp = getdef_str("ENV_HZ");
 		if (NULL != cp) {
 			addenv (cp, NULL);	/* set the default $HZ, if one */
 		}
@@ -930,29 +930,29 @@ static void set_environment (struct passwd *pw)
 		 * Also leave DISPLAY and XAUTHORITY if present, else
 		 * pam_xauth will not work.
 		 */
-		cp = getenv ("DISPLAY");
+		cp = getenv("DISPLAY");
 		if (NULL != cp) {
-			addenv ("DISPLAY", cp);
+			addenv("DISPLAY", cp);
 		}
-		cp = getenv ("XAUTHORITY");
+		cp = getenv("XAUTHORITY");
 		if (NULL != cp) {
-			addenv ("XAUTHORITY", cp);
+			addenv("XAUTHORITY", cp);
 		}
 	} else {
 		char **envp = environ;
 		while (NULL != *envp) {
-			addenv (*envp, NULL);
+			addenv(*envp, NULL);
 			envp++;
 		}
 	}
 
-	cp = getdef_str ((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+	cp = getdef_str((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (NULL == cp) {
-		addenv ((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
+		addenv((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
 	} else if (strchr(cp, '=')) {
-		addenv (cp, NULL);
+		addenv(cp, NULL);
 	} else {
-		addenv ("PATH", cp);
+		addenv("PATH", cp);
 	}
 
 	if (getenv ("IFS") != NULL) {	/* don't export user IFS ... */
@@ -1003,7 +1003,7 @@ static void set_environment (struct passwd *pw)
  *	particular, the argument "-c" will cause the next argument to be
  *	interpreted as a command by the common shell programs.
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	const char *cp;
 	struct passwd *pw = NULL;
@@ -1012,48 +1012,48 @@ int main (int argc, char **argv)
 	int ret;
 #endif				/* USE_PAM */
 
-	check_fds ();
+	check_fds();
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
+	(void) setlocale(LC_ALL, "");
+	(void) bindtextdomain(PACKAGE, LOCALEDIR);
+	(void) textdomain(PACKAGE);
 
 	save_caller_context();
 
-	OPENLOG (Prog);
+	OPENLOG(Prog);
 
-	process_flags (argc, argv);
+	process_flags(argc, argv);
 
-	initenv ();
+	initenv();
 
 #ifdef USE_PAM
-	ret = pam_start (Prog, name, &conv, &pamh);
+	ret = pam_start(Prog, name, &conv, &pamh);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_start: error %d", ret);
 		fprintf(stderr, _("%s: pam_start: error %d\n"), Prog, ret);
-		exit (1);
+		exit(1);
 	}
 
-	ret = pam_set_item (pamh, PAM_TTY, caller_tty);
+	ret = pam_set_item(pamh, PAM_TTY, caller_tty);
 	if (PAM_SUCCESS == ret) {
-		ret = pam_set_item (pamh, PAM_RUSER, caller_name);
+		ret = pam_set_item(pamh, PAM_RUSER, caller_name);
 	}
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_set_item: %s", pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		pam_end (pamh, ret);
-		exit (1);
+		fprintf(stderr, _("%s: %s\n"), Prog, pam_strerror(pamh, ret));
+		pam_end(pamh, ret);
+		exit(1);
 	}
 #endif				/* USE_PAM */
 
-	pw = check_perms ();
+	pw = check_perms();
 
 	/* If the user does not want to change the environment,
 	 * use the current SHELL.
 	 * (unless another shell is required by the command line)
 	 */
 	if ((NULL == shellstr) && !change_environment) {
-		shellstr = getenv ("SHELL");
+		shellstr = getenv("SHELL");
 	}
 
 	/* If su is not called by root, and the target user has a
@@ -1061,7 +1061,7 @@ int main (int argc, char **argv)
 	 * must be the one specified in /etc/passwd.
 	 */
 	if (   !caller_is_root
-	    && restricted_shell (pw->pw_shell)) {
+	    && restricted_shell(pw->pw_shell)) {
 		shellstr = NULL;
 		change_environment = true;
 	}
@@ -1089,33 +1089,33 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 	/* set primary group id and supplementary groups */
-	if (setup_groups (pw) != 0) {
-		pam_end (pamh, PAM_ABORT);
-		exit (1);
+	if (setup_groups(pw) != 0) {
+		pam_end(pamh, PAM_ABORT);
+		exit(1);
 	}
 
 	/*
 	 * pam_setcred() may do things like resource limits, console groups,
 	 * and much more, depending on the configured modules
 	 */
-	ret = pam_setcred (pamh, PAM_ESTABLISH_CRED);
+	ret = pam_setcred(pamh, PAM_ESTABLISH_CRED);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_setcred: %s", pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		(void) pam_end (pamh, ret);
-		exit (1);
+		fprintf(stderr, _("%s: %s\n"), Prog, pam_strerror(pamh, ret));
+		(void) pam_end(pamh, ret);
+		exit(1);
 	}
 
-	ret = pam_open_session (pamh, 0);
+	ret = pam_open_session(pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_open_session: %s", pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		pam_setcred (pamh, PAM_DELETE_CRED);
-		(void) pam_end (pamh, ret);
-		exit (1);
+		fprintf(stderr, _("%s: %s\n"), Prog, pam_strerror(pamh, ret));
+		pam_setcred(pamh, PAM_DELETE_CRED);
+		(void) pam_end(pamh, ret);
+		exit(1);
 	}
 
-	prepare_pam_close_session ();
+	prepare_pam_close_session();
 
 	/* become the new user */
 	if (change_uid (pw) != 0) {
@@ -1124,17 +1124,17 @@ int main (int argc, char **argv)
 #else				/* !USE_PAM */
 	/* no limits if su from root (unless su must fake login's behavior) */
 	if (!caller_is_root || fakelogin) {
-		setup_limits (pw);
+		setup_limits(pw);
 	}
 
-	if (setup_uid_gid (pw, caller_on_console) != 0) {
-		exit (1);
+	if (setup_uid_gid(pw, caller_on_console) != 0) {
+		exit(1);
 	}
 #endif				/* !USE_PAM */
 
 #ifdef WITH_AUDIT
-	audit_fd = audit_open ();
-	audit_log_acct_message (audit_fd,
+	audit_fd = audit_open();
+	audit_log_acct_message(audit_fd,
 				AUDIT_USER_ROLE_CHANGE,
 				NULL,    /* Prog. name */
 				"su",
@@ -1160,11 +1160,11 @@ int main (int argc, char **argv)
 		err = setsid ();
 #else
 		/* Otherwise, we cannot use setsid */
-		int fd = open ("/dev/tty", O_RDWR);
+		int fd = open("/dev/tty", O_RDWR);
 
 		if (fd >= 0) {
-			err = ioctl (fd, TIOCNOTTY, (char *) NULL);
-			(void) close (fd);
+			err = ioctl(fd, TIOCNOTTY, (char *) NULL);
+			(void) close(fd);
 		} else if (ENXIO == errno) {
 			/* There are no controlling terminal already */
 			err = 0;
@@ -1192,21 +1192,21 @@ int main (int argc, char **argv)
 	 * F_SETFD, 1)" in libc/misc/syslog.c, but it is commented out (at
 	 * least in 5.4.33). Why?  --marekm
 	 */
-	closelog ();
+	closelog();
 
 	/*
 	 * See if the user has extra arguments on the command line. In that
 	 * case they will be provided to the new user's shell as arguments.
 	 */
 	if (fakelogin) {
-		cp = getdef_str ("SU_NAME");
+		cp = getdef_str("SU_NAME");
 		if (NULL == cp) {
-			cp = Basename (shellstr);
+			cp = Basename(shellstr);
 		}
 
 		cp = xaprintf("-%s", cp);
 	} else {
-		cp = Basename (shellstr);
+		cp = Basename(shellstr);
 	}
 
 	if (!doshell) {
@@ -1223,16 +1223,16 @@ int main (int argc, char **argv)
 		 * with the rest of the command line included.
 		 */
 		argv[-1] = const_cast(char *, cp);
-		execve_shell (shellstr, &argv[-1], environ);
+		execve_shell(shellstr, &argv[-1], environ);
 		err = errno;
-		(void) fprintf (stderr,
+		(void) fprintf(stderr,
 		                _("Cannot execute %s\n"), shellstr);
 		errno = err;
 	} else {
-		(void) shell (shellstr, cp, environ);
+		(void) shell(shellstr, cp, environ);
 	}
 
-	pw_free (pw);
+	pw_free(pw);
 
 	return (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 }

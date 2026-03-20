@@ -35,7 +35,7 @@
  * preferred_min: the special-case minimum value for a specifically-
  * requested ID, which may be lower than the standard min_id
  */
-static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
+static int get_ranges(bool sys_group, gid_t *min_id, gid_t *max_id,
 		       gid_t *preferred_min)
 {
 	gid_t gid_def_max = 0;
@@ -53,8 +53,8 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
 		 * If SYS_GID_MAX is unspecified, we should assume it to be one
 		 * less than the GID_MIN (which is reserved for non-system accounts)
 		 */
-		gid_def_max = getdef_ulong ("GID_MIN", 1000UL) - 1;
-		*max_id = getdef_ulong ("SYS_GID_MAX", gid_def_max);
+		gid_def_max = getdef_ulong("GID_MIN", 1000UL) - 1;
+		*max_id = getdef_ulong("SYS_GID_MAX", gid_def_max);
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
@@ -77,8 +77,8 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
 		/* Non-system groups */
 
 		/* Get the values from login.defs or use reasonable defaults */
-		*min_id = getdef_ulong ("GID_MIN", 1000UL);
-		*max_id = getdef_ulong ("GID_MAX", 60000UL);
+		*min_id = getdef_ulong("GID_MIN", 1000UL);
+		*max_id = getdef_ulong("GID_MAX", 60000UL);
 
 		/*
 		 * The preferred minimum should match the standard ID minimum
@@ -109,7 +109,7 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
  * If the ID is outside the range, return ERANGE
  * In other cases, return errno from getgrgid()
  */
-static int check_gid (const gid_t gid,
+static int check_gid(const gid_t gid,
 		      const gid_t gid_min,
 		      const gid_t gid_max,
 		      const bool *used_gids)
@@ -157,7 +157,7 @@ static int check_gid (const gid_t gid,
  *
  * Return 0 on success, -1 if no unused GIDs are available.
  */
-int find_new_gid (bool sys_group,
+int find_new_gid(bool sys_group,
                  gid_t *gid,
                  /*@null@*/gid_t const *preferred_gid)
 {
@@ -175,7 +175,7 @@ int find_new_gid (bool sys_group,
 	 * First, figure out what ID range is appropriate for
 	 * automatic assignment
 	 */
-	result = get_ranges (sys_group, &gid_min, &gid_max, &preferred_min);
+	result = get_ranges(sys_group, &gid_min, &gid_max, &preferred_min);
 	if (result == EINVAL) {
 		return -1;
 	}
@@ -187,7 +187,7 @@ int find_new_gid (bool sys_group,
 			/*
 			 * Make sure the GID isn't queued for use already
 			 */
-			if (gr_locate_gid (*preferred_gid) == NULL) {
+			if (gr_locate_gid(*preferred_gid) == NULL) {
 				*gid = *preferred_gid;
 				return 0;
 			}
@@ -210,10 +210,10 @@ int find_new_gid (bool sys_group,
 			 * more likely to want to stop and address the
 			 * issue.
 			 */
-			fprintf (log_get_logfd(),
+			fprintf(log_get_logfd(),
 				_("%s: Encountered error attempting to use "
 				  "preferred GID: %s\n"),
-				log_get_progname(), strerror (result));
+				log_get_progname(), strerror(result));
 			return -1;
 		}
 	}
@@ -247,7 +247,7 @@ int find_new_gid (bool sys_group,
 	}
 
 	/* First look for the lowest and highest value in the local database */
-	(void) gr_rewind ();
+	(void) gr_rewind();
 	highest_found = gid_min;
 	lowest_found = gid_max;
 	while (NULL != (grp = gr_next())) {
@@ -306,7 +306,7 @@ int find_new_gid (bool sys_group,
 			if (result == 0) {
 				/* This GID is available. Return it. */
 				*gid = id;
-				free (used_gids);
+				free(used_gids);
 				return 0;
 			} else if (result == EEXIST || result == EINVAL) {
 				/*
@@ -322,10 +322,10 @@ int find_new_gid (bool sys_group,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (log_get_logfd(),
-						_("%s: Can't get unique system GID (%s). "
+					fprintf(log_get_logfd(),
+						_("%s: Can't get unique system GID(%s). "
 						  "Suppressing additional messages.\n"),
-						log_get_progname(), strerror (result));
+						log_get_progname(), strerror(result));
 					SYSLOG(LOG_ERR,
 						"Error checking available GIDs: %s",
 						strerror(result));
@@ -348,7 +348,7 @@ int find_new_gid (bool sys_group,
 		 */
 		if (lowest_found != gid_max) {
 			for (id = gid_max; id >= gid_min; id--) {
-				result = check_gid (id, gid_min, gid_max, used_gids);
+				result = check_gid(id, gid_min, gid_max, used_gids);
 				if (result == 0) {
 					/* This GID is available. Return it. */
 					*gid = id;
@@ -368,10 +368,10 @@ int find_new_gid (bool sys_group,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (log_get_logfd(),
-							_("%s: Can't get unique system GID (%s). "
+						fprintf(log_get_logfd(),
+							_("%s: Can't get unique system GID(%s). "
 							  "Suppressing additional messages.\n"),
-							log_get_progname(), strerror (result));
+							log_get_progname(), strerror(result));
 						SYSLOG(LOG_ERR,
 							"Error checking available GIDs: %s",
 							strerror(result));
@@ -415,7 +415,7 @@ int find_new_gid (bool sys_group,
 			if (result == 0) {
 				/* This GID is available. Return it. */
 				*gid = id;
-				free (used_gids);
+				free(used_gids);
 				return 0;
 			} else if (result == EEXIST || result == EINVAL) {
 				/*
@@ -431,10 +431,10 @@ int find_new_gid (bool sys_group,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (log_get_logfd(),
-						_("%s: Can't get unique GID (%s). "
+					fprintf(log_get_logfd(),
+						_("%s: Can't get unique GID(%s). "
 						  "Suppressing additional messages.\n"),
-						log_get_progname(), strerror (result));
+						log_get_progname(), strerror(result));
 					SYSLOG(LOG_ERR,
 						"Error checking available GIDs: %s",
 						strerror(result));
@@ -457,7 +457,7 @@ int find_new_gid (bool sys_group,
 		 */
 		if (highest_found != gid_min) {
 			for (id = gid_min; id <= gid_max; id++) {
-				result = check_gid (id, gid_min, gid_max, used_gids);
+				result = check_gid(id, gid_min, gid_max, used_gids);
 				if (result == 0) {
 					/* This GID is available. Return it. */
 					*gid = id;
@@ -477,10 +477,10 @@ int find_new_gid (bool sys_group,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (log_get_logfd(),
-							_("%s: Can't get unique GID (%s). "
+						fprintf(log_get_logfd(),
+							_("%s: Can't get unique GID(%s). "
 							  "Suppressing additional messages.\n"),
-							log_get_progname(), strerror (result));
+							log_get_progname(), strerror(result));
 						SYSLOG(LOG_ERR,
 							"Error checking available GIDs: %s",
 							strerror(result));

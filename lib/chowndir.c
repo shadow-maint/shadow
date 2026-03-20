@@ -22,7 +22,7 @@
 #include "string/strcmp/streq.h"
 
 
-static int chown_tree_at (int at_fd,
+static int chown_tree_at(int at_fd,
                 const char *path,
                 uid_t old_uid,
                 uid_t new_uid,
@@ -34,14 +34,14 @@ static int chown_tree_at (int at_fd,
 	struct stat dir_sb;
 	int dir_fd, rc = 0;
 
-	dir_fd = openat (at_fd, path, O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC);
+	dir_fd = openat(at_fd, path, O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC);
 	if (dir_fd < 0) {
 		return -1;
 	}
 
-	dir = fdopendir (dir_fd);
+	dir = fdopendir(dir_fd);
 	if (!dir) {
-		(void) close (dir_fd);
+		(void) close(dir_fd);
 		return -1;
 	}
 
@@ -51,7 +51,7 @@ static int chown_tree_at (int at_fd,
 	 * recursively.  If not, it is checked to see if an ownership
 	 * shall be changed.
 	 */
-	while ((ent = readdir (dir))) {
+	while ((ent = readdir(dir))) {
 		uid_t tmpuid = (uid_t) -1;
 		gid_t tmpgid = (gid_t) -1;
 		struct stat ent_sb;
@@ -64,16 +64,16 @@ static int chown_tree_at (int at_fd,
 			continue;
 		}
 
-		rc = fstatat (dirfd(dir), ent->d_name, &ent_sb, AT_SYMLINK_NOFOLLOW);
+		rc = fstatat(dirfd(dir), ent->d_name, &ent_sb, AT_SYMLINK_NOFOLLOW);
 		if (rc < 0) {
 			break;
 		}
 
-		if (S_ISDIR (ent_sb.st_mode)) {
+		if (S_ISDIR(ent_sb.st_mode)) {
 			/*
 			 * Do the entire subdirectory.
 			 */
-			rc = chown_tree_at (dirfd(dir), ent->d_name, old_uid, new_uid, old_gid, new_gid);
+			rc = chown_tree_at(dirfd(dir), ent->d_name, old_uid, new_uid, old_gid, new_gid);
 			if (0 != rc) {
 				break;
 			}
@@ -95,7 +95,7 @@ static int chown_tree_at (int at_fd,
 			tmpgid = new_gid;
 		}
 		if (((uid_t) -1 != tmpuid) || ((gid_t) -1 != tmpgid)) {
-			rc = fchownat (dirfd(dir), ent->d_name, tmpuid, tmpgid, AT_SYMLINK_NOFOLLOW);
+			rc = fchownat(dirfd(dir), ent->d_name, tmpuid, tmpgid, AT_SYMLINK_NOFOLLOW);
 			if (0 != rc) {
 				break;
 			}
@@ -105,7 +105,7 @@ static int chown_tree_at (int at_fd,
 	/*
 	 * Now do the root of the tree
 	 */
-	if ((0 == rc) && (fstat (dirfd(dir), &dir_sb) == 0)) {
+	if ((0 == rc) && (fstat(dirfd(dir), &dir_sb) == 0)) {
 		uid_t tmpuid = (uid_t) -1;
 		gid_t tmpgid = (gid_t) -1;
 		if (((uid_t) -1 == old_uid) || (dir_sb.st_uid == old_uid)) {
@@ -115,13 +115,13 @@ static int chown_tree_at (int at_fd,
 			tmpgid = new_gid;
 		}
 		if (((uid_t) -1 != tmpuid) || ((gid_t) -1 != tmpgid)) {
-			rc = fchown (dirfd(dir), tmpuid, tmpgid);
+			rc = fchown(dirfd(dir), tmpuid, tmpgid);
 		}
 	} else {
 		rc = -1;
 	}
 
-	(void) closedir (dir);
+	(void) closedir(dir);
 
 	return rc;
 }
@@ -139,11 +139,11 @@ static int chown_tree_at (int at_fd,
  *	new_uid and new_gid can be set to -1 to indicate that no owner or
  *	group-owner shall be changed.
  */
-int chown_tree (const char *root,
+int chown_tree(const char *root,
                 uid_t old_uid,
                 uid_t new_uid,
                 gid_t old_gid,
                 gid_t new_gid)
 {
-	return chown_tree_at (AT_FDCWD, root, old_uid, new_uid, old_gid, new_gid);
+	return chown_tree_at(AT_FDCWD, root, old_uid, new_uid, old_gid, new_gid);
 }

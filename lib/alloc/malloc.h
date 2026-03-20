@@ -19,7 +19,7 @@
 #define malloc_T(n, T)   malloc_T_(n, typeas(T))
 #define malloc_T_(n, T)                                               \
 ({                                                                    \
-	(T *){mallocarray(n, sizeof(T))};                             \
+	(T *){mallocarray(n, sizeof (T))};                             \
 })
 
 

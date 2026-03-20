@@ -15,14 +15,14 @@
 #include <sys/resource.h>
 #include "prototypes.h"
 
-int set_filesize_limit (int blocks)
+int set_filesize_limit(int blocks)
 {
 	int ret = -1;
 	struct rlimit rlimit_fsize;
 
 	rlimit_fsize.rlim_cur = 512L * blocks;
 	rlimit_fsize.rlim_max = rlimit_fsize.rlim_cur;
-	ret = setrlimit (RLIMIT_FSIZE, &rlimit_fsize);
+	ret = setrlimit(RLIMIT_FSIZE, &rlimit_fsize);
 
 	return ret;
 }
