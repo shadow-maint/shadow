@@ -163,7 +163,7 @@ strdup/ - Memory duplication
 	Like strndup(3), but takes an array.
 
   m/
-    memdup()  // Unimplemented
+    memdup()
 	Duplicate an object.  Returns a pointer to the dup.
     memdup_T()
 	Like memdup(), but with type-safety checks.
