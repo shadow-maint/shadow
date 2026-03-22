@@ -40,7 +40,7 @@
 # define ATTR_ALLOC_SIZE(...)
 #endif
 
-#if (__GNUC__ >= 11) && !defined(__clang__)
+#if (__GNUC__ >= 11) && !defined(__clang__) && !defined(__MCST__)
 # define ATTR_MALLOC(deallocator)    [[gnu::malloc(deallocator)]]
 #else
 # define ATTR_MALLOC(deallocator)
