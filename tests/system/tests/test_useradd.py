@@ -331,11 +331,18 @@ def test_useradd__add_user_with_existing_uid(shadow: Shadow):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_useradd__invalid_numeric_primary_group(shadow: Shadow):
+@pytest.mark.parametrize(
+    "group_identifier",
+    [
+        pytest.param(4242, id="invalid_numeric_gid"),
+        pytest.param("nekral", id="invalid_named_group"),
+    ],
+)
+def test_useradd__invalid_primary_group(shadow: Shadow, group_identifier: int | str):
     """
-    :title: Add a new user with a specified non-existing gid
+    :title: Add a new user with a specified non-existing primary group
     :steps:
-        1. Attempt to create user with -g 4242 option
+        1. Attempt to create user with -g {group_identifier} option
         2. Verify command fails with appropriate error code and message
         3. Check passwd and group entries
         4. Check home directory
@@ -347,7 +354,7 @@ def test_useradd__invalid_numeric_primary_group(shadow: Shadow):
     :customerscenario: False
     """
     with pytest.raises(ProcessError) as exc_info:
-        shadow.useradd("test1 -g 4242")
+        shadow.useradd(f"test1 -g {group_identifier}")
 
     actual_rc = getattr(exc_info.value, "rc", getattr(exc_info.value, "returncode", None))
     assert actual_rc == 6, f"Expected return code 6 (specified group doesn't exist), got {actual_rc}"
