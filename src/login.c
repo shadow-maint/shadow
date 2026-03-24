@@ -801,7 +801,13 @@ int main (int argc, char **argv)
  	/* Open the PAM session */
 	get_pam_user (&pam_user);
 	retcode = pam_open_session (pamh, hushed (pam_user) ? PAM_SILENT : 0);
-	PAM_FAIL_CHECK;
+	if (retcode != PAM_SUCCESS) {
+		fprintf(stderr,"\n%s\n", pam_strerror(pamh, retcode));
+		SYSLOG(LOG_ERR,"%s",pam_strerror(pamh, retcode));
+		pam_setcred(pamh, PAM_DELETE_CRED);
+		pam_end(pamh, retcode);
+		exit(1);
+	}
 
 #else				/* ! USE_PAM */
 	while (true) {	/* repeatedly get login/password pairs */
