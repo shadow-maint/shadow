@@ -18,7 +18,6 @@ man_MANS = \
 	man1/gpasswd.1 \
 	man8/groupadd.8 \
 	man8/groupdel.8 \
-	man8/groupmems.8 \
 	man8/groupmod.8 \
 	man8/grpck.8 \
 	man8/grpconv.8 \
@@ -84,7 +83,6 @@ man_XMANS = \
 	gpasswd.1.xml \
 	groupadd.8.xml \
 	groupdel.8.xml \
-	groupmems.8.xml \
 	groupmod.8.xml \
 	grpck.8.xml \
 	gshadow.5.xml \

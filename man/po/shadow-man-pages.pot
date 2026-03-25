@@ -92,7 +92,6 @@ msgstr ""
 #: gpasswd.1.xml.out:27
 #: groupadd.8.xml.out:23
 #: groupdel.8.xml.out:21
-#: groupmems.8.xml.out:24
 #: groupmod.8.xml.out:21
 #: groups.1.xml.out:20
 #: grpck.8.xml.out:20
@@ -132,7 +131,6 @@ msgstr ""
 #: gpasswd.1.xml.out:28
 #: groupadd.8.xml.out:24
 #: groupdel.8.xml.out:22
-#: groupmems.8.xml.out:25
 #: groupmod.8.xml.out:22
 #: groups.1.xml.out:21
 #: grpck.8.xml.out:21
@@ -172,7 +170,6 @@ msgstr ""
 #: gpasswd.1.xml.out:29
 #: groupadd.8.xml.out:25
 #: groupdel.8.xml.out:23
-#: groupmems.8.xml.out:26
 #: groupmod.8.xml.out:23
 #: groups.1.xml.out:22
 #: grpck.8.xml.out:22
@@ -211,7 +208,6 @@ msgstr ""
 #: gpasswd.1.xml.out:30
 #: groupadd.8.xml.out:26
 #: groupdel.8.xml.out:24
-#: groupmems.8.xml.out:27
 #: groupmod.8.xml.out:24
 #: groups.1.xml.out:23
 #: grpck.8.xml.out:23
@@ -251,7 +247,6 @@ msgstr ""
 #: gpasswd.1.xml.out:33
 #: groupadd.8.xml.out:29
 #: groupdel.8.xml.out:27
-#: groupmems.8.xml.out:30
 #: groupmod.8.xml.out:27
 #: groups.1.xml.out:26
 #: grpck.8.xml.out:26
@@ -293,7 +288,6 @@ msgstr ""
 #: gpasswd.1.xml.out:34
 #: groupadd.8.xml.out:30
 #: groupdel.8.xml.out:28
-#: groupmems.8.xml.out:31
 #: groupmod.8.xml.out:28
 #: groups.1.xml.out:27
 #: grpck.8.xml.out:27
@@ -335,7 +329,6 @@ msgstr ""
 #: gpasswd.1.xml.out:35
 #: groupadd.8.xml.out:31
 #: groupdel.8.xml.out:29
-#: groupmems.8.xml.out:32
 #: groupmod.8.xml.out:29
 #: groups.1.xml.out:28
 #: grpck.8.xml.out:28
@@ -377,7 +370,6 @@ msgstr ""
 #: gpasswd.1.xml.out:36
 #: groupadd.8.xml.out:32
 #: groupdel.8.xml.out:30
-#: groupmems.8.xml.out:33
 #: groupmod.8.xml.out:30
 #: groups.1.xml.out:29
 #: grpck.8.xml.out:29
@@ -452,9 +444,6 @@ msgstr ""
 #: groupdel.8.xml.out:205
 #: groupdel.8.xml.out:208
 #: groupdel.8.xml.out:211
-#: groupmems.8.xml.out:209
-#: groupmems.8.xml.out:212
-#: groupmems.8.xml.out:215
 #: groupmod.8.xml.out:326
 #: groupmod.8.xml.out:329
 #: groupmod.8.xml.out:332
@@ -554,7 +543,6 @@ msgstr ""
 #: gpasswd.1.xml.out:43
 #: groupadd.8.xml.out:39
 #: groupdel.8.xml.out:37
-#: groupmems.8.xml.out:40
 #: groupmod.8.xml.out:37
 #: groups.1.xml.out:36
 #: grpck.8.xml.out:36
@@ -596,7 +584,6 @@ msgstr ""
 #: gpasswd.1.xml.out:44
 #: groupadd.8.xml.out:40
 #: groupdel.8.xml.out:38
-#: groupmems.8.xml.out:41
 #: groupmod.8.xml.out:38
 #: groups.1.xml.out:37
 #: grpck.8.xml.out:37
@@ -692,7 +679,6 @@ msgstr ""
 #: gpasswd.1.xml.out:72
 #: groupadd.8.xml.out:60
 #: groupdel.8.xml.out:56
-#: groupmems.8.xml.out:61
 #: groupmod.8.xml.out:56
 #: groups.1.xml.out:54
 #: grpck.8.xml.out:58
@@ -741,7 +727,6 @@ msgstr ""
 #: groupadd.8.xml.out:51
 #: groupadd.8.xml.out:80
 #: groupdel.8.xml.out:64
-#: groupmems.8.xml.out:76
 #: groupmod.8.xml.out:65
 #: grpck.8.xml.out:122
 #: lastlog.8.xml.out:68
@@ -768,7 +753,6 @@ msgstr ""
 #: gpasswd.1.xml.out:120
 #: groupadd.8.xml.out:81
 #: groupdel.8.xml.out:65
-#: groupmems.8.xml.out:77
 #: groupmod.8.xml.out:66
 #: grpck.8.xml.out:127
 #: lastlog.8.xml.out:69
@@ -786,7 +770,6 @@ msgstr ""
 #. (itstool) path: para/option
 #: chage.1.xml.out:74
 #: gpasswd.1.xml.out:139
-#: groupmems.8.xml.out:94
 #: passwd.1.xml.out:164
 #: useradd.8.xml.out:123
 #: useradd.8.xml.out:151
@@ -844,10 +827,6 @@ msgstr ""
 #: groupadd.8.xml.out:213
 #: groupdel.8.xml.out:88
 #: groupdel.8.xml.out:101
-#: groupmems.8.xml.out:83
-#: groupmems.8.xml.out:94
-#: groupmems.8.xml.out:110
-#: groupmems.8.xml.out:141
 #: groupmod.8.xml.out:72
 #: groupmod.8.xml.out:81
 #: groupmod.8.xml.out:120
@@ -995,7 +974,6 @@ msgstr ""
 #: gpasswd.1.xml.out:151
 #: groupadd.8.xml.out:118
 #: groupdel.8.xml.out:82
-#: groupmems.8.xml.out:118
 #: groupmod.8.xml.out:114
 #: grpck.8.xml.out:132
 #: lastlog.8.xml.out:96
@@ -1022,7 +1000,6 @@ msgstr ""
 #: gpasswd.1.xml.out:151
 #: groupadd.8.xml.out:118
 #: groupdel.8.xml.out:82
-#: groupmems.8.xml.out:118
 #: groupmod.8.xml.out:114
 #: grpck.8.xml.out:132
 #: lastlog.8.xml.out:96
@@ -1064,9 +1041,6 @@ msgstr ""
 #: groupadd.8.xml.out:228
 #: groupdel.8.xml.out:71
 #: groupdel.8.xml.out:82
-#: groupmems.8.xml.out:118
-#: groupmems.8.xml.out:124
-#: groupmems.8.xml.out:130
 #: groupmod.8.xml.out:114
 #: groupmod.8.xml.out:131
 #: groupmod.8.xml.out:193
@@ -1136,7 +1110,6 @@ msgstr ""
 #: gpasswd.1.xml.out:153
 #: groupadd.8.xml.out:120
 #: groupdel.8.xml.out:84
-#: groupmems.8.xml.out:120
 #: groupmod.8.xml.out:116
 #: grpck.8.xml.out:134
 #: lastlog.8.xml.out:99
@@ -1215,8 +1188,6 @@ msgstr ""
 #: faillog.8.xml.out:105
 #: faillog.8.xml.out:185
 #: faillog.8.xml.out:202
-#: groupmems.8.xml.out:55
-#: groupmems.8.xml.out:124
 #: passwd.1.xml.out:218
 #: passwd.1.xml.out:327
 #: su.1.xml.out:144
@@ -1228,7 +1199,6 @@ msgstr ""
 
 #. (itstool) path: term/option
 #: chage.1.xml.out:147
-#: groupmems.8.xml.out:124
 msgid "--list"
 msgstr ""
 
@@ -1337,7 +1307,6 @@ msgstr ""
 #: gpasswd.1.xml.out:191
 #: groupadd.8.xml.out:201
 #: groupdel.8.xml.out:89
-#: groupmems.8.xml.out:142
 #: groupmod.8.xml.out:164
 #: grpck.8.xml.out:149
 #: lastlog.8.xml.out:104
@@ -1362,7 +1331,6 @@ msgstr ""
 #: gpasswd.1.xml.out:160
 #: groupadd.8.xml.out:201
 #: groupdel.8.xml.out:89
-#: groupmems.8.xml.out:142
 #: groupmod.8.xml.out:164
 #: grpck.8.xml.out:149
 #: lastlog.8.xml.out:104
@@ -1406,9 +1374,6 @@ msgstr ""
 #: groupdel.8.xml.out:89
 #: groupdel.8.xml.out:93
 #: groupdel.8.xml.out:95
-#: groupmems.8.xml.out:142
-#: groupmems.8.xml.out:146
-#: groupmems.8.xml.out:148
 #: groupmod.8.xml.out:164
 #: groupmod.8.xml.out:168
 #: groupmod.8.xml.out:170
@@ -1455,7 +1420,6 @@ msgstr ""
 #: gpasswd.1.xml.out:163
 #: groupadd.8.xml.out:204
 #: groupdel.8.xml.out:92
-#: groupmems.8.xml.out:145
 #: groupmod.8.xml.out:167
 #: grpck.8.xml.out:152
 #: lastlog.8.xml.out:107
@@ -1625,7 +1589,6 @@ msgstr ""
 #: gpasswd.1.xml.out:243
 #: groupadd.8.xml.out:247
 #: groupdel.8.xml.out:133
-#: groupmems.8.xml.out:176
 #: groupmod.8.xml.out:212
 #: grpck.8.xml.out:196
 #: lastlog.8.xml.out:182
@@ -1671,7 +1634,6 @@ msgstr ""
 #: groupadd.8.xml.out:250
 #: groupadd.8.xml.out:276
 #: groupdel.8.xml.out:136
-#: groupmems.8.xml.out:179
 #: groupmod.8.xml.out:109
 #: groupmod.8.xml.out:204
 #: groupmod.8.xml.out:215
@@ -1731,7 +1693,6 @@ msgstr ""
 #: gpasswd.1.xml.out:244
 #: groupadd.8.xml.out:248
 #: groupdel.8.xml.out:134
-#: groupmems.8.xml.out:177
 #: groupmod.8.xml.out:213
 #: grpck.8.xml.out:197
 #: lastlog.8.xml.out:183
@@ -1760,7 +1721,6 @@ msgstr ""
 #: gpasswd.1.xml.out:258
 #: groupadd.8.xml.out:261
 #: groupdel.8.xml.out:145
-#: groupmems.8.xml.out:188
 #: groupmod.8.xml.out:224
 #: groups.1.xml.out:77
 #: grpck.8.xml.out:208
@@ -2010,7 +1970,6 @@ msgstr ""
 #: gpasswd.1.xml.out:276
 #: groupadd.8.xml.out:343
 #: groupdel.8.xml.out:202
-#: groupmems.8.xml.out:206
 #: groupmod.8.xml.out:323
 #: groups.1.xml.out:89
 #: grpck.8.xml.out:277
@@ -2054,7 +2013,6 @@ msgstr ""
 #: chsh.1.xml.out:218
 #: groupadd.8.xml.out:351
 #: groupdel.8.xml.out:211
-#: groupmems.8.xml.out:215
 #: groupmod.8.xml.out:332
 #: grpck.8.xml.out:291
 #: lastlog.8.xml.out:176
@@ -2243,7 +2201,6 @@ msgstr ""
 #: chsh.1.xml.out:212
 #: groupadd.8.xml.out:345
 #: groupdel.8.xml.out:205
-#: groupmems.8.xml.out:209
 #: groupmod.8.xml.out:326
 #: login.defs.5.xml.out:243
 #: useradd.8.xml.out:898
@@ -2479,7 +2436,6 @@ msgstr ""
 #: chsh.1.xml.out:109
 #: groupadd.8.xml.out:348
 #: groupdel.8.xml.out:208
-#: groupmems.8.xml.out:212
 #: groupmod.8.xml.out:329
 #: login.defs.5.xml.out:280
 #: useradd.8.xml.out:901
@@ -2575,12 +2531,6 @@ msgstr ""
 #: groupdel.8.xml.out:223
 #: groupdel.8.xml.out:226
 #: groupdel.8.xml.out:229
-#: groupmems.8.xml.out:38
-#: groupmems.8.xml.out:218
-#: groupmems.8.xml.out:221
-#: groupmems.8.xml.out:224
-#: groupmems.8.xml.out:227
-#: groupmems.8.xml.out:230
 #: groupmod.8.xml.out:35
 #: groupmod.8.xml.out:335
 #: groupmod.8.xml.out:338
@@ -2658,7 +2608,6 @@ msgstr ""
 #: faillog.8.xml.out:35
 #: groupadd.8.xml.out:38
 #: groupdel.8.xml.out:36
-#: groupmems.8.xml.out:39
 #: groupmod.8.xml.out:36
 #: grpck.8.xml.out:35
 #: lastlog.8.xml.out:37
@@ -2688,8 +2637,6 @@ msgstr ""
 #. (itstool) path: arg/replaceable
 #. (itstool) path: term/replaceable
 #: chgpasswd.8.xml.out:63
-#: groupmems.8.xml.out:54
-#: groupmems.8.xml.out:110
 msgid "group_name"
 msgstr ""
 
@@ -3009,7 +2956,6 @@ msgstr ""
 #: groupadd.8.xml.out:170
 #: groupadd.8.xml.out:264
 #: groupdel.8.xml.out:148
-#: groupmems.8.xml.out:191
 #: groupmod.8.xml.out:227
 #: groups.1.xml.out:58
 #: groups.1.xml.out:70
@@ -3045,7 +2991,6 @@ msgstr ""
 #: gpasswd.1.xml.out:263
 #: groupadd.8.xml.out:266
 #: groupdel.8.xml.out:150
-#: groupmems.8.xml.out:193
 #: groupmod.8.xml.out:229
 #: groups.1.xml.out:82
 #: grpck.8.xml.out:213
@@ -3071,14 +3016,6 @@ msgstr ""
 #: groupadd.8.xml.out:170
 #: groupadd.8.xml.out:270
 #: groupdel.8.xml.out:154
-#: groupmems.8.xml.out:87
-#: groupmems.8.xml.out:88
-#: groupmems.8.xml.out:98
-#: groupmems.8.xml.out:103
-#: groupmems.8.xml.out:104
-#: groupmems.8.xml.out:134
-#: groupmems.8.xml.out:135
-#: groupmems.8.xml.out:197
 #: groupmod.8.xml.out:233
 #: grpck.8.xml.out:63
 #: grpck.8.xml.out:93
@@ -3157,7 +3094,6 @@ msgstr ""
 #: groupadd.8.xml.out:292
 #: groupadd.8.xml.out:300
 #: groupdel.8.xml.out:217
-#: groupmems.8.xml.out:218
 #: groupmod.8.xml.out:338
 #: login.defs.5.xml.out:303
 #: useradd.8.xml.out:910
@@ -3217,10 +3153,6 @@ msgstr ""
 #. (itstool) path: arg/replaceable
 #. (itstool) path: term/replaceable
 #: chpasswd.8.xml.out:67
-#: groupmems.8.xml.out:52
-#: groupmems.8.xml.out:53
-#: groupmems.8.xml.out:83
-#: groupmems.8.xml.out:94
 msgid "user_name"
 msgstr ""
 
@@ -3335,7 +3267,6 @@ msgstr ""
 #: chpasswd.8.xml.out:318
 #: groupadd.8.xml.out:366
 #: groupdel.8.xml.out:223
-#: groupmems.8.xml.out:224
 #: groupmod.8.xml.out:347
 #: login.defs.5.xml.out:481
 #: newusers.8.xml.out:488
@@ -3625,7 +3556,6 @@ msgstr ""
 #: faillog.8.xml.out:72
 #: faillog.8.xml.out:215
 #: gpasswd.1.xml.out:126
-#: groupmems.8.xml.out:83
 #: groupmod.8.xml.out:73
 #: passwd.1.xml.out:153
 #: usermod.8.xml.out:78
@@ -3716,7 +3646,6 @@ msgstr ""
 
 #. (itstool) path: para/emphasis
 #: faillog.8.xml.out:134
-#: groupmems.8.xml.out:160
 #: porttime.5.xml.out:85
 msgid "root"
 msgstr ""
@@ -4020,7 +3949,6 @@ msgstr ""
 
 #. (itstool) path: term/option
 #: gpasswd.1.xml.out:126
-#: groupmems.8.xml.out:83
 msgid "--add"
 msgstr ""
 
@@ -4045,7 +3973,6 @@ msgstr ""
 
 #. (itstool) path: term/option
 #: gpasswd.1.xml.out:139
-#: groupmems.8.xml.out:94
 #: passwd.1.xml.out:164
 msgid "--delete"
 msgstr ""
@@ -4135,7 +4062,6 @@ msgstr ""
 #: groupdel.8.xml.out:57
 #: groupdel.8.xml.out:66
 #: groupdel.8.xml.out:165
-#: groupmems.8.xml.out:221
 #: groupmod.8.xml.out:341
 #: login.defs.5.xml.out:312
 #: useradd.8.xml.out:913
@@ -4259,7 +4185,6 @@ msgstr ""
 #: groupadd.8.xml.out:95
 #: groupadd.8.xml.out:102
 #: groupadd.8.xml.out:236
-#: groupmems.8.xml.out:110
 #: groupmod.8.xml.out:82
 #: groupmod.8.xml.out:136
 #: groupmod.8.xml.out:201
@@ -4432,8 +4357,6 @@ msgstr ""
 #. (itstool) path: cmdsynopsis/arg
 #. (itstool) path: para/option
 #: groupadd.8.xml.out:158
-#: groupmems.8.xml.out:55
-#: groupmems.8.xml.out:130
 #: groupmod.8.xml.out:143
 #: login.1.xml.out:80
 #: login.1.xml.out:88
@@ -4693,7 +4616,6 @@ msgstr ""
 #. (itstool) path: para/command
 #: groupadd.8.xml.out:369
 #: groupdel.8.xml.out:226
-#: groupmems.8.xml.out:227
 #: groupmod.8.xml.out:350
 #: login.defs.5.xml.out:499
 #: useradd.8.xml.out:933
@@ -4720,7 +4642,6 @@ msgstr ""
 #. (itstool) path: cmdsynopsis/command
 #: groupadd.8.xml.out:372
 #: groupdel.8.xml.out:229
-#: groupmems.8.xml.out:230
 #: groupmod.8.xml.out:353
 #: login.defs.5.xml.out:509
 #: passwd.1.xml.out:513
@@ -4828,22 +4749,18 @@ msgid "<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:citeref
 msgstr ""
 
 #. (itstool) path: author/firstname
-#: groupmems.8.xml.out:18
 msgid "George"
 msgstr ""
 
 #. (itstool) path: author/surname
-#: groupmems.8.xml.out:19
 msgid "Kraft"
 msgstr ""
 
 #. (itstool) path: author/lineage
-#: groupmems.8.xml.out:20
 msgid "IV"
 msgstr ""
 
 #. (itstool) path: author/contrib
-#: groupmems.8.xml.out:21
 msgid "Creation, 2000"
 msgstr ""
 
@@ -4852,104 +4769,75 @@ msgstr ""
 #. (itstool) path: cmdsynopsis/command
 #. (itstool) path: para/command
 #. (itstool) path: varlistentry/term
-#: groupmems.8.xml.out:37
-#: groupmems.8.xml.out:44
-#: groupmems.8.xml.out:50
-#: groupmems.8.xml.out:63
-#: groupmems.8.xml.out:65
-#: groupmems.8.xml.out:71
-#: groupmems.8.xml.out:78
-#: groupmems.8.xml.out:159
-#: groupmems.8.xml.out:163
 #: login.defs.5.xml.out:318
-msgid "groupmems"
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
-#: groupmems.8.xml.out:45
 msgid "administer members of a user's primary group"
 msgstr ""
 
 #. (itstool) path: group/arg
-#: groupmems.8.xml.out:52
 msgid "-a <_:replaceable-1/>"
 msgstr ""
 
 #. (itstool) path: group/arg
-#: groupmems.8.xml.out:53
 msgid "-d <_:replaceable-1/>"
 msgstr ""
 
 #. (itstool) path: group/arg
-#: groupmems.8.xml.out:54
 msgid "-g <_:replaceable-1/>"
 msgstr ""
 
 #. (itstool) path: refsect1/para
-#: groupmems.8.xml.out:62
 msgid "The <_:command-1/> command allows a user to administer their own group membership list without the requirement of superuser privileges. The <_:command-2/> utility is for systems that configure its users to be in their own name sake primary group (i.e., guest / guest)."
 msgstr ""
 
 #. (itstool) path: refsect1/para
-#: groupmems.8.xml.out:70
 msgid "Only the superuser, as administrator, can use <_:command-1/> to alter the memberships of other groups."
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: groupmems.8.xml.out:85
 msgid "Add a user to the group membership list."
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: groupmems.8.xml.out:86
-#: groupmems.8.xml.out:102
-#: groupmems.8.xml.out:133
 msgid "If the <_:filename-1/> file exist, and the group has no entry in the <_:filename-2/> file, a new entry will be created."
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: groupmems.8.xml.out:96
 msgid "Delete a user from the group membership list."
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: groupmems.8.xml.out:97
 msgid "If the <_:filename-1/> file exist, the user will be removed from the list of members and administrators of the group."
 msgstr ""
 
 #. (itstool) path: term/option
-#: groupmems.8.xml.out:110
 #: vipw.8.xml.out:90
 msgid "--group"
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: groupmems.8.xml.out:112
 msgid "The superuser can specify which group membership list to modify."
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: groupmems.8.xml.out:126
 msgid "List the group membership list."
 msgstr ""
 
 #. (itstool) path: term/option
-#: groupmems.8.xml.out:130
 msgid "--purge"
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: groupmems.8.xml.out:132
 msgid "Purge all users from the group membership list."
 msgstr ""
 
 #. (itstool) path: refsect1/title
-#: groupmems.8.xml.out:157
 msgid "SETUP"
 msgstr ""
 
 #. (itstool) path: para/literal
-#: groupmems.8.xml.out:160
 msgid "2710"
 msgstr ""
 
@@ -4958,8 +4846,6 @@ msgstr ""
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: cmdsynopsis/command
 #. (itstool) path: para/command
-#: groupmems.8.xml.out:161
-#: groupmems.8.xml.out:162
 #: groups.1.xml.out:33
 #: groups.1.xml.out:40
 #: groups.1.xml.out:46
@@ -4968,22 +4854,17 @@ msgid "groups"
 msgstr ""
 
 #. (itstool) path: refsect1/para
-#: groupmems.8.xml.out:158
 msgid "The <_:command-1/> executable should be in mode <_:literal-2/> as user <_:emphasis-3/> and in group <_:emphasis-4/>. The system administrator can add users to group <_:emphasis-5/> to allow or disallow them using the <_:command-6/> utility to manage their own group membership list."
 msgstr ""
 
 #. (itstool) path: refsect1/programlisting
-#: groupmems.8.xml.out:167
-msgid "$ groupadd -r groups $ chmod 2710 groupmems $ chown root:groups groupmems $ groupmems -g groups -a gk4"
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: groupmems.8.xml.out:199
 msgid "secure group account information"
 msgstr ""
 
 #. (itstool) path: refsect1/para
-#: groupmems.8.xml.out:207
 msgid "<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, <_:citerefentry-7/>, <_:citerefentry-8/>."
 msgstr ""
 

@@ -15,11 +15,3 @@ man_MANS = \
 	man5/shadow.5 \
 	man1/su.1 \
 	man8/vipw.8
-
-if ENABLE_LASTLOG
-man_MANS += man8/lastlog.8
-endif
-
-EXTRA_DIST = $(man_MANS) \
-	man8/groupmems.8
-

@@ -8,7 +8,6 @@
 /etc/pam.d/chfn
 /etc/pam.d/chpasswd
 /etc/pam.d/chsh
-/etc/pam.d/groupmems
 /etc/pam.d/newusers
 /etc/pam.d/passwd
 /sbin
@@ -25,7 +24,6 @@
 /usr/sbin/chpasswd
 /usr/sbin/groupadd
 /usr/sbin/groupdel
-/usr/sbin/groupmems
 /usr/sbin/groupmod
 /usr/sbin/grpck
 /usr/sbin/grpconv
@@ -93,7 +91,6 @@
 /usr/share/man/de/man8/chpasswd.8.gz
 /usr/share/man/de/man8/groupadd.8.gz
 /usr/share/man/de/man8/groupdel.8.gz
-/usr/share/man/de/man8/groupmems.8.gz
 /usr/share/man/de/man8/groupmod.8.gz
 /usr/share/man/de/man8/grpck.8.gz
 /usr/share/man/de/man8/grpconv.8.gz
@@ -128,7 +125,6 @@
 /usr/share/man/fr/man8/chpasswd.8.gz
 /usr/share/man/fr/man8/groupadd.8.gz
 /usr/share/man/fr/man8/groupdel.8.gz
-/usr/share/man/fr/man8/groupmems.8.gz
 /usr/share/man/fr/man8/groupmod.8.gz
 /usr/share/man/fr/man8/grpck.8.gz
 /usr/share/man/fr/man8/grpconv.8.gz
@@ -170,7 +166,6 @@
 /usr/share/man/it/man8/chpasswd.8.gz
 /usr/share/man/it/man8/groupadd.8.gz
 /usr/share/man/it/man8/groupdel.8.gz
-/usr/share/man/it/man8/groupmems.8.gz
 /usr/share/man/it/man8/groupmod.8.gz
 /usr/share/man/it/man8/grpck.8.gz
 /usr/share/man/it/man8/grpconv.8.gz
@@ -238,7 +233,6 @@
 /usr/share/man/man8/chpasswd.8.gz
 /usr/share/man/man8/groupadd.8.gz
 /usr/share/man/man8/groupdel.8.gz
-/usr/share/man/man8/groupmems.8.gz
 /usr/share/man/man8/groupmod.8.gz
 /usr/share/man/man8/grpck.8.gz
 /usr/share/man/man8/grpconv.8.gz
@@ -260,7 +254,6 @@
 /usr/share/man/pl/man8
 /usr/share/man/pl/man8/groupadd.8.gz
 /usr/share/man/pl/man8/groupdel.8.gz
-/usr/share/man/pl/man8/groupmems.8.gz
 /usr/share/man/pl/man8/groupmod.8.gz
 /usr/share/man/pl/man8/grpck.8.gz
 /usr/share/man/pl/man8/shadowconfig.8.gz
@@ -293,7 +286,6 @@
 /usr/share/man/ru/man8/chpasswd.8.gz
 /usr/share/man/ru/man8/groupadd.8.gz
 /usr/share/man/ru/man8/groupdel.8.gz
-/usr/share/man/ru/man8/groupmems.8.gz
 /usr/share/man/ru/man8/groupmod.8.gz
 /usr/share/man/ru/man8/grpck.8.gz
 /usr/share/man/ru/man8/grpconv.8.gz
@@ -318,7 +310,6 @@
 /usr/share/man/sv/man8
 /usr/share/man/sv/man8/groupadd.8.gz
 /usr/share/man/sv/man8/groupdel.8.gz
-/usr/share/man/sv/man8/groupmems.8.gz
 /usr/share/man/sv/man8/groupmod.8.gz
 /usr/share/man/sv/man8/grpck.8.gz
 /usr/share/man/sv/man8/pwck.8.gz
@@ -355,7 +346,6 @@
 /usr/share/man/zh_CN/man8/chpasswd.8.gz
 /usr/share/man/zh_CN/man8/groupadd.8.gz
 /usr/share/man/zh_CN/man8/groupdel.8.gz
-/usr/share/man/zh_CN/man8/groupmems.8.gz
 /usr/share/man/zh_CN/man8/groupmod.8.gz
 /usr/share/man/zh_CN/man8/grpck.8.gz
 /usr/share/man/zh_CN/man8/grpconv.8.gz

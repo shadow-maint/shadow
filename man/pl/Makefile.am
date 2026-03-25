@@ -10,7 +10,6 @@ man_MANS = \
 	man3/getspnam.3 \
 	man8/groupadd.8 \
 	man8/groupdel.8 \
-	man8/groupmems.8 \
 	man8/groupmod.8 \
 	man8/grpck.8 \
 	man1/newgrp.1 \

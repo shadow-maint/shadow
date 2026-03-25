@@ -5,7 +5,6 @@ pamd_files = \
 	chpasswd \
 	chfn \
 	chsh \
-	groupmems \
 	login \
 	newusers \
 	passwd
