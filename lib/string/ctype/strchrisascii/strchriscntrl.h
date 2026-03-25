@@ -18,10 +18,7 @@ inline bool strchriscntrl(const char *s);
 
 
 // string character is [:cntrl:]
-// Return true if any control character is found in the string.
-// Check both C0 (0x00-0x1F, 0x7F) via iscntrl(3) and C1 (0x80-0x9F)
-// explicitly, since glibc's iscntrl() does not classify C1 bytes as
-// control characters in any locale.
+// Return true if any iscntrl(3) character is found in the string.
 inline bool
 strchriscntrl(const char *s)
 {
@@ -29,8 +26,6 @@ strchriscntrl(const char *s)
 		unsigned char  c = *s;
 
 		if (iscntrl(c))
-			return true;
-		if (c >= 0x80 && c <= 0x9F)
 			return true;
 	}
 
