@@ -83,7 +83,6 @@ src/faillog.c
 src/gpasswd.c
 src/groupadd.c
 src/groupdel.c
-src/groupmems.c
 src/groupmod.c
 src/grpck.c
 src/grpconv.c

@@ -13,7 +13,6 @@ man_MANS = \
 	man1/gpasswd.1 \
 	man8/groupadd.8 \
 	man8/groupdel.8 \
-	man8/groupmems.8 \
 	man8/groupmod.8 \
 	man8/grpck.8 \
 	man8/grpconv.8 \

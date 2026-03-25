@@ -7,7 +7,6 @@
 /gpasswd
 /groupadd
 /groupdel
-/groupmems
 /groupmod
 /grpck
 /grpconv

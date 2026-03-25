@@ -312,12 +312,6 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term>groupmems</term>
-	<listitem>
-	  <para>MAX_MEMBERS_PER_GROUP</para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
 	<term>groupmod</term>
 	<listitem>
 	  <para>MAX_MEMBERS_PER_GROUP</para>
