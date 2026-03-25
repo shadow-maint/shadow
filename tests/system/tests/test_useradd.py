@@ -370,7 +370,14 @@ def test_useradd__invalid_primary_group(shadow: Shadow, group_identifier: int | 
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_useradd__valid_group_as_primary(shadow: Shadow):
+@pytest.mark.parametrize(
+    "group_name, group_gid",
+    [
+        pytest.param("testgroup", None, id="valid_named_group"),
+        pytest.param("testgroup5000", 5000, id="valid_numeric_gid"),
+    ],
+)
+def test_useradd__valid_group_as_primary(shadow: Shadow, group_name: str, group_gid: int | None):
     """
     :title: Add a new user with a valid existing group as primary
     :steps:
@@ -385,13 +392,22 @@ def test_useradd__valid_group_as_primary(shadow: Shadow):
         4. User's GID matches the group's GID
     :customerscenario: False
     """
-    shadow.groupadd("testgroup")
+    if group_gid:
+        shadow.groupadd(f"{group_name} -g {group_gid}")
+    else:
+        shadow.groupadd(group_name)
 
-    group_entry = shadow.tools.getent.group("testgroup")
-    assert group_entry is not None, "Group testgroup should exist"
-    assert group_entry.name == "testgroup", f"Incorrect group name, expected 'testgroup', got '{group_entry.name}'"
+    group_entry = shadow.tools.getent.group(group_name)
+    assert group_entry is not None, f"Group {group_name} should exist"
+    assert group_entry.name == group_name, f"Incorrect group name, expected '{group_name}', got '{group_entry.name}'"
 
-    shadow.useradd("testuser -g testgroup")
+    if group_gid:
+        assert group_entry.gid == group_gid, f"Incorrect GID, expected {group_gid}, got {group_entry.gid}"
+
+    if group_gid:
+        shadow.useradd(f"testuser -g {group_gid}")
+    else:
+        shadow.useradd(f"testuser -g {group_name}")
 
     passwd_entry = shadow.tools.getent.passwd("testuser")
     assert passwd_entry is not None, "User testuser should exist"
