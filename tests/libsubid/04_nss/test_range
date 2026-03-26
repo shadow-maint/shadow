@@ -4,6 +4,9 @@ set -x
 
 echo "starting check_range tests"
 
+touch /etc/passwd
+mount --bind ./passwd /etc/passwd
+
 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 touch /etc/nsswitch.conf
 mount --bind ./nsswitch3.conf /etc/nsswitch.conf
@@ -44,6 +47,130 @@ cleanup2() {
 }
 trap cleanup2 EXIT HUP INT TERM
 ${build_path}/src/check_subid_range user1 u 100000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+umount /etc/subuid
+umount /etc/nsswitch.conf
+
+# nsswitch4: files zzz
+# subuid has user2, ubuntu, error, conn
+# zzz has user1, ubuntu (different range)
+mount --bind ./subuid /etc/subuid
+mount --bind ./nsswitch4.conf /etc/nsswitch.conf
+
+cleanup3() {
+    umount /etc/subuid
+    umount /etc/nsswitch.conf
+}
+trap cleanup3 EXIT HUP INT TERM
+
+# user1 100000 -> not in files -> in zzz -> yes
+${build_path}/src/check_subid_range user1 u 100000 65535
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+# user1 200000 -> not in files  -> in zzz -> no
+${build_path}/src/check_subid_range user1 u 200000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# user2 300000 -> in files -> yes
+${build_path}/src/check_subid_range user2 u 300000 65535
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+# user2 400000 -> in files -> no
+${build_path}/src/check_subid_range user2 u 400000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# unknown 500000 -> not in files -> not in zzz -> no
+${build_path}/src/check_subid_range unknown u 500000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# ubuntu 200000 -> in files -> no
+# Even though ubuntu 200000 is in zzz, it should stop at files because user is in files.
+${build_path}/src/check_subid_range ubuntu u 200000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# ubuntu 400000 -> in files -> yes
+${build_path}/src/check_subid_range ubuntu u 400000 65535
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+umount /etc/nsswitch.conf
+
+# nsswitch5: zzz files
+mount --bind ./nsswitch5.conf /etc/nsswitch.conf
+
+cleanup4() {
+    umount /etc/subuid
+    umount /etc/nsswitch.conf
+}
+trap cleanup4 EXIT HUP INT TERM
+
+# user1 100000 -> in zzz -> yes
+${build_path}/src/check_subid_range user1 u 100000 65535
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+# user1 200000 -> in zzz -> no
+${build_path}/src/check_subid_range user1 u 200000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# user2 300000 -> not in zzz -> in files -> yes
+${build_path}/src/check_subid_range user2 u 300000 65535
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+# user2 400000 -> not in zzz -> in files -> no
+${build_path}/src/check_subid_range user2 u 400000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# unknown 500000 -> not in zzz -> not in files -> no
+${build_path}/src/check_subid_range unknown u 500000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# ubuntu 200000 -> in zzz -> yes
+${build_path}/src/check_subid_range ubuntu u 200000 65535
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+# ubuntu 400000 -> in zzz -> no
+# zzz has the user ubuntu. So it won't lookup files
+${build_path}/src/check_subid_range ubuntu u 400000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# error 500000 -> zzz errors -> no
+${build_path}/src/check_subid_range error u 500000 65535
+if [ $? -eq 0 ]; then
+    exit 1
+fi
+
+# conn 600000 -> zzz errors -> no
+${build_path}/src/check_subid_range conn u 600000 65535
 if [ $? -eq 0 ]; then
     exit 1
 fi

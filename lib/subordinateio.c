@@ -564,7 +564,7 @@ static bool have_range(struct commonio_db *db,
 			rc = sub_uid_open(O_RDONLY);
 		else
 			rc = sub_gid_open(O_RDONLY);
-		if (rc < 0)
+		if (!rc)
 			return false;
 	}
 
@@ -626,17 +626,53 @@ bool local_sub_uid_assigned(const char *owner)
 
 bool have_sub_uids(const char *owner, uid_t start, unsigned long count)
 {
-	struct subid_nss_ops *h;
-	bool found;
 	enum subid_status status;
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->has_range(owner, start, count, ID_TYPE_UID, &found);
-		if (status == SUBID_STATUS_SUCCESS && found)
-			return true;
-		return false;
+	struct subid_nss_db *db;
+	struct subid_nss_ops *h;
+	bool close_db = false;
+	bool exists;
+	bool found;
+
+	db = get_subid_nss_db();
+	if (!db) {
+		// No NSS module configured, search local files only.
+		return have_range(&subordinate_uid_db, owner, start, count);
 	}
-	return have_range (&subordinate_uid_db, owner, start, count);
+
+	for (; db; db = db->next) {
+		h = db->ops;
+		if (h) {
+			status = h->has_range(owner, start, count, ID_TYPE_UID, &found);
+			if (status == SUBID_STATUS_SUCCESS)
+				return found;
+			if (status == SUBID_STATUS_UNKNOWN_USER)
+				continue; // User not found in this database, try the next one.
+
+			return false; // Error occurred.
+		} else {
+			// Local "files" database
+			if (!subordinate_uid_db.isopen) {
+				if (sub_uid_open(O_RDONLY) == 0)
+					return false;
+				close_db = true;
+			}
+
+			found = have_range(&subordinate_uid_db, owner, start, count);
+			exists = range_exists(&subordinate_uid_db, owner);
+
+			if (close_db)
+				sub_uid_close(true);
+
+			if (found)
+				return true;
+			if (!exists)
+				continue; // User does not have any ranges; try the next database.
+			return false; // User has ranges but does not own the requested range.
+		}
+	}
+
+	// Searched all databases and didn't find the range.
+	return false;
 }
 
 /*
@@ -647,7 +683,11 @@ bool have_sub_uids(const char *owner, uid_t start, unsigned long count)
  */
 int sub_uid_add (const char *owner, uid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
+	struct subid_nss_db *db;
+
+	db = get_subid_nss_db();
+	if (db && db->ops) {
+		// NSS module configured and the first database is not "files".
 		errno = EOPNOTSUPP;
 		return 0;
 	}
@@ -657,7 +697,11 @@ int sub_uid_add (const char *owner, uid_t start, unsigned long count)
 /* Return 1 on success.  on failure, return 0 and set errno appropriately */
 int sub_uid_remove (const char *owner, uid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
+	struct subid_nss_db *db;
+
+	db = get_subid_nss_db();
+	if (db && db->ops) {
+		// NSS module configured and the first database is not "files".
 		errno = EOPNOTSUPP;
 		return 0;
 	}
@@ -690,11 +734,23 @@ uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count)
  */
 bool want_subuid_file(void)
 {
-	if (get_subid_nss_handle() != NULL)
-		return false;
+	struct subid_nss_db *db;
+
 	if (getdef_ulong("SUB_UID_COUNT", 65536) == 0)
 		return false;
-	return true;
+
+	db = get_subid_nss_db();
+	if (db == NULL)
+		return true;
+
+	for (; db; db = db->next) {
+		if (db->ops == NULL) {
+			// Local "files" database is used.
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /*
@@ -705,11 +761,23 @@ bool want_subuid_file(void)
  */
 bool want_subgid_file(void)
 {
-	if (get_subid_nss_handle() != NULL)
-		return false;
+	struct subid_nss_db *db;
+
 	if (getdef_ulong("SUB_GID_COUNT", 65536) == 0)
 		return false;
-	return true;
+
+	db = get_subid_nss_db();
+	if (db == NULL)
+		return true;
+
+	for (; db; db = db->next) {
+		if (db->ops == NULL) {
+			// Local "files" database is used.
+			return true;
+		}
+	}
+
+	return false;
 }
 
 static struct commonio_db subordinate_gid_db = {
@@ -759,17 +827,53 @@ int sub_gid_open (int mode)
 
 bool have_sub_gids(const char *owner, gid_t start, unsigned long count)
 {
-	struct subid_nss_ops *h;
-	bool found;
 	enum subid_status status;
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->has_range(owner, start, count, ID_TYPE_GID, &found);
-		if (status == SUBID_STATUS_SUCCESS && found)
-			return true;
-		return false;
+	struct subid_nss_db *db;
+	struct subid_nss_ops *h;
+	bool close_db = false;
+	bool exists;
+	bool found;
+
+	db = get_subid_nss_db();
+	if (!db) {
+		// No NSS module configured, search local files only.
+		return have_range(&subordinate_gid_db, owner, start, count);
 	}
-	return have_range(&subordinate_gid_db, owner, start, count);
+
+	for (; db; db = db->next) {
+		h = db->ops;
+		if (h) {
+			status = h->has_range(owner, start, count, ID_TYPE_GID, &found);
+			if (status == SUBID_STATUS_SUCCESS)
+				return found;
+			if (status == SUBID_STATUS_UNKNOWN_USER)
+				continue; // Group not found in this database, try the next one.
+
+			return false; // Error occurred.
+		} else {
+			// Local "files" database
+			if (!subordinate_gid_db.isopen) {
+				if (sub_gid_open(O_RDONLY) == 0)
+					return false;
+				close_db = true;
+			}
+
+			found = have_range(&subordinate_gid_db, owner, start, count);
+			exists = range_exists(&subordinate_gid_db, owner);
+
+			if (close_db)
+				sub_gid_close(true);
+
+			if (found)
+				return true;
+			if (!exists)
+				continue; // Group does not have any ranges; try the next database.
+			return false; // Group has ranges but does not own the requested range.
+		}
+	}
+
+	// Searched all databases and didn't find the range.
+	return false;
 }
 
 bool local_sub_gid_assigned(const char *owner)
@@ -785,7 +889,11 @@ bool local_sub_gid_assigned(const char *owner)
  */
 int sub_gid_add (const char *owner, gid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
+	struct subid_nss_db *db;
+
+	db = get_subid_nss_db();
+	if (db && db->ops) {
+		// NSS module configured and the first database is not "files".
 		errno = EOPNOTSUPP;
 		return 0;
 	}
@@ -795,7 +903,11 @@ int sub_gid_add (const char *owner, gid_t start, unsigned long count)
 /* Return 1 on success.  on failure, return 0 and set errno appropriately */
 int sub_gid_remove (const char *owner, gid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
+	struct subid_nss_db *db;
+
+	db = get_subid_nss_db();
+	if (db && db->ops) {
+		// NSS module configured and the first database is not "files".
 		errno = EOPNOTSUPP;
 		return 0;
 	}
@@ -854,7 +966,7 @@ static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
 }
 
 /*
- * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)
+ * static int list_local_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
  *
  * @owner: username
  * @id_type: UID or GUID
@@ -865,31 +977,22 @@ static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
  * UID number.  If id_type is UID, then subuids are returned, else
  * subgids are given.
 
- * Returns the number of ranges found, or < 0 on error.
+ * Returns the number of ranges found in local files only, or < 0 on error.
+ * NSS modules are not consulted by this function.
  *
  * The caller must free the subordinate range list.
  */
-int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
+static int list_local_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
 {
 	// TODO - need to handle owner being either uid or username
 	struct subid_range *ranges = NULL;
 	const struct subordinate_range *range;
 	struct commonio_db *db;
-	enum subid_status status;
 	int count = 0;
-	struct subid_nss_ops *h;
 	char id[ID_SIZE];
 	bool have_owner_id;
 
 	*in_ranges = NULL;
-
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->list_owner_ranges(owner, id_type, in_ranges, &count);
-		if (status == SUBID_STATUS_SUCCESS)
-			return count;
-		return -1;
-	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
@@ -933,6 +1036,91 @@ out:
 	return count;
 }
 
+/*
+ * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range ***ranges)
+ *
+ * @owner: username
+ * @id_type: UID or GUID
+ * @ranges: pointer to array of ranges into which results will be placed.
+ *
+ * Fills in the subuid or subgid ranges which are owned by the specified
+ * user.  Username may be a username or a string representation of a
+ * UID number.  If id_type is UID, then subuids are returned, else
+ * subgids are given.
+
+ * Returns the number of ranges found, or < 0 on error.
+ *
+ * The caller must free the subordinate range list.
+ */
+int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **ranges)
+{
+	enum subid_status status;
+	int count = 0;
+	struct subid_nss_db *db;
+	struct subid_nss_ops *h = NULL;
+	struct subid_range *our_ranges;
+	bool error = false;
+
+	*ranges = NULL;
+
+	db = get_subid_nss_db();
+	if (!db) {
+		// No NSS module configured, search local files only.
+		return list_local_owner_ranges(owner, id_type, ranges);
+	}
+
+	for (; db; db = db->next) {
+		h = db->ops;
+		if (h) {
+			status = h->list_owner_ranges(owner, id_type, ranges, &count);
+
+			if (status == SUBID_STATUS_SUCCESS) {
+				if (count > 0) {
+					our_ranges = malloc_T(count, struct subid_range);
+					if (!our_ranges)
+						goto fail;
+
+					memcpy(our_ranges, *ranges, count * sizeof(struct subid_range));
+					h->free(*ranges);
+					*ranges = our_ranges;
+				}
+				return count;
+			}
+			if (status == SUBID_STATUS_UNKNOWN_USER)
+				goto next;
+			if (status == SUBID_STATUS_ERROR || status == SUBID_STATUS_ERROR_CONN)
+				goto fail;
+		} else {
+			// Local "files" database.
+			count = list_local_owner_ranges(owner, id_type, ranges);
+			if (count > 0)
+				return count;
+			if (count == 0)
+				goto next;
+			if (count < 0)
+				goto fail;
+		}
+
+	fail:
+		error = true;
+
+	next:
+		if (*ranges) {
+			if (h)
+				h->free(*ranges);
+			else
+				free(*ranges);
+			*ranges = NULL;
+		}
+
+		if (error)
+			return -1;
+	}
+
+	// Searched all databases but 0 ranges found.
+	return 0;
+}
+
 static int append_uids(uid_t **uids, const char *owner, int n)
 {
 	int    i;
@@ -970,22 +1158,11 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 	return n+1;
 }
 
-int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
+static int find_local_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 {
 	const struct subordinate_range *range;
-	struct subid_nss_ops *h;
-	enum subid_status status;
 	struct commonio_db *db;
 	int n = 0;
-
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->find_subid_owners(id, id_type, uids, &n);
-		// Several ways we could handle the error cases here.
-		if (status != SUBID_STATUS_SUCCESS)
-			return -1;
-		return n;
-	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
@@ -1023,14 +1200,84 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 	return n;
 }
 
+int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
+{
+	struct subid_nss_db *db;
+	struct subid_nss_ops *h;
+	enum subid_status status;
+	int n = 0;
+	int count = 0;
+	bool error = false;
+	uid_t *new_uids = NULL;
+	uid_t *all_uids = NULL;
+
+	*uids = NULL;
+
+	db = get_subid_nss_db();
+	if (!db) {
+		// No NSS module configured, search local files only.
+		return find_local_subid_owners(id, id_type, uids);
+	}
+
+	// Search for all databases and aggregate results.
+	for (; db; db = db->next) {
+		h = db->ops;
+		if (h) {
+			status = h->find_subid_owners(id, id_type, &new_uids, &count);
+			if (status != SUBID_STATUS_SUCCESS)
+				count = -1;
+		} else {
+			count = find_local_subid_owners(id, id_type, &new_uids);
+		}
+
+		if (count <= 0)
+			goto next;
+
+		if (count > 0) {
+			all_uids = reallocf_T(all_uids, n + count, uid_t);
+			if (!all_uids)
+				goto fail;
+			memcpy(all_uids + n, new_uids, count * sizeof(uid_t));
+			n += count;
+			goto next;
+		}
+
+	fail:
+		error = true;
+
+	next:
+		if (new_uids) {
+			if (h)
+				h->free(new_uids);
+			else
+				free(new_uids);
+			new_uids = NULL;
+		}
+
+		if (error) {
+			if (all_uids)
+				free(all_uids);
+			return -1;
+		}
+	}
+
+	*uids = all_uids;
+	return n;
+}
+
 bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, bool reuse)
 {
 	struct commonio_db *db;
+	struct subid_nss_db *nss_db;
 	const struct subordinate_range *r;
 	bool ret;
 
-	if (get_subid_nss_handle())
+	nss_db = get_subid_nss_db();
+	if (nss_db && nss_db->ops) {
+		// NSS module configured and the first database is not "files".
+		errno = EOPNOTSUPP;
 		return false;
+	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
@@ -1099,10 +1346,15 @@ out:
 bool release_subid_range(struct subordinate_range *range, enum subid_type id_type)
 {
 	struct commonio_db *db;
+	struct subid_nss_db *nss_db;
 	bool ret;
 
-	if (get_subid_nss_handle())
+	nss_db = get_subid_nss_db();
+	if (nss_db && nss_db->ops) {
+		// NSS module configured and the first database is not "files".
+		errno = EOPNOTSUPP;
 		return false;
+	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
@@ -1148,12 +1400,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 
 void free_subid_pointer(void *ptr)
 {
-	struct subid_nss_ops *h = get_subid_nss_handle();
-	if (h) {
-		h->free(ptr);
-	} else {
-		free(ptr);
-	}
+	free(ptr);
 }
 
 #else				/* !ENABLE_SUBIDS */
