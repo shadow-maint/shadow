@@ -143,6 +143,8 @@ static struct itemdef def_table[] = {
 	{"UID_MAX", NULL},
 	{"UID_MIN", NULL},
 	{"UMASK", NULL},
+	{"UNSAFE_SUB_GID_DETERMINISTIC_WRAP", NULL},
+	{"UNSAFE_SUB_UID_DETERMINISTIC_WRAP", NULL},
 	{"USERDEL_CMD", NULL},
 	{"USERGROUPS_ENAB", NULL},
 #ifndef USE_PAM
