@@ -245,6 +245,19 @@ SUB_UID_COUNT		    65536
 #SUB_UID_STORE_BY_UID	no
 
 #
+# Enable deterministic subordinate UID allocation based on the user's UID.
+# When set to "yes", subordinate UID ranges are calculated using a
+# deterministic formula instead of searching for the next free range:
+#
+# WARNING: Do not mix deterministic and linear (default) allocation
+# on the same system or across systems sharing /etc/subuid. Mixing
+# methods will cause subordinate ID range conflicts and overlaps.
+#
+# Default: no
+#
+#SUB_UID_DETERMINISTIC	no
+
+#
 # Min/max values for automatic gid selection in groupadd(8)
 #
 GID_MIN			 1000
@@ -260,6 +273,19 @@ SUB_GID_COUNT		    65536
 # If set to yes, subordinate group ID entries in /etc/subgid are stored
 # using the numeric user ID rather than the username.
 #SUB_GID_STORE_BY_UID	no
+
+#
+# Enable deterministic subordinate GID allocation based on the user's UID.
+# When set to "yes", subordinate GID ranges are calculated using a
+# deterministic formula instead of searching for the next free range:
+#
+# WARNING: Do not mix deterministic and linear (default) allocation
+# on the same system or across systems sharing /etc/subgid. Mixing
+# methods will cause subordinate ID range conflicts and overlaps.
+#
+# Default: no
+#
+#SUB_GID_DETERMINISTIC	no
 
 #
 # Max number of login(1) retries if password is bad
