@@ -163,6 +163,20 @@
     </variablelist>
   </refsect1>
 
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>
+      Unprivileged users may write
+      arbitrary non-ASCII characters
+      in the GECOS field,
+      notably including C1 control characters.
+      When reading this file,
+      use the C locale.
+      Otherwise,
+      the contents may look different than they are.
+    </para>
+  </refsect1>
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para>
