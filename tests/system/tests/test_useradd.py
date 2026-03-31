@@ -451,3 +451,29 @@ def test_useradd__invalid_uid(shadow: Shadow, uid_value: int, expected_error: st
     assert shadow.tools.getent.passwd("test1") is None, "User test1 should not be found in passwd"
     assert shadow.tools.getent.group("test1") is None, "Group test1 should not be found"
     assert not shadow.fs.exists("/home/test1"), "Home directory should not be created"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__specific_large_uid(shadow: Shadow):
+    """
+    :title: Verify user creation at the upper boundary for UID
+    :steps:
+        1. Create user with UID 2147483647 (2^31 - 1, maximum signed 32-bit integer)
+        2. Check passwd entry
+        3. Check group entry
+    :expectedresults:
+        1. User is created successfully
+        2. Passwd entry exists with correct UID 2147483647
+        3. Group entry exists
+    :customerscenario: False
+    """
+    shadow.useradd("test1 -u 2147483647")
+
+    passwd_entry = shadow.tools.getent.passwd("test1")
+    assert passwd_entry is not None, "User test1 should be found in passwd"
+    assert passwd_entry.name == "test1", "Incorrect username"
+    assert passwd_entry.uid == 2147483647, f"Incorrect UID, expected 2147483647, got {passwd_entry.uid}"
+
+    group_entry = shadow.tools.getent.group("test1")
+    assert group_entry is not None, "Group test1 should be found"
+    assert group_entry.name == "test1", "Incorrect group name"
