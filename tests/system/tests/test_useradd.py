@@ -414,3 +414,40 @@ def test_useradd__valid_group_as_primary(shadow: Shadow, group_name: str, group_
     assert (
         passwd_entry.gid == group_entry.gid
     ), f"User's GID ({passwd_entry.gid}) should match group's GID ({group_entry.gid})"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+@pytest.mark.parametrize(
+    "uid_value, expected_error",
+    [
+        pytest.param(-1, "useradd: invalid user ID '-1'", id="negative_uid"),
+        pytest.param(4294967296, "useradd: invalid user ID '4294967296'", id="out_of_range_uid"),
+    ],
+)
+def test_useradd__invalid_uid(shadow: Shadow, uid_value: int, expected_error: str):
+    """
+    :title: Add a new user with an invalid UID
+    :steps:
+        1. Attempt to create user with invalid UID
+        2. Verify command fails with appropriate error code and message
+        3. Check passwd, group entries
+        4. Check home directory
+    :expectedresults:
+        1. useradd command fails
+        2. Return code is 3 (invalid argument)
+        3. No entries are added to passwd, group
+        4. No home directory is created
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.useradd(f"test1 -u {uid_value}")
+
+    actual_rc = getattr(exc_info.value, "rc", getattr(exc_info.value, "returncode", None))
+    assert actual_rc == 3, f"Expected return code 3 (invalid argument), got {actual_rc}"
+
+    error_output = exc_info.value.stderr.strip() if exc_info.value.stderr else ""
+    assert error_output == expected_error, f"Expected error message '{expected_error}', got '{error_output}'"
+
+    assert shadow.tools.getent.passwd("test1") is None, "User test1 should not be found in passwd"
+    assert shadow.tools.getent.group("test1") is None, "Group test1 should not be found"
+    assert not shadow.fs.exists("/home/test1"), "Home directory should not be created"
