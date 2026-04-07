@@ -503,3 +503,34 @@ def test_useradd__large_uid_scenarios(
         group_entry = shadow.tools.getent.group("test1")
         assert group_entry is not None, "Group test1 should be found"
         assert group_entry.name == "test1", "Incorrect group name"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__create_homedir(shadow: Shadow):
+    """
+    :title: Add a new user with home directory creation
+    :steps:
+        1. Create user with --create-home option
+        2. Check passwd entry
+        3. Check group entry
+        4. Verify home directory exists
+    :expectedresults:
+        1. User is created successfully
+        2. passwd entry exists with correct attributes
+        3. group entry exists
+        4. Home directory is created at /home/test1
+    :customerscenario: False
+    """
+    shadow.useradd("--create-home test1")
+
+    passwd_entry = shadow.tools.getent.passwd("test1")
+    assert passwd_entry is not None, "User test1 should be found in passwd"
+    assert passwd_entry.name == "test1", "Incorrect username"
+    assert passwd_entry.home == "/home/test1", "Incorrect home directory"
+
+    group_entry = shadow.tools.getent.group("test1")
+    assert group_entry is not None, "Group test1 should be found"
+    assert group_entry.name == "test1", "Incorrect group name"
+
+    home_dir = "/home/test1"
+    assert shadow.fs.exists(home_dir), f"Home directory {home_dir} should exist"
