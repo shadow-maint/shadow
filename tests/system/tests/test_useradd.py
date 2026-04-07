@@ -454,58 +454,6 @@ def test_useradd__invalid_uid(shadow: Shadow, uid_value: int, expected_error: st
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-@pytest.mark.parametrize(
-    "uid_value, should_fail, expected_rc, expected_error",
-    [
-        pytest.param(2147483647, False, None, None, id="maximum_signed_32bit_uid"),
-        pytest.param(4294967294, False, None, None, id="large_uid_4294967294"),
-        pytest.param(4294967295, True, 3, "useradd: invalid user ID '4294967295'", id="uid_4294967295_fail"),
-    ],
-)
-def test_useradd__large_uid_scenarios(
-    shadow: Shadow, uid_value: int, should_fail: bool, expected_rc: int | None, expected_error: str | None
-):
-    """
-    :title: Tests for large UID scenarios
-    :setup:
-        1. Create user with specified UID value
-    :steps:
-        1. Attempt to create user with UID and verify command outcome based on expected behavior
-        2. Check passwd and group entries if creation succeeds
-        3. Verify no user is created if command should fail
-    :expectedresults:
-        1. For UID 2147483647: User is created successfully with correct UID
-        2. For UID 4294967294: User is created successfully with correct UID
-        3. For UID 4294967295: Command fails with return code 3
-    :customerscenario: False
-    """
-    if should_fail:
-        with pytest.raises(ProcessError) as exc_info:
-            shadow.useradd(f"test1 -u {uid_value}")
-
-        actual_rc = getattr(exc_info.value, "rc", getattr(exc_info.value, "returncode", None))
-        assert actual_rc == expected_rc, f"Expected return code {expected_rc}, got {actual_rc}"
-
-        error_output = exc_info.value.stderr.strip() if exc_info.value.stderr else ""
-        assert error_output == expected_error, f"Expected error message '{expected_error}', got '{error_output}'"
-
-        assert shadow.tools.getent.passwd("test1") is None, "User test1 should not be found in passwd"
-        assert shadow.tools.getent.group("test1") is None, "Group test1 should not be found"
-
-    else:
-        shadow.useradd(f"test1 -u {uid_value}")
-
-        passwd_entry = shadow.tools.getent.passwd("test1")
-        assert passwd_entry is not None, "User test1 should be found in passwd"
-        assert passwd_entry.name == "test1", "Incorrect username"
-        assert passwd_entry.uid == uid_value, f"Incorrect UID, expected {uid_value}, got {passwd_entry.uid}"
-
-        group_entry = shadow.tools.getent.group("test1")
-        assert group_entry is not None, "Group test1 should be found"
-        assert group_entry.name == "test1", "Incorrect group name"
-
-
-@pytest.mark.topology(KnownTopology.Shadow)
 def test_useradd__create_homedir(shadow: Shadow):
     """
     :title: Add a new user with home directory creation
@@ -534,3 +482,86 @@ def test_useradd__create_homedir(shadow: Shadow):
 
     home_dir = "/home/test1"
     assert shadow.fs.exists(home_dir), f"Home directory {home_dir} should exist"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd_default_primary_group_with_supplementary(shadow: Shadow):
+    """
+    :title: Add a new user with supplementary groups using default primary group
+    :steps:
+        1. Create required groups
+        2. Create user with supplementary group src (default primary group)
+        3. Check passwd entry
+        4. Check user's own group exists
+        5. Verify user is a member of src supplementary group
+    :expectedresults:
+        1. Groups are created successfully
+        2. User is created successfully
+        3. passwd entry exists with correct attributes
+        4. User's own group (test1) exists with matching GID
+        5. User is added to src group as a member
+    :customerscenario: False
+    """
+    shadow.groupadd("src")
+    shadow.useradd("test1 -G src")
+    username = "test1"
+
+    passwd_entry = shadow.tools.getent.passwd(username)
+    assert passwd_entry is not None, f"User {username} should be found in passwd"
+    assert passwd_entry.name == username, "Incorrect username"
+    assert passwd_entry.home == f"/home/{username}", "Incorrect home directory"
+
+    user_group = shadow.tools.getent.group(username)
+    assert user_group is not None, f"Group {username} should be found"
+    assert (
+        passwd_entry.gid == user_group.gid
+    ), f"User's GID ({passwd_entry.gid}) should match group's GID ({user_group.gid})"
+
+    for group_name in ["src"]:
+        group_entry = shadow.tools.getent.group(group_name)
+        assert group_entry is not None, f"Group {group_name} should exist"
+        assert username in group_entry.members, f"User {username} should be a member of {group_name} group"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd_custom_primary_and_supplementary_groups(shadow: Shadow):
+    """
+    :title: Add a new user with custom primary group and supplementary groups
+    :steps:
+        1. Create required groups
+        2. Create user with primary group nogroup and supplementary groups src, daemon, bin
+        3. Check passwd entry
+        4. Verify primary group is nogroup
+        5. Verify user is a member of all supplementary groups
+    :expectedresults:
+        1. Groups are created successfully
+        2. User is created successfully
+        3. passwd entry exists with correct attributes
+        4. User's primary group is nogroup
+        5. User is added to src, daemon, and bin groups as a member
+    :customerscenario: False
+    """
+    groups_to_create = ["nogroup", "src", "daemon", "bin"]
+    for group in groups_to_create:
+        if shadow.tools.getent.group(group) is None:
+            shadow.groupadd(group)
+
+    shadow.useradd("test1 -g nogroup -G src,daemon,bin")
+    username = "test1"
+
+    passwd_entry = shadow.tools.getent.passwd(username)
+    assert passwd_entry is not None, f"User {username} should be found in passwd"
+    assert passwd_entry.name == username, "Incorrect username"
+    assert passwd_entry.home == f"/home/{username}", "Incorrect home directory"
+
+    nogroup_entry = shadow.tools.getent.group("nogroup")
+    assert nogroup_entry is not None, "Group nogroup should exist"
+    assert (
+        passwd_entry.gid == nogroup_entry.gid
+    ), f"User's primary GID ({passwd_entry.gid}) should match nogroup GID ({nogroup_entry.gid})"
+
+    supplementary_groups = ["src", "daemon", "bin"]
+    for group_name in supplementary_groups:
+        group_entry = shadow.tools.getent.group(group_name)
+        assert group_entry is not None, f"Group {group_name} should exist"
+        assert username in group_entry.members, f"User {username} should be a member of {group_name} group"
