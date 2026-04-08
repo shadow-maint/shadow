@@ -421,6 +421,7 @@ def test_useradd__valid_group_as_primary(shadow: Shadow, group_name: str, group_
     "uid_value, expected_error",
     [
         pytest.param(-1, "useradd: invalid user ID '-1'", id="negative_uid"),
+        pytest.param(4294967295, "useradd: invalid user ID '4294967295'", id="exceeds_maximum_uid"),
         pytest.param(4294967296, "useradd: invalid user ID '4294967296'", id="out_of_range_uid"),
     ],
 )
