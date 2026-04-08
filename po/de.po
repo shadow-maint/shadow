@@ -238,7 +238,7 @@ msgstr "Name für %s konnte nicht gesetzt werden\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: Zeile %d: chown %s (Eigentümer ändern) fehlgeschlagen: %s\n"
 
 #, fuzzy, c-format
