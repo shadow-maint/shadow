@@ -2,7 +2,7 @@ chpasswd: unsupported crypt method: SHA513
 Usage: chpasswd [options]
 
 Options:
-  -c, --crypt-method METHOD     the crypt method (one of NONE DES MD5 SHA256 SHA512)
+  -c, --crypt-method METHOD     the crypt method (one of NONE MD5 SHA256 SHA512)
   -e, --encrypted               supplied passwords are encrypted
   -h, --help                    display this help message and exit
   -R, --root CHROOT_DIR         directory to chroot into
