@@ -485,3 +485,45 @@ def test_useradd__successful_large_uid(shadow: Shadow, uid_value: int):
     assert group_entry is not None, "Group test1 should be found"
     assert group_entry.name == "test1", "Incorrect group name"
 
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd_custom_primary_and_supplementary_groups(shadow: Shadow):
+    """
+    :title: Add a new user with custom primary group and supplementary groups
+    :steps:
+        1. Create required groups
+        2. Create user with primary group and supplementary groups
+        3. Check passwd entry
+        4. Verify primary group
+        5. Verify user is a member of all supplementary groups
+    :expectedresults:
+        1. Groups are created successfully
+        2. User is created successfully
+        3. Passwd entry exists with correct attributes
+        4. User has primary group
+        5. User is added to supplementary groups as a member
+    :customerscenario: False
+    """
+    username = "testuser1"
+    groups_to_create = ["testgroup", "testgroup1", "testgroup2", "testgroup3"]
+    for group in groups_to_create:
+        shadow.groupadd(group)
+
+    shadow.useradd(f"{username} -g testgroup -G testgroup1,testgroup2,testgroup3")
+
+    passwd_entry = shadow.tools.getent.passwd(username)
+    assert passwd_entry is not None, f"User {username} should be found in passwd"
+    assert passwd_entry.name == username, "Incorrect username"
+    assert passwd_entry.home == f"/home/{username}", "Incorrect home directory"
+
+    testgroup_entry = shadow.tools.getent.group("testgroup")
+    assert testgroup_entry is not None, "Group testgroup should exist"
+    assert (
+        passwd_entry.gid == testgroup_entry.gid
+    ), f"User's primary GID ({passwd_entry.gid}) should match testgroup GID ({testgroup_entry.gid})"
+
+    supplementary_groups = ["testgroup1", "testgroup2", "testgroup3"]
+    for group_name in supplementary_groups:
+        group_entry = shadow.tools.getent.group(group_name)
+        assert group_entry is not None, f"Group {group_name} should exist"
+        assert username in group_entry.members, f"User {username} should be a member of {group_name} group"
