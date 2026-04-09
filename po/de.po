@@ -1291,6 +1291,9 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  Ein Systemkonto erstellen\n"
 
+msgid "  -r, --system                  create a system group\n"
+msgstr "  -r, --system                  Eine Systemgruppe erstellen\n"
+
 #, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
 msgid ""

@@ -116,7 +116,7 @@ usage (int status)
 	(void) fputs (_("  -o, --non-unique              allow to create groups with duplicate\n"
 	                "                                (non-unique) GID\n"), usageout);
 	(void) fputs (_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), usageout);
-	(void) fputs (_("  -r, --system                  create a system account\n"), usageout);
+	(void) fputs (_("  -r, --system                  create a system group\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
 	(void) fputs (_("  -U, --users USERS             comma-separated list of users to add as\n"
