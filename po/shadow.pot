@@ -1131,6 +1131,9 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
+msgid "  -r, --system                  create a system group\n"
+msgstr ""
+
 msgid ""
 "  -U, --users USERS             comma-separated list of users to add as\n"
 "\t                         members of this group\n"
