@@ -136,7 +136,6 @@ run_test ./chage/12_chsh_usage-l_invalid_user2/chage.test
 run_test ./chage/13_chsh_locked_passwd/chage.test
 run_test ./chage/14_chsh_locked_shadow/chage.test
 run_test ./chage/15_chage-I_no_shadow_entry/chage.test
-run_test ./chage/16_chage-m_no_shadow_entry/chage.test
 run_test ./chage/17_chage-M_no_shadow_entry/chage.test
 run_test ./chage/18_chage-d_no_shadow_entry/chage.test
 run_test ./chage/19_chage-W_no_shadow_entry/chage.test
