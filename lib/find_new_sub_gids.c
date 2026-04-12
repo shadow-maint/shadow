@@ -173,7 +173,4 @@ find_new_sub_gids(uid_t uid, id_t *range_start, unsigned long *range_count)
 
 	return find_new_sub_gids_linear(range_start, range_count);
 }
-
-#else				/* !ENABLE_SUBIDS */
-extern int ISO_C_forbids_an_empty_translation_unit;
-#endif				/* !ENABLE_SUBIDS */
+#endif				/* ENABLE_SUBIDS */
