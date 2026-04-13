@@ -30,6 +30,7 @@
 #include <acl/libacl.h>
 #endif				/* WITH_ACL */
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -679,7 +680,7 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 		char buf[8192];
 		ssize_t cnt;
 
-		cnt = read(ifd, buf, sizeof(buf));
+		cnt = read(ifd, buf, sizeof_a(buf));
 		if (cnt < 0) {
 			if (errno == EINTR) {
 				continue;

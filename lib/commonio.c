@@ -31,6 +31,7 @@
 #endif				/* WITH_TCB */
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
@@ -154,7 +155,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		errno = EINVAL;
 		return 0;
 	}
-	len = read(fd, buf, sizeof(buf) - 1);
+	len = read(fd, buf, sizeof_a(buf) - 1);
 	close (fd);
 	if (len <= 0) {
 		if (log) {

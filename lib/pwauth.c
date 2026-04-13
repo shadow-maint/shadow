@@ -21,9 +21,10 @@
 
 #include "agetpass.h"
 #include "defines.h"
+#include "getdef.h"
 #include "prototypes.h"
 #include "pwauth.h"
-#include "getdef.h"
+#include "sizeof.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -89,7 +90,7 @@ pw_auth(const char *cipher, const char *user)
 	 * Some BSD updates to the S/KEY API adds a fourth parameter; the
 	 * sizeof of the challenge info buffer.
 	 */
-#  define skeychallenge(s,u,c) skeychallenge(s,u,c,sizeof(c))
+#  define skeychallenge(s,u,c) skeychallenge(s,u,c,countof(c))
 # endif
 
 	if (skeychallenge (&skey, user, challenge_info) == 0) {

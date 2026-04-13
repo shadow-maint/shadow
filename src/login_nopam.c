@@ -182,7 +182,7 @@ static char *myhostname (void)
 	static char name[MAXHOSTNAMELEN + 1] = "";
 
 	if (streq(name, "")) {
-		gethostname(name, sizeof(name));
+		gethostname(name, countof(name));
 		stpcpy(&name[MAXHOSTNAMELEN], "");
 	}
 	return (name);
