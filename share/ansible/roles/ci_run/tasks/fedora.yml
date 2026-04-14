@@ -40,6 +40,20 @@
     group: root
     mode: '0644'
 
+- name: Check if UID 1000 already exists
+  ansible.builtin.getent:
+    database: passwd
+    key: 1000
+  register: existing_uid_1000
+  failed_when: false
+
+- name: Create CI user to simulate cloud VM environment
+  ansible.builtin.user:
+    name: ci
+    create_home: true
+    shell: /bin/bash
+  when: existing_uid_1000.ansible_facts.getent_passwd['1000'] is undefined
+
 - name: Build configuration
   ansible.builtin.command: >
     ./autogen.sh
