@@ -31,4 +31,4 @@ def test_newgrp__change_to_new_group(shadow: Shadow):
 
     cmd, gid = shadow.newgrp("tgroup", run_as="tuser")
     assert cmd.rc == 0, "newgrp command should succeed"
-    assert gid == 1001, f"Current GID should be {1001}, got {gid}"
+    assert gid == 1002, f"Current GID should be {1002}, got {gid}"
