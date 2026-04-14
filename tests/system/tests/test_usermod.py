@@ -38,7 +38,7 @@ def test_usermod__rename_user(shadow: Shadow):
     passwd_entry = shadow.tools.getent.passwd("tuser2")
     assert passwd_entry is not None, "User should be found"
     assert passwd_entry.name == "tuser2", "Incorrect username"
-    assert passwd_entry.uid == 1000, "Incorrect UID"
+    assert passwd_entry.uid == 1001, "Incorrect UID"
 
     shadow_entry = shadow.tools.getent.shadow("tuser2")
     assert shadow_entry is not None, "User should be found"
@@ -47,7 +47,7 @@ def test_usermod__rename_user(shadow: Shadow):
     group_entry = shadow.tools.getent.group("tuser1")
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tuser1", "Incorrect groupname"
-    assert group_entry.gid == 1000, "Incorrect GID"
+    assert group_entry.gid == 1001, "Incorrect GID"
 
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tuser1")
