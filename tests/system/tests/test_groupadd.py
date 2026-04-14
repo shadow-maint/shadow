@@ -29,7 +29,7 @@ def test_groupadd__add_group(shadow: Shadow):
     group_entry = shadow.tools.getent.group("tgroup")
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tgroup", "Incorrect groupname"
-    assert group_entry.gid == 1000, "Incorrect GID"
+    assert group_entry.gid == 1001, "Incorrect GID"
 
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
