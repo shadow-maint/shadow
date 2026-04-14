@@ -38,8 +38,8 @@ def test_useradd__add_user(shadow: Shadow):
     assert passwd_entry is not None, "User should be found"
     assert passwd_entry.name == "tuser", "Incorrect username"
     assert passwd_entry.password == "x", "Incorrect password"
-    assert passwd_entry.uid == 1000, "Incorrect UID"
-    assert passwd_entry.gid == 1000, "Incorrect GID"
+    assert passwd_entry.uid == 1001, "Incorrect UID"
+    assert passwd_entry.gid == 1001, "Incorrect GID"
     assert passwd_entry.home == "/home/tuser", "Incorrect home"
     if "Debian" in shadow.host.distro_name:
         assert passwd_entry.shell == "/bin/sh", "Incorrect shell"
@@ -58,7 +58,7 @@ def test_useradd__add_user(shadow: Shadow):
     group_entry = shadow.tools.getent.group("tuser")
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tuser", "Incorrect groupname"
-    assert group_entry.gid == 1000, "Incorrect GID"
+    assert group_entry.gid == 1001, "Incorrect GID"
 
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tuser")
@@ -78,9 +78,9 @@ def test_useradd__recreate_deleted_user(shadow: Shadow):
         2. Delete the user
         3. Create again the deleted user
     :steps:
-        1. User exists and UID is 1000
-        2. Group exists and GID is 1000
-        3. Home folder exists
+        1. Check user exists and UID matches
+        2. Check group exists and GID matches
+        3. Check home folder exists
     :expectedresults:
         1. User is found and UID matches
         2. Group is found and GID matches
@@ -94,12 +94,12 @@ def test_useradd__recreate_deleted_user(shadow: Shadow):
     id_entry = shadow.tools.id("tuser")
     assert id_entry is not None, "User should be found"
     assert id_entry.user.name == "tuser", "Incorrect username"
-    assert id_entry.user.id == 1000, "Incorrect UID"
+    assert id_entry.user.id == 1001, "Incorrect UID"
 
     group_entry = shadow.tools.getent.group("tuser")
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tuser", "Incorrect groupname"
-    assert group_entry.gid == 1000, "Incorrect GID"
+    assert group_entry.gid == 1001, "Incorrect GID"
 
     assert shadow.fs.exists("/home/tuser"), "Home folder should be found"
 
