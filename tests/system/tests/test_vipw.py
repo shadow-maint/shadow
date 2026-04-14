@@ -23,15 +23,15 @@ def test_vipw__add_user_to_passwd(shadow: Shadow):
         2. User's passwd entry is correct
     :customerscenario: False
     """
-    editor_script = "Go\ntuser:x:1000:1000::/home/tuser:/bin/bash\n:wq"
+    editor_script = "Go\ntuser:x:1001:1001::/home/tuser:/bin/bash\n:wq"
     shadow.vipw(editor_script=editor_script)
 
     passwd_entry = shadow.tools.getent.passwd("tuser")
     assert passwd_entry is not None, "User should be found"
     assert passwd_entry.name == "tuser", "Incorrect username"
     assert passwd_entry.password == "x", "Incorrect password"
-    assert passwd_entry.uid == 1000, "Incorrect UID"
-    assert passwd_entry.gid == 1000, "Incorrect GID"
+    assert passwd_entry.uid == 1001, "Incorrect UID"
+    assert passwd_entry.gid == 1001, "Incorrect GID"
     assert passwd_entry.home == "/home/tuser", "Incorrect home"
     assert passwd_entry.shell == "/bin/bash", "Incorrect shell"
 
@@ -76,13 +76,13 @@ def test_vipw__add_group_to_group(shadow: Shadow):
         2. Group's shadow group is correct
     :customerscenario: False
     """
-    editor_script = "Go\ntgroup:x:1000:\n:wq"
+    editor_script = "Go\ntgroup:x:1001:\n:wq"
     shadow.vipw("-g", editor_script=editor_script)
 
     group_entry = shadow.tools.getent.group("tgroup")
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tgroup", "Incorrect groupname"
-    assert group_entry.gid == 1000, "Incorrect GID"
+    assert group_entry.gid == 1001, "Incorrect GID"
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
