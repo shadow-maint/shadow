@@ -129,6 +129,77 @@ class ShadowHost(BaseHost, BaseLinuxHost):
 
         return PurePosixPath(result.stdout_lines[-1].strip())
 
+    def _restore_home_directory(self, home_backup_path: str) -> None:
+        """
+        Restore /home directory, handling mount point scenarios.
+
+        If /home is a mount point, do selective cleanup by removing only
+        directories that don't exist in the backup. Otherwise, do full restore.
+
+        :param backup_path: Path to the backup directory
+        """
+        mount_check = self.conn.run(
+            "mountpoint -q /home",
+            log_level=ProcessLogLevel.Error,
+            raise_on_error=False,
+        )
+
+        if mount_check.rc == 0:
+            self.logger.info("/home is a mount point, doing selective cleanup")
+
+            backup_dirs = self.conn.run(
+                f"find '{home_backup_path}' -mindepth 1 -maxdepth 1 -type d -printf '%f\\n' || true",
+                log_level=ProcessLogLevel.Error,
+                raise_on_error=False,
+            )
+            backup_dir_list = set(line for line in backup_dirs.stdout_lines if line.strip())
+
+            current_dirs = self.conn.run(
+                "find /home -mindepth 1 -maxdepth 1 -type d -printf '%f\\n' || true",
+                log_level=ProcessLogLevel.Error,
+                raise_on_error=False,
+            )
+            current_dir_list = set(line for line in current_dirs.stdout_lines if line.strip())
+
+            dirs_to_remove = current_dir_list - backup_dir_list
+            for dir_name in dirs_to_remove:
+                if dir_name:
+                    self.logger.info(f"Removing extra directory: /home/{dir_name}")
+                    self.conn.run(
+                        f"rm --force --recursive '/home/{dir_name}'",
+                        log_level=ProcessLogLevel.Error,
+                    )
+
+            self.conn.run(
+                f"""
+                set -e
+                if ls '{home_backup_path}'/* >/dev/null 2>&1; then
+                    cp --force --recursive '{home_backup_path}'/* /home/
+                fi
+
+                if ls '{home_backup_path}'/.[^.]* >/dev/null 2>&1; then
+                    cp --force --recursive '{home_backup_path}'/.[^.]* /home/
+                fi
+                """,
+                log_level=ProcessLogLevel.Error,
+                raise_on_error=False,
+            )
+        else:
+            self.logger.info("/home is not a mount point, doing full restore")
+            self.conn.run(
+                f"""
+                set -ex
+                function restore {{
+                    rm --force --recursive "$2"
+                    if [ -d "$1" ] || [ -f "$1" ]; then
+                        cp --force --archive "$1" "$2"
+                    fi
+                }}
+                restore "{home_backup_path}" /home
+                """,
+                log_level=ProcessLogLevel.Error,
+            )
+
     def restore(self, backup_data: Any | None) -> None:
         """
         Restore all shadow data.
@@ -165,11 +236,11 @@ class ShadowHost(BaseHost, BaseLinuxHost):
             restore "{backup_path}/gshadow" /etc/gshadow
             restore "{backup_path}/subuid" /etc/subuid
             restore "{backup_path}/subgid" /etc/subgid
-            restore "{backup_path}/home" /home
             restore "{backup_path}/secure" /var/log/secure
             """,
             log_level=ProcessLogLevel.Error,
         )
+        self._restore_home_directory(f"{backup_path}/home")
 
     def detect_file_mismatches(self) -> None:
         """
