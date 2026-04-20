@@ -207,7 +207,7 @@
 	    user's login directory. The default is to append the
 	    <replaceable>LOGIN</replaceable> name to
 	    <replaceable>BASE_DIR</replaceable> and use that as the
-	    login directory name.  
+	    login directory name.
 	    The directory <replaceable>HOME_DIR</replaceable> is not created by
 	    default.  However it will be created for non-system users if either the
 	    <option>-m</option> flag is specified or
@@ -422,7 +422,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Create the user's home directory if it does not exist. 
+	    Create the user's home directory if it does not exist.
 	    The files and directories contained in the skeleton directory
 	    (which can be defined with the <option>-k</option> option)
 	    will be copied to the home directory.
@@ -512,7 +512,7 @@
             password himself.
 	  </para>
 	  <para>
-	    <emphasis role="bold">Note:</emphasis>Avoid this option on the command  
+	    <emphasis role="bold">Note:</emphasis>Avoid this option on the command
 	     line because the password (or encrypted password) will
 	    be visible by users listing the processes.
 	  </para>
