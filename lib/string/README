@@ -204,7 +204,7 @@ strcpy/ - String copying
 	a size.  This makes it safer for chaining several calls.
 
   m/
-    MEMCPY()
+    memcpy_a()
 	Like memcpy(3), but takes two arrays.
 
 sprintf/ - Formatted string creation
