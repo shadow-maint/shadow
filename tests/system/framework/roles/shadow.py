@@ -7,7 +7,7 @@ from typing import Dict, Tuple
 
 from pytest_mh.conn import ProcessLogLevel, ProcessResult
 
-from ..hosts.shadow import ShadowHost
+from ..hosts.shadow import LoginDefsConfig, ShadowHost
 from ..misc.errors import ExpectScriptError
 from .base import BaseLinuxRole
 
@@ -31,6 +31,7 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         Set up the environment.
         """
         super().__init__(*args, **kwargs)
+        self.login_defs: LoginDefsConfig = LoginDefsConfig(self.host).postpone_setup()
 
     def teardown(self) -> None:
         """
