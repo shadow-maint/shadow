@@ -26,6 +26,7 @@
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -215,8 +216,7 @@ grp_update(void)
 	 */
 	ogrp = gr_locate (group_name);
 	if (NULL == ogrp) {
-		fprintf (stderr,
-		         _("%s: group '%s' does not exist in %s\n"),
+		eprintf(_("%s: group '%s' does not exist in %s\n"),
 		         Prog, group_name, gr_dbname ());
 		exit (E_GRP_UPDATE);
 	}
@@ -280,7 +280,7 @@ grp_update(void)
 			ul = user_list;
 			while (NULL != (u = strsep(&ul, ","))) {
 				if (prefix_getpwnam(u) == NULL) {
-					fprintf(stderr, _("Invalid member username %s\n"), u);
+					eprintf(_("Invalid member username %s\n"), u);
 					exit(E_GRP_UPDATE);
 				}
 
@@ -297,14 +297,12 @@ grp_update(void)
 	 * Write out the new group file entry.
 	 */
 	if (gr_update (&grp) == 0) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, gr_dbname (), grp.gr_name);
 		exit (E_GRP_UPDATE);
 	}
 	if (nflg && (gr_remove (group_name) == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot remove entry '%s' from %s\n"),
+		eprintf(_("%s: cannot remove entry '%s' from %s\n"),
 		         Prog, grp.gr_name, gr_dbname ());
 		exit (E_GRP_UPDATE);
 	}
@@ -318,14 +316,12 @@ grp_update(void)
 		 * Write out the new shadow group entries as well.
 		 */
 		if (sgr_update (&sgrp) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, sgr_dbname (), sgrp.sg_namp);
 			exit (E_GRP_UPDATE);
 		}
 		if (nflg && (sgr_remove (group_name) == 0)) {
-			fprintf (stderr,
-			         _("%s: cannot remove entry '%s' from %s\n"),
+			eprintf(_("%s: cannot remove entry '%s' from %s\n"),
 			         Prog, group_name, sgr_dbname ());
 			exit (E_GRP_UPDATE);
 		}
@@ -359,8 +355,7 @@ static void check_new_gid (void)
 	/*
 	 * Tell the user what they did wrong.
 	 */
-	fprintf (stderr,
-	         _("%s: GID '%lu' already exists\n"),
+	eprintf(_("%s: GID '%lu' already exists\n"),
 	         Prog, (unsigned long) group_newid);
 	exit (E_GID_IN_USE);
 }
@@ -383,17 +378,13 @@ check_new_name(void)
 	}
 
 	if (!is_valid_group_name(group_newname)) {
-		fprintf(stderr,
-			_("%s: invalid group name '%s'\n"),
-			Prog, group_newname);
+		eprintf(_("%s: invalid group name '%s'\n"), Prog, group_newname);
 		exit(E_BAD_ARG);
 	}
 
 	/* local, no need for xgetgrnam */
 	if (prefix_getgrnam(group_newname) != NULL) {
-		fprintf(stderr,
-			_("%s: group '%s' already exists\n"),
-			Prog, group_newname);
+		eprintf(_("%s: group '%s' already exists\n"), Prog, group_newname);
 		exit(E_NAME_IN_USE);
 	}
 
@@ -432,8 +423,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			gflg = true;
 			if (   (get_gid(optarg, &group_newid) == -1)
 			    || (group_newid == (gid_t)-1)) {
-				fprintf (stderr,
-				         _("%s: invalid group ID '%s'\n"),
+				eprintf(_("%s: invalid group ID '%s'\n"),
 				         Prog, optarg);
 				exit (E_BAD_ARG);
 			}
@@ -490,8 +480,7 @@ static void close_files(const struct option_flags *flags)
 	process_selinux = !flags->chroot && !flags->prefix;
 
 	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		exit (E_GRP_UPDATE);
 	}
@@ -511,8 +500,7 @@ static void close_files(const struct option_flags *flags)
 	if (   is_shadow_grp
 	    && (pflg || nflg || user_list)) {
 		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			exit (E_GRP_UPDATE);
 		}
@@ -540,8 +528,7 @@ static void close_files(const struct option_flags *flags)
 
 	if (gflg) {
 		if (pw_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());
 			exit (E_GRP_UPDATE);
 		}
@@ -668,8 +655,7 @@ static void lock_files(const struct option_flags *flags)
 	process_selinux = !flags->chroot && !flags->prefix;
 
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		exit (E_GRP_UPDATE);
 	}
@@ -679,8 +665,7 @@ static void lock_files(const struct option_flags *flags)
 	if (   is_shadow_grp
 	    && (pflg || nflg || user_list)) {
 		if (sgr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 			exit (E_GRP_UPDATE);
 		}
@@ -690,8 +675,7 @@ static void lock_files(const struct option_flags *flags)
 
 	if (gflg) {
 		if (pw_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, pw_dbname ());
 			exit (E_GRP_UPDATE);
 		}
@@ -708,7 +692,7 @@ static void lock_files(const struct option_flags *flags)
 static void open_files (void)
 {
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 		exit (E_GRP_UPDATE);
 	}
@@ -717,9 +701,7 @@ static void open_files (void)
 	if (   is_shadow_grp
 	    && (pflg || nflg || user_list)) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
+			eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
 			exit (E_GRP_UPDATE);
 		}
@@ -728,9 +710,7 @@ static void open_files (void)
 
 	if (gflg) {
 		if (pw_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, pw_dbname ());
+			eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 			exit (E_GRP_UPDATE);
 		}
@@ -748,16 +728,14 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
 			struct passwd npwd;
 			lpwd = pw_locate (pwd->pw_name);
 			if (NULL == lpwd) {
-				fprintf (stderr,
-				         _("%s: user '%s' does not exist in %s\n"),
+				eprintf(_("%s: user '%s' does not exist in %s\n"),
 				         Prog, pwd->pw_name, pw_dbname ());
 				exit (E_GRP_UPDATE);
 			} else {
 				npwd = *lpwd;
 				npwd.pw_gid = ngid;
 				if (pw_update (&npwd) == 0) {
-					fprintf (stderr,
-					         _("%s: failed to prepare the new %s entry '%s'\n"),
+					eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 					         Prog, pw_dbname (), npwd.pw_name);
 					exit (E_GRP_UPDATE);
 				}
@@ -791,9 +769,7 @@ int main (int argc, char **argv)
 #endif
 
 	if (atexit (do_cleanups) != 0) {
-		fprintf (stderr,
-		         _("%s: Cannot setup cleanup service.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot setup cleanup service.\n"), Prog);
 		exit (E_CLEANUP_SERVICE);
 	}
 
@@ -809,8 +785,7 @@ int main (int argc, char **argv)
 		 */
 		grp = prefix_getgrnam (group_name); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
-			fprintf (stderr,
-			         _("%s: group '%s' does not exist\n"),
+			eprintf(_("%s: group '%s' does not exist\n"),
 			         Prog, group_name);
 			exit (E_NOTFOUND);
 		} else {

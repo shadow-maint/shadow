@@ -147,6 +147,7 @@ test_typetraits_LDADD = \
 test_exit_if_null_SOURCES = \
     ../../lib/exit_if_null.c \
     ../../lib/shadowlog.c \
+    ../../lib/io/fprintf.c \
     ../../lib/alloc/malloc.c \
     test_exit_if_null.c \
     $(NULL)
