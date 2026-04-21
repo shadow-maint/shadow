@@ -13,9 +13,9 @@
 
 #include "atoi/a2i.h"
 #include "defines.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "string/strerrno.h"
 
 
 /*
@@ -38,9 +38,8 @@ gettime(void)
 		return fallback;
 
 	if (a2i(time_t, &epoch, source_date_epoch, NULL, 10, 0, fallback) == -1) {
-		fprintf(log_get_logfd(),
-		        _("Environment variable $SOURCE_DATE_EPOCH: a2i(\"%s\"): %s"),
-		        source_date_epoch, strerrno());
+		fprinte(log_get_logfd(), "a2i(SOURCE_DATE_EPOCH=\"%s\")",
+		        source_date_epoch);
 		return fallback;
 	}
 	return epoch;
