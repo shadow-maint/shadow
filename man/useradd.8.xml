@@ -2,6 +2,7 @@
 <!--
    SPDX-FileCopyrightText: 1991 - 1994, Julianne Frances Haugh
    SPDX-FileCopyrightText: 2007 - 2011, Nicolas François
+   SPDX-FileCopyrightText: 2025 - 2026, Hadi Chokr
    SPDX-License-Identifier: BSD-3-Clause
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
@@ -156,8 +157,30 @@
 		regardless of any configuration file settings.
 	  </para>
 	  <para>
-	    Note: this feature works only if the underlying filesystem supports
-	    Btrfs subvolumes.
+	    If the parent directory of the user's home directory is
+	    <emphasis>not</emphasis> on a Btrfs filesystem,
+	    <command>useradd</command> will <emphasis>not</emphasis> create a
+	    subvolume.
+	    Instead, it creates a regular directory,
+	    prints a warning to standard error,
+	    and logs the event via syslog at level
+	    <constant>LOG_WARN</constant>.
+	    The user account is still created successfully.
+	  </para>
+	  <para>
+	    If the filesystem type cannot be determined (e.g., because of
+	    insufficient permissions, an I/O error,
+	    or a
+	    <citerefentry>
+	      <refentrytitle>statfs</refentrytitle>
+	      <manvolnum>2</manvolnum>
+	    </citerefentry>
+	    failure),
+	    <command>useradd</command> treats this as a fatal error:
+	    the home directory is not created,
+	    the command exits with a non‑zero status
+	    (<literal>E_HOMEDIR</literal>, 12),
+	    and an error message is printed.
 	  </para>
 	</listitem>
       </varlistentry>
