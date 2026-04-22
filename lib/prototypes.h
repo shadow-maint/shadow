@@ -23,7 +23,6 @@
 
 #include <sys/socket.h>
 #include <sys/stat.h>
-#include <sys/statfs.h>
 #include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
@@ -49,14 +48,6 @@ extern int expire (const struct passwd *, /*@null@*/const struct spwd *);
 
 /* isexpired.c */
 extern int isexpired (const struct passwd *, /*@null@*/const struct spwd *);
-
-/* btrfs.c */
-#ifdef WITH_BTRFS
-extern int btrfs_create_subvolume(const char *path);
-extern int btrfs_remove_subvolume(const char *path);
-extern int btrfs_is_subvolume(const char *path);
-extern bool is_btrfs(const struct statfs *sfs);
-#endif
 
 /* basename() renamed to Basename() to avoid libc name space confusion */
 /* basename.c */

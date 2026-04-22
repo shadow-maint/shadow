@@ -20,6 +20,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "btrfs.h"
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
