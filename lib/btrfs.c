@@ -67,8 +67,7 @@ int btrfs_is_subvolume(const char *path)
 	if (ret <= 0)
 		return ret;
 
-	ret = stat(path, &st);
-	if (ret == -1)
+	if (stat(path, &st) == -1)
 		return -1;
 
 	if (st.st_ino != BTRFS_FIRST_FREE_OBJECTID || !S_ISDIR(st.st_mode)) {
