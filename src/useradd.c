@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/statfs.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <time.h>
@@ -2265,6 +2266,7 @@ static void create_home(const struct option_flags *flags)
 #if WITH_BTRFS
 		if (subvolflg && (strlen(prefix_user_home) - (int)strlen(path)) <= 1) {
 			char *btrfs_check = strdup(path);
+			struct statfs  sfs;
 
 			if (!btrfs_check) {
 				fprintf(stderr,
@@ -2273,13 +2275,18 @@ static void create_home(const struct option_flags *flags)
 				fail_exit(E_HOMEDIR, process_selinux);
 			}
 			stpcpy(&btrfs_check[strlen(path) - strlen(cp) - 1], "");
-			if (is_btrfs(btrfs_check) <= 0) {
+			if (statfs(btrfs_check, &sfs) == -1) {
+				fprintf(stderr, "%s: statfs(\"%s\"): %s\n",
+					Prog, btrfs_check, strerrno());
+				fail_exit(E_HOMEDIR, process_selinux);
+			}
+			free(btrfs_check);
+			if (!is_btrfs(&sfs)) {
 				fprintf(stderr,
 					_("%s: home directory \"%s\" must be mounted on BTRFS\n"),
 					Prog, path);
 				fail_exit(E_HOMEDIR, process_selinux);
 			}
-			free(btrfs_check);
 			// make subvolume to mount for user instead of directory
 			if (btrfs_create_subvolume(path)) {
 				fprintf(stderr,

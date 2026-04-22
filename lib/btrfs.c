@@ -60,12 +60,13 @@ int btrfs_remove_subvolume(const char *path)
  */
 int btrfs_is_subvolume(const char *path)
 {
-	struct stat st;
-	int ret;
+	struct stat    st;
+	struct statfs  sfs;
 
-	ret = is_btrfs(path);
-	if (ret <= 0)
-		return ret;
+	if (statfs(path, &sfs) == -1)
+		return -1;
+	if (!is_btrfs(&sfs))
+		return 0;
 
 	if (stat(path, &st) == -1)
 		return -1;
@@ -78,16 +79,8 @@ int btrfs_is_subvolume(const char *path)
 }
 
 
-/* Adapted from btrfsprogs */
-int is_btrfs(const char *path)
+bool
+is_btrfs(const struct statfs *sfs)
 {
-	struct statfs sfs;
-	int ret;
-
-	ret = statfs(path, &sfs);
-	if (ret == -1)
-		return -1;
-
-	return sfs.f_type == BTRFS_SUPER_MAGIC;
+	return sfs->f_type == BTRFS_SUPER_MAGIC;
 }
-
