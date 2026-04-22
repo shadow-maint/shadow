@@ -290,7 +290,7 @@ libshadow_la_SOURCES += tcbfuncs.c tcbfuncs.h
 endif
 
 if WITH_BTRFS
-libshadow_la_SOURCES += btrfs.c
+libshadow_la_SOURCES += btrfs.c btrfs.h
 endif
 
 if ENABLE_LASTLOG

@@ -1,3 +1,7 @@
+#include "config.h"
+
+#include "btrfs.h"
+
 #include <linux/btrfs_tree.h>
 #include <linux/magic.h>
 #include <sys/statfs.h>
