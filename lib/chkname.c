@@ -50,7 +50,7 @@ is_valid_name(const char *name)
 	 || streq(name, ".")
 	 || streq(name, "..")
 	 || strspn(name, "-")
-	 || strpbrk(name, " \"#',/:;")
+	 || strpbrk(name, " !\"#'&*+,/:;@|~")
 	 || strchriscntrl(name)
 	 || strisdigit(name))
 	{
