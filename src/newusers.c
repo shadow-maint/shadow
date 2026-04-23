@@ -41,6 +41,8 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "io/fgets/fgets.h"
+#include "io/fprintf.h"
+#include "io/syslog.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -55,7 +57,6 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
-#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -452,9 +453,8 @@ static int update_passwd (struct passwd *pwd, const char *password)
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		cp = pw_encrypt (password, salt);
 		if (NULL == cp) {
-			fprintf (stderr,
-			         _("%s: failed to crypt password with salt '%s': %s\n"),
-			        Prog, salt, strerrno());
+			fprinte(stderr, _("%s: failed to crypt password with salt '%s'"),
+			        Prog, salt);
 			return 1;
 		}
 		pwd->pw_passwd = cp;
@@ -529,9 +529,9 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 			                                    crypt_arg);
 			cp = pw_encrypt (password, salt);
 			if (NULL == cp) {
-				fprintf (stderr,
-				         _("%s: failed to crypt password with salt '%s': %s\n"),
-				        Prog, salt, strerrno());
+				fprinte(stderr,
+				        _("%s: failed to crypt password with salt '%s'"),
+				        Prog, salt);
 				return 1;
 			}
 			spent.sp_pwdp = cp;
@@ -579,9 +579,9 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		cp = pw_encrypt (password, salt);
 		if (NULL == cp) {
-			fprintf (stderr,
-			         _("%s: failed to crypt password with salt '%s': %s\n"),
-			        Prog, salt, strerrno());
+			fprinte(stderr,
+			        _("%s: failed to crypt password with salt '%s'"),
+			        Prog, salt);
 			return 1;
 		}
 		spent.sp_pwdp = cp;
@@ -1110,7 +1110,7 @@ int main (int argc, char **argv)
 		usernames = reallocf_T(usernames, nusers, char *);
 		passwords = reallocf_T(passwords, nusers, char *);
 		if (lines == NULL || usernames == NULL || passwords == NULL) {
-			fprintf(stderr, _("%s: line %jd: %s\n"), Prog, line, strerrno());
+			fprinte(stderr, _("%s: line %jd"), Prog, line);
 			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		lines[nusers-1]     = line;
@@ -1147,18 +1147,16 @@ int main (int argc, char **argv)
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (mkdir (newpw.pw_dir, mode) != 0) {
-				fprintf (stderr,
-				         _("%s: line %jd: mkdir %s failed: %s\n"),
-				        Prog, line, newpw.pw_dir, strerrno());
+				fprinte(stderr, _("%s: line %jd: mkdir %s failed"),
+				        Prog, line, newpw.pw_dir);
 				if (errno != EEXIST) {
 					fail_exit (EXIT_FAILURE, process_selinux);
 				}
 			}
 			if (chown(newpw.pw_dir, newpw.pw_uid, newpw.pw_gid) != 0)
 			{
-				fprintf (stderr,
-				         _("%s: line %jd: chown %s failed: %s\n"),
-				        Prog, line, newpw.pw_dir, strerrno());
+				fprinte(stderr, _("%s: line %jd: chown %s failed"),
+				        Prog, line, newpw.pw_dir);
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 		}
@@ -1182,11 +1180,10 @@ int main (int argc, char **argv)
 			unsigned long sub_uid_count = 0;
 			if (find_new_sub_uids(newpw.pw_uid, &sub_uid_start, &sub_uid_count) != 0)
 			{
-				fprintf (stderr,
-					_("%s: can't find subordinate user range: %s\n"),
-					Prog, strerrno());
-				SYSLOG(LOG_WARN, "can't find subordinate user range: %s\n",
-				       strerrno());
+				fprinte(stderr,
+					_("%s: can't find subordinate user range"),
+					Prog);
+				SYSLOGE(LOG_WARN, "can't find subordinate user range");
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (sub_uid_add(fields[0], sub_uid_start, sub_uid_count) == 0)
@@ -1205,11 +1202,10 @@ int main (int argc, char **argv)
 			gid_t sub_gid_start = 0;
 			unsigned long sub_gid_count = 0;
 			if (find_new_sub_gids(newpw.pw_uid, &sub_gid_start, &sub_gid_count) != 0) {
-				fprintf (stderr,
-					_("%s: can't find subordinate group range: %s\n"),
-					Prog, strerrno());
-				SYSLOG(LOG_WARN, "can't find subordinate group range: %s\n",
-				       strerrno());
+				fprinte(stderr,
+					_("%s: can't find subordinate group range"),
+					Prog);
+				SYSLOGE(LOG_WARN, "can't find subordinate group range");
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (sub_gid_add(fields[0], sub_gid_start, sub_gid_count) == 0) {

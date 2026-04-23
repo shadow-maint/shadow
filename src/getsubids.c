@@ -5,9 +5,9 @@
 #include <string.h>
 
 #include "attr.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
-#include "string/strerrno.h"
 #include "subid.h"
 
 static const char Prog[] = "getsubids";
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	const char *owner;
 
 	if (!subid_init(Prog, stderr))
-		fprintf(stderr, "subid_init: %s\n", strerrno());
+		fprinte(stderr, "subid_init");
 	if (argc < 2)
 		usage();
 	owner = argv[1];

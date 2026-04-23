@@ -19,6 +19,7 @@
 
 #include "defines.h"
 #include "io/fgets/fgets.h"
+#include "io/syslog.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -68,8 +69,7 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 		if (ENOENT == err) {
 			return NOACTION;
 		}
-		SYSLOG(LOG_ERR, "could not open/read config file '%s': %s\n",
-		       SUAUTHFILE, strerror(err));
+		SYSLOGE(LOG_ERR, "could not open/read config file '%s'", SUAUTHFILE);
 		return DENY;
 	}
 

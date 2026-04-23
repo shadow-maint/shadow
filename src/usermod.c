@@ -38,6 +38,8 @@
 #include "faillog.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fprintf.h"
+#include "io/syslog.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
@@ -64,7 +66,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
-#include "string/strerrno.h"
 #include "string/strspn/stprspn.h"
 #include "sysconf.h"
 #include "time/day_to_str.h"
@@ -373,9 +374,7 @@ prepend_range(const char *str, struct id_range_list_entry **head)
 
 	entry = malloc_T(1, struct id_range_list_entry);
 	if (!entry) {
-		fprintf (stderr,
-			_("%s: failed to allocate memory: %s\n"),
-			Prog, strerrno());
+		fprinte(stderr, _("%s: failed to allocate memory"), Prog);
 		return 0;
 	}
 	entry->next = *head;
@@ -399,7 +398,7 @@ find_range(struct id_range_list_entry **head, uid_t uid,
 
 	entry = malloc_T(1, struct id_range_list_entry);
 	if (entry == NULL) {
-		fprintf(stderr, "%s: malloc: %s\n", Prog, strerrno());
+		fprinte(stderr, "%s: malloc", Prog);
 		return 0;
 	}
 
@@ -1967,9 +1966,8 @@ static void update_lastlog (void)
 	fd = open(_PATH_LASTLOG, O_RDWR);
 
 	if (-1 == fd) {
-		fprintf (stderr,
-		         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-		        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+		fprinte(stderr, _("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+		        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		return;
 	}
 
@@ -1979,9 +1977,8 @@ static void update_lastlog (void)
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 		    || (write_full(fd, &ll, sizeof(ll)) == -1)
 		    || (fsync (fd) != 0)) {
-			fprintf (stderr,
-			         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-			        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+			fprinte(stderr, _("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+			        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		}
 	} else {
 		/* Assume lseek or read failed because there is
@@ -1995,17 +1992,15 @@ static void update_lastlog (void)
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write_full(fd, &ll, sizeof(ll)) == -1)
 			    || (fsync (fd) != 0)) {
-				fprintf (stderr,
-				         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-				        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+				fprinte(stderr, _("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+				        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 			}
 		}
 	}
 
 	if (close (fd) != 0 && errno != EINTR) {
-		fprintf (stderr,
-		         _("%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"),
-		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerrno());
+		fprinte(stderr, _("%s: failed to copy the lastlog entry of user %ju to user %ju"),
+		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid);
 	}
 }
 #endif /* ENABLE_LASTLOG */
@@ -2031,9 +2026,8 @@ static void update_faillog (void)
 	fd = open (FAILLOG_FILE, O_RDWR);
 
 	if (-1 == fd) {
-		fprintf (stderr,
-		         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-		        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+		fprinte(stderr, _("%s: failed to copy the faillog entry of user %lu to user %lu"),
+		        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		return;
 	}
 
@@ -2043,9 +2037,8 @@ static void update_faillog (void)
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 		    || (write_full(fd, &fl, sizeof(fl)) == -1)
 		    || (fsync (fd) != 0)) {
-			fprintf (stderr,
-			         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-			        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+			fprinte(stderr, _("%s: failed to copy the faillog entry of user %lu to user %lu"),
+			        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		}
 	} else {
 		/* Assume lseek or read failed because there is
@@ -2059,17 +2052,15 @@ static void update_faillog (void)
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write_full(fd, &fl, sizeof(fl)) == -1))
 			{
-				fprintf (stderr,
-				         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-				        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+				fprinte(stderr, _("%s: failed to copy the faillog entry of user %lu to user %lu"),
+				        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 			}
 		}
 	}
 
 	if (close (fd) != 0 && errno != EINTR) {
-		fprintf (stderr,
-		         _("%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"),
-		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerrno());
+		fprinte(stderr, _("%s: failed to copy the faillog entry of user %ju to user %ju"),
+		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid);
 	}
 }
 
@@ -2250,19 +2241,17 @@ int main (int argc, char **argv)
 #ifdef ENABLE_SUBIDS
 	if (Sflg) {
 		if (find_range (&add_sub_uids, user_id, find_new_sub_uids) == 0) {
-			fprintf (stderr,
-				_("%s: unable to find new subordinate uid range: %s\n"),
-				Prog, strerrno());
-			SYSLOG(LOG_WARN, "unable to find new subordinate uid range: %s\n",
-			       strerrno());
+			fprinte(stderr,
+				_("%s: unable to find new subordinate uid range"),
+				Prog);
+			SYSLOGE(LOG_WARN, "unable to find new subordinate uid range");
 			fail_exit (E_SUB_UID_UPDATE, process_selinux);
 		}
 		if (find_range (&add_sub_gids, user_id, find_new_sub_gids) == 0) {
-			fprintf (stderr,
-				_("%s: unable to find new subordinate gid range: %s\n"),
-				Prog, strerrno());
-			SYSLOG(LOG_WARN, "unable to find new subordinate gid range: %s\n",
-			       strerrno());
+			fprinte(stderr,
+				_("%s: unable to find new subordinate gid range"),
+				Prog);
+			SYSLOGE(LOG_WARN, "unable to find new subordinate gid range");
 			fail_exit (E_SUB_GID_UPDATE, process_selinux);
 		}
 	}
