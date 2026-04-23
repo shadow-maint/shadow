@@ -11,13 +11,16 @@
 
 #ident "$Id$"
 
+#include <stdint.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <stdio.h>
 #include <time.h>
+
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+
 
 /*
  * sulog - log a SU command execution result
@@ -55,7 +58,7 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 	(void) umask (oldmask);
 	if ((oldgid != 0) && (setgid (oldgid) != 0)) {
 		perror ("setgid");
-		SYSLOG(LOG_ERR, "can't switch back to group `%d' in sulog", oldgid);
+		SYSLOG(LOG_ERR, "can't switch back to group `%jd' in sulog", (intmax_t) oldgid);
 		/* Do not return if the group permission were raised. */
 		exit (EXIT_FAILURE);
 	}
