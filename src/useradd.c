@@ -2216,7 +2216,7 @@ usr_update (unsigned long subuid_count, unsigned long subgid_count,
  */
 static void create_home(const struct option_flags *flags)
 {
-	char    path[strlen(prefix_user_home) + 2];
+	char    path[strlen(prefix_user_home) + 1];
 	char    *bhome, *cp;
 	mode_t  mode;
 	bool    process_selinux;
