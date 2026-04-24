@@ -19,9 +19,10 @@
 #include <fcntl.h>
 #include <string.h>
 
+#include <a2i.h>
+
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
-#include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "shadow/passwd/getpw.h"
 #include "string/ctype/strisascii/strisdigit.h"
