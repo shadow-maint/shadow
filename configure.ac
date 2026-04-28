@@ -145,6 +145,17 @@ AC_ARG_ENABLE([logind],
 	[enable_logind="yes"]
 )
 
+AC_ARG_ENABLE([syslog],
+  [AS_HELP_STRING([--disable-syslog], [disable logging via syslog() calls])],
+  [
+    AS_CASE([${enableval}],
+        [yes|no],[],
+        [AC_MSG_ERROR([bad parameter value for --enable-syslog=${enableval}])]
+    )
+  ],
+  [enable_syslog="yes"]
+)
+
 AC_ARG_WITH([audit],
 	[AS_HELP_STRING([--with-audit], [use auditing support @<:@default=yes if found@:>@])],
 	[with_audit=$withval], [with_audit=maybe])
@@ -200,6 +211,7 @@ AC_DEFINE_UNQUOTED([GROUP_NAME_MAX_LENGTH], [$with_group_name_max_length], [max 
 AC_SUBST([GROUP_NAME_MAX_LENGTH])
 GROUP_NAME_MAX_LENGTH="$with_group_name_max_length"
 
+AS_VAR_IF([enable_syslog],["yes"],[AC_DEFINE([USE_SYSLOG], [1], [Define to use syslog])])
 
 AM_CONDITIONAL([USE_BCRYPT], [test "x$with_bcrypt" = "xyes"])
 if test "X$with_bcrypt" = "Xyes"; then
@@ -630,5 +642,6 @@ AC_MSG_NOTICE([shadow ${PACKAGE_VERSION} has been configured with the following 
 	use file caps:			$with_fcaps
 	install su:			$with_su
 	enabled vendor dir:             $enable_vendordir
+	enable syslog: 			$enable_syslog
 
 ])
