@@ -2274,10 +2274,9 @@ static void create_home(const struct option_flags *flags)
 					Prog, path);
 				fail_exit(E_HOMEDIR, process_selinux);
 			}
-			stpcpy(&btrfs_check[strlen(path) - strlen(cp) - 1], "");
-			if (statfs(btrfs_check, &sfs) == -1) {
-				fprintf(stderr, "%s: statfs(\"%s\"): %s\n",
-					Prog, btrfs_check, strerrno());
+			if (statfs(dirname(btrfs_check), &sfs) == -1) {
+				fprintf(stderr, "%s: statfs(dirname(\"%s\")): %s\n",
+					Prog, path, strerrno());
 				fail_exit(E_HOMEDIR, process_selinux);
 			}
 			free(btrfs_check);
