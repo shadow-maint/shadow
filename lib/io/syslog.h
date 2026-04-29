@@ -24,10 +24,12 @@
 #define LOG_AUTHPRIV LOG_AUTH
 #endif
 
-#ifdef ENABLE_NLS
-#define SYSLOG(...)  SYSLOG_C(__VA_ARGS__)
+#if !USE_SYSLOG
+# define SYSLOG(...)
+#elif defined(ENABLE_NLS)
+# define SYSLOG(...)  SYSLOG_C(__VA_ARGS__)
 #else
-#define SYSLOG(...)  syslog(__VA_ARGS__)
+# define SYSLOG(...)  syslog(__VA_ARGS__)
 #endif
 
 /* The default syslog settings can now be changed here,
