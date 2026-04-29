@@ -566,3 +566,35 @@ def test_useradd_default_primary_group_with_supplementary(shadow: Shadow):
         group_entry = shadow.tools.getent.group(group_name)
         assert group_entry is not None, f"Group {group_name} should exist"
         assert username in group_entry.members, f"User {username} should be a member of {group_name} group"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__create_homedir(shadow: Shadow):
+    """
+    :title: Add a new user with home directory creation
+    :setup:
+        1. Set CREATE_HOME=no in /etc/login.defs to ensure home directory isn't created by default
+        2. Create user with --create-home option
+    :steps:
+        1. Check passwd and group entry
+        2. Verify home directory exists
+    :expectedresults:
+        1. Passwd and group entry exists with correct attributes
+        2. Home directory is created at /home/test1
+    :customerscenario: False
+    """
+    shadow.login_defs["CREATE_HOME"] = "no"
+
+    shadow.useradd("--create-home test1")
+
+    passwd_entry = shadow.tools.getent.passwd("test1")
+    assert passwd_entry is not None, "User test1 should be found in passwd"
+    assert passwd_entry.name == "test1", "Incorrect username"
+    assert passwd_entry.home == "/home/test1", "Incorrect home directory"
+
+    group_entry = shadow.tools.getent.group("test1")
+    assert group_entry is not None, "Group test1 should be found"
+    assert group_entry.name == "test1", "Incorrect group name"
+
+    home_dir = "/home/test1"
+    assert shadow.fs.exists(home_dir), f"Home directory {home_dir} should exist even with CREATE_HOME=no"
