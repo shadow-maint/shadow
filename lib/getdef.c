@@ -80,6 +80,7 @@ struct itemdef {
 	{"LOGIN_ENV_SAFELIST", NULL},		\
 	{"LOGIN_KEEP_USERNAME", NULL},		\
 	{"LOGIN_PLAIN_PROMPT", NULL},		\
+	{"LOGIN_SHELL_FALLBACK", NULL},		\
 	{"MOTD_FIRSTONLY", NULL},		\
 
 
