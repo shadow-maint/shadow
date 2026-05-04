@@ -19,6 +19,7 @@
 #include "idmapping.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
 #include "subordinateio.h"
@@ -113,7 +114,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 	 * is write-once, so attempting to write after it's already written to will
 	 * fail.
 	 */
-	if (read(setgroups_fd, policy_buffer, sizeof(policy_buffer)) < 0) {
+	if (read(setgroups_fd, policy_buffer, sizeof_a(policy_buffer)) < 0) {
 		fprintf(stderr, _("%s: failed to read setgroups: %s\n"),
 			Prog, strerrno());
 		exit(EXIT_FAILURE);

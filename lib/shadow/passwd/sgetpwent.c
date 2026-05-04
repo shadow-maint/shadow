@@ -19,6 +19,7 @@
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "sizeof.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"

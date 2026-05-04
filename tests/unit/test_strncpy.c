@@ -6,6 +6,7 @@
 
 #include "config.h"
 
+#include <stddef.h>
 #include <string.h>
 
 #include <stdarg.h>  // Required by <cmocka.h>
@@ -43,11 +44,11 @@ test_strncpy_a_trunc(MAYBE_UNUSED void ** _1)
 
 	char  src1[4] = {'f', 'o', 'o', 'o'};
 	char  res1[3] = {'f', 'o', 'o'};
-	assert_true(memcmp(res1, strncpy_a(buf, src1), sizeof(buf)) == 0);
+	assert_true(memcmp(res1, strncpy_a(buf, src1), countof(buf)) == 0);
 
 	char  src2[5] = "barb";
 	char  res2[3] = {'b', 'a', 'r'};
-	assert_true(memcmp(res2, strncpy_a(buf, src2), sizeof(buf)) == 0);
+	assert_true(memcmp(res2, strncpy_a(buf, src2), countof(buf)) == 0);
 }
 
 
@@ -58,11 +59,11 @@ test_strncpy_a_fit(MAYBE_UNUSED void ** _1)
 
 	char  src1[3] = {'b', 'a', 'z'};
 	char  res1[3] = {'b', 'a', 'z'};
-	assert_true(memcmp(res1, strncpy_a(buf, src1), sizeof(buf)) == 0);
+	assert_true(memcmp(res1, strncpy_a(buf, src1), countof(buf)) == 0);
 
 	char  src2[4] = "qwe";
 	char  res2[3] = {'q', 'w', 'e'};
-	assert_true(memcmp(res2, strncpy_a(buf, src2), sizeof(buf)) == 0);
+	assert_true(memcmp(res2, strncpy_a(buf, src2), countof(buf)) == 0);
 }
 
 
@@ -73,13 +74,13 @@ test_strncpy_a_pad(MAYBE_UNUSED void ** _1)
 
 	char  src1[3] = "as";
 	char  res1[3] = {'a', 's', 0};
-	assert_true(memcmp(res1, strncpy_a(buf, src1), sizeof(buf)) == 0);
+	assert_true(memcmp(res1, strncpy_a(buf, src1), countof(buf)) == 0);
 
 	char  src2[3] = "";
 	char  res2[3] = {0, 0, 0};
-	assert_true(memcmp(res2, strncpy_a(buf, src2), sizeof(buf)) == 0);
+	assert_true(memcmp(res2, strncpy_a(buf, src2), countof(buf)) == 0);
 
 	char  src3[3] = {'a', 0, 'b'};
 	char  res3[3] = {'a', 0, 0};
-	assert_true(memcmp(res3, strncpy_a(buf, src3), sizeof(buf)) == 0);
+	assert_true(memcmp(res3, strncpy_a(buf, src3), countof(buf)) == 0);
 }

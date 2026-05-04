@@ -25,7 +25,9 @@
 #include "attr.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/sprintf/snprintf.h"
+
 
 int audit_fd;
 
@@ -102,7 +104,7 @@ audit_logger_with_group(int type, const char *op, const char *name,
 	if (audit_fd < 0)
 		return;
 
-	len = strnlen(grp, sizeof(enc_group)/2);
+	len = strnlen(grp, countof(enc_group)/2);
 	if (audit_value_needs_encoding(grp, len)) {
 		stprintf_a(buf, "%s %s=%s", op, grp_type,
 			audit_encode_value(enc_group, grp, len));

@@ -27,6 +27,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
+#include "string/memset/bzero.h"
 #include "string/sprintf/stpeprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strerrno.h"
@@ -161,7 +162,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	}
 
 	/* Lockdown new{g,u}idmap by dropping all unneeded capabilities. */
-	bzero(data, sizeof(data));
+	bzero_a(data);
 	data[0].effective = CAP_TO_MASK(cap);
 	/*
 	 * When uid 0 from the ancestor userns is supposed to be mapped into

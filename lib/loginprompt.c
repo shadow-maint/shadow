@@ -18,6 +18,7 @@
 #include "getdef.h"
 #include "io/fgets/fgets.h"
 #include "prototypes.h"
+#include "sizeof.h"
 #include "string/memset/memzero.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strspn/stpspn.h"
@@ -73,7 +74,7 @@ login_prompt(char *name, int namesize)
 			(void) fclose (fp);
 		}
 	}
-	(void) gethostname(buf, sizeof(buf));
+	(void) gethostname(buf, countof(buf));
 	printf (_("\n%s login: "), buf);
 	(void) fflush (stdout);
 
