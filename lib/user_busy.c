@@ -241,13 +241,17 @@ static int user_busy_processes (const char *name, uid_t uid)
 		if (task_dir != NULL) {
 			while (NULL != (ent = readdir(task_dir))) {
 				pid_t tid;
+				/* 27: xxxxxxxxxx/task/xxxxxxxxxx + \0 */
+				char  tid_sname[27];
+
 				if (get_pid(ent->d_name, &tid) == -1) {
 					continue;
 				}
 				if (tid == pid) {
 					continue;
 				}
-				if (check_status (name, task_path+6, uid) != 0) {
+				stprintf_a(tid_sname, "%ld/task/%ld", (long) pid, (long) tid);
+				if (check_status (name, tid_sname, uid) != 0) {
 					(void) closedir (proc);
 					(void) closedir (task_dir);
 #ifdef ENABLE_SUBIDS
@@ -272,4 +276,3 @@ static int user_busy_processes (const char *name, uid_t uid)
 	return 0;
 }
 #endif				/* __linux__ */
-
