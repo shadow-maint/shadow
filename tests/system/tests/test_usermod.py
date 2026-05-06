@@ -4,9 +4,13 @@ Test usermod
 
 from __future__ import annotations
 
+import crypt
+import re
+
 import pytest
 from pytest_mh.conn import ProcessError
 
+from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -171,3 +175,95 @@ def test_usermod__set_expire_date_with_empty_date(shadow: Shadow, expiration_dat
     assert result is not None, "User should be found"
     assert result.name == "tuser1", "Incorrect username"
     assert result.expiration_date is None, "Expiration date should be empty"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__rename_user_in_group(shadow: Shadow):
+    """
+    :title: Rename user who is member of a group
+    :setup:
+        1. Create group
+        2. Create user with additional group membership
+        3. Rename user
+    :steps:
+        1. Check passwd entry
+        2. Check group entry for user's primary group
+        3. Check group entry for secondary group membership
+    :expectedresults:
+        1. Passwd entry for renamed user exists
+        2. User's primary group still exists with old name
+        3. User is member of group with new name
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.useradd("-G tgroup tuser1")
+    shadow.usermod("-l tuser2 tuser1")
+
+    passwd_entry = shadow.tools.getent.passwd("tuser2")
+    assert passwd_entry is not None, "User should be found"
+    assert passwd_entry.name == "tuser2", "Incorrect username"
+
+    group_entry = shadow.tools.getent.group("tuser1")
+    assert group_entry is not None, "Primary group should still exist"
+    assert group_entry.name == "tuser1", "Primary group should keep old name"
+
+    tgroup_group = shadow.tools.getent.group("tgroup")
+    assert tgroup_group is not None, "tgroup group should exist"
+    assert "tuser2" in tgroup_group.members, "User should be in tgroup group with new name"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__change_password(shadow: Shadow):
+    """
+    :title: Change user password
+    :setup:
+        1. Create user
+        2. Change password using usermod -p
+    :steps:
+        1. Check shadow entry has new password
+    :expectedresults:
+        1. Password is updated in shadow file
+    :customerscenario: False
+    """
+    shadow.useradd("tuser1")
+
+    password_hash = crypt.crypt("Secret123", crypt.mksalt(crypt.METHOD_SHA512))
+    shadow.usermod(f"-p '{password_hash}' tuser1")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.password is not None, "Password should not be None"
+    assert re.match(shadow_password_pattern(), shadow_entry.password), "Incorrect password"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__unlock_password(shadow: Shadow):
+    """
+    :title: Unlock user password
+    :setup:
+        1. Create user
+        2. Set password
+        3. Lock password
+        4. Unlock password with usermod -U
+    :steps:
+        1. Check shadow entry has unlocked password
+    :expectedresults:
+        1. Password no longer has ! prefix
+    :customerscenario: False
+    """
+    shadow.useradd("tuser1")
+    password_hash = crypt.crypt("Secret123", crypt.mksalt(crypt.METHOD_SHA512))
+    shadow.usermod(f"-p '{password_hash}' tuser1")
+    shadow.usermod("-L tuser1")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.password is not None, "Password should not be None"
+    assert shadow_entry.password.startswith("!"), "Password should be locked with ! prefix"
+    assert shadow_entry.password == f"!{password_hash}", "Password should have ! prefix when locked"
+
+    shadow.usermod("-U tuser1")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.password == password_hash, "Password should be unlocked"
