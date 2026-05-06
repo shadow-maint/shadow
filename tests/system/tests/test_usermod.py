@@ -234,3 +234,36 @@ def test_usermod__change_password(shadow: Shadow):
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.password is not None, "Password should not be None"
     assert re.match(shadow_password_pattern(), shadow_entry.password), "Incorrect password"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__unlock_password(shadow: Shadow):
+    """
+    :title: Unlock user password
+    :setup:
+        1. Create user
+        2. Set password
+        3. Lock password
+        4. Unlock password with usermod -U
+    :steps:
+        1. Check shadow entry has unlocked password
+    :expectedresults:
+        1. Password no longer has ! prefix
+    :customerscenario: False
+    """
+    shadow.useradd("tuser1")
+    password_hash = crypt.crypt("Secret123", crypt.mksalt(crypt.METHOD_SHA512))
+    shadow.usermod(f"-p '{password_hash}' tuser1")
+    shadow.usermod("-L tuser1")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.password is not None, "Password should not be None"
+    assert shadow_entry.password.startswith("!"), "Password should be locked with ! prefix"
+    assert shadow_entry.password == f"!{password_hash}", "Password should have ! prefix when locked"
+
+    shadow.usermod("-U tuser1")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.password == password_hash, "Password should be unlocked"
