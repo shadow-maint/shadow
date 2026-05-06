@@ -36,7 +36,7 @@
 
 
 #ifdef __linux__
-static int check_status (const char *name, const char *sname, uid_t uid);
+static int check_status (const char *name, uid_t uid, pid_t pid, pid_t tid);
 static int user_busy_processes (const char *name, uid_t uid);
 #else				/* !__linux__ */
 static int user_busy_utmp (const char *name);
@@ -94,13 +94,13 @@ user_busy_utmp(const char *name)
 #ifdef __linux__
 #ifdef ENABLE_SUBIDS
 #define in_parentuid_range(uid) ((uid) >= parentuid && (uid) < parentuid + range)
-static int different_namespace (const char *sname)
+static int different_namespace (pid_t pid, pid_t tid)
 {
 	/* 41: /proc/xxxxxxxxxx/task/xxxxxxxxxx/ns/user + \0 */
 	char     path[41];
 	char     buf[512], buf2[512];
 
-	stprintf_a(path, "/proc/%s/ns/user", sname);
+	stprintf_a(path, "/proc/%d/task/%d/ns/user", pid, tid);
 
 	if (readlinknul_a(path, buf) == -1)
 		return 0;
@@ -116,14 +116,14 @@ static int different_namespace (const char *sname)
 #endif                          /* ENABLE_SUBIDS */
 
 
-static int check_status (const char *name, const char *sname, uid_t uid)
+static int check_status (const char *name, uid_t uid, pid_t pid, pid_t tid)
 {
 	/* 40: /proc/xxxxxxxxxx/task/xxxxxxxxxx/status + \0 */
 	char  status[40];
 	char  line[1024];
 	FILE  *sfile;
 
-	stprintf_a(status, "/proc/%s/status", sname);
+	stprintf_a(status, "/proc/%d/task/%d/status", pid, tid);
 
 	sfile = fopen (status, "r");
 	if (NULL == sfile) {
@@ -144,7 +144,7 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 					return 1;
 				}
 #ifdef ENABLE_SUBIDS
-				if (    different_namespace (sname)
+				if (    different_namespace (pid, tid)
 				     && (   have_sub_uids(name, ruid, 1)
 				         || have_sub_uids(name, euid, 1)
 				         || have_sub_uids(name, suid, 1))
@@ -225,7 +225,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 			continue;
 		}
 
-		if (check_status (name, tmp_d_name, uid) != 0) {
+		if (check_status (name, uid, pid, pid) != 0) {
 			(void) closedir (proc);
 #ifdef ENABLE_SUBIDS
 			sub_uid_close(true);
@@ -247,7 +247,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 				if (tid == pid) {
 					continue;
 				}
-				if (check_status (name, task_path+6, uid) != 0) {
+				if (check_status (name, uid, pid, tid) != 0) {
 					(void) closedir (proc);
 					(void) closedir (task_dir);
 #ifdef ENABLE_SUBIDS
