@@ -100,6 +100,7 @@ test_snprintf_SOURCES = \
     $(NULL)
 test_snprintf_CFLAGS = \
     $(AM_CFLAGS) \
+    -Wno-format-zero-length \
     $(NULL)
 test_snprintf_LDFLAGS = \
     $(NULL)
