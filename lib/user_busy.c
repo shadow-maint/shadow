@@ -216,7 +216,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		}
 
 		/* Check if the process is in our chroot */
-		stprintf_a(root_path, "/proc/%lu/root", (unsigned long) pid);
+		stprintf_a(root_path, "/proc/%d/root", pid);
 		if (stat (root_path, &sbroot_process) != 0) {
 			continue;
 		}
@@ -236,7 +236,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 			return 1;
 		}
 
-		stprintf_a(task_path, "/proc/%lu/task", (unsigned long) pid);
+		stprintf_a(task_path, "/proc/%d/task", pid);
 		task_dir = opendir (task_path);
 		if (task_dir != NULL) {
 			while (NULL != (ent = readdir(task_dir))) {
