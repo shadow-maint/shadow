@@ -5,6 +5,7 @@ Test usermod
 from __future__ import annotations
 
 import pytest
+from passlib.hash import sha512_crypt
 from pytest_mh.conn import ProcessError
 
 from framework.roles.shadow import Shadow
@@ -206,3 +207,29 @@ def test_usermod__rename_user_in_group(shadow: Shadow):
     tgroup_group = shadow.tools.getent.group("tgroup")
     assert tgroup_group is not None, "tgroup group should exist"
     assert "tuser2" in tgroup_group.members, "User should be in tgroup group with new name"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__change_password(shadow: Shadow):
+    """
+    :title: Change user password
+    :setup:
+        1. Create user
+        2. Change password using usermod -p
+    :steps:
+        1. Check shadow entry has new password
+    :expectedresults:
+        1. Password is updated in shadow file
+    :customerscenario: False
+    """
+    shadow.useradd("tuser1")
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.usermod(f"-p '{password_hash}' tuser1")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.password is not None, "Password should not be None"
+    assert shadow_entry.password.startswith("$6$"), "Password should be SHA-512 crypt hash"
+    assert shadow_entry.password == password_hash, "Password hash should match the generated hash"
