@@ -233,3 +233,44 @@ def test_usermod__change_password(shadow: Shadow):
     assert shadow_entry.password is not None, "Password should not be None"
     assert shadow_entry.password.startswith("$6$"), "Password should be SHA-512 crypt hash"
     assert shadow_entry.password == password_hash, "Password hash should match the generated hash"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__unlock_password(shadow: Shadow):
+    """
+    :title: Unlock user password
+    :setup:
+        1. Create user
+        2. Set password
+    :steps:
+        1. Lock password with usermod -L
+        2. Check shadow entry has locked password
+        3. Unlock password with usermod -U
+        4. Check shadow entry has unlocked password
+    :expectedresults:
+        1. Password is locked
+        2. Password has ! prefix when locked
+        3. Password is unlocked
+        4. Password no longer has ! prefix
+    :customerscenario: False
+    """
+    shadow.useradd("tuser1")
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+
+    shadow.usermod(f"-p '{password_hash}' tuser1")
+    shadow.usermod("-L tuser1")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.password is not None, "Password should not be None"
+    assert shadow_entry.password.startswith("!"), "Password should be locked with ! prefix"
+    assert shadow_entry.password == f"!{password_hash}", "Password should have ! prefix when locked"
+
+    shadow.usermod("-U tuser1")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.password is not None, "Password should not be None"
+    assert shadow_entry.password == password_hash, "Password should be unlocked"
