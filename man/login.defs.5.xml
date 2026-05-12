@@ -145,6 +145,15 @@
       long numeric parameters is machine-dependent.
     </para>
 
+    <para>
+      This configuration file controls the behavior
+      of system tools for user and group management.
+      The parameters may be used by shadow-utils programs, PAM modules,
+      and other system components.
+      The actual behavior depends on the system configuration
+      and which authentication mechanisms are enabled.
+    </para>
+
     <para>The following configuration items are provided:</para>
 
     <variablelist remap='IP'>
