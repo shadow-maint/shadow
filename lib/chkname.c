@@ -33,8 +33,7 @@
 
 #include "defines.h"
 #include "chkname.h"
-#include "string/ctype/strchrisascii/strchriscntrl.h"
-#include "string/ctype/strisascii/strisdigit.h"
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strcaseeq.h"
 #include "sysconf.h"
@@ -51,8 +50,8 @@ is_valid_name(const char *name)
 	 || streq(name, "..")
 	 || strspn(name, "-")
 	 || strpbrk(name, " \"#',/:;")
-	 || strchriscntrl(name)
-	 || strisdigit(name))
+	 || strchriscntrl_c(name)
+	 || strisdigit_c(name))
 	{
 		errno = EINVAL;
 		return false;
