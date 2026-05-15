@@ -21,13 +21,12 @@ save()
 	done
 	DATE=$(date '+%s')
 	DATE=$(( DATE/3600/24 ))
-	WARN=$( grep -E "^PASS_WARN_AGE" /etc/login.defs | { read var val ; echo $val; } )
 	saveifs=$IFS
 	IFS=":"
 	cat data/2/shadow |
 		while read f1 f2 f3 f4 f5 f6 f7 f8 fres
 		do
-			echo "$f1:$f2:$DATE:$f4:$f5:$WARN:::"
+			echo "$f1:$f2:$DATE:$f4:$f5::::"
 		done > tmp/shadow.2
 	IFS=$saveifs
 }
