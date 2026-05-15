@@ -22,8 +22,8 @@
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strtok/stpsep.h"
-#include "string/strtok/strsep2ls.h"
+#include "string/strsep/stpsep.h"
+#include "string/strsep/strsep2ls.h"
 
 
 static FILE *ports;
