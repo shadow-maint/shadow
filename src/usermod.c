@@ -112,6 +112,20 @@ struct option_flags {
 	bool prefix;
 };
 
+struct lk_db_files {
+	bool  pw;
+	bool  spw;
+	bool  gr;
+#ifdef SHADOWGRP
+	bool  sgr;
+#endif
+#ifdef ENABLE_SUBIDS
+	bool  subuid;
+	bool  subgid;
+#endif
+};
+
+
 /*
  * Global variables
  */
@@ -184,16 +198,7 @@ static bool is_sub_uid = false;
 static bool is_sub_gid = false;
 #endif				/* ENABLE_SUBIDS */
 
-static bool pw_locked  = false;
-static bool spw_locked = false;
-static bool gr_locked  = false;
-#ifdef SHADOWGRP
-static bool sgr_locked = false;
-#endif
-#ifdef ENABLE_SUBIDS
-static bool sub_uid_locked = false;
-static bool sub_gid_locked = false;
-#endif				/* ENABLE_SUBIDS */
+static struct lk_db_files  lk = {};
 
 
 /* local function prototypes */
@@ -660,59 +665,74 @@ static void new_spent (struct spwd *spent, bool process_selinux)
 	}
 }
 
+
+// unlock_db - unlock database files
+static void
+unlock_db(bool process_selinux)
+{
+#ifdef ENABLE_SUBIDS
+	if (lk.subgid) {
+		if (sub_gid_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
+		} else {
+			lk.subgid = false;
+		}
+	}
+	if (lk.subuid) {
+		if (sub_uid_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
+		} else {
+			lk.subuid = false;
+		}
+	}
+#endif
+#ifdef SHADOWGRP
+	if (lk.sgr) {
+		if (sgr_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
+		} else {
+			lk.sgr = false;
+		}
+	}
+#endif
+	if (lk.gr) {
+		if (gr_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
+		} else {
+			lk.gr = false;
+		}
+	}
+	if (lk.spw) {
+		if (spw_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
+		} else {
+			lk.spw = false;
+		}
+	}
+	if (lk.pw) {
+		if (pw_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
+		} else {
+			lk.pw = false;
+		}
+	}
+}
+
+
 /*
  * fail_exit - exit with an error code after unlocking files
  */
 NORETURN
 static void
-fail_exit (int code, bool process_selinux)
+fail_exit(int code, bool process_selinux)
 {
-#ifdef ENABLE_SUBIDS
-	if (sub_gid_locked) {
-		if (sub_gid_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
-			/* continue */
-		}
-	}
-	if (sub_uid_locked) {
-		if (sub_uid_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
-			/* continue */
-		}
-	}
-#endif				/* ENABLE_SUBIDS */
-#ifdef	SHADOWGRP
-	if (sgr_locked) {
-		if (sgr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
-			/* continue */
-		}
-	}
-#endif
-	if (gr_locked) {
-		if (gr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
-			/* continue */
-		}
-	}
-	if (spw_locked) {
-		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
-			/* continue */
-		}
-	}
-	if (pw_locked) {
-		if (pw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
-			/* continue */
-		}
-	}
+	unlock_db(process_selinux);
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_MGMT,
@@ -1501,6 +1521,78 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 #endif				/* ENABLE_SUBIDS */
 }
 
+
+// close_db - close and unlock database files
+static int
+close_db(bool process_selinux)
+{
+	int  ret;
+
+	ret = 0;
+#ifdef ENABLE_SUBIDS
+	if (lk.subgid) {
+		if (sub_gid_close(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname());
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_gid_dbname());
+			ret = E_SUB_GID_UPDATE;
+			goto fail;
+		}
+	}
+	if (lk.subuid) {
+		if (sub_uid_close(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname());
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_uid_dbname());
+			ret = E_SUB_UID_UPDATE;
+			goto fail;
+		}
+	}
+#endif
+#ifdef SHADOWGRP
+	if (lk.sgr) {
+		if (sgr_close(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname());
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
+			ret = E_GRP_UPDATE;
+			goto fail;
+		}
+	}
+#endif
+	if (lk.gr) {
+		if (gr_close(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname());
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
+			ret = E_GRP_UPDATE;
+			goto fail;
+		}
+	}
+	if (lk.spw) {
+		if (spw_close(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, spw_dbname());
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
+			ret = E_PW_UPDATE;
+			goto fail;
+		}
+	}
+	if (lk.pw) {
+		if (pw_close(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
+			ret = E_PW_UPDATE;
+			goto fail;
+		}
+	}
+
+#ifdef SHADOWGRP
+	endsgent();
+#endif
+	endgrent();
+	endspent();
+	endpwent();
+fail:
+	unlock_db(process_selinux);
+	return ret;
+}
+
 /*
  * close_files - close all of the files that were opened
  *
@@ -1509,223 +1601,140 @@ process_flags(int argc, char **argv, struct option_flags *flags)
  */
 static void close_files(const struct option_flags *flags)
 {
-	bool process_selinux;
+	int   ret;
+	bool  process_selinux;
 
 	process_selinux = !flags->chroot && !flags->prefix;
 
-#ifdef ENABLE_SUBIDS
-	if (sub_gid_locked) {
-		if (sub_gid_close (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
-			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_gid_dbname());
-			fail_exit (E_SUB_GID_UPDATE, process_selinux);
-		}
-		if (sub_gid_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
-			/* continue */
-		}
-		sub_gid_locked = false;
-	}
-	if (sub_uid_locked) {
-		if (sub_uid_close (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
-			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_uid_dbname());
-			fail_exit (E_SUB_UID_UPDATE, process_selinux);
-		}
-		if (sub_uid_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
-			/* continue */
-		}
-		sub_uid_locked = false;
-	}
-#endif				/* ENABLE_SUBIDS */
-
-	if (gr_locked) {
-#ifdef SHADOWGRP
-		if (is_shadow_grp) {
-			if (sgr_close (process_selinux) == 0) {
-				fprintf (stderr,
-				         _("%s: failure while writing changes to %s\n"),
-				         Prog, sgr_dbname ());
-				SYSLOG(LOG_ERR, "failure while writing changes to %s",
-				       sgr_dbname());
-				fail_exit (E_GRP_UPDATE, process_selinux);
-			}
-			if (sgr_unlock (process_selinux) == 0) {
-				fprintf (stderr,
-				         _("%s: failed to unlock %s\n"),
-				         Prog, sgr_dbname ());
-				SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
-				/* continue */
-			}
-			sgr_locked = false;
-		}
-#endif
-		if (gr_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
-			         Prog, gr_dbname ());
-			SYSLOG(LOG_ERR, "failure while writing changes to %s",
-			       gr_dbname());
-			fail_exit (E_GRP_UPDATE, process_selinux);
-		}
-		if (gr_unlock (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to unlock %s\n"),
-			         Prog, gr_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
-			/* continue */
-		}
-		gr_locked = false;
-	}
-	if (spw_locked) {
-		if (spw_close (process_selinux) == 0) {
-			fprintf (stderr,
-				_("%s: failure while writing changes to %s\n"),
-				Prog, spw_dbname ());
-			SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
-			fail_exit (E_PW_UPDATE, process_selinux);
-		}
-		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to unlock %s\n"),
-			         Prog, spw_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
-			/* continue */
-		}
-		spw_locked = false;
-	}
-	if (pw_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
-		         Prog, pw_dbname ());
-		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
-		fail_exit (E_PW_UPDATE, process_selinux);
-	}
-	if (pw_unlock (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failed to unlock %s\n"),
-		         Prog, pw_dbname ());
-		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
-		/* continue */
-	}
-	pw_locked = false;
-
-	/*
-	 * Close the DBM and/or flat files
-	 */
-#ifdef	SHADOWGRP
-	endsgent ();
-#endif
-	endgrent ();
-	endspent ();
-	endpwent ();
+	ret = close_db(process_selinux);
+	if (ret != 0)
+		fail_exit(ret, process_selinux);
 }
 
-/*
- * open_files - lock and open the password files
- *
- *	open_files() opens the two password files.
- */
-static void open_files (bool process_selinux)
+// open_db - lock and open database files
+static int
+open_db(struct lk_db_files *f, bool process_selinux)
 {
-	if (pw_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, pw_dbname ());
-		fail_exit (E_PW_UPDATE, process_selinux);
-	}
-	pw_locked = true;
-	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"),
-		         Prog, pw_dbname ());
-		fail_exit (E_PW_UPDATE, process_selinux);
-	}
-	if (is_shadow_pwd && (lflg || pflg || eflg || fflg || Lflg || Uflg)) {
-		if (spw_lock () == 0) {
-			fprintf (stderr,
-				_("%s: cannot lock %s; try again later.\n"),
-				Prog, spw_dbname ());
-			fail_exit (E_PW_UPDATE, process_selinux);
+	int  ret;
+
+	if (f->spw)
+		f->pw = true;
+	if (f->pw) {
+		if (pw_lock() == 0) {
+			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, pw_dbname());
+			ret = E_PW_UPDATE;
+			goto fail;
 		}
-		spw_locked = true;
-		if (is_shadow_pwd && (spw_open (O_CREAT | O_RDWR) == 0)) {
-			fprintf (stderr,
-				_("%s: cannot open %s\n"),
-				Prog, spw_dbname ());
-			fail_exit (E_PW_UPDATE, process_selinux);
+		lk.pw = true;
+		if (pw_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, pw_dbname());
+			ret = E_PW_UPDATE;
+			goto fail;
+		}
+	}
+	if (f->spw) {
+		if (spw_lock() == 0) {
+			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, spw_dbname());
+			ret = E_PW_UPDATE;
+			goto fail;
+		}
+		lk.spw = true;
+		if (spw_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, spw_dbname());
+			ret = E_PW_UPDATE;
+			goto fail;
 		}
 	}
 
-	if (Gflg || lflg) {
-		/*
-		 * Lock and open the group file. This will load all of the
-		 * group entries.
-		 */
-		if (gr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, gr_dbname ());
-			fail_exit (E_GRP_UPDATE, process_selinux);
-		}
-		gr_locked = true;
-		if (gr_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, gr_dbname ());
-			fail_exit (E_GRP_UPDATE, process_selinux);
-		}
 #ifdef SHADOWGRP
-		if (is_shadow_grp && (sgr_lock () == 0)) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, sgr_dbname ());
-			fail_exit (E_GRP_UPDATE, process_selinux);
-		}
-		sgr_locked = true;
-		if (is_shadow_grp && (sgr_open (O_CREAT | O_RDWR) == 0)) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
-			fail_exit (E_GRP_UPDATE, process_selinux);
-		}
+	if (f->sgr)
+		f->gr = true;
 #endif
+	if (f->gr) {
+		if (gr_lock() == 0) {
+			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, gr_dbname());
+			ret = E_GRP_UPDATE;
+			goto fail;
+		}
+		lk.gr = true;
+		if (gr_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, gr_dbname());
+			ret = E_GRP_UPDATE;
+			goto fail;
+		}
 	}
+#ifdef SHADOWGRP
+	if (f->sgr) {
+		if (sgr_lock() == 0) {
+			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, sgr_dbname());
+			ret = E_GRP_UPDATE;
+			goto fail;
+		}
+		lk.sgr = true;
+		if (sgr_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname());
+			ret = E_GRP_UPDATE;
+			goto fail;
+		}
+	}
+#endif
+
 #ifdef ENABLE_SUBIDS
-	if (vflg || Vflg) {
-		if (sub_uid_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, sub_uid_dbname ());
-			fail_exit (E_SUB_UID_UPDATE, process_selinux);
+	if (f->subuid) {
+		if (sub_uid_lock() == 0) {
+			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, sub_uid_dbname());
+			ret = E_SUB_UID_UPDATE;
+			goto fail;
 		}
-		sub_uid_locked = true;
-		if (sub_uid_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, sub_uid_dbname ());
-			fail_exit (E_SUB_UID_UPDATE, process_selinux);
+		lk.subuid = true;
+		if (sub_uid_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, sub_uid_dbname());
+			ret = E_SUB_UID_UPDATE;
+			goto fail;
 		}
 	}
-	if (wflg || Wflg) {
-		if (sub_gid_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, sub_gid_dbname ());
-			fail_exit (E_SUB_GID_UPDATE, process_selinux);
+	if (f->subgid) {
+		if (sub_gid_lock() == 0) {
+			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, sub_gid_dbname());
+			ret = E_SUB_GID_UPDATE;
+			goto fail;
 		}
-		sub_gid_locked = true;
-		if (sub_gid_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, sub_gid_dbname ());
-			fail_exit (E_SUB_GID_UPDATE, process_selinux);
+		lk.subgid = true;
+		if (sub_gid_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, sub_gid_dbname());
+			ret = E_SUB_GID_UPDATE;
+			goto fail;
 		}
 	}
-#endif				/* ENABLE_SUBIDS */
+#endif
+	return 0;
+fail:
+	unlock_db(process_selinux);
+	return ret;
+}
+
+
+static void
+open_files(bool process_selinux)
+{
+	int  ret;
+
+	struct lk_db_files  f = {
+		.pw = true,
+		.spw = is_shadow_pwd && (lflg || pflg || eflg || fflg || Lflg || Uflg),
+		.gr = Gflg || lflg,
+	#ifdef SHADOWGRP
+		.sgr = (Gflg || lflg) && is_shadow_grp,
+	#endif
+	#ifdef ENABLE_SUBIDS
+		.subuid = vflg || Vflg,
+		.subgid = wflg || Wflg,
+	#endif
+	};
+
+	ret = open_db(&f, process_selinux);
+	if (ret != 0)
+		fail_exit(ret, process_selinux);
 }
 
 /*
