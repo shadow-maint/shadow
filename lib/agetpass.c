@@ -133,7 +133,7 @@ agetpass(const char *prompt)
 }
 
 char *
-agetpass_stdin()
+agetpass_stdin(void)
 {
 	return agetpass_internal("", RPP_STDIN);
 }
