@@ -59,7 +59,7 @@ is_my_tty(const char tty[UTX_LINESIZE])
 	char  my_tty[countof(full_tty)];
 
 	stpcpy(full_tty, "");
-	if (tty[0] != '/')
+	if (!strspn(tty, "/"))
 		strcpy (full_tty, "/dev/");
 	strncat(full_tty, tty, UTX_LINESIZE);
 
