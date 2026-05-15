@@ -105,6 +105,8 @@ libshadow_la_SOURCES = \
 	idmapping.c \
 	io/fgets/fgets.c \
 	io/fgets/fgets.h \
+	io/fprintf.c \
+	io/fprintf.h \
 	io/syslog.c \
 	io/syslog.h \
 	isexpired.c \
@@ -239,8 +241,6 @@ libshadow_la_SOURCES = \
 	string/strdup/strndupa.h \
 	string/strdup/strndup.c \
 	string/strdup/strndup.h \
-	string/strerrno.c \
-	string/strerrno.h \
 	string/strftime.c \
 	string/strftime.h \
 	string/strspn/stpspn.c \

@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 #include "atoi/a2i.h"
-#include "string/strerrno.h"
+#include "io/fprintf.h"
 #include "subid.h"
 #include "stdlib.h"
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	bool group = false;   // get subuids by default
 
 	if (!subid_init(Prog, stderr))
-		fprintf(stderr, "subid_init: %s\n", strerrno());
+		fprinte(stderr, "subid_init");
 	while ((c = getopt(argc, argv, "g")) != EOF) {
 		switch(c) {
 		case 'g': group = true; break;
