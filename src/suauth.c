@@ -19,6 +19,7 @@
 
 #include "defines.h"
 #include "io/fgets/fgets.h"
+#include "list.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
