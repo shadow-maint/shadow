@@ -13,4 +13,4 @@
 #include <stddef.h>
 
 
-extern inline void *reallocarrayf(void *p, size_t nmemb, size_t size);
+extern inline void *reallocarrayf(void *p, size_t n, size_t size);
