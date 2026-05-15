@@ -19,9 +19,10 @@
 # include <sys/prctl.h>
 #endif
 
+#include <a2i.h>
+
 #include "alloc/calloc.h"
 #include "alloc/malloc.h"
-#include "atoi/a2i.h"
 #include "attr.h"
 #include "idmapping.h"
 #include "prototypes.h"
