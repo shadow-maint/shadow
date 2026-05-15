@@ -182,7 +182,7 @@ get_current_utmp(pid_t main_pid)
 		ut = ut_by_pid ?: ut_by_line;
 
 	if (NULL != ut)
-		ut = memdup_T(ut, struct utmpx);
+		ut = memdup_T(ut, 1, struct utmpx);
 
 	free(ut_by_line);
 	free(ut_by_pid);
