@@ -24,6 +24,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "getdef.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "search/l/lfind.h"
 #include "search/l/lsearch.h"
@@ -36,7 +37,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
-#include "string/strerrno.h"
 
 #undef NDEBUG
 #include <assert.h>
@@ -188,9 +188,8 @@ static void check_perms (const struct group *grp,
 		erase_pass (cp);
 
 		if (NULL == cpasswd) {
-			fprintf (stderr,
-			         _("%s: failed to crypt password with previous salt: %s\n"),
-			        Prog, strerrno());
+			eprinte(_("%s: failed to crypt password with previous salt"),
+			        Prog);
 			SYSLOG(LOG_INFO,
 			       "Failed to crypt password with previous salt of group '%s'",
 			       groupname);
@@ -295,8 +294,7 @@ static void syslog_sg (const char *name, const char *group)
 		child = fork ();
 		if ((pid_t)-1 == child) {
 			/* error in fork() */
-			fprintf (stderr, _("%s: failure forking: %s\n"),
-				is_newgrp ? "newgrp" : "sg", strerrno());
+			eprinte(_("%s: failure forking"), is_newgrp ? "newgrp" : "sg");
 #ifdef WITH_AUDIT
 			if (group) {
 				audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
@@ -437,8 +435,7 @@ int main (int argc, char **argv)
 
 	pwd = get_my_pwent ();
 	if (NULL == pwd) {
-		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_CHGRP_ID,
 		              "changing", NULL, getuid (), SHADOW_AUDIT_FAILURE);
@@ -481,8 +478,7 @@ int main (int argc, char **argv)
 		 */
 		if ((argc > 0) && (argv[0][0] != '-')) {
 			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
+				eprintf(_("%s: provided group is not a valid group name\n"),
 					Prog);
 				goto failure;
 			}
@@ -517,8 +513,7 @@ int main (int argc, char **argv)
 			goto failure;
 		} else if (argv[0] != NULL) {
 			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
+				eprintf(_("%s: provided group is not a valid group name\n"),
 					Prog);
 				goto failure;
 			}
@@ -533,8 +528,7 @@ int main (int argc, char **argv)
 			 */
 			grp = xgetgrgid (pwd->pw_gid);
 			if (NULL == grp) {
-				fprintf (stderr,
-				         _("%s: GID '%lu' does not exist\n"),
+				eprintf(_("%s: GID '%lu' does not exist\n"),
 				         Prog, (unsigned long) pwd->pw_gid);
 				SYSLOG(LOG_CRIT, "GID '%lu' does not exist",
 				       (unsigned long) pwd->pw_gid);
@@ -608,7 +602,7 @@ int main (int argc, char **argv)
 	 */
 	grp = getgrnam (group); /* local, no need for xgetgrnam */
 	if (NULL == grp) {
-		fprintf (stderr, _("%s: group '%s' does not exist\n"), Prog, group);
+		eprintf(_("%s: group '%s' does not exist\n"), Prog, group);
 		goto failure;
 	}
 
