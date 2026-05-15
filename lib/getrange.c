@@ -43,7 +43,7 @@ getrange(const char *range,
 		goto parse_max;
 	}
 
-	if (a2ul(min, range, &end, 10, 0, ULONG_MAX) == -1 && errno != ENOTSUP)
+	if (a2ul(min, range, &end, 10,,) == -1 && errno != ENOTSUP)
 		return -1;
 	*has_min = true;
 
@@ -60,7 +60,7 @@ parse_max:
 		if (!isdigit((unsigned char) *end))
 			return -1;
 
-		if (a2ul(max, end, NULL, 10, *min, ULONG_MAX) == -1)
+		if (a2ul(max, end, NULL, 10, *min,) == -1)
 			return -1;
 		*has_max = true;
 
