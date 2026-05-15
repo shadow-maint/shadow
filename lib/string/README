@@ -193,10 +193,10 @@ strcpy/ - String copying
     strtcpy_a()
 	Like strtcpy(), but takes an array.
 
-    strtcat()  // Unimplemented
+    strtcat()
 	Catenate a string after an existing string, with truncation.
 	Rarely useful.  Consider using stpecpy() instead.
-    STRTCAT()  // Unimplemented
+    strtcat_a()
 	Like strtcat(), but takes an array.
 
     stpecpy()
