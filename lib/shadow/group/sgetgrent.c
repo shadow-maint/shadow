@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 1996-1998, Marek Michałkiewicz
 // SPDX-FileCopyrightText: 2005, Tomasz Kłoczko
 // SPDX-FileCopyrightText: 2008, Nicolas François
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -10,7 +10,9 @@
 
 #include "shadow/group/sgetgrent.h"
 
+#include <errno.h>
 #include <grp.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,74 +20,80 @@
 
 #include "alloc/malloc.h"
 #include "atoi/getnum.h"
-#include "defines.h"
-#include "prototypes.h"
-#include "string/strcmp/streq.h"
+#include "list.h"
+#include "string/strchr/strchrcnt.h"
+#include "string/strcpy/stpecpy.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
-#include "string/strtok/astrsep2ls.h"
-
-
-/*
- * list - turn a comma-separated string into an array of (char *)'s
- *
- *	list() converts the comma-separated list of member names into
- *	an array of character pointers.
- *
- * FINALLY added dynamic allocation.  Still need to fix sgetsgent().
- *  --marekm
- */
-static char **
-list(char *s)
-{
-	static char **members = NULL;
-
-	size_t  n;
-
-	free(members);
-
-	members = astrsep2ls(s, ",", &n);
-	if (members == NULL)
-		return NULL;
-
-	if (streq(members[n-1], ""))
-		members[n-1] = NULL;
-
-	return members;
-}
+#include "typetraits.h"
 
 
 // from-string get group entry
 struct group *
 sgetgrent(const char *s)
 {
-	static char         *dup = NULL;
-	static struct group grent;
+	static char          *buf = NULL;
+	static struct group  grent = {};
 
-	char  *fields[4];
+	int     e;
+	size_t  n, lssize, size;
 
-	free(dup);
-	dup = strdup(s);
-	if (dup == NULL)
+	n = strchrcnt(s, ',') + 2;
+	lssize = n * sizeof(char *);  // For 'grent.gr_mem'.
+	size = lssize + strlen(s) + 1;
+
+	free(buf);
+	buf = MALLOC(size, char);
+	if (buf == NULL)
 		return NULL;
 
-	stpsep(dup, "\n");
-
-	if (strsep2arr_a(dup, ":", fields) == -1)
+	e = sgetgrent_r(s, &grent, buf, size);
+	if (e != 0) {
+		errno = e;
 		return NULL;
-
-	if (streq(fields[2], ""))
-		return NULL;
-
-	grent.gr_name = fields[0];
-	grent.gr_passwd = fields[1];
-	if (get_gid(fields[2], &grent.gr_gid) == -1) {
-		return NULL;
-	}
-	grent.gr_mem = list(fields[3]);
-	if (NULL == grent.gr_mem) {
-		return NULL;	/* out of memory */
 	}
 
 	return &grent;
+}
+
+
+// from-string get group entry re-entrant
+int
+sgetgrent_r(size_t size;
+    const char *restrict s, struct group *restrict grent,
+    char buf[restrict size], size_t size)
+{
+	char    *p, *end;
+	char    *fields[4];
+	size_t  n, lssize;
+
+	// The first 'lssize' bytes of 'buf' are used for 'grent->gr_mem'.
+	n = strchrcnt(s, ',') + 2;
+	lssize = n * sizeof(char *);
+	if (lssize >= size)
+		return E2BIG;
+
+	// The remaining bytes of 'buf' are used for a copy of 's'.
+	end = buf + size;
+	p = buf + lssize;
+	if (stpecpy(p, end, s) == NULL)
+		return errno;
+
+	stpsep(p, "\n");
+
+	if (strsep2arr_a(p, ":", fields) == -1)
+		return EINVAL;
+
+	grent->gr_name = fields[0];
+	grent->gr_passwd = fields[1];
+	if (get_gid(fields[2], &grent->gr_gid) == -1)
+		return errno;
+
+	if (!is_aligned(buf, char *))
+		return EINVAL;
+	grent->gr_mem = (char **) buf;
+	if (csv2ls(fields[3], n, grent->gr_mem) == -1)
+		return errno;
+
+	return 0;
 }
