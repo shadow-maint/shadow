@@ -18,11 +18,11 @@
 // lfind_T - linear find type-safe
 #define lfind_T(T, ...)            lfind_T_(typeas(T), __VA_ARGS__)
 #define lfind_T_(T, k, a, n, cmp)                                     \
-({                                                                    \
-	_Generic(k, T *: (void)0, const T *: (void)0);                \
-	_Generic(a, T *: (void)0, const T *: (void)0);                \
-	(T *){lfind_(k, a, n, sizeof(T), cmp)};                       \
-})
+(                                                                     \
+	_Generic(k, T *: (void)0, const T *: (void)0),                \
+	_Generic(a, T *: (void)0, const T *: (void)0),                \
+	(T *){lfind_(k, a, n, sizeof(T), cmp)}                        \
+)
 
 #define LFIND(T, ...)  lfind_T(T, __VA_ARGS__, CMP(T))
 
