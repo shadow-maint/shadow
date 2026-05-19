@@ -126,8 +126,8 @@ int do_pam_passwd_non_interactive (const char *pam_service,
 	ret = pam_start (pam_service, username, &non_interactive_pam_conv, &pamh);
 	if (ret != PAM_SUCCESS) {
 		fprintf (log_get_logfd(),
-		         _("%s: (user %s) pam_start failure %d\n"),
-		         log_get_progname(), username, ret);
+		         _("%s: pam_start failure %d\n"),
+		         log_get_progname(), ret);
 		return 1;
 	}
 
@@ -135,9 +135,9 @@ int do_pam_passwd_non_interactive (const char *pam_service,
 	ret = pam_chauthtok (pamh, 0);
 	if (ret != PAM_SUCCESS) {
 		fprintf (log_get_logfd(),
-		         _("%s: (user %s) pam_chauthtok() failed, error:\n"
+		         _("%s: pam_chauthtok() failed, error:\n"
 		           "%s\n"),
-		         log_get_progname(), username, pam_strerror (pamh, ret));
+		         log_get_progname(), pam_strerror (pamh, ret));
 	}
 
 	(void) pam_end (pamh, PAM_SUCCESS);

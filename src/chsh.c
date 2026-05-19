@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "chkname.h"
 #include "defines.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
@@ -413,8 +412,7 @@ static void update_shell (const char *user, char *newshell, const struct option_
 	pw = pw_locate (user);
 	if (NULL == pw) {
 		fprintf (stderr,
-		         _("%s: user '%s' does not exist in %s\n"),
-		         Prog, user, pw_dbname ());
+		         _("%s: user does not exist in %s\n"), Prog, pw_dbname());
 		fail_exit (1, process_selinux);
 	}
 
@@ -493,15 +491,10 @@ int main (int argc, char **argv)
 	 * name, or the name getlogin() returns.
 	 */
 	if (optind < argc) {
-		if (!is_valid_user_name (argv[optind])) {
-			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
-			fail_exit (1, process_selinux);
-		}
 		user = argv[optind];
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
-			fprintf (stderr,
-			         _("%s: user '%s' does not exist\n"), Prog, user);
+			fprintf(stderr, _("%s: user does not exist\n"), Prog);
 			fail_exit (1, process_selinux);
 		}
 	} else {
@@ -532,7 +525,7 @@ int main (int argc, char **argv)
 	 * interactively change it.
 	 */
 	if (!sflg) {
-		printf (_("Changing the login shell for %s\n"), user);
+		printf(_("Changing the login shell for %ju\n"), (uintmax_t) pw->pw_uid);
 		new_fields ();
 	}
 
@@ -571,7 +564,7 @@ int main (int argc, char **argv)
 
 	update_shell (user, loginsh, &flags);
 
-	SYSLOG(LOG_INFO, "changed user '%s' shell to '%s'", user, loginsh);
+	SYSLOG(LOG_INFO, "changed user %ju shell to '%s'", (uintmax_t) pw->pw_uid, loginsh);
 
 	nscd_flush_cache ("passwd");
 	sssd_flush_cache (SSSD_DB_PASSWD);
