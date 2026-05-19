@@ -22,7 +22,6 @@
 
 #include "agetpass.h"
 #include "atoi/a2i.h"
-#include "chkname.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
@@ -992,15 +991,10 @@ main(int argc, char **argv)
 		exit (E_NOPERM);
 	}
 	myname = xstrdup (pw->pw_name);
-	if (optind < argc) {
-		if (!is_valid_user_name (argv[optind]) && !is_valid_upn (argv[optind])) {
-			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
-			fail_exit (E_NOPERM, process_selinux);
-		}
+	if (optind < argc)
 		name = argv[optind];
-	} else {
+	else
 		name = myname;
-	}
 
 	/*
 	 * Make sure that at most one username was specified.
@@ -1072,9 +1066,7 @@ main(int argc, char **argv)
 
 	pw = xprefix_getpwnam (name);
 	if (NULL == pw) {
-		(void) fprintf (stderr,
-		                _("%s: user '%s' does not exist\n"),
-		                Prog, name);
+		fprintf(stderr, _("%s: user does not exist\n"), Prog);
 		exit (E_NOPERM);
 	}
 #ifdef WITH_SELINUX
@@ -1088,11 +1080,11 @@ main(int argc, char **argv)
 		             SHADOW_AUDIT_FAILURE);
 #endif /* WITH_AUDIT */
 		SYSLOG(LOG_ALERT,
-		       "root is not authorized by SELinux to change the password of %s",
-		       name);
-		(void) fprintf(stderr,
-		               _("%s: root is not authorized by SELinux to change the password of %s\n"),
-		               Prog, name);
+		       "root is not authorized by SELinux to change the password of %ju",
+		       (uintmax_t) pw->pw_uid);
+		fprintf(stderr,
+		        _("%s: root is not authorized by SELinux to change the password of %ju\n"),
+		        Prog, (uintmax_t) pw->pw_uid);
 		exit (E_NOPERM);
 	}
 #endif				/* WITH_SELINUX */
@@ -1108,12 +1100,12 @@ main(int argc, char **argv)
 		             NULL, pw->pw_uid,
 		             SHADOW_AUDIT_FAILURE);
 #endif /* WITH_AUDIT */
-		(void) fprintf (stderr,
-		                _("%s: You may not view or modify password information for %s.\n"),
-		                Prog, name);
+		fprintf(stderr,
+		        _("%s: You may not view or modify password information for %ju.\n"),
+		        Prog, (uintmax_t) pw->pw_uid);
 		SYSLOG(LOG_WARN,
-		       "can't view or modify password information for %s",
-		       name);
+		       "can't view or modify password information for %ju",
+		       (uintmax_t) pw->pw_uid);
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -1155,14 +1147,13 @@ main(int argc, char **argv)
 			/*
 			 * Let the user know whose password is being changed.
 			 */
-			if (!qflg) {
-				(void) printf (_("Changing password for %s\n"), name);
-			}
+			if (!qflg)
+				printf(_("Changing password for %ju\n"), (uintmax_t) pw->pw_uid);
 
 			if (new_password (pw) != 0) {
-				(void) fprintf (stderr,
-				                _("The password for %s is unchanged.\n"),
-				                name);
+				fprintf(stderr,
+				        _("The password for %ju is unchanged.\n"),
+				        (uintmax_t) pw->pw_uid);
 				closelog ();
 				exit (E_NOPERM);
 			}
@@ -1211,7 +1202,7 @@ main(int argc, char **argv)
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
-	SYSLOG(LOG_INFO, "password for '%s' changed by '%s'", name, myname);
+	SYSLOG(LOG_INFO, "password for %ju changed by '%s'", (uintmax_t) pw->pw_uid, myname);
 	closelog ();
 	if (!qflg) {
 		if (!anyflag) {
