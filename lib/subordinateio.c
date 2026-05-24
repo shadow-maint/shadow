@@ -333,11 +333,12 @@ static int subordinate_range_cmp (const void *p1, const void *p2)
 static id_t
 find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 {
-	uintmax_t                      low, max_id;
+	intmax_t                       low, max_id;
 	const struct subordinate_range *range;
 
 	if (count == 0 || max < min
-	    || (uintmax_t) count - 1 > (uintmax_t) max - min) {
+	    || (uintmax_t) count - 1 > (uintmax_t) max - min)
+	{
 		errno = ERANGE;
 		return -1;
 	}
@@ -346,38 +347,40 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 	commonio_sort (db, subordinate_range_cmp);
 	commonio_rewind(db);
 
-	low = (uintmax_t) min;
-	max_id = (uintmax_t) max;
+	low = min;
+	max_id = max;
 	while (NULL != (range = commonio_next(db))) {
-		uintmax_t  first, last;
+		intmax_t  first, last;
 
 		if (range->count == 0)
 			continue;
 
 		first = range->start;
 		if (__builtin_add_overflow(first, range->count - 1, &last))
-			last = UINTMAX_MAX;
+			last = INTMAX_MAX;
 
 		/*
-		 * Check the hole before this range as an inclusive interval.
-		 * This avoids constructing max + 1, which wraps when max is
-		 * the largest representable id_t value.
+		 * Ranges are sorted by start, and low has been advanced past
+		 * every range seen so far, so the gap [low, first - 1] (clamped
+		 * to max) contains no existing range.  A block that fits in
+		 * this gap lies below first, hence below every later range too,
+		 * so it cannot overlap any allocation.
 		 */
 		if (first > low) {
-			uintmax_t high = first - 1;
+			intmax_t high = first - 1;
 
 			/* Don't allocate IDs after max (included). */
 			if (high > max_id)
 				high = max_id;
 
 			/* Is the hole before this range large enough? */
-			if ((high >= low) && ((high - low + 1) >= count))
-				return (id_t) low;
+			if ((high >= low) && ((high - low + 1) >= (intmax_t) count))
+				return low;
 		}
 
 		/* Compute the low end of the next hole */
 		if (last >= low) {
-			if (last == UINTMAX_MAX)
+			if (last == INTMAX_MAX)
 				goto fail;
 			low = last + 1;
 		}
@@ -386,8 +389,8 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 	}
 
 	/* Is the remaining unclaimed area large enough? */
-	if (((max_id - low) + 1) >= count)
-		return (id_t) low;
+	if (((max_id - low) + 1) >= (intmax_t) count)
+		return low;
 fail:
 	errno = EUSERS;
 	return -1;
