@@ -409,14 +409,25 @@ shadowtcb_status shadowtcb_remove (const char *name)
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
 	char *path = shadowtcb_path_existing (name);
 	char *rel = shadowtcb_path_rel_existing (name);
-	if ((NULL == path) || (NULL == rel) || (rmdir (path) != 0)) {
+	if (NULL == path) {
+		free(rel);
 		return SHADOWTCB_FAILURE;
 	}
+	if (NULL == rel) {
+		free(path);
+		return SHADOWTCB_FAILURE;
+	}
+	if (rmdir (path) != 0) {
+		free(path);
+		free(rel);
+		return SHADOWTCB_FAILURE;
+	}
+	free(path);
 	if (rmdir_leading (rel) == SHADOWTCB_FAILURE) {
+		free(rel);
 		return SHADOWTCB_FAILURE;
 	}
-	free (path);
-	free (rel);
+	free(rel);
 	path = aprintf(TCB_DIR "/%s", name);
 	if (path == NULL) {
 		OUT_OF_MEMORY;
