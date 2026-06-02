@@ -28,5 +28,6 @@
 
 extern bool is_valid_user_name (const char *name);
 extern bool is_valid_group_name (const char *name);
+extern bool is_valid_upn (const char *name);
 
 #endif
