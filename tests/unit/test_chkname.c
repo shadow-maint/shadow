@@ -30,6 +30,12 @@ static void test_is_valid_user_name_nok_empty(MAYBE_UNUSED void ** _1);
 static void test_is_valid_user_name_nok_numeric(MAYBE_UNUSED void ** _1);
 static void test_is_valid_user_name_nok_otherchars(MAYBE_UNUSED void ** _1);
 static void test_is_valid_user_name_long(MAYBE_UNUSED void ** _1);
+static void test_is_valid_upn_ok(MAYBE_UNUSED void ** _1);
+static void test_is_valid_upn_nok_not_upn(MAYBE_UNUSED void ** _1);
+static void test_is_valid_upn_nok_structure(MAYBE_UNUSED void ** _1);
+static void test_is_valid_upn_nok_domain(MAYBE_UNUSED void ** _1);
+static void test_is_valid_upn_ok_limits(MAYBE_UNUSED void ** _1);
+static void test_is_valid_upn_nok_limits(MAYBE_UNUSED void ** _1);
 
 
 int
@@ -45,6 +51,12 @@ main(void)
         cmocka_unit_test(test_is_valid_user_name_nok_numeric),
         cmocka_unit_test(test_is_valid_user_name_nok_otherchars),
         cmocka_unit_test(test_is_valid_user_name_long),
+        cmocka_unit_test(test_is_valid_upn_ok),
+        cmocka_unit_test(test_is_valid_upn_nok_not_upn),
+        cmocka_unit_test(test_is_valid_upn_nok_structure),
+        cmocka_unit_test(test_is_valid_upn_nok_domain),
+        cmocka_unit_test(test_is_valid_upn_ok_limits),
+        cmocka_unit_test(test_is_valid_upn_nok_limits),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
@@ -145,4 +157,123 @@ test_is_valid_user_name_long(MAYBE_UNUSED void ** _1)
 	assert_true(is_valid_user_name(name));
 
 	free(name);
+}
+
+
+static void
+test_is_valid_upn_ok(MAYBE_UNUSED void ** _1)
+{
+	assert_true(is_valid_upn("user@example.com"));
+	assert_true(is_valid_upn("john.doe@corp.example.org"));
+	assert_true(is_valid_upn("test@sub.domain.net"));
+	assert_true(is_valid_upn("a@b.c"));
+	assert_true(is_valid_upn("user123@test123.example"));
+	assert_true(is_valid_upn("user_name@example-domain.com"));
+	assert_true(is_valid_upn("test.user@example.domain.org"));
+	assert_true(is_valid_upn("user@domain"));
+	assert_true(is_valid_upn("user@domain.com."));
+	assert_true(is_valid_upn("user@sub."));
+}
+
+
+static void
+test_is_valid_upn_nok_not_upn(MAYBE_UNUSED void ** _1)
+{
+	assert_true(false == is_valid_upn("regularuser"));
+	assert_true(false == is_valid_upn("user.name"));
+	assert_true(false == is_valid_upn("user_name"));
+	assert_true(false == is_valid_upn("123user"));
+	assert_true(false == is_valid_upn("USER"));
+}
+
+
+static void
+test_is_valid_upn_nok_structure(MAYBE_UNUSED void ** _1)
+{
+	// Empty parts
+	assert_true(false == is_valid_upn("@domain.com"));
+	assert_true(false == is_valid_upn("user@"));
+	assert_true(false == is_valid_upn("@"));
+
+	// Multiple @ symbols
+	assert_true(false == is_valid_upn("user@domain@com"));
+	assert_true(false == is_valid_upn("@@domain.com"));
+	assert_true(false == is_valid_upn("user@@domain.com"));
+
+	// Empty string
+	assert_true(false == is_valid_upn(""));
+
+	// Invalid prefix
+	assert_true(false == is_valid_upn("-user@domain.com"));
+	assert_true(false == is_valid_upn("123@domain.com"));
+	assert_true(false == is_valid_upn("user space@domain.com"));
+}
+
+
+static void
+test_is_valid_upn_nok_domain(MAYBE_UNUSED void ** _1)
+{
+	// Invalid domain formats
+	assert_true(false == is_valid_upn("user@.domain.com"));
+	assert_true(false == is_valid_upn("user@domain..com"));
+
+	// Invalid domain characters
+	assert_true(false == is_valid_upn("user@domain_name.com"));
+	assert_true(false == is_valid_upn("user@domain name.com"));
+}
+
+
+static void
+test_is_valid_upn_ok_limits(MAYBE_UNUSED void ** _1)
+{
+	char    *upn;
+	char    *domain;
+
+	// Test domain at maximum allowed length (254 chars + implicit root = 255)
+	domain = malloc_T(254 + 1, char);
+	assert_true(domain != NULL);
+	strcpy(domain,
+		"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa." // 63 a's + dot
+		"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb." // 63 b's + dot
+		"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc." // 63 c's + dot
+		"ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd."      // 59 d's + dot
+		"co");                                                             // 2
+	// Total: 63 + 1 + 63 + 1 + 63 + 1 + 59 + 1 + 2 (+ 1 implicit root) = 255 chars
+
+	upn = malloc_T(5 + 254 + 1, char);  // "user@" + domain + '\0'
+	assert_true(upn != NULL);
+	strcpy(upn, "user@");
+	strcat(upn, domain);
+	assert_true(is_valid_upn(upn));
+
+	free(upn);
+	free(domain);
+}
+
+
+static void
+test_is_valid_upn_nok_limits(MAYBE_UNUSED void ** _1)
+{
+	char    *upn;
+	char    *domain;
+
+	// Test domain exceeding maximum length (255 chars + implicit root = 256 > 255 limit)
+	domain = malloc_T(255 + 1, char);
+	assert_true(domain != NULL);
+	memset(domain, 'a', 252);
+	strcpy(&domain[252], ".co");
+
+	upn = malloc_T(5 + 255 + 1, char);  // "user@" + domain + '\0'
+	assert_true(upn != NULL);
+	strcpy(upn, "user@");
+	strcat(upn, domain);
+	assert_true(false == is_valid_upn(upn));
+
+	free(upn);
+	free(domain);
+
+	// Domain label too long (>63 chars)
+	assert_true(false == is_valid_upn("user@"
+		"verylongdomainlabelthatexceedssixtythreecharacterslimitsetbyRFC1035"
+		".com"));
 }
