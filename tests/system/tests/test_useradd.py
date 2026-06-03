@@ -305,6 +305,47 @@ def test_useradd__two_users_same_ids(shadow: Shadow):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__two_users_same_uid(shadow: Shadow):
+    """
+    :title: Add two users with same UID using -o flag (allow non-unique UID)
+    :setup:
+        1. Create first user with UID 4242
+        2. Create second user with same UID using -o flag (allows non-unique UIDs)
+    :steps:
+        1. Check passwd entries for both users
+        2. Check group entries for both users
+    :expectedresults:
+        1. Both users exist with UID 4242 and different auto-assigned GIDs
+        2. Each user has their own group with unique GID
+    :customerscenario: False
+    """
+    shadow.useradd("test1 -u 4242")
+    shadow.useradd("test2 -u 4242 -o")
+
+    passwd_entry1 = shadow.tools.getent.passwd("test1")
+    assert passwd_entry1 is not None, "User test1 should be found in passwd"
+    assert passwd_entry1.name == "test1", "Incorrect username for test1"
+    assert passwd_entry1.uid == 4242, "test1 should have UID 4242"
+    assert passwd_entry1.gid == 4242, "test1 should have GID 4242"
+
+    passwd_entry2 = shadow.tools.getent.passwd("test2")
+    assert passwd_entry2 is not None, "User test2 should be found in passwd"
+    assert passwd_entry2.name == "test2", "Incorrect username for test2"
+    assert passwd_entry2.uid == 4242, "test2 should have UID 4242"
+    assert passwd_entry2.gid == 4243, "test2 should have GID 4243 (different from test1)"
+
+    group_entry1 = shadow.tools.getent.group("test1")
+    assert group_entry1 is not None, "Group test1 should be found"
+    assert group_entry1.name == "test1", "Incorrect group name for test1"
+    assert group_entry1.gid == 4242, "test1 group should have GID 4242"
+
+    group_entry2 = shadow.tools.getent.group("test2")
+    assert group_entry2 is not None, "Group test2 should be found"
+    assert group_entry2.name == "test2", "Incorrect group name for test2"
+    assert group_entry2.gid == 4243, "test2 group should have GID 4243"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
 def test_useradd__add_user_with_existing_uid(shadow: Shadow):
     """
     :title: Verify useradd fails when adding user with existing UID without -o flag
