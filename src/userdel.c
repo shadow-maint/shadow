@@ -220,6 +220,7 @@ static void update_groups (bool process_selinux)
 #endif				/* WITH_AUDIT */
 		SYSLOG(LOG_INFO, "delete '%s' from group '%s'\n",
 			user_name, ngrp->gr_name);
+			gr_free (ngrp);
 	}
 
 	if (getdef_bool ("USERGROUPS_ENAB")) {
