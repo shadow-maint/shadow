@@ -221,6 +221,7 @@ static void update_groups (bool process_selinux)
 		SYSLOG(LOG_INFO, "delete '%s' from group '%s'\n",
 			user_name, ngrp->gr_name);
 	}
+	gr_free (ngrp);
 
 	if (getdef_bool ("USERGROUPS_ENAB")) {
 		remove_usergroup (process_selinux);
