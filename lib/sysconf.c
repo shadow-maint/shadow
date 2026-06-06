@@ -9,26 +9,10 @@
 #include <unistd.h>
 
 
-#ifndef  LOGIN_NAME_MAX
-# define LOGIN_NAME_MAX  256
-#endif
-
 #ifndef  NGROUPS_MAX
 # define NGROUPS_MAX  65536
 #endif
 
-
-size_t
-login_name_max_size(void)
-{
-	long  conf;
-
-	conf = sysconf(_SC_LOGIN_NAME_MAX);
-	if (conf == -1)
-		return LOGIN_NAME_MAX;
-
-	return conf;
-}
 
 size_t
 ngroups_max_size(void)

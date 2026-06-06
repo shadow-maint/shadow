@@ -9,10 +9,15 @@
 
 #include "config.h"
 
+#include <limits.h>
 #include <stddef.h>
 
 
-extern size_t login_name_max_size(void);
+#ifndef  LOGIN_NAME_MAX
+# define LOGIN_NAME_MAX  256
+#endif
+
+
 extern size_t ngroups_max_size(void);
 
 #endif  // include guard

@@ -4,6 +4,7 @@
  */
 
 
+#include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -130,19 +131,17 @@ test_is_valid_user_name_nok_otherchars(MAYBE_UNUSED void ** _1)
 static void
 test_is_valid_user_name_long(MAYBE_UNUSED void ** _1)
 {
-	size_t  max;
-	char    *name;
+	char  *name;
 
-	max = sysconf(_SC_LOGIN_NAME_MAX);
-	name = malloc_T(max + 1, char);
+	name = malloc_T(LOGIN_NAME_MAX + 1, char);
 	assert_true(name != NULL);
 
-	memset(name, '_', max);
+	memset(name, '_', LOGIN_NAME_MAX);
 
-	stpcpy(&name[max], "");
+	stpcpy(&name[LOGIN_NAME_MAX], "");
 	assert_true(false == is_valid_user_name(name));
 
-	stpcpy(&name[max - 1], "");
+	stpcpy(&name[LOGIN_NAME_MAX - 1], "");
 	assert_true(is_valid_user_name(name));
 
 	free(name);

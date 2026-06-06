@@ -18,6 +18,7 @@
 #include <lastlog.h>
 #endif 				/* ENABLE_LASTLOG */
 #endif				/* !USE_PAM */
+#include <limits.h>
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
@@ -831,16 +832,13 @@ int main (int argc, char **argv)
 
 		failed = false;	/* haven't failed authentication yet */
 		if (NULL == username) {	/* need to get a login id */
-			size_t  max_size;
-
-			max_size = login_name_max_size();
 			if (subroot) {
 				closelog ();
 				exit (1);
 			}
 			preauth_flag = false;
-			username = xmalloc_T(max_size, char);
-			login_prompt(username, max_size);
+			username = xmalloc_T(LOGIN_NAME_MAX, char);
+			login_prompt(username, LOGIN_NAME_MAX);
 
 			if (streq(username, "")) {
 				/* Prompt for a new login */
