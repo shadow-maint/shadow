@@ -102,7 +102,7 @@ is_valid_name(const char *name)
 bool
 is_valid_user_name(const char *name)
 {
-	if (strlen(name) >= login_name_max_size()) {
+	if (strlen(name) >= LOGIN_NAME_MAX) {
 		errno = EOVERFLOW;
 		return false;
 	}
