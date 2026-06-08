@@ -279,6 +279,7 @@ static void update_groups (bool process_selinux)
 #endif				/* WITH_AUDIT */
 		SYSLOG(LOG_INFO, "delete '%s' from shadow group '%s'\n",
 		       user_name, nsgrp->sg_namp);
+		sgr_free (nsgrp);
 	}
 #endif				/* SHADOWGRP */
 }
