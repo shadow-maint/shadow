@@ -1131,6 +1131,7 @@ static void grp_update (bool process_selinux)
 #endif
 		SYSLOG(LOG_INFO, "add '%s' to shadow group '%s'",
 		       user_name, nsgrp->sg_namp);
+		free (nsgrp);
 	}
 #endif				/* SHADOWGRP */
 }
