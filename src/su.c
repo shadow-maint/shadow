@@ -107,6 +107,19 @@ extern size_t newenvc; /* lib/env.c */
 
 /* local function prototypes */
 
+static bool legacy_tiocsti_disabled() {
+	int ret;
+	char c;
+	int fd = open("/proc/sys/dev/tty/legacy_tiocsti", O_RDONLY);
+	if (fd == -1)
+		return false;
+	ret = read(fd, &c, 1);
+	close(fd);
+	if (ret != 1)
+		return false;
+	return c == '0';
+}
+
 static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
@@ -1010,6 +1023,7 @@ int main (int argc, char **argv)
 {
 	const char *cp;
 	struct passwd *pw = NULL;
+	bool need_pty_prot = false;
 
 #ifdef USE_PAM
 	int ret;
@@ -1022,6 +1036,9 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	save_caller_context();
+
+	if (caller_is_root && !legacy_tiocsti_disabled())
+		need_pty_prot = true;
 
 	OPENLOG (Prog);
 
@@ -1152,7 +1169,7 @@ int main (int argc, char **argv)
 
 	set_environment (pw);
 
-	if (!doshell) {
+	if (!doshell || need_pty_prot) {
 		/* There is no need for a controlling terminal.
 		 * This avoids the callee to inject commands on
 		 * the caller's tty. */
