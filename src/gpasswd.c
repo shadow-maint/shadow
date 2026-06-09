@@ -27,6 +27,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "groupio.h"
+#include "list.h"
 #include "nscd.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
