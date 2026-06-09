@@ -56,6 +56,7 @@
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
+#include "io/fgets/fgets.h"
 #include "pwauth.h"
 #include "prototypes.h"
 #include "shadowlog.h"
@@ -996,6 +997,24 @@ static void set_environment (struct passwd *pw)
 
 }
 
+// See linux.git 83efeeeb3d04 (2022-10-22; "tty: Allow TIOCSTI to be disabled")
+static bool legacy_tiocsti_is_disabled(void)
+{
+	char buf[3];
+	FILE *fp;
+	void *ret;
+
+	fp = fopen("/proc/sys/dev/tty/legacy_tiocsti", "r");
+	if (NULL == fp)
+		return false;
+	ret = fgets_a(buf, fp);
+	fclose(fp);
+	if (ret == NULL)
+		return false;
+
+	return streq(buf, "0\n");
+}
+
 /*
  * su - switch user id
  *
@@ -1010,6 +1029,7 @@ int main (int argc, char **argv)
 {
 	const char *cp;
 	struct passwd *pw = NULL;
+	bool need_pty_prot;
 
 #ifdef USE_PAM
 	int ret;
@@ -1022,6 +1042,8 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	save_caller_context();
+
+	need_pty_prot = caller_is_root && !legacy_tiocsti_is_disabled();
 
 	OPENLOG (Prog);
 
@@ -1152,7 +1174,7 @@ int main (int argc, char **argv)
 
 	set_environment (pw);
 
-	if (!doshell) {
+	if (!doshell || need_pty_prot) {
 		/* There is no need for a controlling terminal.
 		 * This avoids the callee to inject commands on
 		 * the caller's tty. */
