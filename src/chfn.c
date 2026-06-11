@@ -19,7 +19,6 @@
 #include <sys/types.h>
 #include <getopt.h>
 
-#include "chkname.h"
 #include "defines.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
@@ -434,8 +433,7 @@ static void update_gecos(const char *user, char *gecos, const struct option_flag
 	pw = pw_locate (user);
 	if (NULL == pw) {
 		fprintf (stderr,
-		         _("%s: user '%s' does not exist in %s\n"),
-		         Prog, user, pw_dbname ());
+		         _("%s: user does not exist in %s\n"), Prog, pw_dbname());
 		fail_exit (E_NOPERM, process_selinux);
 	}
 
@@ -604,15 +602,10 @@ int main (int argc, char **argv)
 	 * name, or the name getlogin() returns.
 	 */
 	if (optind < argc) {
-		if (!is_valid_user_name (argv[optind])) {
-			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
-			fail_exit (E_NOPERM, process_selinux);
-		}
 		user = argv[optind];
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
-			fprintf (stderr, _("%s: user '%s' does not exist\n"), Prog,
-			         user);
+			fprintf(stderr, _("%s: user does not exist\n"), Prog);
 			fail_exit (E_NOPERM, process_selinux);
 		}
 	} else {
@@ -641,7 +634,7 @@ int main (int argc, char **argv)
 	 * user interactively change them.
 	 */
 	if (!fflg && !rflg && !wflg && !hflg && !oflg) {
-		printf (_("Changing the user information for %s\n"), user);
+		printf (_("Changing information for user %ju\n"), (uintmax_t) pw->pw_uid);
 		new_fields ();
 	}
 
@@ -661,14 +654,14 @@ int main (int argc, char **argv)
 		p = seprintf(p, e, ",%s", slop);
 
 	if (p == e || p == NULL) {
-		fprintf (stderr, _("%s: fields too long\n"), Prog);
+		fprintf(stderr, _("%s: fields too long\n"), Prog);
 		fail_exit (E_NOPERM, process_selinux);
 	}
 
 	/* Rewrite the user's gecos in the passwd file */
 	update_gecos (user, new_gecos, &flags);
 
-	SYSLOG(LOG_INFO, "changed user '%s' information", user);
+	SYSLOG(LOG_INFO, "changed user %ju information", (uintmax_t) pw->pw_uid);
 
 	nscd_flush_cache ("passwd");
 	sssd_flush_cache (SSSD_DB_PASSWD);

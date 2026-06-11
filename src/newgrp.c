@@ -19,7 +19,6 @@
 #include "agetpass.h"
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
-#include "chkname.h"
 #include "defines.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
@@ -60,10 +59,8 @@ static char audit_buf[80];
 
 /* local function prototypes */
 static void usage (void);
-static void check_perms (const struct group *grp,
-                         struct passwd *pwd,
-                         const char *groupname);
-static void syslog_sg (const char *name, const char *group);
+static void check_perms(const struct group *grp, struct passwd *pwd);
+static void syslog_sg(const char *name, gid_t group);
 
 /*
  * usage - print command usage message
@@ -125,9 +122,8 @@ static /*@null@*/struct group *find_matching_group (const char *name, struct gro
  *
  *	It will not return if the user could not be authenticated.
  */
-static void check_perms (const struct group *grp,
-                         struct passwd *pwd,
-                         const char *groupname)
+static void
+check_perms(const struct group *grp, struct passwd *pwd)
 {
 	bool needspasswd = false;
 	struct spwd *spwd;
@@ -192,8 +188,8 @@ static void check_perms (const struct group *grp,
 			         _("%s: failed to crypt password with previous salt: %s\n"),
 			        Prog, strerrno());
 			SYSLOG(LOG_INFO,
-			       "Failed to crypt password with previous salt of group '%s'",
-			       groupname);
+			       "Failed to crypt password with previous salt of group %ju",
+			       (uintmax_t) grp->gr_gid);
 			goto failure;
 		}
 
@@ -206,8 +202,8 @@ static void check_perms (const struct group *grp,
 			              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
 			SYSLOG(LOG_INFO,
-				"Invalid password for group '%s' from '%s'",
-				groupname, pwd->pw_name);
+				"Invalid password for group %ju from '%s'",
+				(uintmax_t) grp->gr_gid, pwd->pw_name);
 			(void) sleep (1);
 			(void) fputs (_("Invalid password.\n"), stderr);
 			goto failure;
@@ -236,7 +232,8 @@ failure:
  *	The logout will also be logged when the user will quit the
  *	sg/newgrp session.
  */
-static void syslog_sg (const char *name, const char *group)
+static void
+syslog_sg(const char *name, gid_t group)
 {
 	const char *loginname = getlogin ();
 	const char *tty = ttyname (0);
@@ -259,8 +256,8 @@ static void syslog_sg (const char *name, const char *group)
 	}
 	tty = strprefix(tty, "/dev/") ?: tty;
 
-	SYSLOG(LOG_INFO, "user '%s' (login '%s' on %s) switched to group '%s'",
-		name, loginname, tty, group);
+	SYSLOG(LOG_INFO, "user '%s' (login '%s' on %s) switched to group %ju",
+	       name, loginname, tty, (uintmax_t) group);
 #ifdef USE_PAM
 	/*
 	 * We want to fork and exec the new shell in the child, leaving the
@@ -298,15 +295,9 @@ static void syslog_sg (const char *name, const char *group)
 			fprintf (stderr, _("%s: failure forking: %s\n"),
 				is_newgrp ? "newgrp" : "sg", strerrno());
 #ifdef WITH_AUDIT
-			if (group) {
-				audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
-							getuid(), "new_group", group,
-							SHADOW_AUDIT_FAILURE);
-			} else {
-				audit_logger (AUDIT_CHGRP_ID,
-				              "changing", NULL, getuid(),
-				              SHADOW_AUDIT_FAILURE);
-			}
+			audit_logger(AUDIT_CHGRP_ID,
+			             "changing", NULL, getuid(),
+			             SHADOW_AUDIT_FAILURE);
 #endif
 			exit (EXIT_FAILURE);
 		} else if (child != 0) {
@@ -480,12 +471,6 @@ int main (int argc, char **argv)
 		 * not "newgrp".
 		 */
 		if ((argc > 0) && (argv[0][0] != '-')) {
-			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
-					Prog);
-				goto failure;
-			}
 			group = argv[0];
 			argc--;
 			argv++;
@@ -516,12 +501,6 @@ int main (int argc, char **argv)
 			usage ();
 			goto failure;
 		} else if (argv[0] != NULL) {
-			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
-					Prog);
-				goto failure;
-			}
 			group = argv[0];
 		} else {
 			/*
@@ -555,13 +534,8 @@ int main (int argc, char **argv)
 	if (gids == NULL) {
 		perror("agetgroups");
 #ifdef WITH_AUDIT
-		if (group) {
-			audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL, getuid(),
-						"new_group", group, SHADOW_AUDIT_FAILURE);
-		} else {
-			audit_logger(AUDIT_CHGRP_ID,
-				     "changing", NULL, getuid(), SHADOW_AUDIT_FAILURE);
-		}
+		audit_logger(AUDIT_CHGRP_ID,
+		             "changing", NULL, getuid(), SHADOW_AUDIT_FAILURE);
 #endif
 		exit(EXIT_FAILURE);
 	}
@@ -608,7 +582,7 @@ int main (int argc, char **argv)
 	 */
 	grp = getgrnam (group); /* local, no need for xgetgrnam */
 	if (NULL == grp) {
-		fprintf (stderr, _("%s: group '%s' does not exist\n"), Prog, group);
+		fprintf(stderr, _("%s: group does not exist\n"), Prog);
 		goto failure;
 	}
 
@@ -645,19 +619,16 @@ int main (int argc, char **argv)
 	}
 #endif
 
-	/*
-	 * Check if the user is allowed to access this group.
-	 */
-	if (!is_member) {
-		check_perms (grp, pwd, group);
-	}
+	// Check if the user is allowed to access this group.
+	if (!is_member)
+		check_perms(grp, pwd);
 
 	/*
 	 * all successful validations pass through this point. The group id
 	 * will be set, and the group added to the concurrent groupset.
 	 */
 	if (getdef_bool ("SYSLOG_SG_ENAB")) {
-		syslog_sg (name, group);
+		syslog_sg (name, grp->gr_gid);
 	}
 
 	gid = grp->gr_gid;
@@ -814,14 +785,7 @@ int main (int argc, char **argv)
 	 */
 	closelog ();
 #ifdef WITH_AUDIT
-	if (NULL != group) {
-		audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
-					getuid(), "new_group", group,
-					SHADOW_AUDIT_FAILURE);
-	} else {
-		audit_logger (AUDIT_CHGRP_ID,
-		              "changing", NULL, getuid (), 0);
-	}
+	audit_logger(AUDIT_CHGRP_ID, "changing", NULL, getuid(), 0);
 #endif
 	exit (EXIT_FAILURE);
 }
