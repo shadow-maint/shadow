@@ -1088,7 +1088,7 @@ int main (int argc, char **argv)
 	 * output, etc.
 	 */
       output:
-	if (setuid (0) != 0) {
+	if (geteuid () == 0 && setuid (0) != 0) {
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG(LOG_ERR, "can't setuid(0)");
 		closelog ();
