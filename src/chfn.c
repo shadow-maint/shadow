@@ -395,13 +395,7 @@ static void update_gecos(const char *user, char *gecos, const struct option_flag
 
 	process_selinux = !flags->chroot;
 
-	/*
-	 * Before going any further, raise the ulimit to prevent colliding
-	 * into a lowered ulimit, and set the real UID to root to protect
-	 * against unexpected signals. Any keyboard signals are set to be
-	 * ignored.
-	 */
-	if (setuid (0) != 0) {
+	if (geteuid () == 0 && setuid (0) != 0) {
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG(LOG_ERR, "can't setuid(0)");
 		fail_exit (E_NOPERM, process_selinux);
