@@ -271,7 +271,7 @@
 	<listitem>
 	  <para>Use the specified method to encrypt the passwords.</para>
 	  <para>
-	    The available methods are DES, MD5, NONE, and SHA256 or SHA512
+	    The available methods are MD5, NONE, and SHA256 or SHA512
 	    if your libc support these methods.
 	  </para>
 	</listitem>
