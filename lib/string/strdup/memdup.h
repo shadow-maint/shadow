@@ -15,15 +15,18 @@
 
 // memdup_T - memory duplicate type-safe
 #define memdup_T(p, T)   memdup_T_(p, typeas(T))
-#define memdup_T_(p, T)                                               \
-({                                                                    \
-	T  *new_;                                                     \
+#define memdup_T_(..., T)                                             \
+((static inline T *(const T *p))                                      \
+{                                                                     \
+	T  *new;                                                      \
                                                                       \
-	new_ = malloc_T(1, T);                                        \
-	if (new_ != NULL)                                             \
-		*new_ = *(p);                                         \
-	new_;                                                         \
-})
+	new = malloc_T(1, T);                                         \
+	if (new == NULL)                                              \
+		return NULL;                                          \
+                                                                      \
+	*new = *p;                                                    \
+	return new;                                                   \
+}(__VA_ARGS__))
 
 
 #endif  // include guard
