@@ -47,7 +47,7 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
     assert shadow_entry.name == "tuser1", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.min_days == 0, "Incorrect min days"
+    assert shadow_entry.min_days is None, "Incorrect min days"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
@@ -79,7 +79,7 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
     assert shadow_entry.name == "tuser2", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.min_days == 0, "Incorrect min days"
+    assert shadow_entry.min_days is None, "Incorrect min days"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
@@ -135,7 +135,7 @@ def test_newusers__create_users_from_file(shadow: Shadow):
     assert shadow_entry.name == "tuser1", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.min_days == 0, "Incorrect min days"
+    assert shadow_entry.min_days is None, "Incorrect min days"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
@@ -167,7 +167,7 @@ def test_newusers__create_users_from_file(shadow: Shadow):
     assert shadow_entry.name == "tuser2", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.min_days == 0, "Incorrect min days"
+    assert shadow_entry.min_days is None, "Incorrect min days"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
