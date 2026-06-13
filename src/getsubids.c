@@ -5,9 +5,9 @@
 #include <string.h>
 
 #include "attr.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
-#include "string/strerrno.h"
 #include "subid.h"
 
 static const char Prog[] = "getsubids";
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	const char *owner;
 
 	if (!subid_init(Prog, stderr))
-		fprintf(stderr, "subid_init: %s\n", strerrno());
+		eprinte("subid_init");
 	if (argc < 2)
 		usage();
 	owner = argv[1];
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 		count = subid_get_uid_ranges(owner, &ranges);
 	}
 	if (!ranges) {
-		fprintf(stderr, "Error fetching ranges\n");
+		eprintf("Error fetching ranges\n");
 		exit(1);
 	}
 	for (i = 0; i < count; i++) {
@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
 static void
 usage(void)
 {
-	fprintf(stderr, "Usage: %s [-g] user\n", Prog);
-	fprintf(stderr, "    list subuid ranges for user\n");
-	fprintf(stderr, "    pass -g to list subgid ranges\n");
+	eprintf("Usage: %s [-g] user\n", Prog);
+	eprintf("    list subuid ranges for user\n");
+	eprintf("    pass -g to list subgid ranges\n");
 	exit(EXIT_FAILURE);
 }

@@ -59,6 +59,7 @@
 
 #include "defines.h"
 #include "io/fgets/fgets.h"
+#include "io/syslog.h"
 #include "prototypes.h"
 #include "sizeof.h"
 #include "string/strcmp/strcaseeq.h"
@@ -138,8 +139,7 @@ login_access(const char *user, const char *from)
 		}
 		(void) fclose (fp);
 	} else if (errno != ENOENT) {
-		int err = errno;
-		SYSLOG(LOG_ERR, "cannot open %s: %s", TABLE, strerror(err));
+		SYSLOGE(LOG_ERR, "cannot open %s", TABLE);
 	}
 	return (!match || strprefix(line, "+"))?1:0;
 }
