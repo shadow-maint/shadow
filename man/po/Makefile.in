@@ -109,8 +109,8 @@ $(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES
 	cd $$origdir; \
 	test ! -f $$tmpdir/$(DOMAIN).po || { \
 	  if test -f $(srcdir)/$(DOMAIN).pot; then \
-	    sed -f remove-potcdate.sed < $(srcdir)/$(DOMAIN).pot > $$tmpdir/$(DOMAIN).1po && \
-	    sed -f remove-potcdate.sed < $$tmpdir/$(DOMAIN).po > $$tmpdir/$(DOMAIN).2po && \
+	    sed -f $(srcdir)/po/remove-potcdate.sed < $(srcdir)/$(DOMAIN).pot > $$tmpdir/$(DOMAIN).1po && \
+	    sed -f $(srcdir)/po/remove-potcdate.sed < $$tmpdir/$(DOMAIN).po > $$tmpdir/$(DOMAIN).2po && \
 	    if ! cmp $$tmpdir/$(DOMAIN).1po $$tmpdir/$(DOMAIN).2po >/dev/null 2>&1; then \
 	      rm -f $(srcdir)/$(DOMAIN).pot && \
 	      mv $$tmpdir/$(DOMAIN).po $(srcdir)/$(DOMAIN).pot; \
@@ -222,8 +222,8 @@ update-po: Makefile
 	echo "$${cdcmd}$(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$lang.new.po"; \
 	cd $(srcdir); \
 	if $(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$ptmpdir/$$lang.new.po; then \
-	  sed -f remove-potcdate.sed < $$lang.po > $$ptmpdir/$$lang.1po; \
-	  sed -f remove-potcdate.sed < $$ptmpdir/$$lang.new.po > $$ptmpdir/$$lang.new.1po; \
+	  sed -f $(srcdir)/po/remove-potcdate.sed < $$lang.po > $$ptmpdir/$$lang.1po; \
+	  sed -f $(srcdir)/po/remove-potcdate.sed < $$ptmpdir/$$lang.new.po > $$ptmpdir/$$lang.new.1po; \
 	  if ! cmp $$ptmpdir/$$lang.1po $$ptmpdir/$$lang.new.1po >/dev/null 2>&1; then \
 	    if mv -f $$ptmpdir/$$lang.new.po $$lang.po; then \
 	      :; \
