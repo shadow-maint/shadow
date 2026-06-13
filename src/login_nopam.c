@@ -308,16 +308,14 @@ static bool from_match (char *tok, const char *string)
 
 		str_len = strlen (string);
 		tok_len = strlen (tok);
-		if (   (str_len > tok_len)
-		    && strcaseeq(tok, string + str_len - tok_len)) {
+		if (str_len > tok_len && strcaseeq(tok, string + str_len - tok_len))
 			return true;
-		}
 	} else if (strcaseeq(tok, "LOCAL")) {	/* LOCAL: no dots */
 		if (!strchr(string, '.'))
 			return true;
-	} else if (   (!streq(tok, "") && tok[strlen(tok) - 1] == '.') /* network */
-		   && strprefix(resolve_hostname(string), tok)) {
-		return true;
+	} else if (!streq(tok, "") && tok[strlen(tok) - 1] == '.') {  /* network */
+		if (strprefix(resolve_hostname(string), tok))
+			return true;
 	}
 	return false;
 }
