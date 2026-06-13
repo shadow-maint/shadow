@@ -18,7 +18,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "defines.h"
 #include "nscd.h"
 #include "sssd.h"

@@ -21,7 +21,8 @@
 #include <time.h>
 #include <pwd.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "defines.h"
 #include "fields.h"
 #include "prototypes.h"

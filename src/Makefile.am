@@ -78,7 +78,9 @@ if WITH_TCB
 shadowsgidubins = passwd
 endif
 
-LDADD          = $(INTLLIBS) \
+LDADD          = \
+		 $(LIBA2I) \
+		 $(INTLLIBS) \
 		 $(top_builddir)/lib/libshadow.la \
 		 $(LIBTCB)
 
