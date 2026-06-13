@@ -78,7 +78,6 @@
 static bool list_match (char *list, const char *item, bool (*match_fn) (char *, const char *));
 static bool user_match (char *tok, const char *string);
 static bool from_match (char *tok, const char *string);
-static bool string_match (const char *tok, const char *string);
 static const char *resolve_hostname (const char *string);
 
 /* login_access - match username/group and host/tty with access control file */
@@ -229,7 +228,7 @@ static bool user_match (char *tok, const char *string)
 	} else if (strprefix(tok, "@")) {	/* netgroup */
 		return (netgroup_match (tok + 1, NULL, string));
 #endif
-	} else if (string_match (tok, string)) {	/* ALL or exact match */
+	} else if (strcaseeq(tok, "ALL") || strcaseeq(tok, string)) {
 		return true;
 	/* local, no need for xgetgrnam */
 	} else if ((group = getgrnam (tok)) != NULL) {	/* try group membership */
@@ -303,7 +302,7 @@ static bool from_match (char *tok, const char *string)
 		return (netgroup_match (tok + 1, string, NULL));
 	} else
 #endif
-	if (string_match (tok, string)) {	/* ALL or exact match */
+	if (strcaseeq(tok, "ALL") || strcaseeq(tok, string)) {
 		return true;
 	} else if (strprefix(tok, ".")) {  /* domain: match last fields */
 		size_t  str_len, tok_len;
@@ -323,23 +322,6 @@ static bool from_match (char *tok, const char *string)
 	}
 	return false;
 }
-
-/* string_match - match a string against one token */
-static bool string_match (const char *tok, const char *string)
-{
-
-	/*
-	 * If the token has the magic value "ALL" the match always succeeds.
-	 * Otherwise, return true if the token fully matches the string.
-	 */
-	if (strcaseeq(tok, "ALL")) {  /* ALL: always matches */
-		return true;
-	} else if (strcaseeq(tok, string)) {  /* try exact match */
-		return true;
-	}
-	return false;
-}
-
 #else				/* !USE_PAM */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !USE_PAM */
