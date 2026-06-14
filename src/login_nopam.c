@@ -137,7 +137,7 @@ login_access(const char *user, const char *from)
 		    && list_match(users, user, user_match))
 		{
 			fclose(fp);
-			return !!strprefix(line, "+");
+			return !!strprefix(perm, "+");
 		}
 	}
 	fclose(fp);
