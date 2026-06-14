@@ -76,72 +76,65 @@
 static bool list_match (char *list, const char *item, bool (*match_fn) (char *, const char *));
 static bool user_match (char *tok, const char *string);
 static bool from_match (char *tok, const char *string);
-static bool string_match (const char *tok, const char *string);
 static const char *resolve_hostname (const char *string);
 
 /* login_access - match username/group and host/tty with access control file */
-int
+bool
 login_access(const char *user, const char *from)
 {
 	FILE *fp;
 	char line[BUFSIZ];
-	char *perm;		/* becomes permission field */
-	char *users;		/* becomes list of login names */
-	char *froms;		/* becomes list of terminals or hosts */
-	bool match = false;
 
-	/*
-	 * Process the table one line at a time and stop at the first match.
-	 * Blank lines and lines that begin with a '#' character are ignored.
-	 * Non-comment lines are broken at the ':' character. All fields are
-	 * mandatory. The first field should be a "+" or "-" character. A
-	 * non-existing table means no access control.
-	 */
 	fp = fopen (TABLE, "r");
-	if (NULL != fp) {
-		intmax_t lineno = 0;	/* for diagnostics */
-		while (   !match
-		       && (fgets_a(line, fp) != NULL))
-		{
-			char  *p;
-
-			lineno++;
-			if (stpsep(line, "\n") == NULL) {
-				SYSLOG(LOG_ERR,
-					"%s: line %jd: missing newline or line too long",
-					TABLE, lineno);
-				continue;
-			}
-			if (strprefix(line, "#")) {
-				continue;	/* comment line */
-			}
-			stpcpy(stprspn(line, " \t"), "");
-			if (streq(line, "")) {	/* skip blank lines */
-				continue;
-			}
-			p = line;
-			perm = strsep(&p, ":");
-			users = strsep(&p, ":");
-			froms = strsep(&p, ":");
-			if (froms == NULL || p != NULL) {
-				SYSLOG(LOG_ERR, "%s: line %jd: bad field count",
-				       TABLE, lineno);
-				continue;
-			}
-			if (perm[0] != '+' && perm[0] != '-') {
-				SYSLOG(LOG_ERR, "%s: line %jd: bad first field",
-					TABLE, lineno);
-				continue;
-			}
-			match = (   list_match (froms, from, from_match)
-			         && list_match (users, user, user_match));
+	if (fp == NULL) {
+		if (errno != ENOENT) {
+			int err = errno;
+			SYSLOG(LOG_ERR, "cannot open %s: %s", TABLE, strerror(err));
 		}
-		(void) fclose (fp);
-	} else if (errno != ENOENT) {
-		int err = errno;
-		SYSLOG(LOG_ERR, "cannot open %s: %s", TABLE, strerror(err));
+		return true;  // A non-existent table means no access control.
 	}
-	return (!match || strprefix(line, "+"))?1:0;
+
+	for (intmax_t i = 1; fgets_a(line, fp) != NULL; i++) {
+		char  *p;
+		char  *perm;	/* becomes permission field */
+		char  *users;	/* becomes list of login names */
+		char  *froms;	/* becomes list of terminals or hosts */
+
+		if (stpsep(line, "\n") == NULL) {
+			SYSLOG(LOG_ERR,
+				"%s: line %jd: missing newline or line too long",
+				TABLE, i);
+			continue;
+		}
+		if (strprefix(line, "#"))  // comment line
+			continue;
+		stpcpy(stprspn(line, " \t"), "");
+		if (streq(line, ""))
+			continue;
+
+		p = line;
+		perm = strsep(&p, ":");
+		users = strsep(&p, ":");
+		froms = strsep(&p, ":");
+		if (froms == NULL || p != NULL) {
+			SYSLOG(LOG_ERR, "%s: line %jd: bad field count",
+			       TABLE, i);
+			continue;
+		}
+		if (perm[0] != '+' && perm[0] != '-') {
+			SYSLOG(LOG_ERR, "%s: line %jd: bad first field",
+				TABLE, i);
+			continue;
+		}
+		if (   list_match(froms, from, from_match)
+		    && list_match(users, user, user_match))
+		{
+			fclose(fp);
+			return !!strprefix(perm, "+");
+		}
+	}
+	fclose(fp);
+	return true;
 }
 
 /* list_match - match an item against a list of tokens with exceptions */
@@ -222,16 +215,16 @@ static bool user_match (char *tok, const char *string)
 	 * the token is a group that contains the username.
 	 */
 	host = stpsep(tok + 1, "@");	/* split user@host pattern */
-	if (host != NULL) {
+	if (host != NULL)
 		return user_match(tok, string) && from_match(host, myhostname());
 #if HAVE_INNETGR
-	} else if (strprefix(tok, "@")) {	/* netgroup */
+	if (strprefix(tok, "@"))	/* netgroup */
 		return (netgroup_match (tok + 1, NULL, string));
 #endif
-	} else if (string_match (tok, string)) {	/* ALL or exact match */
+	if (strcaseeq(tok, "ALL") || strcaseeq(tok, string))
 		return true;
 	/* local, no need for xgetgrnam */
-	} else if ((group = getgrnam (tok)) != NULL) {	/* try group membership */
+	if ((group = getgrnam (tok)) != NULL) {	/* try group membership */
 		int i;
 		for (i = 0; NULL != group->gr_mem[i]; i++) {
 			if (strcaseeq(string, group->gr_mem[i])) {
@@ -298,47 +291,24 @@ static bool from_match (char *tok, const char *string)
 	 * if it matches the head of the string.
 	 */
 #if HAVE_INNETGR
-	if (strprefix(tok, "@")) {  /* netgroup */
+	if (strprefix(tok, "@"))  /* netgroup */
 		return (netgroup_match (tok + 1, string, NULL));
-	} else
 #endif
-	if (string_match (tok, string)) {	/* ALL or exact match */
+	if (strcaseeq(tok, "ALL") || strcaseeq(tok, string))
 		return true;
-	} else if (strprefix(tok, ".")) {  /* domain: match last fields */
+	if (strprefix(tok, ".")) {  /* domain: match last fields */
 		size_t  str_len, tok_len;
 
 		str_len = strlen (string);
 		tok_len = strlen (tok);
-		if (   (str_len > tok_len)
-		    && strcaseeq(tok, string + str_len - tok_len)) {
-			return true;
-		}
-	} else if (strcaseeq(tok, "LOCAL")) {	/* LOCAL: no dots */
-		if (!strchr(string, '.'))
-			return true;
-	} else if (   (!streq(tok, "") && tok[strlen(tok) - 1] == '.') /* network */
-		   && strprefix(resolve_hostname(string), tok)) {
-		return true;
+		return str_len > tok_len && strcaseeq(tok, string + str_len - tok_len);
 	}
+	if (strcaseeq(tok, "LOCAL"))  /* LOCAL: no dots */
+		return !strchr(string, '.');
+	if (!streq(tok, "") && tok[strlen(tok) - 1] == '.')  /* network */
+		return !!strprefix(resolve_hostname(string), tok);
 	return false;
 }
-
-/* string_match - match a string against one token */
-static bool string_match (const char *tok, const char *string)
-{
-
-	/*
-	 * If the token has the magic value "ALL" the match always succeeds.
-	 * Otherwise, return true if the token fully matches the string.
-	 */
-	if (strcaseeq(tok, "ALL")) {  /* ALL: always matches */
-		return true;
-	} else if (strcaseeq(tok, string)) {  /* try exact match */
-		return true;
-	}
-	return false;
-}
-
 #else				/* !USE_PAM */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !USE_PAM */
