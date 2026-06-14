@@ -101,20 +101,16 @@ login_access(const char *user, const char *from)
 		return true;  // A non-existent table means no access control.
 	}
 
-	intmax_t lineno = 0;  /* for diagnostics */
-	while (   !match
-	       && (fgets_a(line, fp) != NULL))
-	{
+	for (intmax_t i = 1; !match && fgets_a(line, fp) != NULL; i++) {
 		char  *p;
 		char  *perm;	/* becomes permission field */
 		char  *users;	/* becomes list of login names */
 		char  *froms;	/* becomes list of terminals or hosts */
 
-		lineno++;
 		if (stpsep(line, "\n") == NULL) {
 			SYSLOG(LOG_ERR,
 				"%s: line %jd: missing newline or line too long",
-				TABLE, lineno);
+				TABLE, i);
 			continue;
 		}
 		if (strprefix(line, "#")) {
@@ -130,12 +126,12 @@ login_access(const char *user, const char *from)
 		froms = strsep(&p, ":");
 		if (froms == NULL || p != NULL) {
 			SYSLOG(LOG_ERR, "%s: line %jd: bad field count",
-			       TABLE, lineno);
+			       TABLE, i);
 			continue;
 		}
 		if (perm[0] != '+' && perm[0] != '-') {
 			SYSLOG(LOG_ERR, "%s: line %jd: bad first field",
-				TABLE, lineno);
+				TABLE, i);
 			continue;
 		}
 		match = (   list_match(froms, from, from_match)
