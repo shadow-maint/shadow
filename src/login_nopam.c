@@ -85,9 +85,6 @@ login_access(const char *user, const char *from)
 {
 	FILE *fp;
 	char line[BUFSIZ];
-	char *perm;		/* becomes permission field */
-	char *users;		/* becomes list of login names */
-	char *froms;		/* becomes list of terminals or hosts */
 	bool match = false;
 
 	/*
@@ -104,6 +101,9 @@ login_access(const char *user, const char *from)
 		       && (fgets_a(line, fp) != NULL))
 		{
 			char  *p;
+			char  *perm;	/* becomes permission field */
+			char  *users;	/* becomes list of login names */
+			char  *froms;	/* becomes list of terminals or hosts */
 
 			lineno++;
 			if (stpsep(line, "\n") == NULL) {
