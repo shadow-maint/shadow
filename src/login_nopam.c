@@ -91,11 +91,17 @@ login_access(const char *user, const char *from)
 	 * Process the table one line at a time and stop at the first match.
 	 * Blank lines and lines that begin with a '#' character are ignored.
 	 * Non-comment lines are broken at the ':' character. All fields are
-	 * mandatory. The first field should be a "+" or "-" character. A
-	 * non-existing table means no access control.
+	 * mandatory. The first field should be a "+" or "-" character.
 	 */
 	fp = fopen (TABLE, "r");
-	if (NULL != fp) {
+	if (fp == NULL) {
+		if (errno != ENOENT) {
+			int err = errno;
+			SYSLOG(LOG_ERR, "cannot open %s: %s", TABLE, strerror(err));
+		}
+		return true;  // A non-existent table means no access control.
+	}
+	{
 		intmax_t lineno = 0;	/* for diagnostics */
 		while (   !match
 		       && (fgets_a(line, fp) != NULL))
@@ -137,9 +143,6 @@ login_access(const char *user, const char *from)
 			         && list_match (users, user, user_match));
 		}
 		(void) fclose (fp);
-	} else if (errno != ENOENT) {
-		int err = errno;
-		SYSLOG(LOG_ERR, "cannot open %s: %s", TABLE, strerror(err));
 	}
 	return (!match || strprefix(line, "+"))?1:0;
 }
