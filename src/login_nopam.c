@@ -221,16 +221,16 @@ static bool user_match (char *tok, const char *string)
 	 * the token is a group that contains the username.
 	 */
 	host = stpsep(tok + 1, "@");	/* split user@host pattern */
-	if (host != NULL) {
+	if (host != NULL)
 		return user_match(tok, string) && from_match(host, myhostname());
 #if HAVE_INNETGR
-	} else if (strprefix(tok, "@")) {	/* netgroup */
+	if (strprefix(tok, "@"))	/* netgroup */
 		return (netgroup_match (tok + 1, NULL, string));
 #endif
-	} else if (strcaseeq(tok, "ALL") || strcaseeq(tok, string)) {
+	if (strcaseeq(tok, "ALL") || strcaseeq(tok, string))
 		return true;
 	/* local, no need for xgetgrnam */
-	} else if ((group = getgrnam (tok)) != NULL) {	/* try group membership */
+	if ((group = getgrnam (tok)) != NULL) {	/* try group membership */
 		int i;
 		for (i = 0; NULL != group->gr_mem[i]; i++) {
 			if (strcaseeq(string, group->gr_mem[i])) {
@@ -297,23 +297,22 @@ static bool from_match (char *tok, const char *string)
 	 * if it matches the head of the string.
 	 */
 #if HAVE_INNETGR
-	if (strprefix(tok, "@")) {  /* netgroup */
+	if (strprefix(tok, "@"))  /* netgroup */
 		return (netgroup_match (tok + 1, string, NULL));
-	} else
 #endif
-	if (strcaseeq(tok, "ALL") || strcaseeq(tok, string)) {
+	if (strcaseeq(tok, "ALL") || strcaseeq(tok, string))
 		return true;
-	} else if (strprefix(tok, ".")) {  /* domain: match last fields */
+	if (strprefix(tok, ".")) {  /* domain: match last fields */
 		size_t  str_len, tok_len;
 
 		str_len = strlen (string);
 		tok_len = strlen (tok);
 		return str_len > tok_len && strcaseeq(tok, string + str_len - tok_len);
-	} else if (strcaseeq(tok, "LOCAL")) {	/* LOCAL: no dots */
-		return !strchr(string, '.');
-	} else if (!streq(tok, "") && tok[strlen(tok) - 1] == '.') {  /* network */
-		return !!strprefix(resolve_hostname(string), tok);
 	}
+	if (strcaseeq(tok, "LOCAL"))  /* LOCAL: no dots */
+		return !strchr(string, '.');
+	if (!streq(tok, "") && tok[strlen(tok) - 1] == '.')  /* network */
+		return !!strprefix(resolve_hostname(string), tok);
 	return false;
 }
 #else				/* !USE_PAM */
