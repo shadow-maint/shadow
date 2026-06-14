@@ -201,7 +201,7 @@ extern void dolastlog (
 #endif /* ENABLE_LASTLOG */
 
 /* login_nopam.c */
-extern int login_access (const char *user, const char *from);
+extern bool login_access(const char *user, const char *from);
 
 /* loginprompt.c */
 extern void login_prompt (char *, int);

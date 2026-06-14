@@ -79,7 +79,7 @@ static bool from_match (char *tok, const char *string);
 static const char *resolve_hostname (const char *string);
 
 /* login_access - match username/group and host/tty with access control file */
-int
+bool
 login_access(const char *user, const char *from)
 {
 	FILE *fp;
