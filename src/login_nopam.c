@@ -86,7 +86,6 @@ login_access(const char *user, const char *from)
 {
 	FILE *fp;
 	char line[BUFSIZ];
-	bool match = false;
 
 	/*
 	 * Process the table one line at a time and stop at the first match.
@@ -101,7 +100,7 @@ login_access(const char *user, const char *from)
 		return true;  // A non-existent table means no access control.
 	}
 
-	for (intmax_t i = 1; !match && fgets_a(line, fp) != NULL; i++) {
+	for (intmax_t i = 1; fgets_a(line, fp) != NULL; i++) {
 		char  *p;
 		char  *perm;	/* becomes permission field */
 		char  *users;	/* becomes list of login names */
@@ -134,12 +133,15 @@ login_access(const char *user, const char *from)
 				TABLE, i);
 			continue;
 		}
-		match = (   list_match(froms, from, from_match)
-			 && list_match(users, user, user_match));
+		if (   list_match(froms, from, from_match)
+		    && list_match(users, user, user_match))
+		{
+			fclose(fp);
+			return !!strprefix(line, "+");
+		}
 	}
-	(void) fclose(fp);
-
-	return (!match || strprefix(line, "+"))?1:0;
+	fclose(fp);
+	return true;
 }
 
 /* list_match - match an item against a list of tokens with exceptions */
