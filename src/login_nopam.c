@@ -100,49 +100,49 @@ login_access(const char *user, const char *from)
 		}
 		return true;  // A non-existent table means no access control.
 	}
-	{
-		intmax_t lineno = 0;	/* for diagnostics */
-		while (   !match
-		       && (fgets_a(line, fp) != NULL))
-		{
-			char  *p;
-			char  *perm;	/* becomes permission field */
-			char  *users;	/* becomes list of login names */
-			char  *froms;	/* becomes list of terminals or hosts */
 
-			lineno++;
-			if (stpsep(line, "\n") == NULL) {
-				SYSLOG(LOG_ERR,
-					"%s: line %jd: missing newline or line too long",
-					TABLE, lineno);
-				continue;
-			}
-			if (strprefix(line, "#")) {
-				continue;	/* comment line */
-			}
-			stpcpy(stprspn(line, " \t"), "");
-			if (streq(line, "")) {	/* skip blank lines */
-				continue;
-			}
-			p = line;
-			perm = strsep(&p, ":");
-			users = strsep(&p, ":");
-			froms = strsep(&p, ":");
-			if (froms == NULL || p != NULL) {
-				SYSLOG(LOG_ERR, "%s: line %jd: bad field count",
-				       TABLE, lineno);
-				continue;
-			}
-			if (perm[0] != '+' && perm[0] != '-') {
-				SYSLOG(LOG_ERR, "%s: line %jd: bad first field",
-					TABLE, lineno);
-				continue;
-			}
-			match = (   list_match (froms, from, from_match)
-			         && list_match (users, user, user_match));
+	intmax_t lineno = 0;  /* for diagnostics */
+	while (   !match
+	       && (fgets_a(line, fp) != NULL))
+	{
+		char  *p;
+		char  *perm;	/* becomes permission field */
+		char  *users;	/* becomes list of login names */
+		char  *froms;	/* becomes list of terminals or hosts */
+
+		lineno++;
+		if (stpsep(line, "\n") == NULL) {
+			SYSLOG(LOG_ERR,
+				"%s: line %jd: missing newline or line too long",
+				TABLE, lineno);
+			continue;
 		}
-		(void) fclose (fp);
+		if (strprefix(line, "#")) {
+			continue;	/* comment line */
+		}
+		stpcpy(stprspn(line, " \t"), "");
+		if (streq(line, "")) {	/* skip blank lines */
+			continue;
+		}
+		p = line;
+		perm = strsep(&p, ":");
+		users = strsep(&p, ":");
+		froms = strsep(&p, ":");
+		if (froms == NULL || p != NULL) {
+			SYSLOG(LOG_ERR, "%s: line %jd: bad field count",
+			       TABLE, lineno);
+			continue;
+		}
+		if (perm[0] != '+' && perm[0] != '-') {
+			SYSLOG(LOG_ERR, "%s: line %jd: bad first field",
+				TABLE, lineno);
+			continue;
+		}
+		match = (   list_match(froms, from, from_match)
+			 && list_match(users, user, user_match));
 	}
+	(void) fclose(fp);
+
 	return (!match || strprefix(line, "+"))?1:0;
 }
 
