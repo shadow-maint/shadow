@@ -86,12 +86,6 @@ login_access(const char *user, const char *from)
 	FILE *fp;
 	char line[BUFSIZ];
 
-	/*
-	 * Process the table one line at a time and stop at the first match.
-	 * Blank lines and lines that begin with a '#' character are ignored.
-	 * Non-comment lines are broken at the ':' character. All fields are
-	 * mandatory. The first field should be a "+" or "-" character.
-	 */
 	fp = fopen (TABLE, "r");
 	if (fp == NULL) {
 		if (errno != ENOENT) {
@@ -113,13 +107,12 @@ login_access(const char *user, const char *from)
 				TABLE, i);
 			continue;
 		}
-		if (strprefix(line, "#")) {
-			continue;	/* comment line */
-		}
-		stpcpy(stprspn(line, " \t"), "");
-		if (streq(line, "")) {	/* skip blank lines */
+		if (strprefix(line, "#"))  // comment line
 			continue;
-		}
+		stpcpy(stprspn(line, " \t"), "");
+		if (streq(line, ""))
+			continue;
+
 		p = line;
 		perm = strsep(&p, ":");
 		users = strsep(&p, ":");
