@@ -46,7 +46,7 @@ include $(srcdir)/Makevars
 .SUFFIXES:
 .SUFFIXES: .po .sed .sin .nop .po-create .po-update
 
-remove-potcdate.sin: $(top_srcdir)/po/remove-potcdate.sin
+remove-potcdate.sed: $(top_srcdir)/po/remove-potcdate.sin
 	cp $? $@
 
 .sin.sed:
@@ -86,7 +86,7 @@ stamp-po: $(srcdir)/$(DOMAIN).pot
 # This target rebuilds $(DOMAIN).pot; it is an expensive operation.
 # Note that $(DOMAIN).pot is not touched if it doesn't need to be changed.
 # TODO: set MSGID_BUGS_ADDRESS, COPYRIGHT_HOLDER
-$(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES
+$(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES remove-potcdate.sed
 	@set -ex; tmpdir=`mktemp -d`; \
 	origdir=`pwd`; \
 	cd $(top_srcdir)/man; \
@@ -161,7 +161,7 @@ check: all
 info dvi ps pdf html tags TAGS ctags CTAGS ID:
 
 mostlyclean:
-	rm -f remove-potcdate.sed remove-potcdate.sin
+	rm -f remove-potcdate.sed
 	rm -f stamp-poT
 	rm -f core core.* $(DOMAIN).po $(DOMAIN).1po $(DOMAIN).2po *.new.po
 
