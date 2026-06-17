@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2025-12-30 14:17+0100\n"
+"POT-Creation-Date: 2026-06-17 14:26-0500\n"
 "PO-Revision-Date: 2011-11-26 22:06+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -58,6 +58,11 @@ msgstr "Nedá sa zmeniť režim vlastníka TTY štandardného vstupu: %s"
 #, c-format
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: nepodarilo sa odmknúť %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't close file\n"
+msgid "%s: Non-text file.\n"
+msgstr "%s: nedá sa zatvoriť súbor\n"
 
 #, c-format
 msgid ""
@@ -132,13 +137,37 @@ msgstr "%s: Nedá sa získať jedinečný GID (už nie sú dostupné žiadne GID
 
 #, c-format
 msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate GIDs\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
 "SUB_GID_COUNT (%lu)\n"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "%s: Can't get unique subordinate GID range\n"
-msgstr "%s: nie je možné vytvoriť používateľa\n"
+#, c-format
+msgid "%s: SUB_GID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Not enough space for any subordinate GIDs (SUB_GID_MIN=%lu, "
+"SUB_GID_MAX=%lu, SUB_GID_COUNT=%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate GID range for UID %ju exceeds SUB_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate UIDs\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -146,9 +175,21 @@ msgid ""
 "SUB_UID_COUNT (%lu)\n"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "%s: Can't get unique subordinate UID range\n"
-msgstr "%s: nie je možné vytvoriť používateľa\n"
+#, c-format
+msgid "%s: SUB_UID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Not enough space for any subordinate UIDs (SUB_UID_MIN=%lu, "
+"SUB_UID_MAX=%lu, SUB_UID_COUNT=%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate UID range for UID %ju exceeds SUB_UID_MAX "
+"(%lu)\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -880,13 +921,6 @@ msgstr "  -c, --crypt-method            metóda šifrovania (jedna z %s)\n"
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr "  -e, --encrypted               zadané heslá sú zakódované\n"
 
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-"  -m, --md5                     použije MD5 kódovanie namiesto DES, ak\n"
-"                                zadané heslá nie sú zakódované\n"
-
 #, fuzzy
 #| msgid ""
 #| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -907,8 +941,9 @@ msgstr "%s: nepodporovaná metóda šifrovania: %s\n"
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: prepínač %s je povolený iba s prepínačom %s\n"
 
-#, c-format
-msgid "%s: the -c, -e, and -m flags are exclusive\n"
+#, fuzzy, c-format
+#| msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgid "%s: the -c and -e flags are exclusive\n"
 msgstr "%s: voľby -c, -e a -m sa navzájom vylučujú\n"
 
 #, c-format
@@ -1001,23 +1036,6 @@ msgstr "%s: používateľ %s neexistuje\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: upozornenie: vlastníkom %s nie je %s\n"
 
-msgid "  -c, --check                   check the user's password expiration\n"
-msgstr ""
-
-msgid ""
-"  -f, --force                   force password change if the user's "
-"password\n"
-"                                is expired\n"
-msgstr ""
-
-#, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr "%s: voľby %s a %s sú v konflikte\n"
-
-#, c-format
-msgid "%s: unexpected argument: %s\n"
-msgstr "%s: neočakávaný argument: %s\n"
-
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 "  -a, --all                     zobrazí faillog záznamy všetkých "
@@ -1090,6 +1108,10 @@ msgstr "%s: Nepodarilo sa nastaviť čas zamknutia pre UID %lu\n"
 #, c-format
 msgid "%s: Unknown user or range: %s\n"
 msgstr "%s: Neznámy používateľ alebo rozsah: %s\n"
+
+#, c-format
+msgid "%s: unexpected argument: %s\n"
+msgstr "%s: neočakávaný argument: %s\n"
 
 #, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
@@ -1218,7 +1240,9 @@ msgid ""
 "group\n"
 msgstr ""
 
-msgid "  -r, --system                  create a system account\n"
+#, fuzzy
+#| msgid "  -r, --system                  create a system account\n"
+msgid "  -r, --system                  create a system group\n"
 msgstr "  -r, --system                  vytvorí systémový účet\n"
 
 #, fuzzy
@@ -1284,63 +1308,6 @@ msgstr "%s: nie je možné odstrniť primárnu skupinu používateľa „%s“.\
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: skupina „%s“ neexistuje\n"
-
-#, c-format
-msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr "%s: používateľ „%s“ je členom „%s“\n"
-
-#, c-format
-msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr "%s: Nedostatok pamäte. Nie je možné aktualizovať %s.\n"
-
-#, c-format
-msgid ""
-"Usage: %s [options] [action]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Použitie: %s [voľby] [operácia]\n"
-"\n"
-"Voľby:\n"
-
-msgid ""
-"  -g, --group groupname         change groupname instead of the user's "
-"group\n"
-"                                (root only)\n"
-msgstr ""
-"  -g, --group groupname         zmeniť názov skupiny namiesto skupiny\n"
-"                                používateľa (iba root)\n"
-
-msgid "\n"
-msgstr ""
-
-msgid "Actions:\n"
-msgstr ""
-
-msgid ""
-"  -a, --add username            add username to the members of the group\n"
-msgstr ""
-"  -a, --add používateľ          pridať používateľa medzi členov skupiny\n"
-
-msgid ""
-"  -d, --delete username         remove username from the members of the "
-"group\n"
-msgstr ""
-"  -d, --delete používateľ       odobrať používateľa spomedzi členov skupiny\n"
-
-msgid "  -p, --purge                   purge all members from the group\n"
-msgstr "  -p, --purge                   odstrániť všetkých členov skupiny\n"
-
-msgid "  -l, --list                    list the members of the group\n"
-msgstr "  -l, --list                    vypísať členov skupiny\n"
-
-#, c-format
-msgid "%s: your groupname does not match your username\n"
-msgstr "%s: meno vašej skupiny sa nezhoduje s vašim používateľským menom\n"
-
-#, c-format
-msgid "%s: only root can use the -g/--group option\n"
-msgstr "%s: iba root môže používať voľbu -g/--group\n"
 
 #, fuzzy
 #| msgid ""
@@ -1648,16 +1615,6 @@ msgstr "Posledné prihlásenie: %s na %s"
 msgid " from %.*s"
 msgstr " z %.*s"
 
-msgid ""
-"login time exceeded\n"
-"\n"
-msgstr ""
-"čas na prihlásenie uplynul\n"
-"\n"
-
-msgid "Usage: logoutd\n"
-msgstr "Použitie: logout\n"
-
 #, c-format
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr ""
@@ -1821,7 +1778,7 @@ msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: riadok %d: položka sa nedá aktualizovať\n"
 
 #, fuzzy, c-format
-msgid "%s: can't find subordinate user range\n"
+msgid "%s: can't find subordinate user range: %s\n"
 msgstr "%s: nie je možné vytvoriť používateľa\n"
 
 #, fuzzy, c-format
@@ -1829,7 +1786,7 @@ msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
 #, fuzzy, c-format
-msgid "%s: can't find subordinate group range\n"
+msgid "%s: can't find subordinate group range: %s\n"
 msgstr "%s: súbor s heslami sa nedá aktualizovať\n"
 
 msgid ""
@@ -2113,6 +2070,9 @@ msgstr "Overenie hesla vynechané.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Pre overenie zadajte VAŠE vlastné heslo.\n"
 
+msgid " ...killed.\n"
+msgstr ""
+
 #, c-format
 msgid "%s: signal masking malfunction\n"
 msgstr ""
@@ -2126,12 +2086,6 @@ msgid "%s: signal malfunction\n"
 msgstr ""
 
 msgid "Session terminated, terminating shell..."
-msgstr ""
-
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
 msgstr ""
 
 msgid " ...terminated.\n"
@@ -2299,8 +2253,9 @@ msgstr "%s: nedá sa vytvoriť adresár %s\n"
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: premenovať: %s: %s\n"
 
-#, c-format
-msgid "%s: too many groups specified (max %d).\n"
+#, fuzzy, c-format
+#| msgid "%s: too many groups specified (max %d).\n"
+msgid "%s: too many groups specified (max %zu).\n"
 msgstr "%s: bolo zadaných príliš veľa skupín (max %d).\n"
 
 #, fuzzy, c-format
@@ -2404,6 +2359,9 @@ msgstr ""
 msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
 
+msgid "  -r, --system                  create a system account\n"
+msgstr "  -r, --system                  vytvorí systémový účet\n"
+
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr ""
 
@@ -2424,6 +2382,10 @@ msgid ""
 "      --selinux-range SERANGE   use a specific MLS range for the SELinux "
 "user mapping\n"
 msgstr ""
+
+#, c-format
+msgid "%s: Out of memory. Cannot update %s.\n"
+msgstr "%s: Nedostatok pamäte. Nie je možné aktualizovať %s.\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -2465,6 +2427,10 @@ msgstr "%s: súbor s heslami sa nedá prepísať\n"
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: voľby %s a %s sú v konflikte\n"
 
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
@@ -2517,9 +2483,11 @@ msgstr "%s: nedá sa vytvoriť adresár %s\n"
 msgid "%s: error while duplicating string in BTRFS check %s\n"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
-msgstr "%s: chybný domovský adresár „%s“\n"
+#, c-format
+msgid ""
+"%s: warning: \"%s\" is not on BTRFS; creating regular directory instead of "
+"subvolume\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: failed to create BTRFS subvolume: %s\n"
@@ -2608,11 +2576,11 @@ msgid "%s: can't create group\n"
 msgstr "%s: sa nedá vytvoriť skupina\n"
 
 #, fuzzy, c-format
-msgid "%s: can't create subordinate user IDs\n"
+msgid "%s: can't create subordinate user IDs: %s\n"
 msgstr "%s: nie je možné vytvoriť používateľa\n"
 
 #, fuzzy, c-format
-msgid "%s: can't create subordinate group IDs\n"
+msgid "%s: can't create subordinate group IDs: %s\n"
 msgstr "%s: sa nedá vytvoriť skupina\n"
 
 #, c-format
@@ -2815,6 +2783,13 @@ msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr ""
 
 #, fuzzy
+#| msgid "  -r, --system                  create a system account\n"
+msgid ""
+"  -S, --add-subids              add entries to sub[ud]id based on system "
+"defaults\n"
+msgstr "  -r, --system                  vytvorí systémový účet\n"
+
+#, fuzzy
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2949,6 +2924,14 @@ msgid "failed to rename mailbox"
 msgstr "chyba pri premenovaní schránky"
 
 #, fuzzy, c-format
+msgid "%s: unable to find new subordinate uid range: %s\n"
+msgstr "%s: chybný dátum „%s“\n"
+
+#, fuzzy, c-format
+msgid "%s: unable to find new subordinate gid range: %s\n"
+msgstr "%s: chybný dátum „%s“\n"
+
+#, fuzzy, c-format
 msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
@@ -2984,6 +2967,9 @@ msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr "  -s, --shadow                  upraví databázu shadow alebo gshadow\n"
 
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
+msgstr ""
+
+msgid "\n"
 msgstr ""
 
 #, c-format
@@ -3058,6 +3044,83 @@ msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: chybný základný adresár „%s“\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Can't get unique subordinate GID range\n"
+#~ msgstr "%s: nie je možné vytvoriť používateľa\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Can't get unique subordinate UID range\n"
+#~ msgstr "%s: nie je možné vytvoriť používateľa\n"
+
+#~ msgid ""
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ msgstr ""
+#~ "  -m, --md5                     použije MD5 kódovanie namiesto DES, ak\n"
+#~ "                                zadané heslá nie sú zakódované\n"
+
+#, c-format
+#~ msgid "%s: user '%s' is already a member of '%s'\n"
+#~ msgstr "%s: používateľ „%s“ je členom „%s“\n"
+
+#, c-format
+#~ msgid ""
+#~ "Usage: %s [options] [action]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr ""
+#~ "Použitie: %s [voľby] [operácia]\n"
+#~ "\n"
+#~ "Voľby:\n"
+
+#~ msgid ""
+#~ "  -g, --group groupname         change groupname instead of the user's "
+#~ "group\n"
+#~ "                                (root only)\n"
+#~ msgstr ""
+#~ "  -g, --group groupname         zmeniť názov skupiny namiesto skupiny\n"
+#~ "                                používateľa (iba root)\n"
+
+#~ msgid ""
+#~ "  -a, --add username            add username to the members of the group\n"
+#~ msgstr ""
+#~ "  -a, --add používateľ          pridať používateľa medzi členov skupiny\n"
+
+#~ msgid ""
+#~ "  -d, --delete username         remove username from the members of the "
+#~ "group\n"
+#~ msgstr ""
+#~ "  -d, --delete používateľ       odobrať používateľa spomedzi členov "
+#~ "skupiny\n"
+
+#~ msgid "  -p, --purge                   purge all members from the group\n"
+#~ msgstr "  -p, --purge                   odstrániť všetkých členov skupiny\n"
+
+#~ msgid "  -l, --list                    list the members of the group\n"
+#~ msgstr "  -l, --list                    vypísať členov skupiny\n"
+
+#, c-format
+#~ msgid "%s: your groupname does not match your username\n"
+#~ msgstr "%s: meno vašej skupiny sa nezhoduje s vašim používateľským menom\n"
+
+#, c-format
+#~ msgid "%s: only root can use the -g/--group option\n"
+#~ msgstr "%s: iba root môže používať voľbu -g/--group\n"
+
+#~ msgid ""
+#~ "login time exceeded\n"
+#~ "\n"
+#~ msgstr ""
+#~ "čas na prihlásenie uplynul\n"
+#~ "\n"
+
+#~ msgid "Usage: logoutd\n"
+#~ msgstr "Použitie: logout\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+#~ msgstr "%s: chybný domovský adresár „%s“\n"
 
 #~ msgid "Warning: too many groups\n"
 #~ msgstr "Upozornenie: príliš mnoho skupín\n"
@@ -3693,8 +3756,8 @@ msgstr "%s: chybný základný adresár „%s“\n"
 #~ "                                existencii zadanej skupiny\n"
 #~ "  -g, --gid GID                 pre novú skupinu použije GID\n"
 #~ "  -h, --help                    zobrazí tohto pomocníka a ukončí sa\n"
-#~ "  -K, --key KEY=VALUE           nahradí predvolené hodnoty z /etc/"
-#~ "login.defs\n"
+#~ "  -K, --key KEY=VALUE           nahradí predvolené hodnoty z /etc/login."
+#~ "defs\n"
 #~ "  -o, --non-unique              povolí vytvorenie skupiny s duplicitným\n"
 #~ "                                (nejedinečným) GID\n"
 #~ "  -p, --password PASSWORD       použije pre novú skupinu šifrované heslo\n"
@@ -3833,8 +3896,8 @@ msgstr "%s: chybný základný adresár „%s“\n"
 #~ "                                patriť nový účet\n"
 #~ "  -h, --help                    zobrazí tohto pomocníka a skončí\n"
 #~ "  -k, --skel VZOR_ADR           zadá alternatívny vzorový adresár\n"
-#~ "  -K, --key KĽÚČ=HODNOTA        nahradí predvolené nastavenia /etc/"
-#~ "login.defs\n"
+#~ "  -K, --key KĽÚČ=HODNOTA        nahradí predvolené nastavenia /etc/login."
+#~ "defs\n"
 #~ "  -l, --no-log-init             nepridávať používateľa do databáz\n"
 #~ "                                lastlog a faillog \n"
 #~ "  -m, --create-home             vytvorí domovský adresár pre nový\n"
@@ -3994,9 +4057,6 @@ msgstr "%s: chybný základný adresár „%s“\n"
 
 #~ msgid "unknown group: %s\n"
 #~ msgstr "skupina %s je neznáma\n"
-
-#~ msgid "%s: can't close file\n"
-#~ msgstr "%s: nedá sa zatvoriť súbor\n"
 
 #~ msgid "%s: can't close shadow file\n"
 #~ msgstr "%s: súbor s tieňovými heslami sa nedá zatvoriť\n"

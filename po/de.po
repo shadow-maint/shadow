@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.2-2\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2025-12-30 14:17+0100\n"
+"POT-Creation-Date: 2026-06-17 14:26-0500\n"
 "PO-Revision-Date: 2020-09-22 15:10+0200\n"
 "Last-Translator: Björn Esser <besser82@fedoraproject.org>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -61,6 +61,11 @@ msgstr "Eigentümer oder Modus von tty stdin kann nicht geändert werden: %s"
 #, c-format
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: Entsperren von %s fehlgeschlagen\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: Non-text file.\n"
+msgstr "%s: Zeile %d: chown %s (Eigentümer ändern) fehlgeschlagen: %s\n"
 
 #, c-format
 msgid ""
@@ -133,6 +138,12 @@ msgstr "%s: Keine einmalige GID bekommen (keine GIDs mehr verfügbar)\n"
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: Keine einmalige GID bekommen (keine GIDs mehr verfügbar)\n"
 
+#, c-format
+msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate GIDs\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
@@ -144,9 +155,32 @@ msgstr ""
 "%s: Ungültige Konfiguration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
 "(%lu)\n"
 
+#, c-format
+msgid "%s: SUB_GID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: Can't get unique subordinate GID range\n"
-msgstr "%s: Benutzer kann nicht erstellt werden\n"
+#| msgid ""
+#| "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+#| "(%lu)\n"
+msgid ""
+"%s: Not enough space for any subordinate GIDs (SUB_GID_MIN=%lu, "
+"SUB_GID_MAX=%lu, SUB_GID_COUNT=%lu)\n"
+msgstr ""
+"%s: Ungültige Konfiguration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate GID range for UID %ju exceeds SUB_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate UIDs\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid ""
@@ -159,9 +193,26 @@ msgstr ""
 "%s: Ungültige Konfiguration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
 "(%lu)\n"
 
+#, c-format
+msgid "%s: SUB_UID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: Can't get unique subordinate UID range\n"
-msgstr "%s: Benutzer kann nicht erstellt werden\n"
+#| msgid ""
+#| "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+#| "(%lu)\n"
+msgid ""
+"%s: Not enough space for any subordinate UIDs (SUB_UID_MIN=%lu, "
+"SUB_UID_MAX=%lu, SUB_UID_COUNT=%lu)\n"
+msgstr ""
+"%s: Ungültige Konfiguration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+"(%lu)\n"
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate UID range for UID %ju exceeds SUB_UID_MAX "
+"(%lu)\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -929,13 +980,6 @@ msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
 "  -e, --encrypted               Angegebene Passwörter sind verschlüsselt\n"
 
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-"  -m, --md5                     Die Klartext-Passwörter mittels MD5-\n"
-"                                Algorithmus verschlüsseln\n"
-
 #, fuzzy
 #| msgid ""
 #| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -956,8 +1000,9 @@ msgstr "%s: Nicht unterstützte Verschlüsselungsmethode: %s\n"
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: %s ist nur zusammen mit %s erlaubt.\n"
 
-#, c-format
-msgid "%s: the -c, -e, and -m flags are exclusive\n"
+#, fuzzy, c-format
+#| msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgid "%s: the -c and -e flags are exclusive\n"
 msgstr "%s: -c, -e und -m können nur exklusiv genutzt werden.\n"
 
 #, c-format
@@ -1053,27 +1098,6 @@ msgstr "%s: Warnung: %s ist nicht vorhanden.\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: Warnung: %s nicht ausführbar.\n"
 
-msgid "  -c, --check                   check the user's password expiration\n"
-msgstr ""
-"  -c, --check                   Ablauf des Benutzerpassworts überprüfen\n"
-
-msgid ""
-"  -f, --force                   force password change if the user's "
-"password\n"
-"                                is expired\n"
-msgstr ""
-"  -f, --force                   Passwortänderung erzwingen, wenn das "
-"Benutzer-\n"
-"                                passwort abgelaufen ist\n"
-
-#, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr "%s: Optionen %s und %s stehen im Konflikt zueinander.\n"
-
-#, c-format
-msgid "%s: unexpected argument: %s\n"
-msgstr "%s: Unerwartetes Argument: %s\n"
-
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 "  -a, --all                     Aufzeichnungen fehlgeschlagener Anmeldungen\n"
@@ -1147,6 +1171,10 @@ msgstr "%s: Setzen der Sperrzeit für UID %lu fehlgeschlagen\n"
 #, c-format
 msgid "%s: Unknown user or range: %s\n"
 msgstr "%s: Unbekannter Benutzer oder Bereich: %s\n"
+
+#, c-format
+msgid "%s: unexpected argument: %s\n"
+msgstr "%s: Unerwartetes Argument: %s\n"
 
 #, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
@@ -1288,9 +1316,6 @@ msgstr ""
 "  -p, --password PASSWORT       Dieses verschlüsselte PASSWORT für die\n"
 "                                neue Gruppe verwenden\n"
 
-msgid "  -r, --system                  create a system account\n"
-msgstr "  -r, --system                  Ein Systemkonto erstellen\n"
-
 msgid "  -r, --system                  create a system group\n"
 msgstr "  -r, --system                  Eine Systemgruppe erstellen\n"
 
@@ -1359,66 +1384,6 @@ msgstr "%s: Primäre Gruppe des Benutzers »%s« konnte nicht entfernt werden.\n
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: Gruppe »%s« existiert nicht.\n"
-
-#, c-format
-msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr "%s: Benutzer »%s« ist bereits ein Mitglied von »%s«.\n"
-
-#, c-format
-msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr "%s: Zu wenig Speicher. %s kann nicht aktualisiert werden.\n"
-
-#, c-format
-msgid ""
-"Usage: %s [options] [action]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Aufruf: %s [Optionen [Aktion]\n"
-"\n"
-"Optionen:\n"
-
-msgid ""
-"  -g, --group groupname         change groupname instead of the user's "
-"group\n"
-"                                (root only)\n"
-msgstr ""
-"  -g, --group Gruppenname       Gruppenname ändern statt der Gruppe des\n"
-"                                Benutzers (nur root)\n"
-
-msgid "\n"
-msgstr "\n"
-
-msgid "Actions:\n"
-msgstr "Aktionen:\n"
-
-msgid ""
-"  -a, --add username            add username to the members of the group\n"
-msgstr ""
-"  -a, --add Benutzername        Benutzername zu den Mitgliedern der Gruppe\n"
-"                                hinzufügen\n"
-
-msgid ""
-"  -d, --delete username         remove username from the members of the "
-"group\n"
-msgstr ""
-"  -d, --delete Benutzername     Benutzername aus der Liste der Gruppen-\n"
-"                                mitglieder entfernen\n"
-
-msgid "  -p, --purge                   purge all members from the group\n"
-msgstr ""
-"  -p, --purge                   Alle Mitglieder aus der Gruppe entfernen\n"
-
-msgid "  -l, --list                    list the members of the group\n"
-msgstr "  -l, --list                    Die Mitglieder der Gruppe auflisten\n"
-
-#, c-format
-msgid "%s: your groupname does not match your username\n"
-msgstr "%s: Ihr Gruppenname passt nicht zu Ihrem Benutzername.\n"
-
-#, c-format
-msgid "%s: only root can use the -g/--group option\n"
-msgstr "%s: Nur root kann die Option -g/--group nutzen.\n"
 
 #, fuzzy
 #| msgid ""
@@ -1752,16 +1717,6 @@ msgstr "Letztes Login: %s auf %s"
 msgid " from %.*s"
 msgstr " von %.*s"
 
-msgid ""
-"login time exceeded\n"
-"\n"
-msgstr ""
-"Login-Zeit überschritten\n"
-"\n"
-
-msgid "Usage: logoutd\n"
-msgstr "Aufruf: logoutd\n"
-
 #, c-format
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr ""
@@ -1931,7 +1886,7 @@ msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: Zeile %d: Eintrag kann nicht aktualisiert werden.\n"
 
 #, fuzzy, c-format
-msgid "%s: can't find subordinate user range\n"
+msgid "%s: can't find subordinate user range: %s\n"
 msgstr "%s: Benutzer kann nicht erstellt werden\n"
 
 #, fuzzy, c-format
@@ -1939,7 +1894,7 @@ msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: Vorbereiten des neuen %s-Eintrags »%s« fehlgeschlagen.\n"
 
 #, fuzzy, c-format
-msgid "%s: can't find subordinate group range\n"
+msgid "%s: can't find subordinate group range: %s\n"
 msgstr "%s: Gruppe kann nicht erzeugt werden\n"
 
 msgid ""
@@ -2236,6 +2191,9 @@ msgstr "Passwort-Authentifizierung umgangen.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Bitte geben Sie Ihr EIGENES Passwort als Authentifizierung ein.\n"
 
+msgid " ...killed.\n"
+msgstr " ... abgeschossen.\n"
+
 #, c-format
 msgid "%s: signal masking malfunction\n"
 msgstr "%s: Signalmaskierungs-Fehlfunktion\n"
@@ -2250,12 +2208,6 @@ msgstr "%s: Signal-Fehlfunktion\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "Sitzung abgebrochen, Shell wird beendet ..."
-
-msgid " ...killed.\n"
-msgstr " ... abgeschossen.\n"
-
-msgid " ...waiting for child to terminate.\n"
-msgstr " ... Warten auf Beendigung des Kindprozesses.\n"
 
 msgid " ...terminated.\n"
 msgstr " ... abgebrochen.\n"
@@ -2424,8 +2376,9 @@ msgstr "%s: Sicherungsdatei kann nicht erstellt werden (%s): %s\n"
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: Umbenennen: %s: %s\n"
 
-#, c-format
-msgid "%s: too many groups specified (max %d).\n"
+#, fuzzy, c-format
+#| msgid "%s: too many groups specified (max %d).\n"
+msgid "%s: too many groups specified (max %zu).\n"
 msgstr "%s: Zu viele Gruppen angegeben (max. %d).\n"
 
 #, fuzzy, c-format
@@ -2553,6 +2506,9 @@ msgstr ""
 "  -p, --password PASSWORT       Verschlüsseltes Passwort für den neuen\n"
 "                                Benutzerzugang\n"
 
+msgid "  -r, --system                  create a system account\n"
+msgstr "  -r, --system                  Ein Systemkonto erstellen\n"
+
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr ""
 "  -s, --shell SHELL             Die Login-Shell des neuen Benutzerzugangs\n"
@@ -2587,6 +2543,10 @@ msgstr ""
 "  -Z, --selinux-user SEBENUTZER Den Benutzernamen SEBENUTZER für die "
 "SELinux-\n"
 "                                Benutzer-Zuordnung verwenden\n"
+
+#, c-format
+msgid "%s: Out of memory. Cannot update %s.\n"
+msgstr "%s: Zu wenig Speicher. %s kann nicht aktualisiert werden.\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -2628,6 +2588,10 @@ msgstr ""
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z erfordert einen Kernel, in dem SELinux aktiviert ist.\n"
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: Optionen %s und %s stehen im Konflikt zueinander.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
@@ -2680,10 +2644,11 @@ msgstr "%s: Verzeichnis %s kann nicht erstellt werden.\n"
 msgid "%s: error while duplicating string in BTRFS check %s\n"
 msgstr ""
 
-#, fuzzy, c-format
-#| msgid "%s: %s home directory (%s) not found\n"
-msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
-msgstr "%s: %s-Home-Verzeichnis (%s) nicht gefunden\n"
+#, c-format
+msgid ""
+"%s: warning: \"%s\" is not on BTRFS; creating regular directory instead of "
+"subvolume\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid "%s: failed to allocate memory: %s\n"
@@ -2777,11 +2742,11 @@ msgid "%s: can't create group\n"
 msgstr "%s: Gruppe kann nicht erzeugt werden\n"
 
 #, fuzzy, c-format
-msgid "%s: can't create subordinate user IDs\n"
+msgid "%s: can't create subordinate user IDs: %s\n"
 msgstr "%s: Benutzer kann nicht erstellt werden\n"
 
 #, fuzzy, c-format
-msgid "%s: can't create subordinate group IDs\n"
+msgid "%s: can't create subordinate group IDs: %s\n"
 msgstr "%s: Gruppe kann nicht erzeugt werden\n"
 
 #, c-format
@@ -3005,6 +2970,13 @@ msgstr ""
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr ""
 
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid ""
+"  -S, --add-subids              add entries to sub[ud]id based on system "
+"defaults\n"
+msgstr "  -r, --system                  Systemzugänge erzeugen\n"
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -3149,6 +3121,14 @@ msgid "failed to rename mailbox"
 msgstr "Fehler beim Umbenennen von mailbox"
 
 #, fuzzy, c-format
+msgid "%s: unable to find new subordinate uid range: %s\n"
+msgstr "%s: Ungültiges Datum »%s«\n"
+
+#, fuzzy, c-format
+msgid "%s: unable to find new subordinate gid range: %s\n"
+msgstr "%s: Ungültiges Datum »%s«\n"
+
+#, fuzzy, c-format
 msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: Vorbereiten des neuen %s-Eintrags »%s« fehlgeschlagen.\n"
 
@@ -3188,6 +3168,9 @@ msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr ""
 "  -u, --user                    Die tcb-shadow-Datei welches Benutzers\n"
 "                                editiert werden soll\n"
+
+msgid "\n"
+msgstr "\n"
 
 #, c-format
 msgid "%s: failed to remove %s\n"
@@ -3256,6 +3239,108 @@ msgstr ""
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: tcb-Verzeichnis für %s konnte nicht gefunden werden\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Can't get unique subordinate GID range\n"
+#~ msgstr "%s: Benutzer kann nicht erstellt werden\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Can't get unique subordinate UID range\n"
+#~ msgstr "%s: Benutzer kann nicht erstellt werden\n"
+
+#~ msgid ""
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ msgstr ""
+#~ "  -m, --md5                     Die Klartext-Passwörter mittels MD5-\n"
+#~ "                                Algorithmus verschlüsseln\n"
+
+#~ msgid ""
+#~ "  -c, --check                   check the user's password expiration\n"
+#~ msgstr ""
+#~ "  -c, --check                   Ablauf des Benutzerpassworts überprüfen\n"
+
+#~ msgid ""
+#~ "  -f, --force                   force password change if the user's "
+#~ "password\n"
+#~ "                                is expired\n"
+#~ msgstr ""
+#~ "  -f, --force                   Passwortänderung erzwingen, wenn das "
+#~ "Benutzer-\n"
+#~ "                                passwort abgelaufen ist\n"
+
+#, c-format
+#~ msgid "%s: user '%s' is already a member of '%s'\n"
+#~ msgstr "%s: Benutzer »%s« ist bereits ein Mitglied von »%s«.\n"
+
+#, c-format
+#~ msgid ""
+#~ "Usage: %s [options] [action]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr ""
+#~ "Aufruf: %s [Optionen [Aktion]\n"
+#~ "\n"
+#~ "Optionen:\n"
+
+#~ msgid ""
+#~ "  -g, --group groupname         change groupname instead of the user's "
+#~ "group\n"
+#~ "                                (root only)\n"
+#~ msgstr ""
+#~ "  -g, --group Gruppenname       Gruppenname ändern statt der Gruppe des\n"
+#~ "                                Benutzers (nur root)\n"
+
+#~ msgid "Actions:\n"
+#~ msgstr "Aktionen:\n"
+
+#~ msgid ""
+#~ "  -a, --add username            add username to the members of the group\n"
+#~ msgstr ""
+#~ "  -a, --add Benutzername        Benutzername zu den Mitgliedern der "
+#~ "Gruppe\n"
+#~ "                                hinzufügen\n"
+
+#~ msgid ""
+#~ "  -d, --delete username         remove username from the members of the "
+#~ "group\n"
+#~ msgstr ""
+#~ "  -d, --delete Benutzername     Benutzername aus der Liste der Gruppen-\n"
+#~ "                                mitglieder entfernen\n"
+
+#~ msgid "  -p, --purge                   purge all members from the group\n"
+#~ msgstr ""
+#~ "  -p, --purge                   Alle Mitglieder aus der Gruppe entfernen\n"
+
+#~ msgid "  -l, --list                    list the members of the group\n"
+#~ msgstr ""
+#~ "  -l, --list                    Die Mitglieder der Gruppe auflisten\n"
+
+#, c-format
+#~ msgid "%s: your groupname does not match your username\n"
+#~ msgstr "%s: Ihr Gruppenname passt nicht zu Ihrem Benutzername.\n"
+
+#, c-format
+#~ msgid "%s: only root can use the -g/--group option\n"
+#~ msgstr "%s: Nur root kann die Option -g/--group nutzen.\n"
+
+#~ msgid ""
+#~ "login time exceeded\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Login-Zeit überschritten\n"
+#~ "\n"
+
+#~ msgid "Usage: logoutd\n"
+#~ msgstr "Aufruf: logoutd\n"
+
+#~ msgid " ...waiting for child to terminate.\n"
+#~ msgstr " ... Warten auf Beendigung des Kindprozesses.\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: %s home directory (%s) not found\n"
+#~ msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+#~ msgstr "%s: %s-Home-Verzeichnis (%s) nicht gefunden\n"
 
 #~ msgid "Warning: too many groups\n"
 #~ msgstr "Warnung: zu viele Gruppen\n"
