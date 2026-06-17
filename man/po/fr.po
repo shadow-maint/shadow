@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
-"POT-Creation-Date: 2026-06-17 14:23-0500\n"
+"POT-Creation-Date: 2026-06-17 14:26-0500\n"
 "PO-Revision-Date: 2019-01-30 21:55+0100\n"
 "Last-Translator: Jean-Philippe MENGUAL <mengualjeanphi@free.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -270,7 +270,7 @@ msgstr "shadow-utils"
 #: shadow.5.xml.out:37 sg.1.xml.out:38 su.1.xml.out:54 suauth.5.xml.out:37
 #: useradd.8.xml.out:57 userdel.8.xml.out:43 usermod.8.xml.out:44
 #: vipw.8.xml.out:39
-msgid "4.19.0"
+msgid "4.20.0-rc1"
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose

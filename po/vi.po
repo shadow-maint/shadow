@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow master\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2025-12-30 14:17+0100\n"
+"POT-Creation-Date: 2026-06-17 14:26-0500\n"
 "PO-Revision-Date: 2016-10-04 07:07+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
@@ -62,6 +62,11 @@ msgstr ""
 #, c-format
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: gặp lỗi khi mở khóa %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: Non-text file.\n"
+msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 
 #, c-format
 msgid ""
@@ -132,6 +137,12 @@ msgstr "%s: Không thể lấy GID duy nhất (không còn có sẵn GID thêm n
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: Không thể lấy GID duy nhất (không còn có sẵn GID thêm nữa)\n"
 
+#, c-format
+msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate GIDs\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
@@ -143,10 +154,32 @@ msgstr ""
 "%s: Cấu hình không hợp lệ: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
 "(%lu)\n"
 
+#, c-format
+msgid "%s: SUB_GID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
 #, fuzzy, c-format
-#| msgid "%s: can't find subordinate user range\n"
-msgid "%s: Can't get unique subordinate GID range\n"
-msgstr "%s: không thể tìm thấy vùng người dùng lệ thuộc\n"
+#| msgid ""
+#| "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+#| "(%lu)\n"
+msgid ""
+"%s: Not enough space for any subordinate GIDs (SUB_GID_MIN=%lu, "
+"SUB_GID_MAX=%lu, SUB_GID_COUNT=%lu)\n"
+msgstr ""
+"%s: Cấu hình không hợp lệ: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate GID range for UID %ju exceeds SUB_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate UIDs\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid ""
@@ -159,10 +192,26 @@ msgstr ""
 "%s: Cấu hình không hợp lệ: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
 "(%lu)\n"
 
+#, c-format
+msgid "%s: SUB_UID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
 #, fuzzy, c-format
-#| msgid "%s: can't find subordinate user range\n"
-msgid "%s: Can't get unique subordinate UID range\n"
-msgstr "%s: không thể tìm thấy vùng người dùng lệ thuộc\n"
+#| msgid ""
+#| "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+#| "(%lu)\n"
+msgid ""
+"%s: Not enough space for any subordinate UIDs (SUB_UID_MIN=%lu, "
+"SUB_UID_MAX=%lu, SUB_UID_COUNT=%lu)\n"
+msgstr ""
+"%s: Cấu hình không hợp lệ: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+"(%lu)\n"
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate UID range for UID %ju exceeds SUB_UID_MAX "
+"(%lu)\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -920,13 +969,6 @@ msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
 "  -e, --encrypted               các mật khẩu đã cung cấp cũng được mật mã\n"
 
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-"  -m, --md5                     mật mã hóa mật khẩu chữ thô, dùng thuật toán "
-"MD5\n"
-
 #, fuzzy
 #| msgid ""
 #| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -946,8 +988,9 @@ msgstr "%s: phương pháp mã hóa không được hỗ trợ: %s\n"
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: cho phép cờ %s chỉ cùng với cờ %s\n"
 
-#, c-format
-msgid "%s: the -c, -e, and -m flags are exclusive\n"
+#, fuzzy, c-format
+#| msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgid "%s: the -c and -e flags are exclusive\n"
 msgstr "%s: các cờ “-c”, “-e” và “-m” loại từ lẫn nhau\n"
 
 #, c-format
@@ -1044,26 +1087,6 @@ msgstr "%s: Cảnh báo: %s không tồn tại\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: Cảnh báo: %s không có quyền thực thi\n"
 
-msgid "  -c, --check                   check the user's password expiration\n"
-msgstr ""
-"  -c, --check                   kiểm tra sự hết hạn của mật khẩu người dùng\n"
-
-msgid ""
-"  -f, --force                   force password change if the user's "
-"password\n"
-"                                is expired\n"
-msgstr ""
-"  -f, --force                   ép buộc đổi mật khẩu nếu mật khẩu của người\n"
-"                                 dùng hết hạn\n"
-
-#, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr "%s: hai tùy chọn %s và %s xung đột với nhau\n"
-
-#, c-format
-msgid "%s: unexpected argument: %s\n"
-msgstr "%s: đối số bất thường: %s\n"
-
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 "  -a, --all                     hiển thị các mục ghi faillog cho mọi người "
@@ -1136,6 +1159,10 @@ msgstr "%s: Gặp lỗi khi đặt thời gian khóa cho UID %lu\n"
 #, c-format
 msgid "%s: Unknown user or range: %s\n"
 msgstr "%s: Không nhận ra người dùng hay phạm vi: %s\n"
+
+#, c-format
+msgid "%s: unexpected argument: %s\n"
+msgstr "%s: đối số bất thường: %s\n"
 
 #, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
@@ -1258,8 +1285,8 @@ msgstr "  -g, --gid GID                 dùng GID này cho nhóm mới\n"
 
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
-"  -K, --key KHÓA=GIÁ_TRỊ        ghi đè lên các giá trị mặc định “/etc/"
-"login.defs”\n"
+"  -K, --key KHÓA=GIÁ_TRỊ        ghi đè lên các giá trị mặc định “/etc/login."
+"defs”\n"
 
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
@@ -1274,7 +1301,9 @@ msgid ""
 msgstr ""
 "  -p, --password MẬT_KHẨU       dùng mật khẩu đã mật mã này cho nhóm mới\n"
 
-msgid "  -r, --system                  create a system account\n"
+#, fuzzy
+#| msgid "  -r, --system                  create a system account\n"
+msgid "  -r, --system                  create a system group\n"
 msgstr "  -r, --system                  tạo một tài khoản hệ thống\n"
 
 #, fuzzy
@@ -1341,61 +1370,6 @@ msgstr "%s: không thể gỡ bỏ nhóm chính của người dùng “%s”\n"
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: nhóm “%s” không tồn tại\n"
-
-#, c-format
-msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr "%s: người dùng “%s” đã thuộc về “%s”\n"
-
-#, c-format
-msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr "%s: Hết bộ nhớ. Không thể cập nhật %s.\n"
-
-#, c-format
-msgid ""
-"Usage: %s [options] [action]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Cách dùng: %s [tuỳ_chọn …] [hành_vi]\n"
-"\n"
-"Tùy chọn:\n"
-
-msgid ""
-"  -g, --group groupname         change groupname instead of the user's "
-"group\n"
-"                                (root only)\n"
-msgstr ""
-"  -g, --group TÊN_NHÓM          thay đổi tên của nhóm này thay cho nhóm của\n"
-"                                  người dùng (chỉ siêu quản trị)\n"
-
-msgid "\n"
-msgstr "\n"
-
-msgid "Actions:\n"
-msgstr "Hành động là:\n"
-
-msgid ""
-"  -a, --add username            add username to the members of the group\n"
-msgstr "  -a, --add TÊN                 thêm tên người dùng này vào nhóm\n"
-
-msgid ""
-"  -d, --delete username         remove username from the members of the "
-"group\n"
-msgstr "  -d, --delete TÊN              gỡ bỏ tên này khỏi nhóm\n"
-
-msgid "  -p, --purge                   purge all members from the group\n"
-msgstr "  -p, --purge                   tẩy mọi người ra nhóm\n"
-
-msgid "  -l, --list                    list the members of the group\n"
-msgstr "  -l, --list                    liệt kê những người trong nhóm\n"
-
-#, c-format
-msgid "%s: your groupname does not match your username\n"
-msgstr "%s: tên nhóm của bạn không tương ứng với tên người dùng\n"
-
-#, c-format
-msgid "%s: only root can use the -g/--group option\n"
-msgstr "%s: chỉ siêu quản trị có quyền sử dụng tùy chọn “-g/--group”\n"
 
 #, fuzzy
 #| msgid ""
@@ -1724,16 +1698,6 @@ msgstr "Đang nhập cuối cùng: %s vào %s"
 msgid " from %.*s"
 msgstr " từ %.*s"
 
-msgid ""
-"login time exceeded\n"
-"\n"
-msgstr ""
-"vượt quá thời gian đăng nhập\n"
-"\n"
-
-msgid "Usage: logoutd\n"
-msgstr "Cách dùng: logoutd\n"
-
 #, c-format
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr ""
@@ -1906,16 +1870,18 @@ msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: dòng %d: không thể cập nhật mục tin\n"
 
-#, c-format
-msgid "%s: can't find subordinate user range\n"
+#, fuzzy, c-format
+#| msgid "%s: can't find subordinate user range\n"
+msgid "%s: can't find subordinate user range: %s\n"
 msgstr "%s: không thể tìm thấy vùng người dùng lệ thuộc\n"
 
 #, c-format
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: gặp lỗi khi chuẩn bị mục tin mới “%s”\n"
 
-#, c-format
-msgid "%s: can't find subordinate group range\n"
+#, fuzzy, c-format
+#| msgid "%s: can't find subordinate group range\n"
+msgid "%s: can't find subordinate group range: %s\n"
 msgstr "%s: không thể tìm thấy vùng nhóm phụ thuộc\n"
 
 msgid ""
@@ -2213,6 +2179,9 @@ msgstr "Xác thực mật khẩu bị đi vòng.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Hãy nhập mật khẩu của MÌNH để xác thực.\n"
 
+msgid " ...killed.\n"
+msgstr " …đã chết.\n"
+
 #, c-format
 msgid "%s: signal masking malfunction\n"
 msgstr "%s: trục trặc mặt nạ tín hiệu\n"
@@ -2227,12 +2196,6 @@ msgstr "%s: tín hiệu trục trặc\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "Phiên làm việc đã kết thúc, nên kết thúc hệ vỏ…"
-
-msgid " ...killed.\n"
-msgstr " …đã chết.\n"
-
-msgid " ...waiting for child to terminate.\n"
-msgstr " …đang đợi tiến con chấm dứt.\n"
 
 msgid " ...terminated.\n"
 msgstr " …đã chấm dứt.\n"
@@ -2405,8 +2368,9 @@ msgstr "%s: Không thể tạo tập tin sao lưu dự phòng (%s): %s\n"
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: thay tên: %s: %s\n"
 
-#, c-format
-msgid "%s: too many groups specified (max %d).\n"
+#, fuzzy, c-format
+#| msgid "%s: too many groups specified (max %d).\n"
+msgid "%s: too many groups specified (max %zu).\n"
 msgstr "%s: ghi rõ quá nhiều nhóm (tối đa %d).\n"
 
 #, fuzzy, c-format
@@ -2522,6 +2486,9 @@ msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
 "  -p, --password MẬT_KHẨU       mật khẩu được mật mã của tài khoản mới\n"
 
+msgid "  -r, --system                  create a system account\n"
+msgstr "  -r, --system                  tạo một tài khoản hệ thống\n"
+
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr "  -s, --shell HỆ_VỎ             hệ vỏ đăng nhập của tài khoản mới\n"
 
@@ -2550,6 +2517,10 @@ msgid ""
 msgstr ""
 "  -Z, --selinux-user SEUSER     dùng một người dùng SE (SEUSER) riêng cho sự "
 "ánh xạ người dùng SELinux\n"
+
+#, c-format
+msgid "%s: Out of memory. Cannot update %s.\n"
+msgstr "%s: Hết bộ nhớ. Không thể cập nhật %s.\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -2592,6 +2563,10 @@ msgstr "%s: Tùy chọn -C không thể dùng cùng với -S\n"
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: “-Z” yêu cầu hạt nhân bật tính năng hỗ trợ SELinux\n"
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: hai tùy chọn %s và %s xung đột với nhau\n"
 
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
@@ -2644,10 +2619,11 @@ msgstr "%s: không thể tạo thư mục %s\n"
 msgid "%s: error while duplicating string in BTRFS check %s\n"
 msgstr ""
 
-#, fuzzy, c-format
-#| msgid "%s: %s home directory (%s) not found\n"
-msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
-msgstr "%s: %s không tìm thấy thư mục riêng (%s)\n"
+#, c-format
+msgid ""
+"%s: warning: \"%s\" is not on BTRFS; creating regular directory instead of "
+"subvolume\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid "%s: failed to allocate memory: %s\n"
@@ -2738,12 +2714,14 @@ msgstr "%s: Gặp lỗi khi tạo thư mục tcb cho %s\n"
 msgid "%s: can't create group\n"
 msgstr "%s: không thể tạo nhóm\n"
 
-#, c-format
-msgid "%s: can't create subordinate user IDs\n"
+#, fuzzy, c-format
+#| msgid "%s: can't create subordinate user IDs\n"
+msgid "%s: can't create subordinate user IDs: %s\n"
 msgstr "%s: không thể tạo mã số người dùng lệ thuộc\n"
 
-#, c-format
-msgid "%s: can't create subordinate group IDs\n"
+#, fuzzy, c-format
+#| msgid "%s: can't create subordinate group IDs\n"
+msgid "%s: can't create subordinate group IDs: %s\n"
 msgstr "%s: không thể tạo mã nhóm phụ thuộc\n"
 
 #, c-format
@@ -2953,6 +2931,13 @@ msgstr "  -w, --add-subgids ĐẦU-CUỐI    thêm vùng mã nhóm lệ thuộc\
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr "  -W, --del-subgids ĐẦU-CUỐI    xóa vùng mã nhóm lệ thuộc\n"
 
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid ""
+"  -S, --add-subids              add entries to sub[ud]id based on system "
+"defaults\n"
+msgstr "  -r, --system                  tạo các tài khoản hệ thống\n"
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -3094,6 +3079,16 @@ msgid "failed to rename mailbox"
 msgstr "gặp lỗi khi đổi tên của hộp thư"
 
 #, fuzzy, c-format
+#| msgid "%s: invalid subordinate uid range '%s'\n"
+msgid "%s: unable to find new subordinate uid range: %s\n"
+msgstr "%s: vùng mã số người dùng lệ thuộc không hợp lệ “%s”\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid subordinate gid range '%s'\n"
+msgid "%s: unable to find new subordinate gid range: %s\n"
+msgstr "%s: vùng mã số nhóm lệ thuộc không hợp lệ “%s”\n"
+
+#, fuzzy, c-format
 #| msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: gặp lỗi khi xóa bỏ vùng mã người dùng %lu-%lu khỏi “%s”\n"
@@ -3135,6 +3130,9 @@ msgstr ""
 
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr "  -u, --user                    sửa tập tin shadow tcb của người này\n"
+
+msgid "\n"
+msgstr "\n"
 
 #, c-format
 msgid "%s: failed to remove %s\n"
@@ -3201,6 +3199,105 @@ msgstr "%s: không thể phục hồi %s: %s (các thay đổi của bạn nằm
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: gặp lỗi khi tìm thư mục tcb cho %s\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: can't find subordinate user range\n"
+#~ msgid "%s: Can't get unique subordinate GID range\n"
+#~ msgstr "%s: không thể tìm thấy vùng người dùng lệ thuộc\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: can't find subordinate user range\n"
+#~ msgid "%s: Can't get unique subordinate UID range\n"
+#~ msgstr "%s: không thể tìm thấy vùng người dùng lệ thuộc\n"
+
+#~ msgid ""
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ msgstr ""
+#~ "  -m, --md5                     mật mã hóa mật khẩu chữ thô, dùng thuật "
+#~ "toán MD5\n"
+
+#~ msgid ""
+#~ "  -c, --check                   check the user's password expiration\n"
+#~ msgstr ""
+#~ "  -c, --check                   kiểm tra sự hết hạn của mật khẩu người "
+#~ "dùng\n"
+
+#~ msgid ""
+#~ "  -f, --force                   force password change if the user's "
+#~ "password\n"
+#~ "                                is expired\n"
+#~ msgstr ""
+#~ "  -f, --force                   ép buộc đổi mật khẩu nếu mật khẩu của "
+#~ "người\n"
+#~ "                                 dùng hết hạn\n"
+
+#, c-format
+#~ msgid "%s: user '%s' is already a member of '%s'\n"
+#~ msgstr "%s: người dùng “%s” đã thuộc về “%s”\n"
+
+#, c-format
+#~ msgid ""
+#~ "Usage: %s [options] [action]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr ""
+#~ "Cách dùng: %s [tuỳ_chọn …] [hành_vi]\n"
+#~ "\n"
+#~ "Tùy chọn:\n"
+
+#~ msgid ""
+#~ "  -g, --group groupname         change groupname instead of the user's "
+#~ "group\n"
+#~ "                                (root only)\n"
+#~ msgstr ""
+#~ "  -g, --group TÊN_NHÓM          thay đổi tên của nhóm này thay cho nhóm "
+#~ "của\n"
+#~ "                                  người dùng (chỉ siêu quản trị)\n"
+
+#~ msgid "Actions:\n"
+#~ msgstr "Hành động là:\n"
+
+#~ msgid ""
+#~ "  -a, --add username            add username to the members of the group\n"
+#~ msgstr "  -a, --add TÊN                 thêm tên người dùng này vào nhóm\n"
+
+#~ msgid ""
+#~ "  -d, --delete username         remove username from the members of the "
+#~ "group\n"
+#~ msgstr "  -d, --delete TÊN              gỡ bỏ tên này khỏi nhóm\n"
+
+#~ msgid "  -p, --purge                   purge all members from the group\n"
+#~ msgstr "  -p, --purge                   tẩy mọi người ra nhóm\n"
+
+#~ msgid "  -l, --list                    list the members of the group\n"
+#~ msgstr "  -l, --list                    liệt kê những người trong nhóm\n"
+
+#, c-format
+#~ msgid "%s: your groupname does not match your username\n"
+#~ msgstr "%s: tên nhóm của bạn không tương ứng với tên người dùng\n"
+
+#, c-format
+#~ msgid "%s: only root can use the -g/--group option\n"
+#~ msgstr "%s: chỉ siêu quản trị có quyền sử dụng tùy chọn “-g/--group”\n"
+
+#~ msgid ""
+#~ "login time exceeded\n"
+#~ "\n"
+#~ msgstr ""
+#~ "vượt quá thời gian đăng nhập\n"
+#~ "\n"
+
+#~ msgid "Usage: logoutd\n"
+#~ msgstr "Cách dùng: logoutd\n"
+
+#~ msgid " ...waiting for child to terminate.\n"
+#~ msgstr " …đang đợi tiến con chấm dứt.\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: %s home directory (%s) not found\n"
+#~ msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+#~ msgstr "%s: %s không tìm thấy thư mục riêng (%s)\n"
 
 #~ msgid "Warning: too many groups\n"
 #~ msgstr "Cảnh báo: quá nhiều nhóm\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2025-12-30 14:17+0100\n"
+"POT-Creation-Date: 2026-06-17 14:26-0500\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -59,6 +59,10 @@ msgstr ""
 #, c-format
 msgid "%s: failed to unlock %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Non-text file.\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, c-format
 msgid ""
@@ -123,13 +127,37 @@ msgstr ""
 
 #, c-format
 msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate GIDs\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
 "SUB_GID_COUNT (%lu)\n"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "%s: Can't get unique subordinate GID range\n"
-msgstr "nepoznata grupa: %s\n"
+#, c-format
+msgid "%s: SUB_GID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Not enough space for any subordinate GIDs (SUB_GID_MIN=%lu, "
+"SUB_GID_MAX=%lu, SUB_GID_COUNT=%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate GID range for UID %ju exceeds SUB_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate UIDs\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -137,9 +165,21 @@ msgid ""
 "SUB_UID_COUNT (%lu)\n"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "%s: Can't get unique subordinate UID range\n"
-msgstr "nepoznata grupa: %s\n"
+#, c-format
+msgid "%s: SUB_UID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Not enough space for any subordinate UIDs (SUB_UID_MIN=%lu, "
+"SUB_UID_MAX=%lu, SUB_UID_COUNT=%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate UID range for UID %ju exceeds SUB_UID_MAX "
+"(%lu)\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -836,11 +876,6 @@ msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
 
 msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-
-msgid ""
 "  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
 "                                or YESCRYPT crypt algorithms\n"
 msgstr ""
@@ -854,7 +889,7 @@ msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr ""
 
 #, c-format
-msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgid "%s: the -c and -e flags are exclusive\n"
 msgstr ""
 
 #, c-format
@@ -939,23 +974,6 @@ msgstr "%s: grupa %s postoji\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: grupa %s postoji\n"
 
-msgid "  -c, --check                   check the user's password expiration\n"
-msgstr ""
-
-msgid ""
-"  -f, --force                   force password change if the user's "
-"password\n"
-"                                is expired\n"
-msgstr ""
-
-#, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr ""
-
-#, c-format
-msgid "%s: unexpected argument: %s\n"
-msgstr ""
-
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
@@ -1012,6 +1030,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%s: Unknown user or range: %s\n"
 msgstr "Nepoznat korisnik: %s\n"
+
+#, c-format
+msgid "%s: unexpected argument: %s\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
@@ -1132,7 +1154,7 @@ msgid ""
 "group\n"
 msgstr ""
 
-msgid "  -r, --system                  create a system account\n"
+msgid "  -r, --system                  create a system group\n"
 msgstr ""
 
 msgid ""
@@ -1193,56 +1215,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: grupa %s postoji\n"
-
-#, c-format
-msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr ""
-
-#, c-format
-msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr ""
-
-#, c-format
-msgid ""
-"Usage: %s [options] [action]\n"
-"\n"
-"Options:\n"
-msgstr ""
-
-msgid ""
-"  -g, --group groupname         change groupname instead of the user's "
-"group\n"
-"                                (root only)\n"
-msgstr ""
-
-msgid "\n"
-msgstr ""
-
-msgid "Actions:\n"
-msgstr ""
-
-msgid ""
-"  -a, --add username            add username to the members of the group\n"
-msgstr ""
-
-msgid ""
-"  -d, --delete username         remove username from the members of the "
-"group\n"
-msgstr ""
-
-msgid "  -p, --purge                   purge all members from the group\n"
-msgstr ""
-
-msgid "  -l, --list                    list the members of the group\n"
-msgstr ""
-
-#, c-format
-msgid "%s: your groupname does not match your username\n"
-msgstr ""
-
-#, c-format
-msgid "%s: only root can use the -g/--group option\n"
-msgstr ""
 
 msgid ""
 "  -a, --append                  append the users mentioned by -U option to "
@@ -1519,14 +1491,6 @@ msgstr ""
 msgid " from %.*s"
 msgstr ""
 
-msgid ""
-"login time exceeded\n"
-"\n"
-msgstr ""
-
-msgid "Usage: logoutd\n"
-msgstr ""
-
 #, c-format
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr ""
@@ -1673,16 +1637,16 @@ msgstr "nepoznata grupa: %s\n"
 msgid "%s: line %jd: can't update entry\n"
 msgstr "nepoznata grupa: %s\n"
 
-#, c-format
-msgid "%s: can't find subordinate user range\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: can't find subordinate user range: %s\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
-msgid "%s: can't find subordinate group range\n"
+msgid "%s: can't find subordinate group range: %s\n"
 msgstr "nepoznata grupa: %s\n"
 
 msgid ""
@@ -1936,6 +1900,9 @@ msgstr ""
 msgid "Please enter your OWN password as authentication.\n"
 msgstr ""
 
+msgid " ...killed.\n"
+msgstr ""
+
 #, c-format
 msgid "%s: signal masking malfunction\n"
 msgstr ""
@@ -1949,12 +1916,6 @@ msgid "%s: signal malfunction\n"
 msgstr ""
 
 msgid "Session terminated, terminating shell..."
-msgstr ""
-
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
 msgstr ""
 
 msgid " ...terminated.\n"
@@ -2091,7 +2052,7 @@ msgid "%s: rename: %s: %s\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, c-format
-msgid "%s: too many groups specified (max %d).\n"
+msgid "%s: too many groups specified (max %zu).\n"
 msgstr ""
 
 #, c-format
@@ -2183,6 +2144,9 @@ msgstr ""
 msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
 
+msgid "  -r, --system                  create a system account\n"
+msgstr ""
+
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr ""
 
@@ -2202,6 +2166,10 @@ msgstr ""
 msgid ""
 "      --selinux-range SERANGE   use a specific MLS range for the SELinux "
 "user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr ""
 
 #, c-format
@@ -2242,6 +2210,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
+msgstr ""
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2289,7 +2261,9 @@ msgid "%s: error while duplicating string in BTRFS check %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+msgid ""
+"%s: warning: \"%s\" is not on BTRFS; creating regular directory instead of "
+"subvolume\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2371,11 +2345,11 @@ msgid "%s: can't create group\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
-msgid "%s: can't create subordinate user IDs\n"
+msgid "%s: can't create subordinate user IDs: %s\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
-msgid "%s: can't create subordinate group IDs\n"
+msgid "%s: can't create subordinate group IDs: %s\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, c-format
@@ -2541,6 +2515,11 @@ msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr ""
 
 msgid ""
+"  -S, --add-subids              add entries to sub[ud]id based on system "
+"defaults\n"
+msgstr ""
+
+msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
@@ -2654,6 +2633,14 @@ msgid "failed to rename mailbox"
 msgstr ""
 
 #, fuzzy, c-format
+msgid "%s: unable to find new subordinate uid range: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: unable to find new subordinate gid range: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
 msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "nepoznata grupa: %s\n"
 
@@ -2686,6 +2673,9 @@ msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr ""
 
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
+msgstr ""
+
+msgid "\n"
 msgstr ""
 
 #, c-format
@@ -2752,6 +2742,14 @@ msgstr ""
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+#~ msgid "%s: Can't get unique subordinate GID range\n"
+#~ msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Can't get unique subordinate UID range\n"
+#~ msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
 #~ msgid "%s: group '%s' is a NIS group\n"

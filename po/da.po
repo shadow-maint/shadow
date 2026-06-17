@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2025-12-30 14:17+0100\n"
+"POT-Creation-Date: 2026-06-17 14:26-0500\n"
 "PO-Revision-Date: 2012-01-26 23:57+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -72,6 +72,11 @@ msgstr "Kan ikke ændre ejer eller tilstand af tty stdin: %s"
 #, c-format
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: Kunne ikke åbne %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: Non-text file.\n"
+msgstr "%s: Linje %d: chown %s fejlede: %s\n"
 
 #, c-format
 msgid ""
@@ -144,6 +149,12 @@ msgstr "%s: Kan ikke indhente unik GID (ikke flere tilgængelige GID'er)\n"
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: Kan ikke indhente unik GID (ikke flere tilgængelige GID'er)\n"
 
+#, c-format
+msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate GIDs\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
@@ -154,9 +165,31 @@ msgid ""
 msgstr ""
 "%s: Ugyldig opsætning: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
 
+#, c-format
+msgid "%s: SUB_GID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: Can't get unique subordinate GID range\n"
-msgstr "%s: Kan ikke oprette bruger\n"
+#| msgid ""
+#| "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+#| "(%lu)\n"
+msgid ""
+"%s: Not enough space for any subordinate GIDs (SUB_GID_MIN=%lu, "
+"SUB_GID_MAX=%lu, SUB_GID_COUNT=%lu)\n"
+msgstr ""
+"%s: Ugyldig opsætning: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate GID range for UID %ju exceeds SUB_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
+"subordinate UIDs\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid ""
@@ -168,9 +201,25 @@ msgid ""
 msgstr ""
 "%s: Ugyldig opsætning: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
 
+#, c-format
+msgid "%s: SUB_UID range [%lu, %lu] is too large to represent\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: Can't get unique subordinate UID range\n"
-msgstr "%s: Kan ikke oprette bruger\n"
+#| msgid ""
+#| "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+#| "(%lu)\n"
+msgid ""
+"%s: Not enough space for any subordinate UIDs (SUB_UID_MIN=%lu, "
+"SUB_UID_MAX=%lu, SUB_UID_COUNT=%lu)\n"
+msgstr ""
+"%s: Ugyldig opsætning: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
+
+#, c-format
+msgid ""
+"%s: Deterministic subordinate UID range for UID %ju exceeds SUB_UID_MAX "
+"(%lu)\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -917,14 +966,6 @@ msgstr "  -c, --crypt-method METODE     crypt-metoden (en af %s)\n"
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr "  -e, --encrypted               angivne adgangskoder er krypterede\n"
 
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-"  -m, --md5                     krypter adgangskoden med klartekst med brug "
-"af\n"
-"                                MD5-algoritmen\n"
-
 #, fuzzy
 #| msgid ""
 #| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -945,8 +986,9 @@ msgstr "%s: Crypt-metode er ikke understøttet: %s\n"
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: Flaget %s er kun tilladt med flaget %s\n"
 
-#, c-format
-msgid "%s: the -c, -e, and -m flags are exclusive\n"
+#, fuzzy, c-format
+#| msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgid "%s: the -c and -e flags are exclusive\n"
 msgstr "%s: Flagene -c, -e og -m udelukker hinanden\n"
 
 #, c-format
@@ -1041,27 +1083,6 @@ msgstr "%s: Advarsel: %s findes ikke\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: Advarsel: %s er ikke kørbar\n"
 
-msgid "  -c, --check                   check the user's password expiration\n"
-msgstr ""
-"  -c, --check                   kontroller udløb for brugerens adgangskode\n"
-
-msgid ""
-"  -f, --force                   force password change if the user's "
-"password\n"
-"                                is expired\n"
-msgstr ""
-"  -f, --force                   fremtving ændring af adgangskode hvis "
-"brugerens adgangskode\n"
-"                                er udløbet\n"
-
-#, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr "%s: Tilvalg %s og %s er i konflikt\n"
-
-#, c-format
-msgid "%s: unexpected argument: %s\n"
-msgstr "%s: Uventet argument: %s\n"
-
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr "  -a, --all                     vis faillog-poster for alle brugere\n"
 
@@ -1128,6 +1149,10 @@ msgstr "%s: Kunne ikke angive låsetid for UID %lu\n"
 #, c-format
 msgid "%s: Unknown user or range: %s\n"
 msgstr "%s: Ukendt bruger eller interval: %s\n"
+
+#, c-format
+msgid "%s: unexpected argument: %s\n"
+msgstr "%s: Uventet argument: %s\n"
 
 #, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
@@ -1265,7 +1290,9 @@ msgstr ""
 "  -p, --password ADGANGSKODE     brug denne krypterede adgangskode for den "
 "nye gruppe\n"
 
-msgid "  -r, --system                  create a system account\n"
+#, fuzzy
+#| msgid "  -r, --system                  create a system account\n"
+msgid "  -r, --system                  create a system group\n"
 msgstr "  -r, --system                  opret en systemkonto\n"
 
 #, fuzzy
@@ -1332,65 +1359,6 @@ msgstr "%s: Kan ikke fjerne den primære gruppe for bruger »%s«.\n"
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: Gruppe »%s« findes ikke\n"
-
-#, c-format
-msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr "%s: Bruger »%s« er allerede medlem af »%s«\n"
-
-#, c-format
-msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr "%s: Ikke nok hukommelse. Kan ikke opdatere %s.\n"
-
-#, c-format
-msgid ""
-"Usage: %s [options] [action]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Brug: %s [tilvalg] [handling]\n"
-"\n"
-"Tilvalg:\n"
-
-msgid ""
-"  -g, --group groupname         change groupname instead of the user's "
-"group\n"
-"                                (root only)\n"
-msgstr ""
-"  -g, --group groupname         ændr gruppenavn i stedet for brugerens "
-"gruppe\n"
-"                                (kun root)\n"
-
-msgid "\n"
-msgstr "\n"
-
-msgid "Actions:\n"
-msgstr "Handlinger:\n"
-
-msgid ""
-"  -a, --add username            add username to the members of the group\n"
-msgstr ""
-"  -a, --add brugernavn          tilføj brugernavn til medlemmer af gruppen\n"
-
-msgid ""
-"  -d, --delete username         remove username from the members of the "
-"group\n"
-msgstr ""
-"  -d, --delete brugernavn       fjern brugernavn fra medlemmer af gruppen\n"
-
-msgid "  -p, --purge                   purge all members from the group\n"
-msgstr ""
-"  -p, --purge                   afinstaller alle medlemmer fra gruppen\n"
-
-msgid "  -l, --list                    list the members of the group\n"
-msgstr "  -l, --list                    vis medlemmer af gruppen\n"
-
-#, c-format
-msgid "%s: your groupname does not match your username\n"
-msgstr "%s: Dit gruppenavn svarer ikke overens med dit brugernavn\n"
-
-#, c-format
-msgid "%s: only root can use the -g/--group option\n"
-msgstr "%s: Kun root kan bruge tilvalget -g/--group\n"
 
 #, fuzzy
 #| msgid ""
@@ -1712,16 +1680,6 @@ msgstr "Sidst logget på: %s på %s"
 msgid " from %.*s"
 msgstr " fra %.*s"
 
-msgid ""
-"login time exceeded\n"
-"\n"
-msgstr ""
-"logindtid overskredet\n"
-"\n"
-
-msgid "Usage: logoutd\n"
-msgstr "Brug: logoutd\n"
-
 #, c-format
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr ""
@@ -1889,7 +1847,7 @@ msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: Linje %d: Kan ikke opdatere punktet\n"
 
 #, fuzzy, c-format
-msgid "%s: can't find subordinate user range\n"
+msgid "%s: can't find subordinate user range: %s\n"
 msgstr "%s: Kan ikke oprette bruger\n"
 
 #, fuzzy, c-format
@@ -1897,7 +1855,7 @@ msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
 
 #, fuzzy, c-format
-msgid "%s: can't find subordinate group range\n"
+msgid "%s: can't find subordinate group range: %s\n"
 msgstr "%s: Kan ikke oprette gruppe\n"
 
 msgid ""
@@ -2187,6 +2145,9 @@ msgstr "Gik uden om adgangskodegodkendelse.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Angiv din EGEN adgangskode som godkendelse.\n"
 
+msgid " ...killed.\n"
+msgstr " ...dræbt.\n"
+
 #, c-format
 msgid "%s: signal masking malfunction\n"
 msgstr "%s: Forkert signalmasking\n"
@@ -2201,12 +2162,6 @@ msgstr "%s: Forkert signal\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "Session termineret, terminerer skal..."
-
-msgid " ...killed.\n"
-msgstr " ...dræbt.\n"
-
-msgid " ...waiting for child to terminate.\n"
-msgstr " ...venter på at underproces termineres.\n"
 
 msgid " ...terminated.\n"
 msgstr " ...termineret.\n"
@@ -2375,8 +2330,9 @@ msgstr "%s: Kan ikke oprette symbolsk henvisning %s: %s\n"
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: Omdøb: %s: %s\n"
 
-#, c-format
-msgid "%s: too many groups specified (max %d).\n"
+#, fuzzy, c-format
+#| msgid "%s: too many groups specified (max %d).\n"
+msgid "%s: too many groups specified (max %zu).\n"
 msgstr "%s: Der er angivet for mange grupper (højst %d).\n"
 
 #, fuzzy, c-format
@@ -2495,6 +2451,9 @@ msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
 "  -p, --password ADGANGSKODE    krypteret adgangskode for den nye konto\n"
 
+msgid "  -r, --system                  create a system account\n"
+msgstr "  -r, --system                  opret en systemkonto\n"
+
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr "  -s, --shell SKAL              logindskal for den nye konto\n"
 
@@ -2525,6 +2484,10 @@ msgid ""
 msgstr ""
 "  -Z, --selinux-user SE_BRUGER   brug en specifik SE_BRUGER for "
 "kortlægningen af SELinux-brugere\n"
+
+#, c-format
+msgid "%s: Out of memory. Cannot update %s.\n"
+msgstr "%s: Ikke nok hukommelse. Kan ikke opdatere %s.\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -2566,6 +2529,10 @@ msgstr ""
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z kræver SELinux-aktiveret kerne\n"
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: Tilvalg %s og %s er i konflikt\n"
 
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
@@ -2618,10 +2585,11 @@ msgstr "%s: Kan ikke oprette mappen %s\n"
 msgid "%s: error while duplicating string in BTRFS check %s\n"
 msgstr ""
 
-#, fuzzy, c-format
-#| msgid "%s: %s home directory (%s) not found\n"
-msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
-msgstr "%s: %s hjemmemappe (%s) er ikke fundet\n"
+#, c-format
+msgid ""
+"%s: warning: \"%s\" is not on BTRFS; creating regular directory instead of "
+"subvolume\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid "%s: failed to allocate memory: %s\n"
@@ -2715,11 +2683,11 @@ msgid "%s: can't create group\n"
 msgstr "%s: Kan ikke oprette gruppe\n"
 
 #, fuzzy, c-format
-msgid "%s: can't create subordinate user IDs\n"
+msgid "%s: can't create subordinate user IDs: %s\n"
 msgstr "%s: Kan ikke oprette bruger\n"
 
 #, fuzzy, c-format
-msgid "%s: can't create subordinate group IDs\n"
+msgid "%s: can't create subordinate group IDs: %s\n"
 msgstr "%s: Kan ikke oprette gruppe\n"
 
 #, c-format
@@ -2934,6 +2902,13 @@ msgstr ""
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr ""
 
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid ""
+"  -S, --add-subids              add entries to sub[ud]id based on system "
+"defaults\n"
+msgstr "  -r, --system                  opret systemkontoer\n"
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -3073,6 +3048,14 @@ msgid "failed to rename mailbox"
 msgstr "kunne ikke omdøbe postkasse"
 
 #, fuzzy, c-format
+msgid "%s: unable to find new subordinate uid range: %s\n"
+msgstr "%s: Ugyldig dato »%s«\n"
+
+#, fuzzy, c-format
+msgid "%s: unable to find new subordinate gid range: %s\n"
+msgstr "%s: Ugyldig dato »%s«\n"
+
+#, fuzzy, c-format
 msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
 
@@ -3111,6 +3094,9 @@ msgstr ""
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr ""
 "  -u, --user                    hvilken brugers tcb-skyggefil at redigere\n"
+
+msgid "\n"
+msgstr "\n"
 
 #, c-format
 msgid "%s: failed to remove %s\n"
@@ -3177,6 +3163,109 @@ msgstr "%s: Kan ikke gendanne %s: %s (dine ændringer er i %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: Kunne ikke finde tcb-mappe for %s\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Can't get unique subordinate GID range\n"
+#~ msgstr "%s: Kan ikke oprette bruger\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Can't get unique subordinate UID range\n"
+#~ msgstr "%s: Kan ikke oprette bruger\n"
+
+#~ msgid ""
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ msgstr ""
+#~ "  -m, --md5                     krypter adgangskoden med klartekst med "
+#~ "brug af\n"
+#~ "                                MD5-algoritmen\n"
+
+#~ msgid ""
+#~ "  -c, --check                   check the user's password expiration\n"
+#~ msgstr ""
+#~ "  -c, --check                   kontroller udløb for brugerens "
+#~ "adgangskode\n"
+
+#~ msgid ""
+#~ "  -f, --force                   force password change if the user's "
+#~ "password\n"
+#~ "                                is expired\n"
+#~ msgstr ""
+#~ "  -f, --force                   fremtving ændring af adgangskode hvis "
+#~ "brugerens adgangskode\n"
+#~ "                                er udløbet\n"
+
+#, c-format
+#~ msgid "%s: user '%s' is already a member of '%s'\n"
+#~ msgstr "%s: Bruger »%s« er allerede medlem af »%s«\n"
+
+#, c-format
+#~ msgid ""
+#~ "Usage: %s [options] [action]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr ""
+#~ "Brug: %s [tilvalg] [handling]\n"
+#~ "\n"
+#~ "Tilvalg:\n"
+
+#~ msgid ""
+#~ "  -g, --group groupname         change groupname instead of the user's "
+#~ "group\n"
+#~ "                                (root only)\n"
+#~ msgstr ""
+#~ "  -g, --group groupname         ændr gruppenavn i stedet for brugerens "
+#~ "gruppe\n"
+#~ "                                (kun root)\n"
+
+#~ msgid "Actions:\n"
+#~ msgstr "Handlinger:\n"
+
+#~ msgid ""
+#~ "  -a, --add username            add username to the members of the group\n"
+#~ msgstr ""
+#~ "  -a, --add brugernavn          tilføj brugernavn til medlemmer af "
+#~ "gruppen\n"
+
+#~ msgid ""
+#~ "  -d, --delete username         remove username from the members of the "
+#~ "group\n"
+#~ msgstr ""
+#~ "  -d, --delete brugernavn       fjern brugernavn fra medlemmer af "
+#~ "gruppen\n"
+
+#~ msgid "  -p, --purge                   purge all members from the group\n"
+#~ msgstr ""
+#~ "  -p, --purge                   afinstaller alle medlemmer fra gruppen\n"
+
+#~ msgid "  -l, --list                    list the members of the group\n"
+#~ msgstr "  -l, --list                    vis medlemmer af gruppen\n"
+
+#, c-format
+#~ msgid "%s: your groupname does not match your username\n"
+#~ msgstr "%s: Dit gruppenavn svarer ikke overens med dit brugernavn\n"
+
+#, c-format
+#~ msgid "%s: only root can use the -g/--group option\n"
+#~ msgstr "%s: Kun root kan bruge tilvalget -g/--group\n"
+
+#~ msgid ""
+#~ "login time exceeded\n"
+#~ "\n"
+#~ msgstr ""
+#~ "logindtid overskredet\n"
+#~ "\n"
+
+#~ msgid "Usage: logoutd\n"
+#~ msgstr "Brug: logoutd\n"
+
+#~ msgid " ...waiting for child to terminate.\n"
+#~ msgstr " ...venter på at underproces termineres.\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: %s home directory (%s) not found\n"
+#~ msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+#~ msgstr "%s: %s hjemmemappe (%s) er ikke fundet\n"
 
 #~ msgid "Warning: too many groups\n"
 #~ msgstr "Advarsel: For mange grupper\n"
