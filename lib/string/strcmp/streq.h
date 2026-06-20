@@ -9,10 +9,14 @@
 #include "config.h"
 
 #include <string.h>
+#include <strings.h>
 
 
 // streq - strings equal
-#define streq(s1, s2)  (!strcmp(s1, s2))
+#define streq(s1, s2)      (!strcmp(s1, s2))
+
+// strcaseeq - strings case-insensitive equal
+#define strcaseeq(s1, s2)  (!strcasecmp(s1, s2))
 
 
 #endif  // include guard

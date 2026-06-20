@@ -209,8 +209,6 @@ libshadow_la_SOURCES = \
 	string/strchr/strchrscnt.h \
 	string/strchr/strnul.c \
 	string/strchr/strnul.h \
-	string/strcmp/strcaseeq.c \
-	string/strcmp/strcaseeq.h \
 	string/strcmp/strcaseprefix.c \
 	string/strcmp/strcaseprefix.h \
 	string/strcmp/streq.c \
