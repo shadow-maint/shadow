@@ -130,7 +130,7 @@ is_valid_domain_label(const char *label)
 		errno = EINVAL;
 		return false;
 	}
-	if (!streq(stpspn(label, CTYPE_ALNUM_C "-"), "")) {
+	if (!strisldh_rfc1035_c(label)) {
 		errno = EINVAL;
 		return false;
 	}
