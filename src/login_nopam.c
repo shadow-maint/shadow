@@ -61,7 +61,6 @@
 #include "io/fgets/fgets.h"
 #include "prototypes.h"
 #include "sizeof.h"
-#include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/strrspn.h"

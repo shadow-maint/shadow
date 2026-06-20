@@ -30,7 +30,6 @@
 #include "shadowlog.h"
 #include "sizeof.h"
 #include "string/sprintf/aprintf.h"
-#include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/strrspn.h"
