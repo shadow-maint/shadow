@@ -447,19 +447,22 @@ static void prepare_pam_close_session (void)
 NORETURN
 static void usage (int status)
 {
-	(void)
-	fputs (_("Usage: su [options] [-] [username [args]]\n"
-	         "\n"
-	         "Options:\n"
-	         "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -, -l, --login                make the shell a login shell\n"
-	         "  -m, -p,\n"
-	         "  --preserve-environment        do not reset environment variables, and\n"
-	         "                                keep the same shell\n"
-	         "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-	         "\n"
-	         "If no username is given, assume root.\n"), (E_SUCCESS != status) ? stderr : stdout);
+	FILE  *stream;
+
+	stream = E_SUCCESS != status ? stderr : stdout;
+
+	fputs(_("Usage: su [options] [-] [username [args]]\n"
+	        "\n"
+	        "Options:\n"), stream);
+	fputs(_("  -c, --command COMMAND         pass COMMAND to the invoked shell\n"), stream);
+	fputs(_("  -h, --help                    display this help message and exit\n"), stream);
+	fputs(_("  -, -l, --login                make the shell a login shell\n"), stream);
+	fputs(_("  -m, -p,\n"
+	        "  --preserve-environment        do not reset environment variables, and\n"
+	        "                                keep the same shell\n"), stream);
+	fputs(_("  -s, --shell SHELL             use SHELL instead of the default in passwd\n"), stream);
+	fputs("\n", stream);
+	fputs(_("If no username is given, assume root.\n"), stream);
 	exit (status);
 }
 
