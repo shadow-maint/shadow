@@ -14,9 +14,9 @@
 #include <string.h>
 
 #include "exitcodes.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "string/strerrno.h"
 
 
 int
@@ -39,12 +39,12 @@ run_command(const char *cmd, const char *argv[],
 		if (ENOENT == errno) {
 			_exit (E_CMD_NOTFOUND);
 		}
-		fprintf (log_get_logfd(), "%s: cannot execute %s: %s\n",
-		         log_get_progname(), cmd, strerrno());
+		fprinte(log_get_logfd(), "%s: cannot execute %s",
+		        log_get_progname(), cmd);
 		_exit (E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == pid) {
-		fprintf (log_get_logfd(), "%s: cannot execute %s: %s\n",
-		         log_get_progname(), cmd, strerrno());
+		fprinte(log_get_logfd(), "%s: cannot execute %s",
+		        log_get_progname(), cmd);
 		return -1;
 	}
 
@@ -56,8 +56,8 @@ run_command(const char *cmd, const char *argv[],
 	         || ((pid_t)-1 != wpid && wpid != pid));
 
 	if ((pid_t)-1 == wpid) {
-		fprintf (log_get_logfd(), "%s: waitpid (status: %d): %s\n",
-		         log_get_progname(), *status, strerrno());
+		fprinte(log_get_logfd(), "%s: waitpid (status: %d)",
+		        log_get_progname(), *status);
 		return -1;
 	}
 
