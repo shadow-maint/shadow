@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2026, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -31,6 +31,7 @@
 #define CTYPE_XDIGIT_C         CTYPE_DIGIT_C "abcdefABCDEF"
 #define CTYPE_ASCII_C          CTYPE_PRINT_C CTYPE_CNTRL_C /*NUL*/
 #define CTYPE_PFCHAR_C         CTYPE_ALNUM_C "._-"  // portable filename character set
+#define CTYPE_LDH_RFC1035_C    CTYPE_ALNUM_C "-"  // letter, digit, hyphen
 
 
 // isascii_c - is [:ascii:] C-locale
@@ -47,11 +48,13 @@
 #define isprint_c(c)           (!streq(strchrnul(CTYPE_PRINT_C, c), ""))
 #define isxdigit_c(c)          (!streq(strchrnul(CTYPE_XDIGIT_C, c), ""))
 #define ispfchar_c(c)          (!streq(strchrnul(CTYPE_PFCHAR_C, c), ""))
+#define isldh_rfc1035_c(c)     (!streq(strchrnul(CTYPE_LDH_RFC1035_C, c), ""))
 
 
 // strisascii_c - string is [:ascii:] C-locale
 #define strisdigit_c(s)        streq(stpspn(s, CTYPE_DIGIT_C), "")
 #define strisprint_c(s)        streq(stpspn(s, CTYPE_PRINT_C), "")
+#define strisldh_rfc1035_c(s)  streq(stpspn(s, CTYPE_LDH_RFC1035_C), "")
 
 
 // strchriscntrl_c - string character is [:cntrl:] C-locale
