@@ -104,7 +104,7 @@ $(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES remove-potcdate.sed
 		fi; \
 		files="$$files $$outbase"; \
 	done; \
-	cd $$tmpdir; itstool -d -o $(DOMAIN).po $$files; \
+	cd $$tmpdir; itstool -d $$files | msgattrib --no-location -o $(DOMAIN).po; \
 	sed -i '1i \
 # To re-generate, run "cd man/po; make update-po"' $$tmpdir/$(DOMAIN).po; \
 	cd $$origdir; \
