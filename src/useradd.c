@@ -2220,11 +2220,20 @@ static void create_home(const struct option_flags *flags)
 	char    *bhome, *cp;
 	mode_t  mode;
 	bool    process_selinux;
+#if WITH_BTRFS
+	uid_t   uid_min;
+	uid_t   uid_max;
+#endif
 
 	process_selinux = !flags->chroot && !flags->prefix;
 
 	if (access (prefix_user_home, F_OK) == 0)
 		return;
+
+#if WITH_BTRFS
+	uid_min = getdef_ulong("UID_MIN", 1000UL);
+	uid_max = getdef_ulong("UID_MAX", 60000UL);
+#endif
 
 	strcpy(path, "");
 	bhome = strdup(prefix_user_home);
@@ -2264,7 +2273,8 @@ static void create_home(const struct option_flags *flags)
 
 		dir_created = false;
 #if WITH_BTRFS
-		if (subvolflg && (strlen(prefix_user_home) - (int)strlen(path)) <= 1) {
+		if (subvolflg && user_id >= uid_min && user_id <= uid_max
+			&& (strlen(prefix_user_home) - (int)strlen(path)) <= 1) {
 			char *btrfs_check = strdup(path);
 			struct statfs  sfs;
 
