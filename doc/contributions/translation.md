@@ -1,4 +1,4 @@
-# Releases
+# Translation
 
 The translations for the shadow project are maintained at the Translation
 Project (TP), both [user interface](https://translationproject.org/domain/shadow.html)
