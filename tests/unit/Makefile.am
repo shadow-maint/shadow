@@ -1,5 +1,7 @@
 AM_CPPFLAGS = -I$(top_srcdir)/lib -I$(top_srcdir)
 
+LIBSHADOW = $(top_builddir)/lib/libshadow.la
+
 if HAVE_CMOCKA
 TESTS = $(check_PROGRAMS)
 
@@ -23,8 +25,6 @@ check_PROGRAMS += \
     $(NULL)
 
 test_adds_SOURCES = \
-    ../../lib/adds.c \
-    ../../lib/search/cmp/cmp.c \
     test_adds.c \
     $(NULL)
 test_adds_CFLAGS = \
@@ -33,12 +33,11 @@ test_adds_CFLAGS = \
 test_adds_LDFLAGS = \
     $(NULL)
 test_adds_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
 
 test_atoi_strtoi_SOURCES = \
-    ../../lib/atoi/strtoi/strtoi.c \
-    ../../lib/atoi/strtoi/strtou_noneg.c \
     test_atoi_strtoi.c \
     $(NULL)
 test_atoi_strtoi_CFLAGS = \
@@ -47,11 +46,11 @@ test_atoi_strtoi_CFLAGS = \
 test_atoi_strtoi_LDFLAGS = \
     $(NULL)
 test_atoi_strtoi_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
 
 test_chkhash_SOURCES = \
-    ../../lib/chkhash.c \
     test_chkhash.c \
     $(NULL)
 test_chkhash_CFLAGS = \
@@ -60,12 +59,11 @@ test_chkhash_CFLAGS = \
 test_chkhash_LDFLAGS = \
     $(NULL)
 test_chkhash_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
 
 test_chkname_SOURCES = \
-    ../../lib/chkname.c \
-    ../../lib/sysconf.c \
     test_chkname.c \
     $(NULL)
 test_chkname_CFLAGS = \
@@ -74,11 +72,11 @@ test_chkname_CFLAGS = \
 test_chkname_LDFLAGS = \
     $(NULL)
 test_chkname_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
 
 test_logind_SOURCES = \
-    ../../lib/logind.c \
     test_logind.c \
     $(NULL)
 test_logind_CFLAGS = \
@@ -90,12 +88,12 @@ test_logind_LDFLAGS = \
     -Wl,-wrap,sd_uid_get_sessions \
     $(NULL)
 test_logind_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(LIBSYSTEMD) \
     $(NULL)
 
 test_stprintf_SOURCES = \
-    ../../lib/string/sprintf/stprintf.c \
     test_stprintf.c \
     $(NULL)
 test_stprintf_CFLAGS = \
@@ -105,6 +103,7 @@ test_stprintf_CFLAGS = \
 test_stprintf_LDFLAGS = \
     $(NULL)
 test_stprintf_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
 
@@ -117,11 +116,11 @@ test_strncpy_CFLAGS = \
 test_strncpy_LDFLAGS = \
     $(NULL)
 test_strncpy_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
 
 test_strtcpy_SOURCES = \
-    ../../lib/string/strcpy/strtcpy.c \
     test_strtcpy.c \
     $(NULL)
 test_strtcpy_CFLAGS = \
@@ -130,6 +129,7 @@ test_strtcpy_CFLAGS = \
 test_strtcpy_LDFLAGS = \
     $(NULL)
 test_strtcpy_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
 
@@ -146,9 +146,6 @@ test_typetraits_LDADD = \
     $(NULL)
 
 test_exit_if_null_SOURCES = \
-    ../../lib/exit_if_null.c \
-    ../../lib/shadowlog.c \
-    ../../lib/alloc/malloc.c \
     test_exit_if_null.c \
     $(NULL)
 test_exit_if_null_CFLAGS = \
@@ -158,6 +155,7 @@ test_exit_if_null_LDFLAGS = \
     -Wl,-wrap,exit \
     $(NULL)
 test_exit_if_null_LDADD = \
+    $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
 
