@@ -66,3 +66,23 @@ def test_groupadd__u_option_empty_string_clears_members(shadow: Shadow):
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
         assert not gshadow_entry.members, "Group should have no members"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__set_gid(shadow: Shadow):
+    """
+    :title: Create group with specific GID using -g flag
+    :setup:
+        1. Create group with specific GID
+    :steps:
+        1. Check group entry
+    :expectedresults:
+        1. Group entry is created with the specified GID
+    :customerscenario: False
+    """
+    shadow.groupadd("-g 1500 tgroup")
+     
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1500, "Incorrect GID"
