@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2026-06-17 14:26-0500\n"
+"POT-Creation-Date: 2026-06-22 21:41-0500\n"
 "PO-Revision-Date: 2011-11-26 22:06+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -16,54 +16,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural= (n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 
+#: lib/addgrps.c:64
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Upozornenie: skupina %s je neznáma\n"
 
+#: lib/age.c:57
 msgid "Your password has expired."
 msgstr "Uplynula platnosť vášho hesla."
 
+#: lib/age.c:60
 msgid "Your password is inactive."
 msgstr "Vaše heslo je neaktívne."
 
+#: lib/age.c:63
 msgid "Your login has expired."
 msgstr "Uplynula platnosť vášho účtu."
 
+#: lib/age.c:75
 msgid "  Contact the system administrator."
 msgstr "  Kontaktujte správcu systému."
 
+#: lib/age.c:78
 msgid "  Choose a new password."
 msgstr "  Zvoľte nové heslo."
 
+#: lib/age.c:165
 msgid "You must change your password."
 msgstr "Musíte si zmeniť heslo."
 
+#: lib/age.c:173
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "O %ld dní uplynie platnosť vášho hesla.\n"
 
+#: lib/age.c:176
 msgid "Your password will expire tomorrow."
 msgstr "Zajtra uplynie platnosť vášho hesla."
 
+#: lib/age.c:178
 msgid "Your password will expire today."
 msgstr "Dnes uplynie platnosť vášho hesla."
 
+#: lib/audit_help.c:43
 msgid "Cannot open audit interface - aborting.\n"
 msgstr "Nie je možné otvoriť rozhranie pre audit - prerušuje sa.\n"
 
+#: lib/chowntty.c:58
 #, c-format
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "Nedá sa zmeniť režim vlastníka TTY štandardného vstupu: %s"
 
+#: lib/cleanup_group.c:178 lib/cleanup_group.c:200 lib/cleanup_user.c:101
+#: lib/cleanup_user.c:122 src/chage.c:102 src/chage.c:109 src/chage.c:582
+#: src/chage.c:588 src/chfn.c:86 src/chfn.c:469 src/chgpasswd.c:84
+#: src/chgpasswd.c:93 src/chgpasswd.c:314 src/chgpasswd.c:330 src/chpasswd.c:88
+#: src/chpasswd.c:96 src/chpasswd.c:318 src/chpasswd.c:333 src/chsh.c:86
+#: src/chsh.c:448 src/grpck.c:108 src/grpck.c:117 src/grpck.c:361
+#: src/grpck.c:370 src/grpconv.c:67 src/grpconv.c:75 src/grpconv.c:263
+#: src/grpconv.c:268 src/grpunconv.c:66 src/grpunconv.c:74 src/grpunconv.c:224
+#: src/grpunconv.c:230 src/newusers.c:164 src/newusers.c:171 src/newusers.c:178
+#: src/newusers.c:186 src/newusers.c:195 src/newusers.c:202 src/newusers.c:878
+#: src/newusers.c:894 src/newusers.c:926 src/newusers.c:944 src/newusers.c:955
+#: src/newusers.c:963 src/passwd.c:470 src/passwd.c:478 src/passwd.c:553
+#: src/passwd.c:569 src/pwck.c:94 src/pwck.c:104 src/pwck.c:353 src/pwck.c:365
+#: src/pwck.c:597 src/pwck.c:685 src/pwconv.c:92 src/pwconv.c:100
+#: src/pwconv.c:312 src/pwconv.c:318 src/pwunconv.c:54 src/pwunconv.c:61
+#: src/pwunconv.c:223 src/pwunconv.c:228 src/useradd.c:277 src/useradd.c:282
+#: src/useradd.c:287 src/useradd.c:293 src/useradd.c:300 src/useradd.c:305
+#: src/useradd.c:1632 src/useradd.c:1645 src/useradd.c:1662 src/useradd.c:1676
+#: src/useradd.c:1729 src/useradd.c:1743 src/userdel.c:405 src/userdel.c:419
+#: src/userdel.c:432 src/userdel.c:448 src/userdel.c:464 src/userdel.c:478
+#: src/userdel.c:494 src/userdel.c:501 src/userdel.c:508 src/userdel.c:516
+#: src/userdel.c:525 src/userdel.c:532 src/usermod.c:673 src/usermod.c:680
+#: src/usermod.c:689 src/usermod.c:697 src/usermod.c:704 src/usermod.c:711
+#: src/usermod.c:1524 src/usermod.c:1537 src/usermod.c:1558 src/usermod.c:1576
+#: src/usermod.c:1593 src/usermod.c:1609 src/vipw.c:168 src/vipw.c:468
 #, c-format
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: nepodarilo sa odmknúť %s\n"
 
+#: lib/commonio.c:616
 #, fuzzy, c-format
 #| msgid "%s: can't close file\n"
 msgid "%s: Non-text file.\n"
 msgstr "%s: nedá sa zatvoriť súbor\n"
 
+#: lib/commonio.c:1021 lib/commonio.c:1126
 #, c-format
 msgid ""
 "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
@@ -71,21 +110,26 @@ msgstr ""
 "Existuje viac záznamov s názvom „%s“ v %s. Prosím, napravte to pomocou pwck "
 "alebo grpck.\n"
 
+#: lib/copydir.c:106
 #, c-format
 msgid "%s: "
 msgstr "%s: "
 
+#: lib/copydir.c:108
 msgid ": "
 msgstr ": "
 
+#: lib/encrypt.c:68
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr "libcrypt nepodporuje metódy šifrovania? (%s)\n"
 
+#: lib/env.c:186
 #, c-format
 msgid "You may not change $%s\n"
 msgstr "Nemôžete zmeniť $%s\n"
 
+#: lib/failure.c:258
 #, c-format
 msgid ""
 "%d failure since last login.\n"
@@ -103,180 +147,218 @@ msgstr[2] ""
 "%d chybných pokusov o prihlásenie od posledného prihlásenia.\n"
 "Posledné bolo %s na %s.\n"
 
+#: lib/find_new_gid.c:62
 #, c-format
 msgid ""
 "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
 "(%lu)\n"
 msgstr ""
 
+#: lib/find_new_gid.c:92
 #, c-format
 msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
 msgstr ""
 
+#: lib/find_new_gid.c:214
 #, c-format
 msgid "%s: Encountered error attempting to use preferred GID: %s\n"
 msgstr ""
 
+#: lib/find_new_gid.c:244 lib/find_new_uid.c:243 src/usermod.c:377
 #, fuzzy, c-format
 msgid "%s: failed to allocate memory: %s\n"
 msgstr "chyba pri zmene vlastníka schránky"
 
+#: lib/find_new_gid.c:326 lib/find_new_gid.c:372
 #, fuzzy, c-format
 msgid ""
 "%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
 msgstr "%s: Nedá sa získať jedinečný UID (už nie sú dostupné žiadne UID)\n"
 
+#: lib/find_new_gid.c:435 lib/find_new_gid.c:481
 #, fuzzy, c-format
 #| msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
 msgstr "%s: Nedá sa získať jedinečný GID (už nie sú dostupné žiadne GID)\n"
 
+#: lib/find_new_gid.c:500
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: Nedá sa získať jedinečný GID (už nie sú dostupné žiadne GID)\n"
 
+#: lib/find_new_sub_gids.c:77
 #, c-format
 msgid ""
 "%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
 "subordinate GIDs\n"
 msgstr ""
 
+#: lib/find_new_sub_gids.c:86
 #, c-format
 msgid ""
 "%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
 "SUB_GID_COUNT (%lu)\n"
 msgstr ""
 
+#: lib/find_new_sub_gids.c:95
 #, c-format
 msgid "%s: SUB_GID range [%lu, %lu] is too large to represent\n"
 msgstr ""
 
+#: lib/find_new_sub_gids.c:104
 #, c-format
 msgid ""
 "%s: Not enough space for any subordinate GIDs (SUB_GID_MIN=%lu, "
 "SUB_GID_MAX=%lu, SUB_GID_COUNT=%lu)\n"
 msgstr ""
 
+#: lib/find_new_sub_gids.c:121
 #, c-format
 msgid ""
 "%s: Deterministic subordinate GID range for UID %ju exceeds SUB_GID_MAX "
 "(%lu)\n"
 msgstr ""
 
+#: lib/find_new_sub_uids.c:77
 #, c-format
 msgid ""
 "%s: UID %ju is less than UID_MIN %lu, cannot calculate deterministic "
 "subordinate UIDs\n"
 msgstr ""
 
+#: lib/find_new_sub_uids.c:86
 #, c-format
 msgid ""
 "%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
 "SUB_UID_COUNT (%lu)\n"
 msgstr ""
 
+#: lib/find_new_sub_uids.c:95
 #, c-format
 msgid "%s: SUB_UID range [%lu, %lu] is too large to represent\n"
 msgstr ""
 
+#: lib/find_new_sub_uids.c:104
 #, c-format
 msgid ""
 "%s: Not enough space for any subordinate UIDs (SUB_UID_MIN=%lu, "
 "SUB_UID_MAX=%lu, SUB_UID_COUNT=%lu)\n"
 msgstr ""
 
+#: lib/find_new_sub_uids.c:121
 #, c-format
 msgid ""
 "%s: Deterministic subordinate UID range for UID %ju exceeds SUB_UID_MAX "
 "(%lu)\n"
 msgstr ""
 
+#: lib/find_new_uid.c:61
 #, c-format
 msgid ""
 "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
 "(%lu)\n"
 msgstr ""
 
+#: lib/find_new_uid.c:91
 #, c-format
 msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
 msgstr ""
 
+#: lib/find_new_uid.c:213
 #, c-format
 msgid "%s: Encountered error attempting to use preferred UID: %s\n"
 msgstr ""
 
+#: lib/find_new_uid.c:325 lib/find_new_uid.c:371
 #, fuzzy, c-format
 msgid ""
 "%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
 msgstr "%s: Nedá sa získať jedinečný UID (už nie sú dostupné žiadne UID)\n"
 
+#: lib/find_new_uid.c:434 lib/find_new_uid.c:480
 #, fuzzy, c-format
 #| msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
 msgstr "%s: Nedá sa získať jedinečný UID (už nie sú dostupné žiadne UID)\n"
 
+#: lib/find_new_uid.c:499
 #, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s: Nedá sa získať jedinečný UID (už nie sú dostupné žiadne UID)\n"
 
+#: lib/getdef.c:264 lib/getdef.c:298 lib/getdef.c:331 lib/getdef.c:363
 #, c-format
 msgid "configuration error - cannot parse %s value: '%s'"
 msgstr ""
 
+#: lib/getdef.c:398
 msgid "Could not allocate space for config info.\n"
 msgstr "Na konfiguračné údaje sa nedá vyhradiť dostatok miesta.\n"
 
+#: lib/getdef.c:444
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
 "konfiguračná chyba - neznámy predmet „%s“ (informujte správcu systému)\n"
 
+#: lib/idmapping.c:52
 #, fuzzy, c-format
 #| msgid "%s: Authentication failure\n"
 msgid "%s: Memory allocation failure\n"
 msgstr "%s: Autentifikácia zlyhala\n"
 
+#: lib/idmapping.c:62 lib/idmapping.c:68 lib/idmapping.c:74
 #, c-format
 msgid "%s: subuid overflow detected.\n"
 msgstr ""
 
+#: lib/idmapping.c:146
 #, fuzzy, c-format
 #| msgid "%s: invalid field '%s'\n"
 msgid "%s: Invalid map file %s specified\n"
 msgstr "%s: chybná položka „%s“\n"
 
+#: lib/idmapping.c:153
 #, c-format
 msgid "%s: Could not prctl(PR_SET_KEEPCAPS)\n"
 msgstr ""
 
+#: lib/idmapping.c:158
 #, fuzzy, c-format
 msgid "%s: Could not seteuid to %d\n"
 msgstr "Na konfiguračné údaje sa nedá vyhradiť dostatok miesta.\n"
 
+#: lib/idmapping.c:174
 #, fuzzy, c-format
 msgid "%s: Could not set caps\n"
 msgstr "Na konfiguračné údaje sa nedá vyhradiť dostatok miesta.\n"
 
+#: lib/idmapping.c:193
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
 msgid "%s: seprintf failed!\n"
 msgstr "%s: nedá sa otvoriť súbor\n"
 
+#: lib/idmapping.c:200
 #, fuzzy, c-format
 msgid "%s: open of %s failed: %s\n"
 msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 
+#: lib/idmapping.c:205
 #, fuzzy, c-format
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 
+#: lib/idmapping.c:210
 #, fuzzy, c-format
 msgid "%s: closing %s failed: %s\n"
 msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 
+#: lib/limits.c:463
 msgid "Too many logins.\n"
 msgstr "Príliš mnoho prihlásení.\n"
 
+#: lib/loginprompt.c:77
 #, c-format
 msgid ""
 "\n"
@@ -285,73 +367,93 @@ msgstr ""
 "\n"
 "Prihlasovacie meno na %s: "
 
+#: lib/mail.c:43 lib/mail.c:61
 msgid "You have new mail."
 msgstr "Máte novú poštu."
 
+#: lib/mail.c:57
 msgid "No mail."
 msgstr "Nemáte žiadnu poštu."
 
+#: lib/mail.c:59
 msgid "You have mail."
 msgstr "Máte poštu."
 
+#: lib/nscd.c:36
 #, c-format
 msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr ""
 
+#: lib/nscd.c:47
 #, c-format
 msgid "%s: nscd exited with status %d\n"
 msgstr ""
 
+#: lib/obscure.c:91
 msgid "no change"
 msgstr "žiadna zmena"
 
+#: lib/obscure.c:99
 msgid "a palindrome"
 msgstr "palindróm"
 
+#: lib/obscure.c:101
 msgid "case changes only"
 msgstr "iba zmeny vo veľkosti písmen"
 
+#: lib/obscure.c:103
 msgid "too similar"
 msgstr "veľmi podobné"
 
+#: lib/obscure.c:105
 msgid "rotated"
 msgstr "opakované"
 
+#: lib/obscure.c:129
 msgid "too short"
 msgstr "veľmi krátke"
 
+#: lib/obscure.c:188
 #, c-format
 msgid "Bad password: %s.  "
 msgstr "Heslo %s je chybné. "
 
+#: lib/pam_pass.c:44
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
 msgstr "passwd: volanie pam_start() zlyhalo, chyba %d\n"
 
+#: lib/pam_pass.c:50
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
+#: lib/pam_pass.c:51
 msgid "passwd: password unchanged\n"
 msgstr "passwd: heslo nezmenené\n"
 
+#: lib/pam_pass.c:56
 msgid "passwd: password updated successfully\n"
 msgstr "passwd: heslo bolo úspešne zmenené\n"
 
+#: lib/pam_pass_non_interactive.c:64
 #, c-format
 msgid "%s: PAM modules requesting echoing are not supported.\n"
 msgstr ""
 
+#: lib/pam_pass_non_interactive.c:89
 #, fuzzy, c-format
 #| msgid "%s: repository %s not supported\n"
 msgid "%s: conversation type %d not supported.\n"
 msgstr "%s: úložisko %s nie je podporované\n"
 
+#: lib/pam_pass_non_interactive.c:129
 #, fuzzy, c-format
 #| msgid "%s: pam_start: error %d\n"
 msgid "%s: (user %s) pam_start failure %d\n"
 msgstr "%s: pam_start: chyba %d\n"
 
+#: lib/pam_pass_non_interactive.c:138
 #, fuzzy, c-format
 #| msgid "passwd: pam_start() failed, error %d\n"
 msgid ""
@@ -359,45 +461,56 @@ msgid ""
 "%s\n"
 msgstr "passwd: volanie pam_start() zlyhalo, chyba %d\n"
 
+#: lib/pwauth.c:37 src/newgrp.c:177
 msgid "Password: "
 msgstr "Heslo: "
 
+#: lib/pwauth.c:39
 #, c-format
 msgid "%s's Password: "
 msgstr "Heslo používateľa %s:"
 
+#: lib/pwdcheck.c:35 src/passwd.c:229
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Chybné heslo pre %s.\n"
 
+#: lib/root_flag.c:50
 #, c-format
 msgid "%s: multiple --root options\n"
 msgstr ""
 
+#: lib/root_flag.c:59
 #, c-format
 msgid "%s: option '%s' requires an argument\n"
 msgstr ""
 
+#: lib/root_flag.c:78 src/chage.c:780
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: zlyhalo odstránenie právomocí (%s)\n"
 
+#: lib/root_flag.c:85
 #, fuzzy, c-format
 msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
 msgstr "%s: chybné telefónne číslo domov: „%s“\n"
 
+#: lib/root_flag.c:92
 #, fuzzy, c-format
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: lib/root_flag.c:99
 #, fuzzy, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: lib/root_flag.c:106
 #, fuzzy, c-format
 msgid "%s: cannot chdir in chroot directory %s: %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: lib/salt.c:391
 #, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
@@ -406,6 +519,7 @@ msgstr ""
 "neplatná hodnota ENCRYPT_METHOD: „%s“.\n"
 "Používa sa štandardná hodnota DES.\n"
 
+#: lib/salt.c:417
 #, c-format
 msgid ""
 "Unable to generate a salt from setting \"%s\", check your settings in "
@@ -413,219 +527,276 @@ msgid ""
 "method.\n"
 msgstr ""
 
+#: lib/selinux.c:140
 #, fuzzy
 #| msgid "Cannot open audit interface - aborting.\n"
 msgid "Cannot open audit interface.\n"
 msgstr "Nie je možné otvoriť rozhranie pre audit - prerušuje sa.\n"
 
+#: lib/selinux.c:195
 #, c-format
 msgid "%s: can not get previous SELinux process context: %s\n"
 msgstr ""
 
+#: lib/semanage.c:47
 #, c-format
 msgid "[libsemanage]: %s\n"
 msgstr ""
 
+#: lib/semanage.c:66
 #, c-format
 msgid "Cannot create SELinux management handle\n"
 msgstr ""
 
+#: lib/semanage.c:74
 #, c-format
 msgid "SELinux policy not managed\n"
 msgstr ""
 
+#: lib/semanage.c:80
 #, c-format
 msgid "Cannot read SELinux policy store\n"
 msgstr ""
 
+#: lib/semanage.c:87
 #, c-format
 msgid "Cannot establish SELinux management connection\n"
 msgstr ""
 
+#: lib/semanage.c:93
 #, c-format
 msgid "Cannot begin SELinux transaction\n"
 msgstr ""
 
+#: lib/semanage.c:119
 #, c-format
 msgid "Could not query seuser for %s\n"
 msgstr ""
 
+#: lib/semanage.c:128 lib/semanage.c:189
 #, fuzzy, c-format
 msgid "Could not set serange for %s to %s\n"
 msgstr "Na konfiguračné údaje sa nedá vyhradiť dostatok miesta.\n"
 
+#: lib/semanage.c:138
 #, fuzzy, c-format
 msgid "Could not set sename for %s\n"
 msgstr "Na konfiguračné údaje sa nedá vyhradiť dostatok miesta.\n"
 
+#: lib/semanage.c:147
 #, c-format
 msgid "Could not modify login mapping for %s\n"
 msgstr ""
 
+#: lib/semanage.c:172
 #, fuzzy, c-format
 msgid "Cannot create SELinux login mapping for %s\n"
 msgstr "Menia sa informácie vypršania platnosti pre používateľa %s\n"
 
+#: lib/semanage.c:180
 #, c-format
 msgid "Could not set name for %s\n"
 msgstr ""
 
+#: lib/semanage.c:199
 #, c-format
 msgid "Could not set SELinux user for %s\n"
 msgstr ""
 
+#: lib/semanage.c:208
 #, c-format
 msgid "Could not add login mapping for %s\n"
 msgstr ""
 
+#: lib/semanage.c:235 lib/semanage.c:300
 #, c-format
 msgid "Cannot init SELinux management\n"
 msgstr ""
 
+#: lib/semanage.c:242 lib/semanage.c:307
 #, fuzzy, c-format
 msgid "Cannot create SELinux user key\n"
 msgstr "%s: vaše používateľské meno sa nedá zistiť.\n"
 
+#: lib/semanage.c:249 lib/semanage.c:314 lib/semanage.c:329
 #, fuzzy, c-format
 msgid "Cannot verify the SELinux user\n"
 msgstr "%s: riadok %d: nedá sa nájsť používateľ %s\n"
 
+#: lib/semanage.c:258
 #, c-format
 msgid "Cannot modify SELinux user mapping\n"
 msgstr ""
 
+#: lib/semanage.c:266
 #, c-format
 msgid "Cannot add SELinux user mapping\n"
 msgstr ""
 
+#: lib/semanage.c:274 lib/semanage.c:353
 #, c-format
 msgid "Cannot commit SELinux transaction\n"
 msgstr ""
 
+#: lib/semanage.c:321
 #, c-format
 msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
 msgstr ""
 
+#: lib/semanage.c:336
 #, c-format
 msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
 msgstr ""
 
+#: lib/semanage.c:345
 #, c-format
 msgid "Could not delete login mapping for %s"
 msgstr ""
 
+#: lib/setupenv.c:114
 #, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "Aktuálny adresár sa nedá nastaviť na „%s“\n"
 
+#: lib/setupenv.c:122
 msgid "No directory, logging in with HOME=/"
 msgstr "Žiadny adresár, prihlásenie s HOME na /"
 
+#: lib/shell.c:77
 #, c-format
 msgid "Cannot execute %s"
 msgstr "%s sa nedá spustiť."
 
+#: lib/sub.c:38
 #, c-format
 msgid "Maximum subsystem depth reached\n"
 msgstr ""
 
+#: lib/sub.c:49
 #, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "Chybný koreňový adresár „%s“\n"
 
+#: lib/sub.c:62
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Koreňový adresár sa nedá zmeniť na „%s“\n"
 
+#: lib/tcbfuncs.c:67 lib/xgetXXbyYY.c:116 src/passwd.c:491
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: nedostatok pamäti\n"
 
+#: lib/tcbfuncs.c:106 lib/tcbfuncs.c:190 lib/tcbfuncs.c:310 lib/tcbfuncs.c:476
+#: lib/tcbfuncs.c:561
 #, fuzzy, c-format
 msgid "%s: Cannot stat %s: %s\n"
 msgstr "%s: nie je možné zmazať %s\n"
 
+#: lib/tcbfuncs.c:122
 #, fuzzy, c-format
 msgid "%s: %s is neither a directory, nor a symlink.\n"
 msgstr "%s: chybný domovský adresár „%s“\n"
 
+#: lib/tcbfuncs.c:129
 #, fuzzy, c-format
 msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: nie je možné odstrániť položku „%s“ z %s\n"
 
+#: lib/tcbfuncs.c:203
 #, fuzzy, c-format
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: lib/tcbfuncs.c:209 lib/tcbfuncs.c:514 lib/tcbfuncs.c:530 lib/tcbfuncs.c:598
+#: lib/tcbfuncs.c:610
 #, fuzzy, c-format
 msgid "%s: Cannot change owner of %s: %s\n"
 msgstr "lastlog: Nepodarilo sa zistiť veľkosť %s: %s\n"
 
+#: lib/tcbfuncs.c:215 lib/tcbfuncs.c:488 lib/tcbfuncs.c:520 lib/tcbfuncs.c:536
+#: lib/tcbfuncs.c:604 lib/tcbfuncs.c:616
 #, fuzzy, c-format
 msgid "%s: Cannot change mode of %s: %s\n"
 msgstr "%s: upozornenie: nemôžem odstrániť %s: %s"
 
+#: lib/tcbfuncs.c:246
 #, fuzzy, c-format
 msgid "%s: unlink: %s: %s\n"
 msgstr "%s: premenovať: %s"
 
+#: lib/tcbfuncs.c:276
 #, fuzzy, c-format
 msgid "%s: Cannot remove directory %s: %s\n"
 msgstr "%s: adresár %s sa nedá premenovať na %s\n"
 
+#: lib/tcbfuncs.c:337
 #, fuzzy, c-format
 msgid "%s: Cannot rename %s to %s: %s\n"
 msgstr "%s: adresár %s sa nedá premenovať na %s\n"
 
+#: lib/tcbfuncs.c:346
 #, fuzzy, c-format
 msgid "%s: Cannot remove %s: %s\n"
 msgstr "%s: upozornenie: nemôžem odstrániť %s: %s"
 
+#: lib/tcbfuncs.c:361
 #, fuzzy, c-format
 msgid "%s: Cannot create symbolic link %s: %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: lib/tcbfuncs.c:482
 #, fuzzy, c-format
 msgid "%s: Cannot change owners of %s: %s\n"
 msgstr "lastlog: Nepodarilo sa zistiť veľkosť %s: %s\n"
 
+#: lib/tcbfuncs.c:495
 #, fuzzy, c-format
 msgid "%s: Cannot lstat %s: %s\n"
 msgstr "%s: nie je možné zmazať %s\n"
 
+#: lib/tcbfuncs.c:500
 #, fuzzy, c-format
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
 msgstr "%s: súbor s tieňovými heslami sa nedá aktualizovať\n"
 
+#: lib/tcbfuncs.c:506
 #, c-format
 msgid ""
 "%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
 "The account is left locked.\n"
 msgstr ""
 
+#: lib/tcbfuncs.c:586
 #, fuzzy, c-format
 msgid "%s: mkdir: %s: %s\n"
 msgstr "%s: premenovať: %s"
 
+#: lib/tcbfuncs.c:592 src/faillog.c:642
 #, fuzzy, c-format
 msgid "%s: Cannot open %s: %s\n"
 msgstr "%s: súbor %s sa nedá otvoriť\n"
 
+#: lib/user_busy.c:84
 #, c-format
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: používateľ %s je práve prihlásený\n"
 
+#: lib/user_busy.c:234 lib/user_busy.c:257
 #, fuzzy, c-format
 #| msgid "%s: user %s is currently logged in\n"
 msgid "%s: user %s is currently used by process %d\n"
 msgstr "%s: používateľ %s je práve prihlásený\n"
 
+#: lib/utmp.c:67
 msgid "Unable to determine your tty name."
 msgstr "Nedá sa zistiť názov vášho tty."
 
+#: lib/yesno.c:60
 msgid "No"
 msgstr "Nie"
 
+#: src/chage.c:135 src/userdel.c:140 src/usermod.c:423
 #, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
@@ -636,6 +807,7 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/chage.c:139
 msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
@@ -643,20 +815,29 @@ msgstr ""
 "  -d, --lastday POSL_DEN        nastaví dátum poslednej zmeny hesla na "
 "POSL_DEN\n"
 
+#: src/chage.c:140
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
 "  -E, --expiredate EXP_DATUM    nastaví dátum vypršania platnosti účtu na\n"
 "                                EXP_DATUM\n"
 
+#: src/chage.c:141 src/chgpasswd.c:128 src/chpasswd.c:130 src/chsh.c:110
+#: src/faillog.c:81 src/gpasswd.c:134 src/groupadd.c:114 src/groupdel.c:83
+#: src/groupmod.c:127 src/grpck.c:150 src/grpconv.c:92 src/grpunconv.c:91
+#: src/lastlog.c:77 src/newusers.c:144 src/passwd.c:161 src/pwck.c:141
+#: src/pwconv.c:117 src/pwunconv.c:77 src/su.c:458 src/useradd.c:918
+#: src/userdel.c:148 src/usermod.c:438 src/vipw.c:92
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr "  -h, --help                    zobrazí tohto pomocníka a ukončí sa\n"
 
+#: src/chage.c:142
 #, fuzzy
 #| msgid "  -g, --group                   edit group database\n"
 msgid "  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"
 msgstr "  -g, --group                   upraví databázu skupín\n"
 
+#: src/chage.c:143
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
@@ -664,9 +845,11 @@ msgstr ""
 "  -I, --inactive NEAKTIV        nastaví nefunkčnosť hesla na NEAKTIV dní\n"
 "                                po vypršaní platnosti účtu\n"
 
+#: src/chage.c:145
 msgid "  -l, --list                    show account aging information\n"
 msgstr "  -l, --list                    zobrazí časové údaje o účte\n"
 
+#: src/chage.c:146
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
@@ -674,6 +857,7 @@ msgstr ""
 "  -m, --mindays MIN_DNÍ         nastaví minimálny počet dní pred zmenou\n"
 "                                hesla na MIN_DNÍ\n"
 
+#: src/chage.c:148
 #, fuzzy
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
@@ -682,121 +866,214 @@ msgstr ""
 "  -M, --maxdays MAX_DNÍ         nastaví maximálny počet dní pred zmenou\n"
 "                                hesla na MAX_DNÍ\n"
 
+#: src/chage.c:150 src/chfn.c:115 src/chgpasswd.c:129 src/chpasswd.c:131
+#: src/chsh.c:111 src/faillog.c:85 src/groupadd.c:120 src/groupdel.c:84
+#: src/groupmod.c:132 src/grpck.c:153 src/grpconv.c:93 src/grpunconv.c:92
+#: src/lastlog.c:78 src/newusers.c:146 src/passwd.c:170 src/pwck.c:145
+#: src/pwconv.c:118 src/pwunconv.c:78 src/useradd.c:933 src/userdel.c:150
+#: src/usermod.c:449 src/vipw.c:95
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
+#: src/chage.c:151 src/chpasswd.c:132 src/groupadd.c:121 src/passwd.c:171
 msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
 msgstr ""
 
+#: src/chage.c:152
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
 "  -W, --warndays UPOZ_DNÍ       nastaví upozornenie o platnosti účtu na "
 "UPOZ_DNÍ\n"
 
+#: src/chage.c:170 src/chfn.c:180 src/chsh.c:125
 msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
 "Zadajte novú hodnotu alebo stlačte ENTER pre použitie predvolenej hodnoty"
 
+#: src/chage.c:174
 msgid "Minimum Password Age"
 msgstr "Minimálna doba platnosti hesla"
 
+#: src/chage.c:179
 msgid "Maximum Password Age"
 msgstr "Maximálna doba platnosti hesla"
 
+#: src/chage.c:188
 msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Posledná zmena hesla (YYYY-MM-DD)"
 
+#: src/chage.c:200
 msgid "Password Expiration Warning"
 msgstr "Upozornenie o uplynutí doby platnosti hesla"
 
+#: src/chage.c:205
 msgid "Password Inactive"
 msgstr "Nečinné heslo"
 
+#: src/chage.c:215
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Uplynutie platnosti účtu (YYYY-MM-DD)"
 
+#: src/chage.c:238 src/chage.c:291 src/chage.c:311
 msgid "never"
 msgstr "nikdy"
 
+#: src/chage.c:242 src/chage.c:247 src/chage.c:252
 msgid "future"
 msgstr ""
 
+#: src/chage.c:273
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Posledná zmena hesla\t\t\t\t\t: "
 
+#: src/chage.c:275 src/chage.c:286 src/chage.c:304
 msgid "password must be changed"
 msgstr "heslo je potrebné zmeniť"
 
+#: src/chage.c:284
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Platnosť hesla uplynie\t\t\t\t\t: "
 
+#: src/chage.c:302
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Neaktívne heslo\t\t\t\t\t: "
 
+#: src/chage.c:320
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Platnosť účtu uplynie\t\t\t\t\t\t: "
 
+#: src/chage.c:330
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
 msgstr "Minimálny počet dní medzi zmenami hesla\t\t: %ld\n"
 
+#: src/chage.c:332
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
 msgstr "Maximálny počet dní medzi zmenami hesla\t\t: %ld\n"
 
+#: src/chage.c:334
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr "Počet dní upozornenia pred vypršaním platnosti hesla\t: %ld\n"
 
+#: src/chage.c:372 src/chage.c:382 src/useradd.c:1253 src/usermod.c:1119
 #, c-format
 msgid "%s: invalid date '%s'\n"
 msgstr "%s: chybný dátum „%s“\n"
 
+#: src/chage.c:397 src/chage.c:409 src/chage.c:418 src/chage.c:433
+#: src/chgpasswd.c:198 src/chpasswd.c:199 src/faillog.c:554 src/faillog.c:564
+#: src/faillog.c:579 src/lastlog.c:336 src/lastlog.c:364 src/newusers.c:691
+#: src/passwd.c:887 src/passwd.c:907 src/passwd.c:945 src/passwd.c:957
+#: src/useradd.c:418 src/useradd.c:1281 src/usermod.c:1130
 #, c-format
 msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: chybný číselný parameter „%s“\n"
 
+#: src/chage.c:464
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: nepoužívajte „l“ s ostatnými príznakmi\n"
 
+#: src/chage.c:492 src/chage.c:810 src/chfn.c:243 src/chfn.c:252 src/chfn.c:261
+#: src/chfn.c:275 src/chfn.c:290 src/chfn.c:325 src/chfn.c:336
+#: src/gpasswd.c:212 src/login.c:306 src/passwd.c:1022 src/passwd.c:1069
+#: src/passwd.c:1134
 #, c-format
 msgid "%s: Permission denied.\n"
 msgstr "%s: Odmietnutý prístup.\n"
 
+#: src/chage.c:517 src/chage.c:538 src/chfn.c:417 src/chgpasswd.c:266
+#: src/chgpasswd.c:282 src/chpasswd.c:271 src/chpasswd.c:286 src/chsh.c:396
+#: src/gpasswd.c:349 src/gpasswd.c:359 src/groupadd.c:347 src/groupadd.c:357
+#: src/groupdel.c:217 src/groupdel.c:226 src/groupmod.c:669 src/groupmod.c:680
+#: src/groupmod.c:691 src/grpck.c:281 src/grpck.c:290 src/grpconv.c:159
+#: src/grpconv.c:171 src/grpunconv.c:161 src/grpunconv.c:174 src/newusers.c:772
+#: src/newusers.c:780 src/newusers.c:788 src/newusers.c:797 src/newusers.c:808
+#: src/newusers.c:817 src/passwd.c:504 src/passwd.c:521 src/pwck.c:263
+#: src/pwck.c:271 src/pwconv.c:191 src/pwconv.c:204 src/pwunconv.c:155
+#: src/pwunconv.c:169 src/useradd.c:1767 src/useradd.c:1785 src/useradd.c:1800
+#: src/useradd.c:1819 src/useradd.c:1833 src/useradd.c:1855 src/userdel.c:558
+#: src/userdel.c:571 src/userdel.c:585 src/userdel.c:598 src/userdel.c:614
+#: src/userdel.c:628 src/usermod.c:1636 src/usermod.c:1650 src/usermod.c:1670
+#: src/usermod.c:1684 src/usermod.c:1701 src/usermod.c:1716
 #, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: nedá sa zamknúť %s, skúste to opäť neskôr\n"
 
+#: src/chage.c:524 src/chage.c:546 src/chfn.c:424 src/chgpasswd.c:273
+#: src/chgpasswd.c:288 src/chpasswd.c:278 src/chpasswd.c:293 src/chsh.c:402
+#: src/gpasswd.c:371 src/gpasswd.c:381 src/gpasswd.c:720 src/gpasswd.c:750
+#: src/groupdel.c:243 src/groupdel.c:252 src/groupmod.c:708 src/groupmod.c:718
+#: src/groupmod.c:729 src/grpck.c:304 src/grpck.c:313 src/grpconv.c:165
+#: src/grpconv.c:177 src/grpunconv.c:168 src/grpunconv.c:181 src/newusers.c:826
+#: src/newusers.c:830 src/newusers.c:834 src/newusers.c:839 src/newusers.c:847
+#: src/newusers.c:855 src/passwd.c:511 src/passwd.c:528 src/pwck.c:284
+#: src/pwck.c:293 src/pwck.c:592 src/pwconv.c:198 src/pwconv.c:211
+#: src/pwunconv.c:162 src/pwunconv.c:176 src/useradd.c:1773 src/useradd.c:1792
+#: src/useradd.c:1807 src/useradd.c:1825 src/useradd.c:1840 src/useradd.c:1862
+#: src/userdel.c:565 src/userdel.c:578 src/userdel.c:591 src/userdel.c:604
+#: src/userdel.c:621 src/userdel.c:635 src/usermod.c:1643 src/usermod.c:1657
+#: src/usermod.c:1677 src/usermod.c:1691 src/usermod.c:1708 src/usermod.c:1723
 #, c-format
 msgid "%s: cannot open %s\n"
 msgstr "%s: súbor %s sa nedá otvoriť\n"
 
+#: src/chage.c:567 src/chage.c:577 src/chfn.c:464 src/chgpasswd.c:308
+#: src/chgpasswd.c:324 src/chpasswd.c:312 src/chpasswd.c:327 src/chsh.c:443
+#: src/gpasswd.c:606 src/gpasswd.c:620 src/groupadd.c:288 src/groupadd.c:309
+#: src/groupdel.c:159 src/groupdel.c:181 src/groupmod.c:494 src/groupmod.c:515
+#: src/groupmod.c:544 src/grpck.c:342 src/grpck.c:348 src/grpconv.c:250
+#: src/grpconv.c:257 src/grpunconv.c:209 src/newusers.c:873 src/newusers.c:887
+#: src/newusers.c:904 src/newusers.c:912 src/newusers.c:918 src/newusers.c:937
+#: src/passwd.c:546 src/passwd.c:562 src/pwck.c:324 src/pwck.c:335
+#: src/pwck.c:673 src/pwconv.c:288 src/pwconv.c:295 src/pwunconv.c:209
+#: src/useradd.c:1603 src/useradd.c:1609 src/useradd.c:1619 src/useradd.c:1625
+#: src/useradd.c:1704 src/useradd.c:1712 src/userdel.c:400 src/userdel.c:414
+#: src/userdel.c:427 src/userdel.c:442 src/userdel.c:459 src/userdel.c:473
+#: src/usermod.c:1519 src/usermod.c:1532 src/usermod.c:1550 src/usermod.c:1568
+#: src/usermod.c:1586 src/usermod.c:1602
 #, c-format
 msgid "%s: failure while writing changes to %s\n"
 msgstr "%s: chyba pri zapisovaní zmien do %s\n"
 
+#: src/chage.c:622 src/chage.c:645 src/chfn.c:455 src/chsh.c:434
+#: src/gpasswd.c:683 src/gpasswd.c:690 src/groupadd.c:237 src/groupadd.c:247
+#: src/groupmod.c:301 src/groupmod.c:322 src/groupmod.c:757 src/grpck.c:646
+#: src/grpck.c:655 src/grpconv.c:233 src/grpconv.c:242 src/grpunconv.c:198
+#: src/passwd.c:659 src/passwd.c:765 src/pwck.c:643 src/pwck.c:652
+#: src/pwconv.c:270 src/pwconv.c:280 src/pwunconv.c:199 src/useradd.c:1058
+#: src/useradd.c:1119 src/useradd.c:1939 src/useradd.c:1955 src/useradd.c:2160
+#: src/useradd.c:2170 src/userdel.c:207 src/userdel.c:273 src/usermod.c:839
+#: src/usermod.c:991 src/usermod.c:1807 src/usermod.c:1821
 #, c-format
 msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
+#: src/chage.c:769
 #, c-format
 msgid "%s: the shadow password file is not present\n"
 msgstr "%s: súbor s tieňovými heslami nie je dostupný\n"
 
+#: src/chage.c:787 src/chfn.c:437 src/chsh.c:416 src/groupmod.c:749
+#: src/passwd.c:626 src/passwd.c:675 src/usermod.c:1753
 #, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s: používateľ „%s“ neexistuje v %s\n"
 
+#: src/chage.c:823
 #, c-format
 msgid "Changing the aging information for %s\n"
 msgstr "Menia sa informácie vypršania platnosti pre používateľa %s\n"
 
+#: src/chage.c:826
 #, c-format
 msgid "%s: error changing fields\n"
 msgstr "%s: chyba pri zmene položiek\n"
 
+#: src/chfn.c:107 src/chsh.c:106 src/passwd.c:154
 #, c-format
 msgid ""
 "Usage: %s [options] [LOGIN]\n"
@@ -807,103 +1084,136 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/chfn.c:111
 msgid "  -f, --full-name FULL_NAME     change user's full name\n"
 msgstr ""
 
+#: src/chfn.c:112
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
 msgstr ""
 
+#: src/chfn.c:113
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
 msgstr ""
 
+#: src/chfn.c:114
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
 msgstr ""
 
+#: src/chfn.c:116
 msgid "  -u, --help                    display this help message and exit\n"
 msgstr "  -u, --help                    zobrazí tohto pomocníka a ukončí sa\n"
 
+#: src/chfn.c:117
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr ""
 
+#: src/chfn.c:183 src/chfn.c:185
 msgid "Full Name"
 msgstr "Celé meno"
 
+#: src/chfn.c:185 src/chfn.c:191 src/chfn.c:197 src/chfn.c:203
 #, c-format
 msgid "\t%s: %s\n"
 msgstr "\t%s: %s\n"
 
+#: src/chfn.c:189 src/chfn.c:191
 msgid "Room Number"
 msgstr "Číslo miestnosti"
 
+#: src/chfn.c:195 src/chfn.c:197
 msgid "Work Phone"
 msgstr "Telefón do zamestnania"
 
+#: src/chfn.c:201 src/chfn.c:203
 msgid "Home Phone"
 msgstr "Telefón domov"
 
+#: src/chfn.c:207
 msgid "Other"
 msgstr "Ostatné"
 
+#: src/chfn.c:267 src/chfn.c:664
 #, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: položka je príliš dlhá\n"
 
+#: src/chfn.c:357 src/chfn.c:622 src/chsh.c:335 src/chsh.c:511
+#: src/gpasswd.c:917 src/newgidmap.c:183 src/newgrp.c:440 src/newuidmap.c:117
+#: src/passwd.c:988 src/su.c:783
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: vaše používateľské meno sa nedá zistiť.\n"
 
+#: src/chfn.c:373 src/chsh.c:351
 #, c-format
 msgid "%s: PAM: %s\n"
 msgstr "%s: PAM: %s\n"
 
+#: src/chfn.c:405 src/chsh.c:386 src/gpasswd.c:1092 src/passwd.c:1201
 msgid "Cannot change ID to root.\n"
 msgstr "ID sa nedá zmeniť na root.\n"
 
+#: src/chfn.c:520
 #, c-format
 msgid "%s: name with non-ASCII characters: '%s'\n"
 msgstr "%s: meno so znakmi, ktoré nie sú v ASCII: „%s“\n"
 
+#: src/chfn.c:522
 #, c-format
 msgid "%s: invalid name: '%s'\n"
 msgstr "%s: chybné meno: „%s“\n"
 
+#: src/chfn.c:527
 #, c-format
 msgid "%s: room number with non-ASCII characters: '%s'\n"
 msgstr "%s: číslo miestnosti so znakmi, ktoré nie sú v ASCII: „%s“\n"
 
+#: src/chfn.c:529
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: chybné číslo miestnosti: „%s“\n"
 
+#: src/chfn.c:534
 #, c-format
 msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: chybné telefónne číslo do zamestnania: „%s“\n"
 
+#: src/chfn.c:539
 #, c-format
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: chybné telefónne číslo domov: „%s“\n"
 
+#: src/chfn.c:545
 #, c-format
 msgid "%s: '%s' contains non-ASCII characters\n"
 msgstr "%s: „%s“ obsahuje znaky, ktoré nie sú v ASCII\n"
 
+#: src/chfn.c:548
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: „%s“ obsahuje chybné znaky\n"
 
+#: src/chfn.c:608 src/chsh.c:497 src/passwd.c:997
 #, fuzzy, c-format
 #| msgid "%s: '%s' is not a valid group name\n"
 msgid "%s: Provided user name is not a valid name\n"
 msgstr "%s: „%s“ nie je platným názvom skupiny\n"
 
+#: src/chfn.c:614 src/chsh.c:504 src/gpasswd.c:199 src/gpasswd.c:244
+#: src/newusers.c:365 src/passwd.c:1076 src/userdel.c:1016 src/usermod.c:1321
 #, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: používateľ „%s“ neexistuje\n"
 
+#: src/chfn.c:644
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Mením informácie o používateľovi %s\n"
 
+#: src/chgpasswd.c:112 src/chpasswd.c:114 src/faillog.c:76 src/grpconv.c:88
+#: src/grpunconv.c:87 src/lastlog.c:71 src/newusers.c:126 src/pwconv.c:113
+#: src/pwunconv.c:73 src/vipw.c:87
 #, c-format
 msgid ""
 "Usage: %s [options]\n"
@@ -914,13 +1224,16 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/chgpasswd.c:117 src/chpasswd.c:119 src/newusers.c:133
 #, fuzzy, c-format
 msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr "  -c, --crypt-method            metóda šifrovania (jedna z %s)\n"
 
+#: src/chgpasswd.c:127 src/chpasswd.c:129
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr "  -e, --encrypted               zadané heslá sú zakódované\n"
 
+#: src/chgpasswd.c:130 src/chpasswd.c:133 src/newusers.c:148
 #, fuzzy
 #| msgid ""
 #| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -932,115 +1245,145 @@ msgstr ""
 "  -s, --sha-rounds              počet cyklov šifrovacích\n"
 "                                algoritmov SHA*\n"
 
+#: src/chgpasswd.c:176
 #, fuzzy, c-format
 #| msgid "%s: unsupported crypt method: %s\n"
 msgid "%s: no crypt method defined\n"
 msgstr "%s: nepodporovaná metóda šifrovania: %s\n"
 
+#: src/chgpasswd.c:222 src/chpasswd.c:223 src/newusers.c:732 src/useradd.c:1465
+#: src/useradd.c:1471 src/useradd.c:1496 src/usermod.c:1371 src/usermod.c:1378
+#: src/usermod.c:1399 src/usermod.c:1406 src/usermod.c:1414
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: prepínač %s je povolený iba s prepínačom %s\n"
 
+#: src/chgpasswd.c:229 src/chpasswd.c:230
 #, fuzzy, c-format
 #| msgid "%s: the -c, -e, and -m flags are exclusive\n"
 msgid "%s: the -c and -e flags are exclusive\n"
 msgstr "%s: voľby -c, -e a -m sa navzájom vylučujú\n"
 
+#: src/chgpasswd.c:248 src/chpasswd.c:249 src/newusers.c:751
 #, c-format
 msgid "%s: unsupported crypt method: %s\n"
 msgstr "%s: nepodporovaná metóda šifrovania: %s\n"
 
+#: src/chgpasswd.c:390 src/chpasswd.c:440 src/newusers.c:1029
 #, fuzzy, c-format
 #| msgid "%s: line %d: line too long\n"
 msgid "%s: line %jd: line too long\n"
 msgstr "%s: riadok %d je príliš dlhý\n"
 
+#: src/chgpasswd.c:409 src/chpasswd.c:460
 #, fuzzy, c-format
 #| msgid "%s: line %d: missing new password\n"
 msgid "%s: line %jd: missing new password\n"
 msgstr "%s: riadok %d: chýba nové heslo\n"
 
+#: src/chgpasswd.c:440 src/chpasswd.c:502 src/gpasswd.c:850 src/newusers.c:457
+#: src/newusers.c:534 src/newusers.c:584 src/passwd.c:347
 #, fuzzy, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: zlyhalo odstránenie %s\n"
 
+#: src/chgpasswd.c:453
 #, fuzzy, c-format
 #| msgid "%s: line %d: group '%s' does not exist\n"
 msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s: riadok %d: skupina „%s“ neexistuje\n"
 
+#: src/chgpasswd.c:513 src/chgpasswd.c:525 src/chpasswd.c:581
+#: src/chpasswd.c:591
 #, fuzzy, c-format
 #| msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
 msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: riadok %d: nepodarilo sa pripraviť novú položku %s „%s“\n"
 
+#: src/chgpasswd.c:542 src/chpasswd.c:616
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: zistená chyba, zmeny budú zamietnuté\n"
 
+#: src/chpasswd.c:471 src/newusers.c:1246
 #, fuzzy, c-format
 msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s: riadok %d: používateľ „%s“ neexistuje\n"
 
+#: src/chpasswd.c:487
 #, fuzzy, c-format
 msgid "%s: (line %jd, user %s) invalid password hash\n"
 msgstr "%s: riadok %d: používateľ „%s“ neexistuje\n"
 
+#: src/chpasswd.c:515
 #, fuzzy, c-format
 #| msgid "%s: line %d: user '%s' does not exist\n"
 msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s: riadok %d: používateľ „%s“ neexistuje\n"
 
+#: src/chsh.c:112 src/usermod.c:450
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
 
+#: src/chsh.c:126
 msgid "Login Shell"
 msgstr "Predvolený shell"
 
+#: src/chsh.c:173
 #, fuzzy, c-format
 #| msgid "%s: Cannot get the size of %s: %s\n"
 msgid "Cannot parse shell files: %s"
 msgstr "%s: Nepodarilo sa zistiť veľkosť %s: %s\n"
 
+#: src/chsh.c:181
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "Cannot evaluate entries in shell files: %s"
 msgstr "%s: nedá sa vytvoriť nový súbor s predvolenými hodnotami\n"
 
+#: src/chsh.c:289 src/chsh.c:301 src/chsh.c:314
 #, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "Nemôžete zmeniť shell pre „%s“.\n"
 
+#: src/chsh.c:535
 #, c-format
 msgid "Changing the login shell for %s\n"
 msgstr "Mením predvolený shell pre %s\n"
 
+#: src/chsh.c:546
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Chybná položka: %s\n"
 
+#: src/chsh.c:555
 #, fuzzy, c-format
 #| msgid "%s: %s is an invalid shell\n"
 msgid "%s: Warning: %s is an invalid shell\n"
 msgstr "%s: %s je neplatný shell\n"
 
+#: src/chsh.c:557
 #, c-format
 msgid "%s: %s is an invalid shell\n"
 msgstr "%s: %s je neplatný shell\n"
 
+#: src/chsh.c:566
 #, fuzzy, c-format
 msgid "%s: Warning: %s does not exist\n"
 msgstr "%s: používateľ %s neexistuje\n"
 
+#: src/chsh.c:568
 #, fuzzy, c-format
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: upozornenie: vlastníkom %s nie je %s\n"
 
+#: src/faillog.c:80
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 "  -a, --all                     zobrazí faillog záznamy všetkých "
 "používateľov\n"
 
+#: src/faillog.c:82
 msgid ""
 "  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
@@ -1048,16 +1391,19 @@ msgstr ""
 "  -l, --lock-secs SEC           po chybnom prihlásení zablokuje účet na SEC\n"
 "                                sekúnd\n"
 
+#: src/faillog.c:83
 msgid ""
 "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 msgstr ""
 "  -m, --maximum MAX             nastaví maximálny počet chybných prihlásení\n"
 "                                na MAX\n"
 
+#: src/faillog.c:84
 msgid "  -r, --reset                   reset the counters of login failures\n"
 msgstr ""
 "  -r, --reset                   vynuluje počítadlá chybných prihlásení\n"
 
+#: src/faillog.c:86
 msgid ""
 "  -t, --time DAYS               display faillog records more recent than "
 "DAYS\n"
@@ -1065,6 +1411,7 @@ msgstr ""
 "  -t, --time DAYS               zobrazí záznamy faillog nie staršie ako\n"
 "                                DAYS dní\n"
 
+#: src/faillog.c:87
 msgid ""
 "  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
 "                                counters and limits (if used with -r, -m,\n"
@@ -1078,49 +1425,61 @@ msgstr ""
 "loginom\n"
 "                                LOGIN\n"
 
+#: src/faillog.c:105 src/faillog.c:121 src/lastlog.c:126
 #, c-format
 msgid "%s: Failed to get the entry for UID %lu\n"
 msgstr "%s: Nepodarilo sa získať položku s UID %lu\n"
 
+#: src/faillog.c:168
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Login       Chybné   Najviac Posledné                 Na\n"
 
+#: src/faillog.c:186
 #, c-format
 msgid " [%lus left]"
 msgstr " [%lus ostalo]"
 
+#: src/faillog.c:189
 #, c-format
 msgid " [%lds lock]"
 msgstr " [%lds zámok]"
 
+#: src/faillog.c:255
 #, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr "%s: Nepodarilo sa znulovať počet chýb pre UID %lu\n"
 
+#: src/faillog.c:351
 #, c-format
 msgid "%s: Failed to set max for UID %lu\n"
 msgstr "%s: Nepodarilo sa nastaviť max. pre UID %lu\n"
 
+#: src/faillog.c:449
 #, c-format
 msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "%s: Nepodarilo sa nastaviť čas zamknutia pre UID %lu\n"
 
+#: src/faillog.c:610 src/lastlog.c:395
 #, c-format
 msgid "%s: Unknown user or range: %s\n"
 msgstr "%s: Neznámy používateľ alebo rozsah: %s\n"
 
+#: src/faillog.c:624 src/lastlog.c:414
 #, c-format
 msgid "%s: unexpected argument: %s\n"
 msgstr "%s: neočakávaný argument: %s\n"
 
+#: src/faillog.c:650 src/lastlog.c:441
 #, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: Nepodarilo sa zistiť veľkosť %s: %s\n"
 
+#: src/faillog.c:677
 #, fuzzy, c-format
 msgid "%s: Failed to write %s: %s\n"
 msgstr "%s: zlyhalo odstránenie %s\n"
 
+#: src/gpasswd.c:128
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [option] GROUP\n"
@@ -1128,25 +1487,32 @@ msgid ""
 "Options:\n"
 msgstr "Použitie: %s [vstup]\n"
 
+#: src/gpasswd.c:132
 msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr ""
 
+#: src/gpasswd.c:133
 msgid "  -d, --delete USER             remove USER from GROUP\n"
 msgstr ""
 
+#: src/gpasswd.c:135
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
+#: src/gpasswd.c:136
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr ""
 
+#: src/gpasswd.c:137
 msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
 msgstr ""
 
+#: src/gpasswd.c:138
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr ""
 
+#: src/gpasswd.c:140
 #, fuzzy
 msgid ""
 "  -A, --administrators ADMIN,...\n"
@@ -1156,58 +1522,73 @@ msgstr ""
 "                                nastaviť zoznam správcov SKUPINY\n"
 "Okrem volieb -A a -M nie je možné voľby kombinovať.\n"
 
+#: src/gpasswd.c:142
 #, fuzzy
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr "Voľby nie je možné kombinovať.\n"
 
+#: src/gpasswd.c:144
 msgid "The options cannot be combined.\n"
 msgstr "Voľby nie je možné kombinovať.\n"
 
+#: src/gpasswd.c:253
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: prepínač -A funguje iba s tieňovými heslami skupín\n"
 
+#: src/gpasswd.c:728 src/groupmod.c:219
 #, c-format
 msgid "%s: group '%s' does not exist in %s\n"
 msgstr "%s: skupina „%s“ neexistuje v %s\n"
 
+#: src/gpasswd.c:740 src/gpasswd.c:776
 #, c-format
 msgid "%s: failure while closing read-only %s\n"
 msgstr "%s: chyba pri zatváraní %s iba na čítanie\n"
 
+#: src/gpasswd.c:811
 #, c-format
 msgid "Changing the password for group %s\n"
 msgstr "Menísa heslo skupiny %s\n"
 
+#: src/gpasswd.c:814
 msgid "New Password: "
 msgstr "Nové heslo: "
 
+#: src/gpasswd.c:821 src/passwd.c:315
 msgid "Re-enter new password: "
 msgstr "Zadajte znova nové heslo: "
 
+#: src/gpasswd.c:836
 msgid "They don't match; try again"
 msgstr "Nezhodujú sa; skúste to znova"
 
+#: src/gpasswd.c:841
 #, c-format
 msgid "%s: Try again later\n"
 msgstr "%s: Skúste to neskôr\n"
 
+#: src/gpasswd.c:993
 #, c-format
 msgid "Adding user %s to group %s\n"
 msgstr "Pridáva sa používateľ %s do skupiny %s.\n"
 
+#: src/gpasswd.c:1010
 #, c-format
 msgid "Removing user %s from group %s\n"
 msgstr "Odstraňuje sa používateľ %s zo skupiny %s\n"
 
+#: src/gpasswd.c:1026
 #, c-format
 msgid "%s: user '%s' is not a member of '%s'\n"
 msgstr "%s: používateľ „%s“ nie je členom „%s“\n"
 
+#: src/gpasswd.c:1065
 #, c-format
 msgid "%s: Not a tty\n"
 msgstr "%s: Nejedná sa o tty\n"
 
+#: src/groupadd.c:107 src/groupdel.c:79 src/groupmod.c:120
 #, c-format
 msgid ""
 "Usage: %s [options] GROUP\n"
@@ -1218,33 +1599,40 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/groupadd.c:111
 msgid ""
 "  -f, --force                   exit successfully if the group already "
 "exists,\n"
 "                                and cancel -g if the GID is already used\n"
 msgstr ""
 
+#: src/groupadd.c:113
 msgid "  -g, --gid GID                 use GID for the new group\n"
 msgstr "  -g, --gid GID                 pre novú skupinu použije GID\n"
 
+#: src/groupadd.c:115 src/useradd.c:920
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
 
+#: src/groupadd.c:116
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
 "                                (non-unique) GID\n"
 msgstr ""
 
+#: src/groupadd.c:118
 msgid ""
 "  -p, --password PASSWORD       use this encrypted password for the new "
 "group\n"
 msgstr ""
 
+#: src/groupadd.c:119
 #, fuzzy
 #| msgid "  -r, --system                  create a system account\n"
 msgid "  -r, --system                  create a system group\n"
 msgstr "  -r, --system                  vytvorí systémový účet\n"
 
+#: src/groupadd.c:122
 #, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
 msgid ""
@@ -1252,44 +1640,56 @@ msgid ""
 "\t                         members of this group\n"
 msgstr "  -l, --list                    vypísať členov skupiny\n"
 
+#: src/groupadd.c:220 src/groupmod.c:283
 #, fuzzy, c-format
 #| msgid "invalid user name '%s'\n"
 msgid "Invalid member username %s\n"
 msgstr "chybné používateľské meno „%s“\n"
 
+#: src/groupadd.c:264
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: „%s“ nie je platným názvom skupiny\n"
 
+#: src/groupadd.c:373 src/groupadd.c:382 src/newgidmap.c:215
+#: src/newuidmap.c:149
 #, fuzzy, c-format
 msgid "%s: cannot open %s: %s\n"
 msgstr "%s: súbor %s sa nedá otvoriť\n"
 
+#: src/groupadd.c:435 src/groupmod.c:436 src/newusers.c:247 src/newusers.c:266
 #, c-format
 msgid "%s: invalid group ID '%s'\n"
 msgstr "%s: chybný ID skupiny „%s“\n"
 
+#: src/groupadd.c:452 src/useradd.c:1343
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: prepínač -K vyžaduje argument typu MENO=HODNOTA\n"
 
+#: src/groupadd.c:520 src/groupmod.c:395
 #, c-format
 msgid "%s: group '%s' already exists\n"
 msgstr "%s: skupina „%s“ už existuje\n"
 
+#: src/groupadd.c:539 src/groupmod.c:363
 #, c-format
 msgid "%s: GID '%lu' already exists\n"
 msgstr "%s: GID „%lu“ už existuje\n"
 
+#: src/groupadd.c:570 src/groupdel.c:375 src/groupmod.c:792
 #, fuzzy, c-format
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: vaše používateľské meno sa nedá zistiť.\n"
 
+#: src/groupdel.c:85 src/groupmod.c:133 src/useradd.c:934 src/userdel.c:151
+#: src/usermod.c:445
 msgid ""
 "  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
 "* files\n"
 msgstr ""
 
+#: src/groupdel.c:86
 #, fuzzy
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
@@ -1297,18 +1697,25 @@ msgid ""
 msgstr ""
 "  -r, --reset                   vynuluje počítadlá chybných prihlásení\n"
 
+#: src/groupdel.c:124 src/groupdel.c:136 src/groupmod.c:307 src/groupmod.c:328
+#: src/grpconv.c:195 src/pwconv.c:229 src/userdel.c:351 src/userdel.c:369
+#: src/userdel.c:652 src/userdel.c:660 src/usermod.c:1813 src/usermod.c:1827
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr "%s: nie je možné odstrániť položku „%s“ z %s\n"
 
+#: src/groupdel.c:294
 #, c-format
 msgid "%s: cannot remove the primary group of user '%s'\n"
 msgstr "%s: nie je možné odstrniť primárnu skupinu používateľa „%s“.\n"
 
+#: src/groupdel.c:395 src/groupmod.c:810 src/newgrp.c:611 src/useradd.c:374
+#: src/useradd.c:813 src/useradd.c:1306 src/usermod.c:276 src/usermod.c:1143
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: skupina „%s“ neexistuje\n"
 
+#: src/groupmod.c:124
 #, fuzzy
 #| msgid ""
 #| "  -l, --no-log-init             do not add the user to the lastlog and\n"
@@ -1321,21 +1728,26 @@ msgstr ""
 "  -l, --no-log-init             nepridávať používateľa do databáz\n"
 "                                lastlog a faillog \n"
 
+#: src/groupmod.c:126
 msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgstr ""
 
+#: src/groupmod.c:128
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
 msgstr ""
 
+#: src/groupmod.c:129
 msgid ""
 "  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
 msgstr ""
 
+#: src/groupmod.c:130
 msgid ""
 "  -p, --password PASSWORD       change the password to this (encrypted)\n"
 "                                PASSWORD\n"
 msgstr ""
 
+#: src/groupmod.c:134
 #, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
 msgid ""
@@ -1343,10 +1755,12 @@ msgid ""
 "                                members of this group\n"
 msgstr "  -l, --list                    vypísať členov skupiny\n"
 
+#: src/groupmod.c:387 src/newusers.c:293
 #, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s: chybné pomenovanie skupiny „%s“\n"
 
+#: src/grpck.c:139
 #, c-format
 msgid ""
 "Usage: %s [options] [group [gshadow]]\n"
@@ -1357,6 +1771,7 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/grpck.c:145
 #, c-format
 msgid ""
 "Usage: %s [options] [group]\n"
@@ -1367,95 +1782,121 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/grpck.c:151 src/pwck.c:143
 msgid ""
 "  -r, --read-only               display errors and warnings\n"
 "                                but do not change files\n"
 msgstr ""
 
+#: src/grpck.c:154 src/pwck.c:150
 msgid "  -s, --sort                    sort entries by UID\n"
 msgstr ""
 
+#: src/grpck.c:155
 msgid ""
 "  -S, --silence-warnings        silence controversial/paranoid warnings\n"
 msgstr ""
 
+#: src/grpck.c:230 src/pwck.c:205
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s a -r nie sú zlučiteľné\n"
 
+#: src/grpck.c:509
 msgid "invalid group file entry"
 msgstr "chybná položka v súbore so skupinami"
 
+#: src/grpck.c:510 src/grpck.c:569 src/grpck.c:711 src/grpck.c:770
+#: src/grpck.c:788 src/pwck.c:413 src/pwck.c:474 src/pwck.c:738 src/pwck.c:799
+#: src/pwck.c:821
 #, c-format
 msgid "delete line '%s'? "
 msgstr "zmazať riadok „%s“? "
 
+#: src/grpck.c:568
 msgid "duplicate group entry"
 msgstr "v súbore so skupinami sa vyskytuje zdvojená položka"
 
+#: src/grpck.c:585
 #, c-format
 msgid "invalid group name '%s'\n"
 msgstr "chybné pomenovanie skupiny „%s“\n"
 
+#: src/grpck.c:592
 #, c-format
 msgid "invalid group ID '%lu'\n"
 msgstr "chybný ID skupiny „%lu“\n"
 
+#: src/grpck.c:609
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "skupina %s: používateľ %s neexistuje\n"
 
+#: src/grpck.c:610 src/grpck.c:821
 #, c-format
 msgid "delete member '%s'? "
 msgstr "zmazať člena „%s“? "
 
+#: src/grpck.c:626 src/grpck.c:786
 #, c-format
 msgid "no matching group file entry in %s\n"
 msgstr "neexistuje zodpovedajúca položka skupiny v súbore %s\n"
 
+#: src/grpck.c:628
 #, c-format
 msgid "add group '%s' in %s? "
 msgstr "pridať skupinu „%s“ do %s?"
 
+#: src/grpck.c:673
 #, c-format
 msgid ""
 "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
 
+#: src/grpck.c:710
 msgid "invalid shadow group file entry"
 msgstr "chybná položka v súbore s tieňovými skupinami"
 
+#: src/grpck.c:769
 msgid "duplicate shadow group entry"
 msgstr "v súbore s tieňovými skupinami sa vyskytuje zdvojená položka"
 
+#: src/grpck.c:807
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "tieňová skupina %s: správca %s neexistuje\n"
 
+#: src/grpck.c:808
 #, c-format
 msgid "delete administrative member '%s'? "
 msgstr "zmazať správcu „%s“? "
 
+#: src/grpck.c:820
 #, c-format
 msgid "shadow group %s: no user %s\n"
 msgstr "tieňová skupina %s: používateľ %s neexistuje\n"
 
+#: src/grpck.c:889 src/pwck.c:910
 #, c-format
 msgid "%s: the files have been updated\n"
 msgstr "%s: súbory boli aktualizované\n"
 
+#: src/grpck.c:891 src/pwck.c:911
 #, c-format
 msgid "%s: no changes\n"
 msgstr "%s: bezo zmien\n"
 
+#: src/grpunconv.c:217 src/pwunconv.c:217
 #, c-format
 msgid "%s: cannot delete %s\n"
 msgstr "%s: nie je možné zmazať %s\n"
 
+#: src/lastlog.c:75
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
 
+#: src/lastlog.c:76
 #, fuzzy
 msgid ""
 "  -C, --clear                   clear lastlog record of a user (usable only "
@@ -1464,6 +1905,7 @@ msgstr ""
 "  -a, --all                     zobrazí faillog záznamy všetkých "
 "používateľov\n"
 
+#: src/lastlog.c:79
 #, fuzzy
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
@@ -1472,15 +1914,18 @@ msgstr ""
 "  -a, --all                     zobrazí faillog záznamy všetkých "
 "používateľov\n"
 
+#: src/lastlog.c:80
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
 
+#: src/lastlog.c:81
 msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 
+#: src/lastlog.c:82
 #, fuzzy
 #| msgid ""
 #| "  -a, --all                     display faillog records for all users\n"
@@ -1491,60 +1936,74 @@ msgstr ""
 "  -a, --all                     zobrazí faillog záznamy všetkých "
 "používateľov\n"
 
+#: src/lastlog.c:151
 #, fuzzy, c-format
 #| msgid "Username                Port     Latest"
 msgid "Username         Port     From%*sLatest\n"
 msgstr "Používateľ              Port     Naposledy"
 
+#: src/lastlog.c:153
 msgid "Username                Port     Latest"
 msgstr "Používateľ              Port     Naposledy"
 
+#: src/lastlog.c:170
 msgid "**Never logged in**"
 msgstr "**Nebol nikdy prihlásený**"
 
+#: src/lastlog.c:190
 #, c-format
 msgid ""
 "%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
 "\tthe output might be incorrect.\n"
 msgstr ""
 
+#: src/lastlog.c:251
 #, fuzzy, c-format
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: Nepodarilo sa získať položku s UID %lu\n"
 
+#: src/lastlog.c:268
 #, c-format
 msgid ""
 "%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
 "\tthey will not be updated.\n"
 msgstr ""
 
+#: src/lastlog.c:289
 #, fuzzy, c-format
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: súbor s heslami sa nedá aktualizovaťt\n"
 
+#: src/lastlog.c:420
 #, c-format
 msgid "%s: Option -C cannot be used together with option -S\n"
 msgstr ""
 
+#: src/lastlog.c:426
 #, c-format
 msgid "%s: Options -C and -S require option -u to specify the user\n"
 msgstr ""
 
+#: src/login.c:139
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Použitie: %s [-p] [meno]\n"
 
+#: src/login.c:143
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "          %s [-p] [-h počítač] [-f meno]\n"
 
+#: src/login.c:181 src/login.c:187
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
 msgstr ""
 
+#: src/login.c:207
 msgid "Invalid login time"
 msgstr "Chybný čas prihlásenia"
 
+#: src/login.c:243
 msgid ""
 "\n"
 "System closed for routine maintenance"
@@ -1552,6 +2011,7 @@ msgstr ""
 "\n"
 "Systém je uzavretý kvôli pravidelnej údržbe."
 
+#: src/login.c:254
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]"
@@ -1559,10 +2019,12 @@ msgstr ""
 "\n"
 "[Odpojenie vynechané -- používateľ root sa môže prihlásiť.]"
 
+#: src/login.c:499
 #, c-format
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr ""
 
+#: src/login.c:608
 #, c-format
 msgid ""
 "\n"
@@ -1571,243 +2033,299 @@ msgstr ""
 "\n"
 "Uplynul časový limit (%u sekúnd) na prihlásenie.\n"
 
+#: src/login.c:622
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "prihlásenie: Chyba PAM, ukončuje sa: %s\n"
 
+#: src/login.c:652
 #, c-format
 msgid "%s login: "
 msgstr "%s prihlasovacie meno: "
 
+#: src/login.c:654
 msgid "login: "
 msgstr "Prihlasovacie meno: "
 
+#: src/login.c:698 src/login.c:742
 #, c-format
 msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Prekročený maximálny počet pokusov (%u)\n"
 
+#: src/login.c:704
 msgid "login: abort requested by PAM\n"
 msgstr "prihlásenie: PAM prerušenie\n"
 
+#: src/login.c:735 src/login.c:985 src/sulogin.c:174
 msgid "Login incorrect"
 msgstr "Chybné prihlásenie"
 
+#: src/login.c:783
 #, fuzzy, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "%s: riadok %d: nedá sa nájsť používateľ %s\n"
 
+#: src/login.c:1097
 #, c-format
 msgid "%s: failure forking: %s"
 msgstr "%s: chybné vetvenie: %s"
 
+#: src/login.c:1118
 #, c-format
 msgid "TIOCSCTTY failed on %s"
 msgstr "TIOCSCTTY zlyhalo na %s"
 
+#: src/login.c:1192
 msgid "Warning: login re-enabled after temporary lockout."
 msgstr "Upozornenie: po dočasnom zákaze je prihlasovanie opäť povolené."
 
+#: src/login.c:1208
 #, c-format
 msgid "Last login: %s on %s"
 msgstr "Posledné prihlásenie: %s na %s"
 
+#: src/login.c:1212
 #, c-format
 msgid " from %.*s"
 msgstr " z %.*s"
 
+#: src/newgidmap.c:63
 #, c-format
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr ""
 
+#: src/newgidmap.c:76
 #, c-format
 msgid ""
 "usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
 "<count> ] ... \n"
 msgstr ""
 
+#: src/newgidmap.c:103
 #, c-format
 msgid "%s: kernel doesn't support setgroups restrictions\n"
 msgstr ""
 
+#: src/newgidmap.c:106
 #, fuzzy, c-format
 #| msgid "%s: can't open group file\n"
 msgid "%s: couldn't open process setgroups: %s\n"
 msgstr "%s: súbor so skupinami sa nedá otvoriť\n"
 
+#: src/newgidmap.c:117
 #, fuzzy, c-format
 #| msgid "%s: failed to remove %s\n"
 msgid "%s: failed to read setgroups: %s\n"
 msgstr "%s: zlyhalo odstránenie %s\n"
 
+#: src/newgidmap.c:126
 #, fuzzy, c-format
 #| msgid "%s: failed to remove %s\n"
 msgid "%s: failed to seek setgroups: %s\n"
 msgstr "%s: zlyhalo odstránenie %s\n"
 
+#: src/newgidmap.c:131
 #, fuzzy, c-format
 #| msgid "%s: failed to unlock %s\n"
 msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s: nepodarilo sa odmknúť %s\n"
 
+#: src/newgidmap.c:193 src/newuidmap.c:127
 #, fuzzy, c-format
 msgid "%s: Could not stat directory for target process: %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/newgidmap.c:206 src/newuidmap.c:140
 #, c-format
 msgid ""
 "%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
 "%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
 
+#: src/newgrp.c:74
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Použitie: newgrp [-] [skupina]\n"
 
+#: src/newgrp.c:76
 #, fuzzy
 #| msgid "Usage: sg group [[-c] command]\n"
 msgid "Usage: sg [-] group [[-c] command]\n"
 msgstr "Použitie: sg skupina [[-c] príkaz]\n"
 
+#: src/newgrp.c:192 src/passwd.c:215
 #, fuzzy, c-format
 msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr "%s: zlyhalo odstránenie %s\n"
 
+#: src/newgrp.c:212
 msgid "Invalid password.\n"
 msgstr "Neplatné heslo.\n"
 
+#: src/newgrp.c:298
 #, c-format
 msgid "%s: failure forking: %s\n"
 msgstr "%s: chybné vetvenie: %s\n"
 
+#: src/newgrp.c:485 src/newgrp.c:521
 #, fuzzy, c-format
 #| msgid "%s: '%s' is not a valid group name\n"
 msgid "%s: provided group is not a valid group name\n"
 msgstr "%s: „%s“ nie je platným názvom skupiny\n"
 
+#: src/newgrp.c:537
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s: GID „%lu“ neexistuje\n"
 
+#: src/newuidmap.c:58
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr ""
 
+#: src/newuidmap.c:71
 #, c-format
 msgid ""
 "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
 msgstr ""
 
+#: src/newusers.c:130 src/pwck.c:140 src/usermod.c:430
 #, fuzzy
 #| msgid "  -q, --quiet                   quiet mode\n"
 msgid "  -b, --badname                 allow bad names\n"
 msgstr "  -q, --quiet                   stručný režim\n"
 
+#: src/newusers.c:145
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
+#: src/newusers.c:311
 #, c-format
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
 msgstr "%s: skupina „%s“ je tieňová skupina, ale neexistuje v /etc/group\n"
 
+#: src/newusers.c:351 src/useradd.c:1413 src/usermod.c:1227
 #, c-format
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: chybný ID používateľa „%s“\n"
 
+#: src/newusers.c:391 src/useradd.c:1523 src/usermod.c:1165
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: chybné používateľské meno „%s“\n"
 
+#: src/newusers.c:395 src/useradd.c:1527 src/usermod.c:1169
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: chybné používateľské meno „%s“\n"
 
+#: src/newusers.c:669
 #, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr ""
 
+#: src/newusers.c:1035
 #, fuzzy, c-format
 #| msgid "%s: line %d: invalid line\n"
 msgid "%s: line %jd: invalid line\n"
 msgstr "%s: riadok %d: chybný riadok\n"
 
+#: src/newusers.c:1047
 #, c-format
 msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
 msgstr ""
 "%s: záznam používateľa %s sa nedá aktualizovať (nie je v databáze passwd)\n"
 
+#: src/newusers.c:1054 src/newusers.c:1089
 #, fuzzy, c-format
 #| msgid "%s: line %d: can't create user\n"
 msgid "%s: line %jd: can't create user\n"
 msgstr "%s: riadok %d: nedá sa vytvoriť používateľ\n"
 
+#: src/newusers.c:1074
 #, fuzzy, c-format
 #| msgid "%s: line %d: can't create group\n"
 msgid "%s: line %jd: can't create group\n"
 msgstr "%s: riadok %d: nedá sa vytvoriť skupina\n"
 
+#: src/newusers.c:1101
 #, fuzzy, c-format
 #| msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s: riadok %d: používateľ „%s“ neexistuje v %s\n"
 
+#: src/newusers.c:1114
 #, fuzzy, c-format
 msgid "%s: line %jd: %s\n"
 msgstr "%s: premenovať: %s"
 
+#: src/newusers.c:1123
 #, fuzzy, c-format
 #| msgid "%s: line %d: can't update password\n"
 msgid "%s: line %jd: can't update password\n"
 msgstr "%s: riadok %d: heslo sa nedá aktualizovať\n"
 
+#: src/newusers.c:1146
 #, fuzzy, c-format
 msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s: riadok %d: volanie mkdir zlyhalo\n"
 
+#: src/newusers.c:1152
 #, fuzzy, c-format
 msgid "%s: line %jd: mkdir %s failed: %s\n"
 msgstr "%s: riadok %d: volanie mkdir zlyhalo\n"
 
+#: src/newusers.c:1161
 #, fuzzy, c-format
 msgid "%s: line %jd: chown %s failed: %s\n"
 msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 
+#: src/newusers.c:1172
 #, fuzzy, c-format
 #| msgid "%s: line %d: can't update entry\n"
 msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: riadok %d: položka sa nedá aktualizovať\n"
 
+#: src/newusers.c:1187
 #, fuzzy, c-format
 msgid "%s: can't find subordinate user range: %s\n"
 msgstr "%s: nie je možné vytvoriť používateľa\n"
 
+#: src/newusers.c:1196 src/newusers.c:1218
 #, fuzzy, c-format
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
+#: src/newusers.c:1210
 #, fuzzy, c-format
 msgid "%s: can't find subordinate group range: %s\n"
 msgstr "%s: súbor s heslami sa nedá aktualizovať\n"
 
+#: src/passwd.c:158
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
 msgstr "  -a, --all                     zobrazí stav hesiel pre všetky účty\n"
 
+#: src/passwd.c:159
 msgid ""
 "  -d, --delete                  delete the password for the named account\n"
 msgstr "  -d, --delete                  odstráni heslo pre zadaný účet\n"
 
+#: src/passwd.c:160
 msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
 msgstr ""
 "  -e, --expire                  vynúti platnosť hesla pre zadaný účet\n"
 
+#: src/passwd.c:162
 msgid "  -k, --keep-tokens             change password only if expired\n"
 msgstr ""
 "  -k, --keep-tokens             zmení heslo iba v prípade vypršania času\n"
 "                                jeho platnosti\n"
 
+#: src/passwd.c:163
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
@@ -1815,10 +2333,12 @@ msgstr ""
 "  -i, --inactive INACTIVE       nastaví neplatnosť hesla po vypršaní času\n"
 "                                platnosti na INACTIVE dní\n"
 
+#: src/passwd.c:165
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
 msgstr "  -l, --lock                    zablokuje zadaný účet\n"
 
+#: src/passwd.c:166
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
@@ -1826,27 +2346,33 @@ msgstr ""
 "  -n, --mindays MIN_DNÍ         nastaví minimálny počet dní pred zmenou\n"
 "                                hesla na MIN_DNÍ dní\n"
 
+#: src/passwd.c:168 src/vipw.c:94
 msgid "  -q, --quiet                   quiet mode\n"
 msgstr "  -q, --quiet                   stručný režim\n"
 
+#: src/passwd.c:169
 msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 msgstr "  -r, --repository REPOSITORY   zmení heslo v repozitári REPOSITORY\n"
 
+#: src/passwd.c:172
 msgid ""
 "  -S, --status                  report password status on the named account\n"
 msgstr "  -S, --status                  zobrazí stav hesla pre zadaný účet\n"
 
+#: src/passwd.c:173
 msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
 msgstr "  -u, --unlock                  odblokuje zadaný účet\n"
 
+#: src/passwd.c:174
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
 "  -w, --warndays WARN_DAYS      nastaví počet dní na upozornenie o vypršaní\n"
 "                                platnosti na WARN_DAYS dní\n"
 
+#: src/passwd.c:175
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
@@ -1854,14 +2380,17 @@ msgstr ""
 "  -x, --maxdays MAX_DNÍ         nastaví maximálny počet dní pred zmenou\n"
 "                                hesla na MAX_DNÍ dní\n"
 
+#: src/passwd.c:177
 #, fuzzy
 #| msgid "  -l, --list                    show account aging information\n"
 msgid "  -s, --stdin                   read new token from stdin\n"
 msgstr "  -l, --list                    zobrazí časové údaje o účte\n"
 
+#: src/passwd.c:205
 msgid "Old password: "
 msgstr "Staré heslo: "
 
+#: src/passwd.c:252
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d characters)\n"
@@ -1870,6 +2399,7 @@ msgstr ""
 "Zadajte nové heslo (počet znakov najmenej %d).\n"
 "Použijte kombináciu veľkých a malých písmen s číslicami.\n"
 
+#: src/passwd.c:257
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1878,17 +2408,21 @@ msgstr ""
 "Zadajte nové heslo (počet znakov v intervale %d až %d).\n"
 "Použijte kombináciu veľkých a malých písmen s číslicami.\n"
 
+#: src/passwd.c:274 src/passwd.c:293
 #, fuzzy
 #| msgid "%s: fields too long\n"
 msgid "Password is too long.\n"
 msgstr "%s: položka je príliš dlhá\n"
 
+#: src/passwd.c:281
 msgid "New password: "
 msgstr "Nové heslo: "
 
+#: src/passwd.c:300
 msgid "Try again."
 msgstr "Skúste to znova."
 
+#: src/passwd.c:311
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway)."
@@ -1896,22 +2430,27 @@ msgstr ""
 "\n"
 "Upozornenie: slabé heslo (ak ho chcete naozaj použiť, znova ho zadajte)."
 
+#: src/passwd.c:323
 msgid "They don't match; try again.\n"
 msgstr "Nezhodujú sa; skúste to znova.\n"
 
+#: src/passwd.c:394
 #, c-format
 msgid "The password for %s cannot be changed.\n"
 msgstr "Heslo pre %s sa nedá zmeniť.\n"
 
+#: src/passwd.c:415
 #, c-format
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "Heslo pre %s sa zatiaľ nedá zmeniť.\n"
 
+#: src/passwd.c:458
 #, fuzzy, c-format
 #| msgid "%s: shadow passwords required for -e\n"
 msgid "%s: malformed password data obtained for user %s\n"
 msgstr "%s: prepínač -e vyžaduje tieňové heslá\n"
 
+#: src/passwd.c:592
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -1921,36 +2460,44 @@ msgstr ""
 "%s: odomknutie používateľa by malo za následok účet bez hesla.\n"
 "Tento účet by ste mali odomknúť nastavením hesla pomocou usermod -p.\n"
 
+#: src/passwd.c:922
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: úložisko %s nie je podporované\n"
 
+#: src/passwd.c:967
 #, fuzzy, c-format
 #| msgid "%s: only root can use the -g/--group option\n"
 msgid "%s: only root can use --stdin/-s option\n"
 msgstr "%s: iba root môže používať voľbu -g/--group\n"
 
+#: src/passwd.c:1094
 #, fuzzy, c-format
 #| msgid "%s: %s is not authorized to change the password of %s\n"
 msgid "%s: root is not authorized by SELinux to change the password of %s\n"
 msgstr "%s: %s nemá oprávnenie zmeniť heslo %s\n"
 
+#: src/passwd.c:1112
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
 msgstr "%s: Nemôžete prezerať alebo meniť informácie o hesle pre %s.\n"
 
+#: src/passwd.c:1159
 #, c-format
 msgid "Changing password for %s\n"
 msgstr "Mení sa heslo používateľovi %s\n"
 
+#: src/passwd.c:1164
 #, c-format
 msgid "The password for %s is unchanged.\n"
 msgstr "Heslo používateľa %s nebolo zmenené.\n"
 
+#: src/passwd.c:1219 src/passwd.c:1222
 #, c-format
 msgid "%s: password changed.\n"
 msgstr "%s: heslo bolo zmenené.\n"
 
+#: src/pwck.c:127
 #, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
@@ -1961,6 +2508,7 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/pwck.c:135
 #, c-format
 msgid ""
 "Usage: %s [options] [passwd [shadow]]\n"
@@ -1971,171 +2519,215 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/pwck.c:142
 msgid "  -q, --quiet                   report errors only\n"
 msgstr ""
 
+#: src/pwck.c:228
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
 msgstr ""
 
+#: src/pwck.c:412
 msgid "invalid password file entry"
 msgstr "chybná položka v súbore s heslami"
 
+#: src/pwck.c:473
 msgid "duplicate password entry"
 msgstr "duplikovaná položka v súbore s heslami"
 
+#: src/pwck.c:491
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: chybné používateľské meno „%s“\n"
 
+#: src/pwck.c:494
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s'\n"
 msgstr "%s: chybné používateľské meno „%s“\n"
 
+#: src/pwck.c:504
 #, c-format
 msgid "invalid user ID '%lu'\n"
 msgstr "chybný ID používateľa „%lu“\n"
 
+#: src/pwck.c:518
 #, c-format
 msgid "user '%s': no group %lu\n"
 msgstr "používateľ „%s“: skupina %lu neexistuje\n"
 
+#: src/pwck.c:537
 #, c-format
 msgid "user '%s': directory '%s' does not exist\n"
 msgstr "používateľ „%s“: adresár „%s“ neexistuje\n"
 
+#: src/pwck.c:554
 #, c-format
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "používateľ „%s“: program „%s“ neexistuje\n"
 
+#: src/pwck.c:567
 #, fuzzy, c-format
 msgid "no tcb directory for %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/pwck.c:569
 #, fuzzy, c-format
 msgid "create tcb directory for %s?"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/pwck.c:575
 #, fuzzy, c-format
 msgid "failed to create tcb directory for %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/pwck.c:585
 #, fuzzy, c-format
 msgid "%s: cannot lock %s.\n"
 msgstr "%s: súbor %s sa nedá zamknúť\n"
 
+#: src/pwck.c:612 src/pwck.c:819
 #, c-format
 msgid "no matching password file entry in %s\n"
 msgstr "neexistuje zodpovedajúca položka hesla v súbore %s\n"
 
+#: src/pwck.c:614
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "pridať používateľa „%s“ do %s? "
 
+#: src/pwck.c:663
 #, c-format
 msgid ""
 "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
 
+#: src/pwck.c:737
 msgid "invalid shadow password file entry"
 msgstr "chybná položka v súbore s tieňovými heslami"
 
+#: src/pwck.c:798
 msgid "duplicate shadow password entry"
 msgstr "duplicitná položka v súbore s tieňovými heslami"
 
+#: src/pwck.c:839
 #, c-format
 msgid "user %s: last password change in the future\n"
 msgstr "používateľ %s: posledná zmena hesla v budúcnosti\n"
 
+#: src/pwck.c:877 src/pwck.c:884
 #, c-format
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: nie je možné zoradiť položdy v %s\n"
 
+#: src/pwconv.c:184 src/pwunconv.c:143
 #, fuzzy, c-format
 msgid "%s: can't work with tcb enabled\n"
 msgstr "%s: súbor sa nedá prepísať\n"
 
+#: src/pwconv.c:305
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr "%s: lastlog: Nepodarilo sa zmeniť režim %s na 0600\n"
 
+#: src/suauth.c:111
 msgid "Access to su to that account DENIED.\n"
 msgstr "Z tohto účtu je prístup k su ZAKÁZANÝ.\n"
 
+#: src/suauth.c:119
 msgid "Password authentication bypassed.\n"
 msgstr "Overenie hesla vynechané.\n"
 
+#: src/suauth.c:126
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Pre overenie zadajte VAŠE vlastné heslo.\n"
 
+#: src/su.c:174
 msgid " ...killed.\n"
 msgstr ""
 
+#: src/su.c:297 src/su.c:347 src/su.c:403
 #, c-format
 msgid "%s: signal masking malfunction\n"
 msgstr ""
 
+#: src/su.c:310
 #, fuzzy, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: súbor %s sa nedá zamknúť\n"
 
+#: src/su.c:322
 #, c-format
 msgid "%s: signal malfunction\n"
 msgstr ""
 
+#: src/su.c:395
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
+#: src/su.c:426
 msgid " ...terminated.\n"
 msgstr ""
 
+#: src/su.c:432 src/su.c:477 src/su.c:494 src/su.c:502 src/su.c:1046
+#: src/su.c:1107 src/su.c:1115
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
+#: src/su.c:454
 #, fuzzy
 #| msgid ""
-#| "Usage: su [options] [LOGIN]\n"
+#| "Usage: %s [options] [group [gshadow]]\n"
 #| "\n"
 #| "Options:\n"
-#| "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -, -l, --login                make the shell a login shell\n"
-#| "  -m, -p,\n"
-#| "  --preserve-environment        do not reset environment variables, and\n"
-#| "                                keep the same shell\n"
-#| "  -s, --shell SHELL             use SHELL instead of the default in "
-#| "passwd\n"
-#| "\n"
 msgid ""
 "Usage: su [options] [-] [username [args]]\n"
 "\n"
 "Options:\n"
-"  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
-"  -h, --help                    display this help message and exit\n"
-"  -, -l, --login                make the shell a login shell\n"
+msgstr ""
+"Použitie: %s [voľby] [súbor_so_skupinami [súbor_s_tieňovými_skupinami]]\n"
+"\n"
+"Voľby:\n"
+
+#: src/su.c:457
+#, fuzzy
+#| msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgid "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
+msgstr "  -c, --comment KOMENTÁR        nová hodnota poľa GECOS\n"
+
+#: src/su.c:459
+#, fuzzy
+#| msgid "  -L, --lock                    lock the user account\n"
+msgid "  -, -l, --login                make the shell a login shell\n"
+msgstr "  -L, --lock                    zablokuje používateľský účet\n"
+
+#: src/su.c:460
+#, fuzzy
+#| msgid ""
+#| "  -N, --no-user-group           do not create a group with the same name "
+#| "as\n"
+#| "                                the user\n"
+msgid ""
 "  -m, -p,\n"
 "  --preserve-environment        do not reset environment variables, and\n"
 "                                keep the same shell\n"
-"  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-"\n"
-"If no username is given, assume root.\n"
 msgstr ""
-"Použitie: su [voľby] [ÚČET]\n"
-"\n"
-"Voľby:\n"
-"  -c, --command PRÍKAZ          odovzdá PRÍKAZ vyvolanému shell-u\n"
-"  -h, --help                    zobrazí tohto pomocníka a ukončí sa\n"
-"  -, -l, --login                nastaví shell ako prihlasovací shell\n"
-"  -m, -p,\n"
-"  --preserve-environment        zachová premenné prostredia a ponechá\n"
-"                                ten istý shell\n"
-"  -s, --shell SHELL             použije SHELL namiesto predvoleného v "
-"passwd\n"
-"\n"
+"  -N, --no-user-group           nevytvorí skupinu s rovnakým menom\n"
+"                                ako má používateľ\n"
 
+#: src/su.c:463
+msgid ""
+"  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
+msgstr ""
+
+#: src/su.c:465
+msgid "If no username is given, assume root.\n"
+msgstr ""
+
+#: src/su.c:486
 #, c-format
 msgid ""
 "%s: %s\n"
@@ -2144,63 +2736,79 @@ msgstr ""
 "%s: %s\n"
 "(Ignorujem)\n"
 
+#: src/su.c:527
 #, c-format
 msgid "Password field is empty, this is forbidden for all accounts.\n"
 msgstr ""
 
+#: src/su.c:531
 #, c-format
 msgid "Password field is empty, this is forbidden for super-user.\n"
 msgstr ""
 
+#: src/su.c:558 src/su.c:582
 #, c-format
 msgid "You are not authorized to su %s\n"
 msgstr "Nie ste oprávnení používať su %s\n"
 
+#: src/su.c:577
 msgid "(Enter your own password)"
 msgstr "(Zadajte vaše heslo)"
 
+#: src/su.c:601
 #, c-format
 msgid "%s: Authentication failure\n"
 msgstr "%s: Autentifikácia zlyhala\n"
 
+#: src/su.c:625
 #, c-format
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: Nie ste momentálne oprávnení používať su\n"
 
+#: src/su.c:667 src/su.c:701
 #, fuzzy, c-format
 msgid "No passwd entry for user '%s'\n"
 msgstr "V súbore passwd nie je položka pre používateľa „root“"
 
+#: src/su.c:693
 #, fuzzy, c-format
 #| msgid "invalid user name '%s'\n"
 msgid "Overlong user name '%s'\n"
 msgstr "chybné používateľské meno „%s“\n"
 
+#: src/su.c:769
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: musí byť spustené z terminálu\n"
 
+#: src/su.c:1036
 #, c-format
 msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: chyba %d\n"
 
+#: src/su.c:1179
 #, fuzzy, c-format
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "lastlog: Nepodarilo sa zistiť veľkosť %s: %s\n"
 
+#: src/su.c:1232
 #, c-format
 msgid "Cannot execute %s\n"
 msgstr "%s sa nedá spustiť\n"
 
+#: src/sulogin.c:96
 msgid "No password file"
 msgstr "Súbor s heslami neexistuje"
 
+#: src/sulogin.c:111
 msgid "TIOCSCTTY failed"
 msgstr "TIOCSCTTY zlyhalo"
 
+#: src/sulogin.c:139
 msgid "No password entry for 'root'"
 msgstr "V súbore passwd nie je položka pre používateľa „root“"
 
+#: src/sulogin.c:150
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
@@ -2210,59 +2818,72 @@ msgstr ""
 "Stlačte control-d pre normálne spustenie systému,\n"
 "(alebo zadajte heslo používateľa root pre údržbu systému):"
 
+#: src/sulogin.c:181
 msgid "Entering System Maintenance Mode"
 msgstr "Prepnutie do režimu údržby systému"
 
+#: src/useradd.c:271
 #, c-format
 msgid "%s: %s was created, but could not be removed\n"
 msgstr ""
 
+#: src/useradd.c:377 src/useradd.c:421
 #, c-format
 msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr ""
 
+#: src/useradd.c:390
 #, c-format
 msgid ""
 "%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr ""
 
+#: src/useradd.c:550 src/useradd.c:559
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
 msgstr "%s: nedá sa vytvoriť nový súbor s predvolenými hodnotami\n"
 
+#: src/useradd.c:568 src/useradd.c:577
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: nedá sa vytvoriť nový súbor s predvolenými hodnotami\n"
 
+#: src/useradd.c:588
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: nedá sa otvoriť nový súbor s predvolenými hodnotami\n"
 
+#: src/useradd.c:613
 #, fuzzy, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 
+#: src/useradd.c:718
 #, fuzzy, c-format
 msgid "%s: Cannot create backup file (%s): %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/useradd.c:729
 #, c-format
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: premenovať: %s: %s\n"
 
+#: src/useradd.c:828 src/usermod.c:291
 #, fuzzy, c-format
 #| msgid "%s: too many groups specified (max %d).\n"
 msgid "%s: too many groups specified (max %zu).\n"
 msgstr "%s: bolo zadaných príliš veľa skupín (max %d).\n"
 
+#: src/useradd.c:878
 #, fuzzy, c-format
 #| msgid "%s: Out of memory. Cannot update %s.\n"
 msgid "%s: Out of memory. Cannot find group '%s'.\n"
 msgstr "%s: Nedostatok pamäte. Nie je možné aktualizovať %s.\n"
 
+#: src/useradd.c:894
 #, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
@@ -2277,59 +2898,72 @@ msgstr ""
 "\n"
 "Voľby:\n"
 
+#: src/useradd.c:900
 #, fuzzy
 #| msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgid "      --badname                 do not check for bad names\n"
 msgstr "  -s, --shadow                  upraví databázu shadow alebo gshadow\n"
 
+#: src/useradd.c:901
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
 "                                new account\n"
 msgstr ""
 
+#: src/useradd.c:904
 msgid ""
 "      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
 msgstr ""
 
+#: src/useradd.c:906
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgstr ""
 
+#: src/useradd.c:907
 msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgstr ""
 
+#: src/useradd.c:908
 msgid ""
 "  -D, --defaults                print or change default useradd "
 "configuration\n"
 msgstr ""
 
+#: src/useradd.c:909
 msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgstr ""
 
+#: src/useradd.c:910
 msgid ""
 "  -f, --inactive INACTIVE       password inactivity period of the new "
 "account\n"
 msgstr ""
 
+#: src/useradd.c:912
 msgid ""
 "  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
 "system user\n"
 msgstr ""
 
+#: src/useradd.c:914
 msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
 
+#: src/useradd.c:916
 msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
 msgstr ""
 
+#: src/useradd.c:919
 msgid ""
 "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
 msgstr ""
 
+#: src/useradd.c:922
 msgid ""
 "  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
@@ -2337,13 +2971,16 @@ msgstr ""
 "  -l, --no-log-init             nepridávať používateľa do databáz\n"
 "                                lastlog a faillog \n"
 
+#: src/useradd.c:925
 msgid "  -m, --create-home             create the user's home directory\n"
 msgstr ""
 
+#: src/useradd.c:926
 msgid ""
 "  -M, --no-create-home          do not create the user's home directory\n"
 msgstr ""
 
+#: src/useradd.c:927
 msgid ""
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
@@ -2351,207 +2988,256 @@ msgstr ""
 "  -N, --no-user-group           nevytvorí skupinu s rovnakým menom\n"
 "                                ako má používateľ\n"
 
+#: src/useradd.c:929
 msgid ""
 "  -o, --non-unique              allow to create users with duplicate\n"
 "                                (non-unique) UID\n"
 msgstr ""
 
+#: src/useradd.c:931
 msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
 
+#: src/useradd.c:932
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  vytvorí systémový účet\n"
 
+#: src/useradd.c:935
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr ""
 
+#: src/useradd.c:936
 msgid "  -u, --uid UID                 user ID of the new account\n"
 msgstr ""
 
+#: src/useradd.c:937
 msgid ""
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
 msgstr ""
 
+#: src/useradd.c:939
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
 msgstr ""
 
+#: src/useradd.c:940
 msgid ""
 "      --selinux-range SERANGE   use a specific MLS range for the SELinux "
 "user mapping\n"
 msgstr ""
 
+#: src/useradd.c:1045 src/useradd.c:1106 src/userdel.c:200 src/userdel.c:258
+#: src/usermod.c:772 src/usermod.c:909
 #, c-format
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: Nedostatok pamäte. Nie je možné aktualizovať %s.\n"
 
+#: src/useradd.c:1208
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: chybný základný adresár „%s“\n"
 
+#: src/useradd.c:1224
 #, c-format
 msgid "%s: invalid comment '%s'\n"
 msgstr "%s: chybný komentár „%s“\n"
 
+#: src/useradd.c:1235
 #, c-format
 msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: chybný domovský adresár „%s“\n"
 
+#: src/useradd.c:1267
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s: prepínač -e vyžaduje tieňové heslá\n"
 
+#: src/useradd.c:1291
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: prepínač -f vyžaduje tieňové heslá\n"
 
+#: src/useradd.c:1369 src/usermod.c:1092 src/usermod.c:1102
 #, c-format
 msgid "%s: invalid field '%s'\n"
 msgstr "%s: chybná položka „%s“\n"
 
+#: src/useradd.c:1390 src/usermod.c:1205
 #, c-format
 msgid "%s: invalid shell '%s'\n"
 msgstr "%s: chybný shell „%s“\n"
 
+#: src/useradd.c:1402 src/usermod.c:1217
 #, fuzzy, c-format
 msgid "%s: Warning: missing or non-executable shell '%s'\n"
 msgstr "%s: upozornenie: vlastníkom %s nie je %s\n"
 
+#: src/useradd.c:1426 src/userdel.c:966 src/usermod.c:1284
 #, fuzzy, c-format
 #| msgid "%s: cannot rewrite password file\n"
 msgid "%s: -Z cannot be used with --prefix\n"
 msgstr "%s: súbor s heslami sa nedá prepísať\n"
 
+#: src/useradd.c:1434 src/userdel.c:974 src/usermod.c:1293
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
+#: src/useradd.c:1477 src/useradd.c:1483 src/useradd.c:1489
 #, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr "%s: voľby %s a %s sú v konflikte\n"
 
+#: src/useradd.c:1992
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: Nepodarilo sa obnoviť položku faillog s UID %lu: %s\n"
 
+#: src/useradd.c:2001
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr "%s: Nepodarilo sa obnoviť položku faillog s UID %lu: %s\n"
 
+#: src/useradd.c:2007
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to close the faillog file for UID %lu: %s\n"
 msgstr "%s: Nepodarilo sa obnoviť položku faillog s UID %lu: %s\n"
 
+#: src/useradd.c:2037
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgid "%s: failed to open the lastlog file for UID %lu: %s\n"
 msgstr "%s: Nepodarilo sa obnoviť položku lastlog s UID %lu: %s\n"
 
+#: src/useradd.c:2046
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: Nepodarilo sa obnoviť položku lastlog s UID %lu: %s\n"
 
+#: src/useradd.c:2053
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
 msgstr "%s: Nepodarilo sa obnoviť položku lastlog s UID %lu: %s\n"
 
+#: src/useradd.c:2098
 #, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
 msgstr "%s: Nepodarilo sa obnoviť položku faillog s UID %lu: %s\n"
 
+#: src/useradd.c:2178 src/useradd.c:2185
 #, fuzzy, c-format
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
+#: src/useradd.c:2233
 #, fuzzy, c-format
 #| msgid "%s: error updating files\n"
 msgid "%s: error while duplicating string %s\n"
 msgstr "%s: chyba pri aktualizácii súborov\n"
 
+#: src/useradd.c:2242
 #, fuzzy, c-format
 #| msgid "%s: cannot create directory %s\n"
 msgid "%s: cannot set SELinux context for home directory %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/useradd.c:2273
 #, c-format
 msgid "%s: error while duplicating string in BTRFS check %s\n"
 msgstr ""
 
+#: src/useradd.c:2285
 #, c-format
 msgid ""
 "%s: warning: \"%s\" is not on BTRFS; creating regular directory instead of "
 "subvolume\n"
 msgstr ""
 
+#: src/useradd.c:2290
 #, fuzzy, c-format
 msgid "%s: failed to create BTRFS subvolume: %s\n"
 msgstr "chyba pri zmene vlastníka schránky"
 
+#: src/useradd.c:2300
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/useradd.c:2307
 #, fuzzy, c-format
 msgid "%s: warning: chown on `%s' failed: %m\n"
 msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 
+#: src/useradd.c:2312
 #, fuzzy, c-format
 msgid "%s: warning: chmod on `%s' failed: %m\n"
 msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 
+#: src/useradd.c:2322
 #, fuzzy, c-format
 msgid "%s: warning: chown on '%s' failed: %m\n"
 msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 
+#: src/useradd.c:2335 src/useradd.c:2426
 #, c-format
 msgid "%s: cannot reset SELinux file creation context\n"
 msgstr ""
 
+#: src/useradd.c:2383
 #, fuzzy, c-format
 msgid "%s: cannot set SELinux context for mailbox file %s\n"
 msgstr "Menia sa informácie vypršania platnosti pre používateľa %s\n"
 
+#: src/useradd.c:2394
 msgid "Creating mailbox file"
 msgstr "Vytvára sa súbor mailbox"
 
+#: src/useradd.c:2400
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 "Nebola nájdená skupina „mail“. Používateľský mailbox súbor sa vytvára s "
 "oprávneniami 0600.\n"
 
+#: src/useradd.c:2412
 msgid "Setting mailbox file permissions"
 msgstr "Nastavujú sa prístupové práva súboru mailbox"
 
+#: src/useradd.c:2416
 #, fuzzy
 #| msgid "Creating mailbox file"
 msgid "Synchronize mailbox file"
 msgstr "Vytvára sa súbor mailbox"
 
+#: src/useradd.c:2419
 #, fuzzy
 #| msgid "Creating mailbox file"
 msgid "Closing mailbox file"
 msgstr "Vytvára sa súbor mailbox"
 
+#: src/useradd.c:2441
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
+#: src/useradd.c:2448
 #, c-format
 msgid ""
 "%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
 msgstr ""
 
+#: src/useradd.c:2587 src/usermod.c:1472
 #, c-format
 msgid "%s: user '%s' already exists\n"
 msgstr "%s: používateľ „%s“ už existuje\n"
 
+#: src/useradd.c:2601
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
@@ -2559,34 +3245,42 @@ msgstr ""
 "%s: skupina %s už existuje - ak chcete pridať tohto používateľa do tejto "
 "skupiny, použijte -g.\n"
 
+#: src/useradd.c:2624
 #, c-format
 msgid "%s: can't create user\n"
 msgstr "%s: nie je možné vytvoriť používateľa\n"
 
+#: src/useradd.c:2630
 #, c-format
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %lu nie je jedinečný\n"
 
+#: src/useradd.c:2643
 #, fuzzy, c-format
 msgid "%s: Failed to create tcb directory for %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/useradd.c:2656
 #, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: sa nedá vytvoriť skupina\n"
 
+#: src/useradd.c:2667
 #, fuzzy, c-format
 msgid "%s: can't create subordinate user IDs: %s\n"
 msgstr "%s: nie je možné vytvoriť používateľa\n"
 
+#: src/useradd.c:2677
 #, fuzzy, c-format
 msgid "%s: can't create subordinate group IDs: %s\n"
 msgstr "%s: sa nedá vytvoriť skupina\n"
 
+#: src/useradd.c:2707 src/usermod.c:2357
 #, c-format
 msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
+#: src/useradd.c:2728
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2598,6 +3292,7 @@ msgstr ""
 "%s: upozornenie: domovský adresár už existuje.\n"
 "Zo skel adresára sa tam neskopíruje žiaden súbor.\n"
 
+#: src/userdel.c:144
 #, fuzzy
 #| msgid ""
 #| "  -f, --force                   force removal of files,\n"
@@ -2611,92 +3306,113 @@ msgstr ""
 "  -f, --force                   vynúti odstránenie súborov, aj keď\n"
 "                                používateľ nie je ich vlastníkom\n"
 
+#: src/userdel.c:149
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
 "  -r, --remove                  odstráni domovský adresár a súbory s poštou\n"
 
+#: src/userdel.c:153
 msgid ""
 "  -Z, --selinux-user            remove any SELinux user mapping for the "
 "user\n"
 msgstr ""
 
+#: src/userdel.c:311
 #, fuzzy, c-format
 msgid ""
 "%s: group %s not removed because it is not the primary group of user %s.\n"
 msgstr "%s: nie je možné odstrniť primárnu skupinu používateľa „%s“.\n"
 
+#: src/userdel.c:319
 #, c-format
 msgid "%s: group %s not removed because it has other members.\n"
 msgstr ""
 
+#: src/userdel.c:336
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: skupina %s sa nedá odstrániť, pretože je primárnou skupinou iného "
 "používateľa.\n"
 
+#: src/userdel.c:667 src/userdel.c:673
 #, fuzzy, c-format
 msgid "%s: cannot remove entry %lu from %s\n"
 msgstr "%s: nie je možné odstrániť položku „%s“ z %s\n"
 
+#: src/userdel.c:768
 #, fuzzy, c-format
 msgid "%s: %s mail spool (%s) not found\n"
 msgstr "%s: chybný domovský adresár „%s“\n"
 
+#: src/userdel.c:774 src/userdel.c:790 src/userdel.c:831
 #, c-format
 msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: upozornenie: nemôžem odstrániť %s: %s\n"
 
+#: src/userdel.c:815 src/userdel.c:1080
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: vlastníkom %s nie je %s, nemažem ho\n"
 
+#: src/userdel.c:867
 #, c-format
 msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
 msgstr ""
 
+#: src/userdel.c:872
 #, fuzzy, c-format
 msgid "%s: Cannot drop privileges: %s\n"
 msgstr "%s: zlyhalo odstránenie právomocí (%s)\n"
 
+#: src/userdel.c:882
 #, fuzzy, c-format
 msgid "%s: Cannot remove the content of %s: %s\n"
 msgstr "lastlog: Nepodarilo sa zistiť veľkosť %s: %s\n"
 
+#: src/userdel.c:891
 #, fuzzy, c-format
 msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: nie je možné odstrániť položku „%s“ z %s\n"
 
+#: src/userdel.c:1075
 #, fuzzy, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: chybný domovský adresár „%s“\n"
 
+#: src/userdel.c:1106
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr "%s: adresár %s nebudem mazať (je to domovský adresár používateľa %s)\n"
 
+#: src/userdel.c:1128
 #, fuzzy, c-format
 #| msgid "%s: error removing directory %s\n"
 msgid "%s: error removing subvolume %s\n"
 msgstr "%s: chyba pri mazaní adresára %s\n"
 
+#: src/userdel.c:1138
 #, c-format
 msgid "%s: error removing directory %s\n"
 msgstr "%s: chyba pri mazaní adresára %s\n"
 
+#: src/userdel.c:1165 src/usermod.c:2370
 #, c-format
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
 
+#: src/usermod.c:427
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                the user from other groups\n"
 msgstr ""
 
+#: src/usermod.c:431
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment KOMENTÁR        nová hodnota poľa GECOS\n"
 
+#: src/usermod.c:432
 msgid ""
 "  -d, --home HOME_DIR           new home directory for the user account\n"
 msgstr ""
@@ -2704,12 +3420,14 @@ msgstr ""
 "používateľský\n"
 "                                účet\n"
 
+#: src/usermod.c:433
 msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
 "  -e, --expiredate EXP_DATUM    nastaví čas vypršania platnosti účtu na\n"
 "                                EXP_DATUM\n"
 
+#: src/usermod.c:434
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
@@ -2717,20 +3435,25 @@ msgstr ""
 "  -f, --inactive NEAKTIV        zablokuje platnosť hesla po NEAKTIV dňoch\n"
 "                                od času vypršania platnosti\n"
 
+#: src/usermod.c:436
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
 msgstr ""
 "  -g, --gid SKUPINA             vynúti použitie skupiny SKUPINA ako novej\n"
 "                                prvotnej prihlasovacej skupiny\n"
 
+#: src/usermod.c:437
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr "  -G, --groups SKUPINY          zobrazí prídavné skupiny\n"
 
+#: src/usermod.c:439
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr "  -l, --login LOGIN             nová hodnota prihlasovacieho mena\n"
 
+#: src/usermod.c:440
 msgid "  -L, --lock                    lock the user account\n"
 msgstr "  -L, --lock                    zablokuje používateľský účet\n"
 
+#: src/usermod.c:441
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
@@ -2739,18 +3462,21 @@ msgstr ""
 "nového\n"
 "                                umiestnenia (používať iba s -d)\n"
 
+#: src/usermod.c:443
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr ""
 "  -o, --non-unique              dovolí použitie duplicitného\n"
 "                                (nejedinečného) UID\n"
 
+#: src/usermod.c:444
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr ""
 "  -p, --password HESLO          ako nové heslo použije zadané zašifrované\n"
 "                                HESLO\n"
 
+#: src/usermod.c:446
 #, fuzzy
 #| msgid ""
 #| "  -f, --force                   force removal of files,\n"
@@ -2764,24 +3490,31 @@ msgstr ""
 "  -f, --force                   vynúti odstránenie súborov, aj keď\n"
 "                                používateľ nie je ich vlastníkom\n"
 
+#: src/usermod.c:451
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr "  -u, --uid UID                 nový UID pre používateľský účet\n"
 
+#: src/usermod.c:452
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr "  -U, --unlock                  odblokuje používateľský účet\n"
 
+#: src/usermod.c:454
 msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
 msgstr ""
 
+#: src/usermod.c:455
 msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
 msgstr ""
 
+#: src/usermod.c:456
 msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
 msgstr ""
 
+#: src/usermod.c:457
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr ""
 
+#: src/usermod.c:458
 #, fuzzy
 #| msgid "  -r, --system                  create a system account\n"
 msgid ""
@@ -2789,6 +3522,7 @@ msgid ""
 "defaults\n"
 msgstr "  -r, --system                  vytvorí systémový účet\n"
 
+#: src/usermod.c:461
 #, fuzzy
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
@@ -2798,6 +3532,7 @@ msgstr ""
 "používateľský\n"
 "                                účet\n"
 
+#: src/usermod.c:462
 #, fuzzy
 msgid ""
 "      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
@@ -2806,6 +3541,7 @@ msgstr ""
 "používateľský\n"
 "                                účet\n"
 
+#: src/usermod.c:485
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -2814,85 +3550,104 @@ msgstr ""
 "%s: odomknutie používateľa by malo za následok účet bez hesla.\n"
 "Tento účet by ste mali odomknúť nastavením hesla pomocou usermod -p.\n"
 
+#: src/usermod.c:523 src/usermod.c:609
 #, c-format
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: používateľ %s už existuje v %s\n"
 
+#: src/usermod.c:1110
 #, c-format
 msgid "%s: homedir must be an absolute path\n"
 msgstr ""
 
+#: src/usermod.c:1240 src/usermod.c:1249
 #, fuzzy, c-format
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: chybný dátum „%s“\n"
 
+#: src/usermod.c:1258 src/usermod.c:1267
 #, fuzzy, c-format
 msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: chybný dátum „%s“\n"
 
+#: src/usermod.c:1365
 #, fuzzy, c-format
 msgid "%s: no options\n"
 msgstr "%s: súbor %s sa nedá otvoriť\n"
 
+#: src/usermod.c:1385
 #, c-format
 msgid "%s: %s and %s are mutually exclusive flags\n"
 msgstr ""
 
+#: src/usermod.c:1392
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr "%s: prepínače -L, -p a -U sa navzájom vylučujú\n"
 
+#: src/usermod.c:1464
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: prepínače -e a -f vyžadujú tieňové heslá\n"
 
+#: src/usermod.c:1480
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: UID „%lu“ už existuje\n"
 
+#: src/usermod.c:1489 src/usermod.c:1497
 #, fuzzy, c-format
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr "%s: %s nemá oprávnenie zmeniť heslo %s\n"
 
+#: src/usermod.c:1850
 #, c-format
 msgid "%s: directory %s exists\n"
 msgstr "%s: adresár %s už existuje\n"
 
+#: src/usermod.c:1862
 #, c-format
 msgid ""
 "%s: The previous home directory (%s) was not a directory. It is not removed "
 "and no home directories are created.\n"
 msgstr ""
 
+#: src/usermod.c:1885 src/usermod.c:2428
 #, fuzzy, c-format
 msgid "%s: Failed to change ownership of the home directory"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
+#: src/usermod.c:1900
 #, c-format
 msgid "%s: error: cannot move subvolume from %s to %s - different device\n"
 msgstr ""
 
+#: src/usermod.c:1913
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
 "%s: upozornenie: chyba pri úplnom odstraňovaní starého domovského adresára %s"
 
+#: src/usermod.c:1929
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: adresár %s sa nedá premenovať na %s\n"
 
+#: src/usermod.c:1935
 #, c-format
 msgid ""
 "%s: The previous home directory (%s) does not exist or is inaccessible. Move "
 "cannot be completed.\n"
 msgstr ""
 
+#: src/usermod.c:1971 src/usermod.c:1983 src/usermod.c:1999
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
 "%s: Nepodarilo sa skopírovať položku lastlog používateľa %lu používateľovi "
 "%lu: %s\n"
 
+#: src/usermod.c:2007
 #, fuzzy, c-format
 #| msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
@@ -2900,12 +3655,14 @@ msgstr ""
 "%s: Nepodarilo sa skopírovať položku lastlog používateľa %lu používateľovi "
 "%lu: %s\n"
 
+#: src/usermod.c:2035 src/usermod.c:2047 src/usermod.c:2063
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgstr ""
 "%s: Nepodarilo sa skopírovať položku faillog používateľa %lu používateľovi "
 "%lu: %s\n"
 
+#: src/usermod.c:2071
 #, fuzzy, c-format
 #| msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
@@ -2913,40 +3670,50 @@ msgstr ""
 "%s: Nepodarilo sa skopírovať položku faillog používateľa %lu používateľovi "
 "%lu: %s\n"
 
+#: src/usermod.c:2130
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: upozornenie: vlastníkom %s nie je %s\n"
 
+#: src/usermod.c:2138
 msgid "failed to change mailbox owner"
 msgstr "chyba pri zmene vlastníka schránky"
 
+#: src/usermod.c:2162
 msgid "failed to rename mailbox"
 msgstr "chyba pri premenovaní schránky"
 
+#: src/usermod.c:2254
 #, fuzzy, c-format
 msgid "%s: unable to find new subordinate uid range: %s\n"
 msgstr "%s: chybný dátum „%s“\n"
 
+#: src/usermod.c:2262
 #, fuzzy, c-format
 msgid "%s: unable to find new subordinate gid range: %s\n"
 msgstr "%s: chybný dátum „%s“\n"
 
+#: src/usermod.c:2278
 #, fuzzy, c-format
 msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
+#: src/usermod.c:2295
 #, fuzzy, c-format
 msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
+#: src/usermod.c:2312
 #, fuzzy, c-format
 msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
+#: src/usermod.c:2329
 #, fuzzy, c-format
 msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s: zlyhalo pripravenie novej položky %s „%s“\n"
 
+#: src/vipw.c:54
 #, c-format
 msgid ""
 "You have modified %s.\n"
@@ -2957,93 +3724,159 @@ msgstr ""
 "Kvôli zachovaniu konzistentnosti budete možno musieť zmeniť %s.\n"
 "Prosím, urobte tak príkazom „%s“.\n"
 
+#: src/vipw.c:91
 msgid "  -g, --group                   edit group database\n"
 msgstr "  -g, --group                   upraví databázu skupín\n"
 
+#: src/vipw.c:93
 msgid "  -p, --passwd                  edit passwd database\n"
 msgstr "  -p, --passwd                  upraví databázu passwd\n"
 
+#: src/vipw.c:96
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr "  -s, --shadow                  upraví databázu shadow alebo gshadow\n"
 
+#: src/vipw.c:98
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr ""
 
+#: src/vipw.c:100
 msgid "\n"
 msgstr ""
 
+#: src/vipw.c:162
 #, c-format
 msgid "%s: failed to remove %s\n"
 msgstr "%s: zlyhalo odstránenie %s\n"
 
+#: src/vipw.c:184
 #, c-format
 msgid "%s: %s is unchanged\n"
 msgstr "%s: %s je bez zmien\n"
 
+#: src/vipw.c:214
 #, fuzzy
 msgid "failed to create scratch directory"
 msgstr "chyba pri premenovaní schránky"
 
+#: src/vipw.c:217 src/vipw.c:262 src/vipw.c:424
 msgid "failed to drop privileges"
 msgstr "zlyhalo odstránenie právomocí"
 
+#: src/vipw.c:242
 #, fuzzy
 msgid "Couldn't get file context"
 msgstr "Súbor sa nedá zamknúť"
 
+#: src/vipw.c:247 src/vipw.c:403
 msgid "setfscreatecon () failed"
 msgstr ""
 
+#: src/vipw.c:253 src/vipw.c:276 src/vipw.c:462
 #, fuzzy
 msgid "failed to gain privileges"
 msgstr "%s: zlyhalo odstránenie právomocí (%s)\n"
 
+#: src/vipw.c:257
 msgid "Couldn't lock file"
 msgstr "Súbor sa nedá zamknúť"
 
+#: src/vipw.c:279
 msgid "Couldn't make backup"
 msgstr "Nedá sa vytvoriť záloha"
 
+#: src/vipw.c:317
 #, fuzzy, c-format
 msgid "%s: %s: %s\n"
 msgstr "%s: PAM: %s\n"
 
+#: src/vipw.c:321
 #, fuzzy, c-format
 msgid "%s: %s returned with status %d\n"
 msgstr "%s: %s sa nenachádza v /etc/passwd\n"
 
+#: src/vipw.c:325 src/vipw.c:388
 #, c-format
 msgid "%s: %s killed by signal %d\n"
 msgstr ""
 
+#: src/vipw.c:418
 #, fuzzy
 msgid "failed to open scratch file"
 msgstr "Súbor so skupinami sa nedá otvoriť\n"
 
+#: src/vipw.c:421
 #, fuzzy
 msgid "failed to unlink scratch file"
 msgstr "%s: nepodarilo sa odmknúť %s\n"
 
+#: src/vipw.c:427
 #, fuzzy
 msgid "failed to stat edited file"
 msgstr "chyba pri premenovaní schránky"
 
+#: src/vipw.c:431
 #, fuzzy
 #| msgid "%s: can't open file\n"
 msgid "aprintf() failed"
 msgstr "%s: nedá sa otvoriť súbor\n"
 
+#: src/vipw.c:435
 #, fuzzy
 msgid "failed to create backup file"
 msgstr "chyba pri premenovaní schránky"
 
+#: src/vipw.c:448
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
 
+#: src/vipw.c:577
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: chybný základný adresár „%s“\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: su [options] [LOGIN]\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -, -l, --login                make the shell a login shell\n"
+#~| "  -m, -p,\n"
+#~| "  --preserve-environment        do not reset environment variables, and\n"
+#~| "                                keep the same shell\n"
+#~| "  -s, --shell SHELL             use SHELL instead of the default in "
+#~| "passwd\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: su [options] [-] [username [args]]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -, -l, --login                make the shell a login shell\n"
+#~ "  -m, -p,\n"
+#~ "  --preserve-environment        do not reset environment variables, and\n"
+#~ "                                keep the same shell\n"
+#~ "  -s, --shell SHELL             use SHELL instead of the default in "
+#~ "passwd\n"
+#~ "\n"
+#~ "If no username is given, assume root.\n"
+#~ msgstr ""
+#~ "Použitie: su [voľby] [ÚČET]\n"
+#~ "\n"
+#~ "Voľby:\n"
+#~ "  -c, --command PRÍKAZ          odovzdá PRÍKAZ vyvolanému shell-u\n"
+#~ "  -h, --help                    zobrazí tohto pomocníka a ukončí sa\n"
+#~ "  -, -l, --login                nastaví shell ako prihlasovací shell\n"
+#~ "  -m, -p,\n"
+#~ "  --preserve-environment        zachová premenné prostredia a ponechá\n"
+#~ "                                ten istý shell\n"
+#~ "  -s, --shell SHELL             použije SHELL namiesto predvoleného v "
+#~ "passwd\n"
+#~ "\n"
 
 #, fuzzy, c-format
 #~ msgid "%s: Can't get unique subordinate GID range\n"
