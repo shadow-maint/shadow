@@ -45,7 +45,7 @@ Contributions are welcome. Follow the
 ## Translations
 
 Translations are maintained within the [Translation Project](https://translationproject.org/html/welcome.html).  For further
-information, see [here](doc/contributions/translation.md)
+information, see [here](doc/contributions/translation.md).
 
 ## Authors and maintainers
 Authors and maintainers are listed in [AUTHORS.md](
