@@ -50,7 +50,7 @@ is_valid_hash(const char *hash)
 		return true;
 
 	// Minimum hash length
-	if (strlen(hash) < 13)
+	if (strlen(hash) < 27)
 		return false;
 
 	// Yescrypt: $y$ + algorithm parameters + $ + salt + $ + 43-char hash
@@ -71,10 +71,6 @@ is_valid_hash(const char *hash)
 
 	// MD5: $1$ + salt + $ + 22-char hash
 	if (match_regex("^\\$1\\$[^$:\n]{1,8}\\$[./A-Za-z0-9]{22}$", hash))
-		return true;
-
-	// DES: exactly 13 characters from [A-Za-z0-9./]
-	if (match_regex("^[./A-Za-z0-9]{13}$", hash))
 		return true;
 
 	// Not a valid hash
