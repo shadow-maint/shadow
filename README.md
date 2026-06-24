@@ -42,6 +42,11 @@ There are several ways to contact us:
 Contributions are welcome. Follow the
 [guidelines](doc/contributions/introduction.md) before posting any patches.
 
+## Translations
+
+Translations are maintained within the [Translation Project](https://translationproject.org/html/welcome.html).  For further
+information, see [here](doc/contributions/translation.md).
+
 ## Authors and maintainers
 Authors and maintainers are listed in [AUTHORS.md](
 https://github.com/shadow-maint/shadow/blob/master/AUTHORS.md).
