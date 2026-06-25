@@ -1,2 +1,0 @@
-useradd: invalid numeric argument '-2'
-useradd: the INACTIVE= configuration in /etc/default/useradd will be ignored

@@ -6,8 +6,6 @@ Options:
   -e, --expire                  force expire the password for the named account
   -h, --help                    display this help message and exit
   -k, --keep-tokens             change password only if expired
-  -i, --inactive INACTIVE       set password inactive after expiration
-                                to INACTIVE
   -l, --lock                    lock the password of the named account
   -n, --mindays MIN_DAYS        set minimum number of days before password
                                 change to MIN_DAYS

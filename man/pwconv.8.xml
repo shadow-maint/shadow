@@ -8,9 +8,6 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
-<!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
-<!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
-<!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
@@ -141,15 +138,6 @@
     </para>
 
     <para>
-      <command>pwconv</command> will use the values of <emphasis
-      remap='I'>PASS_MIN_DAYS</emphasis>, <emphasis
-      remap='I'>PASS_MAX_DAYS</emphasis>, and <emphasis
-      remap='I'>PASS_WARN_AGE</emphasis> from
-      <filename>/etc/login.defs</filename> when adding new entries to
-      <filename>/etc/shadow</filename>.
-    </para>
-
-    <para>
       Likewise <command>pwunconv</command> and <command>grpunconv</command>
       are similar. Passwords in the plain file are updated from the shadowed
       file. Entries which exist in the plain file but not in the shadowed
@@ -217,9 +205,6 @@
       <command>pwconv</command>:
     </para>
     <variablelist>
-      &PASS_MAX_DAYS;
-      &PASS_MIN_DAYS;
-      &PASS_WARN_AGE;
       &USE_TCB;
     </variablelist>
   </refsect1>
