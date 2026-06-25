@@ -126,7 +126,7 @@ static void usage (int status)
 	(void) fputs (_("  -g, --gid GID                 change the group ID to GID\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"), usageout);
-	(void) fputs (_("  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"), usageout);
+	(void) fputs (_("  -o, --non-unique              allow using a duplicate (non-unique) GID\n"), usageout);
 	(void) fputs (_("  -p, --password PASSWORD       change the password to this (encrypted)\n"
 	                "                                PASSWORD\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);

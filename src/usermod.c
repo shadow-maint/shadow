@@ -455,7 +455,7 @@ usage (int status)
 	(void) fputs (_("  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"), usageout);
 	(void) fputs (_("  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"), usageout);
 	(void) fputs (_("  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"), usageout);
-	(void) fputs (_("  -S, --add-subids              add entries to sub[ud]id based on system defaults\n"), usageout);
+	(void) fputs (_("  -S, --add-subids              add entries to sub[ug]id based on system defaults\n"), usageout);
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_SELINUX
 	(void) fputs (_("  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account\n"), usageout);
