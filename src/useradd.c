@@ -2304,13 +2304,13 @@ static void create_home(const struct option_flags *flags)
 		}
 		if (chown(path, 0, 0) < 0) {
 			fprintf(stderr,
-				_("%s: warning: chown on `%s' failed: %m\n"),
-				Prog, path);
+				"%s: %s: chown(%s): %m\n",
+				Prog, _("warning"), path);
 		}
 		if (chmod(path, 0755) < 0) {
 			fprintf(stderr,
-				_("%s: warning: chmod on `%s' failed: %m\n"),
-				Prog, path);
+				"%s: %s: chmod(%s): %m\n",
+				Prog, _("warning"), path);
 		}
 	}
 	free(bhome);
@@ -2319,8 +2319,8 @@ static void create_home(const struct option_flags *flags)
 	mode = getdef_num("HOME_MODE",
 			  0777 & ~getdef_num("UMASK", GETDEF_DEFAULT_UMASK));
 	if (chmod(prefix_user_home, mode)) {
-		fprintf(stderr, _("%s: warning: chown on '%s' failed: %m\n"),
-			Prog, path);
+		fprintf(stderr, "%s: %s: chown(%s): %m\n",
+			Prog, _("warning"), path);
 	}
 	home_added = true;
 #ifdef WITH_AUDIT
