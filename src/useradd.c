@@ -909,7 +909,7 @@ static void usage (int status)
 	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"), usageout);
 	(void) fputs (_("  -f, --inactive INACTIVE       password inactivity period of the new account\n"), usageout);
 #ifdef ENABLE_SUBIDS
-	(void) fputs (_("  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a system user\n"), usageout);
+	(void) fputs (_("  -F, --add-subids-for-system   add entries to sub[ug]id even when adding a system user\n"), usageout);
 #endif
 	(void) fputs (_("  -g, --gid GROUP               name or ID of the primary group of the new\n"
 	                "                                account\n"), usageout);
