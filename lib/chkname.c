@@ -75,26 +75,16 @@ is_valid_name(const char *name)
 	 * sake of Samba 3.x "add machine script"
 	 */
 
-	if (!((*name >= 'a' && *name <= 'z') ||
-	      (*name >= 'A' && *name <= 'Z') ||
-	      (*name >= '0' && *name <= '9') ||
-	      *name == '_' ||
-	      *name == '.'))
-	{
+	if (!ispfchar_c(*name)) {
 		errno = EILSEQ;
 		return false;
 	}
 
 	while (!streq(++name, "")) {
-		if (!((*name >= 'a' && *name <= 'z') ||
-		      (*name >= 'A' && *name <= 'Z') ||
-		      (*name >= '0' && *name <= '9') ||
-		      *name == '_' ||
-		      *name == '.' ||
-		      *name == '-' ||
-		      streq(name, "$")
-		     ))
-		{
+		if (streq(name, "$"))  // Samba
+			return true;
+
+		if (!ispfchar_c(*name)) {
 			errno = EILSEQ;
 			return false;
 		}
@@ -146,7 +136,7 @@ is_valid_domain_label(const char *label)
 		errno = EINVAL;
 		return false;
 	}
-	if (!streq(stpspn(label, CTYPE_ALNUM_C "-"), "")) {
+	if (!strisldh_rfc1035_c(label)) {
 		errno = EINVAL;
 		return false;
 	}
