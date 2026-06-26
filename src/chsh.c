@@ -31,6 +31,7 @@
 #include "pam_defs.h"
 #endif
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "sssd.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
@@ -123,7 +124,7 @@ usage (int status)
 static void new_fields (void)
 {
 	puts (_("Enter the new value, or press ENTER for the default"));
-	change_field(loginsh, sizeof(loginsh), _("Login Shell"));
+	change_field_a(loginsh, _("Login Shell"));
 }
 
 /*
