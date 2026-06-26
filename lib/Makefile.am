@@ -209,8 +209,6 @@ libshadow_la_SOURCES = \
 	string/strchr/strchrscnt.h \
 	string/strchr/strnul.c \
 	string/strchr/strnul.h \
-	string/strcmp/strcaseeq.c \
-	string/strcmp/strcaseeq.h \
 	string/strcmp/strcaseprefix.c \
 	string/strcmp/strcaseprefix.h \
 	string/strcmp/streq.c \
@@ -239,16 +237,12 @@ libshadow_la_SOURCES = \
 	string/strerrno.h \
 	string/strftime.c \
 	string/strftime.h \
-	string/strspn/stpspn.c \
-	string/strspn/stpspn.h \
-	string/strspn/stprcspn.c \
-	string/strspn/stprcspn.h \
-	string/strspn/stprspn.c \
-	string/strspn/stprspn.h \
 	string/strspn/strrcspn.c \
 	string/strspn/strrcspn.h \
 	string/strspn/strrspn.c \
 	string/strspn/strrspn.h \
+	string/strspn/strspn.c \
+	string/strspn/strspn.h \
 	string/strtok/stpsep.c \
 	string/strtok/stpsep.h \
 	string/strtok/astrsep2ls.c \

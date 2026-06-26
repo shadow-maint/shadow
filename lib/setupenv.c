@@ -29,7 +29,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
-#include "string/strspn/stpspn.h"
+#include "string/strspn/strspn.h"
 #include "string/strtok/stpsep.h"
 
 

@@ -65,7 +65,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
-#include "string/strspn/stprspn.h"
+#include "string/strspn/strrspn.h"
 #include "sysconf.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"

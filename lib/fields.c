@@ -21,8 +21,8 @@
 #include "prototypes.h"
 #include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
-#include "string/strspn/stpspn.h"
-#include "string/strspn/stprspn.h"
+#include "string/strspn/strrspn.h"
+#include "string/strspn/strspn.h"
 #include "string/strtok/stpsep.h"
 
 
