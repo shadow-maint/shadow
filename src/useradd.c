@@ -42,6 +42,7 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "io/fgets/fgets.h"
+#include "list.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"

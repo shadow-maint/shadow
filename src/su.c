@@ -53,6 +53,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "getdef.h"
+#include "list.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
