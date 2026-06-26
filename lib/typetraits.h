@@ -54,15 +54,17 @@
 )
 
 
-#define QChar_of(s)  typeof                                           \
+#define QVoidptrof_(p)  typeof(1?(p):(void*){0})
+#define QVoid_of(p)     typeof((QVoidptrof_(p)){0}[0])
+#define QChar_of(Q, s)  typeof                                        \
 (                                                                     \
-	_Generic(s,                                                   \
-		const char *:  (const char){0},                       \
-		const void *:  (const char){0},                       \
-		char *:        (char){0},                             \
-		void *:        (char){0}                              \
+	_Generic((QVoid_of(s) *){0},                                  \
+		Q void *:  (Q char){0},                               \
+		void *:    (char){0}                                  \
 	)                                                             \
 )
+#define CQChar_of(s)    QChar_of(const, s)
+#define VQChar_of(s)    QChar_of(volatile, s)
 
 
 #endif  // include guard

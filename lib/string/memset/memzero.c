@@ -9,5 +9,4 @@
 #include "string/memset/memzero.h"
 
 
-extern inline void *memzero(void *ptr, size_t size);
-extern inline char *strzero(char *s);
+extern inline void *memzero_(volatile void *ptr, size_t size);
