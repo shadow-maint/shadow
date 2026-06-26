@@ -4,7 +4,7 @@
 
 #include "config.h"
 
-#include "string/strtok/strsep2arr.h"
+#include "string/strsep/strsep2arr.h"
 
 #include <stddef.h>
 #include <sys/types.h>
