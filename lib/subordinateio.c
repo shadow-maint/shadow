@@ -17,6 +17,7 @@
 #include <pwd.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <stdint.h>
 #include <string.h>
 
 #include "alloc/malloc.h"
@@ -332,10 +333,12 @@ static int subordinate_range_cmp (const void *p1, const void *p2)
 static id_t
 find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 {
-	id_t                           low, high;
+	intmax_t                       low, max_id;
 	const struct subordinate_range *range;
 
-	if (count == 0 || max < min || count - 1 > max - min) {
+	if (count == 0 || max < min
+	    || (uintmax_t) count - 1 > (uintmax_t) max - min)
+	{
 		errno = ERANGE;
 		return -1;
 	}
@@ -345,33 +348,48 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 	commonio_rewind(db);
 
 	low = min;
+	max_id = max;
 	while (NULL != (range = commonio_next(db))) {
-		id_t  first, last;
+		intmax_t  first, last;
+
+		if (range->count == 0)
+			continue;
 
 		first = range->start;
-		last = first + range->count - 1;
+		if (__builtin_add_overflow(first, range->count - 1, &last))
+			last = INTMAX_MAX;
 
-		/* Find the top end of the hole before this range */
-		high = first;
+		/*
+		 * Ranges are sorted by start, and low has been advanced past
+		 * every range seen so far, so the gap [low, first - 1] (clamped
+		 * to max) contains no existing range.  A block that fits in
+		 * this gap lies below first, hence below every later range too,
+		 * so it cannot overlap any allocation.
+		 */
+		if (first > low) {
+			intmax_t high = first - 1;
 
-		/* Don't allocate IDs after max (included) */
-		if (high > max + 1) {
-			high = max + 1;
+			/* Don't allocate IDs after max (included). */
+			if (high > max_id)
+				high = max_id;
+
+			/* Is the hole before this range large enough? */
+			if ((high >= low) && ((high - low + 1) >= (intmax_t) count))
+				return low;
 		}
 
-		/* Is the hole before this range large enough? */
-		if ((high > low) && ((high - low) >= count))
-			return low;
-
 		/* Compute the low end of the next hole */
-		if (low < (last + 1))
+		if (last >= low) {
+			if (last == INTMAX_MAX)
+				goto fail;
 			low = last + 1;
-		if (low > max)
+		}
+		if (low > max_id)
 			goto fail;
 	}
 
 	/* Is the remaining unclaimed area large enough? */
-	if (((max - low) + 1) >= count)
+	if (((max_id - low) + 1) >= (intmax_t) count)
 		return low;
 fail:
 	errno = EUSERS;
@@ -1128,4 +1146,3 @@ void free_subid_pointer(void *ptr)
 #else				/* !ENABLE_SUBIDS */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !ENABLE_SUBIDS */
-
