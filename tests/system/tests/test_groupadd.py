@@ -4,8 +4,13 @@ Test groupadd
 
 from __future__ import annotations
 
+import re
+
 import pytest
 
+from passlib.hash import sha512_crypt
+
+from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -86,3 +91,32 @@ def test_groupadd__set_gid(shadow: Shadow):
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tgroup", "Incorrect groupname"
     assert group_entry.gid == 1500, "Incorrect GID"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__set_password(shadow: Shadow):
+    """
+    :title: Add group with password using -p flag
+    :setup:
+        1. Create group with password
+    :steps:
+        1. Check group entry
+        2. Check gshadow entry
+    :expectedresults:
+        1. Group entry is created
+        2. Group's password is correctly set
+    :customerscenario: False
+    """
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.groupadd(f"-p '{password_hash}' tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+        assert gshadow_entry.password is not None, "Password should not be None"
+        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
