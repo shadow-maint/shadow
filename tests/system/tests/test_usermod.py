@@ -274,3 +274,36 @@ def test_usermod__unlock_password(shadow: Shadow):
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.password is not None, "Password should not be None"
     assert shadow_entry.password == password_hash, "Password should be unlocked"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__modify_multiple_attributes(shadow: Shadow):
+    """
+    :title: Change multiple user attributes at once
+    :setup:
+        1. Create test group
+        2. Create user
+        3. Change GID, comment, expiration, inactive, shell, and home
+    :steps:
+        1. Check passwd entry
+        2. Check shadow entry
+    :expectedresults:
+        1. Passwd entry for the user exists and the attributes are correct
+        2. Shadow entry for the user exists and the attributes are correct
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup -g 9999")
+    shadow.useradd("tuser1")
+    shadow.usermod("-g 9999 --comment 'Test Comment' -e 2000-09-01 -f 17 -s /bin/bash -d /tmp tuser1")
+
+    passwd_entry = shadow.tools.getent.passwd("tuser1")
+    assert passwd_entry is not None, "User should be found"
+    assert passwd_entry.gid == 9999, "GID should be 9999"
+    assert passwd_entry.gecos == "Test Comment", "Comment should be updated"
+    assert passwd_entry.shell == "/bin/bash", "Shell should be /bin/bash"
+    assert passwd_entry.home == "/tmp", "Home should be /tmp"
+
+    shadow_entry = shadow.tools.getent.shadow("tuser1")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.expiration_date == 11201, "Expiration should be 2000-09-01 (11201 days since epoch)"
+    assert shadow_entry.inactivity_days == 17, "Inactive days should be 17"
