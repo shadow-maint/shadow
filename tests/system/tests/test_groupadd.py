@@ -7,7 +7,6 @@ from __future__ import annotations
 import re
 
 import pytest
-
 from passlib.hash import sha512_crypt
 
 from framework.misc import shadow_password_pattern
@@ -120,3 +119,34 @@ def test_groupadd__set_password(shadow: Shadow):
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
         assert gshadow_entry.password is not None, "Password should not be None"
         assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__force_group_creation(shadow: Shadow):
+    """
+    :title: Forced creation of existing group exits successfully
+    :setup:
+        1. Create group entry
+    :steps:
+        1. Check group entry
+        2. Force create existing group
+        3. Check group entry
+        4. Check gshadow entry
+    :expectedresults:
+        1. Group entry is created
+        2. groupadd -f command completes successfully
+        3. Group entry is unchanged
+        4. gshadow entry is unchanged
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    existing_group_entry = shadow.tools.getent.group("tgroup")
+    assert existing_group_entry is not None, "Group should be found"
+    shadow.groupadd("-f tgroup")
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
