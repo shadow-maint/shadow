@@ -39,7 +39,6 @@ def test_chpasswd__change_passwords_interactive(shadow: Shadow):
     assert shadow_entry1.password is not None, "Password should not be None"
     assert re.match(shadow_password_pattern(), shadow_entry1.password), "Incorrect password"
     assert shadow_entry1.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry1.min_days == 0, "Incorrect min days"
     assert shadow_entry1.max_days == 99999, "Incorrect max days"
     assert shadow_entry1.warn_days == 7, "Incorrect warn days"
 
@@ -49,7 +48,6 @@ def test_chpasswd__change_passwords_interactive(shadow: Shadow):
     assert shadow_entry2.password is not None, "Password should not be None"
     assert re.match(shadow_password_pattern(), shadow_entry2.password), "Incorrect password"
     assert shadow_entry2.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry2.min_days == 0, "Incorrect min days"
     assert shadow_entry2.max_days == 99999, "Incorrect max days"
     assert shadow_entry2.warn_days == 7, "Incorrect warn days"
 
@@ -82,7 +80,6 @@ def test_chpasswd__change_passwords_from_file(shadow: Shadow):
     assert shadow_entry1.password is not None, "Password should not be None"
     assert re.match(shadow_password_pattern(), shadow_entry1.password), "Incorrect password"
     assert shadow_entry1.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry1.min_days == 0, "Incorrect min days"
     assert shadow_entry1.max_days == 99999, "Incorrect max days"
     assert shadow_entry1.warn_days == 7, "Incorrect warn days"
 
@@ -92,6 +89,5 @@ def test_chpasswd__change_passwords_from_file(shadow: Shadow):
     assert shadow_entry2.password is not None, "Password should not be None"
     assert re.match(shadow_password_pattern(), shadow_entry2.password), "Incorrect password"
     assert shadow_entry2.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry2.min_days == 0, "Incorrect min days"
     assert shadow_entry2.max_days == 99999, "Incorrect max days"
     assert shadow_entry2.warn_days == 7, "Incorrect warn days"

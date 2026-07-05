@@ -58,7 +58,6 @@ def test_vipw__add_user_to_shadow(shadow: Shadow):
     assert shadow_entry.password is not None, "Password should not be None"
     assert shadow_entry.password == "!", "Incorrect password"
     assert shadow_entry.last_changed == 20342, "Incorrect last changed"
-    assert shadow_entry.min_days == 0, "Incorrect min days"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
 

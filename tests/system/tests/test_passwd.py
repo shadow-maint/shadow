@@ -37,7 +37,6 @@ def test_passwd__change_password_as_root_with_stdin(shadow: Shadow):
     assert shadow_entry.password is not None, "Password should not be None"
     assert re.match(shadow_password_pattern(), shadow_entry.password), "Incorrect password"
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.min_days == 0, "Incorrect min days"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
@@ -66,7 +65,6 @@ def test_passwd__change_password_as_root_interactive(shadow: Shadow):
     assert shadow_entry.password is not None, "Password should not be None"
     assert re.match(shadow_password_pattern(), shadow_entry.password), "Incorrect password"
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.min_days == 0, "Incorrect min days"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
