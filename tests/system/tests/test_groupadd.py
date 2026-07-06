@@ -8,6 +8,7 @@ import re
 
 import pytest
 from passlib.hash import sha512_crypt
+from pytest_mh.conn import ProcessError
 
 from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
@@ -232,3 +233,32 @@ def test_groupadd__create_group_with_existing_gid(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__invalid_gid(shadow: Shadow):
+    """
+    :title: Group creation with invalid GID fails
+    :setup:
+        1. None required
+    :steps:
+        1. Create group with invalid GID
+        2. Verify if groupadd command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group is not created
+        2. groupadd command fails with error (invalid argument)
+        3. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("-g 1001x tgroup")
+
+    assert exc_info.value.rc == 3, f"Expected return code 3 (invalid argument), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is None, "Group should not be found"
