@@ -150,3 +150,44 @@ def test_groupadd__force_group_creation(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__force_group_creation_with_existing_gid(shadow: Shadow):
+    """
+    :title: Forced creation of group assigns unique GID if specified GID exists
+    :setup:
+        1. Create group with specific GID
+    :steps:
+        1. Check existing group and gshadow entry
+        2. Force create new group with existing GID
+        3. Check new group and gshadow entry
+    :expectedresults:
+        1. Group entry is found with specific GID along with gshadow entry
+        2. groupadd command completes successfully
+        3. Group entry is created with next available GID along with gshadow entry
+    :customerscenario: False
+    """
+    shadow.groupadd("-g 1001 tgroup1")
+
+    existing_group_entry = shadow.tools.getent.group("tgroup1")
+    assert existing_group_entry is not None, "Group should be found"
+    assert existing_group_entry.name == "tgroup1", "Incorrect groupname"
+    assert existing_group_entry.gid == 1001, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        existing_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert existing_gshadow_entry is not None, "Group should be found"
+        assert existing_gshadow_entry.name == "tgroup1", "Incorrect groupname"
+
+    shadow.groupadd("-g 1001 -f tgroup2")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+    assert group_entry.gid == 1002, "Group should have next available unique GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
