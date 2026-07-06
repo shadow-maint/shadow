@@ -17,6 +17,7 @@
 #include <pwd.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <stdint.h>
 #include <string.h>
 
 #include "alloc/malloc.h"
@@ -29,6 +30,9 @@
 #include "string/strcmp/streq.h"
 #include "string/strtok/strsep2arr.h"
 #include "typetraits.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 #define ID_SIZE 31
@@ -333,10 +337,13 @@ static int subordinate_range_cmp (const void *p1, const void *p2)
 static id_t
 find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 {
-	id_t                           low, high;
+	static_assert(sizeof(long long) > sizeof(id_t), "");
+
+	intmax_t                       n, low, high;
 	const struct subordinate_range *range;
 
-	if (count == 0 || max < min || count - 1 > max - min) {
+	n = count;
+	if (n == 0 || max < min || n > max - min + 1LL) {
 		errno = ERANGE;
 		return -1;
 	}
@@ -347,21 +354,21 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 
 	low = min;
 	while (NULL != (range = commonio_next(db))) {
-		id_t  first, last;
+		intmax_t  first, last;
 
 		first = range->start;
-		last = first + range->count - 1;
+		last = first - 1LL + range->count;
 
 		/* Find the top end of the hole before this range */
 		high = first;
 
 		/* Don't allocate IDs after max (included) */
-		if (high > max + 1) {
-			high = max + 1;
+		if (high > max + 1LL) {
+			high = max + 1LL;
 		}
 
 		/* Is the hole before this range large enough? */
-		if ((high > low) && ((high - low) >= count))
+		if ((high > low) && ((high - low) >= n))
 			return low;
 
 		/* Compute the low end of the next hole */
@@ -372,7 +379,7 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 	}
 
 	/* Is the remaining unclaimed area large enough? */
-	if (((max - low) + 1) >= count)
+	if (max - low >= n - 1)
 		return low;
 fail:
 	errno = EUSERS;
