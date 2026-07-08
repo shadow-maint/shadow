@@ -28,6 +28,7 @@
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/strsep2arr.h"
+#include "typetraits.h"
 
 
 #define ID_SIZE 31
@@ -1044,7 +1045,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 		}
 	}
 
-	start = find_free_range(db, range->start, -1, range->count);
+	start = find_free_range(db, range->start, maxof(id_t), range->count);
 	if (start == -1) {
 		ret = false;
 		goto out;
