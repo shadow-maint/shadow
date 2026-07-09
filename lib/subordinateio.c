@@ -14,6 +14,7 @@
 #include "getdef.h"
 #include "../libsubid/subid.h"
 #include <sys/types.h>
+#include <sys/param.h>
 #include <pwd.h>
 #include <ctype.h>
 #include <fcntl.h>
@@ -113,10 +114,13 @@ subordinate_parse(const char *line)
 	if (streq(fields[2], ""))
 		return NULL;
 	range.owner = fields[0];
-	if (str2ul(&range.start, fields[1]) == -1)
+	if (a2ul(&range.start, fields[1], NULL, 0, 0, maxof(id_t)) == -1)
 		return NULL;
-	if (str2ul(&range.count, fields[2]) == -1)
+	if (a2ul(&range.count, fields[2], NULL, 0, 0,
+	         MIN(maxof(id_t) + 1LL - range.start, maxof(id_t))) == -1)
+	{
 		return NULL;
+	}
 
 	return &range;
 }
