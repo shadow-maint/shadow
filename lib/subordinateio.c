@@ -360,6 +360,9 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 	while (NULL != (range = commonio_next(db))) {
 		intmax_t  first, last;
 
+		if (range->count == 0)
+			continue;
+
 		first = range->start;
 		last = first - 1LL + range->count;
 
