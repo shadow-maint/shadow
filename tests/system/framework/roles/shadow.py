@@ -542,3 +542,16 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file(file_to_discard)
 
         return result
+
+    def pwconv(self, *args) -> ProcessResult:
+        """
+        Convert passwd file to shadow password format.
+        """
+        cmd_args = " ".join(args) if args else ""
+        self.logger.info(f"Converting passwd file to shadow format on {self.host.hostname}")
+        cmd = self.host.conn.run(f"pwconv {cmd_args}", log_level=ProcessLogLevel.Error)
+
+        self.host.discard_file("/etc/passwd")
+        self.host.discard_file("/etc/shadow")
+
+        return cmd
