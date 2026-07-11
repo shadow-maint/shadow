@@ -76,14 +76,10 @@ static bool
     aflg = false,			/* -a - show status for all users */
     dflg = false,			/* -d - delete password */
     eflg = false,			/* -e - force password change */
-    iflg = false,			/* -i - set inactive days */
-    kflg = false,			/* -k - change only if expired */
     lflg = false,			/* -l - lock the user's password */
     qflg = false,			/* -q - quiet mode */
     Sflg = false,			/* -S - show password status */
     uflg = false,			/* -u - unlock the user's password */
-    wflg = false,			/* -w - set warning days */
-    xflg = false,			/* -x - set maximum days */
     sflg = false;			/* -s - read passwd from stdin */
 
 /*
@@ -91,10 +87,6 @@ static bool
  * and require username to be specified
  */
 static bool anyflag = false;
-
-static long age_max = 0;	/* Maximum days until change     */
-static long warn = 0;		/* Warning days before change   */
-static long inact = 0;		/* Days without change before locked */
 
 static bool do_update_age = false;
 #ifdef USE_PAM
@@ -157,9 +149,6 @@ usage (int status)
 	(void) fputs (_("  -d, --delete                  delete the password for the named account\n"), usageout);
 	(void) fputs (_("  -e, --expire                  force expire the password for the named account\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -k, --keep-tokens             change password only if expired\n"), usageout);
-	(void) fputs (_("  -i, --inactive INACTIVE       set password inactive after expiration\n"
-	                "                                to INACTIVE\n"), usageout);
 	(void) fputs (_("  -l, --lock                    lock the password of the named account\n"), usageout);
 	(void) fputs (_("  -q, --quiet                   quiet mode\n"), usageout);
 	(void) fputs (_("  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"), usageout);
@@ -167,9 +156,6 @@ usage (int status)
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
 	(void) fputs (_("  -S, --status                  report password status on the named account\n"), usageout);
 	(void) fputs (_("  -u, --unlock                  unlock the password of the named account\n"), usageout);
-	(void) fputs (_("  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
-	(void) fputs (_("  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
-	                "                                change to MAX_DAYS\n"), usageout);
 	(void) fputs (_("  -s, --stdin                   read new token from stdin\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
@@ -362,14 +348,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 	exp_status = isexpired (pw, sp);
 
 	/*
-	 * If not expired and the "change only if expired" option (idea from
-	 * PAM) was specified, do nothing. --marekm
-	 */
-	if (kflg && (0 == exp_status)) {
-		fail_exit(E_SUCCESS, process_selinux);
-	}
-
-	/*
 	 * Root can change any password any time.
 	 */
 	if (amroot) {
@@ -379,10 +357,9 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 	/*
 	 * Expired accounts cannot be changed ever. Passwords which are
 	 * locked may not be changed.
-	 * Passwords which have been inactive too long cannot be changed.
 	 */
 	if (   strprefix(sp->sp_pwdp, "!")
-	    || (exp_status > 1)) {
+	    || (exp_status == 3)) {
 		(void) fprintf (stderr,
 		                _("The password for %s cannot be changed.\n"),
 		                sp->sp_namp);
@@ -414,13 +391,8 @@ static void print_status (const struct passwd *pw)
 	sp = prefix_getspnam (pw->pw_name); /* local, no need for xprefix_getspnam */
 	if (NULL != sp) {
 		day_to_str_a(date, sp->sp_lstchg);
-		(void) printf ("%s %s %s -1 %ld %ld %ld\n",
-		               pw->pw_name,
-		               pw_status (sp->sp_pwdp),
-		               date,
-		               sp->sp_max,
-		               sp->sp_warn,
-		               sp->sp_inact);
+		(void) printf ("%s %s %s -1 -1 -1 -1\n",
+		               pw->pw_name, pw_status(sp->sp_pwdp), date);
 	} else if (NULL != pw->pw_passwd) {
 		(void) printf ("%s %s\n",
 		               pw->pw_name, pw_status (pw->pw_passwd));
@@ -659,24 +631,10 @@ static void update_shadow(bool process_selinux)
 		oom (process_selinux);
 	}
 	nsp->sp_pwdp = update_crypt_pw (nsp->sp_pwdp, process_selinux);
-	if (xflg) {
-		nsp->sp_max = age_max;
-	}
-	if (wflg) {
-		nsp->sp_warn = warn;
-	}
-	if (iflg) {
-		nsp->sp_inact = inact;
-	}
 	if (!use_pam)
 	{
 		if (do_update_age) {
-			nsp->sp_lstchg = gettime () / DAY;
-			if (0 == nsp->sp_lstchg) {
-				/* Better disable aging than requiring a password
-				 * change */
-				nsp->sp_lstchg = -1;
-			}
+			nsp->sp_lstchg = -1;
 		}
 	}
 
@@ -745,14 +703,11 @@ static void update_shadow(bool process_selinux)
  *
  *	-d	delete the password for the named account (*)
  *	-e	expire the password for the named account (*)
- *	-i #	set sp_inact to # days (*)
  *	-k	change password only if expired
  *	-l	lock the password of the named account (*)
  *	-r #	change password in # repository
  *	-S	show password status of named account
  *	-u	unlock the password of the named account (*)
- *	-w #	set sp_warn to # days (*)
- *	-x #	set sp_max to # days (*)
  *	-s	read password from stdin (*)
  *
  *	(*) requires root permission to execute.
@@ -812,8 +767,6 @@ main(int argc, char **argv)
 			{"delete",      no_argument,       NULL, 'd'},
 			{"expire",      no_argument,       NULL, 'e'},
 			{"help",        no_argument,       NULL, 'h'},
-			{"inactive",    required_argument, NULL, 'i'},
-			{"keep-tokens", no_argument,       NULL, 'k'},
 			{"lock",        no_argument,       NULL, 'l'},
 			{"quiet",       no_argument,       NULL, 'q'},
 			{"repository",  required_argument, NULL, 'r'},
@@ -821,8 +774,6 @@ main(int argc, char **argv)
 			{"prefix",      required_argument, NULL, 'P'},
 			{"status",      no_argument,       NULL, 'S'},
 			{"unlock",      no_argument,       NULL, 'u'},
-			{"warndays",    required_argument, NULL, 'w'},
-			{"maxdays",     required_argument, NULL, 'x'},
 			{"stdin",       no_argument,       NULL, 's'},
 			{NULL, 0, NULL, '\0'}
 		};
@@ -844,22 +795,6 @@ main(int argc, char **argv)
 			case 'h':
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
-			case 'i':
-				if (a2sl(&inact, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
-					         Prog, optarg);
-					usage (E_BAD_ARG);
-				}
-				iflg = true;
-				anyflag = true;
-				break;
-			case 'k':
-				/* change only if expired, like Linux-PAM passwd -k. */
-				kflg = true;	/* ok for users */
-				break;
 			case 'l':
 				lflg = true;
 				anyflag = true;
@@ -888,30 +823,6 @@ main(int argc, char **argv)
 				break;
 			case 'u':
 				uflg = true;
-				anyflag = true;
-				break;
-			case 'w':
-				if (a2sl(&warn, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					(void) fprintf (stderr,
-					                _("%s: invalid numeric argument '%s'\n"),
-					                Prog, optarg);
-					usage (E_BAD_ARG);
-				}
-				wflg = true;
-				anyflag = true;
-				break;
-			case 'x':
-				if (a2sl(&age_max, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					(void) fprintf (stderr,
-					                _("%s: invalid numeric argument '%s'\n"),
-					                Prog, optarg);
-					usage (E_BAD_ARG);
-				}
-				xflg = true;
 				anyflag = true;
 				break;
 			case 's':
@@ -1007,10 +918,8 @@ main(int argc, char **argv)
 		usage (E_USAGE);
 	}
 
-	if (   (Sflg && kflg)
-	    || (anyflag && (Sflg || kflg))) {
+	if (anyflag && Sflg)
 		usage (E_USAGE);
-	}
 
 	if (anyflag && !amroot) {
 #ifdef WITH_AUDIT
@@ -1145,7 +1054,7 @@ main(int argc, char **argv)
 			do_pam_passwd_non_interactive ("passwd", name, cp);
 			erase_pass (cp);
 		} else {
-			do_pam_passwd (name, qflg, kflg);
+			do_pam_passwd (name, qflg);
 		}
 		exit (E_SUCCESS);
 	}
