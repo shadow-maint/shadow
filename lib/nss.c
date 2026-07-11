@@ -10,6 +10,7 @@
 #include <stdatomic.h>
 
 #include "alloc/malloc.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "../libsubid/subid.h"
 #include "shadowlog.h"
@@ -72,7 +73,7 @@ nss_init(const char *nsswitch_path) {
 	nssfp = fopen(nsswitch_path, "r");
 	if (!nssfp) {
 		if (errno != ENOENT)
-			fprintf(log_get_logfd(), "Failed opening %s: %m\n", nsswitch_path);
+			fprinte(log_get_logfd(), "Failed opening %s", nsswitch_path);
 
 		atomic_store(&nss_init_completed, true);
 		return;
