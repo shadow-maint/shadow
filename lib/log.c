@@ -18,6 +18,7 @@
 
 #include "attr.h"
 #include "defines.h"
+#include "io/syslog.h"
 #include "prototypes.h"
 #include "string/memset/memzero.h"
 #include "string/strcpy/strncpy.h"
@@ -104,7 +105,7 @@ err_write:
 		errno = saved_errno;
 	}
 err_close:
-	SYSLOG(LOG_WARN,
-	       "Can't write lastlog entry for UID %lu in %s: %m",
-	       (unsigned long) pw->pw_uid, _PATH_LASTLOG);
+	SYSLOGE(LOG_WARN,
+	        "Can't write lastlog entry for UID %lu in %s",
+	        (unsigned long) pw->pw_uid, _PATH_LASTLOG);
 }
