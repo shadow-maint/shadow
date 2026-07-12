@@ -70,6 +70,7 @@ struct option_flags {
  */
 static const char Prog[] = "newusers";
 
+static bool bflg = false;
 static bool rflg = false;	/* create a system account */
 #ifndef USE_PAM
 static /*@null@*//*@observer@*/char *crypt_method = NULL;
@@ -114,7 +115,6 @@ static void check_flags (void);
 static void open_files (bool process_selinux);
 static void close_files(const struct option_flags *flags);
 
-extern int allow_bad_names;
 
 /*
  * usage - display usage message and exit
@@ -288,7 +288,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	}
 
 	/* Check if this is a valid group name */
-	if (!is_valid_group_name (grent.gr_name)) {
+	if (!is_valid_group_name(grent.gr_name, bflg)) {
 		fprintf (stderr,
 		         _("%s: invalid group name '%s'\n"),
 		         Prog, grent.gr_name);
@@ -385,7 +385,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 	struct passwd pwent;
 
 	/* Check if this is a valid user name */
-	if (!is_valid_user_name(name)) {
+	if (!is_valid_user_name(name, bflg)) {
 		if (errno == EILSEQ) {
 			fprintf(stderr,
 			        _("%s: invalid user name '%s': use --badname to ignore\n"),
@@ -643,7 +643,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'b':
-			allow_bad_names = true;
+			bflg = true;
 			break;
 #ifndef USE_PAM
 		case 'c':

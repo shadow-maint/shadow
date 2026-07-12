@@ -604,7 +604,7 @@ int main (int argc, char **argv)
 	 * name, or the name getlogin() returns.
 	 */
 	if (optind < argc) {
-		if (!is_valid_user_name (argv[optind])) {
+		if (!is_valid_user_name(argv[optind], false)) {
 			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
 			fail_exit (E_NOPERM, process_selinux);
 		}
