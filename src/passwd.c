@@ -946,7 +946,7 @@ main(int argc, char **argv)
 	}
 	myname = xstrdup (pw->pw_name);
 	if (optind < argc) {
-		if (!is_valid_user_name(argv[optind], false) && !is_valid_upn(argv[optind], false)) {
+		if (!is_valid_user_name(argv[optind], true) && !is_valid_upn(argv[optind], true)) {
 			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
 			fail_exit (E_NOPERM, process_selinux);
 		}
