@@ -260,7 +260,7 @@ grp_update(void)
 static void
 check_new_name(void)
 {
-	if (!is_valid_group_name(group_name)) {
+	if (!is_valid_group_name(group_name, false)) {
 		fprintf(stderr, _("%s: '%s' is not a valid group name\n"),
 			Prog, group_name);
 

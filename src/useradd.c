@@ -160,9 +160,8 @@ static char **user_groups;	/* NULL-terminated list */
 static size_t sys_ngroups;
 static bool do_grp_update = false;	/* group files need to be updated */
 
-extern int allow_bad_names;
-
 static bool
+    badnameflg = false,
     bflg = false,		/* new default root of home directory */
     cflg = false,		/* comment (GECOS) field for new account */
     dflg = false,		/* home directory for new account */
@@ -1215,7 +1214,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				subvolflg = true;
 				break;
 			case 201:
-				allow_bad_names = true;
+				badnameflg = true;
 				break;
 			case 'c':
 				if (!VALID (optarg)) {
@@ -1516,7 +1515,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		}
 
 		user_name = argv[optind];
-		if (!is_valid_user_name(user_name)) {
+		if (!is_valid_user_name(user_name, badnameflg)) {
 			if (errno == EILSEQ) {
 				fprintf(stderr,
 				        _("%s: invalid user name '%s': use --badname to ignore\n"),

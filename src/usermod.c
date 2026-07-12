@@ -147,6 +147,7 @@ static char* prefix_user_newhome = NULL;
 
 static bool
     aflg = false,		/* append to existing secondary group set */
+    bflg = false,
     cflg = false,		/* new comment (GECOS) field */
     dflg = false,		/* new home directory */
     eflg = false,		/* days since 1970-01-01 when account becomes expired */
@@ -225,7 +226,6 @@ static void update_faillog (void);
 static void move_mailbox (void);
 #endif
 
-extern int allow_bad_names;
 
 /*
  * get_groups - convert a list of group names to an array of group IDs
@@ -1084,7 +1084,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 				aflg = true;
 				break;
 			case 'b':
-				allow_bad_names = true;
+				bflg = true;
 				break;
 			case 'c':
 				if (!VALID (optarg)) {
@@ -1159,7 +1159,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
 			case 'l':
-				if (!is_valid_user_name(optarg)) {
+				if (!is_valid_user_name(optarg, bflg)) {
 					if (errno == EILSEQ) {
 						fprintf(stderr,
 						        _("%s: invalid user name '%s': use --badname to ignore\n"),

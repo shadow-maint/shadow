@@ -20,8 +20,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <ctype.h>
 #include <errno.h>
 #include <limits.h>
@@ -45,11 +43,8 @@
 #define LABEL_MAXLEN	63
 
 
-int allow_bad_names = false;
-
-
 static bool
-is_valid_name(const char *name)
+is_valid_name(const char *name, bool badnames)
 {
 	if (streq(name, "")
 	 || streq(name, ".")
@@ -63,9 +58,8 @@ is_valid_name(const char *name)
 		return false;
 	}
 
-	if (allow_bad_names) {
+	if (badnames)
 		return true;
-	}
 
 	/*
 	 * User/group names must match BRE regex:
@@ -105,19 +99,19 @@ is_valid_name(const char *name)
 
 
 bool
-is_valid_user_name(const char *name)
+is_valid_user_name(const char *name, bool badnames)
 {
 	if (strlen(name) >= LOGIN_NAME_MAX) {
 		errno = EOVERFLOW;
 		return false;
 	}
 
-	return is_valid_name(name);
+	return is_valid_name(name, badnames);
 }
 
 
 bool
-is_valid_group_name(const char *name)
+is_valid_group_name(const char *name, bool badnames)
 {
 	/*
 	 * Arbitrary limit for group names.
@@ -130,7 +124,7 @@ is_valid_group_name(const char *name)
 		return false;
 	}
 
-	return is_valid_name (name);
+	return is_valid_name(name, badnames);
 }
 
 
@@ -196,7 +190,7 @@ is_valid_domain_name(const char *domain)
  * in any authentication system.
  */
 bool
-is_valid_upn(const char *upn)
+is_valid_upn(const char *upn, bool badnames)
 {
 	char  *u, *d;
 
@@ -212,5 +206,5 @@ is_valid_upn(const char *upn)
 		return false;
 	}
 
-	return is_valid_user_name(u) && is_valid_domain_name(d);
+	return is_valid_user_name(u, badnames) && is_valid_domain_name(d);
 }

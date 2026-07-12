@@ -68,6 +68,7 @@ static bool pw_locked  = false;
 static bool spw_locked = false;
 
 /* Options */
+static bool bflg = false;
 static bool read_only = false;
 static bool sort_mode = false;
 static bool quiet = false;		/* don't report warnings, only errors */
@@ -82,7 +83,6 @@ static void check_pw_file (bool *errors, bool *changed,
                            const struct option_flags *flags);
 static void check_spw_file (bool *errors, bool *changed);
 
-extern int allow_bad_names;
 
 /*
  * fail_exit - do some cleanup and exit with the given error code
@@ -178,7 +178,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'b':
-			allow_bad_names = true;
+			bflg = true;
 			break;
 		case 'h':
 			usage (E_SUCCESS);
@@ -486,7 +486,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 		 * Check for invalid usernames.  --marekm
 		 */
 
-		if (!is_valid_user_name(pwd->pw_name)) {
+		if (!is_valid_user_name(pwd->pw_name, bflg)) {
 			if (errno == EILSEQ) {
 				printf(_("invalid user name '%s': use --badname to ignore\n"),
 				       pwd->pw_name);
