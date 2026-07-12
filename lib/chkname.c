@@ -111,7 +111,7 @@ is_valid_user_name(const char *name, bool badnames)
 
 
 bool
-is_valid_group_name(const char *name, bool badnames)
+is_valid_group_name(const char *name)
 {
 	/*
 	 * Arbitrary limit for group names.
@@ -124,7 +124,7 @@ is_valid_group_name(const char *name, bool badnames)
 		return false;
 	}
 
-	return is_valid_name(name, badnames);
+	return is_valid_name(name, false);
 }
 
 

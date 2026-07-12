@@ -288,7 +288,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	}
 
 	/* Check if this is a valid group name */
-	if (!is_valid_group_name(grent.gr_name, false)) {
+	if (!is_valid_group_name(grent.gr_name)) {
 		fprintf (stderr,
 		         _("%s: invalid group name '%s'\n"),
 		         Prog, grent.gr_name);
