@@ -580,7 +580,7 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 		/*
 		 * Check for invalid group names.  --marekm
 		 */
-		if (!is_valid_group_name(grp->gr_name, false)) {
+		if (!is_valid_group_name(grp->gr_name)) {
 			*errors = true;
 			printf (_("invalid group name '%s'\n"), grp->gr_name);
 		}

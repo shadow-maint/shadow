@@ -382,7 +382,7 @@ check_new_name(void)
 		return;
 	}
 
-	if (!is_valid_group_name(group_newname, false)) {
+	if (!is_valid_group_name(group_newname)) {
 		fprintf(stderr,
 			_("%s: invalid group name '%s'\n"),
 			Prog, group_newname);
