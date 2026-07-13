@@ -581,3 +581,16 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/gshadow")
 
         return cmd
+
+    def grpunconv(self, *args) -> ProcessResult:
+        """
+        Convert shadow group format back to group file.
+        """
+        cmd_args = " ".join(args) if args else ""
+        self.logger.info(f"Converting shadow group format back to group on {self.host.hostname}")
+        cmd = self.host.conn.run(f"grpunconv {cmd_args}", log_level=ProcessLogLevel.Error)
+
+        self.host.discard_file("/etc/group")
+        self.host.discard_file("/etc/gshadow")
+
+        return cmd
