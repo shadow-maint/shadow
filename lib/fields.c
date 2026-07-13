@@ -78,8 +78,8 @@ change_field(char *buf, size_t maxsize, const char *prompt)
 		 * makes it possible to change the field to empty, by
 		 * entering a space.  --marekm
 		 */
-		stpcpy(stprspn(newf, " \t"), "");
-		cp = stpspn(newf, " \t");
+		stpcpy(stprspn(newf, CTYPE_BLANK_C), "");
+		cp = stpspn(newf, CTYPE_BLANK_C);
 		strcpy (buf, cp);
 	}
 }
