@@ -27,8 +27,6 @@
 #endif
 
 #ifndef USE_PAM
-#ident "$Id$"
-
     /*
      * This module implements a simple but effective form of login access
      * control based on login names and on host (or domain) names, internet
@@ -61,6 +59,7 @@
 #include "io/fgets/fgets.h"
 #include "prototypes.h"
 #include "sizeof.h"
+#include "string/ctype/isascii.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -116,7 +115,7 @@ login_access(const char *user, const char *from)
 			if (strprefix(line, "#")) {
 				continue;	/* comment line */
 			}
-			stpcpy(stprspn(line, " \t"), "");
+			stpcpy(stprspn(line, CTYPE_BLANK_C), "");
 			if (streq(line, "")) {	/* skip blank lines */
 				continue;
 			}

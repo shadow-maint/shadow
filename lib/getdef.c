@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <ctype.h>
 #include <errno.h>
 #include <stddef.h>
@@ -29,6 +27,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
+#include "string/ctype/isascii.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
@@ -488,7 +487,7 @@ static void def_load (void)
 	 */
 	def_loaded = true;
 
-	error = econf_readDirs (&defs_file, vendordir, sysconfdir, "login", "defs", " \t", "#");
+	error = econf_readDirs (&defs_file, vendordir, sysconfdir, "login", "defs", CTYPE_BLANK_C, "#");
 	if (error) {
 		if (error == ECONF_NOFILE)
 			return;
@@ -568,15 +567,15 @@ static void def_load (void)
 		/*
 		 * Break the line into two fields.
 		 */
-		name = stpspn(buf, " \t");	/* first nonwhite */
+		name = stpspn(buf, CTYPE_BLANK_C);	/* first nonwhite */
 		if (streq(name, "") || strprefix(name, "#"))
 			continue;	/* comment or empty */
 
-		s = stpsep(name, " \t");  /* next field */
+		s = stpsep(name, CTYPE_BLANK_C);  /* next field */
 		if (s == NULL)
 			continue;	/* only 1 field?? */
 
-		value = stpspn(s, " \t");
+		value = stpspn(s, CTYPE_BLANK_C);
 
 		/*
 		 * Store the value in def_table.

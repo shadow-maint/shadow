@@ -20,6 +20,7 @@
 #include "defines.h"
 #include "io/fgets/fgets.h"
 #include "prototypes.h"
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
@@ -85,9 +86,9 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 			continue;
 		}
 
-		stpcpy(stprspn(temp, " \t"), "");
+		stpcpy(stprspn(temp, CTYPE_BLANK_C), "");
 
-		p = stpspn(temp, " \t");
+		p = stpspn(temp, CTYPE_BLANK_C);
 		if (strprefix(p, "#") || streq(p, ""))
 			continue;
 

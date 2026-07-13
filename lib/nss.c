@@ -13,6 +13,7 @@
 #include "prototypes.h"
 #include "../libsubid/subid.h"
 #include "shadowlog.h"
+#include "string/ctype/isascii.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/strcaseprefix.h"
 #include "string/strcmp/streq.h"
@@ -90,7 +91,7 @@ nss_init(const char *nsswitch_path) {
 		if (!strcaseprefix(line, "subid:"))
 			continue;
 		p = &line[6];
-		p = stpspn(p, " \t");
+		p = stpspn(p, CTYPE_BLANK_C);
 		if (!streq(p, ""))
 			break;
 		p = NULL;
@@ -98,7 +99,7 @@ nss_init(const char *nsswitch_path) {
 	if (p == NULL) {
 		goto null_subid;
 	}
-	stpsep(p, " \t");
+	stpsep(p, CTYPE_BLANK_C);
 	if (streq(p, "")) {
 		fprintf(log_get_logfd(), "No usable subid NSS module found, using files\n");
 		// subid_nss has to be null here, but to ease reviews:
