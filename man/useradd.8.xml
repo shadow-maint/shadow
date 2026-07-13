@@ -208,11 +208,28 @@
 	    <replaceable>BASE_DIR</replaceable> and use that as the
 	    login directory name.
 	    The directory <replaceable>HOME_DIR</replaceable> is not created by
-	    default.  However it will be created for non-system users if either the
-	    <option>-m</option> flag is specified or
-	    <replaceable>CREATE_HOME</replaceable> in
-	    <filename>login.defs</filename> is set to true.  However, it will never
-	    be created if the <option>-M</option> flag is specified.
+	    default.
+		Whether it gets created
+		depends on the user type and command-line options.
+	  </para>
+	  <para>
+	    For regular users,
+		the home directory is created
+		if either the <option>-m</option> flag is specified
+		or <replaceable>CREATE_HOME</replaceable>
+		in <citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum></citerefentry>.
+		is set to true.
+	  </para>
+	  <para>
+	    For system users,
+		the home directory is created
+		only if the <option>-m</option> flag is explicitly specified,
+	    regardless of the <replaceable>CREATE_HOME</replaceable> setting.
+	  </para>
+	  <para>
+	    The <option>-M</option> flag
+		prevents home directory creation in all cases,
+		overriding any other settings.
 	  </para>
 	</listitem>
       </varlistentry>
