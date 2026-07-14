@@ -386,8 +386,7 @@ int main (int argc, char **argv)
 	while (fgets_a(buf, stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
-			fprintf (stderr, _("%s: line %jd: line too long\n"),
-			         Prog, line);
+			fprintf(stderr, "%s: %jd: %s\n", Prog, line, _("Non-text file."));
 			goto fail;
 		}
 

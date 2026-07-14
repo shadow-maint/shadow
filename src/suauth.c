@@ -79,10 +79,10 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 		lines++;
 
 		if (stpsep(temp, "\n") == NULL) {
-			SYSLOG(LOG_ERR,
-			       "%s, line %jd: line too long or missing newline",
-			       SUAUTHFILE, lines);
-			continue;
+			fprintf(stderr, "%s:%jd: %s\n", SUAUTHFILE, lines, _("Non-text file."));
+			SYSLOG(LOG_ERR, "%s:%jd: Non-text file.", SUAUTHFILE, lines);
+			fclose(authfile_fd);
+			return DENY;
 		}
 
 		stpcpy(stprspn(temp, " \t"), "");
