@@ -19,6 +19,9 @@
 #include "string/strtok/stpsep.h"
 
 
+#define DEFAULT_TZ  "TZ=UTC"
+
+
 /*
  * tz - return local timezone name
  *
@@ -34,7 +37,7 @@ tz(const char *path)
 
 	fp = fopen(path, "r");
 	if (fp == NULL)
-		return "TZ=UTC";
+		return DEFAULT_TZ;
 
 	if (fgets_a(buf, fp) == NULL)
 		goto def;
@@ -45,7 +48,7 @@ tz(const char *path)
 	return buf;
 def:
 	fclose(fp);
-	return "TZ=UTC";
+	return DEFAULT_TZ;
 }
 #else				/* !USE_PAM */
 extern int ISO_C_forbids_an_empty_translation_unit;
