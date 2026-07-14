@@ -236,14 +236,21 @@ def test_groupadd__create_group_with_existing_gid(shadow: Shadow):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_groupadd__invalid_gid(shadow: Shadow):
+@pytest.mark.parametrize(
+    "argument",
+    [
+        pytest.param("-g 1001x tgroup", id="invalid_gid"),
+        pytest.param("-g -1001 tgroup", id="negative_gid"),
+    ],
+)
+def test_groupadd__invalid_gid(shadow: Shadow, argument: str):
     """
-    :title: Group creation with invalid GID fails
+    :title: Group creation with invalid gid fails
     :setup:
         1. None required
     :steps:
-        1. Create group with invalid GID
-        2. Verify if groupadd command fails
+        1. Create group with invalid gid
+        2. Verify that groupadd command fails
         3. Check group and gshadow entries
     :expectedresults:
         1. Group is not created
@@ -252,7 +259,7 @@ def test_groupadd__invalid_gid(shadow: Shadow):
     :customerscenario: False
     """
     with pytest.raises(ProcessError) as exc_info:
-        shadow.groupadd("-g 1001x tgroup")
+        shadow.groupadd(argument)
 
     assert exc_info.value.rc == 3, f"Expected return code 3 (invalid argument), got {exc_info.value.rc}"
 
