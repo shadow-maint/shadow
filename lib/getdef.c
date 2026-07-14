@@ -576,8 +576,7 @@ static void def_load (void)
 		if (s == NULL)
 			continue;	/* only 1 field?? */
 
-		value = stpspn(s, " \"\t");	/* next nonwhite */
-		stpsep(value, "\"");
+		value = stpspn(s, " \t");
 
 		/*
 		 * Store the value in def_table.
