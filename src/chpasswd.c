@@ -451,9 +451,9 @@ int main (int argc, char **argv)
 				         Prog, line, name);
 				goto fail;
 			}
-		} else
+			continue;
+		}
 #endif				/* USE_PAM */
-		{
 
 		/*
 		 * Prevent adding a non valid hash to /etc/shadow and
@@ -564,7 +564,6 @@ int main (int argc, char **argv)
 				         Prog, line, pw_dbname (), newpw.pw_name);
 				goto fail;
 			}
-		}
 		}
 	}
 
