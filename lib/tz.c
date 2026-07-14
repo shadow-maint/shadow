@@ -39,7 +39,7 @@
 	fp = fopen (fname, "r");
 	if (   (NULL == fp)
 	    || (fgets_a(tzbuf, fp) == NULL)) {
-		result = "TZ=CST6CDT";
+		result = "TZ=UTC";
 	} else {
 		stpsep(tzbuf, "\n");
 		result = tzbuf;
