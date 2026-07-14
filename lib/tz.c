@@ -41,8 +41,8 @@
 
 	if (fgets_a(tzbuf, fp) == NULL)
 		goto def;
-
-	stpsep(tzbuf, "\n");
+	if (stpsep(tzbuf, "\n") == NULL)
+		goto def;
 
 	fclose(fp);
 	return tzbuf;
