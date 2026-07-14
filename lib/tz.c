@@ -32,7 +32,7 @@
  */
 /*@observer@*/const char *tz (const char *fname)
 {
-	FILE *fp = NULL;
+	FILE         *fp;
 	const char *result;
 	static char tzbuf[BUFSIZ];
 
