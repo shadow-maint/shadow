@@ -371,7 +371,7 @@ int main (int argc, char **argv)
 	while (fgets_a(buf, stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
-			eprintf(_("%s: line %jd: line too long\n"), Prog, line);
+			eprintf("%s: %jd: %s\n", Prog, line, _("Non-text file."));
 			goto fail;
 		}
 

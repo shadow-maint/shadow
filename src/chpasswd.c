@@ -413,11 +413,8 @@ int main (int argc, char **argv)
 
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
-			if (feof (stdin) == 0) {
-				eprintf(_("%s: line %jd: line too long\n"),
-				         Prog, line);
-				goto fail;
-			}
+			eprintf("%s: %jd: %s\n", Prog, line, _("Non-text file."));
+			goto fail;
 		}
 
 		/*

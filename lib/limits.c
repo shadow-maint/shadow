@@ -363,7 +363,11 @@ static int setup_user_limits (const char *uname)
 	 * FIXME: a better (smarter) checking should be done
 	 */
 	while (fgets_a(buf, fil) != NULL) {
-		if (strspn(buf, "#") || streq(buf, "\n"))
+		if (stpsep(buf, "\n") == NULL) {
+			fclose(fil);
+			return 0;
+		}
+		if (strspn(buf, "#") || streq(buf, ""))
 			continue;
 
 		memzero_a(tempbuf);
