@@ -33,22 +33,22 @@
 /*@observer@*/const char *tz (const char *fname)
 {
 	FILE         *fp;
-	const char *result;
 	static char tzbuf[BUFSIZ];
 
 	fp = fopen (fname, "r");
 	if (fp == NULL)
 		return "TZ=UTC";
 
-	if (fgets_a(tzbuf, fp) == NULL) {
-		result = "TZ=UTC";
-	} else {
-		stpsep(tzbuf, "\n");
-		result = tzbuf;
-	}
+	if (fgets_a(tzbuf, fp) == NULL)
+		goto def;
+
+	stpsep(tzbuf, "\n");
 
 	fclose(fp);
-	return result;
+	return tzbuf;
+def:
+	fclose(fp);
+	return "TZ=UTC";
 }
 #else				/* !USE_PAM */
 extern int ISO_C_forbids_an_empty_translation_unit;
