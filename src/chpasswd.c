@@ -374,7 +374,6 @@ int main (int argc, char **argv)
 	bool use_pam = true;
 #endif				/* USE_PAM */
 
-	bool errors = false;
 	intmax_t line = 0;
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
@@ -439,8 +438,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: line too long\n"),
 				         Prog, line);
-				errors = true;
-				continue;
+				goto fail;
 			}
 		}
 
@@ -459,8 +457,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: missing new password\n"),
 			         Prog, line);
-			errors = true;
-			continue;
+			goto fail;
 		}
 		newpwd = cp;
 
@@ -470,7 +467,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: (line %jd, user %s) password not changed\n"),
 				         Prog, line, name);
-				errors = true;
+				goto fail;
 			}
 		} else
 #endif				/* USE_PAM */
@@ -486,8 +483,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 					_("%s: (line %jd, user %s) invalid password hash\n"),
 					Prog, line, name);
-				errors = true;
-				continue;
+				goto fail;
 			}
 		}
 		const struct spwd *sp;
@@ -514,8 +510,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: user '%s' does not exist\n"), Prog,
 			         line, name);
-			errors = true;
-			continue;
+			goto fail;
 		}
 		if (is_shadow_pwd) {
 			/* The shadow entry should be updated if the
@@ -580,8 +575,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, spw_dbname (), newsp.sp_namp);
-				errors = true;
-				continue;
+				goto fail;
 			}
 		}
 		if (   (NULL == sp)
@@ -590,33 +584,10 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, pw_dbname (), newpw.pw_name);
-				errors = true;
-				continue;
+				goto fail;
 			}
 		}
 		}
-	}
-
-	/*
-	 * Any detected errors will cause the entire set of changes to be
-	 * aborted. Unlocking the password file will cause all of the
-	 * changes to be ignored. Otherwise the file is closed, causing the
-	 * changes to be written out all at once, and then unlocked
-	 * afterwards.
-	 *
-	 * With PAM, it is not possible to delay the update of the
-	 * password database.
-	 */
-	if (errors) {
-#ifdef USE_PAM
-		if (!use_pam)
-#endif				/* USE_PAM */
-		{
-			fprintf (stderr,
-			         _("%s: error detected, changes ignored\n"),
-			         Prog);
-		}
-		fail_exit (1, process_selinux);
 	}
 
 #ifdef USE_PAM
@@ -631,5 +602,27 @@ int main (int argc, char **argv)
 	sssd_flush_cache (SSSD_DB_PASSWD);
 
 	return (0);
+fail:
+	/*
+	 * Any detected errors will cause the entire set of changes to be
+	 * aborted. Unlocking the password file will cause all of the
+	 * changes to be ignored. Otherwise the file is closed, causing the
+	 * changes to be written out all at once, and then unlocked
+	 * afterwards.
+	 *
+	 * With PAM, it is not possible to delay the update of the
+	 * password database.
+	 */
+	{
+#ifdef USE_PAM
+		if (!use_pam)
+#endif				/* USE_PAM */
+		{
+			fprintf (stderr,
+			         _("%s: error detected, changes ignored\n"),
+			         Prog);
+		}
+		fail_exit (1, process_selinux);
+	}
 }
 
