@@ -429,12 +429,6 @@ int main (int argc, char **argv)
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
 			if (feof (stdin) == 0) {
-				// Drop all remaining characters on this line.
-				while (fgets_a(buf, stdin) != NULL) {
-					if (strchr(buf, '\n'))
-						break;
-				}
-
 				fprintf (stderr,
 				         _("%s: line %jd: line too long\n"),
 				         Prog, line);
