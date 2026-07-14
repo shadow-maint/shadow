@@ -11,11 +11,9 @@
 
 #ifndef USE_PAM
 
+#include <limits.h>
 #include <stdio.h>
-#include <string.h>
 
-#include "defines.h"
-#include "getdef.h"
 #include "io/fgets/fgets.h"
 #include "prototypes.h"
 #include "string/strtok/stpsep.h"
@@ -32,7 +30,7 @@ const char *
 tz(const char *path)
 {
 	FILE         *fp;
-	static char  buf[BUFSIZ];
+	static char  buf[LINE_MAX + 1];
 
 	fp = fopen(path, "r");
 	if (fp == NULL)
