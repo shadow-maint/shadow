@@ -307,3 +307,46 @@ def test_usermod__modify_multiple_attributes(shadow: Shadow):
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.expiration_date == 11201, "Expiration should be 2000-09-01 (11201 days since epoch)"
     assert shadow_entry.inactivity_days == 17, "Inactive days should be 17"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__remove_user_from_existing_supplementary_group(shadow: Shadow):
+    """
+    :title: Remove user from existing supplementary group
+    :setup:
+        1. Create test user and groups
+        2. Add user to supplementary groups
+    :steps:
+        1. Remove user from one supplementary group
+        2. Check group and gshadow entries to verify user is removed from the first group
+        3. Check group and gshadow entries to verify user remains in the second group
+    :expectedresults:
+        1. User is successfully removed from specified group
+        2. group and gshadow entries don't contain user in first group
+        3. group and gshadow entries contains user in second group
+    :customerscenario: False
+    """
+    shadow.useradd("tuser1")
+    shadow.groupadd("tgroup1")
+    shadow.groupadd("tgroup2")
+    shadow.usermod("-a -G tgroup1,tgroup2 tuser1")
+
+    shadow.usermod("-rG tgroup1 tuser1")
+
+    tgroup1_passwd = shadow.tools.getent.group("tgroup1")
+    assert tgroup1_passwd is not None, "Group should be found"
+    assert "tuser1" not in tgroup1_passwd.members, "tuser1 should be removed from tgroup1"
+
+    if shadow.host.features["gshadow"]:
+        tgroup1_gshadow = shadow.tools.getent.gshadow("tgroup1")
+        assert tgroup1_gshadow is not None, "Group should be found"
+        assert "tuser1" not in tgroup1_gshadow.members, "tuser1 should be removed from tgroup1"
+
+    tgroup2_passwd = shadow.tools.getent.group("tgroup2")
+    assert tgroup2_passwd is not None, "Group should be found"
+    assert "tuser1" in tgroup2_passwd.members, "tuser1 should remain in tgroup2"
+
+    if shadow.host.features["gshadow"]:
+        tgroup2_gshadow = shadow.tools.getent.gshadow("tgroup2")
+        assert tgroup2_gshadow is not None, "Group should be found"
+        assert "tuser1" in tgroup2_gshadow.members, "tuser1 should remain in tgroup2"
