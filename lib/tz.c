@@ -37,18 +37,17 @@
 	static char tzbuf[BUFSIZ];
 
 	fp = fopen (fname, "r");
-	if (   (NULL == fp)
-	    || (fgets_a(tzbuf, fp) == NULL)) {
+	if (fp == NULL)
+		return "TZ=UTC";
+
+	if (fgets_a(tzbuf, fp) == NULL) {
 		result = "TZ=UTC";
 	} else {
 		stpsep(tzbuf, "\n");
 		result = tzbuf;
 	}
 
-	if (NULL != fp) {
-		(void) fclose (fp);
-	}
-
+	fclose(fp);
 	return result;
 }
 #else				/* !USE_PAM */
