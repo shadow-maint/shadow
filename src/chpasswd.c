@@ -613,16 +613,12 @@ fail:
 	 * With PAM, it is not possible to delay the update of the
 	 * password database.
 	 */
-	{
 #ifdef USE_PAM
-		if (!use_pam)
-#endif				/* USE_PAM */
-		{
-			fprintf (stderr,
-			         _("%s: error detected, changes ignored\n"),
-			         Prog);
-		}
-		fail_exit (1, process_selinux);
+	if (!use_pam)
+#endif
+	{
+		fprintf(stderr, _("%s: error detected, changes ignored\n"), Prog);
 	}
+	fail_exit(1, process_selinux);
 }
 

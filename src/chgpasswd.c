@@ -538,10 +538,7 @@ fail:
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
 	 */
-	{
-		fprintf (stderr,
-		         _("%s: error detected, changes ignored\n"), Prog);
-		fail_exit (1, process_selinux);
-	}
+	fprintf(stderr, "%s: %s\n", Prog, _("error detected, changes ignored\n"));
+	fail_exit(1, process_selinux);
 }
 
