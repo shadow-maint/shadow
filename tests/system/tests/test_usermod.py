@@ -350,3 +350,46 @@ def test_usermod__remove_user_from_existing_supplementary_group(shadow: Shadow):
         tgroup2_gshadow = shadow.tools.getent.gshadow("tgroup2")
         assert tgroup2_gshadow is not None, "Group should be found"
         assert "tuser1" in tgroup2_gshadow.members, "tuser1 should remain in tgroup2"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_usermod__remove_user_from_nonexistent_supplementary_group(shadow: Shadow):
+    """
+    :title: Remove user from supplementary group they don't belong to
+    :setup:
+        1. Create test user and groups
+        2. Add user to only one supplementary group
+    :steps:
+        1. Attempt to remove user from group they're not in
+        2. Check group and gshadow entries to verify user remains in group
+        3. Check group and gshadow entries to verify second group membership is empty
+    :expectedresults:
+        1. Command succeeds without error
+        2. group and gshadow entries contains user in group
+        3. group and gshadow entries don't contain user in group
+    :customerscenario: False
+    """
+    shadow.useradd("tuser1")
+    shadow.groupadd("tgroup1")
+    shadow.groupadd("tgroup2")
+    shadow.usermod("-a -G tgroup1 tuser1")
+
+    shadow.usermod("-rG tgroup2 tuser1")
+
+    tgroup1_passwd = shadow.tools.getent.group("tgroup1")
+    assert tgroup1_passwd is not None, "Group should be found"
+    assert "tuser1" in tgroup1_passwd.members, "tuser1 should be in tgroup1"
+
+    if shadow.host.features["gshadow"]:
+        tgroup1_gshadow = shadow.tools.getent.gshadow("tgroup1")
+        assert tgroup1_gshadow is not None, "Group should be found"
+        assert "tuser1" in tgroup1_gshadow.members, "tuser1 should be in tgroup1"
+
+    tgroup2_passwd = shadow.tools.getent.group("tgroup2")
+    assert tgroup2_passwd is not None, "Group should be found"
+    assert "tuser2" not in tgroup2_passwd.members, "tuser1 should not be a member of tgroup2"
+
+    if shadow.host.features["gshadow"]:
+        tgroup2_gshadow = shadow.tools.getent.gshadow("tgroup1")
+        assert tgroup2_gshadow is not None, "Group should be found"
+        assert "tuser2" not in tgroup2_gshadow.members, "tuser1 should not be a member of tgroup2"
