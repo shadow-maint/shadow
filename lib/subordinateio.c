@@ -366,19 +366,15 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 		last = first - 1LL + range->count;
 
 		/* Find the top end of the hole before this range */
-		high = first;
-
 		/* Don't allocate IDs after max (included) */
-		if (high > max + 1LL)
-			high = max + 1LL;
+		high = MIN(first, max + 1LL);
 
 		/* Is the hole before this range large enough? */
 		if (high > low && high - low >= n)
 			return low;
 
 		/* Compute the low end of the next hole */
-		if (low < last + 1)
-			low = last + 1;
+		low = MAX(low, last + 1);
 		if (low > max)
 			goto fail;
 	}
