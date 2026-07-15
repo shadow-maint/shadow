@@ -155,8 +155,7 @@ static struct commonio_ops subordinate_ops = {
 static bool
 is_same_user(const char *a, const char *b)
 {
-	uid_t                uid_a;
-	uid_t                uid_b;
+	uid_t                uid_a, uid_b;
 	const struct passwd  *pw;
 
 	pw = getpw_uid_or_nam(a);
@@ -220,8 +219,10 @@ subordinate_range *find_range(struct commonio_db *db, const char *owner,
 	 */
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
-		unsigned long  first = range->start;
-		unsigned long  last = first + range->count - 1;
+		unsigned long  first, last;
+
+		first = range->start;
+		last = first + range->count - 1;
 
 		if (!streq(range->owner, owner))
 			continue;
@@ -245,8 +246,10 @@ subordinate_range *find_range(struct commonio_db *db, const char *owner,
 
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
-		unsigned long  first = range->start;
-		unsigned long  last = first + range->count - 1;
+		unsigned long  first, last;
+
+		first = range->start;
+		last = first + range->count - 1;
 
 		/* For performance reasons check range before using getpwnam() */
 		if (val < first || val > last)
@@ -277,11 +280,9 @@ append_range(struct subid_range *ranges, const struct subordinate_range *new, in
 void
 free_subordinate_ranges(struct subordinate_range **ranges, int count)
 {
-	int i;
-
 	if (!ranges)
 		return;
-	for (i = 0; i < count; i++)
+	for (int i = 0; i < count; i++)
 		subordinate_free(ranges[i]);
 	free(ranges);
 }
@@ -341,7 +342,7 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 {
 	static_assert(sizeof(long long) > sizeof(id_t), "");
 
-	intmax_t                        n, low, high;
+	intmax_t                        n, low;
 	const struct subordinate_range  *range;
 
 	n = count;
@@ -356,7 +357,7 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 
 	low = min;
 	while (NULL != (range = commonio_next(db))) {
-		intmax_t  first, last;
+		intmax_t  first, last, high;
 
 		if (range->count == 0)
 			continue;
@@ -432,17 +433,16 @@ static int add_range(struct commonio_db *db,
 static int remove_range(struct commonio_db *db,
     const char *owner, unsigned long start, unsigned long count)
 {
-	struct commonio_entry  *ent;
-	unsigned long          end;
+	unsigned long  end;
 
 	if (count == 0)
 		return 1;
 
 	end = start + count - 1;
-	for (ent = db->head; NULL != ent; ent = ent->next) {
+	for (struct commonio_entry *ent = db->head; NULL != ent; ent = ent->next)
+	{
 		struct subordinate_range  *range = ent->eptr;
-		unsigned long             first;
-		unsigned long             last;
+		unsigned long             first, last;
 
 		/* Skip unparsed entries */
 		if (NULL == range)
@@ -546,13 +546,13 @@ have_range(struct commonio_db *db,
 {
 	const struct subordinate_range  *range;
 	unsigned long                   end;
-	bool                            doclose = false;
-	bool                            ret = false;
+	bool                            doclose, ret;
 	int                             rc;
 
 	if (count == 0)
 		return false;
 
+	doclose = false;
 	if (!db->isopen) {
 		doclose = true;
 		if (db == &subordinate_uid_db)
@@ -563,6 +563,7 @@ have_range(struct commonio_db *db,
 			return false;
 	}
 
+	ret = false;
 	end = start + count - 1;
 	range = find_range(db, owner, start);
 	while (range) {
@@ -867,15 +868,16 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 int
 list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
 {
-	struct subid_range              *ranges = NULL;
+	struct subid_range              *ranges;
 	const struct subordinate_range  *range;
 	struct commonio_db              *db;
 	enum subid_status               status;
-	int                             count = 0;
+	int                             count;
 	struct subid_nss_ops            *h;
 
 	*in_ranges = NULL;
 
+	count = 0;
 	h = get_subid_nss_handle();
 	if (h) {
 		status = h->list_owner_ranges(owner, id_type, in_ranges, &count);
@@ -901,6 +903,7 @@ list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range
 		return -1;
 	}
 
+	ranges = NULL;
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
 		if (is_same_user(range->owner, owner)) {
@@ -925,12 +928,10 @@ out:
 static int
 append_uids(uid_t **uids, const char *owner, int n)
 {
-	int    i;
 	uid_t  owner_uid;
 
 	if (strisdigit_c(owner)) {
-		i = sscanf(owner, "%d", &owner_uid);
-		if (i != 1) {
+		if (sscanf(owner, "%d", &owner_uid) != 1) {
 			// should not happen
 			free(*uids);
 			*uids = NULL;
@@ -948,7 +949,7 @@ append_uids(uid_t **uids, const char *owner, int n)
 		owner_uid = pwd->pw_uid;
 	}
 
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		if (owner_uid == (*uids)[i])
 			return n;
 	}
@@ -968,8 +969,9 @@ find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 	struct subid_nss_ops            *h;
 	enum subid_status               status;
 	struct commonio_db              *db;
-	int                             n = 0;
+	int                             n;
 
+	n = 0;
 	h = get_subid_nss_handle();
 	if (h) {
 		status = h->find_subid_owners(id, id_type, uids, &n);
@@ -1143,8 +1145,9 @@ release_subid_range(struct subordinate_range *range, enum subid_type id_type)
 void
 free_subid_pointer(void *ptr)
 {
-	struct subid_nss_ops  *h = get_subid_nss_handle();
+	struct subid_nss_ops  *h;
 
+	h = get_subid_nss_handle();
 	if (h)
 		h->free(ptr);
 	else
