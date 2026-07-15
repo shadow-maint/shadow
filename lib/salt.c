@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include <sys/param.h>
 
 #include "defines.h"
 #include "getdef.h"
@@ -118,14 +119,10 @@ static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *pre
 			if (-1 == min_rounds) {
 				min_rounds = max_rounds;
 			}
-
 			if (-1 == max_rounds) {
 				max_rounds = min_rounds;
 			}
-
-			if (min_rounds > max_rounds) {
-				max_rounds = min_rounds;
-			}
+			max_rounds = MAX(max_rounds, min_rounds);
 
 			rounds = csrand_interval (min_rounds, max_rounds);
 		}
@@ -137,13 +134,8 @@ static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *pre
 
 	/* Sanity checks. The libc should also check this, but this
 	 * protects against a rounds_prefix overflow. */
-	if (rounds < SHA_ROUNDS_MIN) {
-		rounds = SHA_ROUNDS_MIN;
-	}
-
-	if (rounds > SHA_ROUNDS_MAX) {
-		rounds = SHA_ROUNDS_MAX;
-	}
+	rounds = MAX(rounds, SHA_ROUNDS_MIN);
+	rounds = MIN(rounds, SHA_ROUNDS_MAX);
 
 	return rounds;
 }
@@ -190,14 +182,10 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *
 			if (-1 == min_rounds) {
 				min_rounds = max_rounds;
 			}
-
 			if (-1 == max_rounds) {
 				max_rounds = min_rounds;
 			}
-
-			if (min_rounds > max_rounds) {
-				max_rounds = min_rounds;
-			}
+			max_rounds = MAX(max_rounds, min_rounds);
 
 			rounds = csrand_interval (min_rounds, max_rounds);
 		}
@@ -208,14 +196,9 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *
 	}
 
 	/* Sanity checks. */
-	if (rounds < B_ROUNDS_MIN) {
-		rounds = B_ROUNDS_MIN;
-	}
-
+	rounds = MAX(rounds, B_ROUNDS_MIN);
 #if USE_XCRYPT_GENSALT
-	if (rounds > B_ROUNDS_MAX) {
-		rounds = B_ROUNDS_MAX;
-	}
+	rounds = MIN(rounds, B_ROUNDS_MAX);
 #else /* USE_XCRYPT_GENSALT */
 	/*
 	 * Use 19 as an upper bound for now,
@@ -223,9 +206,7 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *
 	 * If musl ever supports > 20 rounds,
 	 * rounds should be set to B_ROUNDS_MAX.
 	 */
-	if (rounds > 19) {
-		rounds = 19;
-	}
+	rounds = MIN(rounds, 19);
 #endif /* USE_XCRYPT_GENSALT */
 
 	return rounds;
@@ -268,14 +249,8 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 	}
 
 	/* Sanity checks. */
-	if (cost < Y_COST_MIN) {
-		cost = Y_COST_MIN;
-	}
-
-	if (cost > Y_COST_MAX) {
-		cost = Y_COST_MAX;
-	}
-
+	cost = MAX(cost, Y_COST_MIN);
+	cost = MIN(cost, Y_COST_MAX);
 	return cost;
 }
 
