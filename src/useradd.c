@@ -358,7 +358,10 @@ get_defaults(const struct option_flags *flags)
 	 * values are used, everything else can be ignored.
 	 */
 	while (fgets_a(buf, fp) != NULL) {
-		stpsep(buf, "\n");
+		if (stpsep(buf, "\n") == NULL) {
+			fprintf(stderr, "%s: %s: %s\n", Prog, default_file, _("Non-text file."));
+			goto nontext;
+		}
 
 		cp = stpsep(buf, "=");
 		if (NULL == cp)
@@ -487,8 +490,9 @@ get_defaults(const struct option_flags *flags)
 			def_log_init = xstrdup(ccp);
 		}
 	}
+nontext:
 	(void) fclose (fp);
-     getdef_err:
+getdef_err:
 	if (prefix[0]) {
 		free(default_file);
 	}
@@ -605,17 +609,10 @@ set_defaults(void)
 		char  *val;
 
 		if (stpsep(buf, "\n") == NULL) {
-			/* A line which does not end with \n is only valid
-			 * at the end of the file.
-			 */
-			if (feof (ifp) == 0) {
-				fprintf (stderr,
-				         _("%s: line too long in %s: %s..."),
-				         Prog, default_file, buf);
-				fclose(ifp);
-				fclose(ofp);
-				goto err_free_def;
-			}
+			fprintf(stderr, "%s: %s: %s\n", Prog, default_file, _("Non-text file."));
+			fclose(ifp);
+			fclose(ofp);
+			goto err_free_def;
 		}
 
 		val = stpsep(buf, "=");

@@ -559,11 +559,12 @@ static void def_load (void)
 	 * Go through all of the lines in the file.
 	 */
 	while (fgets_a(buf, fp) != NULL) {
+		if (stpsep(buf, "\n") == NULL) {
+			SYSLOG(LOG_CRIT, "%s: %s", def_fname, _("Non-text file."));
+			exit(EXIT_FAILURE);
+		}
 
-		/*
-		 * Trim trailing whitespace.
-		 */
-		stpcpy(stprspn(buf, " \t\n"), "");
+		stpcpy(stprspn(buf, " \t"), "");
 
 		/*
 		 * Break the line into two fields.

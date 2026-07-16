@@ -348,7 +348,6 @@ int main (int argc, char **argv)
 
 	const struct group *gr;
 	struct group newgr;
-	bool errors = false;
 	intmax_t line = 0;
 	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
@@ -387,10 +386,8 @@ int main (int argc, char **argv)
 	while (fgets_a(buf, stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
-			fprintf (stderr, _("%s: line %jd: line too long\n"),
-			         Prog, line);
-			errors = true;
-			continue;
+			fprintf(stderr, "%s: %jd: %s\n", Prog, line, _("Non-text file."));
+			goto fail;
 		}
 
 		/*
@@ -408,8 +405,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: missing new password\n"),
 			         Prog, line);
-			errors = true;
-			continue;
+			goto fail;
 		}
 		newpwd = cp;
 		if (   (!eflg)
@@ -452,8 +448,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: group '%s' does not exist\n"), Prog,
 			         line, name);
-			errors = true;
-			continue;
+			goto fail;
 		}
 #ifdef SHADOWGRP
 		if (is_shadow_grp) {
@@ -512,8 +507,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, sgr_dbname (), newsg.sg_namp);
-				errors = true;
-				continue;
+				goto fail;
 			}
 		}
 		if (   (NULL == sg)
@@ -524,23 +518,9 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, gr_dbname (), newgr.gr_name);
-				errors = true;
-				continue;
+				goto fail;
 			}
 		}
-	}
-
-	/*
-	 * Any detected errors will cause the entire set of changes to be
-	 * aborted. Unlocking the group file will cause all of the
-	 * changes to be ignored. Otherwise the file is closed, causing the
-	 * changes to be written out all at once, and then unlocked
-	 * afterwards.
-	 */
-	if (errors) {
-		fprintf (stderr,
-		         _("%s: error detected, changes ignored\n"), Prog);
-		fail_exit (1, process_selinux);
 	}
 
 	close_files (&flags);
@@ -549,5 +529,15 @@ int main (int argc, char **argv)
 	sssd_flush_cache (SSSD_DB_GROUP);
 
 	return (0);
+fail:
+	/*
+	 * Any detected errors will cause the entire set of changes to be
+	 * aborted. Unlocking the group file will cause all of the
+	 * changes to be ignored. Otherwise the file is closed, causing the
+	 * changes to be written out all at once, and then unlocked
+	 * afterwards.
+	 */
+	fprintf(stderr, "%s: %s\n", Prog, _("error detected, changes ignored\n"));
+	fail_exit(1, process_selinux);
 }
 

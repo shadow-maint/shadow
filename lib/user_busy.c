@@ -130,6 +130,9 @@ static int check_status (const char *name, uid_t uid, pid_t pid, pid_t tid)
 		return 0;
 	}
 	while (fgets_a(line, sfile) != NULL) {
+		if (stpsep(line, "\n") == NULL)
+			goto nontext;
+
 		if (strprefix(line, "Uid:\t")) {
 			unsigned long ruid, euid, suid;
 
@@ -158,6 +161,7 @@ static int check_status (const char *name, uid_t uid, pid_t pid, pid_t tid)
 			return 0;
 		}
 	}
+nontext:
 	(void) fclose (sfile);
 	return 0;
 }
