@@ -43,7 +43,7 @@ get_map_ranges(int ranges, int argc, char **argv)
 	}
 
 	if (ranges * 3 != argc) {
-		fprintf(log_get_logfd(), "%s: ranges: %u is wrong for argc: %d\n", log_get_progname(), ranges, argc);
+		fprintf(log_get_logfd(), "%s: ranges: %d is wrong for argc: %d\n", log_get_progname(), ranges, argc);
 		return NULL;
 	}
 
@@ -155,7 +155,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 		}
 
 		if (seteuid(ruid) < 0) {
-			fprintf(log_get_logfd(), _("%s: Could not seteuid to %d\n"), log_get_progname(), ruid);
+			fprintf(log_get_logfd(), _("%s: Could not seteuid to %jd\n"), log_get_progname(), (intmax_t) ruid);
 			exit(EXIT_FAILURE);
 		}
 	}
