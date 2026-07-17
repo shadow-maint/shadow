@@ -8,6 +8,7 @@ import re
 
 import pytest
 from passlib.hash import sha512_crypt
+from pytest_mh.conn import ProcessError
 
 from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
@@ -150,3 +151,34 @@ def test_groupadd__force_group_creation(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__locked_group_file(shadow: Shadow):
+    """
+    :title: Group creation fails when /etc/group is locked
+    :setup:
+        1. Create /etc/group.lock to simulate a locked file
+    :steps:
+        1. Attempt to create group
+        2. Verify that groupadd command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group is not created
+        2. groupadd command fails with error (cannot lock file)
+        3. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    shadow.fs.touch("/etc/group.lock")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("tgroup")
+
+    assert exc_info.value.rc == 10, f"Expected rc=10 (cannot lock file), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is None, "Group should not be found"
