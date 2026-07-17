@@ -154,22 +154,29 @@ def test_groupadd__force_group_creation(shadow: Shadow):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_groupadd__locked_group_file(shadow: Shadow):
+@pytest.mark.parametrize(
+    "lock_file",
+    [
+        pytest.param("/etc/group.lock", id="group_file"),
+        pytest.param("/etc/gshadow.lock", id="gshadow_file"),
+    ],
+)
+def test_groupadd__locked_file(shadow: Shadow, lock_file: str):
     """
-    :title: Group creation fails when /etc/group is locked
+    :title: Group creation fails when a lock file exists
     :setup:
-        1. Create /etc/group.lock to simulate a locked file
+        1. Create lock file
     :steps:
         1. Attempt to create group
         2. Verify that groupadd command fails
         3. Check group and gshadow entries
     :expectedresults:
         1. Group is not created
-        2. groupadd command fails with error (cannot lock file)
+        2. groupadd command fails with rc=10 (cannot lock file)
         3. No group or gshadow entries are found
     :customerscenario: False
     """
-    shadow.fs.touch("/etc/group.lock")
+    shadow.fs.touch(lock_file)
 
     with pytest.raises(ProcessError) as exc_info:
         shadow.groupadd("tgroup")
