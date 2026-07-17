@@ -209,3 +209,36 @@ def test_groupadd__invalid_K_no_equals(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__existing_group(shadow: Shadow):
+    """
+    :title: Group creation fails when group already exists
+    :setup:
+        1. Create group
+    :steps:
+        1. Check existing group and gshadow entry
+        2. Attempt to create group
+        3. Verify that groupadd command fails
+    :expectedresults:
+        1. Existing group and gshadow entries are found
+        2. Group is not created
+        3. groupadd command fails with error (group already exists)
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+
+    existing_group_entry = shadow.tools.getent.group("tgroup")
+    assert existing_group_entry is not None, "Group should be found"
+    assert existing_group_entry.name == "tgroup", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        existing_gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert existing_gshadow_entry is not None, "Group should be found"
+        assert existing_gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("tgroup")
+
+    assert exc_info.value.rc == 9, f"Expected return code 9 (group already exists), got {exc_info.value.rc}"
