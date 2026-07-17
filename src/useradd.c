@@ -1769,8 +1769,11 @@ static void open_files (bool process_selinux)
 	/* shadow file will be opened by open_shadow(); */
 
 	open_group_files (process_selinux);
+}
 
 #ifdef ENABLE_SUBIDS
+static void open_subid_files (bool process_selinux)
+{
 	if (is_sub_uid) {
 		if (sub_uid_lock () == 0) {
 			fprintf (stderr,
@@ -1801,8 +1804,8 @@ static void open_files (bool process_selinux)
 			fail_exit (E_SUB_GID_UPDATE, process_selinux);
 		}
 	}
-#endif				/* ENABLE_SUBIDS */
 }
+#endif				/* ENABLE_SUBIDS */
 
 static void open_group_files (bool process_selinux)
 {
@@ -2538,13 +2541,6 @@ int main (int argc, char **argv)
 	process_flags (argc, argv, &flags);
 	process_selinux = !flags.chroot && !flags.prefix;
 
-#ifdef ENABLE_SUBIDS
-	subuid_count = getdef_ulong ("SUB_UID_COUNT", 65536);
-	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
-	is_sub_uid = should_assign_subuid();
-	is_sub_gid = should_assign_subgid();
-#endif				/* ENABLE_SUBIDS */
-
 	if (run_parts ("/etc/shadow-maint/useradd-pre.d", user_name,
 			"useradd")) {
 		exit(1);
@@ -2616,6 +2612,15 @@ int main (int argc, char **argv)
 			}
 		}
 	}
+
+#ifdef ENABLE_SUBIDS
+	subuid_count = getdef_ulong ("SUB_UID_COUNT", 65536);
+	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
+	is_sub_uid = should_assign_subuid();
+	is_sub_gid = should_assign_subgid();
+
+	open_subid_files (process_selinux);
+#endif				/* ENABLE_SUBIDS */
 
 	if (uflg)
 	   check_uid_range(rflg,user_id);
