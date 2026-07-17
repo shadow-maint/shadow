@@ -5,6 +5,7 @@
 
 #include "atoi/a2i.h"
 #include "io/fprintf.h"
+#include "getdef.h"
 #include "subid.h"
 #include "stdlib.h"
 
@@ -44,8 +45,8 @@ int main(int argc, char *argv[])
 	if (argc == 0)
 		usage();
 	range.owner = argv[0];
-	range.start = 0;
-	range.count = 65536;
+	range.start = getdef_ulong ("SUB_UID_MIN", 100000UL);
+	range.count = getdef_ulong ("SUB_UID_COUNT", 65536);
 	if (argc > 1)
 		str2ul(&range.count, argv[1]);
 	if (group)
