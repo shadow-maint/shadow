@@ -343,7 +343,14 @@ def test_groupadd__locked_file(shadow: Shadow, lock_file: str):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_groupadd__invalid_key(shadow: Shadow):
+@pytest.mark.parametrize(
+    "key",
+    [
+        pytest.param("KEY=100", id="invalid_key"),
+        pytest.param("GID_MAX", id="no_equals_sign"),
+    ],
+)
+def test_groupadd__invalid_key(shadow: Shadow, key: str):
     """
     :title: Group creation with invalid key fails
     :setup:
@@ -359,7 +366,7 @@ def test_groupadd__invalid_key(shadow: Shadow):
     :customerscenario: False
     """
     with pytest.raises(ProcessError) as exc_info:
-        shadow.groupadd("-K KEY=100 tgroup")
+        shadow.groupadd(f"-K {key} tgroup")
 
     assert exc_info.value.rc == 3, f"Expected return code 3 (invalid argument), got {exc_info.value.rc}"
 
