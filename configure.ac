@@ -4,7 +4,7 @@ m4_define([libsubid_abi_major], [6])
 m4_define([libsubid_abi_minor], [0])
 m4_define([libsubid_abi_micro], [0])
 
-AC_INIT([shadow], [4.20.0-rc2], [pkg-shadow-devel@lists.alioth.debian.org], [],
+AC_INIT([shadow], [4.20.0-rc3], [pkg-shadow-devel@lists.alioth.debian.org], [],
 	[https://github.com/shadow-maint/shadow])
 AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_AUX_DIR([build-aux])
