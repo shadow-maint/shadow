@@ -61,7 +61,10 @@ test_exit_if_null_exit(MAYBE_UNUSED void ** _1)
 	switch (setjmp(jmpb)) {
 	case 0:
 		p = "called";
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Walloc-size-larger-than="
 		p = xmalloc_T(SIZE_MAX, char);
+#pragma GCC diagnostic pop
 		assert_unreachable();
 		break;
 	case EXIT_CALLED:
