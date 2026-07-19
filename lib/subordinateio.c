@@ -222,6 +222,9 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 		unsigned long first = range->start;
 		unsigned long last = first + range->count - 1;
 
+		if (range->count == 0)
+			continue;
+
 		if (!streq(range->owner, owner))
 			continue;
 
@@ -248,6 +251,9 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 	while (NULL != (range = commonio_next(db))) {
 		unsigned long first = range->start;
 		unsigned long last = first + range->count - 1;
+
+		if (range->count == 0)
+			continue;
 
 		/* For performance reasons check range before using getpwnam() */
 		if ((val < first) || (val > last)) {
