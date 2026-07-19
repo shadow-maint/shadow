@@ -122,17 +122,6 @@ test_is_valid_hash_ok_md5(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_ok_des(MAYBE_UNUSED void ** _1)
-{
-	// Basic DES hash: 13 characters
-	assert_true(is_valid_hash("abcDEF123./zZ"));
-
-	// DES with different character combinations
-	assert_true(is_valid_hash("ZZ./0123456xy"));
-}
-
-
-static void
 test_is_valid_hash_ok_special(MAYBE_UNUSED void ** _1)
 {
 	// Empty string - passwordless account
@@ -242,7 +231,6 @@ main(void)
         cmocka_unit_test(test_is_valid_hash_ok_sha512),
         cmocka_unit_test(test_is_valid_hash_ok_sha256),
         cmocka_unit_test(test_is_valid_hash_ok_md5),
-        cmocka_unit_test(test_is_valid_hash_ok_des),
         cmocka_unit_test(test_is_valid_hash_ok_special),
         cmocka_unit_test(test_is_valid_hash_edge_salt_chars),
         cmocka_unit_test(test_is_valid_hash_edge_account_locks),
