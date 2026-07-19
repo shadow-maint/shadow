@@ -1,0 +1,3 @@
+root:$1$NBLBLIXb$WUgojj1bNuxWEADQGt1m9.:0:0:root:/root:/bin/bash
+daemon:*:1:1:daemon:/usr/sbin:/bin/sh
+tuser1:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:1001:1001::/home/tuser1:/bin/bash
