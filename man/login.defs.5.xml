@@ -48,7 +48,7 @@
 <!ENTITY OBSCURE_CHECKS_ENAB   SYSTEM "login.defs.d/OBSCURE_CHECKS_ENAB.xml">
 <!ENTITY PASS_ALWAYS_WARN      SYSTEM "login.defs.d/PASS_ALWAYS_WARN.xml">
 <!ENTITY PASS_CHANGE_TRIES     SYSTEM "login.defs.d/PASS_CHANGE_TRIES.xml">
-<!ENTITY PASS_MAX_LEN          SYSTEM "login.defs.d/PASS_MAX_LEN.xml">
+<!ENTITY PASS_MIN_LEN          SYSTEM "login.defs.d/PASS_MIN_LEN.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY PORTTIME_CHECKS_ENAB  SYSTEM "login.defs.d/PORTTIME_CHECKS_ENAB.xml">
@@ -205,7 +205,7 @@
         time of account creation. Any changes to these settings won't affect
         existing accounts.
       </para>
-      &PASS_MAX_LEN; <!-- documents also PASS_MIN_LEN -->
+      &PASS_MIN_LEN;
       &PORTTIME_CHECKS_ENAB;
       &QUOTAS_ENAB;
       &SHA_CRYPT_MIN_ROUNDS; <!-- documents also SHA_CRYPT_MAX_ROUNDS -->
@@ -416,7 +416,7 @@
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    ENCRYPT_METHOD OBSCURE_CHECKS_ENAB
-	    PASS_ALWAYS_WARN PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN
+	    PASS_ALWAYS_WARN PASS_CHANGE_TRIES PASS_MIN_LEN
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
