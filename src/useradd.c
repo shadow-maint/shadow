@@ -2207,6 +2207,17 @@ usr_update (unsigned long subuid_count, unsigned long subgid_count,
 	}
 }
 
+#if WITH_BTRFS
+static bool
+want_btrfs_subvolume(const char *path)
+{
+	if (!subvolflg)
+		return false;
+
+	return strlen(prefix_user_home) - strlen(path) <= 1;
+}
+#endif
+
 /*
  * create_home - create the user's home directory
  *
@@ -2264,7 +2275,7 @@ static void create_home(const struct option_flags *flags)
 
 		dir_created = false;
 #if WITH_BTRFS
-		if (subvolflg && (strlen(prefix_user_home) - (int)strlen(path)) <= 1) {
+		if (want_btrfs_subvolume(path)) {
 			char *btrfs_check = strdup(path);
 			struct statfs  sfs;
 
