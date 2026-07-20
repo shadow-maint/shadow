@@ -156,6 +156,19 @@
 		regardless of any configuration file settings.
 	  </para>
 	  <para>
+	    Subvolumes are only created for regular users,
+	    whose UID is within the
+	    <option>UID_MIN</option>-<option>UID_MAX</option>
+	    range defined in <filename>/etc/login.defs</filename>.
+	    System users get a regular home directory instead.
+	    Set the <option>BTRFS_SUBVOLUME_SYSTEM</option> variable
+	    in <filename>/etc/default/useradd</filename>
+	    to <replaceable>yes</replaceable>
+	    to create subvolumes for system users as well.
+	    If this variable is not set,
+	    the default value is no.
+	  </para>
+	  <para>
 	    If the parent directory of the user's home directory is
 	    <emphasis>not</emphasis> on a Btrfs filesystem,
 	    <command>useradd</command> will <emphasis>not</emphasis> create a
