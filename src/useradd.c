@@ -114,6 +114,7 @@ static const char *def_template = SKEL_DIR;
 static const char *def_usrtemplate = USRSKELDIR;
 static const char *def_create_mail_spool = "yes";
 static const char *def_btrfs_subvolume_home = "no";
+static const char *def_btrfs_subvolume_system = "no";
 static const char *def_log_init = "yes";
 
 static long def_inactive = -1;
@@ -223,6 +224,7 @@ static bool home_added = false;
 #define DUSRSKEL		"USRSKEL"
 #define DCREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL"
 #define DBTRFS_SUBVOLUME_HOME	"BTRFS_SUBVOLUME_HOME"
+#define DBTRFS_SUBVOLUME_SYSTEM	"BTRFS_SUBVOLUME_SYSTEM"
 #define DLOG_INIT		"LOG_INIT"
 
 /* local function prototypes */
@@ -478,6 +480,15 @@ get_defaults(const struct option_flags *flags)
 		}
 
 		/*
+		 * Create subvolume homes also for system users?
+		 */
+		else if (streq(buf, DBTRFS_SUBVOLUME_SYSTEM)) {
+			if (streq(ccp, ""))
+				ccp = "no";
+			def_btrfs_subvolume_system = xstrdup(ccp);
+		}
+
+		/*
 		 * By default do we add the user to the lastlog and faillog databases ?
 		 */
 		else if (streq(buf, DLOG_INIT)) {
@@ -512,6 +523,7 @@ static void show_defaults (void)
 	printf ("USRSKEL=%s\n", def_usrtemplate);
 	printf ("CREATE_MAIL_SPOOL=%s\n", def_create_mail_spool);
 	printf ("BTRFS_SUBVOLUME_HOME=%s\n", def_btrfs_subvolume_home);
+	printf ("BTRFS_SUBVOLUME_SYSTEM=%s\n", def_btrfs_subvolume_system);
 	printf ("LOG_INIT=%s\n", def_log_init);
 }
 
@@ -536,6 +548,7 @@ set_defaults(void)
 	bool  out_usrskel = false;
 	bool  out_create_mail_spool = false;
 	bool  out_btrfs_subvolume_home = false;
+	bool  out_btrfs_subvolume_system = false;
 	bool  out_log_init = false;
 	char  buf[1024];
 	char  *new_file = NULL;
@@ -657,6 +670,11 @@ set_defaults(void)
 			        DBTRFS_SUBVOLUME_HOME "=%s\n",
 			        def_btrfs_subvolume_home);
 			out_btrfs_subvolume_home = true;
+		} else if (!out_btrfs_subvolume_system && streq(buf, DBTRFS_SUBVOLUME_SYSTEM)) {
+			fprintf(ofp,
+			        DBTRFS_SUBVOLUME_SYSTEM "=%s\n",
+			        def_btrfs_subvolume_system);
+			out_btrfs_subvolume_system = true;
 		} else if (!out_log_init && streq(buf, DLOG_INIT)) {
 			fprintf(ofp, DLOG_INIT "=%s\n", def_log_init);
 			out_log_init = true;
@@ -693,6 +711,8 @@ set_defaults(void)
 		fprintf (ofp, DCREATE_MAIL_SPOOL "=%s\n", def_create_mail_spool);
 	if (!out_btrfs_subvolume_home)
 		fprintf (ofp, DBTRFS_SUBVOLUME_HOME "=%s\n", def_btrfs_subvolume_home);
+	if (!out_btrfs_subvolume_system)
+		fprintf (ofp, DBTRFS_SUBVOLUME_SYSTEM "=%s\n", def_btrfs_subvolume_system);
 	if (!out_log_init)
 		fprintf (ofp, DLOG_INIT "=%s\n", def_log_init);
 	/*
@@ -2211,10 +2231,20 @@ usr_update (unsigned long subuid_count, unsigned long subgid_count,
 static bool
 want_btrfs_subvolume(const char *path)
 {
+	uid_t  min, max;
+
 	if (!subvolflg)
 		return false;
+	if (strlen(prefix_user_home) - strlen(path) > 1)
+		return false;
 
-	return strlen(prefix_user_home) - strlen(path) <= 1;
+	if (strcaseeq(def_btrfs_subvolume_system, "yes"))
+		return true;
+
+	min = getdef_ulong("UID_MIN", 1000UL);
+	max = getdef_ulong("UID_MAX", 60000UL);
+
+	return user_id >= min && user_id <= max;
 }
 #endif
 
