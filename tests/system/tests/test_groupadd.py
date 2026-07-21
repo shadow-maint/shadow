@@ -488,20 +488,27 @@ def test_groupadd__usage(shadow: Shadow):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_groupadd__no_group(shadow: Shadow):
+@pytest.mark.parametrize(
+    "args",
+    [
+        pytest.param("", id="no_group"),
+        pytest.param("tgroup1 tgroup2", id="two_groups"),
+    ],
+)
+def test_groupadd__invalid_arguments(shadow: Shadow, args: str):
     """
-    :title: Groupadd command fails when no group is mentioned
+    :title: Groupadd command fails with invalid arguments
     :setup:
         1. None required
     :steps:
-        1. Run groupadd command without any argument
+        1. Attempt to create groups
         2. Verify that groupadd command fails
     :expectedresults:
-        1. Command without any argument fails
+        1. Groups are not created
         2. groupadd command fails with error (invalid usage)
     :customerscenario: False
     """
     with pytest.raises(ProcessError) as exc_info:
-        shadow.groupadd()
+        shadow.groupadd(args)
 
     assert exc_info.value.rc == 2, f"Expected return code 2(invalid usage), got {exc_info.value.rc}"
