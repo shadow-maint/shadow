@@ -288,6 +288,7 @@ def test_groupadd__add_group_with_existing_gid(shadow: Shadow):
     [
         pytest.param("1001x", id="invalid_gid"),
         pytest.param("-1001", id="negative_gid"),
+        pytest.param("4294967295", id="exceeds_maximum_uid"),
     ],
 )
 def test_groupadd__invalid_gid(shadow: Shadow, gid_value: str):
