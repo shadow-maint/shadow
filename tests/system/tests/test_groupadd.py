@@ -194,3 +194,32 @@ def test_groupadd__existing_GID(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
         assert gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__invalid_GID_4294967295(shadow: Shadow):
+    """
+    :title: Group creation fails when invalid numeric GID 4294967295 is specified
+    :setup:
+        1. None required
+    :steps:
+        1. Attempt to create group with invalid GID 4294967295
+        2. Verify that groupadd command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group is not created
+        2. groupadd command fails with error (invalid group ID)
+        3. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("-g 4294967295 tgroup")
+
+    assert exc_info.value.rc == 3, f"Expected return code 3 (invalid group ID), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is None, "Group should not be found"
