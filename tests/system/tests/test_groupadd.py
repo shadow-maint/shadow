@@ -188,3 +188,22 @@ def test_groupadd__no_group(shadow: Shadow):
     with pytest.raises(ProcessError) as exc_info:
         shadow.host.conn.run("groupadd")
     assert exc_info.value.rc == 2, f"Expected return code 2(invalid usage), got {exc_info.value.rc}"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__two_groups(shadow: Shadow):
+    """
+    :title: Groupadd command fails when two groups are mentioned
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupadd command with two groupnames
+        2. Verify that groupadd command fails
+    :expectedresults:
+        1. Command with two groupnames fails
+        2. groupadd command fails with error (invalid usage)
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("tgroup1 tgroup2")
+    assert exc_info.value.rc == 2, f"Expected return code 0(invalid usage), got {exc_info.value.rc}"
