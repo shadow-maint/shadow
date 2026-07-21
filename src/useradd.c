@@ -254,7 +254,7 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count,
                         const struct option_flags *flags);
 static void create_home(const struct option_flags *flags);
 static void create_mail(const struct option_flags *flags);
-static void check_uid_range(int rflg, uid_t user_id);
+static void check_uid_range(bool sys_user, uid_t uid);
 
 
 /*
@@ -2339,21 +2339,21 @@ static void create_mail(const struct option_flags *flags)
 #endif
 }
 
-static void check_uid_range(int rflg, uid_t user_id)
+static void check_uid_range(bool sys_user, uid_t uid)
 {
 	uid_t uid_min ;
 	uid_t uid_max ;
-	if (rflg) {
+	if (sys_user) {
 		uid_max = getdef_ulong("SYS_UID_MAX",getdef_ulong("UID_MIN",1000UL)-1);
-		if (user_id > uid_max) {
-			eprintf(_("%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"), Prog, user_name, user_id, uid_max);
+		if (uid > uid_max) {
+			eprintf(_("%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"), Prog, user_name, uid, uid_max);
 		}
 	}else{
 		uid_min = getdef_ulong("UID_MIN", 1000UL);
 		uid_max = getdef_ulong("UID_MAX", 6000UL);
 		if (uid_min <= uid_max) {
-			if (user_id < uid_min || user_id >uid_max)
-				eprintf(_("%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"), Prog, user_name, user_id, uid_min, uid_max);
+			if (uid < uid_min || uid > uid_max)
+				eprintf(_("%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"), Prog, user_name, uid, uid_min, uid_max);
 		}
 	}
 
@@ -2543,7 +2543,7 @@ int main (int argc, char **argv)
 #endif				/* ENABLE_SUBIDS */
 
 	if (uflg)
-	   check_uid_range(rflg,user_id);
+	   check_uid_range(rflg, user_id);
 #ifdef WITH_TCB
 	if (getdef_bool ("USE_TCB")) {
 		if (shadowtcb_create (user_name, user_id) == SHADOWTCB_FAILURE) {
