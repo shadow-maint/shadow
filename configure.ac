@@ -550,7 +550,7 @@ fi
 AM_CONDITIONAL([USE_PAM], [test "X$with_libpam" = "Xyes"])
 
 AC_ARG_WITH([fcaps],
-	[AS_HELP_STRING([--with-fcaps], [use file capabilities instead of suid binaries for newuidmap/newgidmap @<:@default=no@:>@])],
+	[AS_HELP_STRING([--with-fcaps], [use file capabilities instead of suid binaries where possible @<:@default=no@:>@])],
 	[with_fcaps=$withval], [with_fcaps=no])
 AM_CONDITIONAL([FCAPS], [test "x$with_fcaps" = "xyes"])
 
