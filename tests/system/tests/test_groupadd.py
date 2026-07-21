@@ -8,6 +8,7 @@ import re
 
 import pytest
 from passlib.hash import sha512_crypt
+from pytest_mh.conn import ProcessError
 
 from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
@@ -150,3 +151,21 @@ def test_groupadd__force_group_creation(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__usage(shadow: Shadow):
+    """
+    :title: Groupadd command displays usage with -h option and exits successfully
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupadd command with -h option
+        2. Verify that groupadd command exits successfully
+    :expectedresults:
+        1. Command shows usage help
+        2. groupadd command completes successfully
+    :customerscenario: False
+    """
+    result = shadow.groupadd("-h")
+    assert result.rc == 0, f"Expected return code 0(success), got {result.rc}"
