@@ -464,3 +464,24 @@ def test_groupadd__existing_group(shadow: Shadow):
         existing_gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert existing_gshadow_entry is not None, "Group should be found"
         assert existing_gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__usage(shadow: Shadow):
+    """
+    :title: Groupadd command displays usage
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupadd command
+        2. Verify that groupadd command exits successfully
+        3. Check usage information
+    :expectedresults:
+        1. Command runs successfully
+        2. groupadd command completes successfully
+        3. Usage information is displayed
+    :customerscenario: False
+    """
+    result = shadow.groupadd("-h")
+    assert result.rc == 0, f"Expected return code 0(success), got {result.rc}"
+    assert "Usage: groupadd [options] GROUP" in result.stdout
