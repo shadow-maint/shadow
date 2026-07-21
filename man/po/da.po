@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man\n"
-"POT-Creation-Date: 2026-06-22 21:39-0500\n"
+"POT-Creation-Date: 2026-07-21 16:36+0200\n"
 "PO-Revision-Date: 2013-08-23 01:35+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -98,7 +98,7 @@ msgid "shadow-utils"
 msgstr "shadow-utils"
 
 #. (itstool) path: refmeta/refmiscinfo
-msgid "4.20.0-rc2"
+msgid "4.20.0-rc3"
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
@@ -296,27 +296,6 @@ msgstr ""
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
-msgid "-m"
-msgstr ""
-
-#. (itstool) path: term/option
-msgid "--mindays"
-msgstr ""
-
-#. (itstool) path: term/replaceable
-#. (itstool) path: para/replaceable
-msgid "MIN_DAYS"
-msgstr ""
-
-#. (itstool) path: listitem/para
-msgid ""
-"Set the minimum number of days between password changes to <_:replaceable-1/"
-">. A value of zero for this field indicates that the user may change their "
-"password at any time."
-msgstr ""
-
-#. (itstool) path: term/option
-#. (itstool) path: para/option
 msgid "-M"
 msgstr ""
 
@@ -336,8 +315,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Set the maximum number of days during which a password is valid. When <_:"
-"replaceable-1/> plus <_:replaceable-2/> is less than the current day, the "
+"Set the maximum number of days during which a password is valid. When "
+"<_:replaceable-1/> plus <_:replaceable-2/> is less than the current day, the "
 "user will be required to change their password before being able to use "
 "their account. This occurrence can be planned for in advance by use of the "
 "<_:option-3/> option, which provides the user with advance warning."
@@ -461,8 +440,8 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "The <_:command-1/> program will also not report any inconsistency between "
-"the shadow and passwd files (e.g. missing x in the passwd file). The <_:"
-"command-2/> can be used to check for this kind of inconsistencies."
+"the shadow and passwd files (e.g. missing x in the passwd file). The "
+"<_:command-2/> can be used to check for this kind of inconsistencies."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -473,8 +452,8 @@ msgstr ""
 #| "unprivileged user to determine when their password or account is due to "
 #| "expire."
 msgid ""
-"The <_:command-1/> command is restricted to the root user, except for the <_:"
-"option-2/> option, which may be used by an unprivileged user to determine "
+"The <_:command-1/> command is restricted to the root user, except for the "
+"<_:option-2/> option, which may be used by an unprivileged user to determine "
 "when their password or account is due to expire."
 msgstr ""
 "Kommandoen <command>chage</command> er begrænset til administratorbrugeren "
@@ -502,6 +481,50 @@ msgid ""
 msgstr ""
 "De følgende konfigurationsvariabler i <filename>/etc/login.defs</filename> "
 "ændrer opførelsen for dette værktøj:"
+
+#. (itstool) path: term/option
+#. (itstool) path: listitem/para
+#. (itstool) path: para/phrase
+#. (itstool) path: phrase/option
+#. (itstool) path: para/option
+msgid "USE_TCB"
+msgstr ""
+
+#. (itstool) path: varlistentry/term
+#, fuzzy
+#| msgid "<option>USE_TCB</option> (boolean)"
+msgid "<_:option-1/> (boolean)"
+msgstr "<option>USE_TCB</option> (boolesk)"
+
+#. (itstool) path: para/replaceable
+#. (itstool) path: para/emphasis
+msgid "yes"
+msgstr ""
+
+#. (itstool) path: citerefentry/refentrytitle
+msgid "tcb"
+msgstr ""
+
+#. (itstool) path: citerefentry/manvolnum
+#. (itstool) path: para/manvolnum
+#. (itstool) path: refmeta/manvolnum
+#. (itstool) path: term/replaceable
+msgid "5"
+msgstr "5"
+
+#. (itstool) path: listitem/para
+#, fuzzy
+#| msgid ""
+#| "If <replaceable>yes</replaceable>, the <citerefentry><refentrytitle>tcb</"
+#| "refentrytitle><manvolnum>5</manvolnum></citerefentry> password shadowing "
+#| "scheme will be used."
+msgid ""
+"If <_:replaceable-1/>, the <_:citerefentry-2/> password shadowing scheme "
+"will be used."
+msgstr ""
+"Hvis <replaceable>ja</replaceable>, så vil skemaet for adgangskodeskygge "
+"<citerefentry><refentrytitle>tcb</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry> blive brugt."
 
 #. (itstool) path: refsect1/title
 msgid "FILES"
@@ -560,8 +583,8 @@ msgstr "Kan ikke finde shadows adgangskodefil"
 #| "The <command>pwck</command> command exits with the following values: "
 #| "<placeholder-1/>"
 msgid ""
-"The <_:command-1/> command exits with the following values: <_:"
-"variablelist-2/>"
+"The <_:command-1/> command exits with the following values: "
+"<_:variablelist-2/>"
 msgstr ""
 "Kommandoen <command>pwck</command> findes med de følgende værdier: "
 "<placeholder-1/>"
@@ -580,12 +603,6 @@ msgstr "SE OGSÅ"
 #. (itstool) path: para/replaceable
 msgid "passwd"
 msgstr ""
-
-#. (itstool) path: citerefentry/manvolnum
-#. (itstool) path: refmeta/manvolnum
-#. (itstool) path: term/replaceable
-msgid "5"
-msgstr "5"
 
 #. (itstool) path: citerefentry/refentrytitle
 #. (itstool) path: arg/replaceable
@@ -770,6 +787,101 @@ msgid ""
 "<_:emphasis-2/> marks."
 msgstr ""
 
+#. (itstool) path: term/option
+#. (itstool) path: para/phrase
+msgid "CHFN_AUTH"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If <_:replaceable-1/>, the <_:command-2/> program will require "
+"authentication before making any changes, unless run by the superuser."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "CHFN_RESTRICT"
+msgstr ""
+
+#. (itstool) path: varlistentry/term
+#, fuzzy
+#| msgid "<option>-a</option>, <option>--all</option>"
+msgid "<_:option-1/> (string)"
+msgstr "<option>-a</option>, <option>--all</option>"
+
+#. (itstool) path: para/emphasis
+msgid "gecos"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+#, fuzzy
+#| msgid "-f"
+msgid "f"
+msgstr "-f"
+
+#. (itstool) path: para/replaceable
+#, fuzzy
+#| msgid "-r"
+msgid "r"
+msgstr "-r"
+
+#. (itstool) path: para/replaceable
+msgid "w"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "h"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "rwh"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+#. (itstool) path: para/emphasis
+msgid "no"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "frwh"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"This parameter specifies which values in the <_:emphasis-1/> field of the "
+"<_:filename-2/> file may be changed by regular users using the <_:command-3/"
+"> program. It can be any combination of letters <_:replaceable-4/>, "
+"<_:replaceable-5/>, <_:replaceable-6/>, <_:replaceable-7/>, for Full name, "
+"Room number, Work phone, and Home phone, respectively. For backward "
+"compatibility, <_:replaceable-8/> is equivalent to <_:replaceable-9/> and "
+"<_:replaceable-10/> is equivalent to <_:replaceable-11/>. If not specified, "
+"only the superuser can make any changes. The most restrictive setting is "
+"better achieved by not installing <_:command-12/> SUID."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/phrase
+#, fuzzy
+#| msgid "user LIMITS_STRING"
+msgid "LOGIN_STRING"
+msgstr "bruger LIMITS_STRING"
+
+#. (itstool) path: listitem/para
+msgid ""
+"The string used for prompting a password. The default is to use \"Password: "
+"\", or a translation of that string. If you set this variable, the prompt "
+"will not be translated."
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "%s"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If the string contains <_:replaceable-1/>, this will be replaced by the "
+"user's name."
+msgstr ""
+
 #. (itstool) path: listitem/para
 msgid "Shadow password suite configuration."
 msgstr ""
@@ -848,6 +960,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: para/option
+#. (itstool) path: term/option
 #. (itstool) path: para/phrase
 msgid "ENCRYPT_METHOD"
 msgstr ""
@@ -865,9 +978,9 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"The default encryption algorithm can be defined for the system with the <_:"
-"option-1/> variable of <_:filename-2/>, and can be overwritten with the <_:"
-"option-3/> or <_:option-4/> options."
+"The default encryption algorithm can be defined for the system with the "
+"<_:option-1/> variable of <_:filename-2/>, and can be overwritten with the "
+"<_:option-3/> or <_:option-4/> options."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -885,6 +998,7 @@ msgid "Use the specified method to encrypt the passwords."
 msgstr "Brug den angivne metode til at kryptere adgangskoderne."
 
 #. (itstool) path: phrase/replaceable
+#. (itstool) path: para/replaceable
 msgid "BCRYPT"
 msgstr ""
 
@@ -895,14 +1009,6 @@ msgid "<_:replaceable-1/>,"
 msgstr "-h <placeholder-1/>"
 
 #. (itstool) path: para/replaceable
-msgid "DES"
-msgstr ""
-
-#. (itstool) path: para/replaceable
-msgid "MD5"
-msgstr ""
-
-#. (itstool) path: para/replaceable
 msgid "SHA256"
 msgstr ""
 
@@ -911,6 +1017,7 @@ msgid "SHA512"
 msgstr ""
 
 #. (itstool) path: phrase/replaceable
+#. (itstool) path: para/replaceable
 #, fuzzy
 #| msgid "DESCRIPTION"
 msgid "YESCRYPT"
@@ -923,8 +1030,7 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "The available methods are <_:phrase-1/> <_:replaceable-2/>, <_:replaceable-3/"
-">, <_:replaceable-4/>, <_:replaceable-5/>, <_:phrase-6/> and <_:"
-"replaceable-7/> if your libc supports these methods."
+">, <_:phrase-4/> and <_:replaceable-5/> if your libc supports these methods."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -950,8 +1056,8 @@ msgstr "Brug det angivet antal rundet til at kryhptere adgangskoderne."
 
 #. (itstool) path: listitem/para
 msgid ""
-"You can only use this option with crypt method: <_:phrase-1/> <_:"
-"replaceable-2/> <_:replaceable-3/> <_:phrase-4/>"
+"You can only use this option with crypt method: <_:phrase-1/> "
+"<_:replaceable-2/> <_:replaceable-3/> <_:phrase-4/>"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -1050,12 +1156,173 @@ msgstr ""
 "Du skal sikre dig at adgangskoderne og krypteringsmetoden respekterer "
 "systemets adgangskodepolitik."
 
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "BCRYPT_MIN_ROUNDS"
+msgstr ""
+
+#. (itstool) path: varlistentry/term
+#, fuzzy
+#| msgid "<option>GID_MAX</option> (number)"
+msgid "<_:option-1/> (number)"
+msgstr "<option>GID_MAX</option> (nummer)"
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "BCRYPT_MAX_ROUNDS"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"When <_:option-1/> is set to <_:replaceable-2/>, this defines the number of "
+"BCRYPT rounds used by the encryption algorithm by default (when the number "
+"of rounds is not specified on the command line)."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"With a lot of rounds, it is more difficult to brute force the password. But "
+"note also that more CPU resources will be needed to authenticate users."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "The values must be inside the 4-31 range."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If only one of the <_:option-1/> or <_:option-2/> values is set, then this "
+"value will be used."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "If <_:option-1/> &gt; <_:option-2/>, the highest value will be used."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Note: this only affect the generation of group passwords. The generation of "
+"user passwords is done by PAM and subject to the PAM configuration. It is "
+"recommended to set this variable consistently with the PAM configuration."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"This defines the system default encryption algorithm for encrypting "
+"passwords (if no algorithm is specified on the command line)."
+msgstr ""
+
+#. (itstool) path: para/refentrytitle
+#. (itstool) path: citerefentry/refentrytitle
+msgid "crypt"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"It can take one of these values: <_:phrase-1/> <_:replaceable-2/>, "
+"<_:replaceable-3/> (default), <_:phrase-4/>. See <_:refentrytitle-5/"
+"><_:manvolnum-6/> for recommendations."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Note: this only affects the generation of group passwords. The generation of "
+"user passwords is done by PAM and subject to the PAM configuration. It is "
+"recommended to set this variable consistently with the PAM configuration."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: listitem/para
+msgid "MAX_MEMBERS_PER_GROUP"
+msgstr ""
+
+#. (itstool) path: para/filename
 #. (itstool) path: term/filename
 #. (itstool) path: phrase/filename
-#. (itstool) path: para/filename
 #. (itstool) path: citerefentry/refentrytitle
 msgid "/etc/group"
 msgstr "/etc/group"
+
+#. (itstool) path: listitem/para
+msgid ""
+"Maximum members per group entry. When the maximum is reached, a new group "
+"entry (line) is started in <_:filename-1/> (with the same name, same "
+"password, and same GID)."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"The default value is 0, meaning that there are no limits in the number of "
+"members in a group."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"This feature (split group) permits to limit the length of lines in the group "
+"file. This is useful to make sure that lines for NIS groups are not larger "
+"than 1024 characters."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "If you need to enforce such limit, you can use 25."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Note: split groups may not be supported by all tools (even in the Shadow "
+"toolsuite). You should not use this variable unless you really need it."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+#, fuzzy
+#| msgid "<option>SHA_CRYPT_MIN_ROUNDS</option> (number)"
+msgid "SHA_CRYPT_MIN_ROUNDS"
+msgstr "<option>SHA_CRYPT_MIN_ROUNDS</option> (antal)"
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SHA_CRYPT_MAX_ROUNDS"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"When <_:option-1/> is set to <_:replaceable-2/> or <_:replaceable-3/>, this "
+"defines the number of SHA rounds used by the encryption algorithm by default "
+"(when the number of rounds is not specified on the command line)."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If not specified, the libc will choose the default number of rounds (5000), "
+"which is orders of magnitude too low for modern hardware."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "The values must be inside the 1000-999,999,999 range."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/phrase
+msgid "YESCRYPT_COST_FACTOR"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"When <_:option-1/> is set to <_:replaceable-2/>, this defines the cost "
+"factor used by the encryption algorithm by default (when the cost factor is "
+"not specified on the command line)."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"With a high cost factor, it is more difficult to brute force the password. "
+"But note also that more CPU resources will be needed to authenticate users."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "The value must be inside the 1-11 range."
+msgstr ""
 
 #. (itstool) path: listitem/para
 msgid "Group account information."
@@ -1126,8 +1393,8 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "By default, passwords are encrypted by PAM, but (even if not recommended) "
-"you can select a different encryption method with the <_:option-1/> or <_:"
-"option-2/> options."
+"you can select a different encryption method with the <_:option-1/> or "
+"<_:option-2/> options."
 msgstr ""
 
 #. (itstool) path: para/phrase
@@ -1189,11 +1456,11 @@ msgid "PAM configuration for <_:command-1/>."
 msgstr "PAM-konfiguration for <command>passwd</command>."
 
 #. (itstool) path: citerefentry/refentrytitle
+#. (itstool) path: para/command
 #. (itstool) path: varlistentry/term
 #. (itstool) path: refmeta/refentrytitle
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: cmdsynopsis/command
-#. (itstool) path: para/command
 msgid "newusers"
 msgstr "newusers"
 
@@ -1202,11 +1469,11 @@ msgid "<_:citerefentry-1/>,"
 msgstr ""
 
 #. (itstool) path: citerefentry/refentrytitle
+#. (itstool) path: para/command
 #. (itstool) path: varlistentry/term
 #. (itstool) path: refmeta/refentrytitle
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: cmdsynopsis/command
-#. (itstool) path: para/command
 msgid "useradd"
 msgstr ""
 
@@ -1288,9 +1555,9 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"If this file does not exist, the definitions are taken from the files <_:"
-"filename-1/>, <_:filename-2/> and <_:filename-3/> in that order. If <_:"
-"filename-4/> exists, then <_:filename-5/> will not be used."
+"If this file does not exist, the definitions are taken from the files "
+"<_:filename-1/>, <_:filename-2/> and <_:filename-3/> in that order. If "
+"<_:filename-4/> exists, then <_:filename-5/> will not be used."
 msgstr ""
 
 #. (itstool) path: para/filename
@@ -1305,6 +1572,10 @@ msgid ""
 "<_:filename-2/> is discouraged since accidentally changing to a restricted "
 "shell would prevent the user from ever changing her login shell back to its "
 "original value."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "CHSH_AUTH"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -1401,10 +1672,10 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:command-1/> displays the contents of the failure log database (<_:"
-"filename-2/>). It can also set the failure counters and limits. When <_:"
-"command-3/> is run without arguments, it only displays the faillog records "
-"of the users who had a login failure."
+"<_:command-1/> displays the contents of the failure log database "
+"(<_:filename-2/>). It can also set the failure counters and limits. When "
+"<_:command-3/> is run without arguments, it only displays the faillog "
+"records of the users who had a login failure."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -1418,8 +1689,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Display (or act on) faillog records for all users having an entry in the <_:"
-"filename-1/> database."
+"Display (or act on) faillog records for all users having an entry in the "
+"<_:filename-1/> database."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -1430,6 +1701,11 @@ msgstr ""
 msgid ""
 "In display mode, this is still restricted to existing users but forces the "
 "display of the faillog entries even if they are empty."
+msgstr ""
+
+#. (itstool) path: para/option
+#. (itstool) path: term/option
+msgid "-m"
 msgstr ""
 
 #. (itstool) path: para/option
@@ -1473,8 +1749,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Set the maximum number of login failures after the account is disabled to <_:"
-"replaceable-1/>."
+"Set the maximum number of login failures after the account is disabled to "
+"<_:replaceable-1/>."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -1484,6 +1760,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: para/emphasis
+#. (itstool) path: para/replaceable
 msgid "root"
 msgstr ""
 
@@ -1557,10 +1834,10 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"The users can be specified by a login name, a numerical user ID, or a <_:"
-"replaceable-1/> of users. This <_:replaceable-2/> of users can be specified "
-"with a min and max values (<_:replaceable-3/>), a max value (<_:"
-"replaceable-4/>), or a min value (<_:replaceable-5/>)."
+"The users can be specified by a login name, a numerical user ID, or a "
+"<_:replaceable-1/> of users. This <_:replaceable-2/> of users can be "
+"specified with a min and max values (<_:replaceable-3/>), a max value "
+"(<_:replaceable-4/>), or a min value (<_:replaceable-5/>)."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -1742,8 +2019,8 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "Restrict the access to the named <_:replaceable-1/>. The group password is "
-"set to \"!\". Only group members with a password will be allowed to use <_:"
-"command-2/> to join the named <_:replaceable-3/>."
+"set to \"!\". Only group members with a password will be allowed to use "
+"<_:command-2/> to join the named <_:replaceable-3/>."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -1833,8 +2110,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/><_:phrase-7/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/><_:phrase-7/>."
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
@@ -1882,8 +2159,8 @@ msgstr ""
 msgid ""
 "This option causes the command to simply exit with success status if the "
 "specified group already exists. When used with <_:option-1/>, and the "
-"specified GID already exists, another (unique) GID is chosen (i.e. <_:"
-"option-2/> is turned off)."
+"specified GID already exists, another (unique) GID is chosen (i.e. "
+"<_:option-2/> is turned off)."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -1898,6 +2175,7 @@ msgstr ""
 
 #. (itstool) path: para/option
 #. (itstool) path: para/replaceable
+#. (itstool) path: term/option
 msgid "GID_MIN"
 msgstr ""
 
@@ -1911,6 +2189,7 @@ msgstr ""
 
 #. (itstool) path: para/option
 #. (itstool) path: para/replaceable
+#. (itstool) path: term/option
 msgid "GID_MAX"
 msgstr ""
 
@@ -1989,8 +2268,8 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "permits the creation of a group with an already used numerical ID. As a "
-"result, for this <_:replaceable-1/>, the mapping towards group <_:"
-"replaceable-2/> may not be unique."
+"result, for this <_:replaceable-1/>, the mapping towards group "
+"<_:replaceable-2/> may not be unique."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -2005,10 +2284,6 @@ msgstr ""
 
 #. (itstool) path: term/replaceable
 msgid "PASSWORD"
-msgstr ""
-
-#. (itstool) path: citerefentry/refentrytitle
-msgid "crypt"
 msgstr ""
 
 #. (itstool) path: citerefentry/manvolnum
@@ -2055,18 +2330,20 @@ msgid "Create a system group."
 msgstr "Opret en systemgruppe."
 
 #. (itstool) path: para/option
+#. (itstool) path: term/option
 msgid "SYS_GID_MIN"
 msgstr ""
 
 #. (itstool) path: para/option
+#. (itstool) path: term/option
 msgid "SYS_GID_MAX"
 msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
 "The numeric identifiers of new system groups are chosen in the <_:option-1/>-"
-"<_:option-2/> range, defined in <_:filename-3/>, instead of <_:option-4/>-<_:"
-"option-5/>."
+"<_:option-2/> range, defined in <_:filename-3/>, instead of <_:option-4/>-"
+"<_:option-5/>."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -2092,6 +2369,7 @@ msgid "-N"
 msgstr ""
 
 #. (itstool) path: para/option
+#. (itstool) path: term/option
 #. (itstool) path: para/phrase
 msgid "USERGROUPS_ENAB"
 msgstr ""
@@ -2099,9 +2377,45 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "The default behavior (if the <_:option-1/>, <_:option-2/>, and <_:option-3/> "
-"options are not specified) is defined by the <_:option-4/> variable in <_:"
-"filename-5/>."
+"options are not specified) is defined by the <_:option-4/> variable in "
+"<_:filename-5/>."
 msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Range of group IDs used for the creation of regular groups by <_:command-1/"
+">, <_:command-2/>, or <_:command-3/>."
+msgstr ""
+
+#. (itstool) path: listitem/para
+#, fuzzy
+#| msgid ""
+#| "The default value for <option>GID_MIN</option> (resp. <option>GID_MAX</"
+#| "option>) is 1000 (resp. 60000)."
+msgid ""
+"The default value for <_:option-1/> (resp. <_:option-2/>) is 1000 (resp. "
+"60000)."
+msgstr ""
+"Standardværdien for <option>GID_MIN</option> (resp. <option>GID_MAX</"
+"option>) er 1000 (resp. 60000)."
+
+#. (itstool) path: listitem/para
+msgid ""
+"Range of group IDs used for the creation of system groups by <_:command-1/>, "
+"<_:command-2/>, or <_:command-3/>."
+msgstr ""
+
+#. (itstool) path: listitem/para
+#, fuzzy
+#| msgid ""
+#| "The default value for <option>GID_MIN</option> (resp. <option>GID_MAX</"
+#| "option>) is 1000 (resp. 60000)."
+msgid ""
+"The default value for <_:option-1/> (resp. <_:option-2/>) is 101 (resp. "
+"<_:option-3/>-1)."
+msgstr ""
+"Standardværdien for <option>GID_MIN</option> (resp. <option>GID_MAX</"
+"option>) er 1000 (resp. 60000)."
 
 #. (itstool) path: refsect1/para
 msgid ""
@@ -2144,17 +2458,17 @@ msgid "can't update group file"
 msgstr ""
 
 #. (itstool) path: citerefentry/refentrytitle
+#. (itstool) path: para/command
 #. (itstool) path: varlistentry/term
 #. (itstool) path: refmeta/refentrytitle
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: cmdsynopsis/command
-#. (itstool) path: para/command
 msgid "userdel"
 msgstr ""
 
 #. (itstool) path: citerefentry/refentrytitle
-#. (itstool) path: varlistentry/term
 #. (itstool) path: para/command
+#. (itstool) path: varlistentry/term
 #. (itstool) path: refmeta/refentrytitle
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: cmdsynopsis/command
@@ -2163,10 +2477,10 @@ msgstr "usermod"
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, <_:"
-"citerefentry-7/>, <_:citerefentry-8/>, <_:citerefentry-9/>, <_:"
-"citerefentry-10/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, "
+"<_:citerefentry-7/>, <_:citerefentry-8/>, <_:citerefentry-9/>, "
+"<_:citerefentry-10/>."
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
@@ -2238,9 +2552,9 @@ msgstr "Kan ikke fjerne brugers primære gruppe"
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, <_:"
-"citerefentry-7/>, <_:citerefentry-8/>, <_:citerefentry-9/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, "
+"<_:citerefentry-7/>, <_:citerefentry-8/>, <_:citerefentry-9/>."
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
@@ -2249,8 +2563,8 @@ msgstr "ændr en gruppedefinition på systemet"
 
 #. (itstool) path: refsect1/para
 msgid ""
-"The <_:command-1/> command modifies the definition of the specified <_:"
-"replaceable-2/> by modifying the appropriate entry in the group database."
+"The <_:command-1/> command modifies the definition of the specified "
+"<_:replaceable-2/> by modifying the appropriate entry in the group database."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -2265,8 +2579,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"The group ID of the given <_:replaceable-1/> will be changed to <_:"
-"replaceable-2/>."
+"The group ID of the given <_:replaceable-1/> will be changed to "
+"<_:replaceable-2/>."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -2285,8 +2599,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Any files that have the old group ID and must continue to belong to <_:"
-"replaceable-1/>, must have their group ID changed manually."
+"Any files that have the old group ID and must continue to belong to "
+"<_:replaceable-1/>, must have their group ID changed manually."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -2312,14 +2626,14 @@ msgstr "GRUPPE"
 
 #. (itstool) path: listitem/para
 msgid ""
-"The name of the group will be changed from <_:replaceable-1/> to <_:"
-"replaceable-2/> name."
+"The name of the group will be changed from <_:replaceable-1/> to "
+"<_:replaceable-2/> name."
 msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"When used with the <_:option-1/> option, allow to change the group <_:"
-"replaceable-2/> to a non-unique value."
+"When used with the <_:option-1/> option, allow to change the group "
+"<_:replaceable-2/> to a non-unique value."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -2448,8 +2762,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"a corresponding entry in the <_:filename-1/> file (respectively <_:"
-"filename-2/> for the <_:filename-3/> checks)"
+"a corresponding entry in the <_:filename-1/> file (respectively "
+"<_:filename-2/> for the <_:filename-3/> checks)"
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -2488,11 +2802,6 @@ msgstr ""
 msgid "--read-only"
 msgstr ""
 
-#. (itstool) path: para/emphasis
-#. (itstool) path: para/replaceable
-msgid "no"
-msgstr ""
-
 #. (itstool) path: listitem/para
 msgid ""
 "Execute the <_:command-1/> command in read-only mode. This causes all "
@@ -2526,8 +2835,8 @@ msgstr "/etc/gshadow"
 #. (itstool) path: listitem/para
 msgid ""
 "Suppress more controversial warnings, in particular warnings about "
-"inconsistency between group members listed in <_:filename-1/> and <_:"
-"filename-2/>."
+"inconsistency between group members listed in <_:filename-1/> and "
+"<_:filename-2/>."
 msgstr ""
 
 #. (itstool) path: para/phrase
@@ -2541,8 +2850,8 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "By default, <_:command-1/> operates on <_:filename-2/> <_:phrase-3/>. The "
-"user may select alternate files with the <_:emphasis-4/> <_:phrase-5/> <_:"
-"phrase-6/>"
+"user may select alternate files with the <_:emphasis-4/> <_:phrase-5/> "
+"<_:phrase-6/>"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -2615,9 +2924,10 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"If the password field contains some string that is not a valid result of <_:"
-"citerefentry-1/>, for instance ! or *, users will not be able to use a unix "
-"password to access the group (but group members do not need the password)."
+"If the password field contains some string that is not a valid result of "
+"<_:citerefentry-1/>, for instance ! or *, users will not be able to use a "
+"unix password to access the group (but group members do not need the "
+"password)."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -2697,8 +3007,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:citerefentry-5/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:citerefentry-5/>."
 msgstr ""
 
 #. (itstool) path: refmeta/refentrytitle
@@ -2733,10 +3043,10 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:command-1/> formats and prints the contents of the last login log <_:"
-"filename-2/> file. The <_:emphasis-3/>, <_:emphasis-4/>, and <_:emphasis-5/> "
-"will be printed. The default (no flags) causes lastlog entries to be "
-"printed, sorted by their order in <_:filename-6/>."
+"<_:command-1/> formats and prints the contents of the last login log "
+"<_:filename-2/> file. The <_:emphasis-3/>, <_:emphasis-4/>, and "
+"<_:emphasis-5/> will be printed. The default (no flags) causes lastlog "
+"entries to be printed, sorted by their order in <_:filename-6/>."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -2817,10 +3127,29 @@ msgstr ""
 msgid ""
 "The <_:filename-1/> file is a database which contains info on the last login "
 "of each user. You should not rotate it. It is a sparse file, so its size on "
-"the disk is usually much smaller than the one shown by \"<_:command-2/"
-">\" (which can indicate a really big file if you have in <_:filename-3/> "
-"users with a high UID). You can display its real size with \"<_:command-4/"
-">\"."
+"the disk is usually much smaller than the one shown by \"<_:command-2/>\" "
+"(which can indicate a really big file if you have in <_:filename-3/> users "
+"with a high UID). You can display its real size with \"<_:command-4/>\"."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+#. (itstool) path: listitem/para
+msgid "LASTLOG_UID_MAX"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Highest user ID number for which the lastlog entries should be updated. As "
+"higher user IDs are usually tracked by remote user identity and "
+"authentication services there is no need to create a huge sparse lastlog "
+"file for them."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"No <_:option-1/> option present in the configuration means that there is no "
+"user ID limit for writing lastlog entries."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -2858,6 +3187,7 @@ msgstr ""
 #. (itstool) path: refmeta/refentrytitle
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: para/emphasis
+#. (itstool) path: citerefentry/refentrytitle
 msgid "limits"
 msgstr "limits"
 
@@ -3139,13 +3469,14 @@ msgstr "/etc/nologin"
 #. (itstool) path: refsect1/para
 msgid ""
 "The <_:command-1/> program is used to establish a new session with the "
-"system. It is normally invoked automatically by responding to the <_:"
-"emphasis-2/> prompt on the user's terminal. <_:command-3/> may be special to "
-"the shell and may not be invoked as a sub-process. When called from a shell, "
-"<_:command-4/> should be executed as <_:emphasis-5/> which will cause the "
-"user to exit from the current shell (and thus will prevent the new logged in "
-"user to return to the session of the caller). Attempting to execute <_:"
-"command-6/> from any shell but the login shell will produce an error message."
+"system. It is normally invoked automatically by responding to the "
+"<_:emphasis-2/> prompt on the user's terminal. <_:command-3/> may be special "
+"to the shell and may not be invoked as a sub-process. When called from a "
+"shell, <_:command-4/> should be executed as <_:emphasis-5/> which will cause "
+"the user to exit from the current shell (and thus will prevent the new "
+"logged in user to return to the session of the caller). Attempting to "
+"execute <_:command-6/> from any shell but the login shell will produce an "
+"error message."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -3160,8 +3491,8 @@ msgstr ""
 msgid ""
 "If password aging has been enabled for your account, you may be prompted for "
 "a new password before proceeding. You will be forced to provide your old "
-"password and the new password before continuing. Please refer to <_:"
-"citerefentry-1/> for more information."
+"password and the new password before continuing. Please refer to "
+"<_:citerefentry-1/> for more information."
 msgstr ""
 
 #. (itstool) path: para/filename
@@ -3220,10 +3551,10 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"Your user and group ID will be set according to their values in the <_:"
-"filename-1/> file. The value for <_:envar-2/>, <_:envar-3/>, <_:envar-4/>, "
-"<_:envar-5/>, and <_:envar-6/> are set according to the appropriate fields "
-"in the password entry. Ulimit, umask and nice values may also be set "
+"Your user and group ID will be set according to their values in the "
+"<_:filename-1/> file. The value for <_:envar-2/>, <_:envar-3/>, <_:envar-4/"
+">, <_:envar-5/>, and <_:envar-6/> are set according to the appropriate "
+"fields in the password entry. Ulimit, umask and nice values may also be set "
 "according to entries in the GECOS field."
 msgstr ""
 
@@ -3239,8 +3570,8 @@ msgstr "/etc/ttytype"
 #. (itstool) path: refsect1/para
 msgid ""
 "On some installations, the environmental variable <_:envar-1/> will be "
-"initialized to the terminal type on your tty line, as specified in <_:"
-"filename-2/>."
+"initialized to the terminal type on your tty line, as specified in "
+"<_:filename-2/>."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -3272,8 +3603,8 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "The <_:command-1/> program is NOT responsible for removing users from the "
-"utmp file. It is the responsibility of <_:citerefentry-2/> and <_:"
-"citerefentry-3/> to clean up apparent ownership of a terminal session. If "
+"utmp file. It is the responsibility of <_:citerefentry-2/> and "
+"<_:citerefentry-3/> to clean up apparent ownership of a terminal session. If "
 "you use <_:command-4/> from the shell prompt without <_:command-5/>, the "
 "user you use will continue to appear to be logged in even after you log out "
 "of the \"subsession\"."
@@ -3319,6 +3650,586 @@ msgid ""
 "to obtain the password of the next person coming to sit in front of the "
 "machine. Under Linux, the SAK mechanism can be used by users to initiate a "
 "trusted path and prevent this kind of attack."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/phrase
+msgid "CONSOLE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If defined, either full pathname of a file containing device names (one per "
+"line) or a \":\" delimited list of device names. Root logins will be allowed "
+"only upon these devices."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "If not defined, root will be allowed on any device."
+msgstr ""
+"Hvis ikke defineret så vil administrator (root) være tilladt på alle enheder"
+
+#. (itstool) path: listitem/para
+msgid "The device should be specified without the /dev/ prefix."
+msgstr "Enheden skal angives uden præfikset /dev/."
+
+#. (itstool) path: term/option
+#, fuzzy
+#| msgid "GROUP"
+msgid "CONSOLE_GROUPS"
+msgstr "GRUPPE"
+
+#. (itstool) path: listitem/para
+msgid ""
+"List of groups to add to the user's supplementary groups set when logging in "
+"on the console (as determined by the CONSOLE setting). Default is none. "
+"<_:para-1/> Use with caution - it is possible for users to gain permanent "
+"access to these groups, even when not logged in on the console."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "DEFAULT_HOME"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Indicate if login is allowed if we can't cd to the home directory. Default "
+"is no."
+msgstr ""
+"Indiker om logind er tilladt, hvis vi ikke kan cd til hjemmemappen. "
+"Standarden er nej."
+
+#. (itstool) path: para/filename
+msgid "/"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set to <_:replaceable-1/>, the user will login in the root (<_:filename-2/"
+">) directory if it is not possible to cd to her home directory."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "ENV_HZ"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "HZ="
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "HZ=100"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set, it will be used to define the HZ environment variable when a user "
+"login. The value must be preceded by <_:replaceable-1/>. A common value on "
+"Linux is <_:replaceable-2/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "ENV_PATH"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+#. (itstool) path: para/filename
+msgid "/bin:/usr/bin"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "PATH="
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "PATH=/bin:/usr/bin"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set, it will be used to define the PATH environment variable when a "
+"regular user login. The value is a colon separated list of paths (for "
+"example <_:replaceable-1/>) and can be preceded by <_:replaceable-2/>. The "
+"default value is <_:replaceable-3/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "ENV_SUPATH"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+#. (itstool) path: para/filename
+msgid "/sbin:/bin:/usr/sbin:/usr/bin"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "PATH=/sbin:/bin:/usr/sbin:/usr/bin"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set, it will be used to define the PATH environment variable when the "
+"superuser login. The value is a colon separated list of paths (for example "
+"<_:replaceable-1/>) and can be preceded by <_:replaceable-2/>. The default "
+"value is <_:replaceable-3/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "ENV_TZ"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "TZ="
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "TZ=CST6CDT"
+msgstr ""
+
+#. (itstool) path: para/filename
+#, fuzzy
+#| msgid "/etc/motd"
+msgid "/etc/tzname"
+msgstr "/etc/motd"
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set, it will be used to define the TZ environment variable when a user "
+"login. The value can be the name of a timezone preceded by <_:replaceable-1/"
+"> (for example <_:replaceable-2/>), or the full path to the file containing "
+"the timezone specification (for example <_:filename-3/>)."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If a full path is specified but the file does not exist or cannot be read, "
+"the default is to use <_:replaceable-1/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+#, fuzzy
+#| msgid "ENVIRONMENT"
+msgid "ENVIRON_FILE"
+msgstr "MILJØ"
+
+#. (itstool) path: listitem/para
+msgid ""
+"If this file exists and is readable, login environment will be read from it. "
+"Every line should be in the form name=value."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Lines starting with a # are treated as comment lines and ignored."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "ERASECHAR"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "010"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "0177"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Terminal ERASE character (<_:replaceable-1/> = backspace, <_:replaceable-2/> "
+"= DEL)."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"The value can be prefixed \"0\" for an octal value, or \"0x\" for an "
+"hexadecimal value."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "FAIL_DELAY"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Delay in seconds before being allowed another attempt after a login failure."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/phrase
+msgid "FAILLOG_ENAB"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Enable logging and display of <_:filename-1/> login failure info."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "FAKE_SHELL"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set, <_:command-1/> will execute this shell instead of the users' shell "
+"specified in <_:filename-2/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/phrase
+msgid "FTMP_FILE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If defined, login failures will be logged in this file in a utmp format."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "HUSHLOGIN_FILE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If defined, this file can inhibit all the usual chatter during the login "
+"sequence. If a full pathname is specified, then hushed mode will be enabled "
+"if the user's name or shell are found in the file. If not a full pathname, "
+"then hushed mode will be enabled if the file exists in the user's home "
+"directory."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/phrase
+msgid "ISSUE_FILE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "If defined, this file will be displayed before each login prompt."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "KILLCHAR"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "025"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Terminal KILL character (<_:replaceable-1/> = CTRL/U)."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "LASTLOG_ENAB"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Enable logging and display of /var/log/lastlog login time info."
+msgstr ""
+
+#. (itstool) path: term/option
+#, fuzzy
+#| msgid "user LIMITS_STRING"
+msgid "LOGIN_RETRIES"
+msgstr "bruger LIMITS_STRING"
+
+#. (itstool) path: listitem/para
+msgid "Maximum number of login retries in case of bad password."
+msgstr "Maksimalt antal logindforsøg i tilfælde af ugyldig adgangskode."
+
+#. (itstool) path: listitem/para
+msgid ""
+"This will most likely be overridden by PAM, since the default pam_unix "
+"module has its own built in of 3 retries. However, this is a safe fallback "
+"in case you are using an authentication module that does not enforce "
+"PAM_MAXTRIES."
+msgstr ""
+"Denne vil højst sandsynlig blive overskrevet af PAM, da standardmodulet "
+"pam_unix har sin egen indbygget 3 forsøg. Dette er dog en ekstra sikkerhed i "
+"tilfælde af at du bruger et godkendelsesmodul som ikke påtvinger "
+"PAM_MAXTRiES."
+
+#. (itstool) path: term/option
+#, fuzzy
+#| msgid "user LIMITS_STRING"
+msgid "LOGIN_TIMEOUT"
+msgstr "bruger LIMITS_STRING"
+
+#. (itstool) path: listitem/para
+msgid "Max time in seconds for login."
+msgstr "Maks. tidsforbrug i sekunder for logind."
+
+#. (itstool) path: term/option
+msgid "LOG_OK_LOGINS"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Enable logging of successful logins."
+msgstr "Aktiver logning af successfulde logind."
+
+#. (itstool) path: term/option
+msgid "LOG_UNKFAIL_ENAB"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Enable display of unknown usernames when login failures are recorded."
+msgstr "Aktiver visning af ukendte brugernavne når logindfejl optages."
+
+#. (itstool) path: listitem/para
+msgid ""
+"Note: logging unknown usernames may be a security issue if an user enter her "
+"password instead of her login name."
+msgstr ""
+"Bemærk: Logning af ukendte brugernaven kan udgøre en sikkerhedsmæssig risiko "
+"såfremt en bruger indtatser sin adgangskode i stedet for sit logindnavn."
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "MAIL_CHECK_ENAB"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Enable checking and display of mailbox status upon login."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"You should disable it if the shell startup files already check for mail "
+"(\"mailx -e\" or equivalent)."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "MAIL_DIR"
+msgstr ""
+
+#. (itstool) path: para/filename
+#. (itstool) path: term/filename
+msgid "/etc/default/useradd"
+msgstr "/etc/default/useradd"
+
+#. (itstool) path: listitem/para
+msgid ""
+"The mail spool directory. This is needed to manipulate the mailbox when its "
+"corresponding user account is modified or deleted. If not specified, a "
+"compile-time default is used. The parameter CREATE_MAIL_SPOOL in "
+"<_:filename-1/> determines whether the mail spool should be created."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "MAIL_FILE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Defines the location of the users mail spool files relatively to their home "
+"directory."
+msgstr ""
+
+#. (itstool) path: phrase/para
+#. (itstool) path: variablelist/para
+msgid ""
+"The <_:option-1/> and <_:option-2/> variables are used by <_:command-3/>, "
+"<_:command-4/>, and <_:command-5/> to create, move, or delete the user's "
+"mail spool."
+msgstr ""
+
+#. (itstool) path: para/envar
+msgid "MAIL"
+msgstr ""
+
+#. (itstool) path: phrase/para
+#. (itstool) path: variablelist/para
+msgid ""
+"If <_:option-1/> is set to <_:replaceable-2/>, they are also used to define "
+"the <_:envar-3/> environment variable."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "MOTD_FILE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If defined, \":\" delimited list of \"message of the day\" files to be "
+"displayed upon login."
+msgstr ""
+
+#. (itstool) path: term/option
+#, fuzzy
+#| msgid "ENVIRONMENT"
+msgid "NOLOGINS_FILE"
+msgstr "MILJØ"
+
+#. (itstool) path: listitem/para
+msgid ""
+"If defined, name of file whose presence will inhibit non-root logins. The "
+"contents of this file should be a message indicating why logins are "
+"inhibited."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "PORTTIME_CHECKS_ENAB"
+msgstr ""
+
+#. (itstool) path: para/filename
+#. (itstool) path: term/filename
+msgid "/etc/porttime"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Enable checking of time restrictions specified in <_:filename-1/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "QUOTAS_ENAB"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Enable setting of resource limits from <_:filename-1/> and ulimit, umask, "
+"and niceness from the user's passwd gecos field."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+#, fuzzy
+#| msgid "GROUP"
+msgid "TTYGROUP"
+msgstr "GRUPPE"
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "TTYPERM"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"The terminal permissions: the login tty will be owned by the <_:option-1/> "
+"group, and the permissions will be set to <_:option-2/>."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"<_:option-1/> can be either the name of a group or a numeric group "
+"identifier."
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "0600"
+msgstr ""
+
+#. (itstool) path: listitem/para
+#, fuzzy
+#| msgid ""
+#| "By default, the ownership of the terminal is set to the user's primary "
+#| "group and the permissions are set to <replaceable>0600</replaceable>."
+msgid ""
+"If TTYGROUP is not defined, then the group ownership of the terminal is set "
+"to the user's primary group. If TTYPERM is not defined, then the permissions "
+"are set to <_:replaceable-1/>."
+msgstr ""
+"Som standard er ejerskabet af terminalen angivet til brugerens primære "
+"gruppe og rettighederne er angivet til <replaceable>0600</replaceable>."
+
+#. (itstool) path: para/command
+msgid "write"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If you have a <_:command-1/> program which is \"setgid\" to a special group "
+"which owns the terminals, define TTYGROUP to the group number and TTYPERM to "
+"0620. Otherwise leave TTYGROUP commented out and assign TTYPERM to either "
+"622 or 600."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "TTYTYPE_FILE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If defined, file which maps tty line to TERM environment parameter. Each "
+"line of the file is in a format something like \"vt100 tty01\"."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "ULIMIT"
+msgstr ""
+
+#. (itstool) path: para/command
+#, fuzzy
+#| msgid "limits"
+msgid "ulimit"
+msgstr "limits"
+
+#. (itstool) path: listitem/para
+#, fuzzy
+#| msgid "Default <command>ulimit</command> value."
+msgid "Default <_:command-1/> value."
+msgstr "Standardværdi for <command>ulimit</command>."
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "UMASK"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"The file mode creation mask is initialized to this value. If not specified, "
+"the mask will be initialized to 022."
+msgstr ""
+
+#. (itstool) path: para/option
+#. (itstool) path: term/option
+msgid "HOME_MODE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"<_:command-1/> and <_:command-2/> use this mask to set the mode of the home "
+"directory they create if <_:option-3/> is not set."
+msgstr ""
+
+#. (itstool) path: para/emphasis
+msgid "K"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"It is also used by <_:command-1/> to define users' initial umask. Note that "
+"this mask can be overridden by the user's GECOS line (if <_:option-2/> is "
+"set) or by the specification of a limit with the <_:emphasis-3/> identifier "
+"in <_:citerefentry-4/>."
+msgstr ""
+
+#. (itstool) path: para/command
+msgid "pam_umask"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "It is also used by <_:command-1/> as the default umask value."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Enable setting of the umask group bits to be the same as owner bits "
+"(examples: 022 -&gt; 002, 077 -&gt; 007) for non-root users, if the uid is "
+"the same as gid, and username is the same as the primary group name."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set to <_:replaceable-1/>, <_:command-2/> will remove the user's group if "
+"it contains no more members, and <_:command-3/> will create by default a "
+"group with the name of the user."
 msgstr ""
 
 #. (itstool) path: term/filename
@@ -3370,11 +4281,11 @@ msgid "sh"
 msgstr ""
 
 #. (itstool) path: citerefentry/refentrytitle
+#. (itstool) path: para/command
 #. (itstool) path: varlistentry/term
 #. (itstool) path: refmeta/refentrytitle
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: cmdsynopsis/command
-#. (itstool) path: para/command
 msgid "su"
 msgstr ""
 
@@ -3469,13 +4380,13 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"The first field should be a \"<_:emphasis-1/>\" (access granted) or \"<_:"
-"emphasis-2/>\" (access denied) character. The second field should be a list "
-"of one or more login names, group names, or <_:emphasis-3/> (always "
+"The first field should be a \"<_:emphasis-1/>\" (access granted) or "
+"\"<_:emphasis-2/>\" (access denied) character. The second field should be a "
+"list of one or more login names, group names, or <_:emphasis-3/> (always "
 "matches). The third field should be a list of one or more tty names (for non-"
 "networked logins), host names, domain names (begin with \"<_:literal-4/>\"), "
-"host addresses, internet network numbers (end with \"<_:literal-5/>\"), <_:"
-"emphasis-6/> (always matches) or <_:emphasis-7/> (matches any string that "
+"host addresses, internet network numbers (end with \"<_:literal-5/>\"), "
+"<_:emphasis-6/> (always matches) or <_:emphasis-7/> (matches any string that "
 "does not contain a \"<_:literal-8/>\" character). If you run NIS you can use "
 "@netgroupname in host or user patterns."
 msgstr ""
@@ -3526,11 +4437,6 @@ msgstr ""
 "ikke er et mellemrum."
 
 #. (itstool) path: para/replaceable
-#. (itstool) path: para/emphasis
-msgid "yes"
-msgstr ""
-
-#. (itstool) path: para/replaceable
 msgid "0x"
 msgstr ""
 
@@ -3539,9 +4445,9 @@ msgid ""
 "Parameter values may be of four types: strings, booleans, numbers, and long "
 "numbers. A string is comprised of any printable characters. A boolean should "
 "be either the value <_:replaceable-1/> or <_:replaceable-2/>. An undefined "
-"boolean parameter or one with a value other than these will be given a <_:"
-"replaceable-3/> value. Numbers (both regular and long) may be either decimal "
-"values, octal values (precede the value with <_:replaceable-4/>) or "
+"boolean parameter or one with a value other than these will be given a "
+"<_:replaceable-3/> value. Numbers (both regular and long) may be either "
+"decimal values, octal values (precede the value with <_:replaceable-4/>) or "
 "hexadecimal values (precede the value with <_:replaceable-5/>). The maximum "
 "value of the regular and long numeric parameters is machine-dependent."
 msgstr ""
@@ -3558,27 +4464,663 @@ msgstr ""
 msgid "The following configuration items are provided:"
 msgstr "De følgende konfigurationspunkter tilbydes:"
 
+#. (itstool) path: term/option
+#. (itstool) path: para/replaceable
+#. (itstool) path: para/option
+msgid "CREATE_HOME"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Indicate if a home directory should be created by default for new users."
+msgstr ""
+"Indikerer om en hjemmemappe skal oprettes som standard for nye brugere."
+
+#. (itstool) path: listitem/para
+msgid ""
+"This setting does not apply to system users, and can be overridden on the "
+"command line."
+msgstr ""
+"Denne indstilling gælder ikke for systembrugere og kan overskrives på "
+"kommandolinjen."
+
+#. (itstool) path: term/option
+msgid "HMAC_CRYPTO_ALGO"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Used to select the HMAC cryptography algorithm that the pam_timestamp module "
+"is going to use to calculate the keyed-hash message authentication code."
+msgstr ""
+
+#. (itstool) path: para/refentrytitle
+msgid "hmac"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Note: check <_:refentrytitle-1/><_:manvolnum-2/> to see the possible "
+"algorithms that are available in your system."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"The mode for new home directories. If not specified, the <_:option-1/> is "
+"used to create the mode."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"<_:command-1/> and <_:command-2/> use this to set the mode of the home "
+"directory they create."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "NONEXISTENT"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If a system account intentionally does not have a home directory that "
+"exists, this string can be provided in the /etc/passwd entry for the account "
+"to indicate this. The result is that pwck will not emit a spurious warning "
+"for this account."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "OBSCURE_CHECKS_ENAB"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Enable additional checks upon password changes."
+msgstr "Aktiver yderligere kontroller før ændringer af adgangskode."
+
+#. (itstool) path: term/option
+msgid "PASS_ALWAYS_WARN"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Warn about weak passwords (but still allow them) if you are root."
+msgstr ""
+"Advar om svage adgangskoder (men tillad dem stadig) hvis du er administrator "
+"(root)."
+
+#. (itstool) path: term/option
+msgid "PASS_CHANGE_TRIES"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Maximum number of attempts to change password if rejected (too easy)."
+msgstr "Maksimalt antal forsøg at ændre adgangskode hvis afvist (for nemt)."
+
+#. (itstool) path: term/option
 #. (itstool) path: para/option
 #. (itstool) path: para/emphasis
 #. (itstool) path: para/replaceable
 msgid "PASS_MAX_DAYS"
 msgstr ""
 
-#. (itstool) path: para/option
-#. (itstool) path: para/emphasis
-msgid "PASS_MIN_DAYS"
+#. (itstool) path: listitem/para
+msgid ""
+"The maximum number of days a password may be used. If the password is older "
+"than this, a password change will be forced. If not specified, -1 will be "
+"assumed (which disables the restriction)."
 msgstr ""
 
+#. (itstool) path: term/option
 #. (itstool) path: para/option
 #. (itstool) path: para/emphasis
 msgid "PASS_WARN_AGE"
 msgstr ""
 
+#. (itstool) path: listitem/para
+msgid ""
+"The number of days warning given before a password expires. A zero means "
+"warning is given only upon the day of expiration, a value of -1 means no "
+"warning is given. If not specified, no warning will be provided."
+msgstr ""
+
 #. (itstool) path: variablelist/para
 msgid ""
-"<_:option-1/>, <_:option-2/> and <_:option-3/> are only used at the time of "
-"account creation. Any changes to these settings won't affect existing "
-"accounts."
+"<_:option-1/>, and <_:option-2/> are only used at the time of account "
+"creation. Any changes to these settings won't affect existing accounts."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "PASS_MIN_LEN"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Minimum allowed length of a password."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "SULOG_FILE"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "If defined, all su activity is logged to this file."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "SU_NAME"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If defined, the command name to display when running \"su -\". For example, "
+"if this is defined as \"su\" then a \"ps\" will display the command is \"-"
+"su\". If not defined, then \"ps\" would display the name of the shell "
+"actually being run, e.g. something like \"-sh\"."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/phrase
+msgid "SU_WHEEL_ONLY"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If <_:replaceable-1/>, the user must be listed as a member of the first gid "
+"0 group in <_:filename-2/> (called <_:replaceable-3/> on most Linux systems) "
+"to be able to <_:command-4/> to uid 0 accounts. If the group doesn't exist "
+"or is empty, no one will be able to <_:command-5/> to uid 0."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SUB_GID_MIN"
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SUB_GID_MAX"
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SUB_GID_COUNT"
+msgstr ""
+
+#. (itstool) path: para/filename
+#. (itstool) path: term/filename
+#, fuzzy
+#| msgid "/etc/suauth"
+msgid "/etc/subuid"
+msgstr "/etc/suauth"
+
+#. (itstool) path: listitem/para
+msgid ""
+"If <_:filename-1/> exists, the commands <_:command-2/> and <_:command-3/> "
+"(unless the user already have subordinate group IDs) allocate <_:option-4/> "
+"unused group IDs from the range <_:option-5/> to <_:option-6/> for each new "
+"user."
+msgstr ""
+
+#. (itstool) path: listitem/para
+#, fuzzy
+#| msgid ""
+#| "The default value for <option>GID_MIN</option> (resp. <option>GID_MAX</"
+#| "option>) is 1000 (resp. 60000)."
+msgid ""
+"The default values for <_:option-1/>, <_:option-2/>, <_:option-3/> are "
+"respectively 100000, 600100000 and 65536."
+msgstr ""
+"Standardværdien for <option>GID_MIN</option> (resp. <option>GID_MAX</"
+"option>) er 1000 (resp. 60000)."
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SUB_GID_DETERMINISTIC"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set to <_:replaceable-1/>, the commands <_:command-2/>, <_:command-3/>, "
+"and <_:command-4/> will calculate subordinate GID ranges deterministically "
+"based on the user's UID instead of searching for the next free range. The "
+"formula used is:"
+msgstr ""
+
+#. (itstool) path: listitem/literallayout
+msgid ""
+"start = SUB_GID_MIN + ((UID - UID_MIN) * SUB_GID_COUNT) end = start + "
+"SUB_GID_COUNT - 1"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"This ensures the same UID always receives the same subordinate GID range on "
+"every system, making it suitable for environments with centralized user "
+"management (LDAP, NIS, etc.) or synchronized UIDs across systems."
+msgstr ""
+
+#. (itstool) path: para/command
+msgid "usermod --add-subgids -S"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If <_:option-1/> is enabled, you can use <_:command-2/> to produce "
+"deterministic subgids."
+msgstr ""
+
+#. (itstool) path: para/emphasis
+msgid "WARNING"
+msgstr ""
+
+#. (itstool) path: para/option
+#. (itstool) path: term/option
+#. (itstool) path: para/replaceable
+msgid "UID_MIN"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"<_:emphasis-1/>: Because <_:option-2/> is used to calculate the ranges, any "
+"change of <_:option-3/> will change the ranges calculated. <_:option-4/> is "
+"used to calculate the ranges, any change of <_:option-5/> will change the "
+"ranges calculated. Users with identities less than <_:option-6/> are "
+"incompatible with <_:option-7/>, but can still be set manually."
+msgstr ""
+
+#. (itstool) path: para/filename
+#. (itstool) path: term/filename
+#, fuzzy
+#| msgid "/etc/suauth"
+msgid "/etc/subgid"
+msgstr "/etc/suauth"
+
+#. (itstool) path: para/emphasis
+msgid "will cause subordinate ID range conflicts and overlaps"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"<_:emphasis-1/>: Do not mix deterministic and linear (default) allocation on "
+"the same system or across systems sharing <_:filename-2/> via network "
+"storage (NFS, etc.). Mixing allocation methods <_:emphasis-3/>."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "The default value for <_:option-1/> is <_:replaceable-2/>."
+msgstr ""
+
+#. (itstool) path: refsect2/title
+msgid "Range Calculation Examples"
+msgstr ""
+
+#. (itstool) path: refsect2/para
+#, fuzzy
+#| msgid "<option>-a</option>, <option>--all</option>"
+msgid ""
+"With default configuration (<_:option-1/>=1000, <_:option-2/>=100000, "
+"<_:option-3/>=65536):"
+msgstr "<option>-a</option>, <option>--all</option>"
+
+#. (itstool) path: row/entry
+#. (itstool) path: term/replaceable
+msgid "UID"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "Calculation"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "Subordinate GID Range"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "1000"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "100000 + ((1000-1000) * 65536)"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "100000-165535"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "1001"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "100000 + ((1001-1000) * 65536)"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "165536-231071"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "1002"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "100000 + ((1002-1000) * 65536)"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "231072-296607"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "1100"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "100000 + ((1100-1000) * 65536)"
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "6653600-6719135"
+msgstr ""
+
+#. (itstool) path: refsect2/title
+msgid "Subordinate ID Space Planning"
+msgstr ""
+
+#. (itstool) path: refsect2/para
+msgid ""
+"When planning subordinate ID allocation, calculate the maximum number of "
+"users the space can accommodate:"
+msgstr ""
+
+#. (itstool) path: refsect2/literallayout
+msgid "capacity = (SUB_GID_MAX - SUB_GID_MIN) / SUB_GID_COUNT"
+msgstr ""
+
+#. (itstool) path: refsect2/para
+msgid "With default values: (600100000 - 100000) / 65536 ≈ 9155 users."
+msgstr ""
+
+#. (itstool) path: refsect2/para
+msgid "For high-density environments with many users and smaller allocations:"
+msgstr ""
+
+#. (itstool) path: refsect2/literallayout
+msgid "SUB_GID_COUNT 4096 SUB_GID_MIN 100000 SUB_GID_MAX 10000000"
+msgstr ""
+
+#. (itstool) path: refsect2/para
+msgid "This gives: (10000000 - 100000) / 4096 ≈ 2417 users."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "UNSAFE_SUB_GID_DETERMINISTIC_WRAP"
+msgstr ""
+
+#. (itstool) path: para/emphasis
+msgid ""
+"WARNING: SECURITY RISK - MAY CAUSE RANGE OVERLAPS AND PRIVILEGE ESCALATION!"
+msgstr ""
+
+#. (itstool) path: listitem/para
+#, fuzzy
+#| msgid ""
+#| "This option sets the <option>INACTIVE</option> variable in <filename>/etc/"
+#| "default/useradd</filename>."
+msgid "Only effective when <_:option-1/> is set to <_:replaceable-2/>."
+msgstr ""
+"Dette tilvalg sætter variablen <option>INACTIVE</option> i <filename>/etc/"
+"default/useradd</filename>."
+
+#. (itstool) path: listitem/para
+msgid ""
+"When set to <_:replaceable-1/> (WRAP MODE), allows the deterministic range "
+"calculation to wrap around using modulo arithmetic when a UID would overflow "
+"the configured subordinate ID space. The subordinate ID space is treated as "
+"a ring buffer."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"<_:emphasis-1/>: Range overlaps can lead to container escapes and privilege "
+"escalation. For example, with <_:option-2/>=100000, <_:option-3/>=200000, "
+"<_:option-4/>=65536, User A (UID 1000) gets range [100000, 165535] and User "
+"B (UID 1001) wraps and overlaps with User A. User B's container can now "
+"access files from User A's containers."
+msgstr ""
+
+#. (itstool) path: para/emphasis
+msgid "only"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Use <_:emphasis-1/> in development, testing, or tightly constrained lab "
+"environments."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"When set to <_:replaceable-1/> (default), any arithmetic overflow or range "
+"exceeding <_:option-2/> is a hard error. This guarantees non-overlapping, "
+"monotonic allocation."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "SUB_GID_STORE_BY_UID"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set to <_:replaceable-1/>, subordinate group ID entries in <_:filename-2/"
+"> are stored using the numeric user ID rather than the username. The default "
+"value is <_:replaceable-3/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SUB_UID_MIN"
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SUB_UID_MAX"
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SUB_UID_COUNT"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If <_:filename-1/> exists, the commands <_:command-2/> and <_:command-3/> "
+"(unless the user already have subordinate user IDs) allocate <_:option-4/> "
+"unused user IDs from the range <_:option-5/> to <_:option-6/> for each new "
+"user."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SUB_UID_DETERMINISTIC"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set to <_:replaceable-1/>, the commands <_:command-2/>, <_:command-3/>, "
+"and <_:command-4/> will calculate subordinate UID ranges deterministically "
+"based on the user's UID instead of searching for the next free range. The "
+"formula used is:"
+msgstr ""
+
+#. (itstool) path: listitem/literallayout
+msgid ""
+"start = SUB_UID_MIN + ((UID - UID_MIN) * SUB_UID_COUNT) end = start + "
+"SUB_UID_COUNT - 1"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"This ensures the same UID always receives the same subordinate UID range on "
+"every system, making it suitable for environments with centralized user "
+"management (LDAP, NIS, etc.) or synchronized UIDs across systems."
+msgstr ""
+
+#. (itstool) path: para/command
+msgid "usermod --add-subuids -S"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If <_:option-1/> is enabled, you can use <_:command-2/> to produce "
+"deterministic subuids."
+msgstr ""
+
+#. (itstool) path: row/entry
+msgid "Subordinate UID Range"
+msgstr ""
+
+#. (itstool) path: refsect2/literallayout
+msgid "capacity = (SUB_UID_MAX - SUB_UID_MIN) / SUB_UID_COUNT"
+msgstr ""
+
+#. (itstool) path: refsect2/literallayout
+msgid "SUB_UID_COUNT 4096 SUB_UID_MIN 100000 SUB_UID_MAX 10000000"
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "UNSAFE_SUB_UID_DETERMINISTIC_WRAP"
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "SUB_UID_STORE_BY_UID"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If set to <_:replaceable-1/>, subordinate user ID entries in <_:filename-2/> "
+"are stored using the numeric user ID rather than the username. The default "
+"value is <_:replaceable-3/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SYS_UID_MAX"
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+msgid "SYS_UID_MIN"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Range of user IDs used for the creation of system users by <_:command-1/> or "
+"<_:command-2/>."
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: listitem/para
+msgid "SYSLOG_SG_ENAB"
+msgstr ""
+
+#. (itstool) path: para/command
+#. (itstool) path: citerefentry/refentrytitle
+#. (itstool) path: refmeta/refentrytitle
+#. (itstool) path: refnamediv/refname
+#. (itstool) path: cmdsynopsis/command
+msgid "sg"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "Enable \"syslog\" logging of <_:command-1/> activity."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "SYSLOG_SU_ENAB"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Enable \"syslog\" logging of <_:command-1/> activity - in addition to sulog "
+"file logging."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "TCB_AUTH_GROUP"
+msgstr ""
+
+#. (itstool) path: para/replaceable
+msgid "auth"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If <_:replaceable-1/>, newly created tcb shadow files will be group owned by "
+"the <_:replaceable-2/> group."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "TCB_SYMLINKS"
+msgstr ""
+
+#. (itstool) path: para/programlisting
+msgid ""
+"if ( UID is less than 1000) { use /etc/tcb/user } else if ( UID is less than "
+"1000000) { kilos = UID / 1000 use /etc/tcb/:kilos/user make symlink /etc/tcb/"
+"user to the above directory } else { megas = UID / 1000000 kilos = ( UID / "
+"megas * 1000000 ) / 1000 use /etc/tcb/:megas/:kilos/user make symlink /etc/"
+"tcb/user to the above directory }"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If <_:replaceable-1/>, the location of the user tcb directory to be created "
+"will not be automatically set to /etc/tcb/user, but will be computed "
+"depending on the UID of the user, according to the following algorithm: "
+"<_:programlisting-2/>"
+msgstr ""
+
+#. (itstool) path: term/option
+#. (itstool) path: para/option
+#. (itstool) path: para/replaceable
+msgid "UID_MAX"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Range of user IDs used for the creation of regular users by <_:command-1/> "
+"or <_:command-2/>."
+msgstr ""
+
+#. (itstool) path: term/option
+msgid "USERDEL_CMD"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"If defined, this command is run when removing a user. It should remove any "
+"at/cron/print jobs etc. owned by the user to be removed (passed as the first "
+"argument)."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid "The return code of the script is not taken into account."
+msgstr ""
+
+#. (itstool) path: para/programlisting
+msgid ""
+"#! /bin/sh # Check for the required argument. if [ $# != 1 ]; then echo "
+"\"Usage: $0 username\" exit 1 fi # Remove cron jobs. crontab -r -u $1 # "
+"Remove at jobs. # Note that it will remove any jobs owned by the same UID, # "
+"even if it was shared by a different username. AT_SPOOL_DIR=/var/spool/cron/"
+"atjobs find $AT_SPOOL_DIR -name \"[^.]*\" -type f -user $1 -delete \\; # "
+"Remove print jobs. lprm $1 # All done. exit 0"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Here is an example script, which removes the user's cron, at and print jobs: "
+"<_:programlisting-1/>"
 msgstr ""
 
 #. (itstool) path: refsect1/title
@@ -3594,32 +5136,11 @@ msgstr ""
 "adgangskodeprogrampakke der bruger hvilke parametre."
 
 #. (itstool) path: listitem/para
-#. (itstool) path: para/phrase
-#. (itstool) path: phrase/option
-#. (itstool) path: para/option
-msgid "USE_TCB"
-msgstr ""
-
-#. (itstool) path: para/phrase
-msgid "CHFN_AUTH"
-msgstr ""
-
-#. (itstool) path: para/phrase
-#, fuzzy
-#| msgid "user LIMITS_STRING"
-msgid "LOGIN_STRING"
-msgstr "bruger LIMITS_STRING"
-
-#. (itstool) path: listitem/para
 msgid "<_:phrase-1/> CHFN_RESTRICT <_:phrase-2/>"
 msgstr ""
 
 #. (itstool) path: para/phrase
 msgid "BCRYPT_MAX_ROUNDS BCRYPT_MIN_ROUNDS"
-msgstr ""
-
-#. (itstool) path: para/phrase
-msgid "YESCRYPT_COST_FACTOR"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -3630,8 +5151,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"<_:phrase-1/> <_:phrase-2/> SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS <_:"
-"phrase-3/>"
+"<_:phrase-1/> <_:phrase-2/> SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS "
+"<_:phrase-3/>"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -3642,10 +5163,6 @@ msgstr ""
 msgid "GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP SYS_GID_MAX SYS_GID_MIN"
 msgstr ""
 
-#. (itstool) path: listitem/para
-msgid "MAX_MEMBERS_PER_GROUP"
-msgstr ""
-
 #. (itstool) path: varlistentry/term
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: cmdsynopsis/command
@@ -3653,28 +5170,8 @@ msgstr ""
 msgid "grpunconv"
 msgstr ""
 
-#. (itstool) path: listitem/para
-msgid "LASTLOG_UID_MAX"
-msgstr ""
-
-#. (itstool) path: para/phrase
-msgid "CONSOLE"
-msgstr ""
-
 #. (itstool) path: para/phrase
 msgid "ENV_HZ ENV_PATH ENV_SUPATH ENV_TZ ENVIRON_FILE"
-msgstr ""
-
-#. (itstool) path: para/phrase
-msgid "FAILLOG_ENAB"
-msgstr ""
-
-#. (itstool) path: para/phrase
-msgid "FTMP_FILE"
-msgstr ""
-
-#. (itstool) path: para/phrase
-msgid "ISSUE_FILE"
 msgstr ""
 
 #. (itstool) path: para/phrase
@@ -3705,26 +5202,22 @@ msgid "newgrp / sg"
 msgstr ""
 
 #. (itstool) path: listitem/para
-msgid "SYSLOG_SG_ENAB"
-msgstr ""
-
-#. (itstool) path: listitem/para
 msgid ""
 "<_:phrase-1/> ENCRYPT_METHOD GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP HOME_MODE "
-"PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE SHA_CRYPT_MAX_ROUNDS "
-"SHA_CRYPT_MIN_ROUNDS SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN "
-"SUB_GID_DETERMINISTIC SUB_GID_STORE_BY_UID SUB_UID_COUNT SUB_UID_MAX "
-"SUB_UID_MIN SUB_UID_DETERMINISTIC SUB_UID_STORE_BY_UID SYS_GID_MAX "
-"SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK "
-"UNSAFE_SUB_GID_DETERMINISTIC_WRAP UNSAFE_SUB_UID_DETERMINISTIC_WRAP <_:"
-"phrase-2/>"
+"PASS_MAX_DAYS PASS_WARN_AGE SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS "
+"SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN SUB_GID_DETERMINISTIC "
+"SUB_GID_STORE_BY_UID SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN "
+"SUB_UID_DETERMINISTIC SUB_UID_STORE_BY_UID SYS_GID_MAX SYS_GID_MIN "
+"SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK "
+"UNSAFE_SUB_GID_DETERMINISTIC_WRAP UNSAFE_SUB_UID_DETERMINISTIC_WRAP "
+"<_:phrase-2/>"
 msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
 "<_:phrase-1/> ENCRYPT_METHOD OBSCURE_CHECKS_ENAB PASS_ALWAYS_WARN "
-"PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN SHA_CRYPT_MAX_ROUNDS "
-"SHA_CRYPT_MIN_ROUNDS <_:phrase-2/>"
+"PASS_CHANGE_TRIES PASS_MIN_LEN SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS "
+"<_:phrase-2/>"
 msgstr ""
 
 #. (itstool) path: para/phrase
@@ -3732,7 +5225,7 @@ msgid "TCB_AUTH_GROUP TCB_SYMLINKS USE_TCB"
 msgstr ""
 
 #. (itstool) path: listitem/para
-msgid "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <_:phrase-1/>"
+msgid "PASS_MAX_DAYS PASS_WARN_AGE <_:phrase-1/>"
 msgstr ""
 
 #. (itstool) path: varlistentry/term
@@ -3760,10 +5253,6 @@ msgstr ""
 msgid "ENV_TZ LOGIN_STRING MAIL_CHECK_ENAB MAIL_DIR MAIL_FILE QUOTAS_ENAB"
 msgstr ""
 
-#. (itstool) path: para/phrase
-msgid "SU_WHEEL_ONLY"
-msgstr ""
-
 #. (itstool) path: listitem/para
 msgid ""
 "<_:phrase-1/> CONSOLE_GROUPS DEFAULT_HOME <_:phrase-2/> ENV_PATH ENV_SUPATH "
@@ -3786,13 +5275,12 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "CREATE_HOME GID_MAX GID_MIN HOME_MODE LASTLOG_UID_MAX MAIL_DIR "
-"MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE "
-"SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN SUB_GID_DETERMINISTIC "
-"SUB_GID_STORE_BY_UID SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN "
-"SUB_UID_DETERMINISTIC SUB_UID_STORE_BY_UID SYS_GID_MAX SYS_GID_MIN "
-"SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK "
-"UNSAFE_SUB_GID_DETERMINISTIC_WRAP UNSAFE_SUB_UID_DETERMINISTIC_WRAP <_:"
-"phrase-1/>"
+"MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS PASS_WARN_AGE SUB_GID_COUNT SUB_GID_MAX "
+"SUB_GID_MIN SUB_GID_DETERMINISTIC SUB_GID_STORE_BY_UID SUB_UID_COUNT "
+"SUB_UID_MAX SUB_UID_MIN SUB_UID_DETERMINISTIC SUB_UID_STORE_BY_UID "
+"SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK "
+"UNSAFE_SUB_GID_DETERMINISTIC_WRAP UNSAFE_SUB_UID_DETERMINISTIC_WRAP "
+"<_:phrase-1/>"
 msgstr ""
 
 #. (itstool) path: para/phrase
@@ -3801,8 +5289,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB <_:"
-"phrase-1/>"
+"MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB "
+"<_:phrase-1/>"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -3828,9 +5316,10 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "Much of the functionality that used to be provided by the shadow password "
-"suite is now handled by PAM. Thus, <_:filename-1/> is no longer used by <_:"
-"citerefentry-2/>, or less used by <_:citerefentry-3/>, and <_:citerefentry-4/"
-">. Please refer to the corresponding PAM configuration files instead."
+"suite is now handled by PAM. Thus, <_:filename-1/> is no longer used by "
+"<_:citerefentry-2/>, or less used by <_:citerefentry-3/>, and "
+"<_:citerefentry-4/>. Please refer to the corresponding PAM configuration "
+"files instead."
 msgstr ""
 
 #. (itstool) path: citerefentry/refentrytitle
@@ -3840,8 +5329,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>."
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
@@ -3872,13 +5361,14 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "<_:command-1/> changes the current real group ID to the named group, or to "
-"the default group listed in <_:filename-2/> if no group name is given. <_:"
-"command-3/> also tries to add the group to the user groupset. If not root, "
-"the user will be prompted for a password if she does not have a password (in "
-"<_:filename-4/> if this user has an entry in the shadowed password file, or "
-"in <_:filename-5/> otherwise) and the group does, or if the user is not "
-"listed as a member and the group has a password. The user will be denied "
-"access if the group password is empty and the user is not listed as a member."
+"the default group listed in <_:filename-2/> if no group name is given. "
+"<_:command-3/> also tries to add the group to the user groupset. If not "
+"root, the user will be prompted for a password if she does not have a "
+"password (in <_:filename-4/> if this user has an entry in the shadowed "
+"password file, or in <_:filename-5/> otherwise) and the group does, or if "
+"the user is not listed as a member and the group has a password. The user "
+"will be denied access if the group password is empty and the user is not "
+"listed as a member."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -3890,14 +5380,6 @@ msgstr ""
 
 #. (itstool) path: citerefentry/refentrytitle
 msgid "id"
-msgstr ""
-
-#. (itstool) path: citerefentry/refentrytitle
-#. (itstool) path: refmeta/refentrytitle
-#. (itstool) path: refnamediv/refname
-#. (itstool) path: cmdsynopsis/command
-#. (itstool) path: para/command
-msgid "sg"
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
@@ -4140,33 +5622,19 @@ msgid "Allow names that do not conform to standards."
 msgstr ""
 
 #. (itstool) path: listitem/para
+#, fuzzy
+#| msgid ""
+#| "The available methods are DES, MD5, NONE, and SHA256 or SHA512 if your "
+#| "libc support these methods."
 msgid ""
-"The available methods are DES, MD5, NONE, and SHA256 or SHA512 if your libc "
-"support these methods."
+"The available methods are NONE, and SHA256 or SHA512 if your libc support "
+"these methods."
 msgstr ""
 "De tilgængelige metoder er DES, Md5, NONE og SHA256 eller SHA512 hvis din "
 "libc understøtter disse metoder."
 
 #. (itstool) path: listitem/para
 msgid "Create a system account."
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "SYS_UID_MIN"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "SYS_UID_MAX"
-msgstr ""
-
-#. (itstool) path: para/option
-#. (itstool) path: para/replaceable
-msgid "UID_MIN"
-msgstr ""
-
-#. (itstool) path: para/option
-#. (itstool) path: para/replaceable
-msgid "UID_MAX"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -4238,23 +5706,9 @@ msgstr ""
 msgid "/etc/pam.d/newusers"
 msgstr "/etc/pam.d/newusers"
 
-#. (itstool) path: term/filename
-#. (itstool) path: para/filename
-#, fuzzy
-#| msgid "/etc/suauth"
-msgid "/etc/subgid"
-msgstr "/etc/suauth"
-
 #. (itstool) path: listitem/para
 msgid "Per user subordinate group IDs."
 msgstr ""
-
-#. (itstool) path: term/filename
-#. (itstool) path: para/filename
-#, fuzzy
-#| msgid "/etc/suauth"
-msgid "/etc/subuid"
-msgstr "/etc/suauth"
 
 #. (itstool) path: listitem/para
 msgid "Per user subordinate user IDs."
@@ -4359,17 +5813,12 @@ msgstr ""
 msgid "Hints for user passwords"
 msgstr ""
 
-#. (itstool) path: para/emphasis
-msgid "UNIX"
-msgstr ""
-
 #. (itstool) path: refsect2/para
 msgid ""
-"The security of a password depends on the strength of the encryption "
-"algorithm and the size of the key space. The legacy <_:emphasis-1/> System "
-"encryption method is based on the NBS DES algorithm. More recent methods are "
-"now recommended (see <_:option-2/>). The size of the key space depends on "
-"the randomness of the selected password."
+"The security of a password depends on the strength of the hashing method and "
+"the size of the key space. The hashing method can be selected with "
+"<_:option-1/>. The size of the key space depends on the randomness of the "
+"selected password."
 msgstr ""
 
 #. (itstool) path: refsect2/para
@@ -4395,14 +5844,14 @@ msgstr ""
 #. (itstool) path: refsect2/para
 #, fuzzy
 #| msgid ""
-#| "You can find advices on how to choose a strong password on http://en."
-#| "wikipedia.org/wiki/Password_strength"
+#| "You can find advices on how to choose a strong password on http://"
+#| "en.wikipedia.org/wiki/Password_strength"
 msgid ""
-"You can find advice on how to choose a strong password on https://en."
-"wikipedia.org/wiki/Password_strength"
+"You can find advice on how to choose a strong password on https://"
+"en.wikipedia.org/wiki/Password_strength"
 msgstr ""
-"Du kan finde råd om hvordan du vælger en god adgangskode på http://en."
-"wikipedia.org/wiki/Password_strength"
+"Du kan finde råd om hvordan du vælger en god adgangskode på http://"
+"en.wikipedia.org/wiki/Password_strength"
 
 #. (itstool) path: listitem/para
 #, fuzzy
@@ -4576,8 +6025,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Set the maximum number of days a password remains valid. After <_:"
-"replaceable-1/>, the password is required to be changed."
+"Set the maximum number of days a password remains valid. After "
+"<_:replaceable-1/>, the password is required to be changed."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -4643,8 +6092,8 @@ msgstr "/etc/passwd"
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:phrase-5/> <_:citerefentry-6/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:phrase-5/> <_:citerefentry-6/>."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -4720,21 +6169,21 @@ msgstr ""
 msgid ""
 "The encrypted <_:emphasis-1/> field may be empty, in which case no password "
 "is required to authenticate as the specified login name. However, some "
-"applications which read the <_:filename-2/> file may decide not to permit <_:"
-"emphasis-3/> access at all if the <_:emphasis-4/> field is blank."
+"applications which read the <_:filename-2/> file may decide not to permit "
+"<_:emphasis-3/> access at all if the <_:emphasis-4/> field is blank."
 msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
 "A <_:emphasis-1/> field which starts with an exclamation mark means that the "
-"password is locked. The remaining characters on the line represent the <_:"
-"emphasis-2/> field before the password was locked."
+"password is locked. The remaining characters on the line represent the "
+"<_:emphasis-2/> field before the password was locked."
 msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"If the password field contains some string that is not a valid result of <_:"
-"citerefentry-1/>, for instance ! or *, the user will not be able to use a "
+"If the password field contains some string that is not a valid result of "
+"<_:citerefentry-1/>, for instance ! or *, the user will not be able to use a "
 "unix password to log in (but the user may log in the system by other means)."
 msgstr ""
 
@@ -4749,8 +6198,8 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "The home directory field provides the name of the initial working directory. "
-"The <_:command-1/> program uses this information to set the value of the <_:"
-"envar-2/> environmental variable."
+"The <_:command-1/> program uses this information to set the value of the "
+"<_:envar-2/> environmental variable."
 msgstr ""
 
 #. (itstool) path: para/filename
@@ -4760,10 +6209,10 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "The command interpreter field provides the name of the user's command "
-"language interpreter, or the name of the initial program to execute. The <_:"
-"command-1/> program uses this information to set the value of the <_:envar-2/"
-"> environmental variable. If this field is empty, it defaults to the value "
-"<_:filename-3/>."
+"language interpreter, or the name of the initial program to execute. The "
+"<_:command-1/> program uses this information to set the value of the "
+"<_:envar-2/> environmental variable. If this field is empty, it defaults to "
+"the value <_:filename-3/>."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -4805,10 +6254,10 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, <_:"
-"citerefentry-7/>, <_:citerefentry-8/>, <_:citerefentry-9/>, <_:"
-"citerefentry-10/>, <_:citerefentry-11/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, "
+"<_:citerefentry-7/>, <_:citerefentry-8/>, <_:citerefentry-9/>, "
+"<_:citerefentry-10/>, <_:citerefentry-11/>."
 msgstr ""
 
 #. (itstool) path: refmeta/refentrytitle
@@ -4909,17 +6358,12 @@ msgstr ""
 msgid "/dev/console"
 msgstr ""
 
-#. (itstool) path: para/filename
-#. (itstool) path: term/filename
-msgid "/etc/porttime"
-msgstr ""
-
 #. (itstool) path: refsect1/para
 msgid ""
-"The following entries allow access only to the users <_:emphasis-1/> and <_:"
-"emphasis-2/> on <_:filename-3/> at any time. This illustrates how the <_:"
-"filename-4/> file is an ordered list of access times. Any other user would "
-"match the second entry which does not permit access at any time."
+"The following entries allow access only to the users <_:emphasis-1/> and "
+"<_:emphasis-2/> on <_:filename-3/> at any time. This illustrates how the "
+"<_:filename-4/> file is an ordered list of access times. Any other user "
+"would match the second entry which does not permit access at any time."
 msgstr ""
 
 #. (itstool) path: refsect1/programlisting
@@ -5073,9 +6517,9 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"By default, <_:command-1/> operates on the files <_:filename-2/> and <_:"
-"filename-3/><_:phrase-4/>. The user may select alternate files with the <_:"
-"replaceable-5/> and <_:replaceable-6/> parameters."
+"By default, <_:command-1/> operates on the files <_:filename-2/> and "
+"<_:filename-3/><_:phrase-4/>. The user may select alternate files with the "
+"<_:replaceable-5/> and <_:replaceable-6/> parameters."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -5125,14 +6569,14 @@ msgid ""
 "<_:command-1/> does not work with <_:option-2/> enabled. To convert to tcb "
 "passwords, you should first use <_:command-3/> to convert to shadowed "
 "passwords by disabling <_:option-4/> in <_:filename-5/> and then convert to "
-"tcb password using <_:command-6/> (and re-enable <_:option-7/> in <_:"
-"filename-8/>.)"
+"tcb password using <_:command-6/> (and re-enable <_:option-7/> in "
+"<_:filename-8/>.)"
 msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"The <_:command-1/> command creates a plain <_:filename-2/> from shadowed <_:"
-"filename-3/> and <_:filename-4/> and then removes <_:filename-5/>."
+"The <_:command-1/> command creates a plain <_:filename-2/> from shadowed "
+"<_:filename-3/> and <_:filename-4/> and then removes <_:filename-5/>."
 msgstr ""
 
 #. (itstool) path: para/command
@@ -5149,8 +6593,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"The <_:command-1/> command creates plain <_:filename-2/> from shadowed <_:"
-"filename-3/> and <_:filename-4/> and then removes <_:filename-5/>."
+"The <_:command-1/> command creates plain <_:filename-2/> from shadowed "
+"<_:filename-3/> and <_:filename-4/> and then removes <_:filename-5/>."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -5173,9 +6617,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:command-1/> will use the values of <_:emphasis-2/>, <_:emphasis-3/>, and "
-"<_:emphasis-4/> from <_:filename-5/> when adding new entries to <_:"
-"filename-6/>."
+"<_:command-1/> will use the values of <_:emphasis-2/>, and <_:emphasis-3/> "
+"from <_:filename-4/> when adding new entries to <_:filename-5/>."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -5183,8 +6626,8 @@ msgid ""
 "Likewise <_:command-1/> and <_:command-2/> are similar. Passwords in the "
 "plain file are updated from the shadowed file. Entries which exist in the "
 "plain file but not in the shadowed file are left alone. Finally, the "
-"shadowed file is removed. Some password aging information is lost by <_:"
-"command-3/>. It will convert what it can."
+"shadowed file is removed. Some password aging information is lost by "
+"<_:command-3/>. It will convert what it can."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -5327,8 +6770,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:emphasis-1/> manipulates the contents of the shadow password file, <_:"
-"filename-2/>. The structure in the <_:emphasis-3/> file is:"
+"<_:emphasis-1/> manipulates the contents of the shadow password file, "
+"<_:filename-2/>. The structure in the <_:emphasis-3/> file is:"
 msgstr ""
 
 #. (itstool) path: refsect1/programlisting
@@ -5417,8 +6860,8 @@ msgid ""
 "<_:emphasis-1/>, <_:emphasis-2/>, <_:emphasis-3/>, and <_:emphasis-4/> each "
 "return a pointer to a <_:emphasis-5/>. <_:emphasis-6/> returns the next "
 "entry from the file, and <_:emphasis-7/> returns the next entry from the "
-"given stream, which is assumed to be a file of the proper format. <_:"
-"emphasis-8/> returns a pointer to a <_:emphasis-9/> using the provided "
+"given stream, which is assumed to be a file of the proper format. "
+"<_:emphasis-8/> returns a pointer to a <_:emphasis-9/> using the provided "
 "string as input. <_:emphasis-10/> searches from the current position in the "
 "file for an entry matching <_:emphasis-11/>."
 msgstr ""
@@ -5538,9 +6981,9 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"If the password field contains a string that is not a valid result of <_:"
-"citerefentry-1/>, for instance ! or *, the user cannot use a UNIX password "
-"to log in. However, the user may log in the system by other means."
+"If the password field contains a string that is not a valid result of "
+"<_:citerefentry-1/>, for instance ! or *, the user cannot use a UNIX "
+"password to log in. However, the user may log in the system by other means."
 msgstr ""
 
 #. (itstool) path: term/emphasis
@@ -5568,13 +7011,7 @@ msgid "minimum password age"
 msgstr ""
 
 #. (itstool) path: listitem/para
-msgid ""
-"The minimum password age is the number of days the user must wait before "
-"they can change their password again."
-msgstr ""
-
-#. (itstool) path: listitem/para
-msgid "An empty field and value 0 mean that there is no minimum password age."
+msgid "This deprecated field should be empty, and is ignored."
 msgstr ""
 
 #. (itstool) path: term/emphasis
@@ -5709,8 +7146,8 @@ msgid ""
 "The <_:command-1/> command works similar to <_:command-2/> but accepts a "
 "command. The command will be executed with the <_:filename-3/> shell. With "
 "most shells you may run <_:command-4/> from, you need to enclose multi-word "
-"commands in quotes. Another difference between <_:command-5/> and <_:"
-"command-6/> is that some shells treat <_:command-7/> specially, replacing "
+"commands in quotes. Another difference between <_:command-5/> and "
+"<_:command-6/> is that some shells treat <_:command-7/> specially, replacing "
 "themselves with a new instance of a shell that <_:command-8/> creates. This "
 "doesn't happen with <_:command-9/>, so upon exit from an <_:command-10/> "
 "command you are returned to your previous group ID."
@@ -5753,8 +7190,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"Options are recognized everywhere in the argument list. You can use the <_:"
-"option-1/> argument to stop option parsing. The <_:option-2/> option is "
+"Options are recognized everywhere in the argument list. You can use the "
+"<_:option-1/> argument to stop option parsing. The <_:option-2/> option is "
 "special: it is also recognized after <_:option-3/>, but has to be placed "
 "before <_:option-4/>."
 msgstr ""
@@ -5768,22 +7205,6 @@ msgstr ""
 "Brugeren vil blive spurgt om sin adgangskode, hvis det er relevant. Ugyldige "
 "adgangskoder vil medføre en fejlbesked. Alle forsøg, både gyldige og "
 "ugyldige, logges for at deteketere misbrug af systemet."
-
-#. (itstool) path: para/filename
-msgid "/bin:/usr/bin"
-msgstr ""
-
-#. (itstool) path: para/filename
-msgid "/sbin:/bin:/usr/sbin:/usr/bin"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "ENV_PATH"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "ENV_SUPATH"
-msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
@@ -5827,8 +7248,8 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "When <_:option-1/> is used, it must be specified before any <_:option-2/>. "
-"For portability it is recommended to use it as last option, before any <_:"
-"option-3/>. The other forms (<_:option-4/> and <_:option-5/>) do not have "
+"For portability it is recommended to use it as last option, before any "
+"<_:option-3/>. The other forms (<_:option-4/> and <_:option-5/>) do not have "
 "this restriction."
 msgstr ""
 
@@ -5952,39 +7373,17 @@ msgstr ""
 msgid "$HZ"
 msgstr ""
 
-#. (itstool) path: para/option
-msgid "ENV_TZ"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "ENV_HZ"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "MAIL_DIR"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "MAIL_FILE"
-msgstr ""
-
 #. (itstool) path: listitem/para
 msgid ""
 "If <_:option-1/> is used, the <_:envar-2/>, <_:envar-3/>, and <_:envar-4/> "
-"environment variables are set according to the <_:filename-5/> options <_:"
-"option-6/>, <_:option-7/>, <_:option-8/>, and <_:option-9/> (see below)."
+"environment variables are set according to the <_:filename-5/> options "
+"<_:option-6/>, <_:option-7/>, <_:option-8/>, and <_:option-9/> (see below)."
 msgstr ""
-
-#. (itstool) path: para/option
-#, fuzzy
-#| msgid "ENVIRONMENT"
-msgid "ENVIRON_FILE"
-msgstr "MILJØ"
 
 #. (itstool) path: listitem/para
 msgid ""
-"If <_:option-1/> is used, other environment variables might be set by the <_:"
-"option-2/> file (see below)."
+"If <_:option-1/> is used, other environment variables might be set by the "
+"<_:option-2/> file (see below)."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -5993,8 +7392,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Note that the default behavior for the environment is the following: <_:"
-"variablelist-1/>"
+"Note that the default behavior for the environment is the following: "
+"<_:variablelist-1/>"
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -6046,8 +7445,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>."
 msgstr ""
 
 #. (itstool) path: refmeta/refentrytitle
@@ -6108,10 +7507,10 @@ msgstr ""
 #. (itstool) path: refsect1/para
 msgid ""
 "from-id is formatted the same as to-id except the extra word <_:emphasis-1/> "
-"is recognized. <_:emphasis-2/> is perfectly valid too. Following <_:"
-"emphasis-3/> appears one or more group names, delimited by \",\". It is not "
-"sufficient to have primary group id of the relevant group, an entry in <_:"
-"citerefentry-4/> is necessary."
+"is recognized. <_:emphasis-2/> is perfectly valid too. Following "
+"<_:emphasis-3/> appears one or more group names, delimited by \",\". It is "
+"not sufficient to have primary group id of the relevant group, an entry in "
+"<_:citerefentry-4/> is necessary."
 msgstr ""
 
 #. (itstool) path: refsect1/para
@@ -6236,11 +7635,6 @@ msgid "HOME"
 msgstr ""
 
 #. (itstool) path: para/filename
-#. (itstool) path: term/filename
-msgid "/etc/default/useradd"
-msgstr "/etc/default/useradd"
-
-#. (itstool) path: para/filename
 msgid "/home"
 msgstr ""
 
@@ -6329,11 +7723,6 @@ msgstr ""
 msgid "--home-dir"
 msgstr ""
 
-#. (itstool) path: para/replaceable
-#. (itstool) path: para/option
-msgid "CREATE_HOME"
-msgstr ""
-
 #. (itstool) path: listitem/para
 msgid ""
 "The new user will be created using <_:replaceable-1/> as the value for the "
@@ -6382,8 +7771,8 @@ msgid ""
 "Defines the number of days after a password exceeds its maximum age before "
 "the user account gets locked. If the user does not change their password "
 "within this period of time, their account becomes inactive. This value is "
-"stored in the shadow password file. For more information, see <_:"
-"citerefentry-1/>."
+"stored in the shadow password file. For more information, see "
+"<_:citerefentry-1/>."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -6435,12 +7824,12 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"If not specified, the behavior of <_:command-1/> will depend on the <_:"
-"option-2/> variable in <_:filename-3/>. If this variable is set to <_:"
-"replaceable-4/> (or <_:option-5/> is specified on the command line), a group "
-"will be created for the user, with the same name as the loginname. If the "
-"variable is set to <_:replaceable-6/> (or <_:option-7/> is specified on the "
-"command line), useradd will set the primary group of the new user to the "
+"If not specified, the behavior of <_:command-1/> will depend on the "
+"<_:option-2/> variable in <_:filename-3/>. If this variable is set to "
+"<_:replaceable-4/> (or <_:option-5/> is specified on the command line), a "
+"group will be created for the user, with the same name as the loginname. If "
+"the variable is set to <_:replaceable-6/> (or <_:option-7/> is specified on "
+"the command line), useradd will set the primary group of the new user to the "
 "value specified by the <_:option-8/> variable in <_:filename-9/>, or 1000 by "
 "default."
 msgstr ""
@@ -6476,8 +7865,8 @@ msgstr "GRUPPE"
 
 #. (itstool) path: varlistentry/term
 msgid ""
-"<_:option-1/>, <_:option-2/> <_:replaceable-3/>[<_:emphasis-4/>[<_:"
-"emphasis-5/>]]]"
+"<_:option-1/>, <_:option-2/> <_:replaceable-3/>[<_:emphasis-4/"
+">[<_:emphasis-5/>]]]"
 msgstr ""
 
 #. (itstool) path: para/option
@@ -6508,8 +7897,8 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "The skeleton directory, which contains files and directories to be copied in "
-"the user's home directory, when the home directory is created by <_:"
-"command-1/>."
+"the user's home directory, when the home directory is created by "
+"<_:command-1/>."
 msgstr ""
 
 #. (itstool) path: para/option
@@ -6535,36 +7924,32 @@ msgstr "/etc/skel/"
 
 #. (itstool) path: listitem/para
 msgid ""
-"If this option is not set, the skeleton directory is defined by the <_:"
-"option-1/> variable in <_:filename-2/> or, by default, <_:filename-3/>."
+"If this option is not set, the skeleton directory is defined by the "
+"<_:option-1/> variable in <_:filename-2/> or, by default, <_:filename-3/>."
 msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Absolute symlinks that link back to the skel directory will have the <_:"
-"filename-1/> prefix replaced with the user's home directory."
+"Absolute symlinks that link back to the skel directory will have the "
+"<_:filename-1/> prefix replaced with the user's home directory."
 msgstr ""
 
 #. (itstool) path: listitem/para
 msgid "If possible, the ACLs and extended attributes are copied."
 msgstr ""
 
-#. (itstool) path: para/option
-msgid "UMASK"
-msgstr ""
-
 #. (itstool) path: listitem/para
 msgid ""
-"Overrides <_:filename-1/> defaults (<_:option-2/>, <_:option-3/>, <_:"
-"option-4/>, <_:option-5/> and others)."
+"Overrides <_:filename-1/> defaults (<_:option-2/>, <_:option-3/>, "
+"<_:option-4/>, <_:option-5/> and others)."
 msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
 "Example: <_:option-1/> <_:replaceable-2/>=<_:replaceable-3/> can be used "
 "when creating an account to turn off password aging. Multiple <_:option-4/> "
-"options can be specified, e.g.: <_:option-5/> <_:replaceable-6/> =<_:"
-"replaceable-7/> <_:option-8/> <_:replaceable-9/>=<_:replaceable-10/>"
+"options can be specified, e.g.: <_:option-5/> <_:replaceable-6/> "
+"=<_:replaceable-7/> <_:option-8/> <_:replaceable-9/>=<_:replaceable-10/>"
 msgstr ""
 
 #. (itstool) path: term/option
@@ -6656,8 +8041,8 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "Without this option, the new account will be locked and with no password "
-"defined, i.e. a single exclamation mark in the respective field of <_:"
-"filename-1/>. This is a state where the user won't be able to access the "
+"defined, i.e. a single exclamation mark in the respective field of "
+"<_:filename-1/>. This is a state where the user won't be able to access the "
 "account or to define a password himself."
 msgstr ""
 
@@ -6692,10 +8077,6 @@ msgstr ""
 
 #. (itstool) path: term/option
 msgid "--uid"
-msgstr ""
-
-#. (itstool) path: term/replaceable
-msgid "UID"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -6899,10 +8280,10 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Run-part files to execute during user addition. The environment variable <_:"
-"command-1/> will be populated with useradd and <_:command-2/> with the <_:"
-"command-3/>. <_:filename-4/> will be executed prior to any user addition. <_:"
-"filename-5/> will execute after user addition. If a script exits non-zero "
+"Run-part files to execute during user addition. The environment variable "
+"<_:command-1/> will be populated with useradd and <_:command-2/> with the "
+"<_:command-3/>. <_:filename-4/> will be executed prior to any user addition. "
+"<_:filename-5/> will execute after user addition. If a script exits non-zero "
 "then execution will terminate."
 msgstr ""
 
@@ -6954,10 +8335,10 @@ msgstr "et unikt og gyldigt gruppenavn"
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, <_:"
-"citerefentry-7/>, <_:citerefentry-8/>, <_:citerefentry-9/>, <_:phrase-10/> "
-"<_:citerefentry-11/>, <_:citerefentry-12/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, "
+"<_:citerefentry-7/>, <_:citerefentry-8/>, <_:citerefentry-9/>, <_:phrase-10/"
+"> <_:citerefentry-11/>, <_:citerefentry-12/>."
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
@@ -7028,8 +8409,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"Run-part files to execute during user deletion. The environment variable <_:"
-"command-1/> will be populated with <_:command-2/> and <_:command-3/> with "
+"Run-part files to execute during user deletion. The environment variable "
+"<_:command-1/> will be populated with <_:command-2/> and <_:command-3/> with "
 "the username. <_:filename-4/> will be executed prior to any user deletion. "
 "<_:filename-5/> will execute after user deletion. If a script exits non-zero "
 "then execution will terminate."
@@ -7070,20 +8451,20 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"If <_:option-1/> is defined to <_:emphasis-2/> in <_:filename-3/>, <_:"
-"command-4/> will delete the group with the same name as the user. To avoid "
-"inconsistencies in the passwd and group databases, <_:command-5/> will check "
-"that this group is not used as a primary group for another user, and will "
-"just warn without deleting the group otherwise. The <_:option-6/> option can "
-"force the deletion of this group."
+"If <_:option-1/> is defined to <_:emphasis-2/> in <_:filename-3/>, "
+"<_:command-4/> will delete the group with the same name as the user. To "
+"avoid inconsistencies in the passwd and group databases, <_:command-5/> will "
+"check that this group is not used as a primary group for another user, and "
+"will just warn without deleting the group otherwise. The <_:option-6/> "
+"option can force the deletion of this group."
 msgstr ""
 
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:"
-"citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, <_:"
-"citerefentry-7/>, <_:citerefentry-8/>, <_:phrase-9/> <_:citerefentry-10/>, "
-"<_:citerefentry-11/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, "
+"<_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, "
+"<_:citerefentry-7/>, <_:citerefentry-8/>, <_:phrase-9/> <_:citerefentry-10/"
+">, <_:citerefentry-11/>."
 msgstr ""
 
 #. (itstool) path: refnamediv/refpurpose
@@ -7163,8 +8544,8 @@ msgstr ""
 #| "This option requires a <filename>/etc/shadow</filename> file. A "
 #| "<filename>/etc/shadow</filename> entry will be created if there were none."
 msgid ""
-"This option requires the <_:filename-1/> file. If no entry exists in the <_:"
-"filename-2/> file, the system will automatically create one."
+"This option requires the <_:filename-1/> file. If no entry exists in the "
+"<_:filename-2/> file, the system will automatically create one."
 msgstr ""
 "Dette tilvalg kræver en <filename>/etc/shadow</filename>-fil. Et <filename>/"
 "etc/shadow</filename>-punkt vil blive oprettet hvis et sådant ikke fandtes."
@@ -7183,8 +8564,8 @@ msgstr ""
 #| "This option requires a <filename>/etc/shadow</filename> file. A "
 #| "<filename>/etc/shadow</filename> entry will be created if there were none."
 msgid ""
-"This option requires the <_:filename-1/> file. If no entry exist in the <_:"
-"filename-2/> file, the system will automatically create one."
+"This option requires the <_:filename-1/> file. If no entry exist in the "
+"<_:filename-2/> file, the system will automatically create one."
 msgstr ""
 "Dette tilvalg kræver en <filename>/etc/shadow</filename>-fil. Et <filename>/"
 "etc/shadow</filename>-punkt vil blive oprettet hvis et sådant ikke fandtes."
@@ -7207,10 +8588,6 @@ msgid ""
 "fixed manually."
 msgstr ""
 
-#. (itstool) path: para/filename
-msgid "/"
-msgstr ""
-
 #. (itstool) path: listitem/para
 msgid ""
 "The change of the group ownership of files inside of the user's home "
@@ -7229,9 +8606,9 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "If the user is currently a member of a group which is not listed, the user "
-"will be removed from the group. This behaviour can be changed via the <_:"
-"option-1/> option, which appends the user to the current supplementary group "
-"list."
+"will be removed from the group. This behaviour can be changed via the "
+"<_:option-1/> option, which appends the user to the current supplementary "
+"group list."
 msgstr ""
 
 #. (itstool) path: term/replaceable
@@ -7243,8 +8620,8 @@ msgstr "LOGIND"
 
 #. (itstool) path: listitem/para
 msgid ""
-"The name of the user will be changed from <_:replaceable-1/> to <_:"
-"replaceable-2/>. Nothing else is changed. In particular, the user's home "
+"The name of the user will be changed from <_:replaceable-1/> to "
+"<_:replaceable-2/>. Nothing else is changed. In particular, the user's home "
 "directory or mail spool should probably be renamed manually to reflect the "
 "new login name."
 msgstr ""
@@ -7257,8 +8634,8 @@ msgstr ""
 #. (itstool) path: listitem/para
 msgid ""
 "Lock a user's password. This puts a '!' in front of the encrypted password, "
-"effectively disabling the password. You can't use this option with <_:"
-"option-1/> or <_:option-2/>."
+"effectively disabling the password. You can't use this option with "
+"<_:option-1/> or <_:option-2/>."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -7280,8 +8657,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"This option is only valid in combination with the <_:option-1/> (or <_:"
-"option-2/>) option."
+"This option is only valid in combination with the <_:option-1/> (or "
+"<_:option-2/>) option."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -7320,8 +8697,8 @@ msgstr ""
 #| "Add the user to the supplementary group(s). Use only with the <option>-G</"
 #| "option> option."
 msgid ""
-"Remove the user from named supplementary group(s). Use only with the <_:"
-"option-1/> option."
+"Remove the user from named supplementary group(s). Use only with the "
+"<_:option-1/> option."
 msgstr ""
 "Tilføj brugeren til de supplementære grupper. Brug kun med tilvalget "
 "<option>-G</option>."
@@ -7428,18 +8805,6 @@ msgid ""
 "user's account."
 msgstr ""
 
-#. (itstool) path: para/option
-msgid "SUB_UID_MIN"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "SUB_UID_MAX"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "SUB_UID_COUNT"
-msgstr ""
-
 #. (itstool) path: listitem/para
 msgid ""
 "No checks will be performed with regard to <_:option-1/>, <_:option-2/>, or "
@@ -7476,18 +8841,6 @@ msgstr ""
 msgid "Add a range of subordinate gids to the user's account."
 msgstr ""
 
-#. (itstool) path: para/option
-msgid "SUB_GID_MIN"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "SUB_GID_MAX"
-msgstr ""
-
-#. (itstool) path: para/option
-msgid "SUB_GID_COUNT"
-msgstr ""
-
 #. (itstool) path: term/option
 #. (itstool) path: para/option
 msgid "--del-subgids"
@@ -7515,8 +8868,8 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid ""
-"An appropriate uid and gid range is automatically selected from /etc/login."
-"defs defaults."
+"An appropriate uid and gid range is automatically selected from /etc/"
+"login.defs defaults."
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -7725,15 +9078,11 @@ msgstr ""
 "Redigeringsprogram der skal bruges hvis <option>VISUAL</option> ikke er "
 "angivet."
 
-#. (itstool) path: citerefentry/refentrytitle
-msgid "tcb"
-msgstr ""
-
 #. (itstool) path: refsect1/para
 msgid ""
-"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/> <_:"
-"citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, <_:"
-"citerefentry-7/>."
+"<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/> "
+"<_:citerefentry-4/>, <_:citerefentry-5/>, <_:citerefentry-6/>, "
+"<_:citerefentry-7/>."
 msgstr ""
 
 #, fuzzy
@@ -7778,8 +9127,8 @@ msgstr ""
 #~| "no entry in the <filename>/etc/gshadow</filename> file, a new entry will "
 #~| "be created."
 #~ msgid ""
-#~ "If the <_:filename-1/> file exist, and the group has no entry in the <_:"
-#~ "filename-2/> file, a new entry will be created."
+#~ "If the <_:filename-1/> file exist, and the group has no entry in the "
+#~ "<_:filename-2/> file, a new entry will be created."
 #~ msgstr ""
 #~ "Hvis filen <filename>/etc/gshadow</filename> findes, og gruppen ikke har "
 #~ "et punkt i filen <filename>/etc/gshadow</filename>, så vil et nyt punkt "
@@ -7850,18 +9199,6 @@ msgstr ""
 
 #~ msgid "<option>-u</option>, <option>--user</option>"
 #~ msgstr "<option>-u</option>, <option>--user</option>"
-
-#~ msgid "<option>USE_TCB</option> (boolean)"
-#~ msgstr "<option>USE_TCB</option> (boolesk)"
-
-#~ msgid ""
-#~ "If <replaceable>yes</replaceable>, the <citerefentry><refentrytitle>tcb</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry> password shadowing "
-#~ "scheme will be used."
-#~ msgstr ""
-#~ "Hvis <replaceable>ja</replaceable>, så vil skemaet for adgangskodeskygge "
-#~ "<citerefentry><refentrytitle>tcb</refentrytitle><manvolnum>5</manvolnum></"
-#~ "citerefentry> blive brugt."
 
 #~ msgid ""
 #~ "<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
@@ -8004,18 +9341,6 @@ msgstr ""
 #~ msgstr "<option>GID_MIN</option> (nummer)"
 
 #, fuzzy
-#~| msgid ""
-#~| "The default value for <option>GID_MIN</option> (resp. <option>GID_MAX</"
-#~| "option>) is 1000 (resp. 60000)."
-#~ msgid ""
-#~ "The default values for <option>SUB_GID_MIN</option>, <option>SUB_GID_MAX</"
-#~ "option>, <option>SUB_GID_COUNT</option> are respectively 100000, "
-#~ "600100000 and 10000."
-#~ msgstr ""
-#~ "Standardværdien for <option>GID_MIN</option> (resp. <option>GID_MAX</"
-#~ "option>) er 1000 (resp. 60000)."
-
-#, fuzzy
 #~| msgid "<option>GID_MIN</option> (number)"
 #~ msgid "<option>SUB_UID_MIN</option> (number)"
 #~ msgstr "<option>GID_MIN</option> (nummer)"
@@ -8154,30 +9479,8 @@ msgstr ""
 #~ msgid "<option>CREATE_HOME</option> (boolean)"
 #~ msgstr "<option>CREATE_HOME</option> (boolesk)"
 
-#~ msgid ""
-#~ "Indicate if a home directory should be created by default for new users."
-#~ msgstr ""
-#~ "Indikerer om en hjemmemappe skal oprettes som standard for nye brugere."
-
-#~ msgid ""
-#~ "This setting does not apply to system users, and can be overridden on the "
-#~ "command line."
-#~ msgstr ""
-#~ "Denne indstilling gælder ikke for systembrugere og kan overskrives på "
-#~ "kommandolinjen."
-
-#~ msgid "<option>GID_MAX</option> (number)"
-#~ msgstr "<option>GID_MAX</option> (nummer)"
-
 #~ msgid "<option>GID_MIN</option> (number)"
 #~ msgstr "<option>GID_MIN</option> (nummer)"
-
-#~ msgid ""
-#~ "The default value for <option>GID_MIN</option> (resp. <option>GID_MAX</"
-#~ "option>) is 1000 (resp. 60000)."
-#~ msgstr ""
-#~ "Standardværdien for <option>GID_MIN</option> (resp. <option>GID_MAX</"
-#~ "option>) er 1000 (resp. 60000)."
 
 #~ msgid "username already in use"
 #~ msgstr "brugernavn er allerede i brug"
@@ -8244,21 +9547,6 @@ msgstr ""
 #~ "Du kan bruge argumentet <option>--</option> til at adskille <command>su</"
 #~ "command>-tilvalg fra argumenterne angivet til skallen."
 
-#~ msgid "If not defined, root will be allowed on any device."
-#~ msgstr ""
-#~ "Hvis ikke defineret så vil administrator (root) være tilladt på alle "
-#~ "enheder"
-
-#~ msgid "The device should be specified without the /dev/ prefix."
-#~ msgstr "Enheden skal angives uden præfikset /dev/."
-
-#~ msgid ""
-#~ "Indicate if login is allowed if we can't cd to the home directory. "
-#~ "Default is no."
-#~ msgstr ""
-#~ "Indiker om logind er tilladt, hvis vi ikke kan cd til hjemmemappen. "
-#~ "Standarden er nej."
-
 #~ msgid "<option>ENV_HZ</option> (string)"
 #~ msgstr "<option>ENV_HZ</option> (streng)"
 
@@ -8287,32 +9575,17 @@ msgstr ""
 #~ msgid "<option>OBSCURE_CHECKS_ENAB</option> (boolean)"
 #~ msgstr "<option>OBSCURE_CHECKS_ENAB</option> (boolesk)"
 
-#~ msgid "Enable additional checks upon password changes."
-#~ msgstr "Aktiver yderligere kontroller før ændringer af adgangskode."
-
 #~ msgid "<option>PASS_ALWAYS_WARN</option> (boolean)"
 #~ msgstr "<option>PASS_ALWAYS_WARN</option> (boolesk)"
 
-#~ msgid "Warn about weak passwords (but still allow them) if you are root."
-#~ msgstr ""
-#~ "Advar om svage adgangskoder (men tillad dem stadig) hvis du er "
-#~ "administrator (root)."
-
 #~ msgid "<option>PASS_CHANGE_TRIES</option> (number)"
 #~ msgstr "<option>PASS_CHANGE_TRIES</option> (antal)"
-
-#~ msgid ""
-#~ "Maximum number of attempts to change password if rejected (too easy)."
-#~ msgstr "Maksimalt antal forsøg at ændre adgangskode hvis afvist (for nemt)."
 
 #~ msgid "<option>PASS_MAX_LEN</option> (number)"
 #~ msgstr "<option>PASS_MAX_LEN</option> (antal)"
 
 #~ msgid "<option>PASS_MIN_LEN</option> (number)"
 #~ msgstr "<option>PASS_MIN_LEN</option> (antal)"
-
-#~ msgid "<option>SHA_CRYPT_MIN_ROUNDS</option> (number)"
-#~ msgstr "<option>SHA_CRYPT_MIN_ROUNDS</option> (antal)"
 
 #~ msgid ""
 #~ "The <command>passwd</command> command exits with the following values: "
@@ -8397,46 +9670,14 @@ msgstr ""
 #~ msgid "<option>FAIL_DELAY</option> (number)"
 #~ msgstr "<option>FAIL_DELAY</option> (antal)"
 
-#~ msgid "Enable logging of successful logins."
-#~ msgstr "Aktiver logning af successfulde logind."
-
 #~ msgid "<option>LOG_UNKFAIL_ENAB</option> (boolean)"
 #~ msgstr "<option>LOG_UNKFAIL_ENAB</option> (boolesk)"
-
-#~ msgid ""
-#~ "Enable display of unknown usernames when login failures are recorded."
-#~ msgstr "Aktiver visning af ukendte brugernavne når logindfejl optages."
-
-#~ msgid ""
-#~ "Note: logging unknown usernames may be a security issue if an user enter "
-#~ "her password instead of her login name."
-#~ msgstr ""
-#~ "Bemærk: Logning af ukendte brugernaven kan udgøre en sikkerhedsmæssig "
-#~ "risiko såfremt en bruger indtatser sin adgangskode i stedet for sit "
-#~ "logindnavn."
 
 #~ msgid "<option>LOGIN_RETRIES</option> (number)"
 #~ msgstr "<option>LOGIN_RETRIES</option> (antal)"
 
-#~ msgid "Maximum number of login retries in case of bad password."
-#~ msgstr "Maksimalt antal logindforsøg i tilfælde af ugyldig adgangskode."
-
-#~ msgid ""
-#~ "This will most likely be overridden by PAM, since the default pam_unix "
-#~ "module has its own built in of 3 retries. However, this is a safe "
-#~ "fallback in case you are using an authentication module that does not "
-#~ "enforce PAM_MAXTRIES."
-#~ msgstr ""
-#~ "Denne vil højst sandsynlig blive overskrevet af PAM, da standardmodulet "
-#~ "pam_unix har sin egen indbygget 3 forsøg. Dette er dog en ekstra "
-#~ "sikkerhed i tilfælde af at du bruger et godkendelsesmodul som ikke "
-#~ "påtvinger PAM_MAXTRiES."
-
 #~ msgid "<option>LOGIN_TIMEOUT</option> (number)"
 #~ msgstr "<option>LOGIN_TIMEOUT</option> (antal)"
-
-#~ msgid "Max time in seconds for login."
-#~ msgstr "Maks. tidsforbrug i sekunder for logind."
 
 #~ msgid "<option>MOTD_FILE</option> (string)"
 #~ msgstr "<option>MOTD_FILE</option> (streng)"
@@ -8447,18 +9688,8 @@ msgstr ""
 #~ msgid "<option>TTYPERM</option> (string)"
 #~ msgstr "<option>TTYPERM</option> (streng)"
 
-#~ msgid ""
-#~ "By default, the ownership of the terminal is set to the user's primary "
-#~ "group and the permissions are set to <replaceable>0600</replaceable>."
-#~ msgstr ""
-#~ "Som standard er ejerskabet af terminalen angivet til brugerens primære "
-#~ "gruppe og rettighederne er angivet til <replaceable>0600</replaceable>."
-
 #~ msgid "<option>TTYTYPE_FILE</option> (string)"
 #~ msgstr "<option>TTYTYPE_FILE</option> (streng)"
-
-#~ msgid "Default <command>ulimit</command> value."
-#~ msgstr "Standardværdi for <command>ulimit</command>."
 
 #, fuzzy
 #~| msgid "<option>-u</option>, <option>--user</option>"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2026-06-22 21:41-0500\n"
+"POT-Creation-Date: 2026-07-20 15:43+0200\n"
 "PO-Revision-Date: 2007-11-25 20:53+0100\n"
 "Last-Translator: Tomasz Kłoczko <kloczek@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -65,59 +65,55 @@ msgstr "Dziś twoje hasło straci ważność."
 msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
-#: lib/chowntty.c:58
-#, fuzzy, c-format
-msgid "Unable to change owner or mode of tty stdin: %s"
+#: lib/chowntty.c:60
+#, fuzzy
+msgid "Unable to change owner or mode of tty stdin"
 msgstr "Nie można zmienić tty %s"
 
 #: lib/cleanup_group.c:178 lib/cleanup_group.c:200 lib/cleanup_user.c:101
-#: lib/cleanup_user.c:122 src/chage.c:102 src/chage.c:109 src/chage.c:582
-#: src/chage.c:588 src/chfn.c:86 src/chfn.c:469 src/chgpasswd.c:84
-#: src/chgpasswd.c:93 src/chgpasswd.c:314 src/chgpasswd.c:330 src/chpasswd.c:88
-#: src/chpasswd.c:96 src/chpasswd.c:318 src/chpasswd.c:333 src/chsh.c:86
-#: src/chsh.c:448 src/grpck.c:108 src/grpck.c:117 src/grpck.c:361
-#: src/grpck.c:370 src/grpconv.c:67 src/grpconv.c:75 src/grpconv.c:263
-#: src/grpconv.c:268 src/grpunconv.c:66 src/grpunconv.c:74 src/grpunconv.c:224
-#: src/grpunconv.c:230 src/newusers.c:164 src/newusers.c:171 src/newusers.c:178
-#: src/newusers.c:186 src/newusers.c:195 src/newusers.c:202 src/newusers.c:878
-#: src/newusers.c:894 src/newusers.c:926 src/newusers.c:944 src/newusers.c:955
-#: src/newusers.c:963 src/passwd.c:470 src/passwd.c:478 src/passwd.c:553
-#: src/passwd.c:569 src/pwck.c:94 src/pwck.c:104 src/pwck.c:353 src/pwck.c:365
-#: src/pwck.c:597 src/pwck.c:685 src/pwconv.c:92 src/pwconv.c:100
-#: src/pwconv.c:312 src/pwconv.c:318 src/pwunconv.c:54 src/pwunconv.c:61
-#: src/pwunconv.c:223 src/pwunconv.c:228 src/useradd.c:277 src/useradd.c:282
-#: src/useradd.c:287 src/useradd.c:293 src/useradd.c:300 src/useradd.c:305
-#: src/useradd.c:1632 src/useradd.c:1645 src/useradd.c:1662 src/useradd.c:1676
-#: src/useradd.c:1729 src/useradd.c:1743 src/userdel.c:405 src/userdel.c:419
-#: src/userdel.c:432 src/userdel.c:448 src/userdel.c:464 src/userdel.c:478
-#: src/userdel.c:494 src/userdel.c:501 src/userdel.c:508 src/userdel.c:516
-#: src/userdel.c:525 src/userdel.c:532 src/usermod.c:673 src/usermod.c:680
-#: src/usermod.c:689 src/usermod.c:697 src/usermod.c:704 src/usermod.c:711
-#: src/usermod.c:1524 src/usermod.c:1537 src/usermod.c:1558 src/usermod.c:1576
-#: src/usermod.c:1593 src/usermod.c:1609 src/vipw.c:168 src/vipw.c:468
+#: lib/cleanup_user.c:122 src/chage.c:100 src/chage.c:107 src/chage.c:543
+#: src/chage.c:549 src/chfn.c:87 src/chfn.c:457 src/chgpasswd.c:84
+#: src/chgpasswd.c:93 src/chgpasswd.c:300 src/chgpasswd.c:315 src/chpasswd.c:88
+#: src/chpasswd.c:96 src/chpasswd.c:304 src/chpasswd.c:318 src/chsh.c:87
+#: src/chsh.c:436 src/grpck.c:109 src/grpck.c:118 src/grpck.c:358
+#: src/grpck.c:367 src/grpconv.c:68 src/grpconv.c:76 src/grpconv.c:257
+#: src/grpconv.c:262 src/grpunconv.c:67 src/grpunconv.c:75 src/grpunconv.c:217
+#: src/grpunconv.c:223 src/newusers.c:164 src/newusers.c:171 src/newusers.c:178
+#: src/newusers.c:186 src/newusers.c:195 src/newusers.c:202 src/newusers.c:846
+#: src/newusers.c:860 src/newusers.c:887 src/newusers.c:902 src/newusers.c:912
+#: src/newusers.c:920 src/passwd.c:426 src/passwd.c:434 src/passwd.c:498
+#: src/passwd.c:510 src/pwck.c:95 src/pwck.c:105 src/pwck.c:346 src/pwck.c:357
+#: src/pwck.c:586 src/pwck.c:669 src/pwconv.c:93 src/pwconv.c:101
+#: src/pwconv.c:303 src/pwconv.c:309 src/pwunconv.c:55 src/pwunconv.c:62
+#: src/pwunconv.c:215 src/pwunconv.c:220 src/useradd.c:276 src/useradd.c:281
+#: src/useradd.c:286 src/useradd.c:292 src/useradd.c:299 src/useradd.c:304
+#: src/useradd.c:1580 src/useradd.c:1593 src/useradd.c:1610 src/useradd.c:1624
+#: src/useradd.c:1675 src/useradd.c:1689 src/userdel.c:397 src/userdel.c:410
+#: src/userdel.c:423 src/userdel.c:438 src/userdel.c:454 src/userdel.c:468
+#: src/userdel.c:484 src/userdel.c:491 src/userdel.c:498 src/userdel.c:506
+#: src/userdel.c:515 src/userdel.c:522 src/usermod.c:667 src/usermod.c:674
+#: src/usermod.c:683 src/usermod.c:691 src/usermod.c:698 src/usermod.c:705
+#: src/usermod.c:1482 src/usermod.c:1495 src/usermod.c:1514 src/usermod.c:1529
+#: src/usermod.c:1543 src/usermod.c:1555 src/vipw.c:168 src/vipw.c:464
 #, fuzzy, c-format
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: pola zbyt długie\n"
 
-#: lib/commonio.c:616
+#: lib/commonio.c:607
 #, fuzzy, c-format
 msgid "%s: Non-text file.\n"
 msgstr "%s: nie można otworzyć pliku\n"
 
-#: lib/commonio.c:1021 lib/commonio.c:1126
+#: lib/commonio.c:1012 lib/commonio.c:1117
 #, c-format
 msgid ""
 "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
 msgstr ""
 
-#: lib/copydir.c:106
+#: lib/copydir.c:109
 #, fuzzy, c-format
 msgid "%s: "
 msgstr "%s: %s\n"
-
-#: lib/copydir.c:108
-msgid ": "
-msgstr ""
 
 #: lib/encrypt.c:68
 #, c-format
@@ -129,7 +125,7 @@ msgstr ""
 msgid "You may not change $%s\n"
 msgstr "Nie możesz zmieniać $%s\n"
 
-#: lib/failure.c:258
+#: lib/failure.c:259
 #, c-format
 msgid ""
 "%d failure since last login.\n"
@@ -164,23 +160,23 @@ msgstr ""
 msgid "%s: Encountered error attempting to use preferred GID: %s\n"
 msgstr ""
 
-#: lib/find_new_gid.c:244 lib/find_new_uid.c:243 src/usermod.c:377
+#: lib/find_new_gid.c:243 lib/find_new_uid.c:242 src/usermod.c:375
 #, fuzzy, c-format
-msgid "%s: failed to allocate memory: %s\n"
+msgid "%s: failed to allocate memory"
 msgstr "zmiana właściciela skrzynki pocztowej nie powiodła się"
 
-#: lib/find_new_gid.c:326 lib/find_new_gid.c:372
+#: lib/find_new_gid.c:325 lib/find_new_gid.c:371
 #, fuzzy, c-format
 msgid ""
 "%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
 msgstr "%s: nie można uzyskać niepowtarzalnego UID\n"
 
-#: lib/find_new_gid.c:435 lib/find_new_gid.c:481
+#: lib/find_new_gid.c:434 lib/find_new_gid.c:480
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
 msgstr "%s: nie można uzyskać niepowtarzalnego GID\n"
 
-#: lib/find_new_gid.c:500
+#: lib/find_new_gid.c:499
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: nie można uzyskać niepowtarzalnego GID\n"
@@ -268,18 +264,18 @@ msgstr ""
 msgid "%s: Encountered error attempting to use preferred UID: %s\n"
 msgstr ""
 
-#: lib/find_new_uid.c:325 lib/find_new_uid.c:371
+#: lib/find_new_uid.c:324 lib/find_new_uid.c:370
 #, fuzzy, c-format
 msgid ""
 "%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
 msgstr "%s: nie można uzyskać niepowtarzalnego UID\n"
 
-#: lib/find_new_uid.c:434 lib/find_new_uid.c:480
+#: lib/find_new_uid.c:433 lib/find_new_uid.c:479
 #, fuzzy, c-format
 msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
 msgstr "%s: nie można uzyskać niepowtarzalnego UID\n"
 
-#: lib/find_new_uid.c:499
+#: lib/find_new_uid.c:498
 #, fuzzy, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s: nie można uzyskać niepowtarzalnego UID\n"
@@ -338,17 +334,17 @@ msgstr "%s: nie można otworzyć pliku\n"
 
 #: lib/idmapping.c:200
 #, fuzzy, c-format
-msgid "%s: open of %s failed: %s\n"
+msgid "%s: open of %s failed"
 msgstr "%s: linia %d: chown nie powiodło się\n"
 
 #: lib/idmapping.c:205
 #, fuzzy, c-format
-msgid "%s: write to %s failed: %s\n"
+msgid "%s: write to %s failed"
 msgstr "%s: linia %d: chown nie powiodło się\n"
 
 #: lib/idmapping.c:210
 #, fuzzy, c-format
-msgid "%s: closing %s failed: %s\n"
+msgid "%s: closing %s failed"
 msgstr "%s: linia %d: chown nie powiodło się\n"
 
 #: lib/limits.c:463
@@ -386,31 +382,31 @@ msgstr ""
 msgid "%s: nscd exited with status %d\n"
 msgstr ""
 
-#: lib/obscure.c:91
+#: lib/obscure.c:88
 msgid "no change"
 msgstr "bez zmian"
 
-#: lib/obscure.c:99
+#: lib/obscure.c:96
 msgid "a palindrome"
 msgstr "palindrom"
 
-#: lib/obscure.c:101
+#: lib/obscure.c:98
 msgid "case changes only"
 msgstr "zmieniona tylko wielkości liter"
 
-#: lib/obscure.c:103
+#: lib/obscure.c:100
 msgid "too similar"
 msgstr "zbyt podobne"
 
-#: lib/obscure.c:105
+#: lib/obscure.c:102
 msgid "rotated"
 msgstr "rotacja"
 
-#: lib/obscure.c:129
+#: lib/obscure.c:116
 msgid "too short"
 msgstr "za krótkie"
 
-#: lib/obscure.c:188
+#: lib/obscure.c:142
 #, c-format
 msgid "Bad password: %s.  "
 msgstr "Złe hasło: %s.  "
@@ -468,7 +464,7 @@ msgstr "Hasło: "
 msgid "%s's Password: "
 msgstr "Hasło użytkownika %s: "
 
-#: lib/pwdcheck.c:35 src/passwd.c:229
+#: lib/pwdcheck.c:35 src/passwd.c:223
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Nieprawidłowe hasło %s.\n"
@@ -483,9 +479,9 @@ msgstr ""
 msgid "%s: option '%s' requires an argument\n"
 msgstr ""
 
-#: lib/root_flag.c:78 src/chage.c:780
-#, c-format
-msgid "%s: failed to drop privileges (%s)\n"
+#: lib/root_flag.c:78 src/chage.c:730
+#, fuzzy, c-format
+msgid "%s: failed to drop privileges"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
 #: lib/root_flag.c:85
@@ -493,29 +489,29 @@ msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
 msgstr "%s: nieprawidłowy numer telefonu domowego: '%s'\n"
 
-#: lib/root_flag.c:92
+#: lib/root_flag.c:91
 #, fuzzy, c-format
-msgid "%s: cannot access chroot directory %s: %s\n"
+msgid "%s: cannot access chroot directory %s"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: lib/root_flag.c:99
+#: lib/root_flag.c:97
 #, fuzzy, c-format
-msgid "%s: unable to chroot to directory %s: %s\n"
+msgid "%s: unable to chroot to directory %s"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: lib/root_flag.c:106
+#: lib/root_flag.c:103
 #, fuzzy, c-format
-msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgid "%s: cannot chdir in chroot directory %s"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: lib/salt.c:391
+#: lib/salt.c:385
 #, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
-"Defaulting to DES.\n"
+"Defaulting to SHA512.\n"
 msgstr ""
 
-#: lib/salt.c:417
+#: lib/salt.c:397
 #, c-format
 msgid ""
 "Unable to generate a salt from setting \"%s\", check your settings in "
@@ -523,7 +519,7 @@ msgid ""
 "method.\n"
 msgstr ""
 
-#: lib/selinux.c:140
+#: lib/selinux.c:141
 #, fuzzy
 #| msgid "Cannot open the password file.\n"
 msgid "Cannot open audit interface.\n"
@@ -531,7 +527,7 @@ msgstr "Nie można otworzyć pliku z hasłami.\n"
 
 #: lib/selinux.c:195
 #, c-format
-msgid "%s: can not get previous SELinux process context: %s\n"
+msgid "%s: can not get previous SELinux process context"
 msgstr ""
 
 #: lib/semanage.c:47
@@ -678,99 +674,90 @@ msgstr "Nieprawidłowy katalog główny '%s'\n"
 msgid "Can't change root directory to '%s'\n"
 msgstr "Nie można zmienić głównego katalogu na '%s'\n"
 
-#: lib/tcbfuncs.c:67 lib/xgetXXbyYY.c:116 src/passwd.c:491
+#: lib/tcbfuncs.c:67 lib/xgetXXbyYY.c:116 src/passwd.c:447
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: brak pamięci\n"
 
-#: lib/tcbfuncs.c:106 lib/tcbfuncs.c:190 lib/tcbfuncs.c:310 lib/tcbfuncs.c:476
-#: lib/tcbfuncs.c:561
+#: lib/tcbfuncs.c:105 lib/tcbfuncs.c:186 lib/tcbfuncs.c:300 lib/tcbfuncs.c:462
+#: lib/tcbfuncs.c:539
 #, fuzzy, c-format
-msgid "%s: Cannot stat %s: %s\n"
+msgid "%s: Cannot stat %s"
 msgstr "%s: nie można zaktualizować pliku %s\n"
 
-#: lib/tcbfuncs.c:122
+#: lib/tcbfuncs.c:120
 #, fuzzy, c-format
 msgid "%s: %s is neither a directory, nor a symlink.\n"
 msgstr "%s: nieprawidłowy katalog domowy '%s'\n"
 
-#: lib/tcbfuncs.c:129
+#: lib/tcbfuncs.c:126
 #, fuzzy, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
+msgid "%s: Cannot read symbolic link %s"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: lib/tcbfuncs.c:203
+#: lib/tcbfuncs.c:198
 #, fuzzy, c-format
-msgid "%s: Cannot create directory %s: %s\n"
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create directory %s"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: lib/tcbfuncs.c:209 lib/tcbfuncs.c:514 lib/tcbfuncs.c:530 lib/tcbfuncs.c:598
-#: lib/tcbfuncs.c:610
+#: lib/tcbfuncs.c:203 lib/tcbfuncs.c:496 lib/tcbfuncs.c:510 lib/tcbfuncs.c:573
+#: lib/tcbfuncs.c:583
 #, fuzzy, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
+msgid "%s: Cannot change owner of %s"
 msgstr "%s: ostrzeżenie: nie można usunąć "
 
-#: lib/tcbfuncs.c:215 lib/tcbfuncs.c:488 lib/tcbfuncs.c:520 lib/tcbfuncs.c:536
-#: lib/tcbfuncs.c:604 lib/tcbfuncs.c:616
+#: lib/tcbfuncs.c:208 lib/tcbfuncs.c:472 lib/tcbfuncs.c:501 lib/tcbfuncs.c:515
+#: lib/tcbfuncs.c:578 lib/tcbfuncs.c:588
 #, fuzzy, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
+msgid "%s: Cannot change mode of %s"
 msgstr "%s: ostrzeżenie: nie można usunąć "
 
-#: lib/tcbfuncs.c:246
+#: lib/tcbfuncs.c:267
 #, fuzzy, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr "%s: zmiana nazwy: %s"
-
-#: lib/tcbfuncs.c:276
-#, fuzzy, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
+msgid "%s: Cannot remove directory %s"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: lib/tcbfuncs.c:337
+#: lib/tcbfuncs.c:326
 #, fuzzy, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
+msgid "%s: Cannot rename %s to %s"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: lib/tcbfuncs.c:346
+#: lib/tcbfuncs.c:334
 #, fuzzy, c-format
-msgid "%s: Cannot remove %s: %s\n"
+msgid "%s: Cannot remove %s"
 msgstr "%s: ostrzeżenie: nie można usunąć "
 
-#: lib/tcbfuncs.c:361
+#: lib/tcbfuncs.c:348
 #, fuzzy, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
+msgid "%s: Cannot create symbolic link %s"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: lib/tcbfuncs.c:482
+#: lib/tcbfuncs.c:467
 #, fuzzy, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
+msgid "%s: Cannot change owners of %s"
 msgstr "%s: ostrzeżenie: nie można usunąć "
 
-#: lib/tcbfuncs.c:495
+#: lib/tcbfuncs.c:478
 #, fuzzy, c-format
-msgid "%s: Cannot lstat %s: %s\n"
+msgid "%s: Cannot lstat %s"
 msgstr "%s: nie można zaktualizować pliku %s\n"
 
-#: lib/tcbfuncs.c:500
+#: lib/tcbfuncs.c:483
 #, fuzzy, c-format
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
 msgstr "%s: nie można zaktualizować pliku z ukrytymi hasłami\n"
 
-#: lib/tcbfuncs.c:506
+#: lib/tcbfuncs.c:489
 #, c-format
 msgid ""
 "%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
 "The account is left locked.\n"
 msgstr ""
 
-#: lib/tcbfuncs.c:586
+#: lib/tcbfuncs.c:568 src/faillog.c:631
 #, fuzzy, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "%s: zmiana nazwy: %s"
-
-#: lib/tcbfuncs.c:592 src/faillog.c:642
-#, fuzzy, c-format
-msgid "%s: Cannot open %s: %s\n"
+msgid "%s: Cannot open %s"
 msgstr "%s: nie można otworzyć pliku %s\n"
 
 #: lib/user_busy.c:84
@@ -784,7 +771,7 @@ msgstr "%s: użytkownik %s jest aktualnie zalogowany\n"
 msgid "%s: user %s is currently used by process %d\n"
 msgstr "%s: użytkownik %s jest aktualnie zalogowany\n"
 
-#: lib/utmp.c:67
+#: lib/utmp.c:68
 msgid "Unable to determine your tty name."
 msgstr "Nie można ustalić nazwy twojego terminala."
 
@@ -793,7 +780,7 @@ msgstr "Nie można ustalić nazwy twojego terminala."
 msgid "No"
 msgstr "Nie\n"
 
-#: src/chage.c:135 src/userdel.c:140 src/usermod.c:423
+#: src/chage.c:133 src/userdel.c:141 src/usermod.c:420
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
@@ -801,257 +788,242 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/chage.c:139
+#: src/chage.c:137
 msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
 msgstr ""
 
-#: src/chage.c:140
+#: src/chage.c:138
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
 
-#: src/chage.c:141 src/chgpasswd.c:128 src/chpasswd.c:130 src/chsh.c:110
-#: src/faillog.c:81 src/gpasswd.c:134 src/groupadd.c:114 src/groupdel.c:83
-#: src/groupmod.c:127 src/grpck.c:150 src/grpconv.c:92 src/grpunconv.c:91
-#: src/lastlog.c:77 src/newusers.c:144 src/passwd.c:161 src/pwck.c:141
-#: src/pwconv.c:117 src/pwunconv.c:77 src/su.c:458 src/useradd.c:918
-#: src/userdel.c:148 src/usermod.c:438 src/vipw.c:92
+#: src/chage.c:139 src/chgpasswd.c:127 src/chpasswd.c:129 src/chsh.c:111
+#: src/faillog.c:81 src/gpasswd.c:134 src/groupadd.c:115 src/groupdel.c:85
+#: src/groupmod.c:128 src/grpck.c:151 src/grpconv.c:93 src/grpunconv.c:92
+#: src/lastlog.c:77 src/newusers.c:144 src/passwd.c:159 src/pwck.c:142
+#: src/pwconv.c:118 src/pwunconv.c:78 src/su.c:452 src/useradd.c:897
+#: src/userdel.c:149 src/usermod.c:435 src/vipw.c:92
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr ""
 
-#: src/chage.c:142
+#: src/chage.c:140
 msgid "  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"
 msgstr ""
 
-#: src/chage.c:143
+#: src/chage.c:141
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
 
-#: src/chage.c:145
+#: src/chage.c:143
 msgid "  -l, --list                    show account aging information\n"
 msgstr ""
 
-#: src/chage.c:146
-msgid ""
-"  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
-"                                change to MIN_DAYS\n"
-msgstr ""
-
-#: src/chage.c:148
+#: src/chage.c:144
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 
-#: src/chage.c:150 src/chfn.c:115 src/chgpasswd.c:129 src/chpasswd.c:131
-#: src/chsh.c:111 src/faillog.c:85 src/groupadd.c:120 src/groupdel.c:84
-#: src/groupmod.c:132 src/grpck.c:153 src/grpconv.c:93 src/grpunconv.c:92
-#: src/lastlog.c:78 src/newusers.c:146 src/passwd.c:170 src/pwck.c:145
-#: src/pwconv.c:118 src/pwunconv.c:78 src/useradd.c:933 src/userdel.c:150
-#: src/usermod.c:449 src/vipw.c:95
+#: src/chage.c:146 src/chfn.c:116 src/chgpasswd.c:128 src/chpasswd.c:130
+#: src/chsh.c:112 src/faillog.c:85 src/groupadd.c:121 src/groupdel.c:86
+#: src/groupmod.c:133 src/grpck.c:154 src/grpconv.c:94 src/grpunconv.c:93
+#: src/lastlog.c:78 src/newusers.c:146 src/passwd.c:166 src/pwck.c:146
+#: src/pwconv.c:119 src/pwunconv.c:79 src/useradd.c:912 src/userdel.c:151
+#: src/usermod.c:446 src/vipw.c:95
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
-#: src/chage.c:151 src/chpasswd.c:132 src/groupadd.c:121 src/passwd.c:171
+#: src/chage.c:147 src/chpasswd.c:131 src/groupadd.c:122 src/passwd.c:167
 msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
 msgstr ""
 
-#: src/chage.c:152
+#: src/chage.c:148
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
 
-#: src/chage.c:170 src/chfn.c:180 src/chsh.c:125
+#: src/chage.c:166 src/chfn.c:181 src/chsh.c:126
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "Wpisz nową wartość lub wciśnij ENTER by przyjąć wartość domyślną"
 
-#: src/chage.c:174
-msgid "Minimum Password Age"
-msgstr "Minimalny wiek hasła"
-
-#: src/chage.c:179
+#: src/chage.c:170
 msgid "Maximum Password Age"
 msgstr "Maksymalny wiek hasła"
 
-#: src/chage.c:188
+#: src/chage.c:179
 msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Ostatnia zmiana hasła (RRRR-MM-DD)"
 
-#: src/chage.c:200
+#: src/chage.c:191
 msgid "Password Expiration Warning"
 msgstr "Ostrzeżenie o utracie ważności hasła"
 
-#: src/chage.c:205
+#: src/chage.c:196
 msgid "Password Inactive"
 msgstr "Hasło nieaktywne"
 
-#: src/chage.c:215
+#: src/chage.c:206
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Data utraty ważności konta (RRRR-MM-DD)"
 
-#: src/chage.c:238 src/chage.c:291 src/chage.c:311
+#: src/chage.c:229 src/chage.c:282 src/chage.c:302
 msgid "never"
 msgstr "nigdy"
 
-#: src/chage.c:242 src/chage.c:247 src/chage.c:252
+#: src/chage.c:233 src/chage.c:238 src/chage.c:243
 msgid "future"
 msgstr ""
 
-#: src/chage.c:273
+#: src/chage.c:264
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Ostatnia zmiana hasła\t\t\t\t\t: "
 
-#: src/chage.c:275 src/chage.c:286 src/chage.c:304
+#: src/chage.c:266 src/chage.c:277 src/chage.c:295
 msgid "password must be changed"
 msgstr "Hasło musi zostać zmienione"
 
-#: src/chage.c:284
+#: src/chage.c:275
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Hasło traci ważność\t\t\t\t\t: "
 
-#: src/chage.c:302
+#: src/chage.c:293
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Hasło nieaktywne\t\t\t\t\t: "
 
-#: src/chage.c:320
+#: src/chage.c:311
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Konto traci ważność\t\t\t\t\t: "
 
-#: src/chage.c:330
-#, c-format
-msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr "Minimalna ilość dni pomiędzy zmianami hasła\t\t: %ld\n"
-
-#: src/chage.c:332
+#: src/chage.c:314
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
 msgstr "Maksymalna ilość dni pomiędzy zmianami hasła\t\t: %ld\n"
 
-#: src/chage.c:334
+#: src/chage.c:316
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr "Liczba dni ostrzeżenia, zanim ważność hasła upłynie\t: %ld\n"
 
-#: src/chage.c:372 src/chage.c:382 src/useradd.c:1253 src/usermod.c:1119
+#: src/chage.c:352 src/chage.c:361 src/useradd.c:1223 src/usermod.c:1105
 #, c-format
 msgid "%s: invalid date '%s'\n"
 msgstr "%s: nieprawidłowa data '%s'\n"
 
-#: src/chage.c:397 src/chage.c:409 src/chage.c:418 src/chage.c:433
-#: src/chgpasswd.c:198 src/chpasswd.c:199 src/faillog.c:554 src/faillog.c:564
-#: src/faillog.c:579 src/lastlog.c:336 src/lastlog.c:364 src/newusers.c:691
-#: src/passwd.c:887 src/passwd.c:907 src/passwd.c:945 src/passwd.c:957
-#: src/useradd.c:418 src/useradd.c:1281 src/usermod.c:1130
+#: src/chage.c:375 src/chage.c:386 src/chage.c:400 src/chgpasswd.c:195
+#: src/chpasswd.c:197 src/faillog.c:548 src/faillog.c:557 src/faillog.c:571
+#: src/lastlog.c:332 src/lastlog.c:359 src/newusers.c:673 src/passwd.c:817
+#: src/passwd.c:861 src/passwd.c:872 src/useradd.c:413 src/useradd.c:1249
+#: src/usermod.c:1115
 #, c-format
 msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: nieprawidłowy argument numeryczny '%s'\n"
 
-#: src/chage.c:464
+#: src/chage.c:430
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: nie łącz \"l\" z innymi flagami\n"
 
-#: src/chage.c:492 src/chage.c:810 src/chfn.c:243 src/chfn.c:252 src/chfn.c:261
-#: src/chfn.c:275 src/chfn.c:290 src/chfn.c:325 src/chfn.c:336
-#: src/gpasswd.c:212 src/login.c:306 src/passwd.c:1022 src/passwd.c:1069
-#: src/passwd.c:1134
+#: src/chage.c:457 src/chage.c:759 src/chfn.c:243 src/chfn.c:251 src/chfn.c:259
+#: src/chfn.c:271 src/chfn.c:285 src/chfn.c:320 src/chfn.c:331
+#: src/gpasswd.c:211 src/login.c:304 src/passwd.c:933 src/passwd.c:979
+#: src/passwd.c:1039
 #, c-format
 msgid "%s: Permission denied.\n"
 msgstr "%s: Operacja niedozwolona.\n"
 
-#: src/chage.c:517 src/chage.c:538 src/chfn.c:417 src/chgpasswd.c:266
-#: src/chgpasswd.c:282 src/chpasswd.c:271 src/chpasswd.c:286 src/chsh.c:396
-#: src/gpasswd.c:349 src/gpasswd.c:359 src/groupadd.c:347 src/groupadd.c:357
-#: src/groupdel.c:217 src/groupdel.c:226 src/groupmod.c:669 src/groupmod.c:680
-#: src/groupmod.c:691 src/grpck.c:281 src/grpck.c:290 src/grpconv.c:159
-#: src/grpconv.c:171 src/grpunconv.c:161 src/grpunconv.c:174 src/newusers.c:772
-#: src/newusers.c:780 src/newusers.c:788 src/newusers.c:797 src/newusers.c:808
-#: src/newusers.c:817 src/passwd.c:504 src/passwd.c:521 src/pwck.c:263
-#: src/pwck.c:271 src/pwconv.c:191 src/pwconv.c:204 src/pwunconv.c:155
-#: src/pwunconv.c:169 src/useradd.c:1767 src/useradd.c:1785 src/useradd.c:1800
-#: src/useradd.c:1819 src/useradd.c:1833 src/useradd.c:1855 src/userdel.c:558
-#: src/userdel.c:571 src/userdel.c:585 src/userdel.c:598 src/userdel.c:614
-#: src/userdel.c:628 src/usermod.c:1636 src/usermod.c:1650 src/usermod.c:1670
-#: src/usermod.c:1684 src/usermod.c:1701 src/usermod.c:1716
+#: src/chage.c:481 src/chage.c:501 src/chfn.c:408 src/chgpasswd.c:256
+#: src/chgpasswd.c:270 src/chpasswd.c:262 src/chpasswd.c:275 src/chsh.c:386
+#: src/gpasswd.c:345 src/gpasswd.c:354 src/groupadd.c:343 src/groupadd.c:352
+#: src/groupdel.c:214 src/groupdel.c:222 src/groupmod.c:655 src/groupmod.c:665
+#: src/groupmod.c:675 src/grpck.c:281 src/grpck.c:289 src/grpconv.c:159
+#: src/grpconv.c:170 src/grpunconv.c:161 src/grpunconv.c:172 src/newusers.c:749
+#: src/newusers.c:756 src/newusers.c:763 src/newusers.c:771 src/newusers.c:781
+#: src/newusers.c:789 src/passwd.c:459 src/passwd.c:472 src/pwck.c:262
+#: src/pwck.c:269 src/pwconv.c:191 src/pwconv.c:202 src/pwunconv.c:155
+#: src/pwunconv.c:166 src/useradd.c:1712 src/useradd.c:1732 src/useradd.c:1745
+#: src/useradd.c:1762 src/useradd.c:1775 src/useradd.c:1794 src/userdel.c:547
+#: src/userdel.c:558 src/userdel.c:569 src/userdel.c:581 src/userdel.c:595
+#: src/userdel.c:607 src/usermod.c:1580 src/usermod.c:1591 src/usermod.c:1608
+#: src/usermod.c:1619 src/usermod.c:1633 src/usermod.c:1645
 #, fuzzy, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: nie można zablokować plików, spróbuj później\n"
 
-#: src/chage.c:524 src/chage.c:546 src/chfn.c:424 src/chgpasswd.c:273
-#: src/chgpasswd.c:288 src/chpasswd.c:278 src/chpasswd.c:293 src/chsh.c:402
-#: src/gpasswd.c:371 src/gpasswd.c:381 src/gpasswd.c:720 src/gpasswd.c:750
-#: src/groupdel.c:243 src/groupdel.c:252 src/groupmod.c:708 src/groupmod.c:718
-#: src/groupmod.c:729 src/grpck.c:304 src/grpck.c:313 src/grpconv.c:165
-#: src/grpconv.c:177 src/grpunconv.c:168 src/grpunconv.c:181 src/newusers.c:826
-#: src/newusers.c:830 src/newusers.c:834 src/newusers.c:839 src/newusers.c:847
-#: src/newusers.c:855 src/passwd.c:511 src/passwd.c:528 src/pwck.c:284
-#: src/pwck.c:293 src/pwck.c:592 src/pwconv.c:198 src/pwconv.c:211
-#: src/pwunconv.c:162 src/pwunconv.c:176 src/useradd.c:1773 src/useradd.c:1792
-#: src/useradd.c:1807 src/useradd.c:1825 src/useradd.c:1840 src/useradd.c:1862
-#: src/userdel.c:565 src/userdel.c:578 src/userdel.c:591 src/userdel.c:604
-#: src/userdel.c:621 src/userdel.c:635 src/usermod.c:1643 src/usermod.c:1657
-#: src/usermod.c:1677 src/usermod.c:1691 src/usermod.c:1708 src/usermod.c:1723
+#: src/chage.c:488 src/chage.c:508 src/chfn.c:414 src/chgpasswd.c:262
+#: src/chgpasswd.c:276 src/chpasswd.c:268 src/chpasswd.c:281 src/chsh.c:392
+#: src/gpasswd.c:365 src/gpasswd.c:373 src/gpasswd.c:707 src/gpasswd.c:734
+#: src/groupdel.c:238 src/groupdel.c:245 src/groupmod.c:692 src/groupmod.c:701
+#: src/groupmod.c:710 src/grpck.c:303 src/grpck.c:311 src/grpconv.c:165
+#: src/grpconv.c:176 src/grpunconv.c:167 src/grpunconv.c:178 src/newusers.c:798
+#: src/newusers.c:802 src/newusers.c:806 src/newusers.c:811 src/newusers.c:818
+#: src/newusers.c:824 src/passwd.c:464 src/passwd.c:477 src/pwck.c:282
+#: src/pwck.c:290 src/pwck.c:582 src/pwconv.c:197 src/pwconv.c:208
+#: src/pwunconv.c:161 src/pwunconv.c:172 src/useradd.c:1718 src/useradd.c:1738
+#: src/useradd.c:1751 src/useradd.c:1768 src/useradd.c:1781 src/useradd.c:1800
+#: src/userdel.c:553 src/userdel.c:564 src/userdel.c:575 src/userdel.c:587
+#: src/userdel.c:601 src/userdel.c:613 src/usermod.c:1586 src/usermod.c:1597
+#: src/usermod.c:1614 src/usermod.c:1625 src/usermod.c:1639 src/usermod.c:1651
 #, fuzzy, c-format
 msgid "%s: cannot open %s\n"
 msgstr "%s: nie można otworzyć pliku %s\n"
 
-#: src/chage.c:567 src/chage.c:577 src/chfn.c:464 src/chgpasswd.c:308
-#: src/chgpasswd.c:324 src/chpasswd.c:312 src/chpasswd.c:327 src/chsh.c:443
-#: src/gpasswd.c:606 src/gpasswd.c:620 src/groupadd.c:288 src/groupadd.c:309
-#: src/groupdel.c:159 src/groupdel.c:181 src/groupmod.c:494 src/groupmod.c:515
-#: src/groupmod.c:544 src/grpck.c:342 src/grpck.c:348 src/grpconv.c:250
-#: src/grpconv.c:257 src/grpunconv.c:209 src/newusers.c:873 src/newusers.c:887
-#: src/newusers.c:904 src/newusers.c:912 src/newusers.c:918 src/newusers.c:937
-#: src/passwd.c:546 src/passwd.c:562 src/pwck.c:324 src/pwck.c:335
-#: src/pwck.c:673 src/pwconv.c:288 src/pwconv.c:295 src/pwunconv.c:209
-#: src/useradd.c:1603 src/useradd.c:1609 src/useradd.c:1619 src/useradd.c:1625
-#: src/useradd.c:1704 src/useradd.c:1712 src/userdel.c:400 src/userdel.c:414
-#: src/userdel.c:427 src/userdel.c:442 src/userdel.c:459 src/userdel.c:473
-#: src/usermod.c:1519 src/usermod.c:1532 src/usermod.c:1550 src/usermod.c:1568
-#: src/usermod.c:1586 src/usermod.c:1602
+#: src/chage.c:528 src/chage.c:538 src/chfn.c:452 src/chgpasswd.c:294
+#: src/chgpasswd.c:309 src/chpasswd.c:298 src/chpasswd.c:312 src/chsh.c:431
+#: src/gpasswd.c:596 src/gpasswd.c:609 src/groupadd.c:286 src/groupadd.c:306
+#: src/groupdel.c:158 src/groupdel.c:179 src/groupmod.c:483 src/groupmod.c:503
+#: src/groupmod.c:531 src/grpck.c:339 src/grpck.c:345 src/grpconv.c:245
+#: src/grpconv.c:251 src/grpunconv.c:204 src/newusers.c:841 src/newusers.c:854
+#: src/newusers.c:868 src/newusers.c:875 src/newusers.c:880 src/newusers.c:896
+#: src/passwd.c:493 src/passwd.c:505 src/pwck.c:319 src/pwck.c:329
+#: src/pwck.c:658 src/pwconv.c:281 src/pwconv.c:287 src/pwunconv.c:202
+#: src/useradd.c:1554 src/useradd.c:1559 src/useradd.c:1568 src/useradd.c:1573
+#: src/useradd.c:1651 src/useradd.c:1658 src/userdel.c:392 src/userdel.c:405
+#: src/userdel.c:418 src/userdel.c:432 src/userdel.c:449 src/userdel.c:463
+#: src/usermod.c:1477 src/usermod.c:1490 src/usermod.c:1507 src/usermod.c:1522
+#: src/usermod.c:1537 src/usermod.c:1550
 #, fuzzy, c-format
 msgid "%s: failure while writing changes to %s\n"
 msgstr "%s: failure forking: %s"
 
-#: src/chage.c:622 src/chage.c:645 src/chfn.c:455 src/chsh.c:434
-#: src/gpasswd.c:683 src/gpasswd.c:690 src/groupadd.c:237 src/groupadd.c:247
-#: src/groupmod.c:301 src/groupmod.c:322 src/groupmod.c:757 src/grpck.c:646
-#: src/grpck.c:655 src/grpconv.c:233 src/grpconv.c:242 src/grpunconv.c:198
-#: src/passwd.c:659 src/passwd.c:765 src/pwck.c:643 src/pwck.c:652
-#: src/pwconv.c:270 src/pwconv.c:280 src/pwunconv.c:199 src/useradd.c:1058
-#: src/useradd.c:1119 src/useradd.c:1939 src/useradd.c:1955 src/useradd.c:2160
-#: src/useradd.c:2170 src/userdel.c:207 src/userdel.c:273 src/usermod.c:839
-#: src/usermod.c:991 src/usermod.c:1807 src/usermod.c:1821
+#: src/chage.c:582 src/chage.c:604 src/chfn.c:443 src/chsh.c:422
+#: src/gpasswd.c:671 src/gpasswd.c:677 src/groupadd.c:237 src/groupadd.c:246
+#: src/groupmod.c:300 src/groupmod.c:319 src/groupmod.c:735 src/grpck.c:642
+#: src/grpck.c:650 src/grpconv.c:230 src/grpconv.c:238 src/grpunconv.c:194
+#: src/passwd.c:596 src/passwd.c:698 src/pwck.c:630 src/pwck.c:638
+#: src/pwconv.c:265 src/pwconv.c:274 src/pwunconv.c:193 src/useradd.c:1034
+#: src/useradd.c:1093 src/useradd.c:1875 src/useradd.c:1890 src/useradd.c:2087
+#: src/useradd.c:2096 src/userdel.c:206 src/userdel.c:270 src/usermod.c:831
+#: src/usermod.c:981 src/usermod.c:1732 src/usermod.c:1744
 #, fuzzy, c-format
 msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/chage.c:769
+#: src/chage.c:720
 #, c-format
 msgid "%s: the shadow password file is not present\n"
 msgstr "%s: brak pliku z ukrytymi hasłami\n"
 
-#: src/chage.c:787 src/chfn.c:437 src/chsh.c:416 src/groupmod.c:749
-#: src/passwd.c:626 src/passwd.c:675 src/usermod.c:1753
+#: src/chage.c:736 src/chfn.c:426 src/chsh.c:405 src/groupmod.c:728
+#: src/passwd.c:564 src/passwd.c:612 src/usermod.c:1679
 #, fuzzy, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
 
-#: src/chage.c:823
+#: src/chage.c:772
 #, c-format
 msgid "Changing the aging information for %s\n"
 msgstr "Zmieniam informację o użytkowniku %s\n"
 
-#: src/chage.c:826
+#: src/chage.c:775
 #, c-format
 msgid "%s: error changing fields\n"
 msgstr "%s: błąd podczas zmieniania pól\n"
 
-#: src/chfn.c:107 src/chsh.c:106 src/passwd.c:154
+#: src/chfn.c:108 src/chsh.c:107 src/passwd.c:152
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] [LOGIN]\n"
@@ -1059,135 +1031,135 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/chfn.c:111
+#: src/chfn.c:112
 msgid "  -f, --full-name FULL_NAME     change user's full name\n"
 msgstr ""
 
-#: src/chfn.c:112
+#: src/chfn.c:113
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
 msgstr ""
 
-#: src/chfn.c:113
+#: src/chfn.c:114
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
 msgstr ""
 
-#: src/chfn.c:114
+#: src/chfn.c:115
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
 msgstr ""
 
-#: src/chfn.c:116
+#: src/chfn.c:117
 msgid "  -u, --help                    display this help message and exit\n"
 msgstr ""
 
-#: src/chfn.c:117
+#: src/chfn.c:118
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr ""
 
-#: src/chfn.c:183 src/chfn.c:185
+#: src/chfn.c:184 src/chfn.c:186
 msgid "Full Name"
 msgstr "Imię i nazwisko"
 
-#: src/chfn.c:185 src/chfn.c:191 src/chfn.c:197 src/chfn.c:203
+#: src/chfn.c:186 src/chfn.c:192 src/chfn.c:198 src/chfn.c:204
 #, fuzzy, c-format
 msgid "\t%s: %s\n"
 msgstr "%s: %s\n"
 
-#: src/chfn.c:189 src/chfn.c:191
+#: src/chfn.c:190 src/chfn.c:192
 msgid "Room Number"
 msgstr "Numer pokoju"
 
-#: src/chfn.c:195 src/chfn.c:197
+#: src/chfn.c:196 src/chfn.c:198
 msgid "Work Phone"
 msgstr "Telefon do pracy"
 
-#: src/chfn.c:201 src/chfn.c:203
+#: src/chfn.c:202 src/chfn.c:204
 msgid "Home Phone"
 msgstr "Telefon domowy"
 
-#: src/chfn.c:207
+#: src/chfn.c:208
 msgid "Other"
 msgstr "Inne"
 
-#: src/chfn.c:267 src/chfn.c:664
+#: src/chfn.c:264 src/chfn.c:645
 #, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: pola zbyt długie\n"
 
-#: src/chfn.c:357 src/chfn.c:622 src/chsh.c:335 src/chsh.c:511
-#: src/gpasswd.c:917 src/newgidmap.c:183 src/newgrp.c:440 src/newuidmap.c:117
-#: src/passwd.c:988 src/su.c:783
+#: src/chfn.c:351 src/chfn.c:603 src/chsh.c:327 src/chsh.c:497
+#: src/gpasswd.c:897 src/newgidmap.c:178 src/newgrp.c:438 src/newuidmap.c:116
+#: src/passwd.c:901 src/su.c:761
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Nie można ustalić twojej nazwy użytkownika.\n"
 
-#: src/chfn.c:373 src/chsh.c:351
+#: src/chfn.c:366 src/chsh.c:342
 #, fuzzy, c-format
 msgid "%s: PAM: %s\n"
 msgstr "%s: %s\n"
 
-#: src/chfn.c:405 src/chsh.c:386 src/gpasswd.c:1092 src/passwd.c:1201
+#: src/chfn.c:397 src/chsh.c:376 src/gpasswd.c:1070 src/passwd.c:1105
 msgid "Cannot change ID to root.\n"
 msgstr "Nie można zmienić ID na root.\n"
 
-#: src/chfn.c:520
+#: src/chfn.c:508
 #, c-format
 msgid "%s: name with non-ASCII characters: '%s'\n"
 msgstr ""
 
-#: src/chfn.c:522
+#: src/chfn.c:511
 #, c-format
 msgid "%s: invalid name: '%s'\n"
 msgstr "%s: nieprawidłowa nazwa: '%s'\n"
 
-#: src/chfn.c:527
+#: src/chfn.c:515
 #, c-format
 msgid "%s: room number with non-ASCII characters: '%s'\n"
 msgstr ""
 
-#: src/chfn.c:529
+#: src/chfn.c:517
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: nieprawidłowy numer pokoju: '%s'\n"
 
-#: src/chfn.c:534
+#: src/chfn.c:521
 #, c-format
 msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: nieprawidłowy numer telefonu do pracy: '%s'\n"
 
-#: src/chfn.c:539
+#: src/chfn.c:525
 #, c-format
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: nieprawidłowy numer telefonu domowego: '%s'\n"
 
-#: src/chfn.c:545
+#: src/chfn.c:530
 #, fuzzy, c-format
 msgid "%s: '%s' contains non-ASCII characters\n"
 msgstr "%s: '%s' zawiera nieprawidłowe znaki\n"
 
-#: src/chfn.c:548
+#: src/chfn.c:532
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s' zawiera nieprawidłowe znaki\n"
 
-#: src/chfn.c:608 src/chsh.c:497 src/passwd.c:997
+#: src/chfn.c:591 src/chsh.c:485 src/passwd.c:909
 #, fuzzy, c-format
 msgid "%s: Provided user name is not a valid name\n"
 msgstr "%s: %s: nie jest prawidłową nazwą grupy\n"
 
-#: src/chfn.c:614 src/chsh.c:504 src/gpasswd.c:199 src/gpasswd.c:244
-#: src/newusers.c:365 src/passwd.c:1076 src/userdel.c:1016 src/usermod.c:1321
+#: src/chfn.c:597 src/chsh.c:491 src/gpasswd.c:199 src/gpasswd.c:242
+#: src/newusers.c:355 src/passwd.c:985 src/userdel.c:976 src/usermod.c:1293
 #, fuzzy, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
 
-#: src/chfn.c:644
+#: src/chfn.c:625
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Zmieniam informację o użytkowniku %s\n"
 
-#: src/chgpasswd.c:112 src/chpasswd.c:114 src/faillog.c:76 src/grpconv.c:88
-#: src/grpunconv.c:87 src/lastlog.c:71 src/newusers.c:126 src/pwconv.c:113
-#: src/pwunconv.c:73 src/vipw.c:87
+#: src/chgpasswd.c:112 src/chpasswd.c:114 src/faillog.c:76 src/grpconv.c:89
+#: src/grpunconv.c:88 src/lastlog.c:71 src/newusers.c:127 src/pwconv.c:114
+#: src/pwunconv.c:74 src/vipw.c:87
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options]\n"
@@ -1195,97 +1167,97 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/chgpasswd.c:117 src/chpasswd.c:119 src/newusers.c:133
+#: src/chgpasswd.c:117 src/chpasswd.c:119 src/newusers.c:134
 #, c-format
 msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr ""
 
-#: src/chgpasswd.c:127 src/chpasswd.c:129
+#: src/chgpasswd.c:126 src/chpasswd.c:128
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
 
-#: src/chgpasswd.c:130 src/chpasswd.c:133 src/newusers.c:148
+#: src/chgpasswd.c:129 src/chpasswd.c:132 src/newusers.c:148
 msgid ""
 "  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
 "                                or YESCRYPT crypt algorithms\n"
 msgstr ""
 
-#: src/chgpasswd.c:176
+#: src/chgpasswd.c:174
 #, c-format
 msgid "%s: no crypt method defined\n"
 msgstr ""
 
-#: src/chgpasswd.c:222 src/chpasswd.c:223 src/newusers.c:732 src/useradd.c:1465
-#: src/useradd.c:1471 src/useradd.c:1496 src/usermod.c:1371 src/usermod.c:1378
-#: src/usermod.c:1399 src/usermod.c:1406 src/usermod.c:1414
+#: src/chgpasswd.c:218 src/chpasswd.c:220 src/newusers.c:713 src/useradd.c:1423
+#: src/useradd.c:1428 src/useradd.c:1449 src/usermod.c:1342 src/usermod.c:1348
+#: src/usermod.c:1366 src/usermod.c:1372 src/usermod.c:1379
 #, fuzzy, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: opcja -a można użyć TYLKO z pcją -G\n"
 
-#: src/chgpasswd.c:229 src/chpasswd.c:230
+#: src/chgpasswd.c:224 src/chpasswd.c:226
 #, c-format
 msgid "%s: the -c and -e flags are exclusive\n"
 msgstr ""
 
-#: src/chgpasswd.c:248 src/chpasswd.c:249 src/newusers.c:751
+#: src/chgpasswd.c:239 src/chpasswd.c:241 src/newusers.c:729
 #, c-format
 msgid "%s: unsupported crypt method: %s\n"
 msgstr ""
 
-#: src/chgpasswd.c:390 src/chpasswd.c:440 src/newusers.c:1029
+#: src/chgpasswd.c:375 src/chpasswd.c:424 src/newusers.c:986
 #, fuzzy, c-format
 #| msgid "%s: line %d: line too long\n"
 msgid "%s: line %jd: line too long\n"
 msgstr "%s: linia %d: linia zbyt długa\n"
 
-#: src/chgpasswd.c:409 src/chpasswd.c:460
+#: src/chgpasswd.c:392 src/chpasswd.c:443
 #, fuzzy, c-format
 #| msgid "%s: line %d: missing new password\n"
 msgid "%s: line %jd: missing new password\n"
 msgstr "%s: linia %d: brakuje nowego hasła\n"
 
-#: src/chgpasswd.c:440 src/chpasswd.c:502 src/gpasswd.c:850 src/newusers.c:457
-#: src/newusers.c:534 src/newusers.c:584 src/passwd.c:347
+#: src/chgpasswd.c:422 src/chpasswd.c:483 src/gpasswd.c:831 src/newusers.c:443
+#: src/newusers.c:519 src/newusers.c:568 src/passwd.c:330
 #, fuzzy, c-format
-msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgid "%s: failed to crypt password with salt '%s'"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/chgpasswd.c:453
+#: src/chgpasswd.c:434
 #, fuzzy, c-format
 msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s: grupa %s nie istnieje\n"
 
-#: src/chgpasswd.c:513 src/chgpasswd.c:525 src/chpasswd.c:581
-#: src/chpasswd.c:591
+#: src/chgpasswd.c:493 src/chgpasswd.c:504 src/chpasswd.c:560
+#: src/chpasswd.c:569
 #, fuzzy, c-format
 msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: linia %d: nie można zaktualizować wpisu\n"
 
-#: src/chgpasswd.c:542 src/chpasswd.c:616
+#: src/chgpasswd.c:520 src/chpasswd.c:593
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: wykryto błąd, zignorowano modyfikacje\n"
 
-#: src/chpasswd.c:471 src/newusers.c:1246
+#: src/chpasswd.c:453 src/newusers.c:1182
 #, fuzzy, c-format
 msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
 
-#: src/chpasswd.c:487
+#: src/chpasswd.c:469
 #, fuzzy, c-format
 msgid "%s: (line %jd, user %s) invalid password hash\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
 
-#: src/chpasswd.c:515
+#: src/chpasswd.c:495
 #, fuzzy, c-format
 msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
 
-#: src/chsh.c:112 src/usermod.c:450
+#: src/chsh.c:113 src/usermod.c:447
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
 
-#: src/chsh.c:126
+#: src/chsh.c:127
 msgid "Login Shell"
 msgstr "Powłoka logowania"
 
@@ -1294,43 +1266,43 @@ msgstr "Powłoka logowania"
 msgid "Cannot parse shell files: %s"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: src/chsh.c:181
+#: src/chsh.c:180
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "Cannot evaluate entries in shell files: %s"
 msgstr "%s: nie można utworzyć nowego pliku z ustawieniami domyślnymi\n"
 
-#: src/chsh.c:289 src/chsh.c:301 src/chsh.c:314
+#: src/chsh.c:287 src/chsh.c:297 src/chsh.c:308
 #, fuzzy, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "Nie możesz zmieniać powłoki dla %s.\n"
 
-#: src/chsh.c:535
+#: src/chsh.c:521
 #, c-format
 msgid "Changing the login shell for %s\n"
 msgstr "Zmieniam powłokę logowania dla %s\n"
 
-#: src/chsh.c:546
+#: src/chsh.c:532
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Nieprawidłowy wpis: %s\n"
 
-#: src/chsh.c:555
+#: src/chsh.c:541
 #, fuzzy, c-format
 msgid "%s: Warning: %s is an invalid shell\n"
 msgstr "%s jest nieprawidłową powłoką.\n"
 
-#: src/chsh.c:557
+#: src/chsh.c:543
 #, fuzzy, c-format
 msgid "%s: %s is an invalid shell\n"
 msgstr "%s jest nieprawidłową powłoką.\n"
 
-#: src/chsh.c:566
+#: src/chsh.c:552
 #, fuzzy, c-format
 msgid "%s: Warning: %s does not exist\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
 
-#: src/chsh.c:568
+#: src/chsh.c:554
 #, fuzzy, c-format
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: ostrzeżenie: właścicielem %s nie jest %s\n"
@@ -1367,58 +1339,58 @@ msgid ""
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
 
-#: src/faillog.c:105 src/faillog.c:121 src/lastlog.c:126
+#: src/faillog.c:104 src/faillog.c:119 src/lastlog.c:125
 #, fuzzy, c-format
 msgid "%s: Failed to get the entry for UID %lu\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/faillog.c:168
+#: src/faillog.c:166
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Login       Nieudane Maks.   Ostanio                  Na\n"
 
-#: src/faillog.c:186
+#: src/faillog.c:184
 #, fuzzy, c-format
 msgid " [%lus left]"
 msgstr " [pozostało %lds]"
 
-#: src/faillog.c:189
+#: src/faillog.c:187
 #, c-format
 msgid " [%lds lock]"
 msgstr " [blokada %lds]"
 
-#: src/faillog.c:255
+#: src/faillog.c:252
 #, fuzzy, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/faillog.c:351
+#: src/faillog.c:347
 #, fuzzy, c-format
 msgid "%s: Failed to set max for UID %lu\n"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/faillog.c:449
+#: src/faillog.c:444
 #, fuzzy, c-format
 msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/faillog.c:610 src/lastlog.c:395
+#: src/faillog.c:601 src/lastlog.c:389
 #, fuzzy, c-format
 msgid "%s: Unknown user or range: %s\n"
 msgstr "Nieznany użytkownik: %s\n"
 
-#: src/faillog.c:624 src/lastlog.c:414
+#: src/faillog.c:614 src/lastlog.c:407
 #, fuzzy, c-format
 msgid "%s: unexpected argument: %s\n"
 msgstr "lastlog: nieoczekiwany argument: %s\n"
 
-#: src/faillog.c:650 src/lastlog.c:441
+#: src/faillog.c:637 src/lastlog.c:431
 #, fuzzy, c-format
-msgid "%s: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot get the size of %s"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: src/faillog.c:677
+#: src/faillog.c:662
 #, fuzzy, c-format
-msgid "%s: Failed to write %s: %s\n"
+msgid "%s: Failed to write %s"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
 #: src/gpasswd.c:128
@@ -1470,64 +1442,64 @@ msgstr "Hasło dla %s nie może być zmienione.\n"
 msgid "The options cannot be combined.\n"
 msgstr "Hasło dla %s nie może być zmienione.\n"
 
-#: src/gpasswd.c:253
+#: src/gpasswd.c:250
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: plik z ukrytymi hasłami grup wymagany dla -A\n"
 
-#: src/gpasswd.c:728 src/groupmod.c:219
+#: src/gpasswd.c:714 src/groupmod.c:219
 #, fuzzy, c-format
 msgid "%s: group '%s' does not exist in %s\n"
 msgstr "%s: grupa %s nie istnieje\n"
 
-#: src/gpasswd.c:740 src/gpasswd.c:776
+#: src/gpasswd.c:725 src/gpasswd.c:758
 #, fuzzy, c-format
 msgid "%s: failure while closing read-only %s\n"
 msgstr "%s: failure forking: %s"
 
-#: src/gpasswd.c:811
+#: src/gpasswd.c:793
 #, c-format
 msgid "Changing the password for group %s\n"
 msgstr "Zmieniam hasło dla grupy %s\n"
 
-#: src/gpasswd.c:814
+#: src/gpasswd.c:796
 msgid "New Password: "
 msgstr "Nowe hasło: "
 
-#: src/gpasswd.c:821 src/passwd.c:315
+#: src/gpasswd.c:803 src/passwd.c:299
 msgid "Re-enter new password: "
 msgstr "Wpisz hasło ponownie: "
 
-#: src/gpasswd.c:836
+#: src/gpasswd.c:818
 msgid "They don't match; try again"
 msgstr "Nie zgadzają się; spróbuj ponownie"
 
-#: src/gpasswd.c:841
+#: src/gpasswd.c:823
 #, c-format
 msgid "%s: Try again later\n"
 msgstr "%s: Spróbuj ponownie później\n"
 
-#: src/gpasswd.c:993
+#: src/gpasswd.c:972
 #, c-format
 msgid "Adding user %s to group %s\n"
 msgstr "Dodaję nowego użytkownika %s do grupy %s\n"
 
-#: src/gpasswd.c:1010
+#: src/gpasswd.c:989
 #, c-format
 msgid "Removing user %s from group %s\n"
 msgstr "Usuwam użytkownika %s z grupy %s\n"
 
-#: src/gpasswd.c:1026
+#: src/gpasswd.c:1004
 #, fuzzy, c-format
 msgid "%s: user '%s' is not a member of '%s'\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
 
-#: src/gpasswd.c:1065
+#: src/gpasswd.c:1043
 #, c-format
 msgid "%s: Not a tty\n"
 msgstr "%s: To nie tty\n"
 
-#: src/groupadd.c:107 src/groupdel.c:79 src/groupmod.c:120
+#: src/groupadd.c:108 src/groupdel.c:81 src/groupmod.c:121
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] GROUP\n"
@@ -1535,154 +1507,154 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/groupadd.c:111
+#: src/groupadd.c:112
 msgid ""
 "  -f, --force                   exit successfully if the group already "
 "exists,\n"
 "                                and cancel -g if the GID is already used\n"
 msgstr ""
 
-#: src/groupadd.c:113
+#: src/groupadd.c:114
 msgid "  -g, --gid GID                 use GID for the new group\n"
 msgstr ""
 
-#: src/groupadd.c:115 src/useradd.c:920
+#: src/groupadd.c:116 src/useradd.c:899
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
 
-#: src/groupadd.c:116
+#: src/groupadd.c:117
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
 "                                (non-unique) GID\n"
 msgstr ""
 
-#: src/groupadd.c:118
+#: src/groupadd.c:119
 msgid ""
 "  -p, --password PASSWORD       use this encrypted password for the new "
 "group\n"
 msgstr ""
 
-#: src/groupadd.c:119
+#: src/groupadd.c:120
 msgid "  -r, --system                  create a system group\n"
 msgstr ""
 
-#: src/groupadd.c:122
+#: src/groupadd.c:123
 msgid ""
 "  -U, --users USERS             comma-separated list of users to add as\n"
 "\t                         members of this group\n"
 msgstr ""
 
-#: src/groupadd.c:220 src/groupmod.c:283
+#: src/groupadd.c:221 src/groupmod.c:283
 #, fuzzy, c-format
 #| msgid "invalid user name '%s'\n"
 msgid "Invalid member username %s\n"
 msgstr "nieprawidłowa nazwa użytkownika '%s'\n"
 
-#: src/groupadd.c:264
+#: src/groupadd.c:263
 #, fuzzy, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: %s: nie jest prawidłową nazwą grupy\n"
 
-#: src/groupadd.c:373 src/groupadd.c:382 src/newgidmap.c:215
-#: src/newuidmap.c:149
+#: src/groupadd.c:368 src/groupadd.c:376 src/newgidmap.c:206
+#: src/newuidmap.c:144
 #, fuzzy, c-format
-msgid "%s: cannot open %s: %s\n"
+msgid "%s: cannot open %s"
 msgstr "%s: nie można otworzyć pliku %s\n"
 
-#: src/groupadd.c:435 src/groupmod.c:436 src/newusers.c:247 src/newusers.c:266
+#: src/groupadd.c:427 src/groupmod.c:426 src/newusers.c:246 src/newusers.c:263
 #, fuzzy, c-format
 msgid "%s: invalid group ID '%s'\n"
 msgstr "nieprawidłowa nazwa grupy '%s'\n"
 
-#: src/groupadd.c:452 src/useradd.c:1343
+#: src/groupadd.c:443 src/useradd.c:1308
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: -K wymaga KLUCZ=WARTOŚĆ\n"
 
-#: src/groupadd.c:520 src/groupmod.c:395
+#: src/groupadd.c:510 src/groupmod.c:387
 #, fuzzy, c-format
 msgid "%s: group '%s' already exists\n"
 msgstr "%s: grupa %s istnieje\n"
 
-#: src/groupadd.c:539 src/groupmod.c:363
+#: src/groupadd.c:528 src/groupmod.c:358
 #, fuzzy, c-format
 msgid "%s: GID '%lu' already exists\n"
 msgstr "Członek grupy już istnieje\n"
 
-#: src/groupadd.c:570 src/groupdel.c:375 src/groupmod.c:792
+#: src/groupadd.c:558 src/groupdel.c:365 src/groupmod.c:769
 #, fuzzy, c-format
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Nie można ustalić twojej nazwy użytkownika.\n"
 
-#: src/groupdel.c:85 src/groupmod.c:133 src/useradd.c:934 src/userdel.c:151
-#: src/usermod.c:445
+#: src/groupdel.c:87 src/groupmod.c:134 src/useradd.c:913 src/userdel.c:152
+#: src/usermod.c:442
 msgid ""
 "  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
 "* files\n"
 msgstr ""
 
-#: src/groupdel.c:86
+#: src/groupdel.c:88
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
 msgstr ""
 
-#: src/groupdel.c:124 src/groupdel.c:136 src/groupmod.c:307 src/groupmod.c:328
-#: src/grpconv.c:195 src/pwconv.c:229 src/userdel.c:351 src/userdel.c:369
-#: src/userdel.c:652 src/userdel.c:660 src/usermod.c:1813 src/usermod.c:1827
+#: src/groupdel.c:125 src/groupdel.c:136 src/groupmod.c:305 src/groupmod.c:324
+#: src/grpconv.c:193 src/pwconv.c:225 src/userdel.c:344 src/userdel.c:361
+#: src/userdel.c:629 src/userdel.c:636 src/usermod.c:1737 src/usermod.c:1749
 #, fuzzy, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: src/groupdel.c:294
+#: src/groupdel.c:285
 #, fuzzy, c-format
 msgid "%s: cannot remove the primary group of user '%s'\n"
 msgstr "%s: nie można zmienić użytkownika '%s' na kliencie NIS.\n"
 
-#: src/groupdel.c:395 src/groupmod.c:810 src/newgrp.c:611 src/useradd.c:374
-#: src/useradd.c:813 src/useradd.c:1306 src/usermod.c:276 src/usermod.c:1143
+#: src/groupdel.c:383 src/groupmod.c:785 src/newgrp.c:605 src/useradd.c:372
+#: src/useradd.c:795 src/useradd.c:1272 src/usermod.c:277 src/usermod.c:1127
 #, fuzzy, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: grupa %s nie istnieje\n"
 
-#: src/groupmod.c:124
+#: src/groupmod.c:125
 msgid ""
 "  -a, --append                  append the users mentioned by -U option to "
 "the group \n"
 "                                without removing existing user members\n"
 msgstr ""
 
-#: src/groupmod.c:126
+#: src/groupmod.c:127
 msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgstr ""
 
-#: src/groupmod.c:128
+#: src/groupmod.c:129
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
 msgstr ""
 
-#: src/groupmod.c:129
+#: src/groupmod.c:130
 msgid ""
-"  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
+"  -o, --non-unique              allow using a duplicate (non-unique) GID\n"
 msgstr ""
 
-#: src/groupmod.c:130
+#: src/groupmod.c:131
 msgid ""
 "  -p, --password PASSWORD       change the password to this (encrypted)\n"
 "                                PASSWORD\n"
 msgstr ""
 
-#: src/groupmod.c:134
+#: src/groupmod.c:135
 msgid ""
 "  -U, --users USERS             comma-separated list of users to add as\n"
 "                                members of this group\n"
 msgstr ""
 
-#: src/groupmod.c:387 src/newusers.c:293
+#: src/groupmod.c:381 src/newusers.c:288
 #, fuzzy, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "nieprawidłowa nazwa grupy '%s'\n"
 
-#: src/grpck.c:139
+#: src/grpck.c:140
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] [group [gshadow]]\n"
@@ -1690,7 +1662,7 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/grpck.c:145
+#: src/grpck.c:146
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] [group]\n"
@@ -1698,113 +1670,113 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/grpck.c:151 src/pwck.c:143
+#: src/grpck.c:152 src/pwck.c:144
 msgid ""
 "  -r, --read-only               display errors and warnings\n"
 "                                but do not change files\n"
 msgstr ""
 
-#: src/grpck.c:154 src/pwck.c:150
+#: src/grpck.c:155 src/pwck.c:151
 msgid "  -s, --sort                    sort entries by UID\n"
 msgstr ""
 
-#: src/grpck.c:155
+#: src/grpck.c:156
 msgid ""
 "  -S, --silence-warnings        silence controversial/paranoid warnings\n"
 msgstr ""
 
-#: src/grpck.c:230 src/pwck.c:205
+#: src/grpck.c:231 src/pwck.c:206
 #, fuzzy, c-format
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s i -r są niekompatybilne\n"
 
-#: src/grpck.c:509
+#: src/grpck.c:506
 msgid "invalid group file entry"
 msgstr "nieprawidłowy wpis do pliku grup"
 
-#: src/grpck.c:510 src/grpck.c:569 src/grpck.c:711 src/grpck.c:770
-#: src/grpck.c:788 src/pwck.c:413 src/pwck.c:474 src/pwck.c:738 src/pwck.c:799
-#: src/pwck.c:821
+#: src/grpck.c:507 src/grpck.c:566 src/grpck.c:706 src/grpck.c:765
+#: src/grpck.c:783 src/pwck.c:405 src/pwck.c:466 src/pwck.c:722 src/pwck.c:783
+#: src/pwck.c:805
 #, c-format
 msgid "delete line '%s'? "
 msgstr "usunąć linię '%s'? "
 
-#: src/grpck.c:568
+#: src/grpck.c:565
 msgid "duplicate group entry"
 msgstr "powtórzony wpis w pliku grup"
 
-#: src/grpck.c:585
+#: src/grpck.c:582
 #, c-format
 msgid "invalid group name '%s'\n"
 msgstr "nieprawidłowa nazwa grupy '%s'\n"
 
-#: src/grpck.c:592
+#: src/grpck.c:589
 #, fuzzy, c-format
 msgid "invalid group ID '%lu'\n"
 msgstr "nieprawidłowa nazwa grupy '%s'\n"
 
-#: src/grpck.c:609
+#: src/grpck.c:606
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grupa %s: nie ma użytkownika %s\n"
 
-#: src/grpck.c:610 src/grpck.c:821
+#: src/grpck.c:607 src/grpck.c:816
 #, c-format
 msgid "delete member '%s'? "
 msgstr "skasować członka '%s'? "
 
-#: src/grpck.c:626 src/grpck.c:786
+#: src/grpck.c:623 src/grpck.c:781
 #, c-format
 msgid "no matching group file entry in %s\n"
 msgstr "brak pasującego wpisu w pliku group %s\n"
 
-#: src/grpck.c:628
+#: src/grpck.c:625
 #, fuzzy, c-format
 msgid "add group '%s' in %s? "
 msgstr "dodać grupę '%s' w %s ?"
 
-#: src/grpck.c:673
+#: src/grpck.c:668
 #, c-format
 msgid ""
 "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
 
-#: src/grpck.c:710
+#: src/grpck.c:705
 msgid "invalid shadow group file entry"
 msgstr "nieprawidłowy wpis w pliku z ukrytymi hasłami grup"
 
-#: src/grpck.c:769
+#: src/grpck.c:764
 msgid "duplicate shadow group entry"
 msgstr "powtórzony wpis w pliku z ukrytymi hasłami grup"
 
-#: src/grpck.c:807
+#: src/grpck.c:802
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr ""
 "grupa %s: użytkownik administracyjny %s z pliku ukrytych haseł grup nie "
 "istnieje\n"
 
-#: src/grpck.c:808
+#: src/grpck.c:803
 #, c-format
 msgid "delete administrative member '%s'? "
 msgstr "usunąć członka administracyjnego '%s'? "
 
-#: src/grpck.c:820
+#: src/grpck.c:815
 #, c-format
 msgid "shadow group %s: no user %s\n"
 msgstr "grupa %s: użytkownik %s z pliku ukrytych haseł grup nie istnieje\n"
 
-#: src/grpck.c:889 src/pwck.c:910
+#: src/grpck.c:884 src/pwck.c:892
 #, c-format
 msgid "%s: the files have been updated\n"
 msgstr "%s: pliki zostały zaktualizowane\n"
 
-#: src/grpck.c:891 src/pwck.c:911
+#: src/grpck.c:886 src/pwck.c:893
 #, c-format
 msgid "%s: no changes\n"
 msgstr "%s: bez zmian\n"
 
-#: src/grpunconv.c:217 src/pwunconv.c:217
+#: src/grpunconv.c:211 src/pwunconv.c:209
 #, fuzzy, c-format
 msgid "%s: cannot delete %s\n"
 msgstr "%s: nie można zaktualizować pliku %s\n"
@@ -1843,50 +1815,50 @@ msgid ""
 "in**' users"
 msgstr ""
 
-#: src/lastlog.c:151
+#: src/lastlog.c:150
 #, fuzzy, c-format
 #| msgid "Username                Port     Latest"
 msgid "Username         Port     From%*sLatest\n"
 msgstr "Użytkownik             Port     Ostatnio"
 
-#: src/lastlog.c:153
+#: src/lastlog.c:152
 msgid "Username                Port     Latest"
 msgstr "Użytkownik             Port     Ostatnio"
 
-#: src/lastlog.c:170
+#: src/lastlog.c:169
 msgid "**Never logged in**"
 msgstr "**Nigdy nie zalogowany**"
 
-#: src/lastlog.c:190
+#: src/lastlog.c:189
 #, c-format
 msgid ""
 "%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
 "\tthe output might be incorrect.\n"
 msgstr ""
 
-#: src/lastlog.c:251
+#: src/lastlog.c:249
 #, fuzzy, c-format
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/lastlog.c:268
+#: src/lastlog.c:266
 #, c-format
 msgid ""
 "%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
 "\tthey will not be updated.\n"
 msgstr ""
 
-#: src/lastlog.c:289
+#: src/lastlog.c:286
 #, fuzzy, c-format
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: nie można zaktualizować pliku z hasłami\n"
 
-#: src/lastlog.c:420
+#: src/lastlog.c:412
 #, c-format
 msgid "%s: Option -C cannot be used together with option -S\n"
 msgstr ""
 
-#: src/lastlog.c:426
+#: src/lastlog.c:417
 #, c-format
 msgid "%s: Options -C and -S require option -u to specify the user\n"
 msgstr ""
@@ -1901,16 +1873,16 @@ msgstr "Użycie: %s [-p] [nazwa]\n"
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "        %s [-p] [-h host] [-f nazwa]\n"
 
-#: src/login.c:181 src/login.c:187
+#: src/login.c:180 src/login.c:185
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
 msgstr ""
 
-#: src/login.c:207
+#: src/login.c:205
 msgid "Invalid login time"
 msgstr "Nieprawidłowy czas logowania"
 
-#: src/login.c:243
+#: src/login.c:241
 msgid ""
 "\n"
 "System closed for routine maintenance"
@@ -1918,7 +1890,7 @@ msgstr ""
 "\n"
 "System zamknięty do rutynowej konserwacji."
 
-#: src/login.c:254
+#: src/login.c:252
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]"
@@ -1926,12 +1898,12 @@ msgstr ""
 "\n"
 "[Rozłączenie pominięte -- zezwolenie na logowanie się roota.]"
 
-#: src/login.c:499
+#: src/login.c:497
 #, c-format
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr ""
 
-#: src/login.c:608
+#: src/login.c:606
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -1940,58 +1912,59 @@ msgstr ""
 "\n"
 "Limit czasu logowania przekroczony po %d sekundach.\n"
 
-#: src/login.c:622
+#: src/login.c:619
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: PAM niepowodzenie, przerwane: %s\n"
 
-#: src/login.c:652
+#: src/login.c:649
 #, c-format
 msgid "%s login: "
 msgstr "%s login: "
 
-#: src/login.c:654
+#: src/login.c:651
 msgid "login: "
 msgstr "login: "
 
-#: src/login.c:698 src/login.c:742
+#: src/login.c:694 src/login.c:737
 #, fuzzy, c-format
 msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Maksymalna ilość prób przekroczona (%d)\n"
 
-#: src/login.c:704
+#: src/login.c:700
 msgid "login: abort requested by PAM\n"
 msgstr "login: przerwanie wywołane przez PAM\n"
 
-#: src/login.c:735 src/login.c:985 src/sulogin.c:174
+#: src/login.c:731 src/login.c:978 src/sulogin.c:174
 msgid "Login incorrect"
 msgstr "Nieprawidłowe logowanie"
 
-#: src/login.c:783
+#: src/login.c:777
 #, fuzzy, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "%s: linia %d: nie można znaleźć użytkownika %s\n"
 
-#: src/login.c:1097
-#, c-format
-msgid "%s: failure forking: %s"
+#: src/login.c:1090 src/newgrp.c:297
+#, fuzzy, c-format
+#| msgid "%s: failure forking: %s"
+msgid "%s: failure forking"
 msgstr "%s: failure forking: %s"
 
-#: src/login.c:1118
+#: src/login.c:1111
 #, c-format
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-#: src/login.c:1192
+#: src/login.c:1185
 msgid "Warning: login re-enabled after temporary lockout."
 msgstr "Ostrzeżenie: logowanie ponownie odblokowanie po czasowej blokadzie."
 
-#: src/login.c:1208
+#: src/login.c:1201
 #, c-format
 msgid "Last login: %s on %s"
 msgstr "Ostatnie logowanie: %s na %s"
 
-#: src/login.c:1212
+#: src/login.c:1205
 #, c-format
 msgid " from %.*s"
 msgstr " z %.*s"
@@ -2016,30 +1989,30 @@ msgstr ""
 #: src/newgidmap.c:106
 #, fuzzy, c-format
 #| msgid "%s: can't open group file\n"
-msgid "%s: couldn't open process setgroups: %s\n"
+msgid "%s: couldn't open process setgroups"
 msgstr "%s: nie można otworzyć pliku z grupami\n"
 
-#: src/newgidmap.c:117
+#: src/newgidmap.c:116
 #, fuzzy, c-format
-msgid "%s: failed to read setgroups: %s\n"
+msgid "%s: failed to read setgroups"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/newgidmap.c:126
+#: src/newgidmap.c:124
 #, fuzzy, c-format
-msgid "%s: failed to seek setgroups: %s\n"
+msgid "%s: failed to seek setgroups"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/newgidmap.c:131
+#: src/newgidmap.c:128
 #, fuzzy, c-format
-msgid "%s: failed to setgroups %s policy: %s\n"
+msgid "%s: failed to setgroups %s policy"
 msgstr "%s: pola zbyt długie\n"
 
-#: src/newgidmap.c:193 src/newuidmap.c:127
+#: src/newgidmap.c:186 src/newuidmap.c:124
 #, fuzzy, c-format
-msgid "%s: Could not stat directory for target process: %s\n"
+msgid "%s: Could not stat directory for target process"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/newgidmap.c:206 src/newuidmap.c:140
+#: src/newgidmap.c:198 src/newuidmap.c:136
 #, c-format
 msgid ""
 "%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
@@ -2056,27 +2029,22 @@ msgstr "Użycie: newgrp [-] [grupa]\n"
 msgid "Usage: sg [-] group [[-c] command]\n"
 msgstr "Użycie: sg grupa [[-c] polecenie]\n"
 
-#: src/newgrp.c:192 src/passwd.c:215
+#: src/newgrp.c:191 src/passwd.c:210
 #, fuzzy, c-format
-msgid "%s: failed to crypt password with previous salt: %s\n"
+msgid "%s: failed to crypt password with previous salt"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/newgrp.c:212
+#: src/newgrp.c:211
 #, fuzzy
 msgid "Invalid password.\n"
 msgstr "Stare hasło: "
 
-#: src/newgrp.c:298
-#, fuzzy, c-format
-msgid "%s: failure forking: %s\n"
-msgstr "%s: failure forking: %s"
-
-#: src/newgrp.c:485 src/newgrp.c:521
+#: src/newgrp.c:481 src/newgrp.c:516
 #, fuzzy, c-format
 msgid "%s: provided group is not a valid group name\n"
 msgstr "%s: %s: nie jest prawidłową nazwą grupy\n"
 
-#: src/newgrp.c:537
+#: src/newgrp.c:531
 #, fuzzy, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
@@ -2093,7 +2061,7 @@ msgid ""
 "<count> ] ... \n"
 msgstr ""
 
-#: src/newusers.c:130 src/pwck.c:140 src/usermod.c:430
+#: src/newusers.c:131 src/pwck.c:141 src/usermod.c:427
 msgid "  -b, --badname                 allow bad names\n"
 msgstr ""
 
@@ -2101,213 +2069,198 @@ msgstr ""
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
-#: src/newusers.c:311
+#: src/newusers.c:304
 #, fuzzy, c-format
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
 msgstr "%s: grupa %s nie istnieje\n"
 
-#: src/newusers.c:351 src/useradd.c:1413 src/usermod.c:1227
+#: src/newusers.c:343 src/useradd.c:1374 src/usermod.c:1206
 #, fuzzy, c-format
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: nieprawidłowa nazwa użytkownika '%s'\n"
 
-#: src/newusers.c:391 src/useradd.c:1523 src/usermod.c:1165
+#: src/newusers.c:380 src/useradd.c:1475 src/usermod.c:1148
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: nieprawidłowa nazwa użytkownika '%s'\n"
 
-#: src/newusers.c:395 src/useradd.c:1527 src/usermod.c:1169
+#: src/newusers.c:383 src/useradd.c:1478 src/usermod.c:1151
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: nieprawidłowa nazwa użytkownika '%s'\n"
 
-#: src/newusers.c:669
+#: src/newusers.c:652
 #, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr ""
 
-#: src/newusers.c:1035
+#: src/newusers.c:991
 #, fuzzy, c-format
 #| msgid "%s: line %d: invalid line\n"
 msgid "%s: line %jd: invalid line\n"
 msgstr "%s: linia %d: nieprawidłowa linia\n"
 
-#: src/newusers.c:1047
+#: src/newusers.c:1001
 #, fuzzy, c-format
 msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
 msgstr "%s: nie można zaktualizować wpisu dla użytkownika %s\n"
 
-#: src/newusers.c:1054 src/newusers.c:1089
+#: src/newusers.c:1007 src/newusers.c:1040
 #, fuzzy, c-format
 msgid "%s: line %jd: can't create user\n"
 msgstr "%s: linia %d: nie można utworzyć GID\n"
 
-#: src/newusers.c:1074
+#: src/newusers.c:1026
 #, fuzzy, c-format
 msgid "%s: line %jd: can't create group\n"
 msgstr "%s: linia %d: nie można utworzyć GID\n"
 
-#: src/newusers.c:1101
+#: src/newusers.c:1051
 #, fuzzy, c-format
 msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s: użytkownik %s nie istnieje\n"
 
-#: src/newusers.c:1114
+#: src/newusers.c:1064
 #, fuzzy, c-format
-msgid "%s: line %jd: %s\n"
+msgid "%s: line %jd"
 msgstr "%s: zmiana nazwy: %s"
 
-#: src/newusers.c:1123
+#: src/newusers.c:1072
 #, fuzzy, c-format
 #| msgid "%s: line %d: can't update password\n"
 msgid "%s: line %jd: can't update password\n"
 msgstr "%s: linia %d: nie można zaktualizować pliku z hasłami\n"
 
-#: src/newusers.c:1146
+#: src/newusers.c:1094
 #, fuzzy, c-format
 msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s: linia %d: mkdir nie powiodło się\n"
 
-#: src/newusers.c:1152
+#: src/newusers.c:1099
 #, fuzzy, c-format
-msgid "%s: line %jd: mkdir %s failed: %s\n"
+msgid "%s: line %jd: mkdir %s failed"
 msgstr "%s: linia %d: mkdir nie powiodło się\n"
 
-#: src/newusers.c:1161
+#: src/newusers.c:1107
 #, fuzzy, c-format
-msgid "%s: line %jd: chown %s failed: %s\n"
+msgid "%s: line %jd: chown %s failed"
 msgstr "%s: linia %d: chown nie powiodło się\n"
 
-#: src/newusers.c:1172
+#: src/newusers.c:1117
 #, fuzzy, c-format
 #| msgid "%s: line %d: can't update entry\n"
 msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: linia %d: nie można zaktualizować wpisu\n"
 
-#: src/newusers.c:1187
+#: src/newusers.c:1131
 #, fuzzy, c-format
-msgid "%s: can't find subordinate user range: %s\n"
+msgid "%s: can't find subordinate user range"
 msgstr "%s: nie można utworzyć %s\n"
 
-#: src/newusers.c:1196 src/newusers.c:1218
+#: src/newusers.c:1137 src/newusers.c:1155
 #, fuzzy, c-format
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/newusers.c:1210
+#: src/newusers.c:1150
 #, fuzzy, c-format
-msgid "%s: can't find subordinate group range: %s\n"
+msgid "%s: can't find subordinate group range"
 msgstr "%s: nie można zaktualizować pliku z grupami\n"
 
-#: src/passwd.c:158
+#: src/passwd.c:156
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
 msgstr ""
 
-#: src/passwd.c:159
+#: src/passwd.c:157
 msgid ""
 "  -d, --delete                  delete the password for the named account\n"
 msgstr ""
 
-#: src/passwd.c:160
+#: src/passwd.c:158
 msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
 msgstr ""
 
-#: src/passwd.c:162
+#: src/passwd.c:160
 msgid "  -k, --keep-tokens             change password only if expired\n"
 msgstr ""
 
-#: src/passwd.c:163
+#: src/passwd.c:161
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
 
-#: src/passwd.c:165
+#: src/passwd.c:163
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
 msgstr ""
 
-#: src/passwd.c:166
-msgid ""
-"  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
-"                                change to MIN_DAYS\n"
-msgstr ""
-
-#: src/passwd.c:168 src/vipw.c:94
+#: src/passwd.c:164 src/vipw.c:94
 msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
 
-#: src/passwd.c:169
+#: src/passwd.c:165
 msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 msgstr ""
 
-#: src/passwd.c:172
+#: src/passwd.c:168
 msgid ""
 "  -S, --status                  report password status on the named account\n"
 msgstr ""
 
-#: src/passwd.c:173
+#: src/passwd.c:169
 msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
 msgstr ""
 
-#: src/passwd.c:174
+#: src/passwd.c:170
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
 
-#: src/passwd.c:175
+#: src/passwd.c:171
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 
-#: src/passwd.c:177
+#: src/passwd.c:173
 msgid "  -s, --stdin                   read new token from stdin\n"
 msgstr ""
 
-#: src/passwd.c:205
+#: src/passwd.c:201
 msgid "Old password: "
 msgstr "Stare hasło: "
 
-#: src/passwd.c:252
+#: src/passwd.c:242
 #, fuzzy, c-format
 msgid ""
-"Enter the new password (minimum of %d characters)\n"
+"Enter the new password (minimum of %zu characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
 "Wpisz nowe hasło (minimum %d, maksimum %d znaków)\n"
 "Proszę użyj kombinacji wielkich i małych znaków oraz cyfr.\n"
 
-#: src/passwd.c:257
-#, c-format
-msgid ""
-"Enter the new password (minimum of %d, maximum of %d characters)\n"
-"Please use a combination of upper and lower case letters and numbers.\n"
-msgstr ""
-"Wpisz nowe hasło (minimum %d, maksimum %d znaków)\n"
-"Proszę użyj kombinacji wielkich i małych znaków oraz cyfr.\n"
-
-#: src/passwd.c:274 src/passwd.c:293
+#: src/passwd.c:258 src/passwd.c:277
 #, fuzzy
 #| msgid "%s: fields too long\n"
 msgid "Password is too long.\n"
 msgstr "%s: pola zbyt długie\n"
 
-#: src/passwd.c:281
+#: src/passwd.c:265
 msgid "New password: "
 msgstr "Nowe hasło: "
 
-#: src/passwd.c:300
+#: src/passwd.c:284
 msgid "Try again."
 msgstr "Spróbuj ponownie."
 
-#: src/passwd.c:311
+#: src/passwd.c:295
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway)."
@@ -2315,27 +2268,22 @@ msgstr ""
 "\n"
 "Ostrzeżenie: słabe hasło (wpisz je ponowie jeśli jednak chcesz go użyć)."
 
-#: src/passwd.c:323
+#: src/passwd.c:307
 msgid "They don't match; try again.\n"
 msgstr "Nie zgadzają się; spróbuj ponownie.\n"
 
-#: src/passwd.c:394
+#: src/passwd.c:373
 #, c-format
 msgid "The password for %s cannot be changed.\n"
 msgstr "Hasło dla %s nie może być zmienione.\n"
 
-#: src/passwd.c:415
-#, fuzzy, c-format
-msgid "The password for %s cannot be changed yet.\n"
-msgstr "Hasło dla %s nie może być zmienione.\n"
-
-#: src/passwd.c:458
+#: src/passwd.c:414
 #, fuzzy, c-format
 #| msgid "%s: shadow passwords required for -e\n"
 msgid "%s: malformed password data obtained for user %s\n"
 msgstr "%s: ukryte hasła wymagane dla -e\n"
 
-#: src/passwd.c:592
+#: src/passwd.c:531
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -2343,42 +2291,42 @@ msgid ""
 "account.\n"
 msgstr ""
 
-#: src/passwd.c:922
+#: src/passwd.c:839
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: repozytorium %s nie jest obsługiwane\n"
 
-#: src/passwd.c:967
+#: src/passwd.c:881
 #, c-format
 msgid "%s: only root can use --stdin/-s option\n"
 msgstr ""
 
-#: src/passwd.c:1094
+#: src/passwd.c:1001
 #, c-format
 msgid "%s: root is not authorized by SELinux to change the password of %s\n"
 msgstr ""
 
-#: src/passwd.c:1112
+#: src/passwd.c:1018
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
 msgstr "%s: Nie możesz przeglądać lub zmieniać informacji o haśle dla %s.\n"
 
-#: src/passwd.c:1159
+#: src/passwd.c:1064
 #, c-format
 msgid "Changing password for %s\n"
 msgstr "Zmieniam hasło dla %s\n"
 
-#: src/passwd.c:1164
+#: src/passwd.c:1068
 #, c-format
 msgid "The password for %s is unchanged.\n"
 msgstr "Hasło dla %s pozostaje niezmienione.\n"
 
-#: src/passwd.c:1219 src/passwd.c:1222
+#: src/passwd.c:1123 src/passwd.c:1126
 #, fuzzy, c-format
 msgid "%s: password changed.\n"
 msgstr "Hasło zmienione."
 
-#: src/pwck.c:127
+#: src/pwck.c:128
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
@@ -2386,7 +2334,7 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/pwck.c:135
+#: src/pwck.c:136
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] [passwd [shadow]]\n"
@@ -2394,7 +2342,7 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/pwck.c:142
+#: src/pwck.c:143
 msgid "  -q, --quiet                   report errors only\n"
 msgstr ""
 
@@ -2403,106 +2351,106 @@ msgstr ""
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
 msgstr ""
 
-#: src/pwck.c:412
+#: src/pwck.c:404
 msgid "invalid password file entry"
 msgstr "nieprawidłowy wpis do pliku z hasłami"
 
-#: src/pwck.c:473
+#: src/pwck.c:465
 msgid "duplicate password entry"
 msgstr "powtórzony wpis w pliku z hasłami"
 
-#: src/pwck.c:491
+#: src/pwck.c:483
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: nieprawidłowa nazwa użytkownika '%s'\n"
 
-#: src/pwck.c:494
+#: src/pwck.c:486
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s'\n"
 msgstr "%s: nieprawidłowa nazwa użytkownika '%s'\n"
 
-#: src/pwck.c:504
+#: src/pwck.c:496
 #, fuzzy, c-format
 msgid "invalid user ID '%lu'\n"
 msgstr "nieprawidłowa nazwa użytkownika '%s'\n"
 
-#: src/pwck.c:518
+#: src/pwck.c:510
 #, fuzzy, c-format
 msgid "user '%s': no group %lu\n"
 msgstr "użytkownik %s: brak grupy %u\n"
 
-#: src/pwck.c:537
+#: src/pwck.c:529
 #, fuzzy, c-format
 msgid "user '%s': directory '%s' does not exist\n"
 msgstr "użytkownik %s: katalog %s nie istnieje\n"
 
-#: src/pwck.c:554
+#: src/pwck.c:546
 #, fuzzy, c-format
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "użytkownik %s: program %s nie istnieje\n"
 
-#: src/pwck.c:567
+#: src/pwck.c:559
 #, fuzzy, c-format
 msgid "no tcb directory for %s\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/pwck.c:569
+#: src/pwck.c:561
 #, fuzzy, c-format
 msgid "create tcb directory for %s?"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/pwck.c:575
+#: src/pwck.c:567
 #, fuzzy, c-format
 msgid "failed to create tcb directory for %s\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/pwck.c:585
+#: src/pwck.c:576
 #, fuzzy, c-format
 msgid "%s: cannot lock %s.\n"
 msgstr "%s: nie można zablokować pliku %s\n"
 
-#: src/pwck.c:612 src/pwck.c:819
+#: src/pwck.c:601 src/pwck.c:803
 #, c-format
 msgid "no matching password file entry in %s\n"
 msgstr "brak pasującego wpisu w pliku z hasłami %s\n"
 
-#: src/pwck.c:614
+#: src/pwck.c:603
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "dodać grupę '%s' w %s ?"
 
-#: src/pwck.c:663
+#: src/pwck.c:649
 #, c-format
 msgid ""
 "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
 
-#: src/pwck.c:737
+#: src/pwck.c:721
 msgid "invalid shadow password file entry"
 msgstr "nieprawidłowy wpis w pliku z hasłami"
 
-#: src/pwck.c:798
+#: src/pwck.c:782
 msgid "duplicate shadow password entry"
 msgstr "powtórzony wpis w pliku z ukrytymi hasłami"
 
-#: src/pwck.c:839
+#: src/pwck.c:823
 #, c-format
 msgid "user %s: last password change in the future\n"
 msgstr "użytkownik %s: ostatnia zmiana hasła w przyszłości\n"
 
-#: src/pwck.c:877 src/pwck.c:884
+#: src/pwck.c:860 src/pwck.c:866
 #, fuzzy, c-format
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: nie można otworzyć pliku %s\n"
 
-#: src/pwconv.c:184 src/pwunconv.c:143
+#: src/pwconv.c:185 src/pwunconv.c:144
 #, fuzzy, c-format
 msgid "%s: can't work with tcb enabled\n"
 msgstr "%s: nie można przepisać pliku\n"
 
-#: src/pwconv.c:305
+#: src/pwconv.c:296
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
@@ -2519,40 +2467,40 @@ msgstr "Uwierzytelnianie na podstawie hasła pominięte.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Proszę wpisz swoje WŁASNE hasło jako hasło uwierzytelniające.\n"
 
-#: src/su.c:174
+#: src/su.c:176
 msgid " ...killed.\n"
 msgstr ""
 
-#: src/su.c:297 src/su.c:347 src/su.c:403
+#: src/su.c:298 src/su.c:342 src/su.c:397
 #, c-format
 msgid "%s: signal masking malfunction\n"
 msgstr ""
 
-#: src/su.c:310
+#: src/su.c:309
 #, fuzzy, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: nie można zablokować pliku %s\n"
 
-#: src/su.c:322
+#: src/su.c:319
 #, c-format
 msgid "%s: signal malfunction\n"
 msgstr ""
 
-#: src/su.c:395
+#: src/su.c:389
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#: src/su.c:426
+#: src/su.c:420
 msgid " ...terminated.\n"
 msgstr ""
 
-#: src/su.c:432 src/su.c:477 src/su.c:494 src/su.c:502 src/su.c:1046
-#: src/su.c:1107 src/su.c:1115
+#: src/su.c:426 src/su.c:471 src/su.c:486 src/su.c:493 src/su.c:1044
+#: src/su.c:1105 src/su.c:1113
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#: src/su.c:454
+#: src/su.c:448
 #, fuzzy
 msgid ""
 "Usage: su [options] [-] [username [args]]\n"
@@ -2560,31 +2508,31 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/su.c:457
+#: src/su.c:451
 msgid "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
 msgstr ""
 
-#: src/su.c:459
+#: src/su.c:453
 msgid "  -, -l, --login                make the shell a login shell\n"
 msgstr ""
 
-#: src/su.c:460
+#: src/su.c:454
 msgid ""
 "  -m, -p,\n"
 "  --preserve-environment        do not reset environment variables, and\n"
 "                                keep the same shell\n"
 msgstr ""
 
-#: src/su.c:463
+#: src/su.c:457
 msgid ""
 "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
 msgstr ""
 
-#: src/su.c:465
+#: src/su.c:459
 msgid "If no username is given, assume root.\n"
 msgstr ""
 
-#: src/su.c:486
+#: src/su.c:479
 #, c-format
 msgid ""
 "%s: %s\n"
@@ -2593,62 +2541,60 @@ msgstr ""
 "%s: %s\n"
 "(Zignorowano)\n"
 
-#: src/su.c:527
-#, c-format
+#: src/su.c:517
 msgid "Password field is empty, this is forbidden for all accounts.\n"
 msgstr ""
 
-#: src/su.c:531
-#, c-format
+#: src/su.c:521
 msgid "Password field is empty, this is forbidden for super-user.\n"
 msgstr ""
 
-#: src/su.c:558 src/su.c:582
+#: src/su.c:547 src/su.c:569
 #, c-format
 msgid "You are not authorized to su %s\n"
 msgstr "Nie masz autoryzacji by używać su %s\n"
 
-#: src/su.c:577
+#: src/su.c:565
 msgid "(Enter your own password)"
 msgstr "(Wpisz swoje własne hasło)"
 
-#: src/su.c:601
+#: src/su.c:587
 #, fuzzy, c-format
 msgid "%s: Authentication failure\n"
 msgstr "%s: błąd podczas uwierzytelniania przez PAM\n"
 
-#: src/su.c:625
+#: src/su.c:610
 #, fuzzy, c-format
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "Nie masz autoryzacji by używać su %s\n"
 
-#: src/su.c:667 src/su.c:701
+#: src/su.c:651 src/su.c:682
 #, fuzzy, c-format
 msgid "No passwd entry for user '%s'\n"
 msgstr "Brak wpisu do bazy haseł dla 'root'"
 
-#: src/su.c:693
+#: src/su.c:676
 #, fuzzy, c-format
 #| msgid "invalid user name '%s'\n"
 msgid "Overlong user name '%s'\n"
 msgstr "nieprawidłowa nazwa użytkownika '%s'\n"
 
-#: src/su.c:769
+#: src/su.c:749
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: musisz uruchamiać z terminala\n"
 
-#: src/su.c:1036
+#: src/su.c:1034
 #, c-format
 msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: błąd %d\n"
 
-#: src/su.c:1179
+#: src/su.c:1176
 #, fuzzy, c-format
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: src/su.c:1232
+#: src/su.c:1228
 #, fuzzy, c-format
 msgid "Cannot execute %s\n"
 msgstr "Nie można uruchomić %s"
@@ -2679,67 +2625,62 @@ msgstr ""
 msgid "Entering System Maintenance Mode"
 msgstr "Wchodzę w tryb konserwacji systemu"
 
-#: src/useradd.c:271
+#: src/useradd.c:270
 #, c-format
 msgid "%s: %s was created, but could not be removed\n"
 msgstr ""
 
-#: src/useradd.c:377 src/useradd.c:421
+#: src/useradd.c:374 src/useradd.c:415
 #, c-format
 msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr ""
 
-#: src/useradd.c:390
+#: src/useradd.c:386
 #, c-format
 msgid ""
 "%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr ""
 
-#: src/useradd.c:550 src/useradd.c:559
+#: src/useradd.c:544 src/useradd.c:551
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
-msgid "%s: cannot create new defaults file: %s\n"
+msgid "%s: cannot create new defaults file"
 msgstr "%s: nie można utworzyć nowego pliku z ustawieniami domyślnymi\n"
 
-#: src/useradd.c:568 src/useradd.c:577
+#: src/useradd.c:558 src/useradd.c:566
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: nie można utworzyć nowego pliku z ustawieniami domyślnymi\n"
 
-#: src/useradd.c:588
+#: src/useradd.c:576
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: nie można otworzyć nowego pliku z ustawieniami domyślnymi\n"
 
-#: src/useradd.c:613
+#: src/useradd.c:600
 #, fuzzy, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: linia %d: chown nie powiodło się\n"
 
-#: src/useradd.c:718
+#: src/useradd.c:704
 #, fuzzy, c-format
-msgid "%s: Cannot create backup file (%s): %s\n"
+msgid "%s: Cannot create backup file (%s)"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/useradd.c:729
-#, fuzzy, c-format
-msgid "%s: rename: %s: %s\n"
-msgstr "%s: zmiana nazwy: %s"
-
-#: src/useradd.c:828 src/usermod.c:291
+#: src/useradd.c:808 src/usermod.c:290
 #, fuzzy, c-format
 #| msgid "%s: too many groups specified (max %d).\n"
 msgid "%s: too many groups specified (max %zu).\n"
 msgstr "%s: podano zbyt wiele grup (maks %d).\n"
 
-#: src/useradd.c:878
+#: src/useradd.c:857
 #, fuzzy, c-format
 msgid "%s: Out of memory. Cannot find group '%s'.\n"
 msgstr "%s: zabrakło pamięci w update_group\n"
 
-#: src/useradd.c:894
+#: src/useradd.c:873
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
@@ -2749,377 +2690,366 @@ msgid ""
 "Options:\n"
 msgstr "Użycie: %s [wejście]\n"
 
-#: src/useradd.c:900
+#: src/useradd.c:879
 msgid "      --badname                 do not check for bad names\n"
 msgstr ""
 
-#: src/useradd.c:901
+#: src/useradd.c:880
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
 "                                new account\n"
 msgstr ""
 
-#: src/useradd.c:904
+#: src/useradd.c:883
 msgid ""
 "      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
 msgstr ""
 
-#: src/useradd.c:906
+#: src/useradd.c:885
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgstr ""
 
-#: src/useradd.c:907
+#: src/useradd.c:886
 msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgstr ""
 
-#: src/useradd.c:908
+#: src/useradd.c:887
 msgid ""
 "  -D, --defaults                print or change default useradd "
 "configuration\n"
 msgstr ""
 
-#: src/useradd.c:909
+#: src/useradd.c:888
 msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgstr ""
 
-#: src/useradd.c:910
+#: src/useradd.c:889
 msgid ""
 "  -f, --inactive INACTIVE       password inactivity period of the new "
 "account\n"
 msgstr ""
 
-#: src/useradd.c:912
+#: src/useradd.c:891
 msgid ""
-"  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
+"  -F, --add-subids-for-system   add entries to sub[ug]id even when adding a "
 "system user\n"
 msgstr ""
 
-#: src/useradd.c:914
+#: src/useradd.c:893
 msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
 
-#: src/useradd.c:916
+#: src/useradd.c:895
 msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
 msgstr ""
 
-#: src/useradd.c:919
+#: src/useradd.c:898
 msgid ""
 "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
 msgstr ""
 
-#: src/useradd.c:922
+#: src/useradd.c:901
 msgid ""
 "  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
 msgstr ""
 
-#: src/useradd.c:925
+#: src/useradd.c:904
 msgid "  -m, --create-home             create the user's home directory\n"
 msgstr ""
 
-#: src/useradd.c:926
+#: src/useradd.c:905
 msgid ""
 "  -M, --no-create-home          do not create the user's home directory\n"
 msgstr ""
 
-#: src/useradd.c:927
+#: src/useradd.c:906
 msgid ""
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
 msgstr ""
 
-#: src/useradd.c:929
+#: src/useradd.c:908
 msgid ""
 "  -o, --non-unique              allow to create users with duplicate\n"
 "                                (non-unique) UID\n"
 msgstr ""
 
-#: src/useradd.c:931
+#: src/useradd.c:910
 msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
 
-#: src/useradd.c:932
+#: src/useradd.c:911
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
-#: src/useradd.c:935
+#: src/useradd.c:914
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr ""
 
-#: src/useradd.c:936
+#: src/useradd.c:915
 msgid "  -u, --uid UID                 user ID of the new account\n"
 msgstr ""
 
-#: src/useradd.c:937
+#: src/useradd.c:916
 msgid ""
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
 msgstr ""
 
-#: src/useradd.c:939
+#: src/useradd.c:918
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
 msgstr ""
 
-#: src/useradd.c:940
+#: src/useradd.c:919
 msgid ""
 "      --selinux-range SERANGE   use a specific MLS range for the SELinux "
 "user mapping\n"
 msgstr ""
 
-#: src/useradd.c:1045 src/useradd.c:1106 src/userdel.c:200 src/userdel.c:258
-#: src/usermod.c:772 src/usermod.c:909
+#: src/useradd.c:1022 src/useradd.c:1081 src/userdel.c:200 src/userdel.c:256
+#: src/usermod.c:765 src/usermod.c:900
 #, fuzzy, c-format
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: zabrakło pamięci w update_group\n"
 
-#: src/useradd.c:1208
+#: src/useradd.c:1181
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
 
-#: src/useradd.c:1224
+#: src/useradd.c:1196
 #, c-format
 msgid "%s: invalid comment '%s'\n"
 msgstr "%s: nieprawidłowy komentarz '%s'\n"
 
-#: src/useradd.c:1235
+#: src/useradd.c:1206
 #, c-format
 msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: nieprawidłowy katalog domowy '%s'\n"
 
-#: src/useradd.c:1267
+#: src/useradd.c:1236
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s: ukryte hasła wymagane dla -e\n"
 
-#: src/useradd.c:1291
+#: src/useradd.c:1258
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: ukryte hasła wymagane dla -f\n"
 
-#: src/useradd.c:1369 src/usermod.c:1092 src/usermod.c:1102
+#: src/useradd.c:1333 src/usermod.c:1081 src/usermod.c:1090
 #, c-format
 msgid "%s: invalid field '%s'\n"
 msgstr "%s: nieprawidłowe pole '%s'\n"
 
-#: src/useradd.c:1390 src/usermod.c:1205
+#: src/useradd.c:1353 src/usermod.c:1186
 #, c-format
 msgid "%s: invalid shell '%s'\n"
 msgstr "%s: nieprawidłowa powłoka '%s'\n"
 
-#: src/useradd.c:1402 src/usermod.c:1217
+#: src/useradd.c:1364 src/usermod.c:1197
 #, fuzzy, c-format
 msgid "%s: Warning: missing or non-executable shell '%s'\n"
 msgstr "%s: ostrzeżenie: właścicielem %s nie jest %s\n"
 
-#: src/useradd.c:1426 src/userdel.c:966 src/usermod.c:1284
+#: src/useradd.c:1386 src/userdel.c:927 src/usermod.c:1258
 #, fuzzy, c-format
 #| msgid "%s: cannot rewrite password file\n"
 msgid "%s: -Z cannot be used with --prefix\n"
 msgstr "%s: nie można przepisać pliku z hasłami\n"
 
-#: src/useradd.c:1434 src/userdel.c:974 src/usermod.c:1293
+#: src/useradd.c:1393 src/userdel.c:934 src/usermod.c:1266
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
-#: src/useradd.c:1477 src/useradd.c:1483 src/useradd.c:1489
+#: src/useradd.c:1433 src/useradd.c:1438 src/useradd.c:1443
 #, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
-#: src/useradd.c:1992
+#: src/useradd.c:1926
 #, fuzzy, c-format
-msgid "%s: failed to open the faillog file for UID %lu: %s\n"
+msgid "%s: failed to open the faillog file for UID %lu"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/useradd.c:2001
-#, c-format
-msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
-msgstr ""
-
-#: src/useradd.c:2007
+#: src/useradd.c:1934
 #, fuzzy, c-format
-msgid "%s: failed to close the faillog file for UID %lu: %s\n"
+msgid "%s: failed to reset the faillog entry of UID %lu"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/useradd.c:2037
+#: src/useradd.c:1939
 #, fuzzy, c-format
-msgid "%s: failed to open the lastlog file for UID %lu: %s\n"
+msgid "%s: failed to close the faillog file for UID %lu"
+msgstr "%s: nie można utworzyć katalogu %s\n"
+
+#: src/useradd.c:1968
+#, fuzzy, c-format
+msgid "%s: failed to open the lastlog file for UID %lu"
 msgstr "%s: nie można zaktualizować pliku z hasłami\n"
 
-#: src/useradd.c:2046
-#, c-format
-msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
-msgstr ""
-
-#: src/useradd.c:2053
+#: src/useradd.c:1976
 #, fuzzy, c-format
-msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
+msgid "%s: failed to reset the lastlog entry of UID %lu"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/useradd.c:2098
+#: src/useradd.c:1982
+#, fuzzy, c-format
+msgid "%s: failed to close the lastlog file for UID %lu"
+msgstr "%s: nie można utworzyć katalogu %s\n"
+
+#: src/useradd.c:2026
 #, fuzzy, c-format
 msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/useradd.c:2178 src/useradd.c:2185
+#: src/useradd.c:2103 src/useradd.c:2109
 #, fuzzy, c-format
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/useradd.c:2233
+#: src/useradd.c:2156
 #, fuzzy, c-format
 #| msgid "%s: error updating files\n"
 msgid "%s: error while duplicating string %s\n"
 msgstr "%s: błąd podczas aktualizowania plików\n"
 
-#: src/useradd.c:2242
+#: src/useradd.c:2164
 #, fuzzy, c-format
 #| msgid "%s: cannot create directory %s\n"
 msgid "%s: cannot set SELinux context for home directory %s\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/useradd.c:2273
+#: src/useradd.c:2194
 #, c-format
 msgid "%s: error while duplicating string in BTRFS check %s\n"
 msgstr ""
 
-#: src/useradd.c:2285
+#: src/useradd.c:2204
 #, c-format
 msgid ""
 "%s: warning: \"%s\" is not on BTRFS; creating regular directory instead of "
 "subvolume\n"
 msgstr ""
 
-#: src/useradd.c:2290
+#: src/useradd.c:2208
 #, fuzzy, c-format
 msgid "%s: failed to create BTRFS subvolume: %s\n"
 msgstr "zmiana właściciela skrzynki pocztowej nie powiodła się"
 
-#: src/useradd.c:2300
+#: src/useradd.c:2218
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/useradd.c:2307
-#, fuzzy, c-format
-msgid "%s: warning: chown on `%s' failed: %m\n"
-msgstr "%s: linia %d: chown nie powiodło się\n"
+#: src/useradd.c:2224 src/useradd.c:2226 src/useradd.c:2234
+msgid "warning"
+msgstr ""
 
-#: src/useradd.c:2312
-#, fuzzy, c-format
-msgid "%s: warning: chmod on `%s' failed: %m\n"
-msgstr "%s: linia %d: chown nie powiodło się\n"
-
-#: src/useradd.c:2322
-#, fuzzy, c-format
-msgid "%s: warning: chown on '%s' failed: %m\n"
-msgstr "%s: linia %d: chown nie powiodło się\n"
-
-#: src/useradd.c:2335 src/useradd.c:2426
+#: src/useradd.c:2245 src/useradd.c:2334
 #, c-format
 msgid "%s: cannot reset SELinux file creation context\n"
 msgstr ""
 
-#: src/useradd.c:2383
+#: src/useradd.c:2292
 #, fuzzy, c-format
 msgid "%s: cannot set SELinux context for mailbox file %s\n"
 msgstr "Zmieniam informację o użytkowniku %s\n"
 
-#: src/useradd.c:2394
+#: src/useradd.c:2303
 msgid "Creating mailbox file"
 msgstr "Tworzenie pliku mailbox"
 
-#: src/useradd.c:2400
+#: src/useradd.c:2309
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 "Nie znaleziono grupy 'mail'. Tworzenie pliku mailbox użytkownika z prawami "
 "dostępu 600.\n"
 
-#: src/useradd.c:2412
+#: src/useradd.c:2321
 msgid "Setting mailbox file permissions"
 msgstr "Ustawianie praw dostępu do pliku mailbox"
 
-#: src/useradd.c:2416
+#: src/useradd.c:2325
 #, fuzzy
 #| msgid "Creating mailbox file"
 msgid "Synchronize mailbox file"
 msgstr "Tworzenie pliku mailbox"
 
-#: src/useradd.c:2419
+#: src/useradd.c:2328
 #, fuzzy
 #| msgid "Creating mailbox file"
 msgid "Closing mailbox file"
 msgstr "Tworzenie pliku mailbox"
 
-#: src/useradd.c:2441
+#: src/useradd.c:2349
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
-#: src/useradd.c:2448
+#: src/useradd.c:2356
 #, c-format
 msgid ""
 "%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
 msgstr ""
 
-#: src/useradd.c:2587 src/usermod.c:1472
+#: src/useradd.c:2488 src/usermod.c:1434
 #, fuzzy, c-format
 msgid "%s: user '%s' already exists\n"
 msgstr "%s: użytkownik %s istnieje\n"
 
-#: src/useradd.c:2601
+#: src/useradd.c:2501
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s: grupa %s istnieje - aby dodać tego użytkownika do tej grupy, użyj -g.\n"
 
-#: src/useradd.c:2624
+#: src/useradd.c:2524
 #, fuzzy, c-format
 msgid "%s: can't create user\n"
 msgstr "%s: nie można utworzyć %s\n"
 
-#: src/useradd.c:2630
+#: src/useradd.c:2529
 #, fuzzy, c-format
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %u nie jest niepowtarzalny\n"
 
-#: src/useradd.c:2643
+#: src/useradd.c:2550
 #, fuzzy, c-format
 msgid "%s: Failed to create tcb directory for %s\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/useradd.c:2656
+#: src/useradd.c:2562
 #, fuzzy, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: nie można utworzyć %s\n"
 
-#: src/useradd.c:2667
+#: src/useradd.c:2571
 #, fuzzy, c-format
-msgid "%s: can't create subordinate user IDs: %s\n"
+msgid "%s: can't create subordinate user IDs"
 msgstr "%s: nie można utworzyć %s\n"
 
-#: src/useradd.c:2677
+#: src/useradd.c:2578
 #, fuzzy, c-format
-msgid "%s: can't create subordinate group IDs: %s\n"
+msgid "%s: can't create subordinate group IDs"
 msgstr "%s: nie można utworzyć %s\n"
 
-#: src/useradd.c:2707 src/usermod.c:2357
+#: src/useradd.c:2605 src/usermod.c:2252
 #, c-format
 msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
-#: src/useradd.c:2728
+#: src/useradd.c:2625
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -3131,7 +3061,7 @@ msgstr ""
 "%s: uwaga: katalog domowy już istnieje.\n"
 "Pliki z katalogu skel nie są kopiowane.\n"
 
-#: src/userdel.c:144
+#: src/userdel.c:145
 msgid ""
 "  -f, --force                   force some actions that would fail "
 "otherwise\n"
@@ -3139,161 +3069,161 @@ msgid ""
 "                                or files, even if not owned by the user\n"
 msgstr ""
 
-#: src/userdel.c:149
+#: src/userdel.c:150
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
 
-#: src/userdel.c:153
+#: src/userdel.c:154
 msgid ""
 "  -Z, --selinux-user            remove any SELinux user mapping for the "
 "user\n"
 msgstr ""
 
-#: src/userdel.c:311
+#: src/userdel.c:307
 #, fuzzy, c-format
 msgid ""
 "%s: group %s not removed because it is not the primary group of user %s.\n"
 msgstr "%s: nie można zmienić użytkownika '%s' na kliencie NIS.\n"
 
-#: src/userdel.c:319
+#: src/userdel.c:314
 #, c-format
 msgid "%s: group %s not removed because it has other members.\n"
 msgstr ""
 
-#: src/userdel.c:336
+#: src/userdel.c:330
 #, fuzzy, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: nie można usunąć grupy %s która jest grupą podstawową\n"
 "dla innego użytkownika.\n"
 
-#: src/userdel.c:667 src/userdel.c:673
+#: src/userdel.c:642 src/userdel.c:647
 #, fuzzy, c-format
 msgid "%s: cannot remove entry %lu from %s\n"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: src/userdel.c:768
+#: src/userdel.c:741
 #, fuzzy, c-format
 msgid "%s: %s mail spool (%s) not found\n"
 msgstr "%s: nieprawidłowy katalog domowy '%s'\n"
 
-#: src/userdel.c:774 src/userdel.c:790 src/userdel.c:831
+#: src/userdel.c:746 src/userdel.c:760 src/userdel.c:798
 #, fuzzy, c-format
-msgid "%s: warning: can't remove %s: %s\n"
+msgid "%s: warning: can't remove %s"
 msgstr "%s: ostrzeżenie: nie można usunąć "
 
-#: src/userdel.c:815 src/userdel.c:1080
+#: src/userdel.c:783 src/userdel.c:1038
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: właścicielem %s nie jest %s, nie usuwam\n"
 
-#: src/userdel.c:867
+#: src/userdel.c:832
 #, c-format
 msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
 msgstr ""
 
-#: src/userdel.c:872
+#: src/userdel.c:837
 #, fuzzy, c-format
-msgid "%s: Cannot drop privileges: %s\n"
+msgid "%s: Cannot drop privileges"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/userdel.c:882
+#: src/userdel.c:846
 #, fuzzy, c-format
-msgid "%s: Cannot remove the content of %s: %s\n"
+msgid "%s: Cannot remove the content of %s"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: src/userdel.c:891
+#: src/userdel.c:854
 #, fuzzy, c-format
-msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgid "%s: Cannot remove tcb files for %s"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: src/userdel.c:1075
+#: src/userdel.c:1034
 #, fuzzy, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: nieprawidłowy katalog domowy '%s'\n"
 
-#: src/userdel.c:1106
+#: src/userdel.c:1063
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
 "%s: nie usuwam katalogu %s (usunęłoby to katalog domowy użytkownika %s)\n"
 
-#: src/userdel.c:1128
+#: src/userdel.c:1084
 #, fuzzy, c-format
 #| msgid "%s: error removing directory %s\n"
 msgid "%s: error removing subvolume %s\n"
 msgstr "%s: błąd podczas usuwania katalogu %s\n"
 
-#: src/userdel.c:1138
+#: src/userdel.c:1093
 #, c-format
 msgid "%s: error removing directory %s\n"
 msgstr "%s: błąd podczas usuwania katalogu %s\n"
 
-#: src/userdel.c:1165 src/usermod.c:2370
+#: src/userdel.c:1119 src/usermod.c:2264
 #, c-format
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
 
-#: src/usermod.c:427
+#: src/usermod.c:424
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                the user from other groups\n"
 msgstr ""
 
-#: src/usermod.c:431
+#: src/usermod.c:428
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr ""
 
-#: src/usermod.c:432
+#: src/usermod.c:429
 msgid ""
 "  -d, --home HOME_DIR           new home directory for the user account\n"
 msgstr ""
 
-#: src/usermod.c:433
+#: src/usermod.c:430
 msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
 
-#: src/usermod.c:434
+#: src/usermod.c:431
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
 
-#: src/usermod.c:436
+#: src/usermod.c:433
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
 msgstr ""
 
-#: src/usermod.c:437
+#: src/usermod.c:434
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr ""
 
-#: src/usermod.c:439
+#: src/usermod.c:436
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
 
-#: src/usermod.c:440
+#: src/usermod.c:437
 msgid "  -L, --lock                    lock the user account\n"
 msgstr ""
 
-#: src/usermod.c:441
+#: src/usermod.c:438
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
 msgstr ""
 
-#: src/usermod.c:443
+#: src/usermod.c:440
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr ""
 
-#: src/usermod.c:444
+#: src/usermod.c:441
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr ""
 
-#: src/usermod.c:446
+#: src/usermod.c:443
 msgid ""
 "  -r, --remove                  remove the user from only the supplemental "
 "GROUPS\n"
@@ -3301,203 +3231,203 @@ msgid ""
 "                                the user from other groups\n"
 msgstr ""
 
-#: src/usermod.c:451
+#: src/usermod.c:448
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr ""
 
-#: src/usermod.c:452
+#: src/usermod.c:449
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
-#: src/usermod.c:454
+#: src/usermod.c:451
 msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
 msgstr ""
 
-#: src/usermod.c:455
+#: src/usermod.c:452
 msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
 msgstr ""
 
-#: src/usermod.c:456
+#: src/usermod.c:453
 msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
 msgstr ""
 
-#: src/usermod.c:457
+#: src/usermod.c:454
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr ""
 
-#: src/usermod.c:458
+#: src/usermod.c:455
 msgid ""
-"  -S, --add-subids              add entries to sub[ud]id based on system "
+"  -S, --add-subids              add entries to sub[ug]id based on system "
 "defaults\n"
 msgstr ""
 
-#: src/usermod.c:461
+#: src/usermod.c:458
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
 
-#: src/usermod.c:462
+#: src/usermod.c:459
 msgid ""
 "      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
 msgstr ""
 
-#: src/usermod.c:485
+#: src/usermod.c:481
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock this user's password.\n"
 msgstr ""
 
-#: src/usermod.c:523 src/usermod.c:609
+#: src/usermod.c:518 src/usermod.c:603
 #, fuzzy, c-format
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: użytkownik %s istnieje\n"
 
-#: src/usermod.c:1110
+#: src/usermod.c:1097
 #, c-format
 msgid "%s: homedir must be an absolute path\n"
 msgstr ""
 
-#: src/usermod.c:1240 src/usermod.c:1249
+#: src/usermod.c:1218 src/usermod.c:1226
 #, fuzzy, c-format
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: nieprawidłowa data '%s'\n"
 
-#: src/usermod.c:1258 src/usermod.c:1267
+#: src/usermod.c:1234 src/usermod.c:1242
 #, fuzzy, c-format
 msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: nieprawidłowa data '%s'\n"
 
-#: src/usermod.c:1365
+#: src/usermod.c:1337
 #, fuzzy, c-format
 msgid "%s: no options\n"
 msgstr "%s: nie można otworzyć pliku %s\n"
 
-#: src/usermod.c:1385
+#: src/usermod.c:1354
 #, c-format
 msgid "%s: %s and %s are mutually exclusive flags\n"
 msgstr ""
 
-#: src/usermod.c:1392
+#: src/usermod.c:1360
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
 
-#: src/usermod.c:1464
+#: src/usermod.c:1428
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: ukryte hasła wymagane dla -e i -f\n"
 
-#: src/usermod.c:1480
+#: src/usermod.c:1440
 #, fuzzy, c-format
 msgid "%s: UID '%lu' already exists\n"
 msgstr "Członek grupy już istnieje\n"
 
-#: src/usermod.c:1489 src/usermod.c:1497
+#: src/usermod.c:1448 src/usermod.c:1455
 #, c-format
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr ""
 
-#: src/usermod.c:1850
+#: src/usermod.c:1771
 #, c-format
 msgid "%s: directory %s exists\n"
 msgstr "%s: katalog %s istnieje\n"
 
-#: src/usermod.c:1862
+#: src/usermod.c:1781
 #, c-format
 msgid ""
 "%s: The previous home directory (%s) was not a directory. It is not removed "
 "and no home directories are created.\n"
 msgstr ""
 
-#: src/usermod.c:1885 src/usermod.c:2428
+#: src/usermod.c:1803 src/usermod.c:2321
 #, fuzzy, c-format
 msgid "%s: Failed to change ownership of the home directory"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/usermod.c:1900
+#: src/usermod.c:1817
 #, c-format
 msgid "%s: error: cannot move subvolume from %s to %s - different device\n"
 msgstr ""
 
-#: src/usermod.c:1913
+#: src/usermod.c:1829
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
 "%s: uwaga: nie powiodło się całkowite usuniecie starego katalogu domovego %s"
 
-#: src/usermod.c:1929
+#: src/usermod.c:1844
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: nie można zmienić nazwy katalogu z %s na %s\n"
 
-#: src/usermod.c:1935
+#: src/usermod.c:1849
 #, c-format
 msgid ""
 "%s: The previous home directory (%s) does not exist or is inaccessible. Move "
 "cannot be completed.\n"
 msgstr ""
 
-#: src/usermod.c:1971 src/usermod.c:1983 src/usermod.c:1999
-#, c-format
-msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
-msgstr ""
-
-#: src/usermod.c:2007
+#: src/usermod.c:1884 src/usermod.c:1895 src/usermod.c:1910
 #, fuzzy, c-format
-msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgid "%s: failed to copy the lastlog entry of user %lu to user %lu"
 msgstr "%s: nie można zaktualizować pliku z hasłami\n"
 
-#: src/usermod.c:2035 src/usermod.c:2047 src/usermod.c:2063
-#, c-format
-msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
-msgstr ""
-
-#: src/usermod.c:2071
+#: src/usermod.c:1917
 #, fuzzy, c-format
-msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju"
+msgstr "%s: nie można zaktualizować pliku z hasłami\n"
+
+#: src/usermod.c:1944 src/usermod.c:1955 src/usermod.c:1970
+#, fuzzy, c-format
+msgid "%s: failed to copy the faillog entry of user %lu to user %lu"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#: src/usermod.c:2130
+#: src/usermod.c:1977
+#, fuzzy, c-format
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju"
+msgstr "%s: nie można utworzyć katalogu %s\n"
+
+#: src/usermod.c:2036
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: ostrzeżenie: właścicielem %s nie jest %s\n"
 
-#: src/usermod.c:2138
+#: src/usermod.c:2044
 msgid "failed to change mailbox owner"
 msgstr "zmiana właściciela skrzynki pocztowej nie powiodła się"
 
-#: src/usermod.c:2162
+#: src/usermod.c:2068
 msgid "failed to rename mailbox"
 msgstr "zmiana nazwy skrzynki pocztowej nie powiodła się"
 
-#: src/usermod.c:2254
+#: src/usermod.c:2159
 #, fuzzy, c-format
-msgid "%s: unable to find new subordinate uid range: %s\n"
+msgid "%s: unable to find new subordinate uid range"
 msgstr "%s: nieprawidłowa data '%s'\n"
 
-#: src/usermod.c:2262
+#: src/usermod.c:2164
 #, fuzzy, c-format
-msgid "%s: unable to find new subordinate gid range: %s\n"
+msgid "%s: unable to find new subordinate gid range"
 msgstr "%s: nieprawidłowa data '%s'\n"
 
-#: src/usermod.c:2278
+#: src/usermod.c:2177
 #, fuzzy, c-format
 msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/usermod.c:2295
+#: src/usermod.c:2193
 #, fuzzy, c-format
 msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/usermod.c:2312
+#: src/usermod.c:2209
 #, fuzzy, c-format
 msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
-#: src/usermod.c:2329
+#: src/usermod.c:2225
 #, fuzzy, c-format
 msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
@@ -3547,7 +3477,7 @@ msgstr ""
 msgid "failed to create scratch directory"
 msgstr "zmiana nazwy skrzynki pocztowej nie powiodła się"
 
-#: src/vipw.c:217 src/vipw.c:262 src/vipw.c:424
+#: src/vipw.c:217 src/vipw.c:262 src/vipw.c:421
 #, fuzzy
 msgid "failed to drop privileges"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
@@ -3557,11 +3487,11 @@ msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 msgid "Couldn't get file context"
 msgstr "Nie można zablokować pliku"
 
-#: src/vipw.c:247 src/vipw.c:403
+#: src/vipw.c:247 src/vipw.c:400
 msgid "setfscreatecon () failed"
 msgstr ""
 
-#: src/vipw.c:253 src/vipw.c:276 src/vipw.c:462
+#: src/vipw.c:253 src/vipw.c:276 src/vipw.c:458
 #, fuzzy
 msgid "failed to gain privileges"
 msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
@@ -3574,56 +3504,127 @@ msgstr "Nie można zablokować pliku"
 msgid "Couldn't make backup"
 msgstr "Nie można wykonać kopii zapasowej"
 
-#: src/vipw.c:317
-#, fuzzy, c-format
-msgid "%s: %s: %s\n"
-msgstr "%s: %s\n"
-
-#: src/vipw.c:321
-#, fuzzy, c-format
-msgid "%s: %s returned with status %d\n"
-msgstr "%s: nie znaleziono %s w /etc/passwd\n"
-
-#: src/vipw.c:325 src/vipw.c:388
+#: src/vipw.c:385
 #, c-format
 msgid "%s: %s killed by signal %d\n"
 msgstr ""
 
-#: src/vipw.c:418
+#: src/vipw.c:415
 #, fuzzy
 msgid "failed to open scratch file"
 msgstr "Nie można otworzyć pliku z grupami\n"
 
-#: src/vipw.c:421
+#: src/vipw.c:418
 #, fuzzy
 msgid "failed to unlink scratch file"
 msgstr "%s: pola zbyt długie\n"
 
-#: src/vipw.c:427
+#: src/vipw.c:424
 #, fuzzy
 msgid "failed to stat edited file"
 msgstr "zmiana nazwy skrzynki pocztowej nie powiodła się"
 
-#: src/vipw.c:431
+#: src/vipw.c:428
 #, fuzzy
 #| msgid "%s: can't open file\n"
 msgid "aprintf() failed"
 msgstr "%s: nie można otworzyć pliku\n"
 
-#: src/vipw.c:435
+#: src/vipw.c:432
 #, fuzzy
 msgid "failed to create backup file"
 msgstr "zmiana nazwy skrzynki pocztowej nie powiodła się"
 
-#: src/vipw.c:448
-#, c-format
-msgid "%s: can't restore %s: %s (your changes are in %s)\n"
+#: src/vipw.c:444
+#, fuzzy, c-format
+#| msgid "%s: can't restore %s: %s (your changes are in %s)\n"
+msgid "%s: can't restore %s (your changes are in %s)"
 msgstr "%s: nie można odzyskać %s: %s (twoje zmiany są w %s)\n"
 
-#: src/vipw.c:577
+#: src/vipw.c:572
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: failed to allocate memory: %s\n"
+#~ msgstr "zmiana właściciela skrzynki pocztowej nie powiodła się"
+
+#, c-format
+#~ msgid "%s: failed to drop privileges (%s)\n"
+#~ msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Cannot create directory %s: %s\n"
+#~ msgstr "%s: nie można utworzyć katalogu %s\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: unlink: %s: %s\n"
+#~ msgstr "%s: zmiana nazwy: %s"
+
+#, fuzzy, c-format
+#~ msgid "%s: mkdir: %s: %s\n"
+#~ msgstr "%s: zmiana nazwy: %s"
+
+#, fuzzy, c-format
+#~ msgid "%s: Cannot open %s: %s\n"
+#~ msgstr "%s: nie można otworzyć pliku %s\n"
+
+#~ msgid "Minimum Password Age"
+#~ msgstr "Minimalny wiek hasła"
+
+#, c-format
+#~ msgid "Minimum number of days between password change\t\t: %ld\n"
+#~ msgstr "Minimalna ilość dni pomiędzy zmianami hasła\t\t: %ld\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: cannot open %s: %s\n"
+#~ msgstr "%s: nie można otworzyć pliku %s\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: failure forking: %s\n"
+#~ msgstr "%s: failure forking: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Enter the new password (minimum of %d, maximum of %d characters)\n"
+#~ "Please use a combination of upper and lower case letters and numbers.\n"
+#~ msgstr ""
+#~ "Wpisz nowe hasło (minimum %d, maksimum %d znaków)\n"
+#~ "Proszę użyj kombinacji wielkich i małych znaków oraz cyfr.\n"
+
+#, fuzzy, c-format
+#~ msgid "The password for %s cannot be changed yet.\n"
+#~ msgstr "Hasło dla %s nie może być zmienione.\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: cannot create new defaults file\n"
+#~ msgid "%s: cannot create new defaults file: %s\n"
+#~ msgstr "%s: nie można utworzyć nowego pliku z ustawieniami domyślnymi\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: rename: %s: %s\n"
+#~ msgstr "%s: zmiana nazwy: %s"
+
+#, fuzzy, c-format
+#~ msgid "%s: warning: chown on `%s' failed: %m\n"
+#~ msgstr "%s: linia %d: chown nie powiodło się\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: warning: chmod on `%s' failed: %m\n"
+#~ msgstr "%s: linia %d: chown nie powiodło się\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: warning: chown on '%s' failed: %m\n"
+#~ msgstr "%s: linia %d: chown nie powiodło się\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: %s: %s\n"
+#~ msgstr "%s: %s\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: %s returned with status %d\n"
+#~ msgstr "%s: nie znaleziono %s w /etc/passwd\n"
 
 #, fuzzy
 #~| msgid ""
@@ -3749,10 +3750,6 @@ msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
 #~ msgstr "zbyt wiele grup\n"
 
 #, c-format
-#~ msgid "%s: cannot create new defaults file\n"
-#~ msgstr "%s: nie można utworzyć nowego pliku z ustawieniami domyślnymi\n"
-
-#, c-format
 #~ msgid "%s: group '%s' is a NIS group.\n"
 #~ msgstr "%s: grupa '%s' jest grupą NIS.\n"
 
@@ -3770,10 +3767,6 @@ msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
 #, fuzzy, c-format
 #~ msgid "%s: Could not open proc directory for target %u\n"
 #~ msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
-
-#, fuzzy
-#~ msgid "failed to allocate memory"
-#~ msgstr "zmiana właściciela skrzynki pocztowej nie powiodła się"
 
 #~ msgid "Usage: id\n"
 #~ msgstr "Użycie: id\n"
@@ -4153,8 +4146,8 @@ msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
 #~ "  -l, --login NOWY_LOGIN      nowa nawana logina użytkownika\n"
 #~ "  -L, --lock                  blokuj konto użytkowqnika\n"
 #~ "  -m, --move-home             przenieś zawartość katalogu domowego\n"
-#~ "                              użytkownika (może być użyte tylko z opcją -"
-#~ "d)\n"
+#~ "                              użytkownika (może być użyte tylko z opcją "
+#~ "-d)\n"
 #~ "  -o, --non-unique            pozwól na użycie nieunikalnego UID dla "
 #~ "konta\n"
 #~ "  -p, --password HASŁO        użyj nowe zakodowane HASŁO dla użytkonta\n"
@@ -4392,8 +4385,8 @@ msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
 #~ "                                konta\n"
 #~ "  -k, --skel SKEL_DIR           podaj alternatywną ścieżkę do katalogu "
 #~ "skel\n"
-#~ "  -K, --key KLUCZ=WARTOŚĆ       przysłoń wartość domyślną z /etc/login."
-#~ "defs\n"
+#~ "  -K, --key KLUCZ=WARTOŚĆ       przysłoń wartość domyślną z /etc/"
+#~ "login.defs\n"
 #~ "  -m, --create-home             twórz katalog domowy dla nowego "
 #~ "użytkownika\n"
 #~ "  -o, --non-unique              pozwól na utworzenie konta z nieunikalnym "
