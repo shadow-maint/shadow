@@ -8,6 +8,7 @@ import re
 
 import pytest
 from passlib.hash import sha512_crypt
+from pytest_mh.conn import ProcessError
 
 from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
@@ -150,3 +151,46 @@ def test_groupadd__force_group_creation(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__existing_GID(shadow: Shadow):
+    """
+    :title: Group creation fails when specified GID already exists
+    :setup:
+        1. Create group with specific GID
+    :steps:
+        1. Check existing group and gshadow entry
+        2. Attempt to create group with existing GID
+        3. Verify that groupadd command fails
+        4. Check group and gshadow entries
+    :expectedresults:
+        1. Existing group and gshadow entries are found
+        2. Group is not created
+        3. groupadd command fails with error (GID already exists)
+        4. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    shadow.groupadd("-g 1500 tgroup1")
+
+    existing_group_entry = shadow.tools.getent.group("tgroup1")
+    assert existing_group_entry is not None, "Group should be found"
+    assert existing_group_entry.name == "tgroup1", "Incorrect groupname"
+    assert existing_group_entry.gid == 1500, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        existing_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert existing_gshadow_entry is not None, "Group should be found"
+        assert existing_gshadow_entry.name == "tgroup1", "Incorrect groupname"
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("-g 1500 tgroup2")
+
+    assert exc_info.value.rc == 4, f"Expected return code 4 (GID already exists), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is None, "Group should not be found"
