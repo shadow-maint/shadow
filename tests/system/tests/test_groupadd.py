@@ -512,3 +512,34 @@ def test_groupadd__invalid_arguments(shadow: Shadow, args: str):
         shadow.groupadd(args)
 
     assert exc_info.value.rc == 2, f"Expected return code 2(invalid usage), got {exc_info.value.rc}"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__no_gshadow(shadow: Shadow):
+    """
+    :title: Group creation succeeds when /etc/gshadow does not exist
+    :setup:
+        1. Remove /etc/gshadow file
+        2. Set FORCE_SHADOW=no in /etc/login.defs
+    :steps:
+        1. Create group
+        2. Check group entry
+        3. Check that /etc/gshadow file is not present
+    :expectedresults:
+        1. Group is created
+        2. Group entry is found
+        3. /etc/gshadow file is not found
+    :customerscenario: False
+    """
+    shadow.fs.rm("/etc/gshadow")
+
+    shadow.login_defs["FORCE_SHADOW"] = "no"
+
+    shadow.groupadd("tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+
+    gshadow_file = shadow.fs.exists("/etc/gshadow")
+    assert not gshadow_file, "/etc/gshadow file should not be found"
