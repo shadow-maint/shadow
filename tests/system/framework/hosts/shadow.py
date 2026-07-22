@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import PurePosixPath
 from typing import Any
 
-from pytest_mh import MultihostUtility
+from pytest_mh import MultihostUtility, mh_utility_used
 from pytest_mh.conn import ProcessLogLevel
 
 from .base import BaseHost, BaseLinuxHost
@@ -275,104 +275,158 @@ class ShadowHost(BaseHost, BaseLinuxHost):
                 break
 
 
-class LoginDefsConfig(MultihostUtility[ShadowHost]):
+class KeyValueFileConfig(MultihostUtility[ShadowHost]):
     """
-    Manage /etc/login.defs configuration.
+    Manage a key-value configuration file with dictionary-like access.
 
     Usage:
         # Set a value
-        shadow.login_defs["CREATE_HOME"] = "no"
+        config["KEY"] = "value"
 
         # Get a value
-        value = shadow.login_defs["CREATE_HOME"]
+        value = config["KEY"]
 
         # Remove an option
-        del shadow.login_defs["CREATE_HOME"]
+        del config["KEY"]
+
+    The file is backed up on setup and restored on teardown. If the file
+    or its parent directory does not exist, it is created on setup and
+    removed again on teardown.
     """
 
-    def __init__(self, host: ShadowHost) -> None:
+    def __init__(self, host: ShadowHost, path: str, separator: str = " ") -> None:
+        """
+        :param host: Multihost host.
+        :type host: ShadowHost
+        :param path: Path to the configuration file.
+        :type path: str
+        :param separator: Separator between key and value, ``" "`` or ``"="``.
+        :type separator: str
+        """
         super().__init__(host)
+        self.path: str = path
+        self.separator: str = separator
         self._backup_path: str | None = None
+        self._file_existed: bool = False
+        self._dir_created: str | None = None
+
+    def _ensure_exists(self) -> None:
+        """
+        Make sure the parent directory and the file exist, creating them
+        when missing. Anything created here is removed on teardown.
+        """
+        parent = str(PurePosixPath(self.path).parent)
+        if not self.host.fs.exists(parent):
+            self.host.conn.run(f"mkdir -p '{parent}'", log_level=ProcessLogLevel.Error)
+            if self._dir_created is None:
+                self._dir_created = parent
+
+        if not self.host.fs.exists(self.path):
+            self.host.conn.run(f"touch '{self.path}'", log_level=ProcessLogLevel.Error)
 
     def setup(self) -> None:
         """
-        Backup the original /etc/login.defs file.
+        Backup the original file.
         Called automatically by the framework.
         """
-        if self.host.fs.exists("/etc/login.defs"):
+        if self.host.fs.exists(self.path):
+            self._file_existed = True
             result = self.host.conn.run(
-                """
+                f"""
                 set -ex
                 backup_path=`mktemp`
-                cp /etc/login.defs $backup_path
+                cp '{self.path}' $backup_path
                 echo $backup_path
                 """,
                 log_level=ProcessLogLevel.Error,
             )
             self._backup_path = result.stdout_lines[-1].strip()
 
+        self._ensure_exists()
+
     def teardown(self) -> None:
         """
-        Restore the original /etc/login.defs file.
+        Restore the original file.
         Called automatically by the framework.
         """
-        if self._backup_path and self.host.fs.exists(self._backup_path):
-            self.host.conn.run(f"mv {self._backup_path} /etc/login.defs")
+        if self._file_existed:
+            if self._backup_path and self.host.fs.exists(self._backup_path):
+                self.host.conn.run(f"mv '{self._backup_path}' '{self.path}'")
+        else:
+            self.host.conn.run(f"rm -f '{self.path}'", raise_on_error=False)
 
+        if self._dir_created is not None:
+            self.host.conn.run(f"rmdir '{self._dir_created}'", raise_on_error=False)
+
+    @mh_utility_used
     def __getitem__(self, key: str) -> str:
         """
-        Get a value from /etc/login.defs.
+        Get a value from the file.
 
         :param key: Option name (e.g., 'CREATE_HOME')
         :type key: str
         :return: Current value
         :rtype: str
         """
-        result = self.host.conn.run(
-            f"grep -E '^{key}\\s+' /etc/login.defs | tail -1 | awk '{{print $2}}'", raise_on_error=False
-        )
+        self._ensure_exists()
+
+        if self.separator == "=":
+            cmd = f"grep -E '^{key}=' {self.path} | tail -1 | cut -d= -f2-"
+        else:
+            cmd = f"grep -E '^{key}\\s+' {self.path} | tail -1 | awk '{{print $2}}'"
+
+        result = self.host.conn.run(cmd, raise_on_error=False)
         if result.rc != 0 or not result.stdout.strip():
             return ""
         return result.stdout.strip()
 
+    @mh_utility_used
     def __setitem__(self, key: str, value: str) -> None:
         """
-        Set a value in /etc/login.defs.
+        Set a value in the file.
 
         :param key: Option name (e.g., 'CREATE_HOME')
         :type key: str
         :param value: Value to set (can contain special characters like /, &, etc.)
         :type value: str
         """
-        self.logger.info(f"Setting {key}={value} in /etc/login.defs on {self.host.hostname}")
+        self._ensure_exists()
+        self.logger.info(f"Setting {key}={value} in {self.path} on {self.host.hostname}")
+
+        sep = self.separator
+        grep_match = "=" if sep == "=" else "\\s"
+        awk_match = "=" if sep == "=" else "\\\\s"
 
         # Escape special characters for awk
         escaped_value = value.replace("/", "\\/")
 
         self.host.conn.run(
             f"""
-            if grep -q '^{key}\\s' /etc/login.defs; then
+            if grep -q '^{key}{grep_match}' {self.path}; then
                 awk -v key="{key}" -v val="{escaped_value}" \\
-                    '{{if ($0 ~ "^" key "\\\\s") print key " " val; else print $0}}' \\
-                    /etc/login.defs > /etc/login.defs.tmp && mv /etc/login.defs.tmp /etc/login.defs
-            elif grep -q '^#\\s*{key}\\s' /etc/login.defs; then
+                    '{{if ($0 ~ "^" key "{awk_match}") print key "{sep}" val; else print $0}}' \\
+                    {self.path} > {self.path}.tmp && mv {self.path}.tmp {self.path}
+            elif grep -q '^#\\s*{key}{grep_match}' {self.path}; then
                 awk -v key="{key}" -v val="{escaped_value}" \\
-                    '{{if ($0 ~ "^#\\\\s*" key "\\\\s") print key " " val; else print $0}}' \\
-                    /etc/login.defs > /etc/login.defs.tmp && mv /etc/login.defs.tmp /etc/login.defs
+                    '{{if ($0 ~ "^#\\\\s*" key "{awk_match}") print key "{sep}" val; else print $0}}' \\
+                    {self.path} > {self.path}.tmp && mv {self.path}.tmp {self.path}
             else
-                echo '{key} {value}' >> /etc/login.defs
+                echo '{key}{sep}{value}' >> {self.path}
             fi
             """,
             log_level=ProcessLogLevel.Error,
         )
 
+    @mh_utility_used
     def __delitem__(self, key: str) -> None:
         """
-        Remove an option from /etc/login.defs (comment it out).
+        Remove an option from the file (comment it out).
 
         :param key: Option name to remove
         :type key: str
         """
-        self.logger.info(f"Removing {key} from /etc/login.defs on {self.host.hostname}")
+        self._ensure_exists()
+        self.logger.info(f"Removing {key} from {self.path} on {self.host.hostname}")
 
-        self.host.conn.run(f"sed -i 's/^{key}\\s.*/#&/' /etc/login.defs", log_level=ProcessLogLevel.Error)
+        match = "=" if self.separator == "=" else "\\s"
+        self.host.conn.run(f"sed -i 's/^{key}{match}.*/#&/' {self.path}", log_level=ProcessLogLevel.Error)
