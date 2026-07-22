@@ -8,6 +8,7 @@ import re
 
 import pytest
 from passlib.hash import sha512_crypt
+from pytest_mh.conn import ProcessError
 
 from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
@@ -150,3 +151,90 @@ def test_groupadd__force_group_creation(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__no_gshadow(shadow: Shadow):
+    """
+    :title: Group creation succeeds when /etc/gshadow does not exist
+    :setup:
+        1. Remove /etc/gshadow file
+        2. Disable FORCE_SHADOW in /etc/login.defs
+    :steps:
+        1. Create group
+        2. Check group entry
+        3. Check that /etc/gshadow file is not recreated
+    :expectedresults:
+        1. Group entry is created
+        2. Group entry is found
+        3. /etc/gshadow file is not found
+    :customerscenario: False
+    """
+    shadow.fs.rm("/etc/gshadow")
+
+    shadow.login_defs["FORCE_SHADOW"] = "no"
+
+    shadow.groupadd("tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert not shadow.fs.exists("/etc/gshadow"), "/etc/gshadow file should not exist"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__o_without_g(shadow: Shadow):
+    """
+    :title: Groupadd command fails when -o is mentioned without -g
+    :setup:
+        1. None required
+    :steps:
+        1. Attempt to create group
+        2. Verify that groupadd command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group entry is not created
+        2. groupadd command fails with error (invalid usage)
+        3. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("-o tgroup")
+
+    assert exc_info.value.rc == 2, f"Expected return code 2 (invalid usage), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__invalid_option(shadow: Shadow):
+    """
+    :title: Group creation fails with invalid option
+    :setup:
+        1. None required
+    :steps:
+        1. Attempt to create group
+        2. Verify that groupadd command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group entry is not created
+        2. groupadd command fails with error (invalid usage)
+        3. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("-invalid tgroup")
+
+    assert exc_info.value.rc == 2, f"Expected return code 2 (invalid usage), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is None, "Group should not be found"
