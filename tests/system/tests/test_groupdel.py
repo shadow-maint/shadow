@@ -64,3 +64,31 @@ def test_groupdel__delete_group_no_gshadow_entry(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupdel__delete_group_no_gshadow_file(shadow: Shadow):
+    """
+    :title: Group deletion with no gshadow file
+    :setup:
+        1. Create group
+        2. Remove gshadow file
+    :steps:
+        1. Delete group
+        2. Check group entry
+        3. Verify that gshadow file doesn't exist
+    :expectedresults:
+        1. Group entry is deleted successfully
+        2. No group entry is found
+        3. No gshadow file is found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+
+    shadow.fs.rm("/etc/gshadow")
+
+    shadow.groupdel("tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is None, "Group should not be found"
+    assert not shadow.fs.exists("/etc/gshadow"), "/etc/gshadow file should not be found"
