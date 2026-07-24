@@ -70,7 +70,6 @@
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strtok/stpsep.h"
 #include "sysconf.h"
@@ -1177,7 +1176,8 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			switch (c) {
 			case 'b':
 				if (   ( !VALID (optarg) )
-				    || ( optarg[0] != '/' )) {
+				    || !strspn(optarg, "/"))
+				{
 					eprintf(_("%s: invalid base directory '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
@@ -1202,7 +1202,8 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				break;
 			case 'd':
 				if (   ( !VALID (optarg) )
-				    || ( optarg[0] != '/' )) {
+				    || !strspn(optarg, "/"))
+				{
 					eprintf(_("%s: invalid home directory '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
@@ -1347,15 +1348,13 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
-				    || (   !streq(optarg, "")
-				        && ('/'  != optarg[0])
-				        && ('*'  != optarg[0]) )) {
+				    || strcspn(optarg, "/*"))
+				{
 					eprintf(_("%s: invalid shell '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				if (!streq(optarg, "")
-				     && '*'  != optarg[0]
+				if (strcspn(optarg, "*")
 				     && !streq(optarg, "/sbin/nologin")
 				     && !streq(optarg, "/usr/sbin/nologin")
 				     && (   stat(optarg, &st) != 0
@@ -2176,7 +2175,7 @@ static void create_home(const struct option_flags *flags)
 		bool  dir_created;
 
 		/* Avoid turning a relative path into an absolute path. */
-		if (strprefix(bhome, "/") || !streq(path, ""))
+		if (strspn(bhome, "/") || !streq(path, ""))
 			strcat(path, "/");
 
 		strcat(path, cp);
