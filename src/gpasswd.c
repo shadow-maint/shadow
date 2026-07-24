@@ -28,6 +28,7 @@
 #include "exitcodes.h"
 #include "groupio.h"
 #include "io/fprintf.h"
+#include "list.h"
 #include "nscd.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
