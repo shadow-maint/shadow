@@ -67,6 +67,8 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	tmp[i] = xstrdup (member);
 	tmp[i+1] = NULL;
 
+	free (list);
+
 	return tmp;
 }
 
@@ -95,6 +97,10 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	for (i = j = 0; list[i] != NULL; i++) {
 		if (!streq(list[i], member)) {
 			j++;
+		} else {
+			/* The removed entry is no longer referenced by the
+			 * new list, so free its string here. */
+			free (list[i]);
 		}
 	}
 

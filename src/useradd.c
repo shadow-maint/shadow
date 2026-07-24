@@ -1043,6 +1043,7 @@ static void grp_update (bool process_selinux)
 		              SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG(LOG_INFO, "add '%s' to group '%s'", user_name, ngrp->gr_name);
+		gr_free (ngrp);
 	}
 
 #ifdef	SHADOWGRP
@@ -1104,6 +1105,7 @@ static void grp_update (bool process_selinux)
 #endif
 		SYSLOG(LOG_INFO, "add '%s' to shadow group '%s'",
 		       user_name, nsgrp->sg_namp);
+		sgr_free (nsgrp);
 	}
 #endif				/* SHADOWGRP */
 }
