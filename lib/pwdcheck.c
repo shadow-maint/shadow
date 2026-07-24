@@ -36,6 +36,4 @@ passwd_check(const char *user, const char *passwd)
 		exit (EXIT_FAILURE);
 	}
 }
-#else			/* USE_PAM */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif			/* USE_PAM */
