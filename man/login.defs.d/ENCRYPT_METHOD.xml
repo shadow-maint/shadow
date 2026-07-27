@@ -26,5 +26,12 @@
       PAM configuration. It is recommended to set this variable
       consistently with the PAM configuration.
     </para>
+    <para>
+      History:
+      This variable is used by other programs,
+      which may still default to unsafe algorithms such as DES.
+      To avoid using unsafe algorithms,
+      the variable should always be specified.
+    </para>
   </listitem>
 </varlistentry>
