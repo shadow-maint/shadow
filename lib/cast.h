@@ -8,8 +8,11 @@
 
 #include "config.h"
 
+#include "sizeof.h"
+
 
 #define const_cast(T, p)  _Generic(p, const T:  (T) (p))
+#define ptr_cast(T, p)    rvalue((typeas(T) *){(p)})
 
 #define rvalue(lv)        ((void)0, (lv))
 
