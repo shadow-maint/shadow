@@ -325,6 +325,16 @@ grp_update(void)
 		}
 	}
 #endif				/* SHADOWGRP */
+	if (NULL != user_list) {
+		free_list(grp.gr_mem);
+		free(grp.gr_mem);
+#ifdef	SHADOWGRP
+		if (NULL != osgrp) {
+			free_list(sgrp.sg_mem);
+			free(sgrp.sg_mem);
+		}
+#endif				/* SHADOWGRP */
+	}
 }
 
 /*
