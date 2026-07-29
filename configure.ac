@@ -171,9 +171,6 @@ AC_ARG_WITH([selinux],
 AC_ARG_WITH([acl],
 	[AS_HELP_STRING([--with-acl], [use ACL support @<:@default=yes if found@:>@])],
 	[with_acl=$withval], [with_acl=maybe])
-AC_ARG_WITH([attr],
-	[AS_HELP_STRING([--with-attr], [use Extended Attribute support @<:@default=yes if found@:>@])],
-	[with_attr=$withval], [with_attr=maybe])
 AC_ARG_WITH([skey],
 	[AS_HELP_STRING([--with-skey], [use S/Key support @<:@default=no@:>@])],
 	[with_skey=$withval], [with_skey=no])
@@ -628,7 +625,6 @@ AC_MSG_NOTICE([shadow ${PACKAGE_VERSION} has been configured with the following 
 	SELinux support:		$with_selinux
 	BtrFS support:			$with_btrfs
 	ACL support:			$with_acl
-	Extended Attributes support:	$with_attr
 	tcb support (incomplete):	$with_tcb
 	shadow group support:		$enable_shadowgrp
 	S/Key support:			$with_skey
