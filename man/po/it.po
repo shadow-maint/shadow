@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.5\n"
-"POT-Creation-Date: 2026-07-21 16:36+0200\n"
+"POT-Creation-Date: 2026-07-29 11:13+0200\n"
 "PO-Revision-Date: 2013-08-23 01:38+0200\n"
 "Last-Translator: Giuseppe Sacco <eppesuig@debian.org>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -87,7 +87,7 @@ msgid "shadow-utils"
 msgstr "shadow-utils"
 
 #. (itstool) path: refmeta/refmiscinfo
-msgid "4.20.0-rc3"
+msgid "4.20.0"
 msgstr ""
 
 # type: Plain text
@@ -1611,6 +1611,13 @@ msgstr ""
 "generazione delle password utente avviene tramite PAM ed è soggetta alla "
 "configurazione PAM. È raccomandato di impostare questa variabile in maniera "
 "consistente con la configurazione PAM."
+
+#. (itstool) path: listitem/para
+msgid ""
+"History: This variable is used by other programs, which may still default to "
+"unsafe algorithms such as DES. To avoid using unsafe algorithms, the "
+"variable should always be specified."
+msgstr ""
 
 #. (itstool) path: term/option
 #. (itstool) path: listitem/para
@@ -11093,6 +11100,19 @@ msgstr ""
 msgid ""
 "When the <_:option-1/> command-line option is specified, a Btrfs subvolume "
 "is created regardless of any configuration file settings."
+msgstr ""
+
+#. (itstool) path: para/option
+msgid "BTRFS_SUBVOLUME_SYSTEM"
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"Subvolumes are only created for regular users, whose UID is within the "
+"<_:option-1/>-<_:option-2/> range defined in <_:filename-3/>. System users "
+"get a regular home directory instead. Set the <_:option-4/> variable in "
+"<_:filename-5/> to <_:replaceable-6/> to create subvolumes for system users "
+"as well. If this variable is not set, the default value is no."
 msgstr ""
 
 #. (itstool) path: para/emphasis
