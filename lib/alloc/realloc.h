@@ -20,7 +20,7 @@
 #define realloc_T_(p, n, T)                                           \
 (                                                                     \
 	_Generic(p, T *: (void)0),                                    \
-	rvalue((T *){reallocarray_(p, n, sizeof(T))})                 \
+	ptr_cast(T, reallocarray_(p, n, sizeof(T)))                   \
 )
 
 #define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
