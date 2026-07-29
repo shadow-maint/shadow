@@ -8,6 +8,7 @@
 
 #ifdef ENABLE_SUBIDS
 
+#include <stdint.h>
 #include <stdio.h>
 #include <errno.h>
 
