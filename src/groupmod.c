@@ -259,8 +259,7 @@ grp_update(void)
 			grp.gr_mem[0] = NULL;
 		} else {
 			// append to existing groups
-			if (NULL != grp.gr_mem[0])
-				grp.gr_mem = dup_list (grp.gr_mem);
+			grp.gr_mem = dup_list (grp.gr_mem);
 		}
 #ifdef	SHADOWGRP
 		if (NULL != osgrp) {
@@ -268,8 +267,7 @@ grp_update(void)
 				sgrp.sg_mem = xmalloc_T(1, char *);
 				sgrp.sg_mem[0] = NULL;
 			} else {
-				if (NULL != sgrp.sg_mem[0])
-					sgrp.sg_mem = dup_list(sgrp.sg_mem);
+				sgrp.sg_mem = dup_list(sgrp.sg_mem);
 			}
 		}
 #endif				/* SHADOWGRP */
