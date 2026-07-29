@@ -14,10 +14,12 @@
 #endif
 #include <sys/types.h>
 
+#include "cast.h"
+
 
 #define typeas(T)            typeof((T){0})
 
-#define ssizeof(x)           ((void)0, (ssize_t){sizeof(x)})
+#define ssizeof(x)           rvalue((ssize_t){sizeof(x)})
 #define memberof(T, member)  ((T){}.member)
 #define WIDTHOF(x)           (sizeof(x) * CHAR_BIT)
 
