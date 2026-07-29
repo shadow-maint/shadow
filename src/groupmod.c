@@ -241,7 +241,7 @@ grp_update(void)
 			sgrp.sg_namp   = xstrdup (grp.gr_name);
 			sgrp.sg_passwd = xstrdup (grp.gr_passwd);
 			sgrp.sg_adm    = &empty;
-			sgrp.sg_mem    = dup_list (grp.gr_mem);
+			sgrp.sg_mem    = grp.gr_mem;
 			new_sgent (&sgrp);
 			osgrp = &sgrp; /* entry needs to be committed */
 		}
