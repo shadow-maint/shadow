@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man 4.20.0-rc2\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2026-07-21 16:36+0200\n"
+"POT-Creation-Date: 2026-07-29 11:13+0200\n"
 "PO-Revision-Date: 2026-06-25 20:14+0200\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -98,7 +98,7 @@ msgstr "shadow-utils"
 #. (itstool) path: refmeta/refmiscinfo
 #, fuzzy
 #| msgid "4.20.0-rc2"
-msgid "4.20.0-rc3"
+msgid "4.20.0"
 msgstr "4.20.0-rc2"
 
 #. (itstool) path: refnamediv/refpurpose
@@ -1277,6 +1277,13 @@ msgid ""
 "Note: this only affects the generation of group passwords. The generation of "
 "user passwords is done by PAM and subject to the PAM configuration. It is "
 "recommended to set this variable consistently with the PAM configuration."
+msgstr ""
+
+#. (itstool) path: listitem/para
+msgid ""
+"History: This variable is used by other programs, which may still default to "
+"unsafe algorithms such as DES. To avoid using unsafe algorithms, the "
+"variable should always be specified."
 msgstr ""
 
 #. (itstool) path: term/option
@@ -8563,6 +8570,21 @@ msgstr ""
 "Când este specificată opțiunea de linie de comandă <_:option-1/>, se creează "
 "un sub-volum Btrfs, indiferent de orice parametri din fișierul de "
 "configurare."
+
+#. (itstool) path: para/option
+#, fuzzy
+#| msgid "BTRFS_SUBVOLUME_HOME"
+msgid "BTRFS_SUBVOLUME_SYSTEM"
+msgstr "BTRFS_SUBVOLUME_HOME"
+
+#. (itstool) path: listitem/para
+msgid ""
+"Subvolumes are only created for regular users, whose UID is within the "
+"<_:option-1/>-<_:option-2/> range defined in <_:filename-3/>. System users "
+"get a regular home directory instead. Set the <_:option-4/> variable in "
+"<_:filename-5/> to <_:replaceable-6/> to create subvolumes for system users "
+"as well. If this variable is not set, the default value is no."
+msgstr ""
 
 #. (itstool) path: para/emphasis
 msgid "not"

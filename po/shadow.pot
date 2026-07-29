@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.20.0-rc3\n"
+"Project-Id-Version: shadow 4.20.0\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2026-07-20 15:43+0200\n"
+"POT-Creation-Date: 2026-07-28 17:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,10 +83,10 @@ msgstr ""
 #: src/passwd.c:510 src/pwck.c:95 src/pwck.c:105 src/pwck.c:346 src/pwck.c:357
 #: src/pwck.c:586 src/pwck.c:669 src/pwconv.c:93 src/pwconv.c:101
 #: src/pwconv.c:303 src/pwconv.c:309 src/pwunconv.c:55 src/pwunconv.c:62
-#: src/pwunconv.c:215 src/pwunconv.c:220 src/useradd.c:276 src/useradd.c:281
-#: src/useradd.c:286 src/useradd.c:292 src/useradd.c:299 src/useradd.c:304
-#: src/useradd.c:1580 src/useradd.c:1593 src/useradd.c:1610 src/useradd.c:1624
-#: src/useradd.c:1675 src/useradd.c:1689 src/userdel.c:397 src/userdel.c:410
+#: src/pwunconv.c:215 src/pwunconv.c:220 src/useradd.c:278 src/useradd.c:283
+#: src/useradd.c:288 src/useradd.c:294 src/useradd.c:301 src/useradd.c:306
+#: src/useradd.c:1600 src/useradd.c:1613 src/useradd.c:1630 src/useradd.c:1644
+#: src/useradd.c:1695 src/useradd.c:1709 src/userdel.c:397 src/userdel.c:410
 #: src/userdel.c:423 src/userdel.c:438 src/userdel.c:454 src/userdel.c:468
 #: src/userdel.c:484 src/userdel.c:491 src/userdel.c:498 src/userdel.c:506
 #: src/userdel.c:515 src/userdel.c:522 src/usermod.c:667 src/usermod.c:674
@@ -780,7 +780,7 @@ msgstr ""
 #: src/faillog.c:81 src/gpasswd.c:134 src/groupadd.c:115 src/groupdel.c:85
 #: src/groupmod.c:128 src/grpck.c:151 src/grpconv.c:93 src/grpunconv.c:92
 #: src/lastlog.c:77 src/newusers.c:144 src/passwd.c:159 src/pwck.c:142
-#: src/pwconv.c:118 src/pwunconv.c:78 src/su.c:452 src/useradd.c:897
+#: src/pwconv.c:118 src/pwunconv.c:78 src/su.c:452 src/useradd.c:917
 #: src/userdel.c:149 src/usermod.c:435 src/vipw.c:92
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr ""
@@ -809,7 +809,7 @@ msgstr ""
 #: src/chsh.c:112 src/faillog.c:85 src/groupadd.c:121 src/groupdel.c:86
 #: src/groupmod.c:133 src/grpck.c:154 src/grpconv.c:94 src/grpunconv.c:93
 #: src/lastlog.c:78 src/newusers.c:146 src/passwd.c:166 src/pwck.c:146
-#: src/pwconv.c:119 src/pwunconv.c:79 src/useradd.c:912 src/userdel.c:151
+#: src/pwconv.c:119 src/pwunconv.c:79 src/useradd.c:932 src/userdel.c:151
 #: src/usermod.c:446 src/vipw.c:95
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
@@ -885,7 +885,7 @@ msgstr ""
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr ""
 
-#: src/chage.c:352 src/chage.c:361 src/useradd.c:1223 src/usermod.c:1105
+#: src/chage.c:352 src/chage.c:361 src/useradd.c:1243 src/usermod.c:1105
 #, c-format
 msgid "%s: invalid date '%s'\n"
 msgstr ""
@@ -893,7 +893,7 @@ msgstr ""
 #: src/chage.c:375 src/chage.c:386 src/chage.c:400 src/chgpasswd.c:195
 #: src/chpasswd.c:197 src/faillog.c:548 src/faillog.c:557 src/faillog.c:571
 #: src/lastlog.c:332 src/lastlog.c:359 src/newusers.c:673 src/passwd.c:817
-#: src/passwd.c:861 src/passwd.c:872 src/useradd.c:413 src/useradd.c:1249
+#: src/passwd.c:861 src/passwd.c:872 src/useradd.c:415 src/useradd.c:1269
 #: src/usermod.c:1115
 #, c-format
 msgid "%s: invalid numeric argument '%s'\n"
@@ -921,8 +921,8 @@ msgstr ""
 #: src/newusers.c:756 src/newusers.c:763 src/newusers.c:771 src/newusers.c:781
 #: src/newusers.c:789 src/passwd.c:459 src/passwd.c:472 src/pwck.c:262
 #: src/pwck.c:269 src/pwconv.c:191 src/pwconv.c:202 src/pwunconv.c:155
-#: src/pwunconv.c:166 src/useradd.c:1712 src/useradd.c:1732 src/useradd.c:1745
-#: src/useradd.c:1762 src/useradd.c:1775 src/useradd.c:1794 src/userdel.c:547
+#: src/pwunconv.c:166 src/useradd.c:1732 src/useradd.c:1752 src/useradd.c:1765
+#: src/useradd.c:1782 src/useradd.c:1795 src/useradd.c:1814 src/userdel.c:547
 #: src/userdel.c:558 src/userdel.c:569 src/userdel.c:581 src/userdel.c:595
 #: src/userdel.c:607 src/usermod.c:1580 src/usermod.c:1591 src/usermod.c:1608
 #: src/usermod.c:1619 src/usermod.c:1633 src/usermod.c:1645
@@ -939,8 +939,8 @@ msgstr ""
 #: src/newusers.c:802 src/newusers.c:806 src/newusers.c:811 src/newusers.c:818
 #: src/newusers.c:824 src/passwd.c:464 src/passwd.c:477 src/pwck.c:282
 #: src/pwck.c:290 src/pwck.c:582 src/pwconv.c:197 src/pwconv.c:208
-#: src/pwunconv.c:161 src/pwunconv.c:172 src/useradd.c:1718 src/useradd.c:1738
-#: src/useradd.c:1751 src/useradd.c:1768 src/useradd.c:1781 src/useradd.c:1800
+#: src/pwunconv.c:161 src/pwunconv.c:172 src/useradd.c:1738 src/useradd.c:1758
+#: src/useradd.c:1771 src/useradd.c:1788 src/useradd.c:1801 src/useradd.c:1820
 #: src/userdel.c:553 src/userdel.c:564 src/userdel.c:575 src/userdel.c:587
 #: src/userdel.c:601 src/userdel.c:613 src/usermod.c:1586 src/usermod.c:1597
 #: src/usermod.c:1614 src/usermod.c:1625 src/usermod.c:1639 src/usermod.c:1651
@@ -957,8 +957,8 @@ msgstr ""
 #: src/newusers.c:868 src/newusers.c:875 src/newusers.c:880 src/newusers.c:896
 #: src/passwd.c:493 src/passwd.c:505 src/pwck.c:319 src/pwck.c:329
 #: src/pwck.c:658 src/pwconv.c:281 src/pwconv.c:287 src/pwunconv.c:202
-#: src/useradd.c:1554 src/useradd.c:1559 src/useradd.c:1568 src/useradd.c:1573
-#: src/useradd.c:1651 src/useradd.c:1658 src/userdel.c:392 src/userdel.c:405
+#: src/useradd.c:1574 src/useradd.c:1579 src/useradd.c:1588 src/useradd.c:1593
+#: src/useradd.c:1671 src/useradd.c:1678 src/userdel.c:392 src/userdel.c:405
 #: src/userdel.c:418 src/userdel.c:432 src/userdel.c:449 src/userdel.c:463
 #: src/usermod.c:1477 src/usermod.c:1490 src/usermod.c:1507 src/usermod.c:1522
 #: src/usermod.c:1537 src/usermod.c:1550
@@ -971,9 +971,9 @@ msgstr ""
 #: src/groupmod.c:300 src/groupmod.c:319 src/groupmod.c:735 src/grpck.c:642
 #: src/grpck.c:650 src/grpconv.c:230 src/grpconv.c:238 src/grpunconv.c:194
 #: src/passwd.c:596 src/passwd.c:698 src/pwck.c:630 src/pwck.c:638
-#: src/pwconv.c:265 src/pwconv.c:274 src/pwunconv.c:193 src/useradd.c:1034
-#: src/useradd.c:1093 src/useradd.c:1875 src/useradd.c:1890 src/useradd.c:2087
-#: src/useradd.c:2096 src/userdel.c:206 src/userdel.c:270 src/usermod.c:831
+#: src/pwconv.c:265 src/pwconv.c:274 src/pwunconv.c:193 src/useradd.c:1054
+#: src/useradd.c:1113 src/useradd.c:1895 src/useradd.c:1910 src/useradd.c:2107
+#: src/useradd.c:2116 src/userdel.c:206 src/userdel.c:270 src/usermod.c:831
 #: src/usermod.c:981 src/usermod.c:1732 src/usermod.c:1744
 #, c-format
 msgid "%s: failed to prepare the new %s entry '%s'\n"
@@ -1164,8 +1164,8 @@ msgstr ""
 msgid "%s: no crypt method defined\n"
 msgstr ""
 
-#: src/chgpasswd.c:218 src/chpasswd.c:220 src/newusers.c:713 src/useradd.c:1423
-#: src/useradd.c:1428 src/useradd.c:1449 src/usermod.c:1342 src/usermod.c:1348
+#: src/chgpasswd.c:218 src/chpasswd.c:220 src/newusers.c:713 src/useradd.c:1443
+#: src/useradd.c:1448 src/useradd.c:1469 src/usermod.c:1342 src/usermod.c:1348
 #: src/usermod.c:1366 src/usermod.c:1372 src/usermod.c:1379
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
@@ -1490,7 +1490,7 @@ msgstr ""
 msgid "  -g, --gid GID                 use GID for the new group\n"
 msgstr ""
 
-#: src/groupadd.c:116 src/useradd.c:899
+#: src/groupadd.c:116 src/useradd.c:919
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
 
@@ -1537,7 +1537,7 @@ msgstr ""
 msgid "%s: invalid group ID '%s'\n"
 msgstr ""
 
-#: src/groupadd.c:443 src/useradd.c:1308
+#: src/groupadd.c:443 src/useradd.c:1328
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr ""
@@ -1557,7 +1557,7 @@ msgstr ""
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr ""
 
-#: src/groupdel.c:87 src/groupmod.c:134 src/useradd.c:913 src/userdel.c:152
+#: src/groupdel.c:87 src/groupmod.c:134 src/useradd.c:933 src/userdel.c:152
 #: src/usermod.c:442
 msgid ""
 "  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
@@ -1582,8 +1582,8 @@ msgstr ""
 msgid "%s: cannot remove the primary group of user '%s'\n"
 msgstr ""
 
-#: src/groupdel.c:383 src/groupmod.c:785 src/newgrp.c:605 src/useradd.c:372
-#: src/useradd.c:795 src/useradd.c:1272 src/usermod.c:277 src/usermod.c:1127
+#: src/groupdel.c:383 src/groupmod.c:785 src/newgrp.c:605 src/useradd.c:374
+#: src/useradd.c:815 src/useradd.c:1292 src/usermod.c:277 src/usermod.c:1127
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr ""
@@ -2031,17 +2031,17 @@ msgstr ""
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
 msgstr ""
 
-#: src/newusers.c:343 src/useradd.c:1374 src/usermod.c:1206
+#: src/newusers.c:343 src/useradd.c:1394 src/usermod.c:1206
 #, c-format
 msgid "%s: invalid user ID '%s'\n"
 msgstr ""
 
-#: src/newusers.c:380 src/useradd.c:1475 src/usermod.c:1148
+#: src/newusers.c:380 src/useradd.c:1495 src/usermod.c:1148
 #, c-format
 msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr ""
 
-#: src/newusers.c:383 src/useradd.c:1478 src/usermod.c:1151
+#: src/newusers.c:383 src/useradd.c:1498 src/usermod.c:1151
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr ""
@@ -2562,59 +2562,59 @@ msgstr ""
 msgid "Entering System Maintenance Mode"
 msgstr ""
 
-#: src/useradd.c:270
+#: src/useradd.c:272
 #, c-format
 msgid "%s: %s was created, but could not be removed\n"
 msgstr ""
 
-#: src/useradd.c:374 src/useradd.c:415
+#: src/useradd.c:376 src/useradd.c:417
 #, c-format
 msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr ""
 
-#: src/useradd.c:386
+#: src/useradd.c:388
 #, c-format
 msgid ""
 "%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr ""
 
-#: src/useradd.c:544 src/useradd.c:551
+#: src/useradd.c:557 src/useradd.c:564
 #, c-format
 msgid "%s: cannot create new defaults file"
 msgstr ""
 
-#: src/useradd.c:558 src/useradd.c:566
+#: src/useradd.c:571 src/useradd.c:579
 #, c-format
 msgid "%s: cannot create directory for defaults file\n"
 msgstr ""
 
-#: src/useradd.c:576
+#: src/useradd.c:589
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr ""
 
-#: src/useradd.c:600
+#: src/useradd.c:613
 #, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr ""
 
-#: src/useradd.c:704
+#: src/useradd.c:724
 #, c-format
 msgid "%s: Cannot create backup file (%s)"
 msgstr ""
 
-#: src/useradd.c:808 src/usermod.c:290
+#: src/useradd.c:828 src/usermod.c:290
 #, c-format
 msgid "%s: too many groups specified (max %zu).\n"
 msgstr ""
 
-#: src/useradd.c:857
+#: src/useradd.c:877
 #, c-format
 msgid "%s: Out of memory. Cannot find group '%s'.\n"
 msgstr ""
 
-#: src/useradd.c:873
+#: src/useradd.c:893
 #, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
@@ -2624,356 +2624,356 @@ msgid ""
 "Options:\n"
 msgstr ""
 
-#: src/useradd.c:879
+#: src/useradd.c:899
 msgid "      --badname                 do not check for bad names\n"
 msgstr ""
 
-#: src/useradd.c:880
+#: src/useradd.c:900
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
 "                                new account\n"
 msgstr ""
 
-#: src/useradd.c:883
+#: src/useradd.c:903
 msgid ""
 "      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
 msgstr ""
 
-#: src/useradd.c:885
+#: src/useradd.c:905
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgstr ""
 
-#: src/useradd.c:886
+#: src/useradd.c:906
 msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgstr ""
 
-#: src/useradd.c:887
+#: src/useradd.c:907
 msgid ""
 "  -D, --defaults                print or change default useradd "
 "configuration\n"
 msgstr ""
 
-#: src/useradd.c:888
+#: src/useradd.c:908
 msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgstr ""
 
-#: src/useradd.c:889
+#: src/useradd.c:909
 msgid ""
 "  -f, --inactive INACTIVE       password inactivity period of the new "
 "account\n"
 msgstr ""
 
-#: src/useradd.c:891
+#: src/useradd.c:911
 msgid ""
 "  -F, --add-subids-for-system   add entries to sub[ug]id even when adding a "
 "system user\n"
 msgstr ""
 
-#: src/useradd.c:893
+#: src/useradd.c:913
 msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
 
-#: src/useradd.c:895
+#: src/useradd.c:915
 msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
 msgstr ""
 
-#: src/useradd.c:898
+#: src/useradd.c:918
 msgid ""
 "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
 msgstr ""
 
-#: src/useradd.c:901
+#: src/useradd.c:921
 msgid ""
 "  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
 msgstr ""
 
-#: src/useradd.c:904
+#: src/useradd.c:924
 msgid "  -m, --create-home             create the user's home directory\n"
 msgstr ""
 
-#: src/useradd.c:905
+#: src/useradd.c:925
 msgid ""
 "  -M, --no-create-home          do not create the user's home directory\n"
 msgstr ""
 
-#: src/useradd.c:906
+#: src/useradd.c:926
 msgid ""
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
 msgstr ""
 
-#: src/useradd.c:908
+#: src/useradd.c:928
 msgid ""
 "  -o, --non-unique              allow to create users with duplicate\n"
 "                                (non-unique) UID\n"
 msgstr ""
 
-#: src/useradd.c:910
+#: src/useradd.c:930
 msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
 
-#: src/useradd.c:911
+#: src/useradd.c:931
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
-#: src/useradd.c:914
+#: src/useradd.c:934
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr ""
 
-#: src/useradd.c:915
+#: src/useradd.c:935
 msgid "  -u, --uid UID                 user ID of the new account\n"
 msgstr ""
 
-#: src/useradd.c:916
+#: src/useradd.c:936
 msgid ""
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
 msgstr ""
 
-#: src/useradd.c:918
+#: src/useradd.c:938
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
 msgstr ""
 
-#: src/useradd.c:919
+#: src/useradd.c:939
 msgid ""
 "      --selinux-range SERANGE   use a specific MLS range for the SELinux "
 "user mapping\n"
 msgstr ""
 
-#: src/useradd.c:1022 src/useradd.c:1081 src/userdel.c:200 src/userdel.c:256
+#: src/useradd.c:1042 src/useradd.c:1101 src/userdel.c:200 src/userdel.c:256
 #: src/usermod.c:765 src/usermod.c:900
 #, c-format
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr ""
 
-#: src/useradd.c:1181
+#: src/useradd.c:1201
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr ""
 
-#: src/useradd.c:1196
+#: src/useradd.c:1216
 #, c-format
 msgid "%s: invalid comment '%s'\n"
 msgstr ""
 
-#: src/useradd.c:1206
+#: src/useradd.c:1226
 #, c-format
 msgid "%s: invalid home directory '%s'\n"
 msgstr ""
 
-#: src/useradd.c:1236
+#: src/useradd.c:1256
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr ""
 
-#: src/useradd.c:1258
+#: src/useradd.c:1278
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr ""
 
-#: src/useradd.c:1333 src/usermod.c:1081 src/usermod.c:1090
+#: src/useradd.c:1353 src/usermod.c:1081 src/usermod.c:1090
 #, c-format
 msgid "%s: invalid field '%s'\n"
 msgstr ""
 
-#: src/useradd.c:1353 src/usermod.c:1186
+#: src/useradd.c:1373 src/usermod.c:1186
 #, c-format
 msgid "%s: invalid shell '%s'\n"
 msgstr ""
 
-#: src/useradd.c:1364 src/usermod.c:1197
+#: src/useradd.c:1384 src/usermod.c:1197
 #, c-format
 msgid "%s: Warning: missing or non-executable shell '%s'\n"
 msgstr ""
 
-#: src/useradd.c:1386 src/userdel.c:927 src/usermod.c:1258
+#: src/useradd.c:1406 src/userdel.c:927 src/usermod.c:1258
 #, c-format
 msgid "%s: -Z cannot be used with --prefix\n"
 msgstr ""
 
-#: src/useradd.c:1393 src/userdel.c:934 src/usermod.c:1266
+#: src/useradd.c:1413 src/userdel.c:934 src/usermod.c:1266
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
-#: src/useradd.c:1433 src/useradd.c:1438 src/useradd.c:1443
+#: src/useradd.c:1453 src/useradd.c:1458 src/useradd.c:1463
 #, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
-#: src/useradd.c:1926
+#: src/useradd.c:1946
 #, c-format
 msgid "%s: failed to open the faillog file for UID %lu"
 msgstr ""
 
-#: src/useradd.c:1934
+#: src/useradd.c:1954
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu"
 msgstr ""
 
-#: src/useradd.c:1939
+#: src/useradd.c:1959
 #, c-format
 msgid "%s: failed to close the faillog file for UID %lu"
 msgstr ""
 
-#: src/useradd.c:1968
+#: src/useradd.c:1988
 #, c-format
 msgid "%s: failed to open the lastlog file for UID %lu"
 msgstr ""
 
-#: src/useradd.c:1976
+#: src/useradd.c:1996
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu"
 msgstr ""
 
-#: src/useradd.c:1982
+#: src/useradd.c:2002
 #, c-format
 msgid "%s: failed to close the lastlog file for UID %lu"
 msgstr ""
 
-#: src/useradd.c:2026
+#: src/useradd.c:2046
 #, c-format
 msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
 msgstr ""
 
-#: src/useradd.c:2103 src/useradd.c:2109
+#: src/useradd.c:2123 src/useradd.c:2129
 #, c-format
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr ""
 
-#: src/useradd.c:2156
+#: src/useradd.c:2197
 #, c-format
 msgid "%s: error while duplicating string %s\n"
 msgstr ""
 
-#: src/useradd.c:2164
+#: src/useradd.c:2205
 #, c-format
 msgid "%s: cannot set SELinux context for home directory %s\n"
 msgstr ""
 
-#: src/useradd.c:2194
+#: src/useradd.c:2235
 #, c-format
 msgid "%s: error while duplicating string in BTRFS check %s\n"
 msgstr ""
 
-#: src/useradd.c:2204
+#: src/useradd.c:2245
 #, c-format
 msgid ""
 "%s: warning: \"%s\" is not on BTRFS; creating regular directory instead of "
 "subvolume\n"
 msgstr ""
 
-#: src/useradd.c:2208
+#: src/useradd.c:2249
 #, c-format
 msgid "%s: failed to create BTRFS subvolume: %s\n"
 msgstr ""
 
-#: src/useradd.c:2218
+#: src/useradd.c:2259
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr ""
 
-#: src/useradd.c:2224 src/useradd.c:2226 src/useradd.c:2234
+#: src/useradd.c:2265 src/useradd.c:2267 src/useradd.c:2275
 msgid "warning"
 msgstr ""
 
-#: src/useradd.c:2245 src/useradd.c:2334
+#: src/useradd.c:2286 src/useradd.c:2375
 #, c-format
 msgid "%s: cannot reset SELinux file creation context\n"
 msgstr ""
 
-#: src/useradd.c:2292
+#: src/useradd.c:2333
 #, c-format
 msgid "%s: cannot set SELinux context for mailbox file %s\n"
 msgstr ""
 
-#: src/useradd.c:2303
+#: src/useradd.c:2344
 msgid "Creating mailbox file"
 msgstr ""
 
-#: src/useradd.c:2309
+#: src/useradd.c:2350
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 
-#: src/useradd.c:2321
+#: src/useradd.c:2362
 msgid "Setting mailbox file permissions"
 msgstr ""
 
-#: src/useradd.c:2325
+#: src/useradd.c:2366
 msgid "Synchronize mailbox file"
 msgstr ""
 
-#: src/useradd.c:2328
+#: src/useradd.c:2369
 msgid "Closing mailbox file"
 msgstr ""
 
-#: src/useradd.c:2349
+#: src/useradd.c:2390
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
-#: src/useradd.c:2356
+#: src/useradd.c:2397
 #, c-format
 msgid ""
 "%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
 msgstr ""
 
-#: src/useradd.c:2488 src/usermod.c:1434
+#: src/useradd.c:2529 src/usermod.c:1434
 #, c-format
 msgid "%s: user '%s' already exists\n"
 msgstr ""
 
-#: src/useradd.c:2501
+#: src/useradd.c:2542
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 
-#: src/useradd.c:2524
+#: src/useradd.c:2565
 #, c-format
 msgid "%s: can't create user\n"
 msgstr ""
 
-#: src/useradd.c:2529
+#: src/useradd.c:2570
 #, c-format
 msgid "%s: UID %lu is not unique\n"
 msgstr ""
 
-#: src/useradd.c:2550
+#: src/useradd.c:2591
 #, c-format
 msgid "%s: Failed to create tcb directory for %s\n"
 msgstr ""
 
-#: src/useradd.c:2562
+#: src/useradd.c:2603
 #, c-format
 msgid "%s: can't create group\n"
 msgstr ""
 
-#: src/useradd.c:2571
+#: src/useradd.c:2612
 #, c-format
 msgid "%s: can't create subordinate user IDs"
 msgstr ""
 
-#: src/useradd.c:2578
+#: src/useradd.c:2619
 #, c-format
 msgid "%s: can't create subordinate group IDs"
 msgstr ""
 
-#: src/useradd.c:2605 src/usermod.c:2252
+#: src/useradd.c:2646 src/usermod.c:2252
 #, c-format
 msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
-#: src/useradd.c:2625
+#: src/useradd.c:2666
 #, c-format
 msgid ""
 "%s: warning: the home directory %s already exists.\n"
