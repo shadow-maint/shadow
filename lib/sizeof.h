@@ -12,10 +12,11 @@
 #if __has_include(<stdcountof.h>)
 # include <stdcountof.h>
 #endif
+#include <stddef.h>
 #include <sys/types.h>
 
 
-#define typeas(T)            typeof((T){0})
+#define typeas(T)  typeof(*(typeof(T) *){_Generic(0, T: NULL, default: NULL)})
 
 #define ssizeof(x)           ({(ssize_t){sizeof(x)};})
 #define memberof(T, member)  ((T){}.member)
