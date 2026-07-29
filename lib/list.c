@@ -67,6 +67,8 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	tmp[i] = xstrdup (member);
 	tmp[i+1] = NULL;
 
+	free (list);
+
 	return tmp;
 }
 

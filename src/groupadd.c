@@ -67,8 +67,6 @@ static const char Prog[] = "groupadd";
 static /*@null@*/char *group_name;
 static gid_t group_id;
 static /*@null@*/char *group_passwd;
-static /*@null@*/char *empty_list = NULL;
-
 static const char *prefix = "";
 static char *user_list;
 
@@ -151,7 +149,7 @@ static void new_grent (struct group *grent)
 		grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 	}
 	grent->gr_gid = group_id;
-	grent->gr_mem = &empty_list;
+	grent->gr_mem = comma_to_list("");
 }
 
 #ifdef	SHADOWGRP
@@ -170,8 +168,8 @@ static void new_sgent (struct sgrp *sgent)
 	} else {
 		sgent->sg_passwd = "!";	/* XXX warning: const */
 	}
-	sgent->sg_adm = &empty_list;
-	sgent->sg_mem = &empty_list;
+	sgent->sg_adm = comma_to_list("");
+	sgent->sg_mem = comma_to_list("");
 }
 #endif				/* SHADOWGRP */
 
@@ -247,6 +245,14 @@ grp_update(void)
 		         Prog, sgr_dbname (), sgrp.sg_namp);
 		fail_exit (E_GRP_UPDATE);
 	}
+#endif				/* SHADOWGRP */
+	free_list(grp.gr_mem);
+	free(grp.gr_mem);
+#ifdef	SHADOWGRP
+	free_list(sgrp.sg_mem);
+	free(sgrp.sg_mem);
+	free_list(sgrp.sg_adm);
+	free(sgrp.sg_adm);
 #endif				/* SHADOWGRP */
 }
 
