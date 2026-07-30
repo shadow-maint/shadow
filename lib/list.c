@@ -128,6 +128,8 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 
 	tmp[j] = NULL;
 
+	free (list);
+
 	return tmp;
 }
 
