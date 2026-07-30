@@ -121,6 +121,8 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 		if (!streq(list[i], member)) {
 			tmp[j] = list[i];
 			j++;
+		} else {
+			free (list[i]);
 		}
 	}
 
