@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2026, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -10,7 +10,6 @@
 
 #include <stdlib.h>
 
-#include "attr.h"
 #include "cast.h"
 #include "exit_if_null.h"
 #include "sizeof.h"
@@ -26,16 +25,7 @@
 
 
 // mallocarray - malloc array
-ATTR_ALLOC_SIZE(1, 2)
-ATTR_MALLOC(free)
-inline void *mallocarray(size_t nmemb, size_t size);
-
-
-inline void *
-mallocarray(size_t nmemb, size_t size)
-{
-	return reallocarray(NULL, nmemb, size);
-}
+#define mallocarray(...)  reallocarray(NULL, __VA_ARGS__)
 
 
 #endif  // include guard
