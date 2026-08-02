@@ -46,7 +46,7 @@ Don't use some libc functions without Really Good Reasons:
 	Use strcaseeq() instead.
 
     strncat(3)
-	Use strndup(3) or strndupa(3) instead.
+	Use strndup(3) instead.
 	strncat(3) is legitimate for catenating a prefix of a string
 	after an existing string.
 
@@ -159,11 +159,6 @@ strcmp/ - String comparison
 strdup/ - Memory duplication
 
   s/
-    strndupa(3)
-	Create a new string (in stack) from a [[gnu::nonstring]].
-    strndupa_a()
-	Like strndupa(3), but takes an array.
-
     strndup_a()
 	Like strndup(3), but takes an array.
 
