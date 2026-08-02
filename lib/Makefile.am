@@ -233,8 +233,6 @@ libshadow_la_SOURCES = \
 	string/strdup/memdup.h \
 	string/strdup/strdup.c \
 	string/strdup/strdup.h \
-	string/strdup/strndupa.c \
-	string/strdup/strndupa.h \
 	string/strdup/strndup.c \
 	string/strdup/strndup.h \
 	string/strftime.c \
