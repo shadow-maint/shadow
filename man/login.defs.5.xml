@@ -115,10 +115,23 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <filename>/etc/login.defs</filename> file defines the
-      site-specific configuration for the shadow password suite. This file
-      is required. Absence of this file will not prevent system operation,
-      but will probably result in undesirable operation.
+      The configuration for the shadow password suite is defined by
+      <filename>login.defs</filename>.
+    </para>
+    <para>
+      Depending on compile-time configuration,
+      the settings are either read from a single file
+      (<filename>/etc/login.defs</filename>),
+      or merged hierarchically
+      (if compiled with <literal>libeconf</literal> support):
+      from <filename>/usr/etc/login.defs</filename>,
+      <filename>/usr/lib/login.defs</filename>,
+      <filename>/etc/login.defs</filename>,
+      and drop-ins under <filename>/etc/login.defs.d/</filename>.
+    </para>
+    <para>
+      The merging follows the UAPI configuration file specification:
+      https://uapi-group.org/specifications/specs/configuration_files_specification/
     </para>
 
     <para>
