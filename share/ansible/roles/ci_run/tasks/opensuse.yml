@@ -16,6 +16,7 @@
       - gettext-tools
       - intltool
       - libcmocka-devel
+      - libeconf-devel
       - libtool
       - libxslt-tools
       - make
