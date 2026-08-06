@@ -218,7 +218,11 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><filename>/etc/login.defs</filename></term>
+	<term>
+	  <citerefentry>
+	    <refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+	  </citerefentry>
+	</term>
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
 	</listitem>
