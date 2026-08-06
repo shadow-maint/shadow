@@ -2469,6 +2469,7 @@ int main (int argc, char **argv)
 	unsigned long subgid_count = 0;
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
+	const char *default_skel;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -2500,6 +2501,8 @@ int main (int argc, char **argv)
 #endif
 
 	get_defaults (&flags);
+
+	default_skel = def_template;
 
 	process_flags (argc, argv, &flags);
 	process_selinux = !flags.chroot && !flags.prefix;
@@ -2660,8 +2663,10 @@ int main (int argc, char **argv)
 		if (home_added) {
 			copy_tree (def_template, prefix_user_home, false,
 			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
-			copy_tree (def_usrtemplate, prefix_user_home, false,
-			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
+			if (streq(def_template, default_skel)) {
+				copy_tree(def_usrtemplate, prefix_user_home, false,
+				           (uid_t)-1, user_id, (gid_t)-1, user_gid);
+			}
 		} else {
 			eprintf(_("%s: warning: the home directory %s already exists.\n"
 			          "%s: Not copying any file from skel directory into it.\n"),
