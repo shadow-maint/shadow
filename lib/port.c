@@ -22,7 +22,6 @@
 #include "prototypes.h"
 #include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2ls.h"
 
@@ -54,7 +53,7 @@ static int portcmp (const char *pattern, const char *port)
 	if (streq(orig, "SU"))
 		return 1;
 
-	return !strprefix(pattern, "*");
+	return !strspn(pattern, "*");
 }
 
 /*
@@ -145,7 +144,7 @@ next:
 		errno = saveerr;
 		return NULL;
 	}
-	if (strprefix(buf, "#"))
+	if (strspn(buf, "#"))
 		goto next;
 
 	stpsep(buf, "\n");
@@ -266,9 +265,11 @@ next:
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
-		if (('-' != cp[i]) || (dtime > 2400) || ((dtime % 100) > 59)) {
+		if (!strspn(cp + i, "-"))
 			goto next;
-		}
+		if (dtime > 2400 || (dtime % 100) > 59)
+			goto next;
+
 		port.pt_times[j].t_start = dtime;
 		cp = cp + i + 1;
 
@@ -276,11 +277,10 @@ next:
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
-		if (   ((',' != cp[i]) && ('\0' != cp[i]))
-		    || (dtime > 2400)
-		    || ((dtime % 100) > 59)) {
+		if (strcspn(cp + i, ","))
 			goto next;
-		}
+		if (dtime > 2400 || (dtime % 100) > 59)
+			goto next;
 
 		port.pt_times[j].t_end = dtime;
 		cp = cp + i + 1;
