@@ -13,22 +13,14 @@
 
 #include "attr.h"
 #include "cast.h"
+#include "typetraits.h"
 
 
-// string prefix
+// strprefix - string prefix
 #define strprefix(s, prefix)                                          \
-({                                                                    \
-	const char  *p_;                                              \
-	                                                              \
-	p_ = strprefix_(s, prefix);                                   \
-	                                                              \
-	_Generic(s,                                                   \
-		const char *:                     p_,                 \
-		const void *:                     p_,                 \
-		char *:        const_cast(char *, p_),                \
-		void *:        const_cast(char *, p_)                 \
-	);                                                            \
-})
+(                                                                     \
+	const_cast(QChar_of(s) *, strprefix_(s, prefix))              \
+)
 
 
 ATTR_STRING(1)
