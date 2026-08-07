@@ -56,7 +56,8 @@
 		return NULL;
 	}
 
-	for (i = 0; NULL != sgent->sg_adm[i]; i++);
+	for (i = 0; NULL != sgent->sg_adm[i]; i++)
+		continue;
 	/*@-mustfreeonly@*/
 	sg->sg_adm = malloc_T(i + 1, char *);
 	/*@=mustfreeonly@*/
@@ -81,7 +82,8 @@
 	}
 	sg->sg_adm[i] = NULL;
 
-	for (i = 0; NULL != sgent->sg_mem[i]; i++);
+	for (i = 0; NULL != sgent->sg_mem[i]; i++)
+		continue;
 	/*@-mustfreeonly@*/
 	sg->sg_mem = malloc_T(i + 1, char *);
 	/*@=mustfreeonly@*/
@@ -308,6 +310,4 @@ int sgr_sort ()
 {
 	return commonio_sort_wrt (&gshadow_db, __gr_get_db ());
 }
-#else
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif
