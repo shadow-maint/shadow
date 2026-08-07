@@ -18,7 +18,8 @@
 #include <sys/types.h>
 #include <time.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "defines.h"
 /*@-exitarg@*/
 #include "exitcodes.h"

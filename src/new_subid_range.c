@@ -1,13 +1,14 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <a2i.h>
 
-#include "atoi/a2i.h"
-#include "io/fprintf.h"
+
 #include "getdef.h"
+#include "io/fprintf.h"
 #include "subid.h"
-#include "stdlib.h"
 
 
 /* Test program for the subid creation routine */
