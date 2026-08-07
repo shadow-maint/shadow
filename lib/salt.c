@@ -21,6 +21,7 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/stprintf.h"
@@ -393,13 +394,8 @@ sha512:
 
 	/* Should not happen, but... */
 	if (NULL == retval) {
-		fprintf (log_get_logfd(),
-			 _("Unable to generate a salt from setting "
-			   "\"%s\", check your settings in "
-			   "ENCRYPT_METHOD and the corresponding "
-			   "configuration for your selected hash "
-			   "method.\n"), result);
-
+		fprinte(log_get_logfd(), "crypt_gensalt(\"%s\", %lu)",
+		        result, rounds);
 		exit (1);
 	}
 
