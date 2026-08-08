@@ -35,9 +35,9 @@
 
 
 // xmalloc_T - exit-on-error malloc type-safe
-#define xmalloc_T(n, T)  exit_if_null(malloc_T(n, T))
+#define xmalloc_T(n, T)      exit_if_null(malloc_T(n, T))
 // xcalloc_T - exit-on-error calloc type-safe
-#define xcalloc_T(n, T)  exit_if_null(calloc_T(n, T))
+#define xcalloc_T(n, T)      exit_if_null(calloc_T(n, T))
 // xrealloc_T - exit-on-error realloc type-safe
 #define xrealloc_T(p, n, T)  exit_if_null(realloc_T(p, n, T))
 
@@ -46,7 +46,7 @@
 #define mallocarray(...)  reallocarray(NULL, __VA_ARGS__)
 
 
-#define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
+#define reallocarray_(p, n, size)   reallocarray(p, (n) ?: 1, (size) ?: 1)
 #define reallocarrayf_(p, n, size)  reallocarrayf(p, (n) ?: 1, (size) ?: 1)
 
 
