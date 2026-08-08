@@ -115,10 +115,49 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <filename>/etc/login.defs</filename> file defines the
-      site-specific configuration for the shadow password suite. This file
-      is required. Absence of this file will not prevent system operation,
-      but will probably result in undesirable operation.
+      The configuration for the shadow password suite is defined by
+      <filename>login.defs</filename>.
+    </para>
+    <para>
+      Depending on compile-time configuration, the settings are either read
+      from a single file (<filename>/etc/login.defs</filename>), or merged
+      hierarchically following the UAPI configuration file specification
+      (if compiled with <literal>libeconf</literal> support):
+      https://uapi-group.org/specifications/specs/configuration_files_specification/
+    </para>
+    <para>
+      When the stateless merging model is used, the configurations are parsed
+      and merged in the following order of precedence (later files override
+      earlier ones):
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          <emphasis>Vendor defaults:</emphasis> typically located in
+          <filename>/usr/etc/login.defs</filename> or <filename>/usr/lib/login.defs</filename>.
+          These files are owned by the distribution packages and should not be
+          manually modified.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis>Local admin overrides:</emphasis> located in
+          <filename>/etc/login.defs</filename>. Administrators should use this file
+          to override vendor presets.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis>Admin drop-ins:</emphasis> located in
+          <filename>/etc/login.defs.d/</filename>. This directory allows for modular,
+          package-specific overrides without editing the main file.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Neither <filename>/etc/login.defs</filename> nor the drop-in directories are
+      strictly required. If they are absent, the shadow utilities will seamlessly fall
+      back to the vendor-provided defaults.
     </para>
 
     <para>
