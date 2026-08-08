@@ -10,16 +10,12 @@
 
 #include <stdlib.h>
 
+#include "cast.h"
 #include "exit_if_null.h"
-#include "sizeof.h"
 
 
 // calloc_T - calloc type-safe
-#define calloc_T(n, T)   calloc_T_(n, typeas(T))
-#define calloc_T_(n, T)                                               \
-({                                                                    \
-	(T *){calloc(n, sizeof(T))};                                  \
-})
+#define calloc_T(n, T)   ptr_cast(T, calloc(n, sizeof(T)))
 
 
 // xcalloc_T - exit-on-error calloc type-safe
