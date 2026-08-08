@@ -10,7 +10,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "exitcodes.h"
 #include "defines.h"
 #include "prototypes.h"

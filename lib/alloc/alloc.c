@@ -4,4 +4,9 @@
 
 #include "config.h"
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
+
+#include <stddef.h>
+
+
+extern inline void *reallocarrayf(void *p, size_t nmemb, size_t size);

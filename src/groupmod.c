@@ -21,7 +21,7 @@
 #include <strings.h>
 #include <sys/types.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
