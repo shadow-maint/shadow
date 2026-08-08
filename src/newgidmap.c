@@ -20,6 +20,7 @@
 #include "io/fprintf.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/strcmp/strprefix.h"
 #include "subordinateio.h"
 
@@ -112,7 +113,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 	 * is write-once, so attempting to write after it's already written to will
 	 * fail.
 	 */
-	if (read(setgroups_fd, policy_buffer, sizeof(policy_buffer)) < 0) {
+	if (read(setgroups_fd, policy_buffer, sizeof_a(policy_buffer)) < 0) {
 		eprinte(_("%s: failed to read setgroups"), Prog);
 		exit(EXIT_FAILURE);
 	}
