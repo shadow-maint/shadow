@@ -14,7 +14,7 @@
 
 #include <security/pam_appl.h>
 
-#include "alloc/calloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "prototypes.h"
 #include "shadowlog.h"
