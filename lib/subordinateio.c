@@ -21,8 +21,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "alloc/malloc.h"
-#include "alloc/reallocf.h"
+#include "alloc/alloc.h"
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "shadow/passwd/getpw.h"
