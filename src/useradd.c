@@ -31,7 +31,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "btrfs.h"

@@ -46,7 +46,7 @@
 #include <fcntl.h>
 #endif				/* !USE_PAM */
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "cast.h"
 #include "defines.h"
