@@ -67,6 +67,8 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	tmp[i] = xstrdup (member);
 	tmp[i+1] = NULL;
 
+	free (list);
+
 	return tmp;
 }
 
@@ -119,10 +121,14 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 		if (!streq(list[i], member)) {
 			tmp[j] = list[i];
 			j++;
+		} else {
+			free (list[i]);
 		}
 	}
 
 	tmp[j] = NULL;
+
+	free (list);
 
 	return tmp;
 }
