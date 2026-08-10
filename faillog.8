@@ -1,0 +1,66 @@
+.\" Copyright 1989, 1990, 1992, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Use, duplication, and disclosure prohibited without
+.\" the express written permission of the author.
+.\"
+.\"	@(#)faillog.8	3.2	20:36:19	07 Mar 1992
+.\"
+.TH FAILLOG 8
+.SH NAME
+faillog \- examine faillog and set login failure limits
+.SH SYNOPSIS
+/etc/faillog [ -u uid ] [ -a ] [ -t days ] [ -m max ] [ -pr ] 
+.SH DESCRIPTION
+\fIfaillog\fR formats the contents of the failure log,
+\fI/usr/adm/faillog\fR, and maintains failure counts and
+limits.
+The order of the arguments to \fIfaillog\fR is significant.
+Each argument is processed immediately in the order given.
+.PP
+The \fB-p\fR flag causes failure entries to be printed in UID
+order.
+Entering \fB-u login-name\fR flag will
+cause the failure record for \fBlogin-name\fR only to be printed.
+Entering \fB-t days\fR will cause only the
+failures more recent than \fBdays\fR to be printed.
+The \fB-t\fR flag overrides the use of \fB-u\fR.
+The \fB-a\fR flag causes all users to be selected.
+When used with the \fB-p\fR flag, this option selects all users
+who have ever had a login failure.
+It is meaningless with the \fB-r\fR flag.
+.PP
+The \fB-r\fR flag is used to reset the count of login failures.
+Write access to \fI/usr/adm/faillog\fR is required for
+this option.
+Entering \fB-u login-name\fR will cause only the failure count
+for \fBlogin-name\fR to be reset.
+.PP
+The \fB-m\fR flag is used to set the maximum number of login
+failures before the account is disabled.
+Write access to \fB/usr/adm/faillog\fR is required for this
+option.
+Entering \fB-m max\fR will cause all accounts to be disabled
+after \fBmax\fR failed logins occur.
+This may be modified with \fB-u login-name\fR to limit this
+function to \fBlogin-name\fR only.
+Selecting a \fBmax\fR value of 0 has the effect of not placing
+a limit on the number of failed logins.
+The maximum failure count
+should always be 0 for \fBroot\fR to prevent
+a denial of services attack against the system.
+.PP
+Options may be combined in virtually any fashion.
+Each \fB-p\fR, \fB-r\fR, and \fB-m\fR option will cause
+immediate execution using any \fB-u\fR or \fB-t\fR modifier.
+.SH Bugs
+\fIfaillog\fR only prints out users with no successful login since
+the last failure.
+To print out a user who has had a successful login since their last
+failure, you must explicitly request the user with the \fB-u\fR flag,
+or print out all users with the \fB-a\fR flag.
+.SH Files
+/usr/adm/faillog \- failure logging file
+.SH See Also
+login(1),
+faillog(4)

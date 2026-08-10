@@ -1,0 +1,61 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)newgrp.1	3.2	14:52:37	28 Apr 1992
+.\"
+.TH NEWGRP 1
+.SH NAME
+newgrp \- Change group ID
+.br
+sg \- Execute command as different group ID
+.SH SYNOPSIS
+.B newgrp
+[ - ] [ \fIgroup\fR ]
+.br
+.B sg
+[ - ] [ \fIgroup\fR [ \fB-c\fR \fIcommand\fR ] ]
+.SH DESCRIPTION
+.I newgrp
+is used to change the current group ID during a login session.
+If the optional \fB\-\fR flag is given, the user's environment
+will be reinitialized as though the user had logged in, otherwise
+the current environment, including current working directory,
+remains unchanged.
+.PP
+.I newgrp
+changes the current real group ID to the named group, or to
+the default group listed in \fB/etc/passwd\fR if no group name
+is given.
+The user will be prompted for a password if they do not have a
+password and the group does, or if the user is not listed as a
+member and the group has a password.
+The user will be denied access if the group password is empty
+and the user is not listed as a member.
+.PP
+The
+.I sg
+command works similiar to \fInewgrp\fR but does not replace the
+user's shell, so upon exit from a \fIsg\fR command, you are
+returned to your previous group ID.
+.I sg
+also accepts a command.
+The command will be executed with the Bourne shell and must be
+enclosed in quotes.
+.SH CAVEATS
+.PP
+This version of \fInewgrp\fR has many compilation options,
+only some of which may be in use at any particular site.
+.SH Files
+/etc/passwd \- user account information
+.br
+/etc/group \- group information
+.SH See Also
+login(1),
+id(1),
+su(1)

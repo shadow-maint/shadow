@@ -1,0 +1,44 @@
+.\" Copyright 1992, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\" This software is provided on an AS-IS basis and the author makes
+.\" no warrantee of any kind.
+.\"
+.\"	@(#)pwauth.8	3.1	08:30:40	01 Oct 1992
+.\"
+.TH PWAUTH 8
+.SH NAME
+pwauth \- administrator defined password authentication
+.SH DESCRIPTION
+The system administrator is able to define a list of programs which
+are used to validate a user's identity.
+These programs are given in place of the encrypted password
+information which is present in either the \fB/etc/passwd\fR or
+\fB/etc/shadow\fR files.
+The utilities which administer user accounts examine the encrypted
+password field and determine if the user has an administrator defined
+authentication program.
+The \fIpw_auth\fR function will be invoked whenever one of these
+administration programs determines that a user which is being altered
+has authentication programs defined.
+.PP
+The initial entry is created with the \fIuseradd\fR command.
+Alterations, such as changing authentication information or deleting
+the user account, will cause the \fIpw_auth\fR function to be invoked.
+This keeps the authentication information up to date for each user
+account.
+.PP
+The authentication programs do not create the actual login or network
+sessions. 
+The exit code from the authentication program is taken as an
+indication that the action is to be permitted.
+The calling process must have the appropriate priviledges to create
+the login or network session itself.
+.SH SEE ALSO
+login(1), passwd(1), su(1), useradd(1), userdel(1), usermod(1), pwauth(3)

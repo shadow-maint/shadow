@@ -1,0 +1,38 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)groupadd.1	3.1	13:28:00	13 Jul 1991
+.\"
+.TH GROUPADD 1M
+.SH NAME
+groupadd \- Create a new group
+.SH SYNOPSIS
+.B groupadd
+[ \fB-g\fI gid \fR[ \fB-o\fR ] ]
+.I group
+.SH DESCRIPTION
+The \fIgroupadd\fR command
+creates a new group account using the values specified on the
+command line and the default values from the system.
+The new group will be entered into the system files as needed.
+The options which apply to the \fIgroupadd\fR command are
+.IP "\fB-g \fIgid\fR"
+The numerical value of the group's ID.
+This value must be unique, unless the \fI-o\fR option is used.
+The value must be non-negative.
+The default is to use the smallest ID value greater than 99 and
+greater than every other group.
+Values between 0 and 99 are typically reserved for system accounts.
+.SH Files
+/etc/group \- group account information
+.br
+/etc/gshadow \- secure group account information
+.SH SEE ALSO
+\fBchfn(1), chsh(1), useradd(1M), userdel(1M), usermod(1M),
+passwd(1), groupdel(1M), groupmod(1M)

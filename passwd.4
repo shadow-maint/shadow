@@ -1,0 +1,88 @@
+.\" Copyright 1989, 1990, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Use, duplication, and disclosure prohibited without
+.\" the express written permission of the author.
+.\"
+.\"	@(#)passwd.4	3.1	09:34:24	21 Nov 1990
+.\"
+.TH PASSWD 4
+.SH NAME
+passwd \- The password file
+.SH DESCRIPTION
+.I passwd
+contains various pieces of information for each user account.
+Included is
+.IP "" .5i
+Login name
+.IP "" .5i
+Optional encrypted password
+.IP "" .5i
+Numerical user ID
+.IP "" .5i
+Numerical group ID
+.IP "" .5i
+User name or comment field
+.IP "" .5i
+User home directory
+.IP "" .5i
+User command interpreter
+.PP
+The password field may not be filled if shadow passwords
+have been enabled.
+If shadow passwords are being used, the encrypted password will
+be found in \fB/etc/shadow\fR.
+The encryped password consists of 13 characters from the
+64 character alphabet
+a thru z, A thru Z, 0 thru 9, \. and /.
+Refer to \fIcrypt(3)\fR for details on how this string is
+interpreted.
+.PP
+An optional password age string may follow the encrypted
+password, separated by a comma, from the same alphabet
+as the password itself.
+The first character gives the number of weeks during which the
+password is valid.
+The second character gives the number of weeks which must pass
+before the user is permitted to change the password.
+The last two characters give the week since Jan 1970 when the
+password was last changed.
+When the number of weeks during which the password is valid
+have passed, the user will be required to provide a new
+password.
+.PP
+The comment field is used by various system utilities, such as
+\fIfinger(1)\fR.
+Three additional values may be present in the comment field.
+They are
+.IP "" .5i
+pri= \- set initial value of nice
+.IP "" .5i
+umask= \- set initial value of umask
+.IP "" .5i
+ulimit= \- set initial value of ulimit
+.PP
+These fields are separated from each other and from any other
+comment field by a comma.
+.PP
+The home directory field provides the name of the initial
+working directory.
+\fILogin\fR uses this information to set the value of
+the \fBHOME\fR environmental variable.
+.PP
+The command interpreter field provides the name of the user's
+command language interpreter, or the name of the initial program
+to execute.
+\fILogin\fR uses this information to set the value of the
+\fBSHELL\fR environmental variable.
+If this field is empty, it defaults to the value \fB/bin/sh\fR.
+.SH Files
+/etc/passwd \- user account information
+.SH See Also
+login(1),
+passwd(1),
+su(1),
+sulogin(1M),
+shadow(4),
+pwconv(8),
+pwunconv(8)

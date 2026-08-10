@@ -1,0 +1,40 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)groupmod.1	3.1	13:28:27	13 Jul 1991
+.\"
+.TH GROUPMOD 1M
+.SH NAME
+groupmod \- Modify a group
+.SH SYNOPSIS
+.B groupmod
+[ \fB-g\fI gid \fR[ \fB-o\fR ] ]
+[ \fB-n\fI group_name \fR ]
+.I group
+.SH DESCRIPTION
+The \fIgroupmod\fR command modifies the system account files to reflect
+the changes that are specified on the command line.
+The options which apply to the \fIgroupmod\fR command are
+.IP "\fB-g \fIgid\fR"
+The numerical value of the group's ID.
+This value must be unique, unless the \fI-o\fR option is used.
+The value must be non-negative.
+Values between 0 and 99 are typically reserved for system groups.
+Any files which the old group ID is the file group ID
+must have the file group ID changed manually.
+.IP "\fB-n \fIgroup_name\fR"
+The name of the group will be changed from \fIgroup\fR to
+\fIgroup_name\fR.
+.SH Files
+/etc/group \- group information
+.br
+/etc/gshadow \- secure group information
+.SH SEE ALSO
+\fBchfn(1), chsh(1), useradd(1M), userdel(1M), usermod(1M),
+passwd(1), groupadd(1M), groupdel(1M)

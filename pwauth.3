@@ -1,0 +1,126 @@
+.\" Copyright 1992, 1993, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\" This software is provided on an AS-IS basis and the author makes
+.\" no warrantee of any kind.
+.\"
+.\"	@(#)pwauth.3	3.2	12:26:12	01 May 1993
+.\"
+.TH PWAUTH 3
+.SH NAME
+pwauth \- administrator defined password authentication routines
+.SH SYNTAX
+.IP "" .5i
+#include <pwauth.h>
+.IP "" .5i
+int pw_auth (char *command, char *user, int reason, char *input);
+.SH DESCRIPTION
+.I pw_auth
+invokes the administrator defined functions for a given user.
+.PP
+\fIcommand\fR is the name of the authentication program.
+It is retrieved from the user's password file information.
+The string contains one or more executable file names, delimited by
+semi-colons.
+Each program will be executed in the order given.
+The command line arguments are given for each of the reasons listed
+below.
+.PP
+\fIuser\fR is the name of the user to be authenticated, as given
+in the \fB/etc/passwd\fR file.
+User entries are indexed by username.
+This allows non-unique user IDs to be present and for each different
+username associated with that user ID to have a different
+authentication program and information.
+.PP
+Each of the permissible authentication reasons is handled in a
+potentially differenent manner.
+Unless otherwise mentioned, the standard file descriptors 0, 1, and
+2 are available for communicating with the user.
+The real user ID may be used to determine the identity of the user
+making the authentication request.
+\fIreason\fR is one of
+.IP PW_SU 1i
+Perform authentication for the current real user ID attempting to
+switch real user ID to the named user.
+The authentication program will be invoked with a \fB-s\fR option, followed
+by the username.
+.IP PW_LOGIN 1i
+Perform authentication for the named user creating a new login session.
+The authentication program will be invoked with a \fB-l\fR option, followed
+by the username.
+.IP PW_ADD 1i
+Create a new entry for the named user.
+This allows an authentication program to initialize storage for a new
+user.
+The authentication program will be invoked with a \fB-a\fR option, followed
+by the username.
+.IP PW_CHANGE 1i
+Alter an existing entry for the named user.
+This allows an authentication program to alter the authentication
+information for an existing user.
+The authentication program will be invoked with a \fB-c\fR option, followed
+by the username.
+.IP PW_DELETE 1i
+Delete authentication information for the named user.
+This allows an authentication program to reclaim storage for a user which
+is no longer authenticated using the authentication program.
+The authentication program will be invoked with a \fB-d\fR option, followed
+by the username.
+.IP PW_TELNET 1i
+Authenticate a user who is connecting to the system using the \fItelnet\fR
+command.
+The authentication program will be invoked with a \fB-t\fR option, followed
+by the username.
+.IP PW_RLOGIN 1i
+Authenticate a user who is connecting to the system using the \fIrlogin\fR
+command.
+The authentication program will be invoked with a \fB-r\fR option, followed
+by the username.
+.IP PW_FTP 1i
+Authenticate a user who is connecting to the system using the \fIftp\fR
+command.
+The authentication program will be invoked with a \fR-f\fR option, followed
+by the username.
+The standard file descriptors are not available for communicating with the
+user.
+The standard input file descriptor will be connected to the parent process,
+while the other two output file descriptors will be connected to
+\fB/dev/null\fR.
+The \fIpw_auth\fR function will pipe a single line of data to the
+authentication program using file descriptor 0.
+.IP PW_REXEC 1i
+Authenticate a user who is connecting to the system using the \fIrexec\fR
+command.
+The authentication program will be invoked with a \fB-x\fR option, followed
+by the username.
+The standard file descriptors are not available for communicating with the
+remote user.
+The standard input file descriptor will be connected to the parent process,
+while the other two output file descriptors will be connected to
+\fB/dev/null\fR.
+The \fIpw_auth\fR function will pipe a single line of data to the
+authentication program using file descriptor 0.
+.PP
+The last argument is the authentication data which is used by the
+PW_FTP and PW_REXEC reasons.
+It is treated as a single line of text which is piped to the authentication
+program.
+When the reason is PW_CHANGE, the value of \fIinput\fR is the value of
+previous user name if the user name is being changed.
+.SH CAVEATS
+This function does not create the actual session.
+It only indicates if the user should be allowed to create the session.
+.PP
+The network options are untested at this time.
+.SH DIAGNOSTICS
+The \fIpw_auth\fR function returns 0 if the authentication program exited
+with a 0 exit code, and a non-zero value otherwise.
+.SH SEE ALSO
+login(1), passwd(1), su(1), useradd(1), userdel(1), usermod(1)

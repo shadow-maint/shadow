@@ -1,0 +1,37 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)chpasswd.8	3.1	16:50:16	04 Aug 1991
+.\"
+.TH CHPASSWD 8
+.SH NAME
+\fBchpasswd\fR - update password file in batch
+.SH SYNOPSIS
+\fBchpasswd\fR
+.SH DESCRIPTION
+\fBchpasswd\fR reads a file of user name and cleartext password pairs
+from standard input and uses this information
+to update a group of existing users.
+Each line is of the format
+.DS
+	  \fIuser_name\fR:\fIpassword\fR
+.DE
+The named user must exist.
+The supplied password will be encrypted and the password age updated,
+if present.
+.PP
+This command is intended to be used in a large system environment where
+many accounts are created at a single time.
+.SH CAVEATS
+The \fImkpasswd\fR command must be executed afterwards to update the
+DBM password files.
+The input file must be protected since it contains unencrypted passwords.
+This command may be discarded in favor of the newusers(8) command.
+.SH SEE ALSO
+mkpasswd(8), passwd(1), useradd(1)

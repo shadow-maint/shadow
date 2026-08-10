@@ -1,0 +1,59 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)mkpasswd.8	3.1	07:49:05	13 Jul 1991
+.\"
+.TH MKPASSWD 1
+.SH NAME
+mkpasswd \- Update passwd and group database files
+.SH SYNOPSIS
+\fBmkpasswd\fR [ \fB-fvgps\fR ] \fIfile\fR
+.SH DESCRIPTION
+.I mkpasswd
+reads the file in the format given by the flags and converts it to the
+corresponding database file format.
+These database files are used to improve access performance on systems
+with large numbers of users.
+The output files will be named \fIfile\fR.dir and \fIfile\fR.pag.
+.PP
+The \fB-f\fR option causes \fImkpasswd\fR to ignore any existing output
+files and overwrite them.
+Normally \fImkpasswd\fR complains about existing output files and quits.
+.PP
+The \fB-v\fR option causes \fImkpasswd\fR to output information about
+each record as it is converted, with a final message at the very end.
+.PP
+The \fB-g\fR option treats the input file as though it were in
+\fB/etc/group\fR file format.
+When combined with the \fB-s\fR option, the \fB/etc/gshadow\fR file
+format is used instead.
+.PP
+The \fB-p\fR option treats the input file as though it were in
+\fB/etc/passwd\fR file format.
+This is the default.
+When combined with the \fB-s\fR option, the \fB/etc/shadow\fR file
+format is used instead.
+.SH CAVEATS
+The use of more than one database file is limited to systems which
+include the NDBM database library and therefore may not be available
+on every system.
+.SH Note
+Since most commands are capable of updating the database files as
+changes are made, this command need only be used when re-creating a
+deleted or corrupted database file.
+.SH Files
+/etc/passwd \- user account information
+.br
+/etc/shadow \- shadow user information
+.br
+/etc/group \- group information
+.br
+/etc/gshadow \- shadow group information
+.SH See Also
+passwd(4), group(4), shadow(4)

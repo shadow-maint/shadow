@@ -1,0 +1,76 @@
+.\" Copyright 1989, 1990, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Use, duplication, and disclosure prohibited without
+.\" the express written permission of the author.
+.\"
+.\"	@(#)shadow.4	3.1	23:49:44	11 Nov 1990
+.\"
+.TH SHADOW 4
+.SH NAME
+shadow \- encrypted password file
+.SH DESCRIPTION
+.I shadow
+contains the encrypted password information for user's accounts
+and optional the password aging information.
+Included is
+.IP "" .5i
+Login name
+.IP "" .5i
+Encrypted password
+.IP "" .5i
+Days since Jan 1, 1970 that password was last changed
+.IP "" .5i
+Days before password may be changed
+.IP "" .5i
+Days after which password must be changed
+.IP "" .5i
+Days before password is to expire that user is warned
+.IP "" .5i
+Days after password expires that account is disabled
+.IP "" .5i
+Days since Jan 1, 1970 that account is disabled
+.IP "" .5i
+A reserved field
+.PP
+The password field must be filled.
+The encryped password consists of 13 to 24 characters from the
+64 character alphabet
+a thru z, A thru Z, 0 thru 9, \. and /.
+Refer to \fIcrypt(3)\fR for details on how this string is
+interpreted.
+.PP
+The date of the last password change is given as the number
+of days since Jan 1, 1970.
+The password may not be changed again until the proper number
+of days have passed, and must be changed after the maximum
+number of days.
+If the minimum number of days required is greater than the
+maximum number of day allowed, this password may not be
+changed by the user.
+.PP
+An account is considered to be inactive and is disabled if
+the password is not changed within the specified number of
+days after the password expires.
+An account will also be disabled on the specified day
+regardless of other password expiration information.
+.PP
+This information supercedes any password or password age
+information present in \fB/etc/passwd\fR.
+.PP
+This file must not be readable by regular users if password
+security is to be maintained.
+.SH Files
+/etc/passwd \- user account information
+.br
+/etc/shadow \- encrypted user passwords
+.SH See Also
+chage(1),
+login(1),
+passwd(1),
+su(1),
+sulogin(1M),
+shadow(3),
+passwd(4),
+pwconv(8),
+pwunconv(8)

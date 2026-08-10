@@ -1,0 +1,49 @@
+.\" Copyright 1989, 1990, 1993, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\" This software is provided on an AS-IS basis and the author makes
+.\" no warrantee of any kind.
+.\"
+.\"	@(#)pwconv.8	3.2	12:04:55	02 May 1993
+.\"
+.TH PWCONV 8
+.SH NAME
+pwconv \- convert and update shadow password files
+.SH SYNOPSIS
+pwconv
+.SH DESCRIPTION
+\fIPwconv\fR copies the old password file information to a new shadow
+password file,
+merging entries from an optional existing shadow file.
+The new password file is left in \fBnpasswd\fR,
+the new shadow file is left in \fBnshadow\fR.
+Both of these are files are created with modes which only permit
+read access to the owner.
+Existing shadow entries are copied as is.
+Shadow entries in the System V Release 3.2 format will be silently
+converted to the new System V Release 4 format on output.
+Any entries which are missing fields will have those fields
+filled in with default values where appropriate.
+New entries are created with passwords which expire in 10000 days,
+with a last changed date of today,
+unless password aging information was already present.
+Entries with blank passwords are not copied to the shadow file at all.
+.SH FILES
+/etc/passwd \- old encrypted passwords and password aging
+.br
+/etc/shadow \- previously converted shadow password file
+.br
+./npasswd \- new password file
+.br
+./nshadow \- new shadow password file
+.SH SEE ALSO
+passwd(1),
+passwd(4),
+shadow(4),
+pwunconv(8)

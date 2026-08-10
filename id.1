@@ -1,0 +1,34 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)id.1	3.2	07:24:54	01 Aug 1991
+.\"
+.TH ID 1
+.SH NAME
+id \- Display current user and group ID names
+.SH SYNOPSIS
+.B id
+[
+.B -a
+]
+.SH DESCRIPTION
+.I id
+displays the current real and effective user and group ID names
+or values.
+If the value does not have a corresponding entry in \fB/etc/passwd\fR
+or \fB/etc/group\fR, the value will be displayed without the corresponding
+name.
+The optional \fB-a\fR flag will display the group set on systems which
+support multiple concurrent group membership.
+.SH Files
+/etc/passwd \- user account information
+.br
+/etc/group \- group information
+.SH See Also
+getuid(2), getgid(2), getgroups(2)

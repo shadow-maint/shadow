@@ -1,0 +1,29 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)logoutd.8	3.1	16:31:36	22 Sep 1991
+.\"
+.TH LOGOUTD 8
+.SH NAME
+logoutd \- Enforce login time restrictions
+.SH SYNOPSIS
+.B /etc/logoutd
+.SH DESCRIPTION
+.I logoutd enforces the login time and port restrictions specified in
+/etc/porttime.
+.I logoutd should be started from \fB/etc/rc\fR.
+The \fB/etc/utmp\fR file is scanned periodically and each user name
+is checked to see if the named user is permitted on the named port
+at the current time.
+Any login session which is violating the restrictions in \fB/etc/porttime\fR
+is terminated.
+.SH Files
+/etc/porttime \- login and port permissions
+.br
+/etc/utmp \- current login sessions

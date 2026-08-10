@@ -1,0 +1,104 @@
+.\" Copyright 1989, 1990, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Use, duplication, and disclosure prohibited without
+.\" the express written permission of the author.
+.\"
+.\"	@(#)login.1	3.1	09:34:21	21 Nov 1990
+.\"
+.TH LOGIN 1
+.SH NAME
+login \- Begin session on the system
+.SH SYNOPSIS
+.B login
+[ username [ environmental-variables ] ]
+.SH DESCRIPTION
+.I login
+is used to establish a new session with the system.
+It is normally invoked automatically by responding to the
+.B login:
+prompt on the user\'s terminal.
+.I login
+may be special to the shell and may not be invoked as a sub-process.
+Typically,
+.I login
+is treated by the shell as \fBexec login\fR which causes the user
+to exit from the current shell.
+Attempting to execute \fIlogin\fR from any shell but the login shell
+will produce an error message.
+.PP
+When invoked from the \fBlogin:\fR prompt, the user may enter
+environmental variables after the username.
+These variables are entered in the form \fBNAME=VALUE\fR.
+Not all variables may be set in the fashion, notably \fBPATH\fR,
+\fBHOME\fR and \fBSHELL\fR.
+Additionally, \fBIFS\fR may be inhibited if the user\'s login
+shell is \fB/bin/sh\fR.
+.PP
+The user is then prompted for a password, where appropriate.
+Echoing is disabled to prevent revealing the password.
+Only a small number of password failures are permitted before
+\fIlogin\fR exits and the communications link is severed.
+.PP
+If password aging has been enabled for your account, you may be
+prompted for a new password before proceeding.
+You will be forced to provide your old password and the new
+password before continuing.
+Please refer to \fIpasswd(1)\fR for more information.
+.PP
+After a successful login,
+you will be informed of any system messages and the presence
+of mail.
+You may turn off the printing of the system message file,
+\fI/etc/motd\fR, by creating a zero-length file \fI.hushlogin\fR
+in your login directory.
+The mail message will be one of "\fIYou have new mail.\fR",
+"\fIYou have mail.\fR", or "\fINo Mail.\fR" according to
+the condition of your mailbox.
+.PP
+Your user and group ID will be set according to their values in
+the \fI/etc/passwd\fR file.
+The value for \fB$HOME\fR, \fB$SHELL\fR, \fB$PATH\fR, \fB$LOGNAME\fR,
+and \fB$MAIL\fR are set according to the appropriate fields in the
+password entry.
+Ulimit, umask and nice values may also be set according to
+entries in the GECOS field.
+.PP
+On some installations, the environmental variable \fB$TERM\fR will be
+initialize to the terminal type on your tty line, as specified in
+\fI/etc/ttytype\fR.
+.PP
+An initialization script for your command interpreter may also be
+executed.
+Please see the appropriate manual section for more information on
+this function.
+.SH CAVEATS
+.PP
+This version of \fIlogin\fR has many compilation options, only some of which
+may be in use at any particular site.
+.SH Files
+/etc/utmp \- list of current login sessions
+.br
+/etc/wtmp \- list of previous login sessions
+.br
+/etc/passwd \- user account information
+.br
+/etc/shadow \- encrypted passwords and age information
+.br
+/etc/motd \- system message file
+.br
+/etc/ttytype \- list of terminal types
+.br
+$HOME/.profile \- initialization script for default shell
+.br
+$HOME/.hushlogin \- suppress printing of system messages
+.br
+.SH See Also
+.PP
+getty(1M),
+mail(1),
+passwd(1),
+sh(1),
+su(1),
+d_passwd(4),
+passwd(4)

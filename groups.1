@@ -1,0 +1,36 @@
+.\" Copyright 1991, 1992, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)groups.1	3.2	14:52:10	28 Apr 1992
+.\"
+.TH GROUPS 1
+.SH NAME
+groups \- Display current group ID names
+.SH SYNOPSIS
+.B groups
+[
+.I user
+]
+.SH DESCRIPTION
+.I groups
+displays the current group ID names
+or values.
+If the value does not have a corresponding entry in
+\fB/etc/group\fR, the value will be displayed as the numerical group value.
+The optional \fIuser\fR parameter will display the groups for the named
+\fIuser\R.
+.SH Note
+Systems which do not support concurrent group sets will have the information
+from \fB/etc/group\fR reported.
+The user must use \fInewgrp\fR or \fIsg\fR to change their current real and
+effective group ID.
+.SH Files
+/etc/group \- group information
+.SH See Also
+newgrp(1), getuid(2), getgid(2), getgroups(2)

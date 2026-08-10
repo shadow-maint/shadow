@@ -1,0 +1,37 @@
+.\" Copyright 1991, 1993, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\" This software is provided on an AS-IS basis and the author makes
+.\" no warrantee of any kind.
+.\"
+.\"	@(#)groupdel.1	3.2	08:14:28	23 Apr 1993
+.\"
+.TH GROUPDEL 1M
+.SH NAME
+groupdel \- Delete a group
+.SH SYNOPSIS
+.B groupdel
+.I group
+.SH DESCRIPTION
+The \fIgroupdel\fR command modifies the system account files, deleting
+all entries that refer to \fIgroup\fR.
+The named group must exist.
+.PP
+You must manually check all filesystems to insure that no files remain
+with the named group as the file group ID.
+.SH CAVEATS
+You may not remove the primary group of any existing user.
+You must remove the user before you remove the group.
+.SH Files
+/etc/group \- group information
+.br
+/etc/gshadow \- secure group information
+.SH SEE ALSO
+\fBchfn(1), chsh(1), useradd(1M), userdel(1M), usermod(1M),
+passwd(1), groupadd(1M), groupmod(1M)

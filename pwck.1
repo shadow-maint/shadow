@@ -1,0 +1,87 @@
+.\" Copyright 1992, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\" This software is provided on an AS-IS basis and the author makes
+.\" no warrantee of any kind.
+.\"
+.\"	@(#)pwck.1	3.2	17:43:54	01 May 1993
+.\"
+.TH PWCK 1
+.SH NAME
+pwck \- verify integrity of password files
+.SH SYNOPSIS
+\fBpwck\fR [ \fB-r\fR ] [ \fIpasswd\fR \fIshadow\fR ]
+.SH DESCRIPTION
+\fBpwck\fR verifies the integrity of the system authentication information.
+All entries in the \fB/etc/passwd\fR and \fB/etc/shadow\fR are checked to
+see that the entry has the proper format and valid data in each field.
+The user is prompted to delete entries that are improperly formatted or
+which have other incorrectable errors.
+.P
+Checks are made to verify that each entry has
+.sp
+.in +.5i
+- the correct number of fields
+.br
+- a unique user name
+.br
+- a valid user and group identifier
+.br
+- a valid primary group
+.br
+- a valid home directory
+.br
+- a valid login shell
+.in -.5i
+.sp
+.P
+The checks for correct number of fields and unique user name are fatal.
+If the entry has the wrong number of fields, the user will be prompted to
+delete the entire line.
+If the user does not answer affirmatively, all further checks are bypassed.
+An entry with a duplicated user name is prompted for deletion, but the
+remaining checks will still be made.
+All other errors are warning and the user is encouraged to run the
+\fBusermod\fR command to correct the error.
+.P
+The commands which operate on the \fB/etc/passwd\fR file are not able to
+alter corrupted or duplicated entries.
+\fBpwck\fR should be used in those circumstances to remove the offending
+entry.
+.SH OPTIONS
+By default, \fBpwck\fR operates on the files \fB/etc/passwd\fR and
+\fB/etc/shadow\fR.
+The user may select alternate files with the \fIpasswd\fR and \fIshadow\fR
+parameters.
+Additionally, the user may execute the command in read-only mode by
+specifying the \fB-r\fR flag.
+This causes all questions regarding changes to be answered \fBno\fR
+without user intervention.
+.SH FILES
+/etc/passwd \- user account information
+.br
+/etc/shadow \- encrypted password information
+.br
+/etc/group \- group information
+.SH SEE ALSO
+usermod(1), group(4), passwd(4), shadow(4)
+.SH DIAGNOSTICS
+The \fIpwck\fR command exits with the following values:
+.IP 0 5
+Success
+.IP 1 5
+Syntax Error
+.IP 2 5
+One or more bad password entries
+.IP 3 5
+Cannot open password files
+.IP 4 5
+Cannot lock password files
+.IP 5 5
+Cannot update password files

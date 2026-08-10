@@ -1,0 +1,36 @@
+.\" Copyright 1989, 1990, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Use, duplication, and disclosure prohibited without
+.\" the express written permission of the author.
+.\"
+.\"	@(#)faillog.4	3.1	09:34:18	21 Nov 1990
+.\"
+.TH FAILLOG 4
+.SH NAME
+faillog \- Login failure logging file
+.SH DESCRIPTION
+.I faillog
+maintains a count of login failures and the limits for each account.
+The file is fixed length record, indexed by numerical UID.
+Each record contains the count of login failures since the last
+successful login;
+the maximum number of failures before the account is disabled;
+the line the last login failure occured on;
+and the date the last login failure occured.
+.PP
+The structure of the file is
+.DS
+
+        struct	faillog {
+                short   fail_cnt;
+                short   fail_max;
+                char    fail_line[12];
+                time_t  fail_time;
+        };
+
+.DE
+.SH Files
+/usr/adm/faillog \- login failure log
+.SH See Also
+faillog(8)

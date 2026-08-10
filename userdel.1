@@ -1,0 +1,44 @@
+.\" Copyright 1991, 1993, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\" This software is provided on an AS-IS basis and the author makes
+.\" no warrantee of any kind.
+.\"
+.\"	@(#)userdel.1	3.2	08:04:38	07 May 1993
+.\"
+.TH USERDEL 1M
+.SH NAME
+userdel \- Delete a user account and related files
+.SH SYNOPSIS
+.B userdel
+[ \fB-r\fI ]
+.I login
+.SH DESCRIPTION
+The \fIuserdel\fR command modifies the system account files, deleting
+all entries that refer to \fIlogin\fR.
+The named user must exist.
+.IP \fB-r\fR
+Files in the user's home directory will be removed along with the
+home directory itself.
+Files located in other file system will have to be searched for
+and deleted manually.
+.SH Files
+/etc/passwd \- user account information
+.br
+/etc/shadow \- secure user account information
+.br
+/etc/group \- group information
+.SH CAVEATS
+\fBuserdel\fR will not allow you to remove an account if the user
+is currently logged in.
+You must kill any running processes which belong to an account that
+you are deleting.
+.SH SEE ALSO
+\fBchfn(1), chsh(1), groupadd(1M), groupdel(1M), groupmod(1M),
+passwd(1), useradd(1M), usermod(1M)

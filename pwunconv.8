@@ -1,0 +1,40 @@
+.\" Copyright 1989, 1990, 1993 John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\" This software is provided on an AS-IS basis and the author makes
+.\" no warrantee of any kind.
+.\"
+.\"	@(#)pwunconv.8	3.2	12:24:15	02 May 1993
+.\"
+.TH PWUNCONV 8
+.SH NAME
+pwunconv \- restore old password file from shadow password file
+.SH SYNOPSIS
+pwunconv
+.SH DESCRIPTION
+\fIPwunconv\fR copies the password file information from the shadow
+password file,
+merging entries from an optional existing shadow file.
+The new password file is left in \fBnpasswd\fR.
+This file is created with modes which allow read access for
+the owner only.
+There is no new shadow file.
+Password aging information is translated where possible.
+There is some loss of resolution in the password aging information.
+.SH FILES
+/etc/passwd \- old encrypted passwords and password aging
+.br
+/etc/shadow \- previously converted shadow password file
+.br
+./npasswd \- new password file
+.SH SEE ALSO
+passwd(1),
+passwd(4),
+shadow(4),
+pwconv(8)

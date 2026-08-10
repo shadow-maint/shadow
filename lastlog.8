@@ -1,0 +1,36 @@
+.\" Copyright 1992, Phillip Street and John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)lastlog.8	3.2	10:35:49	18 Jul 1993 (National Guard Release)
+.\"
+.TH LASTLOG 8
+.SH NAME
+lastlog \- examine lastlog file
+.SH SYNOPSIS
+/etc/lastlog [ -u uid ] [ -t days ]
+.SH DESCRIPTION
+\fIlastlog\fR formats and prints the contents of the last login log,
+\fI/usr/adm/lastlog\fR.  The \fBlogin-name\fR, \fBport\fR, and \fBlast login 
+time\fR will be printed.
+The default (no flags) causes lastlog entries to be printed in UID
+order.
+Entering \fB-u login-name\fR flag will
+cause the lastlog record for \fBlogin-name\fR only to be printed.
+Entering \fB-t days\fR will cause only the
+lastlogins more recent than \fBdays\fR to be printed.
+The \fB-t\fR flag overrides the use of \fB-u\fR.
+.PP
+If the user has never logged in the message \fB"**Never logged in**"\fR will 
+be displayed instead of the port and time.
+.SH Files
+/usr/adm/lastlog \- lastlog logging file
+.SH Caveats
+Large gaps in uid numbers will cause the lastlog program to run longer with
+no output to the screen (i.e. if mmdf=800 and last uid=170, program will
+appear to hang as it processes uid 171-799).

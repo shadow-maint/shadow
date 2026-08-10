@@ -1,0 +1,47 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Permission is granted to copy and create derivative works for any
+.\" non-commercial purpose, provided this copyright notice is preserved
+.\" in all copies of source code, or included in human readable form
+.\" and conspicuously displayed on all copies of object code or
+.\" distribution media.
+.\"
+.\"	@(#)newusers.8	3.1	16:49:47	04 Aug 1991
+.\"
+.TH NEWUSERS 8
+.SH NAME
+\fBnewusers\fR - update and create new users in batch
+.SH SYNOPSIS
+\fBnewusers\fR
+[ \fI new_users \fR ]
+.SH DESCRIPTION
+\fBnewusers\fR reads a file of user name and cleartext password pairs
+and uses this information to update a group of existing users or to
+create new users.
+Each line is in the same format as the standard password file (see
+\fIpasswd(4)\fR) with the following exceptions.
+.IP "pw_passwd"
+This field will be encrypted and used as the new value
+of the encrpted password.
+.IP "pw_age"
+This field will be ignored for shadow passwords if the user already
+exists.
+.IP "pw_gid"
+This field may be the name of an existing group, in which case the
+named user will be added as a member.  If a non-existent numerical
+group is given, a new group will be created having this number.
+.IP "pw_dir"
+This field will be checked for existence as a directory and a new
+directory will the same name created if it does not already exist.
+The ownership of the directory will be set to be that of the user
+being created or updated.
+.PP
+This command is intended to be used in a large system environment where
+many accounts are updated at a single time.
+.SH CAVEATS
+The \fImkpasswd\fR command must be executed afterwards to update the
+DBM password files.
+The input file must be protected since it contains unencrypted passwords.
+.SH SEE ALSO
+mkpasswd(8), passwd(1), useradd(1)
