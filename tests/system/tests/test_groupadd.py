@@ -141,12 +141,16 @@ def test_groupadd__force_group_creation(shadow: Shadow):
     :customerscenario: False
     """
     shadow.groupadd("tgroup")
+
     existing_group_entry = shadow.tools.getent.group("tgroup")
     assert existing_group_entry is not None, "Group should be found"
+
     shadow.groupadd("-f tgroup")
+
     group_entry = shadow.tools.getent.group("tgroup")
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tgroup", "Incorrect groupname"
+
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
