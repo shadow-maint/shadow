@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 
+#include "cast.h"
 #include "exit_if_null.h"
 #include "sizeof.h"
 
@@ -19,7 +20,7 @@
 #define realloc_T_(p, n, T)                                           \
 (                                                                     \
 	_Generic(p, T *: (void)0),                                    \
-	(T *){reallocarray_(p, n, sizeof(T))}                         \
+	rvalue((T *){reallocarray_(p, n, sizeof(T))})                 \
 )
 
 #define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)

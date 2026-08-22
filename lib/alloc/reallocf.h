@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include "attr.h"
+#include "cast.h"
 #include "sizeof.h"
 
 
@@ -20,7 +21,7 @@
 #define reallocf_T_(p, n, T)                                          \
 (                                                                     \
 	_Generic(p, T *: (void)0),                                    \
-	(T *){reallocarrayf_(p, n, sizeof(T))}                        \
+	rvalue((T *){reallocarrayf_(p, n, sizeof(T))})                \
 )
 
 #define reallocarrayf_(p, n, size)  reallocarrayf(p, (n) ?: 1, (size) ?: 1)
