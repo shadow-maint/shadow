@@ -72,11 +72,34 @@
     chdir: /usr/local/src/shadow/
   ignore_errors: true
 
-- name: Install
-  ansible.builtin.command:
-    make install
+# make install fails with "File exists" on /sbin/nologin, which the base image
+# already provides; install into a staging tree and apply it by hand instead.
+- name: Install into a staging tree
+  ansible.builtin.shell: |
+    rm -rf /tmp/rootfs
+    make install DESTDIR=/tmp/rootfs > install.log 2>&1
   args:
     chdir: /usr/local/src/shadow/
+  ignore_errors: true
+
+# The targets are removed before extracting: tar(1) fails with ETXTBSY when it
+# overwrites a running binary in place.  -U (--unlink-first) would do that for
+# us, but it also unlinks the merged-/usr symlinks (/bin, /sbin, /lib) that
+# --keep-directory-symlink is here to preserve, so do it explicitly.
+- name: Apply the staging tree to the system
+  ansible.builtin.shell: |
+    exec > apply.log 2>&1
+    set -euxo pipefail
+    find /tmp/rootfs -not -type d -printf '/%P\n' \
+    | sort > install-manifest.txt
+    xargs -d '\n' -r rm -f -- < install-manifest.txt
+    tar -C /tmp/rootfs -cf - . \
+    | tar -C / -xpf - --keep-directory-symlink --no-overwrite-dir
+    ldconfig
+    test -x /bin/sh
+  args:
+    chdir: /usr/local/src/shadow/
+    executable: /bin/bash
   ignore_errors: true
 
 - name: Copy logs
@@ -88,6 +111,9 @@
     - "/usr/local/src/shadow/config.log"
     - "/usr/local/src/shadow/config.h"
     - "/usr/local/src/shadow/build.log"
+    - "/usr/local/src/shadow/install.log"
+    - "/usr/local/src/shadow/apply.log"
+    - "/usr/local/src/shadow/install-manifest.txt"
     - "/usr/local/src/shadow/tests/unit/test-suite.log"
 
 - name: Copy configuration file for testing
