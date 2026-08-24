@@ -49,28 +49,30 @@
   when: existing_uid_1000.ansible_facts.getent_passwd['1000'] is undefined
 
 - name: Build configuration
-  ansible.builtin.command: >
-    ./autogen.sh
-    --enable-man
-    --with-yescrypt
-    --without-selinux
+  ansible.builtin.shell: |
+    ./autogen.sh \
+        --enable-man \
+        --with-yescrypt \
+        --without-selinux \
+        > configure.log 2>&1
   args:
     chdir: /usr/local/src/shadow/
-  ignore_errors: true
+  register: ci_configure
+  failed_when: false
 
 - name: Build
-  ansible.builtin.shell:
-    make -Orecurse -j4 > build.log
+  ansible.builtin.shell: make -Orecurse -j4 > build.log 2>&1
   args:
     chdir: /usr/local/src/shadow/
-  ignore_errors: true
+  register: ci_build
+  failed_when: false
 
 - name: Run unit-tests
-  ansible.builtin.command:
-    make check
+  ansible.builtin.shell: make check > check.log 2>&1
   args:
     chdir: /usr/local/src/shadow/
-  ignore_errors: true
+  register: ci_check
+  failed_when: false
 
 # make install fails with "File exists" on /sbin/nologin, which the base image
 # already provides; install into a staging tree and apply it by hand instead.
@@ -80,7 +82,8 @@
     make install DESTDIR=/tmp/rootfs > install.log 2>&1
   args:
     chdir: /usr/local/src/shadow/
-  ignore_errors: true
+  register: ci_install
+  failed_when: false
 
 # The targets are removed before extracting: tar(1) fails with ETXTBSY when it
 # overwrites a running binary in place.  -U (--unlink-first) would do that for
@@ -100,17 +103,21 @@
   args:
     chdir: /usr/local/src/shadow/
     executable: /bin/bash
-  ignore_errors: true
+  register: ci_apply
+  failed_when: false
 
 - name: Copy logs
   ansible.builtin.fetch:
     src: '{{ item }}'
     dest: ./build-out/
     flat: yes
+    fail_on_missing: false
   with_items:
     - "/usr/local/src/shadow/config.log"
     - "/usr/local/src/shadow/config.h"
+    - "/usr/local/src/shadow/configure.log"
     - "/usr/local/src/shadow/build.log"
+    - "/usr/local/src/shadow/check.log"
     - "/usr/local/src/shadow/install.log"
     - "/usr/local/src/shadow/apply.log"
     - "/usr/local/src/shadow/install-manifest.txt"
@@ -121,3 +128,16 @@
     src: /usr/local/src/shadow/tests/system/etc/login.defs
     dest: /etc/login.defs
     remote_src: yes
+
+- name: Fail if any build step failed
+  ansible.builtin.assert:
+    that:
+      - ci_configure.rc == 0
+      - ci_build.rc == 0
+      - ci_check.rc == 0
+      - ci_install.rc == 0
+      - ci_apply.rc == 0
+    fail_msg: >-
+      configure={{ ci_configure.rc }} build={{ ci_build.rc }}
+      check={{ ci_check.rc }} install={{ ci_install.rc }}
+      apply={{ ci_apply.rc }}
