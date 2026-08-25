@@ -11,7 +11,7 @@ messages.mo: ../po/$(LANG).po
 login.defs.d:
 	ln -sf $(srcdir)/../login.defs.d login.defs.d
 
-%.xml: ../%.xml messages.mo login.defs.d
+%.xml: ../%.xml messages.mo login.defs.d config.xml
 	if grep -q SHADOW-CONFIG-HERE $< ; then \
 	    sed -e 's/^<!-- SHADOW-CONFIG-HERE -->/<!ENTITY % config SYSTEM "config.xml">%config;/' $< > $@; \
 	else \
