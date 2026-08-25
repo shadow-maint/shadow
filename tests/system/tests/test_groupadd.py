@@ -601,3 +601,34 @@ def test_groupadd__invalid_option(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__add_system_group(shadow: Shadow):
+    """
+    :title: System group creation assigns GID from the system GID range
+    :setup:
+        1. None required
+    :steps:
+        1. Create system group
+        2. Check group and gshadow entries
+        3. Check GID for system group
+    :expectedresults:
+        1. System group is created
+        2. Group and gshadow entries are found
+        3. System group is assigned with GID within system GID range
+    :customerscenario: False
+    """
+    shadow.groupadd("--system sgroup")
+
+    group_entry = shadow.tools.getent.group("sgroup")
+    assert group_entry is not None, "System group should be found"
+    assert group_entry.name == "sgroup", "Incorrect groupname"
+    assert group_entry.gid is not None, "System group should have a GID"
+    assert group_entry.gid >= 101, "System group GID should be >= SYS_GID_MIN (101)"
+    assert group_entry.gid < 1000, "System group GID should be < GID_MIN (1000)"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("sgroup")
+        assert gshadow_entry is not None, "System group should be found"
+        assert gshadow_entry.name == "sgroup", "Incorrect groupname"
