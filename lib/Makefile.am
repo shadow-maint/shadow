@@ -117,6 +117,8 @@ libshadow_la_SOURCES = \
 	mail.c \
 	memory/memcmp/memeq.c \
 	memory/memcmp/memeq.h \
+	memory/memcmp/strneq.c \
+	memory/memcmp/strneq.h \
 	memory/memcpy/strncpytail.c \
 	memory/memcpy/strncpytail.h \
 	memory/memdup/memdup.c \
@@ -225,8 +227,6 @@ libshadow_la_SOURCES = \
 	string/strcmp/strcaseprefix.h \
 	string/strcmp/streq.c \
 	string/strcmp/streq.h \
-	string/strcmp/strneq.c \
-	string/strcmp/strneq.h \
 	string/strcmp/strprefix.c \
 	string/strcmp/strprefix.h \
 	string/strcpy/stpecpy.c \
