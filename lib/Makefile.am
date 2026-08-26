@@ -199,8 +199,6 @@ libshadow_la_SOURCES = \
 	string/ctype/isascii.h \
 	string/ctype/toascii.c \
 	string/ctype/toascii.h \
-	string/memset/memzero.c \
-	string/memset/memzero.h \
 	string/sprintf/aprintf.c \
 	string/sprintf/aprintf.h \
 	string/sprintf/seprintf.c \
@@ -257,6 +255,8 @@ libshadow_la_SOURCES = \
 	string/strtok/strsep2arr.h \
 	string/strtok/strsep2ls.c \
 	string/strtok/strsep2ls.h \
+	string/strzero/strzero.c \
+	string/strzero/strzero.h \
 	strtoday.c \
 	sub.c \
 	subordinateio.h \
