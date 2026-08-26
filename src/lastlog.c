@@ -29,10 +29,10 @@
 #include "exitcodes.h"
 #include "getdef.h"
 #include "io/fprintf.h"
+#include "memory/memset/memzero.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
-#include "string/memset/memzero.h"
 #include "string/strftime.h"
 
 #undef NDEBUG

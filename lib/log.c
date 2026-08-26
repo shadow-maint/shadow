@@ -19,8 +19,8 @@
 #include "attr.h"
 #include "defines.h"
 #include "io/syslog.h"
+#include "memory/memset/memzero.h"
 #include "prototypes.h"
-#include "string/memset/memzero.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
 

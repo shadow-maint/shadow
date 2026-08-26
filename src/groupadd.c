@@ -26,6 +26,7 @@
 #include "groupio.h"
 #include "io/fprintf.h"
 #include "io/syslog.h"
+#include "memory/memset/memzero.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
@@ -35,7 +36,6 @@
 #endif
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
-#include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 

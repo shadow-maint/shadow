@@ -24,9 +24,9 @@
 #include "exitcodes.h"
 #include "faillog.h"
 #include "io/fprintf.h"
+#include "memory/memset/memzero.h"
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "string/memset/memzero.h"
 #include "string/strftime.h"
 
 #undef NDEBUG

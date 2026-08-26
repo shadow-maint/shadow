@@ -19,8 +19,8 @@
 #include "faillog.h"
 #include "failure.h"
 #include "io/syslog.h"
+#include "memory/memset/memzero.h"
 #include "prototypes.h"
-#include "string/memset/memzero.h"
 #include "string/strftime.h"
 #include "string/strcpy/strtcpy.h"
 
