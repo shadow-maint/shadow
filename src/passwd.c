@@ -26,6 +26,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "io/fprintf.h"
+#include "memory/memset/memzero.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
