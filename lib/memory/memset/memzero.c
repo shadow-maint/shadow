@@ -4,7 +4,9 @@
 
 #include "config.h"
 
-#include "string/memset/memzero.h"
+#include <stddef.h>
+
+#include "memory/memset/memzero.h"
 
 
-extern inline char *strzero(char *s);
+extern inline void *memzero(void *ptr, size_t size);

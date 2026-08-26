@@ -26,6 +26,7 @@
 #include "defines.h"
 #include "fs/mkstemp/fmkomstemp.h"
 #include "io/fprintf.h"
+#include "memory/memset/memzero.h"
 #include "nscd.h"
 #ifdef WITH_TCB
 #include <tcb.h>
@@ -33,7 +34,6 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sssd.h"
-#include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"

@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <ctype.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -25,11 +23,11 @@
 #include "defines.h"
 #include "fields.h"
 #include "io/fprintf.h"
+#include "memory/memset/memzero.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
 #include "shadowlog.h"
-#include "string/memset/memzero.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
