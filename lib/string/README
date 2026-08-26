@@ -19,6 +19,18 @@ General guidelines:
 Don't use some libc functions without Really Good Reasons:
 ==========================================================
 
+<memory.h>
+    strncmp(3)
+	Use strneq_a(), or strpfx(), or else,
+	depending on what you want.
+	The return value of strncmp(3) is confusing,
+	and it is unclear the purpose of its use when you read it.
+
+    strncat(3)
+	Use strndup(3) instead.
+	strncat(3) is legitimate for catenating a prefix of a string
+	after an existing string.
+
 <stdio.h>
     asprintf(3)
 	Use aprintf(3) instead.
@@ -36,19 +48,8 @@ Don't use some libc functions without Really Good Reasons:
 	The return value of strcmp(3) is confusing.
 	strcmp(3) would be legitimate for sorting strings.
 
-    strncmp(3)
-	Use strneq_a(), or strpfx(), or else,
-	depending on what you want.
-	The return value of strncmp(3) is confusing,
-	and it is unclear the purpose of its use when you read it.
-
     strcasecmp(3)
 	Use strcaseeq() instead.
-
-    strncat(3)
-	Use strndup(3) instead.
-	strncat(3) is legitimate for catenating a prefix of a string
-	after an existing string.
 
     strlcpy(3)
 	Use strtcpy() instead.
