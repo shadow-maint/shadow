@@ -123,6 +123,8 @@ libshadow_la_SOURCES = \
 	memory/memdup/strndup.h \
 	memory/memset/memzero.c \
 	memory/memset/memzero.h \
+	memory/strncmp/strneq.c \
+	memory/strncmp/strneq.h \
 	motd.c \
 	myname.c \
 	nss.c \
@@ -223,8 +225,6 @@ libshadow_la_SOURCES = \
 	string/strcmp/strcaseprefix.h \
 	string/strcmp/streq.c \
 	string/strcmp/streq.h \
-	string/strcmp/strneq.c \
-	string/strcmp/strneq.h \
 	string/strcmp/strprefix.c \
 	string/strcmp/strprefix.h \
 	string/strcpy/stpecpy.c \
