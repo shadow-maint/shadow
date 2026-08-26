@@ -112,7 +112,7 @@ memory/ - memory operations
     strncat_a()  // To be removed
 	Do NOT use.  I'll remove it soon.
 
-    MEMCPY()
+    memcpy_a()
 	Like memcpy(3), but takes two arrays.
 
 string/ - string operations
