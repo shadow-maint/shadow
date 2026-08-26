@@ -117,6 +117,10 @@ libshadow_la_SOURCES = \
 	mail.c \
 	memory/memcpy/strncpytail.c \
 	memory/memcpy/strncpytail.h \
+	memory/memdup/memdup.c \
+	memory/memdup/memdup.h \
+	memory/memdup/strndup.c \
+	memory/memdup/strndup.h \
 	memory/memset/memzero.c \
 	memory/memset/memzero.h \
 	motd.c \
@@ -233,12 +237,8 @@ libshadow_la_SOURCES = \
 	string/strcpy/strtcat.h \
 	string/strcpy/strtcpy.c \
 	string/strcpy/strtcpy.h \
-	string/strdup/memdup.c \
-	string/strdup/memdup.h \
 	string/strdup/strdup.c \
 	string/strdup/strdup.h \
-	string/strdup/strndup.c \
-	string/strdup/strndup.h \
 	string/strftime.c \
 	string/strftime.h \
 	string/strspn/stpspn.c \
