@@ -21,6 +21,7 @@
 #include "defines.h"
 #include "fs/readlink/readlinknul.h"
 #include "io/fgets/fgets.h"
+#include "memory/strncmp/strneq.h"
 #include "prototypes.h"
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
@@ -28,7 +29,6 @@
 #include "shadowlog.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 
 #undef NDEBUG
