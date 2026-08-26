@@ -28,6 +28,7 @@
 #include "exitcodes.h"
 #include "groupio.h"
 #include "io/fprintf.h"
+#include "memory/memset/memzero.h"
 #include "nscd.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
@@ -36,7 +37,6 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
-#include "string/memset/memzero.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
