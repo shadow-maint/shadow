@@ -17,7 +17,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "groupio.h"
-#include "string/memset/memzero.h"
+#include "string/strzero/strzero.h"
 
 
 /*@null@*/ /*@only@*/struct group *__gr_dup (const struct group *grent)

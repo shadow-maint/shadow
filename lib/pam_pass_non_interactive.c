@@ -18,7 +18,7 @@
 #include "attr.h"
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "string/memset/memzero.h"
+#include "string/strzero/strzero.h"
 
 #undef NDEBUG
 #include <assert.h>

@@ -19,7 +19,7 @@
 
 #include "alloc/calloc.h"
 #include "shadowio.h"
-#include "string/memset/memzero.h"
+#include "string/strzero/strzero.h"
 
 
 /*@null@*/ /*@only@*/struct spwd *__spw_dup (const struct spwd *spent)

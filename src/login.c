@@ -40,7 +40,6 @@
 #include "pwauth.h"
 #include "shadow/gshadow/endsgent.h"
 #include "shadowlog.h"
-#include "string/memset/memzero.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strneq.h"
@@ -48,6 +47,7 @@
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
 #include "string/strftime.h"
+#include "string/strzero/strzero.h"
 #include "sysconf.h"
 
 #ifdef USE_PAM

@@ -26,7 +26,7 @@
 #include "shadow/gshadow/putsgent.h"
 #include "shadow/gshadow/sgetsgent.h"
 #include "shadow/gshadow/sgrp.h"
-#include "string/memset/memzero.h"
+#include "string/strzero/strzero.h"
 
 
 /*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent)
