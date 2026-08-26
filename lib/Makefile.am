@@ -115,6 +115,10 @@ libshadow_la_SOURCES = \
 	lockpw.c \
 	loginprompt.c \
 	mail.c \
+	memory/memcpy/strncat.c \
+	memory/memcpy/strncat.h \
+	memory/memcpy/strncpy.c \
+	memory/memcpy/strncpy.h \
 	memory/memdup/memdup.c \
 	memory/memdup/memdup.h \
 	memory/memdup/strndup.c \
@@ -227,10 +231,6 @@ libshadow_la_SOURCES = \
 	string/strcmp/strprefix.h \
 	string/strcpy/stpecpy.c \
 	string/strcpy/stpecpy.h \
-	string/strcpy/strncat.c \
-	string/strcpy/strncat.h \
-	string/strcpy/strncpy.c \
-	string/strcpy/strncpy.h \
 	string/strcpy/strtcpy.c \
 	string/strcpy/strtcpy.h \
 	string/strdup/strdup.c \
