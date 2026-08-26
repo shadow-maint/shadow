@@ -25,11 +25,11 @@
 #include "alloc/reallocf.h"
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
+#include "memory/memdup/memdup.h"
 #include "shadow/passwd/getpw.h"
 #include "string/ctype/isascii.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strdup/memdup.h"
 #include "string/strtok/strsep2arr.h"
 #include "typetraits.h"
 

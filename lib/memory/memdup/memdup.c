@@ -4,7 +4,7 @@
 
 #include "config.h"
 
-#include "string/strdup/memdup.h"
+#include "memory/memdup/memdup.h"
 
 #include <stddef.h>
 
