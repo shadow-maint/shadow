@@ -24,7 +24,6 @@
 #include "prototypes.h"
 #include "pwauth.h"
 #include "getdef.h"
-#include "string/memset/memzero.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 
