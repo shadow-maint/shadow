@@ -92,9 +92,6 @@ memory/ - memory operations
 
   memdup/ - Memory duplication
 
-    strndup_a()
-	Like strndup(3), but takes an array.
-
     memdup()  // Unimplemented
 	Duplicate an object.  Returns a pointer to the dup.
     memdup_T()
