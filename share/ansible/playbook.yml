@@ -12,7 +12,6 @@
     - role: build_container
       vars:
         privileged: "{{ privileged_mode | default(false) | bool }}"
-        name: "{{ container_name }}"
   post_tasks:
     - name: Register container as a host
       ansible.builtin.add_host:
