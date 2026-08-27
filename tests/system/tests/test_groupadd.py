@@ -485,3 +485,23 @@ def test_groupadd__usage(shadow: Shadow):
     result = shadow.groupadd("-h")
     assert result.rc == 0, f"Expected return code 0(success), got {result.rc}"
     assert "Usage: groupadd [options] GROUP" in result.stdout
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__no_group(shadow: Shadow):
+    """
+    :title: Groupadd command fails when no group is mentioned
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupadd command without any argument
+        2. Verify that groupadd command fails
+    :expectedresults:
+        1. Command without any argument fails
+        2. groupadd command fails with error (invalid usage)
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd()
+
+    assert exc_info.value.rc == 2, f"Expected return code 2(invalid usage), got {exc_info.value.rc}"
