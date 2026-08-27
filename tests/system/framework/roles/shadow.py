@@ -46,9 +46,12 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         """
         super().teardown()
 
-    def _parse_args(self, *args) -> Dict[str, str]:
-        args_list = shlex.split(*args[0])
-        name = args_list[-1]
+    def _parse_args(self, args) -> Dict[str, str]:
+        if not args or not args[0]:
+            return {"name": ""}
+
+        args_list = shlex.split(args[0])
+        name = args_list[-1] if args_list else ""
 
         return {"name": name}
 
@@ -230,7 +233,7 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         """
         args_dict = self._parse_args(args)
         self.logger.info(f'Creating group "{args_dict["name"]}" on {self.host.hostname}')
-        cmd = self.host.conn.run("groupadd " + args[0], log_level=ProcessLogLevel.Error)
+        cmd = self.host.conn.run("groupadd " + (args[0] if args else ""), log_level=ProcessLogLevel.Error)
 
         self.host.discard_file("/etc/group")
         self.host.discard_file("/etc/gshadow")
