@@ -398,21 +398,27 @@ class KeyValueFileConfig(MultihostUtility[ShadowHost]):
         self.logger.info(f"Setting {key}={value} in {self.path} on {self.host.hostname}")
 
         sep = self.separator
-        grep_match = "=" if sep == "=" else "\\s"
-        awk_match = "=" if sep == "=" else "\\\\s"
+        if sep == "=":
+            grep_pattern = f"^{key}="
+            grep_comment_pattern = f"^# *{key}="
+            awk_pattern = "="
+        else:
+            grep_pattern = f"^{key}\\s+"
+            grep_comment_pattern = f"^# *{key}\\s+"
+            awk_pattern = "[[:space:]]+"
 
         # Escape special characters for awk
         escaped_value = value.replace("/", "\\/")
 
         self.host.conn.run(
             f"""
-            if grep -q '^{key}{grep_match}' {self.path}; then
+            if grep -qE '{grep_pattern}' {self.path}; then
                 awk -v key="{key}" -v val="{escaped_value}" \\
-                    '{{if ($0 ~ "^" key "{awk_match}") print key "{sep}" val; else print $0}}' \\
+                    '{{if ($0 ~ "^" key "{awk_pattern}") print key "{sep}" val; else print $0}}' \\
                     {self.path} > {self.path}.tmp && mv {self.path}.tmp {self.path}
-            elif grep -q '^#\\s*{key}{grep_match}' {self.path}; then
+            elif grep -qE '{grep_comment_pattern}' {self.path}; then
                 awk -v key="{key}" -v val="{escaped_value}" \\
-                    '{{if ($0 ~ "^#\\\\s*" key "{awk_match}") print key "{sep}" val; else print $0}}' \\
+                    '{{if ($0 ~ "^# *" key "{awk_pattern}") print key "{sep}" val; else print $0}}' \\
                     {self.path} > {self.path}.tmp && mv {self.path}.tmp {self.path}
             else
                 echo '{key}{sep}{value}' >> {self.path}
@@ -432,5 +438,8 @@ class KeyValueFileConfig(MultihostUtility[ShadowHost]):
         self._ensure_exists()
         self.logger.info(f"Removing {key} from {self.path} on {self.host.hostname}")
 
-        match = "=" if self.separator == "=" else "\\s"
-        self.host.conn.run(f"sed -i 's/^{key}{match}.*/#&/' {self.path}", log_level=ProcessLogLevel.Error)
+        if self.separator == "=":
+            pattern = f"^{key}="
+        else:
+            pattern = f"^{key}\\s+"
+        self.host.conn.run(f"sed -iE 's/{pattern}.*/#&/' {self.path}", log_level=ProcessLogLevel.Error)
