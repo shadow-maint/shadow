@@ -19,6 +19,18 @@ General guidelines:
 Don't use some libc functions without Really Good Reasons:
 ==========================================================
 
+<memory.h>
+    strncmp(3)
+	Use strneq_a(), or strpfx(), or else,
+	depending on what you want.
+	The return value of strncmp(3) is confusing,
+	and it is unclear the purpose of its use when you read it.
+
+    strncat(3)
+	Use strndup(3) instead.
+	strncat(3) is legitimate for catenating a prefix of a string
+	after an existing string.
+
 <stdio.h>
     asprintf(3)
 	Use aprintf(3) instead.
@@ -36,19 +48,8 @@ Don't use some libc functions without Really Good Reasons:
 	The return value of strcmp(3) is confusing.
 	strcmp(3) would be legitimate for sorting strings.
 
-    strncmp(3)
-	Use strneq_a(), or strpfx(), or else,
-	depending on what you want.
-	The return value of strncmp(3) is confusing,
-	and it is unclear the purpose of its use when you read it.
-
     strcasecmp(3)
 	Use strcaseeq() instead.
-
-    strncat(3)
-	Use strndup(3) instead.
-	strncat(3) is legitimate for catenating a prefix of a string
-	after an existing string.
 
     strlcpy(3)
 	Use strtcpy() instead.
@@ -63,11 +64,60 @@ Don't use some libc functions without Really Good Reasons:
 
 Specific guidelines:
 ====================
+	Under lib/memory/ we provide a set of functions to manipulate
+	bytes --mem*()-- and nonstrings --strn*()--.
 	Under lib/string/ we provide a set of functions to manipulate
-	strings, separated in subdirectories by utility type.  In this
-	section, we provide a broad overview.
+	strings.
+	All of these functions are separated in subdirectories
+	by utility type.
+	In this section, we provide a broad overview of all of them.
 
-ctype/ - Character classification and conversion functions
+memory/ - memory operations
+  memset/ - Memory setting
+
+    memzero()
+	Synonym of explicit_bzero(3).
+    memzero_a()
+	Like memzero(), but takes an array.
+
+  strncmp/ - Nonstring comparison
+    strneq()
+	Return true if a [[gnu::nonstring]] is equal to a string.
+    strneq_a()
+	Like strneq(), but takes an array.
+
+    strnpfx()  // Unimplemented
+	Return true if a [[gnu::nonstring]] starts with a prefix.
+    STRNPFX()  // Unimplemented
+	Like strnpfx(), but takes an array.
+
+  memdup/ - Memory duplication
+
+    memdup()  // Unimplemented
+	Duplicate an object.  Returns a pointer to the dup.
+    memdup_T()
+	Like memdup(), but with type-safety checks.
+
+  memcpy/ - Memory copying
+    strncpy_a()
+	Like strncpy(3), but takes an array.
+	Use it *exclusively* for copying from a string into a utmp(5)
+	member.
+
+    strncpytail()
+	Like strncpy(), but when truncating, the tail of the string is
+	kept instead of the beginning.  This is useful for ut_id.
+    STRNCPYTAIL()
+	Like strncpytail, but takes an array.
+
+    strncat_a()  // To be removed
+	Do NOT use.  I'll remove it soon.
+
+    memcpy_a()
+	Like memcpy(3), but takes two arrays.
+
+string/ - string operations
+  ctype/ - Character classification and conversion functions
 
     isascii.h
 	The functions defined in this file
@@ -92,17 +142,12 @@ ctype/ - Character classification and conversion functions
 	The functions defined in this file
 	translate all characters in a string.
 
-memset/ - Memory zeroing
-
-    memzero()
-	Synonym of explicit_bzero(3).
-    memzero_a()
-	Like memzero(), but takes an array.
+  strzero/ - String zeroing
 
     strzero()
 	Like memzero(), but takes a string.
 
-strchr/ - Character search and counting
+  strchr/ - Character search and counting
 
     strchrcnt()
 	Count the number of occurrences of a given character in a string.
@@ -113,9 +158,8 @@ strchr/ - Character search and counting
     strnul(3)
 	Return a pointer to the terminating null byte.
 
-strstr/ - String search
+  strstr/ - String search
 
-  s/
     stppfx()  // Current name: strprefix()
 	Return a pointer to the end of the prefix,
 	or NULL if not found.
@@ -124,9 +168,8 @@ strstr/ - String search
 	Return a pointer to the beginning of the suffix,
 	or NULL if not found.
 
-strcmp/ - String comparison
+  strcmp/ - String comparison
 
-  s/
     streq(3)
 	Return true if the strings are equal.
 
@@ -145,47 +188,8 @@ strcmp/ - String comparison
     strcasesfx()  // Unimplemented
 	Like strsfx(), but ignore upper-/lower-case.
 
-  n/
-    strneq()
-	Return true if a [[gnu::nonstring]] is equal to a string.
-    strneq_a()
-	Like strneq(), but takes an array.
+  strcpy/ - String copying
 
-    strnpfx()  // Unimplemented
-	Return true if a [[gnu::nonstring]] starts with a prefix.
-    STRNPFX()  // Unimplemented
-	Like strnpfx(), but takes an array.
-
-strdup/ - Memory duplication
-
-  s/
-    strndup_a()
-	Like strndup(3), but takes an array.
-
-  m/
-    memdup()  // Unimplemented
-	Duplicate an object.  Returns a pointer to the dup.
-    memdup_T()
-	Like memdup(), but with type-safety checks.
-
-strcpy/ - String copying
-
-  n/
-    strncpy_a()
-	Like strncpy(3), but takes an array.
-	Use it *exclusively* for copying from a string into a utmp(5)
-	member.
-
-    strncpytail()
-	Like strncpy(), but when truncating, the tail of the string is
-	kept instead of the beginning.  This is useful for ut_id.
-    STRNCPYTAIL()
-	Like strncpytail, but takes an array.
-
-    strncat_a()  // To be removed
-	Do NOT use.  I'll remove it soon.
-
-  s/
     strtcpy()
 	Copy from a string into another string with truncation.
 	This is what the Linux kernel calls strscpy().
@@ -204,11 +208,7 @@ strcpy/ - String copying
 	Similar to strtcpy(), but takes a pointer to the end instead of
 	a size.  This makes it safer for chaining several calls.
 
-  m/
-    MEMCPY()
-	Like memcpy(3), but takes two arrays.
-
-sprintf/ - Formatted string creation
+  sprintf/ - Formatted string creation
 
     aprintf(3)
 	sprintf(3) variant that allocates.
@@ -227,7 +227,7 @@ sprintf/ - Formatted string creation
 	Similar to stprintf(), but takes a pointer to the end instead of
 	a size.  This makes it safer for chaining several calls.
 
-strspn/ - String span searching
+  strspn/ - String span searching
 
 	Naming conventions:
 	-  'r': rear (search from the end).
@@ -258,7 +258,7 @@ strspn/ - String span searching
 	This is rarely useful.  It was useful for implementing
 	basename().
 
-strsep/ - String separation
+  strsep/ - String separation
 
     stpsep()
 	Similar to strsep(3), but swap the input pointer with the return
@@ -288,6 +288,6 @@ strsep/ - String separation
 	Variant of strsep2ls() that allocates the array of strings.
 	(But the strings themselves are not duplicated.)
 
-strftime.h
+  strftime.h
     strftime_a()
 	Like strftime(3), but takes an array.

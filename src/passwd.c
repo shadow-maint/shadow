@@ -26,6 +26,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "io/fprintf.h"
+#include "memory/memset/memzero.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
@@ -33,13 +34,13 @@
 #include "shadowio.h"
 #include "shadowlog.h"
 #include "sssd.h"
-#include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
+#include "string/strzero/strzero.h"
 #include "time/day_to_str.h"
 
 

@@ -21,10 +21,10 @@
 #include "defines.h"
 #include "getdef.h"
 #include "string/ctype/toascii.h"
-#include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
+#include "string/strzero/strzero.h"
 
 
 /*

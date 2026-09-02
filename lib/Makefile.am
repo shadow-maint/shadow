@@ -115,6 +115,18 @@ libshadow_la_SOURCES = \
 	lockpw.c \
 	loginprompt.c \
 	mail.c \
+	memory/memcpy/strncat.c \
+	memory/memcpy/strncat.h \
+	memory/memcpy/strncpy.c \
+	memory/memcpy/strncpy.h \
+	memory/memdup/memdup.c \
+	memory/memdup/memdup.h \
+	memory/memdup/strndup.c \
+	memory/memdup/strndup.h \
+	memory/memset/memzero.c \
+	memory/memset/memzero.h \
+	memory/strncmp/strneq.c \
+	memory/strncmp/strneq.h \
 	motd.c \
 	myname.c \
 	nss.c \
@@ -197,8 +209,6 @@ libshadow_la_SOURCES = \
 	string/ctype/isascii.h \
 	string/ctype/toascii.c \
 	string/ctype/toascii.h \
-	string/memset/memzero.c \
-	string/memset/memzero.h \
 	string/sprintf/aprintf.c \
 	string/sprintf/aprintf.h \
 	string/sprintf/seprintf.c \
@@ -217,24 +227,14 @@ libshadow_la_SOURCES = \
 	string/strcmp/strcaseprefix.h \
 	string/strcmp/streq.c \
 	string/strcmp/streq.h \
-	string/strcmp/strneq.c \
-	string/strcmp/strneq.h \
 	string/strcmp/strprefix.c \
 	string/strcmp/strprefix.h \
 	string/strcpy/stpecpy.c \
 	string/strcpy/stpecpy.h \
-	string/strcpy/strncat.c \
-	string/strcpy/strncat.h \
-	string/strcpy/strncpy.c \
-	string/strcpy/strncpy.h \
 	string/strcpy/strtcpy.c \
 	string/strcpy/strtcpy.h \
-	string/strdup/memdup.c \
-	string/strdup/memdup.h \
 	string/strdup/strdup.c \
 	string/strdup/strdup.h \
-	string/strdup/strndup.c \
-	string/strdup/strndup.h \
 	string/strftime.c \
 	string/strftime.h \
 	string/strspn/stpspn.c \
@@ -255,6 +255,8 @@ libshadow_la_SOURCES = \
 	string/strtok/strsep2arr.h \
 	string/strtok/strsep2ls.c \
 	string/strtok/strsep2ls.h \
+	string/strzero/strzero.c \
+	string/strzero/strzero.h \
 	strtoday.c \
 	sub.c \
 	subordinateio.h \
