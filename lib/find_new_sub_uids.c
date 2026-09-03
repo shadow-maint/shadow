@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <errno.h>
+#include <stdint.h>
 
 #include "prototypes.h"
 #include "subordinateio.h"
