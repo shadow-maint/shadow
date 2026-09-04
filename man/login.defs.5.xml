@@ -25,6 +25,7 @@
 <!ENTITY FAIL_DELAY            SYSTEM "login.defs.d/FAIL_DELAY.xml">
 <!ENTITY FAILLOG_ENAB          SYSTEM "login.defs.d/FAILLOG_ENAB.xml">
 <!ENTITY FAKE_SHELL            SYSTEM "login.defs.d/FAKE_SHELL.xml">
+<!ENTITY FORCE_SHADOW          SYSTEM "login.defs.d/FORCE_SHADOW.xml">
 <!ENTITY FTMP_FILE             SYSTEM "login.defs.d/FTMP_FILE.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY HMAC_CRYPTO_ALGO      SYSTEM "login.defs.d/HMAC_CRYPTO_ALGO.xml">
@@ -187,6 +188,7 @@
       &FAIL_DELAY;
       &FAILLOG_ENAB;
       &FAKE_SHELL;
+      &FORCE_SHADOW;
       &FTMP_FILE;
       &GID_MAX; <!-- documents also GID_MIN -->
       &HMAC_CRYPTO_ALGO;
@@ -277,7 +279,7 @@
 	  <para>
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
-	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP
+	    ENCRYPT_METHOD FORCE_SHADOW MAX_MEMBERS_PER_GROUP
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
@@ -290,7 +292,7 @@
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    <phrase condition="no_pam">ENCRYPT_METHOD</phrase>
-	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
+	    FORCE_SHADOW SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
 	</listitem>
@@ -320,7 +322,7 @@
 	<term>groupadd</term>
 	<listitem>
 	  <para>
-	    GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP
+	    FORCE_SHADOW GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP
 	    SYS_GID_MAX SYS_GID_MIN
 	  </para>
 	</listitem>
