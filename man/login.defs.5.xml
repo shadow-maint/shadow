@@ -25,6 +25,7 @@
 <!ENTITY FAIL_DELAY            SYSTEM "login.defs.d/FAIL_DELAY.xml">
 <!ENTITY FAILLOG_ENAB          SYSTEM "login.defs.d/FAILLOG_ENAB.xml">
 <!ENTITY FAKE_SHELL            SYSTEM "login.defs.d/FAKE_SHELL.xml">
+<!ENTITY FORCE_SHADOW          SYSTEM "login.defs.d/FORCE_SHADOW.xml">
 <!ENTITY FTMP_FILE             SYSTEM "login.defs.d/FTMP_FILE.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY HMAC_CRYPTO_ALGO      SYSTEM "login.defs.d/HMAC_CRYPTO_ALGO.xml">
@@ -187,6 +188,7 @@
       &FAIL_DELAY;
       &FAILLOG_ENAB;
       &FAKE_SHELL;
+      &FORCE_SHADOW;
       &FTMP_FILE;
       &GID_MAX; <!-- documents also GID_MIN -->
       &HMAC_CRYPTO_ALGO;
@@ -255,10 +257,13 @@
     </para>
     <!-- .na -->
     <variablelist remap='IP'>
-      <varlistentry condition="tcb">
+      <varlistentry>
 	<term>chage</term>
 	<listitem>
-	  <para>USE_TCB</para>
+	  <para>
+	    FORCE_SHADOW
+	    <phrase condition="tcb">USE_TCB</phrase>
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -277,7 +282,7 @@
 	  <para>
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
-	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP
+	    ENCRYPT_METHOD FORCE_SHADOW MAX_MEMBERS_PER_GROUP
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
@@ -290,7 +295,7 @@
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    <phrase condition="no_pam">ENCRYPT_METHOD</phrase>
-	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
+	    FORCE_SHADOW SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
 	</listitem>
@@ -310,7 +315,7 @@
 	  <para>
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
-	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP
+	    ENCRYPT_METHOD FORCE_SHADOW MAX_MEMBERS_PER_GROUP
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
@@ -320,7 +325,7 @@
 	<term>groupadd</term>
 	<listitem>
 	  <para>
-	    GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP
+	    FORCE_SHADOW GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP
 	    SYS_GID_MAX SYS_GID_MIN
 	  </para>
 	</listitem>
@@ -328,19 +333,19 @@
       <varlistentry>
 	<term>groupdel</term>
 	<listitem>
-	  <para>MAX_MEMBERS_PER_GROUP</para>
+	  <para>FORCE_SHADOW MAX_MEMBERS_PER_GROUP</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>groupmod</term>
 	<listitem>
-	  <para>MAX_MEMBERS_PER_GROUP</para>
+	  <para>FORCE_SHADOW MAX_MEMBERS_PER_GROUP</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>grpck</term>
 	<listitem>
-	  <para>MAX_MEMBERS_PER_GROUP</para>
+	  <para>FORCE_SHADOW MAX_MEMBERS_PER_GROUP</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -352,7 +357,7 @@
       <varlistentry>
 	<term>grpunconv</term>
 	<listitem>
-	  <para>MAX_MEMBERS_PER_GROUP</para>
+	  <para>FORCE_SHADOW MAX_MEMBERS_PER_GROUP</para>
 	</listitem>
       </varlistentry>
       <!-- id: no variables -->
@@ -405,6 +410,7 @@
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    ENCRYPT_METHOD
+	    FORCE_SHADOW
 	    GID_MAX GID_MIN
 	    MAX_MEMBERS_PER_GROUP
 	    HOME_MODE
@@ -428,7 +434,7 @@
 	  <para>
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
-	    ENCRYPT_METHOD OBSCURE_CHECKS_ENAB
+	    ENCRYPT_METHOD FORCE_SHADOW OBSCURE_CHECKS_ENAB
 	    PASS_ALWAYS_WARN PASS_CHANGE_TRIES PASS_MIN_LEN
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
@@ -439,7 +445,7 @@
 	<term>pwck</term>
 	<listitem>
 	  <para>
-	    PASS_MAX_DAYS PASS_WARN_AGE
+	    FORCE_SHADOW PASS_MAX_DAYS PASS_WARN_AGE
 	    <phrase condition="tcb">TCB_AUTH_GROUP TCB_SYMLINKS USE_TCB</phrase>
 	  </para>
 	</listitem>
@@ -453,10 +459,11 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="tcb">
+      <varlistentry>
 	<term>pwunconv</term>
 	<listitem>
 	  <para>
+	    FORCE_SHADOW
 	    <phrase condition="tcb">USE_TCB</phrase>
 	  </para>
 	</listitem>
@@ -492,6 +499,7 @@
 	<listitem>
 	  <para>
 	    CREATE_HOME
+	    FORCE_SHADOW
 	    GID_MAX GID_MIN
 	    HOME_MODE
 	    LASTLOG_UID_MAX
@@ -512,7 +520,7 @@
 	<term>userdel</term>
 	<listitem>
 	  <para>
-	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD
+	    FORCE_SHADOW MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD
 	    USERGROUPS_ENAB
 	    <phrase condition="tcb">TCB_SYMLINKS USE_TCB</phrase>
 	  </para>
@@ -522,7 +530,7 @@
 	<term>usermod</term>
 	<listitem>
 	  <para>
-	    LASTLOG_UID_MAX
+	    FORCE_SHADOW LASTLOG_UID_MAX
 	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP
 	    SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN SUB_GID_DETERMINISTIC
 	    SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN SUB_UID_DETERMINISTIC
@@ -531,10 +539,11 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="tcb">
+      <varlistentry>
 	<term>vipw</term>
 	<listitem>
 	  <para>
+	    FORCE_SHADOW
 	    <phrase condition="tcb">USE_TCB</phrase>
 	  </para>
 	</listitem>

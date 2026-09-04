@@ -1,0 +1,18 @@
+<!--
+   SPDX-FileCopyrightText: 2026, shadow-utils contributors
+   SPDX-License-Identifier: BSD-3-Clause
+-->
+<varlistentry>
+  <term><option>FORCE_SHADOW</option> (boolean)</term>
+  <listitem>
+    <para>
+      If set to <replaceable>yes</replaceable>,
+      the shadow utilities will create
+      <filename>/etc/shadow</filename>
+      and/or
+      <filename>/etc/gshadow</filename>
+      if they are missing, and use them.
+      The default value is <replaceable>no</replaceable>.
+    </para>
+  </listitem>
+</varlistentry>
