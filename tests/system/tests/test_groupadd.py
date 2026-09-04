@@ -601,3 +601,102 @@ def test_groupadd__invalid_option(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__add_system_group(shadow: Shadow):
+    """
+    :title: System group creation assigns GID from the system GID range
+    :setup:
+        1. None required
+    :steps:
+        1. Create system group
+        2. Check group and gshadow entries
+        3. Check GID for system group
+    :expectedresults:
+        1. System group is created
+        2. Group and gshadow entries are found
+        3. System group is assigned with GID within system GID range
+    :customerscenario: False
+    """
+    shadow.groupadd("--system sgroup")
+
+    group_entry = shadow.tools.getent.group("sgroup")
+    assert group_entry is not None, "System group should be found"
+    assert group_entry.name == "sgroup", "Incorrect groupname"
+    assert group_entry.gid is not None, "System group should have a GID"
+    assert group_entry.gid >= 101, "System group GID should be >= SYS_GID_MIN (101)"
+    assert group_entry.gid < 1000, "System group GID should be < GID_MIN (1000)"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("sgroup")
+        assert gshadow_entry is not None, "System group should be found"
+        assert gshadow_entry.name == "sgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__no_gids_available(shadow: Shadow):
+    """
+    :title: Group creation fails when all GIDs in the range are exhausted
+    :setup:
+        1. Set GID_MIN=2000 and GID_MAX=2001 in /etc/login.defs
+        2. Create two groups with GID 2000 and 2001 respectively
+    :steps:
+        1. Attempt to create new group
+        2. Verify that groupadd command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group is not created
+        2. groupadd command fails with rc=4 (no GID available)
+        3. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    shadow.login_defs["GID_MIN"] = "2000"
+    shadow.login_defs["GID_MAX"] = "2001"
+    shadow.groupadd("-g 2000 tgroup1")
+    shadow.groupadd("-g 2001 tgroup2")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("tgroup3")
+    assert exc_info.value.rc == 4, f"Expected rc=4 (no GID available), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup3")
+    assert group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup3")
+        assert gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__no_system_gids_available(shadow: Shadow):
+    """
+    :title: System group creation fails when all GIDs in the range are exhausted
+    :setup:
+        1. Set SYS_GID_MIN=500 and SYS_GID_MAX=501 in /etc/login.defs
+        2. Create two system groups with GID 500 and 501 respectively
+    :steps:
+        1. Attempt to create new system group
+        2. Verify that groupadd command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. System group is not created
+        2. groupadd command fails with rc=4 (no GID available)
+        3. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    shadow.login_defs["SYS_GID_MIN"] = "500"
+    shadow.login_defs["SYS_GID_MAX"] = "501"
+    shadow.groupadd("-r -g 500 sgroup1")
+    shadow.groupadd("-r -g 501 sgroup2")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupadd("-r sgroup3")
+    assert exc_info.value.rc == 4, f"Expected rc=4 (no system GID available), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("sgroup3")
+    assert group_entry is None, "System group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("sgroup3")
+        assert gshadow_entry is None, "System group should not be found"
