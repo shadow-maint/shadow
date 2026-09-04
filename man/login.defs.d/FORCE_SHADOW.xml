@@ -1,0 +1,17 @@
+<!--
+   SPDX-FileCopyrightText: 2026, shadow-utils contributors
+   SPDX-License-Identifier: BSD-3-Clause
+-->
+<varlistentry>
+  <term><option>FORCE_SHADOW</option> (boolean)</term>
+  <listitem>
+    <para>
+      If set to <replaceable>yes</replaceable>,
+      the shadow utilities will use the shadow password and
+      shadow group files even if
+      <filename>/etc/shadow</filename> or
+      <filename>/etc/gshadow</filename> are missing.
+      The default value is <replaceable>no</replaceable>.
+    </para>
+  </listitem>
+</varlistentry>

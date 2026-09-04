@@ -135,6 +135,7 @@ login_defs_v = \
 	FAIL_DELAY.xml \
 	FAILLOG_ENAB.xml \
 	FAKE_SHELL.xml \
+	FORCE_SHADOW.xml \
 	FTMP_FILE.xml \
 	GID_MAX.xml \
 	HMAC_CRYPTO_ALGO.xml \
