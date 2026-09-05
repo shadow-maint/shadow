@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <ctype.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -37,7 +35,7 @@
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 /*

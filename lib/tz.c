@@ -21,7 +21,7 @@
 #include "getdef.h"
 #include "io/fgets/fgets.h"
 #include "prototypes.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 /*
