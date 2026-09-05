@@ -13,22 +13,14 @@
 
 #include "attr.h"
 #include "cast.h"
+#include "typetraits.h"
 
 
-// string case-insensitive prefix
+// strcaseprefix - string case-insensitive prefix
 #define strcaseprefix(s, prefix)                                      \
-({                                                                    \
-	const char  *p_;                                              \
-	                                                              \
-	p_ = strcaseprefix_(s, prefix);                               \
-	                                                              \
-	_Generic(s,                                                   \
-		const char *:                     p_,                 \
-		const void *:                     p_,                 \
-		char *:        const_cast(char *, p_),                \
-		void *:        const_cast(char *, p_)                 \
-	);                                                            \
-})
+(                                                                     \
+	const_cast(QChar_of(s) *, strcaseprefix_(s, prefix))          \
+)
 
 
 ATTR_STRING(1) ATTR_STRING(2)
