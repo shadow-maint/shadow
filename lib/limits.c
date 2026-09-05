@@ -17,8 +17,6 @@
 
 #ifndef USE_PAM
 
-#ident "$Id$"
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -32,6 +30,7 @@
 
 #include "atoi/a2i.h"
 #include "io/fgets/fgets.h"
+#include "string/ctype/isascii.h"
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -183,7 +182,7 @@ static int do_user_limits (const char *buf, const char *name)
 	int retval = 0;
 	bool reported = false;
 
-	pp = stpspn(buf, " \t");
+	pp = stpspn(buf, CTYPE_BLANK_C);
 
 	/* The special limit string "-" results in no limit for all known
 	 * limits.
