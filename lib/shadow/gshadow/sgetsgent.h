@@ -13,11 +13,16 @@
 
 #include "shadow/gshadow/sgrp.h"
 
+#include <stddef.h>
+
 
 #if __has_include(<gshadow.h>)
 # include <gshadow.h>
 #else
 struct sgrp *sgetsgent(const char *);
+int sgetsgent_r(size_t size;
+    const char *s, struct sgrp *sgent, char buf[size], size_t size,
+    struct sgrp **dummy);
 #endif
 
 
