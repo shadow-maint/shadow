@@ -9,5 +9,5 @@
 #include <sys/types.h>
 
 
-extern inline ssize_t readlinknul(const char *restrict link, char *restrict buf,
-    ssize_t size);
+extern inline ssize_t readlinknul(ssize_t size;
+    const char *restrict link, char buf[restrict size], ssize_t size);
