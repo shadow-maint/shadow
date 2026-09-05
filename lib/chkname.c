@@ -33,7 +33,6 @@
 #include "sizeof.h"
 #include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strcaseeq.h"
 #include "string/strspn/strrcspn.h"
 #include "string/strtok/stpsep.h"
 #include "sysconf.h"

@@ -35,7 +35,7 @@
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strspn/stpspn.h"
+#include "string/strspn/strspn.h"
 #include "typetraits.h"
 
 
@@ -468,7 +468,7 @@ void setup_limits (const struct passwd *info)
 		for (cp = info->pw_gecos; cp != NULL; cp = strchr (cp, ',')) {
 			char  *val;
 
-			cp = strprefix(cp, ",") ?: cp;
+			cp = stpspn(cp, ",");
 
 			val = strprefix(cp, "pri=");
 			if (val != NULL) {
