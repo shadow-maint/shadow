@@ -20,6 +20,8 @@
 #include <sys/types.h>
 #include <time.h>
 
+#include <a2i.h>
+
 #include "agetpass.h"
 #include "atoi/a2i.h"
 #include "chkname.h"
