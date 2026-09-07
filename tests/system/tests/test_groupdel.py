@@ -5,6 +5,7 @@ Test groupdel
 from __future__ import annotations
 
 import pytest
+from pytest_mh.conn import ProcessError
 
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
@@ -94,3 +95,40 @@ def test_groupdel__delete_group_no_gshadow_file(shadow: Shadow):
 
     gshadow_file = shadow.fs.exists("/etc/gshadow")
     assert not gshadow_file, "/etc/gshadow file should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupdel__delete_group_error_busy_group(shadow: Shadow):
+    """
+    :title: Group deletion fails when it is primary group for user
+    :setup:
+        1. Create group
+        2. Create user with primary group
+    :steps:
+        1. Attempt to delete group
+        2. Verify that groupdel command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group is not deleted
+        2. groupdel command fails with error (cannot remove the primary group of user)
+        3. Group and gshadow entries are found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.useradd("-g tgroup tuser")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupdel("tgroup")
+
+    assert (
+        exc_info.value.rc == 8
+    ), f"Expected return code 8 (cannot remove the primary group of user), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
