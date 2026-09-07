@@ -132,3 +132,23 @@ def test_groupdel__delete_group_error_busy_group(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupdel__delete_non_existing_group(shadow: Shadow):
+    """
+    :title: Group deletion fails when specified group does not exist
+    :setup:
+        1. None required
+    :steps:
+        1. Attempt to delete a non-existing group
+        2. Verify that groupdel command fails
+    :expectedresults:
+        1. Group is not deleted
+        2. groupdel command fails with error (group does not exist)
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupdel("tgroup")
+
+    assert exc_info.value.rc == 6, f"Expected return code 6 (group does not exist), got {exc_info.value.rc}"
