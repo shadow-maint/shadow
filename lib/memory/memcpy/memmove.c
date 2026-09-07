@@ -5,3 +5,6 @@
 #include "config.h"
 
 #include "memory/memcpy/memmove.h"
+
+
+extern inline void *mempmove(void *dst, const void *src, size_t n);

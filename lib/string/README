@@ -131,6 +131,9 @@ memory/ - memory operations
     memmove_T()
 	Like memmove(3), but type safe.
 
+    mempmove()
+	Like memmove(3), but return an offset pointer.
+
 string/ - string operations
   ctype/ - Character classification and conversion functions
 
