@@ -700,3 +700,32 @@ def test_groupadd__no_system_gids_available(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("sgroup3")
         assert gshadow_entry is None, "System group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupadd__override_GID_MIN(shadow: Shadow):
+    """
+    :title: Group creation respects GID_MIN override
+    :setup:
+        1. None required
+    :steps:
+        1. Create group with GID_MIN override
+        2. Check group and gshadow entries
+        3. Check GID for group
+    :expectedresults:
+        1. Group is created
+        2. Group and gshadow entries are found
+        3. Group entry is found with GID = 2000
+    :customerscenario: False
+    """
+    shadow.groupadd("-K GID_MIN=2000 tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 2000, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found in gshadow"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
