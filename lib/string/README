@@ -133,6 +133,8 @@ memory/ - memory operations
 
     mempmove()
 	Like memmove(3), but return an offset pointer.
+    mempmove_T()
+	Like mempmove(), but type safe.
 
 string/ - string operations
   ctype/ - Character classification and conversion functions
