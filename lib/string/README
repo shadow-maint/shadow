@@ -211,6 +211,9 @@ strcpy/ - String copying
     memmove_T()
 	Like memmove(3), but type safe.
 
+    mempmove()
+	Like memmove(3), but return an offset pointer.
+
 sprintf/ - Formatted string creation
 
     aprintf(3)

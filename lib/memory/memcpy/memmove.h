@@ -23,4 +23,15 @@
 } while (0)
 
 
+inline void *mempmove(void *dst, const void *src, size_t n);
+
+
+// mempmove - memory return-offset-pointer move
+inline void *
+mempmove(void *dst, const void *src, size_t n)
+{
+	return memmove(dst, src, n) + n;
+}
+
+
 #endif  // include guard
