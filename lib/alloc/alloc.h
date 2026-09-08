@@ -17,24 +17,20 @@
 
 
 // malloc_T - malloc type-safe
-#define malloc_T(n, T)   malloc_T_(n, typeas(T))
-#define malloc_T_(n, T)  rvalue((T *){mallocarray(n, sizeof(T))})
+#define malloc_T(n, T)      rvalue((typeas(T) *){mallocarray(n, sizeof(T))})
 // calloc_T - calloc type-safe
-#define calloc_T(n, T)   calloc_T_(n, typeas(T))
-#define calloc_T_(n, T)  rvalue((T *){calloc(n, sizeof(T))})
+#define calloc_T(n, T)      rvalue((typeas(T) *){calloc(n, sizeof(T))})
 // realloc_T - realloc type-safe
-#define realloc_T(p, n, T)   realloc_T_(p, n, typeas(T))
-#define realloc_T_(p, n, T)                                           \
+#define realloc_T(p, n, T)                                            \
 (                                                                     \
-	_Generic(p, T *: (void)0),                                    \
-	rvalue((T *){reallocarray_(p, n, sizeof(T))})                 \
+	_Generic(p, typeas(T) *: (void)0),                            \
+	rvalue((typeas(T) *){reallocarray_(p, n, sizeof(T))})         \
 )
 // reallocf_T - realloc free-on-error type-safe
-#define reallocf_T(p, n, T)   reallocf_T_(p, n, typeas(T))
-#define reallocf_T_(p, n, T)                                          \
+#define reallocf_T(p, n, T)                                           \
 (                                                                     \
-	_Generic(p, T *: (void)0),                                    \
-	rvalue((T *){reallocarrayf_(p, n, sizeof(T))})                \
+	_Generic(p, typeas(T) *: (void)0),                            \
+	rvalue((typeas(T) *){reallocarrayf_(p, n, sizeof(T))})        \
 )
 
 
