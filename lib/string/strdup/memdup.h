@@ -10,7 +10,7 @@
 
 #include <stddef.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 
 
 // memdup_T - memory duplicate type-safe

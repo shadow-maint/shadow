@@ -26,8 +26,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include "alloc/calloc.h"
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "io/syslog.h"
 #include "memory/memcpy/strncpytail.h"

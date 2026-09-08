@@ -8,7 +8,7 @@
 
 #include "config.h"
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "string/strchr/strchrcnt.h"
