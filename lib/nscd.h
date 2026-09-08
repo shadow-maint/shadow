@@ -7,7 +7,11 @@
 #ifdef	USE_NSCD
 extern int nscd_flush_cache (const char *service);
 #else
-#define nscd_flush_cache(service) (0)
+static inline int
+nscd_flush_cache(MAYBE_UNUSED int _1)
+{
+	return 0;
+}
 #endif
 
 #endif
