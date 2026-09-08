@@ -13,6 +13,7 @@
 
 #include "atoi/strtoi/strtoi.h"
 #include "atoi/strtoi/strtou_noneg.h"
+#include "cast.h"
 #include "typetraits.h"
 
 
@@ -35,7 +36,7 @@
 		unsigned int:       strtou_noneg,                     \
 		unsigned long:      strtou_noneg,                     \
 		unsigned long long: strtou_noneg                      \
-	)(s, (char **) endp_, base, min_, max_, &status);             \
+	)(s, const_cast(char **, endp_), base, min_, max_, &status);  \
 	                                                              \
 	if (status != 0)                                              \
 		errno = status;                                       \
