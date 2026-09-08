@@ -365,13 +365,7 @@ static void update_shell (const char *user, char *newshell, const struct option_
 
 	process_selinux = !flags->chroot;
 
-	/*
-	 * Before going any further, raise the ulimit to prevent
-	 * colliding into a lowered ulimit, and set the real UID
-	 * to root to protect against unexpected signals. Any
-	 * keyboard signals are set to be ignored.
-	 */
-	if (setuid (0) != 0) {
+	if (geteuid () == 0 && setuid (0) != 0) {
 		SYSLOG(LOG_ERR, "can't setuid(0)");
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		fail_exit (1, process_selinux);
