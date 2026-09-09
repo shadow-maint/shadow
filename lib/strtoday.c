@@ -34,7 +34,7 @@ strtoday(const char *str)
 	/* If a numerical value is provided, this is already a number of
 	 * days since EPOCH.
 	 */
-	if (str2sl(&d, str) == 0)
+	if (a2sl(&d, str, NULL, 0,,) == 0)
 		return d;
 
 	d = get_date(str);
