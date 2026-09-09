@@ -176,18 +176,21 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				usage (E_USAGE);
 			}
 			if (  (   (streq(crypt_method, "SHA256") || streq(crypt_method, "SHA512"))
-			       && (-1 == a2sl(&sha_rounds, optarg, NULL, 0,,)))) {
+			       && (-1 == a2i(long, &sha_rounds, optarg, NULL, 0,,))))
+			{
 				bad_s = 1;
 			}
 #if defined(USE_BCRYPT)
 			if (  (   streq(crypt_method, "BCRYPT")
-			       && (-1 == a2sl(&bcrypt_rounds, optarg, NULL, 0,,)))) {
+			       && (-1 == a2i(long, &bcrypt_rounds, optarg, NULL, 0,,))))
+			{
 				bad_s = 1;
 			}
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
 			if (  (   streq(crypt_method, "YESCRYPT")
-			       && (-1 == a2sl(&yescrypt_cost, optarg, NULL, 0,,)))) {
+			       && (-1 == a2i(long, &yescrypt_cost, optarg, NULL, 0,,))))
+			{
 				bad_s = 1;
 			}
 #endif				/* USE_YESCRYPT */
