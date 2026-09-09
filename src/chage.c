@@ -168,7 +168,7 @@ static int new_fields (void)
 
 	stprintf_a(buf, "%ld", maxdays);
 	change_field(buf, sizeof(buf), _("Maximum Password Age"));
-	if (a2sl(&maxdays, buf, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(&maxdays, buf, NULL, 0, -1,) == -1)
 		return 0;
 
 	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY)
@@ -189,12 +189,12 @@ static int new_fields (void)
 
 	stprintf_a(buf, "%ld", warndays);
 	change_field(buf, sizeof(buf), _("Password Expiration Warning"));
-	if (a2sl(&warndays, buf, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(&warndays, buf, NULL, 0, -1,) == -1)
 		return 0;
 
 	stprintf_a(buf, "%ld", inactdays);
 	change_field(buf, sizeof(buf), _("Password Inactive"));
-	if (a2sl(&inactdays, buf, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(&inactdays, buf, NULL, 0, -1,) == -1)
 		return 0;
 
 	if (-1 == expdate || LONG_MAX / DAY < expdate)
@@ -371,7 +371,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			break;
 		case 'I':
 			Iflg = true;
-			if (a2sl(&inactdays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
+			if (a2sl(&inactdays, optarg, NULL, 0, -1,) == -1) {
 				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
@@ -382,7 +382,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			break;
 		case 'M':
 			Mflg = true;
-			if (a2sl(&maxdays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
+			if (a2sl(&maxdays, optarg, NULL, 0, -1,) == -1) {
 				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
@@ -396,7 +396,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			break;
 		case 'W':
 			Wflg = true;
-			if (a2sl(&warndays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
+			if (a2sl(&warndays, optarg, NULL, 0, -1,) == -1) {
 				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
