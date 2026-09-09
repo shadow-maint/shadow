@@ -17,14 +17,6 @@
 #include "typetraits.h"
 
 
-#define adds_T(T, a, b, ...)                                          \
-({                                                                    \
-	T  addend_[] = {a, b, __VA_ARGS__};                           \
-                                                                      \
-	addsN_T_(T, countof(addend_), addend_);                       \
-})
-
-
 #define adds2_T_(T, a, b)                                             \
 ({                                                                    \
 	T  sum_;                                                      \
@@ -42,23 +34,26 @@
 })
 
 
-#define addsN_T_(T, n, addend)                                        \
+#define adds_T(T, a, b, ...)                                          \
 ({                                                                    \
-	int  e_;                                                      \
+	T       addend_[] = {(a), (b), __VA_ARGS__};                  \
+	int     e_;                                                   \
+	size_t  n_;                                                   \
 	                                                              \
+	n_ = countof(addend_);                                        \
 	e_ = errno;                                                   \
-	while (n > 1) {                                               \
-		QSORT(T, addend, n);                                  \
+	while (n_ > 1) {                                               \
+		QSORT(T, addend_, n_);                                \
 		                                                      \
 		errno = 0;                                            \
-		addend[0] = adds2_T_(T, addend[0], addend[--n]);      \
+		addend_[0] = adds2_T_(T, addend_[0], addend_[--n_]);  \
 		if (errno != 0)                                       \
 			break;                                        \
 	}                                                             \
 	if (errno == 0)                                               \
 		errno = e_;                                           \
 	                                                              \
-	addend[0];                                                    \
+	addend_[0];                                                   \
 })
 
 
