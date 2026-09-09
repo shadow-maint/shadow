@@ -13,26 +13,26 @@
 #include "adds.h"
 #include "attr.h"
 
-static void test_addsl_2_ok(MAYBE_UNUSED void ** _1);
-static void test_addsl_2_underflow(MAYBE_UNUSED void ** _1);
-static void test_addsl_2_overflow(MAYBE_UNUSED void ** _1);
-static void test_addsl_3_ok(MAYBE_UNUSED void ** _1);
-static void test_addsl_3_underflow(MAYBE_UNUSED void ** _1);
-static void test_addsl_3_overflow(MAYBE_UNUSED void ** _1);
-static void test_addsl_5_ok(MAYBE_UNUSED void ** _1);
+static void test_adds_2_ok(MAYBE_UNUSED void ** _1);
+static void test_adds_2_underflow(MAYBE_UNUSED void ** _1);
+static void test_adds_2_overflow(MAYBE_UNUSED void ** _1);
+static void test_adds_3_ok(MAYBE_UNUSED void ** _1);
+static void test_adds_3_underflow(MAYBE_UNUSED void ** _1);
+static void test_adds_3_overflow(MAYBE_UNUSED void ** _1);
+static void test_adds_5_ok(MAYBE_UNUSED void ** _1);
 
 
 int
 main(void)
 {
     const struct CMUnitTest  tests[] = {
-        cmocka_unit_test(test_addsl_2_ok),
-        cmocka_unit_test(test_addsl_2_underflow),
-        cmocka_unit_test(test_addsl_2_overflow),
-        cmocka_unit_test(test_addsl_3_ok),
-        cmocka_unit_test(test_addsl_3_underflow),
-        cmocka_unit_test(test_addsl_3_overflow),
-        cmocka_unit_test(test_addsl_5_ok),
+        cmocka_unit_test(test_adds_2_ok),
+        cmocka_unit_test(test_adds_2_underflow),
+        cmocka_unit_test(test_adds_2_overflow),
+        cmocka_unit_test(test_adds_3_ok),
+        cmocka_unit_test(test_adds_3_underflow),
+        cmocka_unit_test(test_adds_3_overflow),
+        cmocka_unit_test(test_adds_5_ok),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
@@ -40,66 +40,66 @@ main(void)
 
 
 static void
-test_addsl_2_ok(MAYBE_UNUSED void ** _1)
+test_adds_2_ok(MAYBE_UNUSED void ** _1)
 {
-	assert_true(addsl(1, 3)			== 1 + 3);
-	assert_true(addsl(-4321, 7)		== -4321 + 7);
-	assert_true(addsl(1, 1)			== 1 + 1);
-	assert_true(addsl(-1, -2)		== -1 - 2);
-	assert_true(addsl(LONG_MAX, -1)		== LONG_MAX - 1);
-	assert_true(addsl(LONG_MIN, 1)		== LONG_MIN + 1);
-	assert_true(addsl(LONG_MIN, LONG_MAX)	== LONG_MIN + LONG_MAX);
-	assert_true(addsl(0, 0)			== 0);
+	assert_true(adds_T(long, 1, 3)			== 1 + 3);
+	assert_true(adds_T(long, -4321, 7)		== -4321 + 7);
+	assert_true(adds_T(long, 1, 1)			== 1 + 1);
+	assert_true(adds_T(long, -1, -2)		== -1 - 2);
+	assert_true(adds_T(long, LONG_MAX, -1)		== LONG_MAX - 1);
+	assert_true(adds_T(long, LONG_MIN, 1)		== LONG_MIN + 1);
+	assert_true(adds_T(long, LONG_MIN, LONG_MAX)	== LONG_MIN + LONG_MAX);
+	assert_true(adds_T(long, 0, 0)			== 0);
 }
 
 
 static void
-test_addsl_2_underflow(MAYBE_UNUSED void ** _1)
+test_adds_2_underflow(MAYBE_UNUSED void ** _1)
 {
-	assert_true(addsl(LONG_MIN, -1)		== LONG_MIN);
-	assert_true(addsl(LONG_MIN + 3, -7)	== LONG_MIN);
-	assert_true(addsl(LONG_MIN, LONG_MIN)	== LONG_MIN);
+	assert_true(adds_T(long, LONG_MIN, -1)		== LONG_MIN);
+	assert_true(adds_T(long, LONG_MIN + 3, -7)	== LONG_MIN);
+	assert_true(adds_T(long, LONG_MIN, LONG_MIN)	== LONG_MIN);
 }
 
 
 static void
-test_addsl_2_overflow(MAYBE_UNUSED void ** _1)
+test_adds_2_overflow(MAYBE_UNUSED void ** _1)
 {
-	assert_true(addsl(LONG_MAX, 1)		== LONG_MAX);
-	assert_true(addsl(LONG_MAX - 3, 7)	== LONG_MAX);
-	assert_true(addsl(LONG_MAX, LONG_MAX)	== LONG_MAX);
+	assert_true(adds_T(long, LONG_MAX, 1)		== LONG_MAX);
+	assert_true(adds_T(long, LONG_MAX - 3, 7)	== LONG_MAX);
+	assert_true(adds_T(long, LONG_MAX, LONG_MAX)	== LONG_MAX);
 }
 
 
 static void
-test_addsl_3_ok(MAYBE_UNUSED void ** _1)
+test_adds_3_ok(MAYBE_UNUSED void ** _1)
 {
-	assert_true(addsl(1, 2, 3)		== 1 + 2 + 3);
-	assert_true(addsl(LONG_MIN, -3, 4)	== LONG_MIN + 4 - 3);
-	assert_true(addsl(LONG_MAX, LONG_MAX, LONG_MIN)
+	assert_true(adds_T(long, 1, 2, 3)		== 1 + 2 + 3);
+	assert_true(adds_T(long, LONG_MIN, -3, 4)	== LONG_MIN + 4 - 3);
+	assert_true(adds_T(long, LONG_MAX, LONG_MAX, LONG_MIN)
 						== LONG_MAX + LONG_MIN + LONG_MAX);
 }
 
 
 static void
-test_addsl_3_underflow(MAYBE_UNUSED void ** _1)
+test_adds_3_underflow(MAYBE_UNUSED void ** _1)
 {
-	assert_true(addsl(LONG_MIN, 2, -3)	== LONG_MIN);
-	assert_true(addsl(LONG_MIN, -1, 0)	== LONG_MIN);
+	assert_true(adds_T(long, LONG_MIN, 2, -3)	== LONG_MIN);
+	assert_true(adds_T(long, LONG_MIN, -1, 0)	== LONG_MIN);
 }
 
 
 static void
-test_addsl_3_overflow(MAYBE_UNUSED void ** _1)
+test_adds_3_overflow(MAYBE_UNUSED void ** _1)
 {
-	assert_true(addsl(LONG_MAX, -1, 2)	== LONG_MAX);
-	assert_true(addsl(LONG_MAX, +1, 0)	== LONG_MAX);
-	assert_true(addsl(LONG_MAX, LONG_MAX, 0)== LONG_MAX);
+	assert_true(adds_T(long, LONG_MAX, -1, 2)	== LONG_MAX);
+	assert_true(adds_T(long, LONG_MAX, +1, 0)	== LONG_MAX);
+	assert_true(adds_T(long, LONG_MAX, LONG_MAX, 0)== LONG_MAX);
 }
 
 
 static void
-test_addsl_5_ok(MAYBE_UNUSED void ** _1)
+test_adds_5_ok(MAYBE_UNUSED void ** _1)
 {
-	assert_true(addsl(LONG_MAX, LONG_MAX, LONG_MIN, LONG_MIN, 44) == 42);
+	assert_true(adds_T(long, LONG_MAX, LONG_MAX, LONG_MIN, LONG_MIN, 44) == 42);
 }
