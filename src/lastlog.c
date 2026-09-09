@@ -328,7 +328,7 @@ int main (int argc, char **argv)
 			case 'b':
 			{
 				unsigned long inverse_days;
-				if (str2ul(&inverse_days, optarg) == -1) {
+				if (a2ul(&inverse_days, optarg, NULL, 0,,) == -1) {
 					eprintf(_("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					exit (EXIT_FAILURE);
@@ -355,7 +355,7 @@ int main (int argc, char **argv)
 			case 't':
 			{
 				unsigned long days;
-				if (str2ul(&days, optarg) == -1) {
+				if (a2ul(&days, optarg, NULL, 0,,) == -1) {
 					eprintf(_("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					exit (EXIT_FAILURE);
