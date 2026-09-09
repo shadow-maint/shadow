@@ -31,7 +31,7 @@ inline int get_uid(const char *restrict uidstr, uid_t *restrict uid);
 inline int
 get_fd(const char *restrict fdstr, int *restrict fd)
 {
-	return a2si(fd, fdstr, NULL, 10, 0,);
+	return a2i(int, fd, fdstr, NULL, 10, 0,);
 }
 
 
