@@ -155,12 +155,19 @@ def test_groupdel__delete_non_existing_group(shadow: Shadow):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_groupdel__locked_group_file(shadow: Shadow):
+@pytest.mark.parametrize(
+    "lock_file",
+    [
+        pytest.param("/etc/group.lock", id="group_file"),
+        pytest.param("/etc/gshadow.lock", id="gshadow_file"),
+    ],
+)
+def test_groupdel__locked_file(shadow: Shadow, lock_file: str):
     """
-    :title: Group deletion fails when /etc/group is locked
+    :title: Group deletion fails when a lock file exists
     :setup:
         1. Create group
-        2. Create /etc/group.lock to simulate a locked file
+        2. Create lock file
     :steps:
         1. Attempt to delete group
         2. Verify that groupdel command fails
@@ -172,7 +179,7 @@ def test_groupdel__locked_group_file(shadow: Shadow):
     :customerscenario: False
     """
     shadow.groupadd("tgroup")
-    shadow.fs.touch("/etc/group.lock")
+    shadow.fs.touch(lock_file)
 
     with pytest.raises(ProcessError) as exc_info:
         shadow.groupdel("tgroup")
