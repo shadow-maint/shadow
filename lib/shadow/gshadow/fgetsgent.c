@@ -20,7 +20,7 @@
 #include "prototypes.h"
 #include "shadow/gshadow/sgetsgent.h"
 #include "shadow/gshadow/sgrp.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 /*
