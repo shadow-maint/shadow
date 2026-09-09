@@ -44,15 +44,4 @@
 })
 
 
-#define a2sh(...)   a2i(short, __VA_ARGS__)
-#define a2si(...)   a2i(int, __VA_ARGS__)
-#define a2sl(...)   a2i(long, __VA_ARGS__)
-#define a2sll(...)  a2i(long long, __VA_ARGS__)
-
-#define a2uh(...)   a2i(unsigned short, __VA_ARGS__)
-#define a2ui(...)   a2i(unsigned int, __VA_ARGS__)
-#define a2ul(...)   a2i(unsigned long, __VA_ARGS__)
-#define a2ull(...)  a2i(unsigned long long, __VA_ARGS__)
-
-
 #endif  // include guard
