@@ -136,7 +136,7 @@ sgetspent(const char *s)
 
 	if (streq(fields[8], ""))
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-	else if (str2ul(&spwd.sp_flag, fields[8]) == -1)
+	else if (a2ul(&spwd.sp_flag, fields[8], NULL, 0,,) == -1)
 		return NULL;
 
 	return (&spwd);
