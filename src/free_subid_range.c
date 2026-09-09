@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
 	if (argc < 3)
 		usage();
 	range.owner = argv[0];
-	str2ul(&range.start, argv[1]);
-	str2ul(&range.count, argv[2]);
+	a2i(unsigned long, &range.start, argv[1], NULL, 0,,);
+	a2i(unsigned long, &range.count, argv[2], NULL, 0,,);
 	if (group)
 		ok = subid_ungrant_gid_range(&range);
 	else
