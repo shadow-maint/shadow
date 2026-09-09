@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2026, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -14,57 +14,52 @@
 
 #include "search/sort/qsort.h"
 #include "sizeof.h"
+#include "typetraits.h"
 
 
-#define addsl(a, b, ...)                                                      \
-({                                                                            \
-	long  addend_[] = {a, b, __VA_ARGS__};                                \
-                                                                              \
-	addslN(countof(addend_), addend_);                                    \
+#define adds_T(T, a, b, ...)                                          \
+({                                                                    \
+	T  addend_[] = {a, b, __VA_ARGS__};                           \
+                                                                      \
+	addsN_T_(T, countof(addend_), addend_);                       \
 })
 
 
-inline long addsl2(long a, long b);
-inline long addslN(size_t n, long addend[n]);
+#define adds2_T_(T, a, b)                                             \
+({                                                                    \
+	T  sum_;                                                      \
+	                                                              \
+	if (a > 0 && b > maxof(T) - a) {                              \
+		errno = EOVERFLOW;                                    \
+		sum_ = maxof(T);                                      \
+	} else if (a < 0 && b < minof(T) - a) {                       \
+		errno = EOVERFLOW;                                    \
+		sum_ = minof(T);                                      \
+	} else {                                                      \
+		sum_ = a + b;                                         \
+	}                                                             \
+	sum_;                                                         \
+})
 
 
-inline long
-addsl2(long a, long b)
-{
-	if (a > 0 && b > LONG_MAX - a) {
-		errno = EOVERFLOW;
-		return LONG_MAX;
-	}
-	if (a < 0 && b < LONG_MIN - a) {
-		errno = EOVERFLOW;
-		return LONG_MIN;
-	}
-	return a + b;
-}
-
-
-inline long
-addslN(size_t n, long addend[n])
-{
-	int   e;
-
-	if (n == 0) {
-		errno = EDOM;
-		return 0;
-	}
-
-	e = errno;
-	while (n > 1) {
-		QSORT(long, addend, n);
-
-		errno = 0;
-		addend[0] = addsl2(addend[0], addend[--n]);
-		if (errno == EOVERFLOW)
-			return addend[0];
-	}
-	errno = e;
-	return addend[0];
-}
+#define addsN_T_(T, n, addend)                                        \
+({                                                                    \
+	int  e_;                                                      \
+	                                                              \
+	e_ = errno;                                                   \
+	while (n > 1) {                                               \
+		QSORT(T, addend, n);                                  \
+		                                                      \
+		errno = 0;                                            \
+		addend[0] = adds2_T_(T, addend[0], addend[--n]);      \
+		if (errno != 0)                                       \
+			break;                                        \
+	}                                                             \
+	if (errno == 0)                                               \
+		errno = e_;                                           \
+	                                                              \
+	addend[0];                                                    \
+})
 
 
 #endif  // include guard
