@@ -152,3 +152,45 @@ def test_groupdel__delete_non_existing_group(shadow: Shadow):
         shadow.groupdel("tgroup")
 
     assert exc_info.value.rc == 6, f"Expected return code 6 (group does not exist), got {exc_info.value.rc}"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+@pytest.mark.parametrize(
+    "lock_file",
+    [
+        pytest.param("/etc/group.lock", id="group_file"),
+        pytest.param("/etc/gshadow.lock", id="gshadow_file"),
+    ],
+)
+def test_groupdel__delete_group_locked_file(shadow: Shadow, lock_file: str):
+    """
+    :title: Group deletion fails when a lock file exists
+    :setup:
+    1. Create group
+    2. Create lock file
+    :steps:
+        1. Attempt to delete group
+        2. Verify that groupdel command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group is not deleted
+        2. groupdel command fails with rc=10 (cannot lock file)
+        3. Group and gshadow entries are still found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.fs.touch(lock_file)
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupdel("tgroup")
+
+    assert exc_info.value.rc == 10, f"Expected rc=10 (cannot lock file), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
