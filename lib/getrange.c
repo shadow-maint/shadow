@@ -9,6 +9,7 @@
 
 #include <ctype.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "atoi/a2i.h"
 #include "defines.h"
@@ -39,7 +40,7 @@ getrange(const char *range,
 	*has_min = false;
 	*has_max = false;
 
-	if ('-' == range[0]) {
+	if (strspn(range, "-")) {
 		end = range + 1;
 		goto parse_max;
 	}

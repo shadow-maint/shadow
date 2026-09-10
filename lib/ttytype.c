@@ -50,9 +50,8 @@ void ttytype (const char *line)
 		return;
 	}
 	while (fgets_a(buf, fp) != NULL) {
-		if (strprefix(buf, "#")) {
+		if (strspn(buf, "#"))
 			continue;
-		}
 
 		stpsep(buf, "\n");
 
