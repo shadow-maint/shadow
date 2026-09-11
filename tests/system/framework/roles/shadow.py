@@ -548,3 +548,35 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file(file_to_discard)
 
         return result
+
+    def pwck(self, *args) -> ProcessResult:
+        """
+        Verify the integrity of password files.
+
+        The pwck command verifies that all entries in /etc/passwd and /etc/shadow
+        have the proper format and contain valid data.
+        """
+        cmd_args = " ".join(args)
+        self.logger.info(f"Running pwck on {self.host.hostname}")
+        cmd = self.host.conn.run(f"pwck {cmd_args}", log_level=ProcessLogLevel.Error)
+
+        self.host.discard_file("/etc/passwd")
+        self.host.discard_file("/etc/shadow")
+
+        return cmd
+
+    def grpck(self, *args) -> ProcessResult:
+        """
+        Verify the integrity of group files.
+
+        The grpck command verifies that all entries in /etc/group and /etc/gshadow
+        have the proper format and contain valid data.
+        """
+        cmd_args = " ".join(args)
+        self.logger.info(f"Running grpck on {self.host.hostname}")
+        cmd = self.host.conn.run(f"grpck {cmd_args}", log_level=ProcessLogLevel.Error)
+
+        self.host.discard_file("/etc/group")
+        self.host.discard_file("/etc/gshadow")
+
+        return cmd
