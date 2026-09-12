@@ -69,6 +69,16 @@ bool subid_init(const char *progname, FILE *logfd);
 void subid_free(void *ptr);
 
 /*
+ * Lets GCC 11 and later check that an array returned by the functions
+ * below is released with subid_free().  Expands to nothing elsewhere.
+ */
+#if defined(__GNUC__) && (__GNUC__ >= 11) && !defined(__clang__) && !defined(__MCST__)
+# define SUBID_ATTR_MALLOC(deallocator)  __attribute__((__malloc__(deallocator)))
+#else
+# define SUBID_ATTR_MALLOC(deallocator)
+#endif
+
+/*
  * subid_get_uid_ranges: return a list of UID ranges for a user
  *
  * @owner: username being queried
@@ -93,6 +103,47 @@ int subid_get_uid_ranges(const char *owner, struct subid_range **ranges);
  * returns: number of ranges found, ir < 0 on error.
  */
 int subid_get_gid_ranges(const char *owner, struct subid_range **ranges);
+
+/*
+ * subid_get_uid_ranges2: return the UID ranges for a user together with
+ *                        the status of the lookup
+ *
+ * @owner: username, or a string representation of a UID number
+ * @count: set to the number of ranges in the returned array (0 unless the
+ *         lookup succeeded).  May be NULL.
+ * @err: set to the status of the lookup: SUBID_STATUS_SUCCESS when an
+ *       array is returned, otherwise the reason the lookup failed.  May
+ *       be NULL.
+ *
+ * Returns an array of *count ranges, or NULL when the lookup failed.  An
+ * owner without ranges gets a zero-length array, so NULL always means
+ * failure: SUBID_STATUS_UNKNOWN_USER when the backend does
+ * not know the owner, SUBID_STATUS_ERROR_CONN when the backend could not
+ * be reached, SUBID_STATUS_ERROR otherwise.  The files backend does not
+ * distinguish an unknown owner from an owner without ranges; both get an
+ * empty array.
+ *
+ * The caller must subid_free() the array.
+ */
+SUBID_ATTR_MALLOC(subid_free)
+struct subid_range *subid_get_uid_ranges2(const char *owner, int *count, enum subid_status *err);
+
+/*
+ * subid_get_gid_ranges2: return the GID ranges for a user together with
+ *                        the status of the lookup
+ *
+ * @owner: username, or a string representation of a UID number
+ * @count: set to the number of ranges in the returned array (0 unless the
+ *         lookup succeeded).  May be NULL.
+ * @err: set to the status of the lookup.  May be NULL.
+ *
+ * See subid_get_uid_ranges2() for the meaning of the return value and of
+ * each status.
+ *
+ * The caller must subid_free() the array.
+ */
+SUBID_ATTR_MALLOC(subid_free)
+struct subid_range *subid_get_gid_ranges2(const char *owner, int *count, enum subid_status *err);
 
 /*
  * subid_get_uid_owners: return a list of uids to which the given uid has been
