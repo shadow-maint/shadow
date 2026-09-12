@@ -17,6 +17,7 @@
 #include <sys/param.h>
 #include <pwd.h>
 #include <ctype.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <stdint.h>
 #include <string.h>
@@ -29,6 +30,7 @@
 #include "string/ctype/isascii.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strdup/memdup.h"
 #include "string/strtok/strsep2arr.h"
 #include "typetraits.h"
 
@@ -851,75 +853,214 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 }
 
 /*
- * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)
+ * resolve_owner - look the queried owner up in the passwd database
  *
- * @owner: username
- * @id_type: UID or GUID
- * @ranges: pointer to array of ranges into which results will be placed.
+ * Sets *known to whether the owner exists.  Returns SUBID_STATUS_SUCCESS
+ * when the lookup itself worked, whether or not the owner was found.
+ *
+ * getpwnam_r(3) and getpwuid_r(3) return 0 with a NULL result when the
+ * name is not found (glibc and musl), and the error the NSS module
+ * reported when the lookup failed: EAGAIN when glibc stops at a service
+ * that is unavailable, or the connect(2) error from the sss client, so
+ * ENOENT there means the socket is missing, not the user.  Such a
+ * failure is SUBID_STATUS_ERROR_CONN, an allocation failure is
+ * SUBID_STATUS_ERROR.  A module that reports no error along with
+ * NSS_STATUS_UNAVAIL looks like a missing owner; nothing here can tell
+ * the two apart.
+ */
+static enum subid_status
+resolve_owner(const char *owner, bool *known)
+{
+	struct passwd  pwbuf, *pw;
+	char           *buf = NULL;
+	size_t         len = 0x100;
+	uid_t          uid;
+	bool           by_uid;
+	int            err;
+
+	*known = false;
+	by_uid = get_uid(owner, &uid) == 0;
+
+	while (true) {
+		buf = reallocf_T(buf, len, char);
+		if (buf == NULL)
+			return SUBID_STATUS_ERROR;
+		/* glibc hands back errno as the error when the module set none */
+		errno = 0;
+		if (by_uid)
+			err = getpwuid_r(uid, &pwbuf, buf, len, &pw);
+		else
+			err = getpwnam_r(owner, &pwbuf, buf, len, &pw);
+		if (err != ERANGE)
+			break;
+		if (len > SIZE_MAX / 4) {
+			free(buf);
+			return SUBID_STATUS_ERROR;
+		}
+		len *= 4;
+	}
+	free(buf);
+
+	if (err == 0) {
+		*known = pw != NULL;
+		return SUBID_STATUS_SUCCESS;
+	}
+	switch (err) {
+	case ENOMEM:
+	case EMFILE:
+	case ENFILE:
+		return SUBID_STATUS_ERROR;
+	default:
+		return SUBID_STATUS_ERROR_CONN;
+	}
+}
+
+/*
+ * enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id_type, struct subid_range **in_ranges, int *in_count)
+ *
+ * @owner: username, or a string representation of a UID number
+ * @id_type: UID or GID
+ * @in_ranges: pointer into which the array of ranges is placed
+ * @in_count: pointer into which the number of ranges is placed
  *
  * Fills in the subuid or subgid ranges which are owned by the specified
- * user.  Username may be a username or a string representation of a
- * UID number.  If id_type is UID, then subuids are returned, else
- * subgids are given.
-
- * Returns the number of ranges found, or < 0 on error.
+ * user and reports how the lookup went.  On SUBID_STATUS_SUCCESS *in_count
+ * is the number of ranges found and *in_ranges is a non-NULL array that
+ * free(3) releases, of zero length when the count is 0.
+ * On any other status *in_ranges is NULL and *in_count is 0.
  *
- * The caller must free the subordinate range list.
+ * A subid NSS module answers with a status of its own.  Its array is
+ * copied and released with the module's free() at once, so that every
+ * array this function hands out is owned by libsubid.  A result that
+ * contradicts the status (an array together with an error, a negative
+ * count together with success) is dropped and reported as
+ * SUBID_STATUS_ERROR.  The files backend resolves the owner through the
+ * passwd database first: a lookup that fails because that database could
+ * not be reached is SUBID_STATUS_ERROR_CONN.  It cannot tell an unknown
+ * owner from an owner without ranges, so both are SUBID_STATUS_SUCCESS
+ * with a count of 0.
+ *
+ * The caller must free the range list with free_subid_pointer().
  */
-int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
+enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id_type, struct subid_range **in_ranges, int *in_count)
 {
 	struct subid_range *ranges = NULL;
 	const struct subordinate_range *range;
 	struct commonio_db *db;
 	enum subid_status status;
 	int count = 0;
+	bool known;
 	struct subid_nss_ops *h;
 
 	*in_ranges = NULL;
+	*in_count = 0;
 
 	h = get_subid_nss_handle();
 	if (h) {
-		status = h->list_owner_ranges(owner, id_type, in_ranges, &count);
-		if (status == SUBID_STATUS_SUCCESS)
-			return count;
-		return -1;
+		struct subid_range  *r = NULL;
+
+		status = h->list_owner_ranges(owner, id_type, &r, &count);
+		switch (status) {
+		case SUBID_STATUS_SUCCESS:
+			if (count < 0 || (count > 0 && r == NULL)) {
+				status = SUBID_STATUS_ERROR;
+				break;
+			}
+			ranges = memdup_T(r, count, struct subid_range);
+			h->free(r);
+			if (ranges == NULL)
+				return SUBID_STATUS_ERROR;
+			*in_ranges = ranges;
+			*in_count = count;
+			return SUBID_STATUS_SUCCESS;
+		case SUBID_STATUS_UNKNOWN_USER:
+		case SUBID_STATUS_ERROR_CONN:
+		case SUBID_STATUS_ERROR:
+			break;
+		default:
+			status = SUBID_STATUS_ERROR;
+			break;
+		}
+		h->free(r);
+		return status;
+	}
+
+	status = resolve_owner(owner, &known);
+	if (status != SUBID_STATUS_SUCCESS)
+		return status;
+	if (!known) {
+		/* a zero-length array, so that NULL is left to the failure case */
+		*in_ranges = malloc_T(0, struct subid_range);
+		return *in_ranges != NULL ? SUBID_STATUS_SUCCESS : SUBID_STATUS_ERROR;
 	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
 		if (!sub_uid_open(O_RDONLY)) {
-			return -1;
+			return SUBID_STATUS_ERROR;
 		}
 		db = &subordinate_uid_db;
 		break;
 	case ID_TYPE_GID:
 		if (!sub_gid_open(O_RDONLY)) {
-			return -1;
+			return SUBID_STATUS_ERROR;
 		}
 		db = &subordinate_gid_db;
 		break;
 	default:
-		return -1;
+		return SUBID_STATUS_ERROR;
 	}
 
+	status = SUBID_STATUS_SUCCESS;
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
 		if (is_same_user(range->owner, owner)) {
 			ranges = append_range(ranges, range, count++);
 			if (ranges == NULL) {
-				count = -1;
-				goto out;
+				status = SUBID_STATUS_ERROR;
+				count = 0;
+				break;
 			}
 		}
 	}
 
-out:
 	if (id_type == ID_TYPE_UID)
 		sub_uid_close(true);
 	else
 		sub_gid_close(true);
 
+	if (status == SUBID_STATUS_SUCCESS && ranges == NULL) {
+		/* a zero-length array, so that NULL is left to the failure case */
+		ranges = malloc_T(0, struct subid_range);
+		if (ranges == NULL)
+			status = SUBID_STATUS_ERROR;
+	}
+
 	*in_ranges = ranges;
+	*in_count = count;
+	return status;
+}
+
+/*
+ * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **ranges)
+ *
+ * Same as list_owner_ranges_status(), for callers that only want a count.
+ *
+ * Returns the number of ranges found, or < 0 on error.  A lookup that
+ * succeeds without finding any range returns 0 and sets *ranges to NULL.
+ *
+ * The caller must free the subordinate range list.
+ */
+int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
+{
+	int count;
+
+	if (list_owner_ranges_status(owner, id_type, in_ranges, &count) != SUBID_STATUS_SUCCESS)
+		return -1;
+	if (count == 0) {
+		free(*in_ranges);
+		*in_ranges = NULL;
+	}
 	return count;
 }
 
@@ -970,9 +1111,19 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 
 	h = get_subid_nss_handle();
 	if (h) {
-		status = h->find_subid_owners(id, id_type, uids, &n);
+		uid_t  *r = NULL;
+
+		status = h->find_subid_owners(id, id_type, &r, &n);
 		// Several ways we could handle the error cases here.
-		if (status != SUBID_STATUS_SUCCESS)
+		if (status != SUBID_STATUS_SUCCESS || n < 0 || (n > 0 && r == NULL)) {
+			h->free(r);
+			return -1;
+		}
+		*uids = NULL;
+		if (n > 0)
+			*uids = memdup_T(r, n, uid_t);
+		h->free(r);
+		if (n > 0 && *uids == NULL)
 			return -1;
 		return n;
 	}
@@ -1136,14 +1287,14 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 	return ret;
 }
 
+/*
+ * Every array libsubid hands out is allocated by libsubid itself; a subid
+ * NSS module's result is copied and released with the module's free()
+ * before it reaches a caller.
+ */
 void free_subid_pointer(void *ptr)
 {
-	struct subid_nss_ops *h = get_subid_nss_handle();
-	if (h) {
-		h->free(ptr);
-	} else {
-		free(ptr);
-	}
+	free(ptr);
 }
 
 #else				/* !ENABLE_SUBIDS */

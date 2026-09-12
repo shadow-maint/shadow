@@ -47,6 +47,12 @@
       ranges for a given user. The subordinate group IDs can be listed using
       the <option>-g</option> option.
     </para>
+    <para>
+      A user without subordinate IDs produces no output and a successful
+      exit status. A lookup that fails is reported on standard error and
+      through the exit status, so that a caller can tell a user without
+      ranges from a backend that could not answer.
+    </para>
   </refsect1>
 
   <refsect1 id='options'>
@@ -92,6 +98,39 @@ $ getsubids testuser
     <para>
       This command output provides (in order from left to right) the list
       index, username, UID range start, and number of UIDs in range.
+    </para>
+  </refsect1>
+
+  <refsect1 id='exit_values'>
+    <title>EXIT VALUES</title>
+    <para>
+      The <command>getsubids</command> command exits with the following values:
+      <variablelist>
+	<varlistentry>
+	  <term><replaceable>0</replaceable></term>
+	  <listitem>
+	    <para>success, including a user without subordinate IDs</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>1</replaceable></term>
+	  <listitem>
+	    <para>the lookup failed, or the command line is invalid</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>2</replaceable></term>
+	  <listitem>
+	    <para>the subordinate ID backend does not know the user</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>3</replaceable></term>
+	  <listitem>
+	    <para>the subordinate ID backend could not be reached</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
     </para>
   </refsect1>
 
