@@ -17,6 +17,7 @@
 #include <sys/param.h>
 #include <pwd.h>
 #include <ctype.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <stdint.h>
 #include <string.h>
@@ -852,6 +853,69 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 }
 
 /*
+ * resolve_owner - look the queried owner up in the passwd database
+ *
+ * Sets *known to whether the owner exists.  Returns SUBID_STATUS_SUCCESS
+ * when the lookup itself worked, whether or not the owner was found.
+ *
+ * getpwnam_r(3) and getpwuid_r(3) return 0 with a NULL result when the
+ * name is not found (glibc and musl), and the error the NSS module
+ * reported when the lookup failed: EAGAIN when glibc stops at a service
+ * that is unavailable, or the connect(2) error from the sss client, so
+ * ENOENT there means the socket is missing, not the user.  Such a
+ * failure is SUBID_STATUS_ERROR_CONN, an allocation failure is
+ * SUBID_STATUS_ERROR.  A module that reports no error along with
+ * NSS_STATUS_UNAVAIL looks like a missing owner; nothing here can tell
+ * the two apart.
+ */
+static enum subid_status
+resolve_owner(const char *owner, bool *known)
+{
+	struct passwd  pwbuf, *pw;
+	char           *buf = NULL;
+	size_t         len = 0x100;
+	uid_t          uid;
+	bool           by_uid;
+	int            err;
+
+	*known = false;
+	by_uid = get_uid(owner, &uid) == 0;
+
+	while (true) {
+		buf = reallocf_T(buf, len, char);
+		if (buf == NULL)
+			return SUBID_STATUS_ERROR;
+		/* glibc hands back errno as the error when the module set none */
+		errno = 0;
+		if (by_uid)
+			err = getpwuid_r(uid, &pwbuf, buf, len, &pw);
+		else
+			err = getpwnam_r(owner, &pwbuf, buf, len, &pw);
+		if (err != ERANGE)
+			break;
+		if (len > SIZE_MAX / 4) {
+			free(buf);
+			return SUBID_STATUS_ERROR;
+		}
+		len *= 4;
+	}
+	free(buf);
+
+	if (err == 0) {
+		*known = pw != NULL;
+		return SUBID_STATUS_SUCCESS;
+	}
+	switch (err) {
+	case ENOMEM:
+	case EMFILE:
+	case ENFILE:
+		return SUBID_STATUS_ERROR;
+	default:
+		return SUBID_STATUS_ERROR_CONN;
+	}
+}
+
+/*
  * enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id_type, struct subid_range **in_ranges, int *in_count)
  *
  * @owner: username, or a string representation of a UID number
@@ -870,9 +934,11 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
  * array this function hands out is owned by libsubid.  A result that
  * contradicts the status (an array together with an error, a negative
  * count together with success) is dropped and reported as
- * SUBID_STATUS_ERROR.  The files backend cannot tell an unknown owner
- * from an owner without ranges, so both are SUBID_STATUS_SUCCESS with a
- * count of 0.
+ * SUBID_STATUS_ERROR.  The files backend resolves the owner through the
+ * passwd database first: a lookup that fails because that database could
+ * not be reached is SUBID_STATUS_ERROR_CONN.  It cannot tell an unknown
+ * owner from an owner without ranges, so both are SUBID_STATUS_SUCCESS
+ * with a count of 0.
  *
  * The caller must free the range list with free_subid_pointer().
  */
@@ -883,6 +949,7 @@ enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id
 	struct commonio_db *db;
 	enum subid_status status;
 	int count = 0;
+	bool known;
 	struct subid_nss_ops *h;
 
 	*in_ranges = NULL;
@@ -916,6 +983,15 @@ enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id
 		}
 		h->free(r);
 		return status;
+	}
+
+	status = resolve_owner(owner, &known);
+	if (status != SUBID_STATUS_SUCCESS)
+		return status;
+	if (!known) {
+		/* a zero-length array, so that NULL is left to the failure case */
+		*in_ranges = malloc_T(0, struct subid_range);
+		return *in_ranges != NULL ? SUBID_STATUS_SUCCESS : SUBID_STATUS_ERROR;
 	}
 
 	switch (id_type) {
