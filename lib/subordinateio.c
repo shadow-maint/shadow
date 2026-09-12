@@ -29,6 +29,7 @@
 #include "string/ctype/isascii.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strdup/memdup.h"
 #include "string/strtok/strsep2arr.h"
 #include "typetraits.h"
 
@@ -851,20 +852,21 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 }
 
 /*
- * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)
+ * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
  *
- * @owner: username
- * @id_type: UID or GUID
- * @ranges: pointer to array of ranges into which results will be placed.
+ * @owner: username, or a string representation of a UID number
+ * @id_type: UID or GID
+ * @in_ranges: pointer into which the array of ranges is placed
  *
  * Fills in the subuid or subgid ranges which are owned by the specified
- * user.  Username may be a username or a string representation of a
- * UID number.  If id_type is UID, then subuids are returned, else
- * subgids are given.
-
+ * user.  If id_type is UID, then subuids are returned, else subgids are
+ * given.  A subid NSS module's array is copied and released with the
+ * module's free() at once, so that every array this function hands out
+ * is owned by libsubid.
+ *
  * Returns the number of ranges found, or < 0 on error.
  *
- * The caller must free the subordinate range list.
+ * The caller must free the range list with free_subid_pointer().
  */
 int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
 {
@@ -879,10 +881,20 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 
 	h = get_subid_nss_handle();
 	if (h) {
-		status = h->list_owner_ranges(owner, id_type, in_ranges, &count);
-		if (status == SUBID_STATUS_SUCCESS)
-			return count;
-		return -1;
+		struct subid_range  *r = NULL;
+
+		status = h->list_owner_ranges(owner, id_type, &r, &count);
+		if (status != SUBID_STATUS_SUCCESS) {
+			h->free(r);
+			return -1;
+		}
+		if (count > 0)
+			ranges = memdup_T(r, count, struct subid_range);
+		h->free(r);
+		if (count > 0 && ranges == NULL)
+			return -1;
+		*in_ranges = ranges;
+		return count;
 	}
 
 	switch (id_type) {
@@ -970,9 +982,19 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 
 	h = get_subid_nss_handle();
 	if (h) {
-		status = h->find_subid_owners(id, id_type, uids, &n);
+		uid_t  *r = NULL;
+
+		status = h->find_subid_owners(id, id_type, &r, &n);
 		// Several ways we could handle the error cases here.
-		if (status != SUBID_STATUS_SUCCESS)
+		if (status != SUBID_STATUS_SUCCESS || n < 0 || (n > 0 && r == NULL)) {
+			h->free(r);
+			return -1;
+		}
+		*uids = NULL;
+		if (n > 0)
+			*uids = memdup_T(r, n, uid_t);
+		h->free(r);
+		if (n > 0 && *uids == NULL)
 			return -1;
 		return n;
 	}
@@ -1136,14 +1158,14 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 	return ret;
 }
 
+/*
+ * Every array libsubid hands out is allocated by libsubid itself; a subid
+ * NSS module's result is copied and released with the module's free()
+ * before it reaches a caller.
+ */
 void free_subid_pointer(void *ptr)
 {
-	struct subid_nss_ops *h = get_subid_nss_handle();
-	if (h) {
-		h->free(ptr);
-	} else {
-		free(ptr);
-	}
+	free(ptr);
 }
 
 #else				/* !ENABLE_SUBIDS */

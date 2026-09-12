@@ -62,9 +62,9 @@ bool subid_init(const char *progname, FILE *logfd);
  *
  * Some functions like @subid_get_uid_ranges allocate memory internally. As
  * soon as a result is no longer needed, it should be freed with this routine.
- * Initially, default function `free()` was used. Thus for backward
- * compatibility this function falls back to `free()` if a plugin does not
- * explicitly specify routine to free allocated memory.
+ * Every array these functions return is allocated by libsubid itself (a
+ * subid NSS module's result is copied and released with the module's own
+ * routine before it is returned), so this is equivalent to `free()`.
  */
 void subid_free(void *ptr);
 
