@@ -852,23 +852,28 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 }
 
 /*
- * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
+ * enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id_type, struct subid_range **in_ranges, int *in_count)
  *
  * @owner: username, or a string representation of a UID number
  * @id_type: UID or GID
  * @in_ranges: pointer into which the array of ranges is placed
+ * @in_count: pointer into which the number of ranges is placed
  *
  * Fills in the subuid or subgid ranges which are owned by the specified
- * user.  If id_type is UID, then subuids are returned, else subgids are
- * given.  A subid NSS module's array is copied and released with the
- * module's free() at once, so that every array this function hands out
- * is owned by libsubid.
+ * user and reports how the lookup went.  On SUBID_STATUS_SUCCESS *in_count
+ * is the number of ranges found and *in_ranges points to them, or is NULL
+ * when the count is 0.  On any other status *in_ranges is NULL and
+ * *in_count is 0.
  *
- * Returns the number of ranges found, or < 0 on error.
+ * A subid NSS module answers with a status of its own.  Its array is
+ * copied and released with the module's free() at once, so that every
+ * array this function hands out is owned by libsubid.  The files backend
+ * cannot tell an unknown owner from an owner without ranges, so both are
+ * SUBID_STATUS_SUCCESS with a count of 0.
  *
  * The caller must free the range list with free_subid_pointer().
  */
-int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
+enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id_type, struct subid_range **in_ranges, int *in_count)
 {
 	struct subid_range *ranges = NULL;
 	const struct subordinate_range *range;
@@ -878,60 +883,88 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 	struct subid_nss_ops *h;
 
 	*in_ranges = NULL;
+	*in_count = 0;
 
 	h = get_subid_nss_handle();
 	if (h) {
 		struct subid_range  *r = NULL;
 
 		status = h->list_owner_ranges(owner, id_type, &r, &count);
-		if (status != SUBID_STATUS_SUCCESS) {
+		switch (status) {
+		case SUBID_STATUS_SUCCESS:
+			if (count > 0)
+				ranges = memdup_T(r, count, struct subid_range);
 			h->free(r);
-			return -1;
+			if (count > 0 && ranges == NULL)
+				return SUBID_STATUS_ERROR;
+			*in_ranges = ranges;
+			*in_count = count;
+			return SUBID_STATUS_SUCCESS;
+		case SUBID_STATUS_UNKNOWN_USER:
+		case SUBID_STATUS_ERROR_CONN:
+		case SUBID_STATUS_ERROR:
+			break;
 		}
-		if (count > 0)
-			ranges = memdup_T(r, count, struct subid_range);
 		h->free(r);
-		if (count > 0 && ranges == NULL)
-			return -1;
-		*in_ranges = ranges;
-		return count;
+		return status;
 	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
 		if (!sub_uid_open(O_RDONLY)) {
-			return -1;
+			return SUBID_STATUS_ERROR;
 		}
 		db = &subordinate_uid_db;
 		break;
 	case ID_TYPE_GID:
 		if (!sub_gid_open(O_RDONLY)) {
-			return -1;
+			return SUBID_STATUS_ERROR;
 		}
 		db = &subordinate_gid_db;
 		break;
 	default:
-		return -1;
+		return SUBID_STATUS_ERROR;
 	}
 
+	status = SUBID_STATUS_SUCCESS;
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
 		if (is_same_user(range->owner, owner)) {
 			ranges = append_range(ranges, range, count++);
 			if (ranges == NULL) {
-				count = -1;
-				goto out;
+				status = SUBID_STATUS_ERROR;
+				count = 0;
+				break;
 			}
 		}
 	}
 
-out:
 	if (id_type == ID_TYPE_UID)
 		sub_uid_close(true);
 	else
 		sub_gid_close(true);
 
 	*in_ranges = ranges;
+	*in_count = count;
+	return status;
+}
+
+/*
+ * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **ranges)
+ *
+ * Same as list_owner_ranges_status(), for callers that only want a count.
+ *
+ * Returns the number of ranges found, or < 0 on error.  A lookup that
+ * succeeds without finding any range returns 0.
+ *
+ * The caller must free the subordinate range list.
+ */
+int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
+{
+	int count;
+
+	if (list_owner_ranges_status(owner, id_type, in_ranges, &count) != SUBID_STATUS_SUCCESS)
+		return -1;
 	return count;
 }
 
