@@ -75,6 +75,18 @@ fi
 
 umount /etc/nsswitch.conf
 
+echo "starting passwd outage tests"
+mount --bind ./nsswitch4.conf /etc/nsswitch.conf
+LD_LIBRARY_PATH=.:${build_path}/libsubid/.libs:$LD_LIBRARY_PATH ./test_status outage
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+$getsubids root
+if [ $? -ne 3 ]; then
+    exit 1
+fi
+umount /etc/nsswitch.conf
+
 mount --bind ./nsswitch1.conf /etc/nsswitch.conf
 touch /etc/subuid /etc/subgid
 mount --bind ./empty /etc/subuid

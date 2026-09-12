@@ -3,7 +3,9 @@
 /*
  * Check that the status a subid NSS module reports survives the public
  * libsubid API, and that a result which contradicts its status is dropped.
- * Run with nsswitch3.conf ("subid: zzz") bound over /etc/nsswitch.conf.
+ * Run with nsswitch3.conf ("subid: zzz") bound over /etc/nsswitch.conf,
+ * or with "outage" and nsswitch4.conf (passwd stops at an unavailable
+ * service, subid: files).
  */
 
 #include <stdio.h>
@@ -52,10 +54,18 @@ check_legacy(const char *owner, int want)
 	subid_free(ranges);
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	if (!subid_init("test_status", stderr))
 		return 1;
+
+	if (argc == 2 && strcmp(argv[1], "outage") == 0) {
+		check_ranges2("root", SUBID_STATUS_ERROR_CONN, 0);
+		check_ranges2("0", SUBID_STATUS_ERROR_CONN, 0);
+		check_legacy("root", -1);
+		printf("outage tests done, %d failure(s)\n", failures);
+		return failures != 0;
+	}
 
 	check_ranges2("user1", SUBID_STATUS_SUCCESS, 1);
 	check_ranges2("user2", SUBID_STATUS_SUCCESS, 0);
