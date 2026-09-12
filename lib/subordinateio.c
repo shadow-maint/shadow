@@ -867,9 +867,12 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
  *
  * A subid NSS module answers with a status of its own.  Its array is
  * copied and released with the module's free() at once, so that every
- * array this function hands out is owned by libsubid.  The files backend
- * cannot tell an unknown owner from an owner without ranges, so both are
- * SUBID_STATUS_SUCCESS with a count of 0.
+ * array this function hands out is owned by libsubid.  A result that
+ * contradicts the status (an array together with an error, a negative
+ * count together with success) is dropped and reported as
+ * SUBID_STATUS_ERROR.  The files backend cannot tell an unknown owner
+ * from an owner without ranges, so both are SUBID_STATUS_SUCCESS with a
+ * count of 0.
  *
  * The caller must free the range list with free_subid_pointer().
  */
@@ -892,6 +895,10 @@ enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id
 		status = h->list_owner_ranges(owner, id_type, &r, &count);
 		switch (status) {
 		case SUBID_STATUS_SUCCESS:
+			if (count < 0 || (count > 0 && r == NULL)) {
+				status = SUBID_STATUS_ERROR;
+				break;
+			}
 			if (count > 0)
 				ranges = memdup_T(r, count, struct subid_range);
 			h->free(r);
@@ -903,6 +910,9 @@ enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id
 		case SUBID_STATUS_UNKNOWN_USER:
 		case SUBID_STATUS_ERROR_CONN:
 		case SUBID_STATUS_ERROR:
+			break;
+		default:
+			status = SUBID_STATUS_ERROR;
 			break;
 		}
 		h->free(r);
