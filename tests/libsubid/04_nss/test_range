@@ -32,6 +32,47 @@ if [ $? -eq 0 ]; then
     exit 1
 fi
 
+echo "starting status tests"
+LD_LIBRARY_PATH=.:${build_path}/libsubid/.libs:$LD_LIBRARY_PATH ./test_status
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+echo "starting getsubids exit status tests"
+getsubids="${build_path}/src/getsubids"
+out=$($getsubids user1)
+if [ $? -ne 0 ] || [ "$out" != "0: user1 100000 65536" ]; then
+    exit 1
+fi
+out=$($getsubids user2)
+if [ $? -ne 0 ] || [ -n "$out" ]; then
+    exit 1
+fi
+$getsubids unknown
+if [ $? -ne 2 ]; then
+    exit 1
+fi
+$getsubids conn
+if [ $? -ne 3 ]; then
+    exit 1
+fi
+$getsubids error
+if [ $? -ne 1 ]; then
+    exit 1
+fi
+$getsubids errptr
+if [ $? -ne 1 ]; then
+    exit 1
+fi
+out=$($getsubids zeroptr)
+if [ $? -ne 0 ] || [ -n "$out" ]; then
+    exit 1
+fi
+$getsubids negcount
+if [ $? -ne 1 ]; then
+    exit 1
+fi
+
 umount /etc/nsswitch.conf
 
 mount --bind ./nsswitch1.conf /etc/nsswitch.conf

@@ -113,6 +113,20 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 		return SUBID_STATUS_UNKNOWN_USER;
 	if (strcmp(owner, "conn") == 0)
 		return SUBID_STATUS_ERROR_CONN;
+	/* results that contradict their status; libsubid must not pass them on */
+	if (strcmp(owner, "errptr") == 0) {
+		*in_ranges = malloc_T(1, struct subid_range);
+		return SUBID_STATUS_ERROR;
+	}
+	if (strcmp(owner, "zeroptr") == 0) {
+		*in_ranges = malloc_T(1, struct subid_range);
+		return SUBID_STATUS_SUCCESS;
+	}
+	if (strcmp(owner, "negcount") == 0) {
+		*in_ranges = malloc_T(1, struct subid_range);
+		*count = -1;
+		return SUBID_STATUS_SUCCESS;
+	}
 
 	*in_ranges = NULL;
 	if (strcmp(owner, "user1") != 0 && strcmp(owner, "ubuntu") != 0 &&
