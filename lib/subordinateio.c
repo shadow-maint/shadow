@@ -861,9 +861,9 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
  *
  * Fills in the subuid or subgid ranges which are owned by the specified
  * user and reports how the lookup went.  On SUBID_STATUS_SUCCESS *in_count
- * is the number of ranges found and *in_ranges points to them, or is NULL
- * when the count is 0.  On any other status *in_ranges is NULL and
- * *in_count is 0.
+ * is the number of ranges found and *in_ranges is a non-NULL array that
+ * free(3) releases, of zero length when the count is 0.
+ * On any other status *in_ranges is NULL and *in_count is 0.
  *
  * A subid NSS module answers with a status of its own.  Its array is
  * copied and released with the module's free() at once, so that every
@@ -899,10 +899,9 @@ enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id
 				status = SUBID_STATUS_ERROR;
 				break;
 			}
-			if (count > 0)
-				ranges = memdup_T(r, count, struct subid_range);
+			ranges = memdup_T(r, count, struct subid_range);
 			h->free(r);
-			if (count > 0 && ranges == NULL)
+			if (ranges == NULL)
 				return SUBID_STATUS_ERROR;
 			*in_ranges = ranges;
 			*in_count = count;
@@ -954,6 +953,13 @@ enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id
 	else
 		sub_gid_close(true);
 
+	if (status == SUBID_STATUS_SUCCESS && ranges == NULL) {
+		/* a zero-length array, so that NULL is left to the failure case */
+		ranges = malloc_T(0, struct subid_range);
+		if (ranges == NULL)
+			status = SUBID_STATUS_ERROR;
+	}
+
 	*in_ranges = ranges;
 	*in_count = count;
 	return status;
@@ -965,7 +971,7 @@ enum subid_status list_owner_ranges_status(const char *owner, enum subid_type id
  * Same as list_owner_ranges_status(), for callers that only want a count.
  *
  * Returns the number of ranges found, or < 0 on error.  A lookup that
- * succeeds without finding any range returns 0.
+ * succeeds without finding any range returns 0 and sets *ranges to NULL.
  *
  * The caller must free the subordinate range list.
  */
@@ -975,6 +981,10 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 
 	if (list_owner_ranges_status(owner, id_type, in_ranges, &count) != SUBID_STATUS_SUCCESS)
 		return -1;
+	if (count == 0) {
+		free(*in_ranges);
+		*in_ranges = NULL;
+	}
 	return count;
 }
 
