@@ -18,7 +18,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "pwio.h"
-#include "string/memset/memzero.h"
+#include "string/strzero/strzero.h"
 
 
 /*@null@*/ /*@only@*/struct passwd *__pw_dup (const struct passwd *pwent)

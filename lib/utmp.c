@@ -30,16 +30,16 @@
 #include "alloc/malloc.h"
 #include "attr.h"
 #include "io/syslog.h"
+#include "memory/memcpy/strncpy.h"
 #include "memory/memcpy/strncpytail.h"
+#include "memory/memdup/memdup.h"
+#include "memory/memdup/strndup.h"
+#include "memory/strncmp/strneq.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strcpy/strncpy.h"
-#include "string/strdup/memdup.h"
 #include "string/strdup/strdup.h"
-#include "string/strdup/strndup.h"
 
 #undef NDEBUG
 #include <assert.h>
