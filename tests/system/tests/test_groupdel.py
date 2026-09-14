@@ -194,3 +194,23 @@ def test_groupdel__locked_file(shadow: Shadow, lock_file: str):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupdel__no_group(shadow: Shadow):
+    """
+    :title: Groupdel command fails when no group is mentioned
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupdel command without any argument
+        2. Verify that groupdel command fails
+    :expectedresults:
+        1. Command without any argument fails
+        2. groupdel command fails with error (invalid usage)
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupdel()
+
+    assert exc_info.value.rc == 2, f"Expected return code 2(invalid usage), got {exc_info.value.rc}"
