@@ -9,6 +9,10 @@
 #define SUBID_ABI_MINOR @LIBSUBID_ABI_MINOR@
 #define SUBID_ABI_MICRO @LIBSUBID_ABI_MICRO@
 
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic error "-Wpadded"
+
 /* subid_range is just a starting point and size of a range */
 struct subid_range {
 	unsigned long start;
@@ -22,6 +26,8 @@ struct subordinate_range {
 	unsigned long start;
 	unsigned long count;
 };
+
+#pragma GCC diagnostic pop
 
 enum subid_type {
 	ID_TYPE_UID = 1,
