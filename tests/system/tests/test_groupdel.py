@@ -221,3 +221,24 @@ def test_groupdel__invalid_arguments(shadow: Shadow, args: str):
         shadow.groupdel(args)
 
     assert exc_info.value.rc == 2, f"Expected return code 2(invalid usage), got {exc_info.value.rc}"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupdel__usage(shadow: Shadow):
+    """
+    :title: Groupdel command displays usage
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupdel command
+        2. Verify that groupdel command exits successfully
+        3. Check usage information
+    :expectedresults:
+        1. Command runs successfully
+        2. groupdel command completes successfully
+        3. Usage information is displayed
+    :customerscenario: False
+    """
+    result = shadow.groupdel("--help")
+    assert result.rc == 0, f"Expected return code 0(success), got {result.rc}"
+    assert "Usage: groupdel [options] GROUP" in result.stdout
