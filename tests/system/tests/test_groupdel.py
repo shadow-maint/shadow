@@ -242,3 +242,34 @@ def test_groupdel__usage(shadow: Shadow):
     result = shadow.groupdel("--help")
     assert result.rc == 0, f"Expected return code 0(success), got {result.rc}"
     assert "Usage: groupdel [options] GROUP" in result.stdout
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupdel__invalid_option(shadow: Shadow):
+    """
+    :title: Group deletion fails with invalid option
+    :setup:
+        1. Create group
+    :steps:
+        1. Attempt to delete group
+        2. Verify that groupdel command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group is not deleted
+        2. groupdel command fails with error (invalid usage)
+        3. Group or gshadow entries are still found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupdel("-invalid tgroup")
+
+    assert exc_info.value.rc == 2, f"Expected return code 2 (invalid usage), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
