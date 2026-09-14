@@ -6,6 +6,8 @@
 #include <string.h>
 #include "alloc/malloc.h"
 
+static int  outstanding;  // arrays handed out and not yet released
+
 enum subid_status shadow_subid_has_any_range(const char *owner, enum subid_type t, bool *result)
 {
 	if (strcmp(owner, "ubuntu") == 0) {
@@ -80,6 +82,7 @@ static int alloc_uid(uid_t **uids, uid_t id) {
 	*uids = malloc_T(1, uid_t);
 	if (!*uids)
 		return -1;
+	outstanding++;
 	*uids[0] = id;
 	return 1;
 }
@@ -116,6 +119,22 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 		return SUBID_STATUS_ERROR_CONN;
 	if (strcmp(owner, "emptyarr") == 0) {
 		*in_ranges = malloc_T(0, struct subid_range);
+		if (!*in_ranges)
+			return SUBID_STATUS_ERROR;
+		outstanding++;
+		return SUBID_STATUS_SUCCESS;
+	}
+	if (strcmp(owner, "multi") == 0) {
+		ranges = malloc_T(2, struct subid_range);
+		if (!ranges)
+			return SUBID_STATUS_ERROR;
+		outstanding++;
+		ranges[0].start = 100000;
+		ranges[0].count = 65536;
+		ranges[1].start = 300000;
+		ranges[1].count = 65536;
+		*count = 2;
+		*in_ranges = ranges;
 		return SUBID_STATUS_SUCCESS;
 	}
 
@@ -130,6 +149,7 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 	ranges = malloc_T(1, struct subid_range);
 	if (!ranges)
 		return SUBID_STATUS_ERROR;
+	outstanding++;
 	if (strcmp(owner, "user1") == 0 || strcmp(owner, "group1") == 0) {
 		ranges[0].start = 100000;
 		ranges[0].count = 65536;
@@ -146,5 +166,14 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 
 void shadow_subid_free(void *ptr)
 {
+	if (ptr != NULL)
+		outstanding--;
 	free(ptr);
+}
+
+// zzz_outstanding: arrays handed out and not yet released, for the tests
+int
+zzz_outstanding(void)
+{
+	return outstanding;
 }
