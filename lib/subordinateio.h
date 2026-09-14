@@ -46,8 +46,6 @@ extern int sub_gid_remove (const char *owner, gid_t start, unsigned long count);
 extern uid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count);
 extern bool want_subgid_file(void);
 
-extern void free_subid_pointer(void *ptr);
-
 #endif				/* ENABLE_SUBIDS */
 
 #endif

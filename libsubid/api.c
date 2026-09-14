@@ -46,7 +46,7 @@ bool subid_init(const char *progname, FILE * logfd)
 
 void subid_free(void *ptr)
 {
-	free_subid_pointer(ptr);
+	free(ptr);
 }
 
 static
