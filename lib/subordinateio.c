@@ -851,11 +851,11 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 }
 
 /*
- * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)
+ * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
  *
  * @owner: username
  * @id_type: UID or GID
- * @ranges: pointer to array of ranges into which results will be placed.
+ * @in_ranges: pointer to array of ranges into which results will be placed.
  *
  * Fills in the subuid or subgid ranges which are owned by the specified
  * user.  Username may be a username or a string representation of a
