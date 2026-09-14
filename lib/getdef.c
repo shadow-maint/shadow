@@ -259,7 +259,7 @@ getdef_num(const char *item, int dflt)
 		return dflt;
 	}
 
-	if (a2si(&val, d->value, NULL, 0, -1, INT_MAX) == -1) {
+	if (a2i(int, &val, d->value, NULL, 0, -1,) == -1) {
 		fprintf (log_get_logfd(),
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
@@ -293,7 +293,7 @@ getdef_unum(const char *item, unsigned int dflt)
 		return dflt;
 	}
 
-	if (a2ui(&val, d->value, NULL, 0, 0, UINT_MAX) == -1) {
+	if (a2i(unsigned int, &val, d->value, NULL, 0,,) == -1) {
 		fprintf (log_get_logfd(),
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
@@ -326,7 +326,7 @@ long getdef_long (const char *item, long dflt)
 		return dflt;
 	}
 
-	if (a2sl(&val, d->value, NULL, 0, -1, LONG_MAX) == -1) {
+	if (a2i(long, &val, d->value, NULL, 0, -1,) == -1) {
 		fprintf (log_get_logfd(),
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
@@ -358,7 +358,7 @@ unsigned long getdef_ulong (const char *item, unsigned long dflt)
 		return dflt;
 	}
 
-	if (str2ul(&val, d->value) == -1) {
+	if (a2i(unsigned long, &val, d->value, NULL, 0,,) == -1) {
 		fprintf (log_get_logfd(),
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);

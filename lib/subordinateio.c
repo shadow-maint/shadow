@@ -114,10 +114,10 @@ subordinate_parse(const char *line)
 	if (streq(fields[2], ""))
 		return NULL;
 	range.owner = fields[0];
-	if (a2ul(&range.start, fields[1], NULL, 0, 0, maxof(id_t)) == -1)
+	if (a2i(unsigned long, &range.start, fields[1], NULL, 0, 0, maxof(id_t)) == -1)
 		return NULL;
-	if (a2ul(&range.count, fields[2], NULL, 0, 0,
-	         MIN(maxof(id_t) + 1LL - range.start, maxof(id_t))) == -1)
+	if (a2i(unsigned long, &range.count, fields[2], NULL, 0, 0,
+	        MIN(maxof(id_t) + 1LL - range.start, maxof(id_t))) == -1)
 	{
 		return NULL;
 	}
