@@ -985,6 +985,8 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 	struct commonio_db *db;
 	int n = 0;
 
+	*uids = NULL;
+
 	h = get_subid_nss_handle();
 	if (h) {
 		uid_t  *r;
@@ -992,10 +994,10 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 		status = h->find_subid_owners(id, id_type, &r, &n);
 		if (status != SUBID_STATUS_SUCCESS)
 			return -1;
-		*uids = NULL;
-		if (n <= 0)
-			return n;
-		*uids = memdup_T(r, n, uid_t);
+		if (n == 0)
+			*uids = malloc_T(0, uid_t);
+		else
+			*uids = memdup_T(r, n, uid_t);
 		h->free(r);
 		if (*uids == NULL)
 			return -1;
@@ -1019,8 +1021,6 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 		return -1;
 	}
 
-	*uids = NULL;
-
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
 		if (id >= range->start && id < range->start + range-> count) {
@@ -1034,6 +1034,11 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 		sub_uid_close(true);
 	else
 		sub_gid_close(true);
+
+	if (n == 0)
+		*uids = malloc_T(0, uid_t);
+	if (*uids == NULL)
+		n = -1;
 
 	return n;
 }
