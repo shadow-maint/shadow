@@ -197,20 +197,27 @@ def test_groupdel__locked_file(shadow: Shadow, lock_file: str):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_groupdel__no_group(shadow: Shadow):
+@pytest.mark.parametrize(
+    "args",
+    [
+        pytest.param("", id="no_group"),
+        pytest.param("tgroup1 tgroup2", id="two_groups"),
+    ],
+)
+def test_groupdel__invalid_arguments(shadow: Shadow, args: str):
     """
-    :title: Groupdel command fails when no group is mentioned
+    :title: Groupdel command fails with invalid arguments
     :setup:
         1. None required
     :steps:
-        1. Run groupdel command without any argument
+        1. Attempt to delete groups
         2. Verify that groupdel command fails
     :expectedresults:
-        1. Command without any argument fails
+        1. Groups are not deleted
         2. groupdel command fails with error (invalid usage)
     :customerscenario: False
     """
     with pytest.raises(ProcessError) as exc_info:
-        shadow.groupdel()
+        shadow.groupdel(args)
 
     assert exc_info.value.rc == 2, f"Expected return code 2(invalid usage), got {exc_info.value.rc}"
