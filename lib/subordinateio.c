@@ -861,7 +861,7 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
  * user.  Username may be a username or a string representation of a
  * UID number.  If id_type is UID, then subuids are returned, else
  * subgids are given.
-
+ *
  * Returns the number of ranges found, or < 0 on error.
  *
  * The caller must free the subordinate range list.
