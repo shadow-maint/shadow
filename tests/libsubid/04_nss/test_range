@@ -32,6 +32,16 @@ if [ $? -eq 0 ]; then
     exit 1
 fi
 
+echo "starting array tests"
+LD_LIBRARY_PATH=.:${build_path}/libsubid/.libs:$LD_LIBRARY_PATH ./test_arrays
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+out=$(${build_path}/src/getsubids user2)
+if [ $? -ne 0 ] || [ -n "$out" ]; then
+    exit 1
+fi
+
 umount /etc/nsswitch.conf
 
 mount --bind ./nsswitch1.conf /etc/nsswitch.conf

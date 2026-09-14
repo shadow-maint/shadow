@@ -114,6 +114,10 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 		return SUBID_STATUS_UNKNOWN_USER;
 	if (strcmp(owner, "conn") == 0)
 		return SUBID_STATUS_ERROR_CONN;
+	if (strcmp(owner, "emptyarr") == 0) {
+		*in_ranges = malloc_T(0, struct subid_range);
+		return SUBID_STATUS_SUCCESS;
+	}
 
 	*in_ranges = NULL;
 	if (strcmp(owner, "user1") != 0 && strcmp(owner, "ubuntu") != 0 &&
