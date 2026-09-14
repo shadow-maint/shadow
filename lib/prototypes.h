@@ -256,7 +256,7 @@ struct subid_nss_ops {
 	 * @id - the delegated id (subuid or subgid) being queried
 	 * @id_type - subuid or subgid
 	 * @uids - pointer to an array of uids which will be allocated by
-	 *         nss_find_subid_owners()
+	 *         nss_find_subid_owners(), or NULL if none is found
 	 * @count - number of uids found
 	 *
 	 * returns success if the module was able to determine an answer,

@@ -98,6 +98,7 @@ enum subid_status shadow_subid_find_subid_owners(unsigned long id, enum subid_ty
 			return SUBID_STATUS_SUCCESS;
 		return SUBID_STATUS_ERROR; // out of memory
 	}
+	*uids = NULL;
 	*count = 0; // nothing found
 	return SUBID_STATUS_SUCCESS;
 }
