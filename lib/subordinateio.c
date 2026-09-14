@@ -29,6 +29,7 @@
 #include "string/ctype/isascii.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strdup/memdup.h"
 #include "string/strtok/strsep2arr.h"
 #include "typetraits.h"
 
@@ -879,10 +880,18 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 
 	h = get_subid_nss_handle();
 	if (h) {
-		status = h->list_owner_ranges(owner, id_type, in_ranges, &count);
-		if (status == SUBID_STATUS_SUCCESS)
-			return count;
-		return -1;
+		struct subid_range  *r;
+
+		status = h->list_owner_ranges(owner, id_type, &r, &count);
+		if (status != SUBID_STATUS_SUCCESS)
+			return -1;
+		if (count > 0)
+			ranges = memdup_T(r, count, struct subid_range);
+		h->free(r);
+		if (count > 0 && ranges == NULL)
+			return -1;
+		*in_ranges = ranges;
+		return count;
 	}
 
 	switch (id_type) {
@@ -970,9 +979,17 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 
 	h = get_subid_nss_handle();
 	if (h) {
-		status = h->find_subid_owners(id, id_type, uids, &n);
-		// Several ways we could handle the error cases here.
+		uid_t  *r;
+
+		status = h->find_subid_owners(id, id_type, &r, &n);
 		if (status != SUBID_STATUS_SUCCESS)
+			return -1;
+		*uids = NULL;
+		if (n <= 0)
+			return n;
+		*uids = memdup_T(r, n, uid_t);
+		h->free(r);
+		if (*uids == NULL)
 			return -1;
 		return n;
 	}
@@ -1138,12 +1155,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 
 void free_subid_pointer(void *ptr)
 {
-	struct subid_nss_ops *h = get_subid_nss_handle();
-	if (h) {
-		h->free(ptr);
-	} else {
-		free(ptr);
-	}
+	free(ptr);
 }
 
 #else				/* !ENABLE_SUBIDS */
