@@ -863,7 +863,8 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
  * UID number.  If id_type is UID, then subuids are returned, else
  * subgids are given.
  *
- * Returns the number of ranges found, or < 0 on error.
+ * Returns the number of ranges found, or < 0 on error.  An empty result
+ * is a zero-length allocation, so *in_ranges is NULL only on error.
  *
  * The caller must free the subordinate range list.
  */
@@ -885,10 +886,12 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		status = h->list_owner_ranges(owner, id_type, &r, &count);
 		if (status != SUBID_STATUS_SUCCESS)
 			return -1;
-		if (count > 0)
+		if (count == 0)
+			ranges = malloc_T(0, struct subid_range);
+		else
 			ranges = memdup_T(r, count, struct subid_range);
 		h->free(r);
-		if (count > 0 && ranges == NULL)
+		if (ranges == NULL)
 			return -1;
 		*in_ranges = ranges;
 		return count;
@@ -927,6 +930,11 @@ out:
 		sub_uid_close(true);
 	else
 		sub_gid_close(true);
+
+	if (count == 0)
+		ranges = malloc_T(0, struct subid_range);
+	if (ranges == NULL)
+		count = -1;
 
 	*in_ranges = ranges;
 	return count;
