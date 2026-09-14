@@ -8,7 +8,7 @@ test_nss: test_nss.c $(basedir)/lib/nss.c
 	gcc -o test_nss test_nss.o $(basedir)/lib/.libs/libshadow.a -ldl
 
 test_arrays: test_arrays.c
-	gcc -I$(basedir)/libsubid -o test_arrays test_arrays.c -L$(basedir)/libsubid/.libs -lsubid
+	gcc -I$(basedir)/lib -I$(basedir) -I$(basedir)/libsubid -o test_arrays test_arrays.c -L$(basedir)/libsubid/.libs -lsubid -ldl
 
 libsubid_zzz.so: libsubid_zzz.c
 	gcc -c -I$(basedir)/lib/ -I$(basedir) -I$(basedir)/libsubid libsubid_zzz.c
