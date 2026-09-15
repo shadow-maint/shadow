@@ -867,6 +867,33 @@ errno_of_status(enum subid_status status)
 }
 
 /*
+ * lookup_owner: look the owner up in the passwd database
+ *
+ * Returns 0 if the database answered, whether or not it has the owner,
+ * or -1 with errno set: ENOMEM, EMFILE and ENFILE as they are, EAGAIN
+ * for any other failure.
+ */
+static int
+lookup_owner(const char *owner)
+{
+	errno = 0;
+	if (getpw_uid_or_nam(owner) != NULL)
+		return 0;
+
+	switch (errno) {
+	case 0:
+		return 0;
+	case ENOMEM:
+	case EMFILE:
+	case ENFILE:
+		return -1;
+	default:
+		errno = EAGAIN;
+		return -1;
+	}
+}
+
+/*
  * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
  *
  * @owner: username
@@ -916,6 +943,9 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		*in_ranges = ranges;
 		return count;
 	}
+
+	if (lookup_owner(owner) == -1)
+		return -1;
 
 	switch (id_type) {
 	case ID_TYPE_UID:
