@@ -194,3 +194,82 @@ def test_groupdel__locked_file(shadow: Shadow, lock_file: str):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+@pytest.mark.parametrize(
+    "args",
+    [
+        pytest.param("", id="no_group"),
+        pytest.param("tgroup1 tgroup2", id="two_groups"),
+    ],
+)
+def test_groupdel__invalid_arguments(shadow: Shadow, args: str):
+    """
+    :title: Groupdel command fails with invalid arguments
+    :setup:
+        1. None required
+    :steps:
+        1. Attempt to delete groups
+        2. Verify that groupdel command fails
+    :expectedresults:
+        1. Groups are not deleted
+        2. groupdel command fails with error (invalid usage)
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupdel(args)
+
+    assert exc_info.value.rc == 2, f"Expected return code 2(invalid usage), got {exc_info.value.rc}"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupdel__usage(shadow: Shadow):
+    """
+    :title: Groupdel command displays usage
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupdel command
+        2. Verify that groupdel command exits successfully
+        3. Check usage information
+    :expectedresults:
+        1. Command runs successfully
+        2. groupdel command completes successfully
+        3. Usage information is displayed
+    :customerscenario: False
+    """
+    result = shadow.groupdel("--help")
+    assert result.rc == 0, f"Expected return code 0(success), got {result.rc}"
+    assert "Usage: groupdel [options] GROUP" in result.stdout
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupdel__invalid_option(shadow: Shadow):
+    """
+    :title: Group deletion fails with invalid option
+    :setup:
+        1. Create group
+    :steps:
+        1. Attempt to delete group
+        2. Verify that groupdel command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. Group is not deleted
+        2. groupdel command fails with error (invalid usage)
+        3. Group or gshadow entries are still found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupdel("-invalid tgroup")
+
+    assert exc_info.value.rc == 2, f"Expected return code 2 (invalid usage), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"

@@ -259,7 +259,7 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         """
         args_dict = self._parse_args(args)
         self.logger.info(f'Deleting group "{args_dict["name"]}" on {self.host.hostname}')
-        cmd = self.host.conn.run("groupdel " + args[0], log_level=ProcessLogLevel.Error)
+        cmd = self.host.conn.run("groupdel " + (args[0] if args else ""), log_level=ProcessLogLevel.Error)
 
         self.host.discard_file("/etc/group")
         self.host.discard_file("/etc/gshadow")
