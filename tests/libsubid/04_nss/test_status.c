@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "string/strcmp/streq.h"
 #include "subid.h"
 
 static int  failures;
@@ -35,10 +36,17 @@ check(enum subid_type type, const char *owner, int want_errno, int want_count)
 }
 
 int
-main(void)
+main(int, char *argv[])
 {
 	if (!subid_init("test_status", stderr))
 		return 1;
+
+	if (argv[1] != NULL && streq(argv[1], "outage")) {
+		check(ID_TYPE_UID, "root", EAGAIN, 0);
+		check(ID_TYPE_UID, "0", EAGAIN, 0);
+		check(ID_TYPE_GID, "root", EAGAIN, 0);
+		return failures != 0;
+	}
 
 	check(ID_TYPE_UID, "user1", 0, 1);
 	check(ID_TYPE_UID, "user2", 0, 0);
