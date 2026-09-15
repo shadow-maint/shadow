@@ -51,6 +51,7 @@ void pwd_init (void)
 	signal (SIGTERM, SIG_IGN);
 	signal (SIGTSTP, SIG_IGN);
 	signal (SIGTTOU, SIG_IGN);
+	signal (SIGXFSZ, SIG_IGN);
 
 	umask (077);
 }

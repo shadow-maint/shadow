@@ -61,17 +61,22 @@ noinst_PROGRAMS = sulogin
 
 suidusbins     =
 suidbins       =
-suidubins      = chage chfn chsh gpasswd newgrp
 if WITH_SU
 suidbins      += su
 endif
+
+privubins      = chage chfn chsh gpasswd newgrp
 if !WITH_TCB
-suidubins += passwd
+privubins     += passwd
 endif
 if ENABLE_SUBIDS
-if !FCAPS
-suidubins += newgidmap newuidmap
+privubins     += newgidmap newuidmap
 endif
+
+if FCAPS
+suidubins      =
+else
+suidubins      = $(privubins)
 endif
 
 if WITH_TCB
@@ -142,6 +147,16 @@ if WITH_TCB
 		chown root:shadow $(DESTDIR)$(ubindir)/$$i; \
 		chmod $(sgidperms) $(DESTDIR)$(ubindir)/$$i; \
 	done
+endif
+if FCAPS
+	setcap cap_dac_read_search+ep $(DESTDIR)$(ubindir)/chage
+	setcap cap_setgid,cap_dac_read_search+ep $(DESTDIR)$(ubindir)/newgrp
+	setcap cap_chown,cap_dac_override,cap_fowner+ep $(DESTDIR)$(ubindir)/chfn
+	setcap cap_chown,cap_dac_override,cap_fowner+ep $(DESTDIR)$(ubindir)/chsh
+	setcap cap_chown,cap_dac_override,cap_fowner+ep $(DESTDIR)$(ubindir)/gpasswd
+if !WITH_TCB
+	setcap cap_chown,cap_dac_override,cap_fowner+ep $(DESTDIR)$(ubindir)/passwd
+endif
 endif
 if ENABLE_SUBIDS
 if FCAPS
