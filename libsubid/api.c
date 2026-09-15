@@ -65,6 +65,33 @@ int subid_get_gid_ranges(const char *owner, struct subid_range **ranges)
 	return get_subid_ranges(owner, ID_TYPE_GID, ranges);
 }
 
+static struct subid_range *
+get_subid_ranges2(const char *owner, enum subid_type id_type, int *count)
+{
+	int                 n;
+	struct subid_range  *ranges;
+
+	n = list_owner_ranges(owner, id_type, &ranges);
+	if (n == -1) {
+		*count = 0;
+		return NULL;
+	}
+	*count = n;
+	return ranges;
+}
+
+struct subid_range *
+subid_get_uid_ranges2(const char *owner, int *count)
+{
+	return get_subid_ranges2(owner, ID_TYPE_UID, count);
+}
+
+struct subid_range *
+subid_get_gid_ranges2(const char *owner, int *count)
+{
+	return get_subid_ranges2(owner, ID_TYPE_GID, count);
+}
+
 static
 int get_subid_owner(unsigned long id, enum subid_type id_type, uid_t **owner)
 {
