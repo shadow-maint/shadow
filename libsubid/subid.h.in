@@ -71,6 +71,14 @@ bool subid_init(const char *progname, FILE *logfd);
  */
 void subid_free(void *ptr);
 
+/* GCC >= 11 warns if the array is freed with anything but subid_free(). */
+#if defined(__GNUC__) && (__GNUC__ >= 11) \
+    && !defined(__clang__) && !defined(__MCST__)
+# define SUBID_ATTR_MALLOC(dealloc)  __attribute__((__malloc__(dealloc)))
+#else
+# define SUBID_ATTR_MALLOC(dealloc)
+#endif
+
 /*
  * subid_get_uid_ranges: return a list of UID ranges for a user
  *
@@ -96,6 +104,33 @@ int subid_get_uid_ranges(const char *owner, struct subid_range **ranges);
  * returns: number of ranges found, ir < 0 on error.
  */
 int subid_get_gid_ranges(const char *owner, struct subid_range **ranges);
+
+/*
+ * subid_get_uid_ranges2: return the UID ranges of a user
+ *
+ * @owner: username being queried
+ * @count: set to the number of ranges returned, or to 0 on failure.
+ *
+ * Returns an array of *count ranges, or NULL on failure with errno set:
+ * ENOENT when the backend does not know the user, EAGAIN when it could
+ * not be reached, ENOMEM for a failed allocation, and EIO for any other
+ * failure.  When the backend finds no range for the user, the array is
+ * a zero-length allocation, so NULL always means failure.  A subid NSS
+ * module may report an unknown user for a user without ranges as well
+ * as for one it does not know.
+ *
+ * The caller must subid_free() the array.
+ */
+SUBID_ATTR_MALLOC(subid_free)
+struct subid_range *subid_get_uid_ranges2(const char *owner, int *count);
+
+/*
+ * subid_get_gid_ranges2: return the GID ranges of a user
+ *
+ * See subid_get_uid_ranges2().
+ */
+SUBID_ATTR_MALLOC(subid_free)
+struct subid_range *subid_get_gid_ranges2(const char *owner, int *count);
 
 /*
  * subid_get_uid_owners: return a list of uids to which the given uid has been

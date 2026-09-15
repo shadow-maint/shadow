@@ -17,6 +17,7 @@
 #include <sys/param.h>
 #include <pwd.h>
 #include <ctype.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <stdint.h>
 #include <string.h>
@@ -851,6 +852,47 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 	return find_free_range(&subordinate_gid_db, min, max, count);
 }
 
+// errno_of_status - errno for a failed subid NSS module status
+static int
+errno_of_status(enum subid_status status)
+{
+	switch (status) {
+	case SUBID_STATUS_UNKNOWN_USER:
+		return ENOENT;
+	case SUBID_STATUS_ERROR_CONN:
+		return EAGAIN;
+	default:
+		return EIO;
+	}
+}
+
+/*
+ * lookup_owner: look the owner up in the passwd database
+ *
+ * Returns 0 if the database answered, whether or not it has the owner,
+ * or -1 with errno set: ENOMEM, EMFILE and ENFILE as they are, EAGAIN
+ * for any other failure.
+ */
+static int
+lookup_owner(const char *owner)
+{
+	errno = 0;
+	if (getpw_uid_or_nam(owner) != NULL)
+		return 0;
+
+	switch (errno) {
+	case 0:
+		return 0;
+	case ENOMEM:
+	case EMFILE:
+	case ENFILE:
+		return -1;
+	default:
+		errno = EAGAIN;
+		return -1;
+	}
+}
+
 /*
  * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
  *
@@ -863,8 +905,11 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
  * UID number.  If id_type is UID, then subuids are returned, else
  * subgids are given.
  *
- * Returns the number of ranges found, or < 0 on error.  An empty result
- * is a zero-length allocation, so *in_ranges is NULL only on error.
+ * Returns the number of ranges found, or -1 on failure with errno set:
+ * ENOENT when the backend does not know the user, EAGAIN when it could
+ * not be reached, EINVAL for a bad id_type, ENOMEM for a failed
+ * allocation, and EIO for any other failure.  An empty result is a
+ * zero-length allocation, so *in_ranges is NULL only on failure.
  *
  * The caller must free the subordinate range list.
  */
@@ -884,8 +929,10 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		struct subid_range  *r;
 
 		status = h->list_owner_ranges(owner, id_type, &r, &count);
-		if (status != SUBID_STATUS_SUCCESS)
+		if (status != SUBID_STATUS_SUCCESS) {
+			errno = errno_of_status(status);
 			return -1;
+		}
 		if (count == 0)
 			ranges = malloc_T(0, struct subid_range);
 		else
@@ -897,20 +944,26 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		return count;
 	}
 
+	if (lookup_owner(owner) == -1)
+		return -1;
+
 	switch (id_type) {
 	case ID_TYPE_UID:
 		if (!sub_uid_open(O_RDONLY)) {
+			errno = EIO;
 			return -1;
 		}
 		db = &subordinate_uid_db;
 		break;
 	case ID_TYPE_GID:
 		if (!sub_gid_open(O_RDONLY)) {
+			errno = EIO;
 			return -1;
 		}
 		db = &subordinate_gid_db;
 		break;
 	default:
+		errno = EINVAL;
 		return -1;
 	}
 
