@@ -20,6 +20,11 @@ Don't use some libc functions without Really Good Reasons:
 ==========================================================
 
 <memory.h>
+    memcmp(3)
+	Use memeq(3) instead.
+	The return value of memcmp(3) is confusing.
+	memcmp(3) would be legitimate for sorting memory.
+
     strncmp(3)
 	Use strneq_a(), or strpfx(), or else,
 	depending on what you want.
@@ -91,6 +96,9 @@ memory/ - memory operations
 	Return true if a [[gnu::nonstring]] starts with a prefix.
     STRNPFX()  // Unimplemented
 	Like strnpfx(), but takes an array.
+
+    memeq(3)
+	Return true if two blocks of memory are equal.
 
   memdup/ - Memory duplication
 
