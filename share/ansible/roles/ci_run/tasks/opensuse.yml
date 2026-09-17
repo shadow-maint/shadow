@@ -98,6 +98,10 @@
     chdir: /usr/local/src/shadow/
   ignore_errors: true
 
+- name: Refresh the dynamic linker cache
+  ansible.builtin.command:
+    ldconfig
+
 - name: Copy logs
   ansible.builtin.fetch:
     src: '{{ item }}'
