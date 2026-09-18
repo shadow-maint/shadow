@@ -8,6 +8,7 @@
 #include <sys/types.h>
 
 #include "memory/memcmp/memeq.h"
+#include "string/strcmp/streq.h"
 #include "subid.h"
 
 static int  failures;
@@ -108,7 +109,7 @@ check_owners(enum subid_type type, uid_t id, int n)
 }
 
 int
-main(void)
+main(int, char *argv[])
 {
 	void                             *h;
 	static const struct subid_range  none[0];
@@ -127,6 +128,13 @@ main(void)
 	if (zzz_outstanding == NULL) {
 		printf("FAIL: %s\n", dlerror());
 		return 1;
+	}
+
+	if (argv[1] != NULL && streq(argv[1], "outage")) {
+		check_fail(ID_TYPE_UID, "root", EAGAIN);
+		check_fail(ID_TYPE_UID, "0", EAGAIN);
+		check_fail(ID_TYPE_GID, "root", EAGAIN);
+		return failures != 0;
 	}
 
 	check_ranges(ID_TYPE_UID, "user1", 1, one);
