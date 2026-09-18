@@ -107,28 +107,29 @@ SUBID_ATTR_MALLOC(subid_free)
 struct subid_range *subid_get_gid_ranges(const char *owner, int *count);
 
 /*
- * subid_get_uid_owners: return a list of uids to which the given uid has been
- *                    delegated.
+ * subid_get_uid_owners: return the users a subordinate UID is delegated to
  *
  * @uid: the subuid being queried
- * @owners: a pointer to an array of uids into which the results are placed.
- *          The returned array must be freed by the caller.
+ * @count: set to the number of owners returned.
  *
- * Returns the number of uids returned, or < 0 on error.
+ * Returns an array of *count UIDs, or NULL on failure with errno set:
+ * EAGAIN when the backend could not be reached, ENOMEM, EMFILE or
+ * ENFILE when memory or file descriptors ran out, and EIO for any
+ * other failure.  When nobody owns the ID, the array is a zero-length
+ * allocation, so NULL always means failure.
+ *
+ * The caller must subid_free() the array.
  */
-int subid_get_uid_owners(uid_t uid, uid_t **owner);
+SUBID_ATTR_MALLOC(subid_free)
+uid_t *subid_get_uid_owners(uid_t uid, int *count);
 
 /*
- * subid_get_gid_owners: return a list of uids to which the given gid has been
- *                    delegated.
+ * subid_get_gid_owners: return the users a subordinate GID is delegated to
  *
- * @uid: the subgid being queried
- * @owners: a pointer to an array of uids into which the results are placed.
- *          The returned array must be freed by the caller.
- *
- * Returns the number of uids returned, or < 0 on error.
+ * See subid_get_uid_owners().
  */
-int subid_get_gid_owners(gid_t gid, uid_t **owner);
+SUBID_ATTR_MALLOC(subid_free)
+uid_t *subid_get_gid_owners(gid_t gid, int *count);
 
 /*
  * subid_grant_uid_range: assign a subuid range to a user
