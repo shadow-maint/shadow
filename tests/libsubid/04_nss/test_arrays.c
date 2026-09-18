@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 
 #include <dlfcn.h>
+#include <errno.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -62,18 +63,24 @@ check_ranges(enum subid_type type, const char *owner, int n,
 	subid_free(r);
 }
 
-// check_fail: no array
+// check_fail: no array, and errno 'want'
 static void
-check_fail(enum subid_type type, const char *owner)
+check_fail(enum subid_type type, const char *owner, int want)
 {
+	int                 err;
 	int                 got;
 	struct subid_range  *r;
 
 	r = get_ranges(type, owner, &got);
+	err = errno;
 	check_released(type, owner);
 	if (r != NULL) {
 		printf("FAIL %s %s: %d ranges; want NULL\n",
 		       type_name(type), owner, got);
+		failures++;
+	} else if (err != want) {
+		printf("FAIL %s %s: errno %d; want %d\n",
+		       type_name(type), owner, err, want);
 		failures++;
 	}
 	subid_free(r);
@@ -126,12 +133,13 @@ main(void)
 	check_ranges(ID_TYPE_UID, "multi", 2, two);
 	check_ranges(ID_TYPE_UID, "user2", 0, none);
 	check_ranges(ID_TYPE_UID, "emptyarr", 0, none);
-	check_fail(ID_TYPE_UID, "unknown");
-	check_fail(ID_TYPE_UID, "conn");
-	check_fail(ID_TYPE_UID, "error");
+	check_fail(ID_TYPE_UID, "unknown", ENOENT);
+	check_fail(ID_TYPE_UID, "conn", EAGAIN);
+	check_fail(ID_TYPE_UID, "error", EIO);
 	check_ranges(ID_TYPE_GID, "group1", 1, one);
 	check_ranges(ID_TYPE_GID, "multi", 2, two);
 	check_ranges(ID_TYPE_GID, "user1", 0, none);
+	check_fail(ID_TYPE_GID, "unknown", ENOENT);
 
 	check_owners(ID_TYPE_UID, 100000, 1);
 	check_owners(ID_TYPE_UID, 5, 0);
