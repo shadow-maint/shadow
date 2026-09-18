@@ -119,6 +119,8 @@ libshadow_la_SOURCES = \
 	memory/memcmp/memeq.h \
 	memory/memcmp/strneq.c \
 	memory/memcmp/strneq.h \
+	memory/memcpy/memmove.c \
+	memory/memcpy/memmove.h \
 	memory/memcpy/strncat.c \
 	memory/memcpy/strncat.h \
 	memory/memcpy/strncpy.c \
@@ -235,6 +237,8 @@ libshadow_la_SOURCES = \
 	string/strcmp/strprefix.h \
 	string/strcpy/stpecpy.c \
 	string/strcpy/stpecpy.h \
+	string/strcpy/strmove.c \
+	string/strcpy/strmove.h \
 	string/strcpy/strtcat.c \
 	string/strcpy/strtcat.h \
 	string/strcpy/strtcpy.c \
