@@ -29,7 +29,7 @@
 #include <sys/types.h>
 #include <time.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "btrfs.h"

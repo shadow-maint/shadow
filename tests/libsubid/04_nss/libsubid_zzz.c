@@ -4,7 +4,9 @@
 #include <stdbool.h>
 #include <subid.h>
 #include <string.h>
-#include "alloc/malloc.h"
+
+#include "alloc/alloc.h"
+
 
 static int  outstanding;  // arrays handed out and not yet released
 

@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include "alloc/calloc.h"
+#include "alloc/alloc.h"
 #include "groupio.h"
 #include "getdef.h"
 #include "io/fprintf.h"
