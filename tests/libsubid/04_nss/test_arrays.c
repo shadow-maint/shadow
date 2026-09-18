@@ -18,12 +18,12 @@ type_name(enum subid_type type)
 	return type == ID_TYPE_UID ? "uid" : "gid";
 }
 
-static int
-get_ranges(enum subid_type type, const char *owner, struct subid_range **r)
+static struct subid_range *
+get_ranges(enum subid_type type, const char *owner, int *n)
 {
 	if (type == ID_TYPE_UID)
-		return subid_get_uid_ranges(owner, r);
-	return subid_get_gid_ranges(owner, r);
+		return subid_get_uid_ranges(owner, n);
+	return subid_get_gid_ranges(owner, n);
 }
 
 // check_released: the module has released every array it handed out
@@ -45,11 +45,15 @@ check_ranges(enum subid_type type, const char *owner, int n,
 	int                 got;
 	struct subid_range  *r;
 
-	got = get_ranges(type, owner, &r);
+	r = get_ranges(type, owner, &got);
 	check_released(type, owner);
-	if (got != n || r == NULL) {
-		printf("FAIL %s %s: got %d, %s; want %d\n",
-		       type_name(type), owner, got, r ? "array" : "NULL", n);
+	if (r == NULL) {
+		printf("FAIL %s %s: NULL; want %d ranges\n",
+		       type_name(type), owner, n);
+		failures++;
+	} else if (got != n) {
+		printf("FAIL %s %s: %d ranges; want %d\n",
+		       type_name(type), owner, got, n);
 		failures++;
 	} else if (!memeq(r, want, n * sizeof(r[0]))) {
 		printf("FAIL %s %s: wrong ranges\n", type_name(type), owner);
@@ -58,18 +62,18 @@ check_ranges(enum subid_type type, const char *owner, int n,
 	subid_free(r);
 }
 
-// check_fail: -1 and no array
+// check_fail: no array
 static void
 check_fail(enum subid_type type, const char *owner)
 {
 	int                 got;
 	struct subid_range  *r;
 
-	got = get_ranges(type, owner, &r);
+	r = get_ranges(type, owner, &got);
 	check_released(type, owner);
-	if (got != -1 || r != NULL) {
-		printf("FAIL %s %s: got %d, %s; want -1\n",
-		       type_name(type), owner, got, r ? "array" : "NULL");
+	if (r != NULL) {
+		printf("FAIL %s %s: %d ranges; want NULL\n",
+		       type_name(type), owner, got);
 		failures++;
 	}
 	subid_free(r);

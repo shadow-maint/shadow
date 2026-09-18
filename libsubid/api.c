@@ -49,20 +49,29 @@ void subid_free(void *ptr)
 	free(ptr);
 }
 
-static
-int get_subid_ranges(const char *owner, enum subid_type id_type, struct subid_range **ranges)
+static struct subid_range *
+get_subid_ranges(const char *owner, enum subid_type id_type, int *count)
 {
-	return list_owner_ranges(owner, id_type, ranges);
+	int                 n;
+	struct subid_range  *ranges;
+
+	n = list_owner_ranges(owner, id_type, &ranges);
+	if (n == -1)
+		return NULL;
+	*count = n;
+	return ranges;
 }
 
-int subid_get_uid_ranges(const char *owner, struct subid_range **ranges)
+struct subid_range *
+subid_get_uid_ranges(const char *owner, int *count)
 {
-	return get_subid_ranges(owner, ID_TYPE_UID, ranges);
+	return get_subid_ranges(owner, ID_TYPE_UID, count);
 }
 
-int subid_get_gid_ranges(const char *owner, struct subid_range **ranges)
+struct subid_range *
+subid_get_gid_ranges(const char *owner, int *count)
 {
-	return get_subid_ranges(owner, ID_TYPE_GID, ranges);
+	return get_subid_ranges(owner, ID_TYPE_GID, count);
 }
 
 static

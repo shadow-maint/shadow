@@ -29,11 +29,11 @@ int main(int argc, char *argv[])
 	owner = argv[1];
 	if (argc == 3 && streq(argv[1], "-g")) {
 		owner = argv[2];
-		count = subid_get_gid_ranges(owner, &ranges);
+		ranges = subid_get_gid_ranges(owner, &count);
 	} else if (argc == 2 && streq(argv[1], "-h")) {
 		usage();
 	} else {
-		count = subid_get_uid_ranges(owner, &ranges);
+		ranges = subid_get_uid_ranges(owner, &count);
 	}
 	if (!ranges) {
 		eprintf("Error fetching ranges\n");
