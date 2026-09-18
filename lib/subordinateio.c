@@ -999,14 +999,31 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 			// should not happen
 			free(*uids);
 			*uids = NULL;
+			errno = EIO;
 			return -1;
 		}
 	} else {
-		struct passwd *pwd = getpwnam(owner);
+		int            err;
+		struct passwd  *pwd;
+
+		errno = 0;
+		pwd = getpwnam(owner);
+		err = errno;
 		if (NULL == pwd) {
-			/* Username not defined in /etc/passwd, or error occurred during lookup */
 			free(*uids);
 			*uids = NULL;
+			switch (err) {
+			case ENOMEM:
+			case EMFILE:
+			case ENFILE:
+				break;
+			case 0:
+				err = EIO;
+				break;
+			default:
+				err = EAGAIN;
+			}
+			errno = err;
 			return -1;
 		}
 		owner_uid = pwd->pw_uid;
@@ -1040,8 +1057,10 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 		uid_t  *r;
 
 		status = h->find_subid_owners(id, id_type, &r, &n);
-		if (status != SUBID_STATUS_SUCCESS)
+		if (status != SUBID_STATUS_SUCCESS) {
+			errno = errno_of_status(status);
 			return -1;
+		}
 		if (n == 0)
 			*uids = malloc_T(0, uid_t);
 		else
@@ -1055,17 +1074,20 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 	switch (id_type) {
 	case ID_TYPE_UID:
 		if (!sub_uid_open(O_RDONLY)) {
+			errno = EIO;
 			return -1;
 		}
 		db = &subordinate_uid_db;
 		break;
 	case ID_TYPE_GID:
 		if (!sub_gid_open(O_RDONLY)) {
+			errno = EIO;
 			return -1;
 		}
 		db = &subordinate_gid_db;
 		break;
 	default:
+		errno = EINVAL;
 		return -1;
 	}
 
