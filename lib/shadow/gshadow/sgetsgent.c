@@ -14,18 +14,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "list.h"
 #include "shadow/gshadow/sgrp.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/astrsep2ls.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
 
 #if defined(SHADOWGRP) && !__has_include(<gshadow.h>)
 static struct sgrp  sgroup = {};
-
-
-static char **build_list(char *s);
 
 
 // from-string get shadow group entry
@@ -52,24 +49,12 @@ sgetsgent(const char *s)
 	free(sgroup.sg_adm);
 	free(sgroup.sg_mem);
 
-	sgroup.sg_adm = build_list(fields[2]);
-	sgroup.sg_mem = build_list(fields[3]);
+	sgroup.sg_adm = acsv2ls(fields[2]);
+	sgroup.sg_mem = acsv2ls(fields[3]);
+
+	if (sgroup.sg_adm == NULL || sgroup.sg_mem == NULL)
+		return NULL;
 
 	return &sgroup;
-}
-
-
-static char **
-build_list(char *s)
-{
-	char    **l;
-	size_t  n;
-
-	l = xastrsep2ls(s, ",", &n);
-
-	if (streq(l[n-1], ""))
-		l[n-1] = NULL;
-
-	return l;
 }
 #endif
