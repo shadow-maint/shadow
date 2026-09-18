@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +10,10 @@
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "subid.h"
+
+#define E_LOOKUP	1	/* the lookup failed */
+#define E_NOTFOUND	2	/* unknown user (ENOENT) */
+#define E_CONN		11	/* backend unreachable (EAGAIN) */
 
 static const char Prog[] = "getsubids";
 
@@ -36,8 +41,17 @@ int main(int argc, char *argv[])
 		ranges = subid_get_uid_ranges(owner, &count);
 	}
 	if (!ranges) {
-		eprintf("Error fetching ranges\n");
-		exit(1);
+		switch (errno) {
+		case ENOENT:
+			eprintf("%s: unknown user '%s'\n", Prog, owner);
+			exit(E_NOTFOUND);
+		case EAGAIN:
+			eprintf("%s: cannot reach the subordinate ID backend\n", Prog);
+			exit(E_CONN);
+		default:
+			eprintf("Error fetching ranges\n");
+			exit(E_LOOKUP);
+		}
 	}
 	for (i = 0; i < count; i++) {
 		printf("%d: %s %lu %lu\n", i, owner,
