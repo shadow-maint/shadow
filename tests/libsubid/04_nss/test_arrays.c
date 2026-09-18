@@ -116,6 +116,29 @@ check_owners(enum subid_type type, uid_t id, int n)
 	subid_free(uids);
 }
 
+// check_owners_fail: no array, and errno 'want'
+static void
+check_owners_fail(enum subid_type type, uid_t id, int want)
+{
+	int    err;
+	int    got;
+	uid_t  *uids;
+
+	uids = get_owners(type, id, &got);
+	err = errno;
+	check_released(type, "owners");
+	if (uids != NULL) {
+		printf("FAIL %s owners %ju: %d; want NULL\n",
+		       type_name(type), (uintmax_t) id, got);
+		failures++;
+	} else if (err != want) {
+		printf("FAIL %s owners %ju: errno %d; want %d\n",
+		       type_name(type), (uintmax_t) id, err, want);
+		failures++;
+	}
+	subid_free(uids);
+}
+
 int
 main(int, char *argv[])
 {
@@ -161,6 +184,8 @@ main(int, char *argv[])
 	check_owners(ID_TYPE_UID, 5, 0);
 	check_owners(ID_TYPE_GID, 100000, 1);
 	check_owners(ID_TYPE_GID, 5, 0);
+	check_owners_fail(ID_TYPE_UID, 400000, EAGAIN);
+	check_owners_fail(ID_TYPE_GID, 400000, EAGAIN);
 
 	return failures != 0;
 }
