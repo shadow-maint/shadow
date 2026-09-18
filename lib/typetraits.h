@@ -8,6 +8,9 @@
 
 #include "config.h"
 
+#include <stdalign.h>
+#include <stdint.h>
+
 #include "sizeof.h"
 
 
@@ -22,6 +25,12 @@
 # define maxof(T)        ((T) (is_signed(T) ? stype_max(T) : utype_max(T)))
 # define minof(T)        ((T) ~maxof(T))
 #endif
+
+
+#define is_aligned(p, T)                                              \
+(                                                                     \
+	!((uintptr_t) p % alignof(T))                                 \
+)
 
 
 #define is_same_type(a, b)                                                    \
