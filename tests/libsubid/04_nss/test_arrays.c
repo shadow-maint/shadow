@@ -28,6 +28,14 @@ get_ranges(enum subid_type type, const char *owner, int *n)
 	return subid_get_gid_ranges(owner, n);
 }
 
+static uid_t *
+get_owners(enum subid_type type, uid_t id, int *n)
+{
+	if (type == ID_TYPE_UID)
+		return subid_get_uid_owners(id, n);
+	return subid_get_gid_owners(id, n);
+}
+
 // check_released: the module has released every array it handed out
 static void
 check_released(enum subid_type type, const char *what)
@@ -94,15 +102,15 @@ check_owners(enum subid_type type, uid_t id, int n)
 	int    got;
 	uid_t  *uids;
 
-	if (type == ID_TYPE_UID)
-		got = subid_get_uid_owners(id, &uids);
-	else
-		got = subid_get_gid_owners(id, &uids);
+	uids = get_owners(type, id, &got);
 	check_released(type, "owners");
-	if (got != n || uids == NULL) {
-		printf("FAIL %s owners %ju: got %d, %s; want %d\n",
-		       type_name(type), (uintmax_t) id, got,
-		       uids ? "array" : "NULL", n);
+	if (uids == NULL) {
+		printf("FAIL %s owners %ju: NULL; want %d\n",
+		       type_name(type), (uintmax_t) id, n);
+		failures++;
+	} else if (got != n) {
+		printf("FAIL %s owners %ju: %d; want %d\n",
+		       type_name(type), (uintmax_t) id, got, n);
 		failures++;
 	}
 	subid_free(uids);

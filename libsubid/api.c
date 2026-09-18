@@ -74,20 +74,29 @@ subid_get_gid_ranges(const char *owner, int *count)
 	return get_subid_ranges(owner, ID_TYPE_GID, count);
 }
 
-static
-int get_subid_owner(unsigned long id, enum subid_type id_type, uid_t **owner)
+static uid_t *
+get_subid_owners(unsigned long id, enum subid_type id_type, int *count)
 {
-	return find_subid_owners(id, id_type, owner);
+	int    n;
+	uid_t  *owners;
+
+	n = find_subid_owners(id, id_type, &owners);
+	if (n == -1)
+		return NULL;
+	*count = n;
+	return owners;
 }
 
-int subid_get_uid_owners(uid_t uid, uid_t **owner)
+uid_t *
+subid_get_uid_owners(uid_t uid, int *count)
 {
-	return get_subid_owner(uid, ID_TYPE_UID, owner);
+	return get_subid_owners(uid, ID_TYPE_UID, count);
 }
 
-int subid_get_gid_owners(gid_t gid, uid_t **owner)
+uid_t *
+subid_get_gid_owners(gid_t gid, int *count)
 {
-	return get_subid_owner(gid, ID_TYPE_GID, owner);
+	return get_subid_owners(gid, ID_TYPE_GID, count);
 }
 
 static
