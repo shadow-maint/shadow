@@ -38,7 +38,7 @@
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 #undef NDEBUG
 #include <assert.h>

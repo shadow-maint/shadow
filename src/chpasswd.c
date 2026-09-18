@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
@@ -37,7 +35,7 @@
 #include "io/fgets/fgets.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 #define IS_CRYPT_METHOD(str) ((crypt_method != NULL && streq(crypt_method, str)) ? true : false)
