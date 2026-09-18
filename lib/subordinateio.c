@@ -865,6 +865,31 @@ errno_of_status(enum subid_status status)
 	}
 }
 
+static int
+lookup_owner(const char *owner)
+{
+	int  e;
+
+	e = errno;
+	errno = 0;
+	if (getpw_uid_or_nam(owner) != NULL) {
+		errno = e;
+		return 0;
+	}
+	switch (errno) {
+	case 0:
+		errno = e;
+		return 0;
+	case ENOMEM:
+	case EMFILE:
+	case ENFILE:
+		return -1;
+	default:
+		errno = EAGAIN;
+		return -1;
+	}
+}
+
 /*
  * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
  *
@@ -913,6 +938,9 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		*in_ranges = ranges;
 		return count;
 	}
+
+	if (lookup_owner(owner) == -1)
+		return -1;
 
 	switch (id_type) {
 	case ID_TYPE_UID:
