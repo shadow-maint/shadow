@@ -18,6 +18,7 @@ __all__ = [
     "GroupEntry",
     "GShadowEntry",
     "InitgroupsEntry",
+    "SubidEntry",
     "LinuxToolsUtils",
     "KillCommand",
     "GetentUtils",
@@ -497,6 +498,66 @@ class InitgroupsEntry(object):
         return cls.FromDict(dictionary)
 
 
+class SubidEntry(object):
+    """
+    One range from ``getsubids``
+    """
+
+    def __init__(self, index: int, owner: str, start: int, count: int) -> None:
+        self.index: int = index
+        """
+        Position in the output, from zero.
+        """
+
+        self.owner: str = owner
+        """
+        User that owns the range.
+        """
+
+        self.start: int = start
+        """
+        First subordinate id of the range.
+        """
+
+        self.count: int = count
+        """
+        Number of ids in the range.
+        """
+
+    def __str__(self) -> str:
+        return f"({self.index}:{self.owner}:{self.start}:{self.count})"
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    @classmethod
+    def FromDict(cls, d: dict[str, Any]) -> SubidEntry:
+        return cls(
+            index=d["index"],
+            owner=d["owner"],
+            start=d["start"],
+            count=d["count"],
+        )
+
+    @classmethod
+    def FromOutput(cls, stdout: str) -> SubidEntry:
+        """
+        Parse one ``index: owner start count`` line.
+        """
+        fields = stdout.split()
+        if len(fields) != 4 or not fields[0].endswith(":"):
+            raise ValueError(f"Unexpected getsubids line: {stdout!r}")
+
+        return cls.FromDict(
+            {
+                "index": int(fields[0][:-1]),
+                "owner": fields[1],
+                "start": int(fields[2]),
+                "count": int(fields[3]),
+            }
+        )
+
+
 class LinuxToolsUtils(MultihostUtility[MultihostHost]):
     """
     Run various standard commands on remote host.
@@ -528,6 +589,24 @@ class LinuxToolsUtils(MultihostUtility[MultihostHost]):
             return None
 
         return IdEntry.FromOutput(command.stdout)
+
+    def getsubids(self, name: str, gid: bool = False) -> list[SubidEntry] | None:
+        """
+        Run ``getsubids`` command.
+
+        :param name: User name.
+        :type name: str
+        :param gid: List the subordinate group ids instead of the user ids (``-g``), defaults to False.
+        :type gid: bool, optional
+        :return: Ranges in output order, an empty list when there are none, None if the command failed.
+        :rtype: list[SubidEntry] | None
+        """
+        args = ["getsubids", "-g", name] if gid else ["getsubids", name]
+        command = self.host.conn.exec(args, raise_on_error=False)
+        if command.rc != 0:
+            return None
+
+        return [SubidEntry.FromOutput(line) for line in command.stdout.splitlines() if line.strip()]
 
     def grep(self, pattern: str, paths: str | list[str], args: list[str] | None = None) -> bool:
         """
