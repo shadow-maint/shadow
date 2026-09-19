@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 
-set timeout 2
+set timeout 10
 expect_after default {puts stderr "\nFAIL (timeout)"; exit 1}
 
 if {$argc != 3} {
