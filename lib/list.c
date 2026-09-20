@@ -62,14 +62,13 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 /*@only@*/char **
 del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
-	int  n, m;
+	size_t  n, m;
 
 	assert (NULL != member);
 	assert (NULL != list);
 
 	for (;;) {
-		for (n = 0; list[n] != NULL; n++)
-			continue;
+		n = lslen(list);
 		for (m = 0; m < n && !streq(list[m], member); m++)
 			continue;
 		if (m == n)
