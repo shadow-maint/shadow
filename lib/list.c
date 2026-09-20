@@ -236,3 +236,13 @@ comma_to_list(const char *comma)
 	return array;
 }
 
+
+size_t
+lslen(char *const ls[])
+{
+	size_t  i;
+
+	for (i = 0; ls[i] != NULL; i++)
+		continue;
+	return i;
+}
