@@ -25,6 +25,9 @@
 #include <assert.h>
 
 
+static size_t lslen(char *const ls[]);
+
+
 /*
  * add_list - add a member to a list of group members
  */
@@ -181,3 +184,13 @@ comma_to_list(const char *comma)
 	return array;
 }
 
+
+static size_t
+lslen(char *const ls[])
+{
+	size_t  i;
+
+	for (i = 0; ls[i] != NULL; i++)
+		continue;
+	return i;
+}
