@@ -169,3 +169,35 @@ def test_groupmod__change_gid_updates_primary_group(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+@pytest.mark.builtwith(shadow="gshadow")
+def test_groupmod__change_gid_no_gshadow_entry(shadow: Shadow):
+    """
+    :title: Change GID of group with no corresponding gshadow entry
+    :setup:
+        1. Create group
+        2. Remove gshadow entry manually
+    :steps:
+        1. Change GID of group
+        2. Check group entry
+        3. Check gshadow entry
+    :expectedresults:
+        1. Group GID has changed successfully
+        2. Group is found with new GID
+        3. No gshadow entry is found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.fs.sed("/^tgroup:/d", "/etc/gshadow", args=["-i"])
+
+    shadow.groupmod("-g 1501 tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1501, "Incorrect GID"
+
+    gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+    assert gshadow_entry is None, "Group should not be found"
