@@ -2,3 +2,14 @@
 # tasks file for ci_run
 - name: 'Include distribution specific ci_run tasks fedora'
   include_tasks: '{{ distribution }}.yml'
+
+- name: Start from empty subordinate id files
+  ansible.builtin.copy:
+    content: ""
+    dest: '{{ item }}'
+    owner: root
+    group: root
+    mode: '0644'
+  with_items:
+    - "/etc/subuid"
+    - "/etc/subgid"
