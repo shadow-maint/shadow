@@ -129,3 +129,43 @@ def test_groupmod__u_option_with_user_list(shadow: Shadow):
         assert len(gshadow_entry.members) == 2, f"Group should have 2 members, but has {len(gshadow_entry.members)}"
         assert "tuser1" in gshadow_entry.members, "tuser1 should be a member of tgroup"
         assert "tuser2" in gshadow_entry.members, "tuser2 should be a member of tgroup"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_updates_primary_group(shadow: Shadow):
+    """
+    :title: Changing GID of group updates primary group for corresponding users
+    :setup:
+        1. Create group
+        2. Create user with group as primary group
+    :steps:
+        1. Change GID of group
+        2. Check group entry
+        3. Check user's primary GID
+        4. Check gshadow entry
+    :expectedresults:
+        1. Group GID has changed successfully
+        2. Group entry is found with new GID
+        3. User's primary GID has changed
+        4. gshadow entry is found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.useradd("-g tgroup tuser")
+
+    shadow.groupmod("-g 1501 tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1501, "Incorrect GID"
+
+    passwd_entry = shadow.tools.getent.passwd("tuser")
+    assert passwd_entry is not None, "User should be found"
+    assert passwd_entry.name == "tuser", "Incorrect username"
+    assert passwd_entry.gid == 1501, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
