@@ -201,3 +201,36 @@ def test_groupmod__change_gid_no_gshadow_entry(shadow: Shadow):
 
     gshadow_entry = shadow.tools.getent.gshadow("tgroup")
     assert gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_no_gshadow_file(shadow: Shadow):
+    """
+    :title: Change GID of group with no gshadow file
+    :setup:
+        1. Create group
+        2. Remove /etc/gshadow file
+        3. Set FORCE_SHADOW=no in /etc/login.defs
+    :steps:
+        1. Change GID of group
+        2. Check group entry
+        3. Verify that gshadow file doesn't exist
+    :expectedresults:
+        1. Group GID has changed successfully
+        2. Group is found with new GID
+        3. No /etc/gshadow file is found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.fs.rm("/etc/gshadow")
+    shadow.login_defs["FORCE_SHADOW"] = "no"
+
+    shadow.groupmod("-g 1501 tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1501, "Incorrect GID"
+
+    gshadow_file = shadow.fs.exists("/etc/gshadow")
+    assert not gshadow_file, "/etc/gshadow file should not be found"
