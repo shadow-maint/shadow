@@ -24,12 +24,14 @@ def test_useradd__add_user(shadow: Shadow):
         3. Check group entry
         4. Check gshadow entry
         5. Check home folder
+        6. Check subordinate id ranges
     :expectedresults:
         1. passwd entry for the user exists and the attributes are correct
         2. shadow entry for the user exists and the attributes are correct
         3. group entry for the user exists and the attributes are correct
         4. gshadow entry for the user exists and the attributes are correct
         5. Home folder exists
+        6. One subuid range and one subgid range, each 100000 with 65536 ids, owned by the user
     :customerscenario: False
     """
     shadow.useradd("tuser")
@@ -66,6 +68,20 @@ def test_useradd__add_user(shadow: Shadow):
         assert gshadow_entry.password == "!", "Incorrect password"
 
     assert shadow.fs.exists("/home/tuser"), "Home folder should be found"
+
+    subuid = shadow.tools.getsubids("tuser")
+    assert subuid is not None, "Subuid ranges should be found"
+    assert len(subuid) == 1, "Incorrect number of subuid ranges"
+    assert subuid[0].owner == "tuser", "Incorrect subuid owner"
+    assert subuid[0].start == 100000, "Incorrect subuid start"
+    assert subuid[0].count == 65536, "Incorrect subuid count"
+
+    subgid = shadow.tools.getsubids("tuser", gid=True)
+    assert subgid is not None, "Subgid ranges should be found"
+    assert len(subgid) == 1, "Incorrect number of subgid ranges"
+    assert subgid[0].owner == "tuser", "Incorrect subgid owner"
+    assert subgid[0].start == 100000, "Incorrect subgid start"
+    assert subgid[0].count == 65536, "Incorrect subgid count"
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
@@ -638,3 +654,51 @@ def test_useradd__create_homedir(shadow: Shadow):
 
     home_dir = "/home/test1"
     assert shadow.fs.exists(home_dir), f"Home directory {home_dir} should exist when using --create-home flag"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__system_user_has_no_subordinate_ids(shadow: Shadow):
+    """
+    :title: System user without subordinate ids
+    :setup:
+        1. Create system user
+    :steps:
+        1. List the subuid ranges of the user
+        2. List the subgid ranges of the user
+    :expectedresults:
+        1. getsubids succeeds and returns no range
+        2. getsubids succeeds and returns no range
+    :customerscenario: False
+    """
+    shadow.useradd("tsysuser -r")
+
+    uids = shadow.tools.getsubids("tsysuser")
+    assert uids is not None, "getsubids should succeed"
+    assert not uids, "System user should have no subuid ranges"
+
+    gids = shadow.tools.getsubids("tsysuser", gid=True)
+    assert gids is not None, "getsubids should succeed"
+    assert not gids, "System user should have no subgid ranges"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__unknown_user_has_no_subordinate_ids(shadow: Shadow):
+    """
+    :title: User that does not exist
+    :setup:
+        1. None required
+    :steps:
+        1. List the subuid ranges of a user that does not exist
+        2. List the subgid ranges of a user that does not exist
+    :expectedresults:
+        1. getsubids succeeds and returns no range
+        2. getsubids succeeds and returns no range
+    :customerscenario: False
+    """
+    uids = shadow.tools.getsubids("nosuchuser")
+    assert uids is not None, "getsubids should succeed"
+    assert not uids, "Unknown user should have no subuid ranges"
+
+    gids = shadow.tools.getsubids("nosuchuser", gid=True)
+    assert gids is not None, "getsubids should succeed"
+    assert not gids, "Unknown user should have no subgid ranges"
