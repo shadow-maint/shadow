@@ -234,3 +234,45 @@ def test_groupmod__change_gid_no_gshadow_file(shadow: Shadow):
 
     gshadow_file = shadow.fs.exists("/etc/gshadow")
     assert not gshadow_file, "/etc/gshadow file should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_non_unique_gid(shadow: Shadow):
+    """
+    :title: Change GID of group to existing non-unique GID
+    :setup:
+        1. Create two groups with different GIDs
+    :steps:
+        1. Change GID of group
+        2. Check group and gshadow entry for tgroup1
+        3. Check group and gshadow entry for tgroup2
+    :expectedresults:
+        1. Group GID has changed successfully
+        2. Group entry is found with non-unique GID along with gshadow entry
+        3. Group and gshadow entry are found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+    shadow.groupadd("tgroup2")
+
+    shadow.groupmod("-g 1002 -o tgroup1")
+
+    group_entry1 = shadow.tools.getent.group("tgroup1")
+    assert group_entry1 is not None, "Group should be found"
+    assert group_entry1.name == "tgroup1", "Incorrect groupname"
+    assert group_entry1.gid == 1002, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry1 = shadow.tools.getent.gshadow("tgroup1")
+        assert gshadow_entry1 is not None, "gshadow entry should be found"
+        assert gshadow_entry1.name == "tgroup1", "Incorrect groupname"
+
+    group_entry2 = shadow.tools.getent.group("tgroup2")
+    assert group_entry2 is not None, "Group should be found"
+    assert group_entry2.name == "tgroup2", "Incorrect groupname"
+    assert group_entry2.gid == 1002, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry2 = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry2 is not None, "gshadow entry should be found"
+        assert gshadow_entry2.name == "tgroup2", "Incorrect groupname"
