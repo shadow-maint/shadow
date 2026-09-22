@@ -90,21 +90,21 @@
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #endif /* !USE_XCRYPT_GENSALT */
-static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds);
+static /*@observer@*/unsigned long SHA_get_salt_rounds(/*@null@*/const long *prefered_rounds);
 static /*@observer@*/const char *SHA_salt_rounds(unsigned long rounds);
 #ifdef USE_BCRYPT
-static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *prefered_rounds);
+static /*@observer@*/unsigned long BCRYPT_get_salt_rounds(/*@null@*/const long *prefered_rounds);
 static /*@observer@*/const char *BCRYPT_salt_rounds(unsigned long rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
-static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *prefered_cost);
+static /*@observer@*/unsigned long YESCRYPT_get_salt_cost(/*@null@*/const long *prefered_cost);
 static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost);
 #endif /* USE_YESCRYPT */
 
 
 /* Return the the rounds number for the SHA crypt methods. */
 static /*@observer@*/unsigned long
-SHA_get_salt_rounds(/*@null@*/const int *prefered_rounds)
+SHA_get_salt_rounds(/*@null@*/const long *prefered_rounds)
 {
 	unsigned long  rounds;
 
@@ -165,7 +165,7 @@ SHA_salt_rounds(unsigned long rounds)
 #ifdef USE_BCRYPT
 /* Return the the rounds number for the BCRYPT method. */
 static /*@observer@*/unsigned long
-BCRYPT_get_salt_rounds(/*@null@*/const int *prefered_rounds)
+BCRYPT_get_salt_rounds(/*@null@*/const long *prefered_rounds)
 {
 	unsigned long  rounds;
 
@@ -233,7 +233,8 @@ BCRYPT_salt_rounds(unsigned long rounds)
 
 #ifdef USE_YESCRYPT
 /* Return the the cost number for the YESCRYPT method. */
-static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *prefered_cost)
+static /*@observer@*/unsigned long
+YESCRYPT_get_salt_cost(/*@null@*/const long *prefered_cost)
 {
 	unsigned long cost;
 
@@ -316,7 +317,9 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
  *    (if not NULL).
  *  * For the YESCRYPT method, this specifies the cost factor (if not NULL).
  */
-/*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg)
+/*@observer@*/
+const char *
+crypt_make_salt(/*@null@*//*@observer@*/const char *meth, /*@null@*/const long *arg)
 {
 	size_t         salt_len;
 	const char     *method;
@@ -328,27 +331,27 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	if (streq(method, "SHA256")) {
 		MAGNUM(result, '5');
 		salt_len = SHA_CRYPT_SALT_SIZE;
-		rounds = SHA_get_salt_rounds (arg);
+		rounds = SHA_get_salt_rounds(arg);
 		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		BCRYPTMAGNUM(result);
 		salt_len = BCRYPT_SALT_SIZE;
-		rounds = BCRYPT_get_salt_rounds (arg);
+		rounds = BCRYPT_get_salt_rounds(arg);
 		assert(strtcat_a(result, BCRYPT_salt_rounds(rounds)) != -1);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (streq(method, "YESCRYPT")) {
 		MAGNUM(result, 'y');
 		salt_len = YESCRYPT_SALT_SIZE;
-		rounds = YESCRYPT_get_salt_cost (arg);
+		rounds = YESCRYPT_get_salt_cost(arg);
 		assert(strtcat_a(result, YESCRYPT_salt_cost(rounds)) != -1);
 #endif /* USE_YESCRYPT */
 	} else if (streq(method, "SHA512")) {
 sha512:
 		MAGNUM(result, '6');
 		salt_len = SHA_CRYPT_SALT_SIZE;
-		rounds = SHA_get_salt_rounds (arg);
+		rounds = SHA_get_salt_rounds(arg);
 		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
 	} else {
 		fprintf (log_get_logfd(),
