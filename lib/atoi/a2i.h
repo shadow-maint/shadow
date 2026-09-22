@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2026, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -13,6 +13,7 @@
 
 #include "atoi/strtoi/strtoi.h"
 #include "atoi/strtoi/strtou_noneg.h"
+#include "macro.h"
 #include "typetraits.h"
 
 
@@ -21,8 +22,8 @@
 ({                                                                    \
 	T            *n_ = n;                                         \
 	QChar_of(s)  **endp_ = endp;                                  \
-	T            min_ = min;                                      \
-	T            max_ = max;                                      \
+	T            min_ = DEFAULT(minof(T), min);                   \
+	T            max_ = DEFAULT(maxof(T), max);                   \
 	                                                              \
 	int  status;                                                  \
 	                                                              \
@@ -41,29 +42,6 @@
 		errno = status;                                       \
 	-!!status;                                                    \
 })
-
-
-#define a2sh(...)   a2i(short, __VA_ARGS__)
-#define a2si(...)   a2i(int, __VA_ARGS__)
-#define a2sl(...)   a2i(long, __VA_ARGS__)
-#define a2sll(...)  a2i(long long, __VA_ARGS__)
-
-#define a2uh(...)   a2i(unsigned short, __VA_ARGS__)
-#define a2ui(...)   a2i(unsigned int, __VA_ARGS__)
-#define a2ul(...)   a2i(unsigned long, __VA_ARGS__)
-#define a2ull(...)  a2i(unsigned long long, __VA_ARGS__)
-
-#define str2i(T, ...)  a2i(T, __VA_ARGS__, NULL, 0, minof(T), maxof(T))
-
-#define str2sh(...)    str2i(short, __VA_ARGS__)
-#define str2si(...)    str2i(int, __VA_ARGS__)
-#define str2sl(...)    str2i(long, __VA_ARGS__)
-#define str2sll(...)   str2i(long long, __VA_ARGS__)
-
-#define str2uh(...)    str2i(unsigned short, __VA_ARGS__)
-#define str2ui(...)    str2i(unsigned int, __VA_ARGS__)
-#define str2ul(...)    str2i(unsigned long, __VA_ARGS__)
-#define str2ull(...)   str2i(unsigned long long, __VA_ARGS__)
 
 
 #endif  // include guard
