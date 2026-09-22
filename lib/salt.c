@@ -289,13 +289,13 @@ static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost)
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt (size_t len)
 {
-	static char salt[MAX_SALT_LEN + 6];
+	static char salt[MAX_SALT_LEN + 1];
 
 	assert(len >= MIN_SALT_LEN && len <= MAX_SALT_LEN);
 
 	strcpy(salt, "");
 	while (strlen(salt) < len)
-		strcat(salt, l64a(csrand()));
+		strtcat_a(salt, l64a(csrand()));
 
 	stpcpy(&salt[len], "");
 
