@@ -321,10 +321,8 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
-	strcat (salt, l64a (csrand ()));
-	do {
-		strcat (salt, l64a (csrand ()));
-	} while (strlen (salt) < salt_size);
+	while (strlen(salt) < salt_size)
+		strcat(salt, l64a(csrand()));
 
 	stpcpy(&salt[salt_size], "");
 
