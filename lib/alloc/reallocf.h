@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
@@ -20,13 +21,17 @@
 #define reallocf_T_(p, n, T)                                          \
 ({                                                                    \
 	_Generic(p, T *: (void)0);                                    \
-	(T *){reallocarrayf_(p, n, sizeof(T))};                       \
+	(T *){DEPRECATED(reallocarrayf_(p, n, sizeof(T)))};           \
 })
 
 #define reallocarrayf_(p, n, size)  reallocarrayf(p, (n) ?: 1, (size) ?: 1)
 
 
+ATTR_DEPRECATED typeof(reallocf)  reallocf;
+
+
 // reallocarrayf - realloc array free-on-error
+ATTR_DEPRECATED
 ATTR_ALLOC_SIZE(2, 3)
 ATTR_MALLOC(free)
 inline void *reallocarrayf(void *p, size_t nmemb, size_t size);
