@@ -14,13 +14,18 @@
 #include <unistd.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
 // readlinknul_a - read link nul-terminate array
-#define readlinknul_a(link, buf)  readlinknul(link, buf, countof(buf))
+#define readlinknul_a(link, buf)  DEPRECATED(readlinknul(link, buf, countof(buf)))
 
 
+ATTR_DEPRECATED typeof(readlink)  readlink;
+
+
+ATTR_DEPRECATED
 ATTR_STRING(1)
 inline ssize_t readlinknul(const char *restrict link, char *restrict buf,
     ssize_t size);
@@ -32,7 +37,7 @@ readlinknul(const char *restrict link, char *restrict buf, ssize_t size)
 {
 	ssize_t  len;
 
-	len = readlink(link, buf, size);
+	len = DEPRECATED(readlink(link, buf, size));
 	if (len == -1)
 		return -1;
 
