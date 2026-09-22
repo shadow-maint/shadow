@@ -19,6 +19,14 @@
 // memzero_explicit_a - memory zero explicit array
 #define memzero_explicit_a(arr)  memzero_explicit(arr, sizeof_a(arr))
 
+// memzero_explicit_T - memory zero explicit type-safe
+#define memzero_explicit_T(p, n, T)   memzero_explicit_T_(p, n, typeas(T))
+#define memzero_explicit_T_(p, n, T)                                  \
+(                                                                     \
+	_Generic(p, T *: (void)0),                                    \
+	(T *) DEPRECATED(memzero_explicit(p, (n) * sizeof(T)))        \
+)
+
 
 inline void *memzero_explicit(void *ptr, size_t size);
 
