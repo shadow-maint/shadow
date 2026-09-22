@@ -317,7 +317,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 {
 	static char salt[MAX_SALT_SIZE + 6];
 
-	bzero(salt, MAX_SALT_SIZE + 6);
+	strcpy(salt, "");
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
