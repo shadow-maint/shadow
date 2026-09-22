@@ -13,6 +13,8 @@
 #include <stddef.h>
 #include <strings.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
@@ -28,6 +30,10 @@
 )
 
 
+ATTR_DEPRECATED typeof(explicit_bzero)  explicit_bzero;
+
+
+ATTR_DEPRECATED
 inline void *memzero_explicit(void *ptr, size_t size);
 
 

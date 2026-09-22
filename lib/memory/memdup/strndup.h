@@ -10,15 +10,19 @@
 
 #include <memory.h>
 
-#include "sizeof.h"
 #include "exit_if_null.h"
+#include "pragma.h"
+#include "sizeof.h"
 
 
 // strndup_a - nonstring duplicate-into-string array
-#define strndup_a(s)   strndup(s, countof(s))
+#define strndup_a(s)   DEPRECATED(strndup(s, countof(s)))
 
 // xstrndup_a - exit-on-error nonstring duplicate-into-string array
 #define xstrndup_a(s)  exit_if_null(strndup_a(s))
+
+
+ATTR_DEPRECATED typeof(strndup)  strndup;
 
 
 #endif  // include guard
