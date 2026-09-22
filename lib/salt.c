@@ -39,11 +39,11 @@
 #endif
 
 /* Add the salt prefix. */
-#define MAGNUM(array,ch)	(array)[0]=(array)[2]='$',(array)[1]=(ch),(array)[3]='\0'
+#define MAGNUM(buf, c)        sprintf(buf, "$%c$", c)
 
 #ifdef USE_BCRYPT
 /* Use $2b$ as prefix for compatibility with OpenBSD's bcrypt. */
-#define BCRYPTMAGNUM(array)	(array)[0]=(array)[3]='$',(array)[1]='2',(array)[2]='b',(array)[4]='\0'
+#define BCRYPTMAGNUM(buf)     strcpy(buf, "$2b$")
 #define BCRYPT_SALT_SIZE 22
 /* Default number of rounds if not explicitly specified.  */
 #define B_ROUNDS_DEFAULT 13
