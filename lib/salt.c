@@ -80,7 +80,6 @@
 #endif
 
 #define MAX_SALT_LEN 44
-#define MIN_SALT_LEN 8
 
 /* Maximum size of the generated salt string. */
 #define GENSALT_SETTING_SIZE 100
@@ -291,7 +290,7 @@ static /*@observer@*/const char *gensalt (size_t len)
 {
 	static char salt[MAX_SALT_LEN + 1];
 
-	assert(len >= MIN_SALT_LEN && len <= MAX_SALT_LEN);
+	assert(len <= MAX_SALT_LEN);
 
 	strcpy(salt, "");
 	while (strlen(salt) < len)
