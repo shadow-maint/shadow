@@ -9,9 +9,15 @@
 
 #include <memory.h>
 
+#include "attr.h"
+#include "pragma.h"
+
 
 // memeq - memory equal
-#define memeq(a, b, n)  (!memcmp(a, b, n))
+#define memeq(a, b, n)  (DEPRECATED(memcmp(a, b, n)) == 0)
+
+
+ATTR_DEPRECATED typeof(memcmp)  memcmp;
 
 
 #endif  // include guard

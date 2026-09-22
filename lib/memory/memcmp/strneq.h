@@ -13,12 +13,17 @@
 #include <string.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
-#define strneq_a(strn, s)  strneq(strn, s, countof(strn))
+#define strneq_a(strn, s)  DEPRECATED(strneq(strn, s, countof(strn)))
 
 
+ATTR_DEPRECATED typeof(strncmp)  strncmp;
+
+
+ATTR_DEPRECATED
 ATTR_STRING(2)
 inline bool strneq(ATTR_NONSTRING const char *strn, const char *s, size_t size);
 
@@ -31,7 +36,7 @@ strneq(const char *strn, const char *s, size_t size)
 	if (strlen(s) > size)
 		return false;
 
-	return strncmp(strn, s, size) == 0;
+	return DEPRECATED(strncmp(strn, s, size)) == 0;
 }
 
 

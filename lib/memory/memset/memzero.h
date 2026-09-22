@@ -13,6 +13,8 @@
 #include <stddef.h>
 #include <strings.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
@@ -24,10 +26,14 @@
 #define memzero_explicit_T_(p, n, T)                                  \
 (                                                                     \
 	_Generic(p, T *: (void)0),                                    \
-	(T *) memzero_explicit(p, (n) * sizeof(T))                    \
+	(T *) DEPRECATED(memzero_explicit(p, (n) * sizeof(T)))        \
 )
 
 
+ATTR_DEPRECATED typeof(explicit_bzero)  explicit_bzero;
+
+
+ATTR_DEPRECATED
 inline void *memzero_explicit(void *ptr, size_t size);
 
 
