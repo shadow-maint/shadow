@@ -14,6 +14,7 @@
 
 #include "alloc/malloc.h"
 #include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
@@ -22,10 +23,11 @@
 #define memdup_T_(p, n, T)                                            \
 (                                                                     \
 	_Generic(p, T *: (void)0, const T *: (void)0),                \
-	(T *){memdup(p, (n) * sizeof(T))}                             \
+	(T *){DEPRECATED(memdup(p, (n) * sizeof(T)))}                 \
 )
 
 
+ATTR_DEPRECATED
 ATTR_MALLOC(free)
 inline void *memdup(const void *p, size_t size);
 
@@ -36,11 +38,11 @@ memdup(const void *p, size_t size)
 {
 	void  *dup;
 
-	dup = malloc(size);
+	dup = DEPRECATED(malloc(size));
 	if (dup == NULL)
 		return NULL;
 
-	return memcpy(dup, p, size);
+	return DEPRECATED(memcpy(dup, p, size));
 }
 
 

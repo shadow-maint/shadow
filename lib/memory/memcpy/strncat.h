@@ -10,11 +10,16 @@
 
 #include <memory.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
 // strncat_a - nonstring catenate-into-string array
-#define strncat_a(dst, src)  strncat(dst, src, countof(src))
+#define strncat_a(dst, src)  DEPRECATED(strncat(dst, src, countof(src)))
+
+
+ATTR_DEPRECATED typeof(strncat)  strncat;
 
 
 #endif  // include guard

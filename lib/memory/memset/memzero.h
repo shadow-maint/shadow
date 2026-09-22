@@ -13,11 +13,13 @@
 #include <stddef.h>
 #include <strings.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
 // memzero_a - memory zero (explicit) array
-#define memzero_a(arr)  memzero(arr, sizeof_a(arr))
+#define memzero_a(arr)  DEPRECATED(memzero(arr, sizeof_a(arr)))
 
 // memzero_T - memory zero type-safe
 #define memzero_T(p, T)   memzero_T_(p, typeas(T))
@@ -28,6 +30,10 @@
 )
 
 
+ATTR_DEPRECATED typeof(explicit_bzero)  explicit_bzero;
+
+
+ATTR_DEPRECATED
 inline void *memzero(void *ptr, size_t size);
 
 
