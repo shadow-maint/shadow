@@ -103,31 +103,26 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long co
 
 
 /* Return the the rounds number for the SHA crypt methods. */
-static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds)
+static /*@observer@*/unsigned long
+SHA_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 {
-	unsigned long rounds;
+	unsigned long  rounds;
 
 	if (NULL == prefered_rounds) {
-		long min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
-		long max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
+		long  min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
+		long  max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
 
-		if ((-1 == min_rounds) && (-1 == max_rounds)) {
+		if (-1 == min_rounds && -1 == max_rounds) {
 			rounds = SHA_ROUNDS_DEFAULT;
-		}
-		else {
-			if (-1 == min_rounds) {
+		} else {
+			if (-1 == min_rounds)
 				min_rounds = max_rounds;
-			}
-
-			if (-1 == max_rounds) {
+			if (-1 == max_rounds)
 				max_rounds = min_rounds;
-			}
-
-			if (min_rounds > max_rounds) {
+			if (min_rounds > max_rounds)
 				max_rounds = min_rounds;
-			}
 
-			rounds = csrand_interval (min_rounds, max_rounds);
+			rounds = csrand_interval(min_rounds, max_rounds);
 		}
 	} else if (0 == *prefered_rounds) {
 		rounds = SHA_ROUNDS_DEFAULT;
@@ -137,13 +132,10 @@ static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *pre
 
 	/* Sanity checks. The libc should also check this, but this
 	 * protects against a rounds_prefix overflow. */
-	if (rounds < SHA_ROUNDS_MIN) {
+	if (rounds < SHA_ROUNDS_MIN)
 		rounds = SHA_ROUNDS_MIN;
-	}
-
-	if (rounds > SHA_ROUNDS_MAX) {
+	if (rounds > SHA_ROUNDS_MAX)
 		rounds = SHA_ROUNDS_MAX;
-	}
 
 	return rounds;
 }
@@ -176,30 +168,26 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long round
 
 #ifdef USE_BCRYPT
 /* Return the the rounds number for the BCRYPT method. */
-static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *prefered_rounds)
+static /*@observer@*/unsigned long
+BCRYPT_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 {
-	unsigned long rounds;
+	unsigned long  rounds;
 
 	if (NULL == prefered_rounds) {
-		long min_rounds = getdef_long ("BCRYPT_MIN_ROUNDS", -1);
-		long max_rounds = getdef_long ("BCRYPT_MAX_ROUNDS", -1);
+		long  min_rounds = getdef_long ("BCRYPT_MIN_ROUNDS", -1);
+		long  max_rounds = getdef_long ("BCRYPT_MAX_ROUNDS", -1);
 
 		if ((-1 == min_rounds) && (-1 == max_rounds)) {
 			rounds = B_ROUNDS_DEFAULT;
 		} else {
-			if (-1 == min_rounds) {
+			if (-1 == min_rounds)
 				min_rounds = max_rounds;
-			}
-
-			if (-1 == max_rounds) {
+			if (-1 == max_rounds)
 				max_rounds = min_rounds;
-			}
-
-			if (min_rounds > max_rounds) {
+			if (min_rounds > max_rounds)
 				max_rounds = min_rounds;
-			}
 
-			rounds = csrand_interval (min_rounds, max_rounds);
+			rounds = csrand_interval(min_rounds, max_rounds);
 		}
 	} else if (0 == *prefered_rounds) {
 		rounds = B_ROUNDS_DEFAULT;
@@ -208,14 +196,12 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *
 	}
 
 	/* Sanity checks. */
-	if (rounds < B_ROUNDS_MIN) {
+	if (rounds < B_ROUNDS_MIN)
 		rounds = B_ROUNDS_MIN;
-	}
 
 #if USE_XCRYPT_GENSALT
-	if (rounds > B_ROUNDS_MAX) {
+	if (rounds > B_ROUNDS_MAX)
 		rounds = B_ROUNDS_MAX;
-	}
 #else /* USE_XCRYPT_GENSALT */
 	/*
 	 * Use 19 as an upper bound for now,
@@ -223,9 +209,8 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *
 	 * If musl ever supports > 20 rounds,
 	 * rounds should be set to B_ROUNDS_MAX.
 	 */
-	if (rounds > 19) {
+	if (rounds > 19)
 		rounds = 19;
-	}
 #endif /* USE_XCRYPT_GENSALT */
 
 	return rounds;
@@ -300,13 +285,13 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long co
 
 	p = &buf[buf_begin];
 	p = stpcpy(p, "j");
-	if (cost < 3) {
+	if (cost < 3)
 		*p++ = 0x36 + cost;
-	} else if (cost < 6) {
+	else if (cost < 6)
 		*p++ = 0x34 + cost;
-	} else {
+	else
 		*p++ = 0x3b + cost;
-	}
+
 	p = stpcpy(p, (cost >= 3) ? "T" : "5");
 	stpcpy(p, "$");
 }
