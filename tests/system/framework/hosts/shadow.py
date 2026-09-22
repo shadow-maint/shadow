@@ -40,6 +40,8 @@ class ShadowHost(BaseHost, BaseLinuxHost):
             {"origin": "/etc/shadow", "backup": "shadow"},
             {"origin": "/etc/group", "backup": "group"},
             {"origin": "/etc/gshadow", "backup": "gshadow"},
+            {"origin": "/etc/subuid", "backup": "subuid"},
+            {"origin": "/etc/subgid", "backup": "subgid"},
         ]
         """Files to verify for mismatch."""
 

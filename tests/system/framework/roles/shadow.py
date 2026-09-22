@@ -194,6 +194,8 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/shadow")
         self.host.discard_file("/etc/group")
         self.host.discard_file("/etc/gshadow")
+        self.host.discard_file("/etc/subuid")
+        self.host.discard_file("/etc/subgid")
 
         return cmd
 
@@ -209,6 +211,8 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/shadow")
         self.host.discard_file("/etc/group")
         self.host.discard_file("/etc/gshadow")
+        self.host.discard_file("/etc/subuid")
+        self.host.discard_file("/etc/subgid")
 
         return cmd
 
@@ -224,6 +228,8 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/shadow")
         self.host.discard_file("/etc/group")
         self.host.discard_file("/etc/gshadow")
+        self.host.discard_file("/etc/subuid")
+        self.host.discard_file("/etc/subgid")
 
         return cmd
 
@@ -302,6 +308,8 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/shadow")
         self.host.discard_file("/etc/group")
         self.host.discard_file("/etc/gshadow")
+        self.host.discard_file("/etc/subuid")
+        self.host.discard_file("/etc/subgid")
 
         return cmd
 
