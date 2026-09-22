@@ -124,10 +124,8 @@ SHA_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 
 			rounds = csrand_interval(min, max);
 		}
-	} else if (0 == *prefered_rounds) {
-		rounds = SHA_ROUNDS_DEFAULT;
 	} else {
-		rounds = *prefered_rounds;
+		rounds = prefered_rounds[0] ?: SHA_ROUNDS_DEFAULT;
 	}
 
 	/* Sanity checks. The libc should also check this, but this
@@ -190,10 +188,8 @@ BCRYPT_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 
 			rounds = csrand_interval(min, max);
 		}
-	} else if (0 == *prefered_rounds) {
-		rounds = B_ROUNDS_DEFAULT;
 	} else {
-		rounds = *prefered_rounds;
+		rounds = prefered_rounds[0] ?: B_ROUNDS_DEFAULT;
 	}
 
 	/* Sanity checks. */
@@ -246,13 +242,10 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 {
 	unsigned long cost;
 
-	if (NULL == prefered_cost) {
+	if (NULL == prefered_cost)
 		cost = getdef_num ("YESCRYPT_COST_FACTOR", Y_COST_DEFAULT);
-	} else if (0 == *prefered_cost) {
-		cost = Y_COST_DEFAULT;
-	} else {
-		cost = *prefered_cost;
-	}
+	else
+		cost = prefered_cost[0] ?: Y_COST_DEFAULT;
 
 	/* Sanity checks. */
 	if (cost < Y_COST_MIN) {
