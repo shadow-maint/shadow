@@ -109,20 +109,20 @@ SHA_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 	unsigned long  rounds;
 
 	if (NULL == prefered_rounds) {
-		long  min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
-		long  max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
+		long  min = getdef_long("SHA_CRYPT_MIN_ROUNDS", -1);
+		long  max = getdef_long("SHA_CRYPT_MAX_ROUNDS", -1);
 
-		if (-1 == min_rounds && -1 == max_rounds) {
+		if (-1 == min && -1 == max) {
 			rounds = SHA_ROUNDS_DEFAULT;
 		} else {
-			if (-1 == min_rounds)
-				min_rounds = max_rounds;
-			if (-1 == max_rounds)
-				max_rounds = min_rounds;
-			if (min_rounds > max_rounds)
-				max_rounds = min_rounds;
+			if (-1 == min)
+				min = max;
+			if (-1 == max)
+				max = min;
+			if (min > max)
+				max = min;
 
-			rounds = csrand_interval(min_rounds, max_rounds);
+			rounds = csrand_interval(min, max);
 		}
 	} else if (0 == *prefered_rounds) {
 		rounds = SHA_ROUNDS_DEFAULT;
@@ -174,20 +174,20 @@ BCRYPT_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 	unsigned long  rounds;
 
 	if (NULL == prefered_rounds) {
-		long  min_rounds = getdef_long ("BCRYPT_MIN_ROUNDS", -1);
-		long  max_rounds = getdef_long ("BCRYPT_MAX_ROUNDS", -1);
+		long  min = getdef_long ("BCRYPT_MIN_ROUNDS", -1);
+		long  max = getdef_long ("BCRYPT_MAX_ROUNDS", -1);
 
-		if ((-1 == min_rounds) && (-1 == max_rounds)) {
+		if ((-1 == min) && (-1 == max)) {
 			rounds = B_ROUNDS_DEFAULT;
 		} else {
-			if (-1 == min_rounds)
-				min_rounds = max_rounds;
-			if (-1 == max_rounds)
-				max_rounds = min_rounds;
-			if (min_rounds > max_rounds)
-				max_rounds = min_rounds;
+			if (-1 == min)
+				min = max;
+			if (-1 == max)
+				max = min;
+			if (min > max)
+				max = min;
 
-			rounds = csrand_interval(min_rounds, max_rounds);
+			rounds = csrand_interval(min, max);
 		}
 	} else if (0 == *prefered_rounds) {
 		rounds = B_ROUNDS_DEFAULT;
