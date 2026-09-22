@@ -126,7 +126,7 @@ static off_t lookup_faillog(struct faillog *fl, uid_t uid)
 		 * as if we were reading an non existing entry in the
 		 * sparse faillog file).
 		 */
-		memzero_explicit(fl, sizeof(*fl));
+		memzero_explicit_T(fl, 1, struct faillog);
 	}
 
 	return offset;
