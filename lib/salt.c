@@ -127,7 +127,7 @@ SHA_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 	} else if (0 == *prefered_rounds) {
 		rounds = SHA_ROUNDS_DEFAULT;
 	} else {
-		rounds = (unsigned long) *prefered_rounds;
+		rounds = *prefered_rounds;
 	}
 
 	/* Sanity checks. The libc should also check this, but this
@@ -193,7 +193,7 @@ BCRYPT_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 	} else if (0 == *prefered_rounds) {
 		rounds = B_ROUNDS_DEFAULT;
 	} else {
-		rounds = (unsigned long) *prefered_rounds;
+		rounds = *prefered_rounds;
 	}
 
 	/* Sanity checks. */
@@ -251,7 +251,7 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 	} else if (0 == *prefered_cost) {
 		cost = Y_COST_DEFAULT;
 	} else {
-		cost = (unsigned long) *prefered_cost;
+		cost = *prefered_cost;
 	}
 
 	/* Sanity checks. */
