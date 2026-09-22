@@ -14,14 +14,16 @@
 #include <sys/param.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
 
 
 // strncpytail_a - nonstring copy tail-of-string array
-#define strncpytail_a(dst, src)  strncpytail(dst, src, countof(dst))
+#define strncpytail_a(dst, src)  DEPRECATED(strncpytail(dst, src, countof(dst)))
 
 
+ATTR_DEPRECATED
 ATTR_STRING(2)
 inline char *strncpytail(char *restrict dst, const char *restrict src,
     size_t dsize);
@@ -31,7 +33,7 @@ inline char *strncpytail(char *restrict dst, const char *restrict src,
 inline char *
 strncpytail(char *restrict dst, const char *restrict src, size_t dsize)
 {
-	return strncpy(dst, strnul(src) - MIN(strlen(src), dsize), dsize);
+	return DEPRECATED(strncpy(dst, strnul(src) - MIN(strlen(src), dsize), dsize));
 }
 
 
