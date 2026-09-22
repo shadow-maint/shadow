@@ -29,14 +29,8 @@ libshadow_la_SOURCES = \
 	age.c \
 	agetpass.c \
 	agetpass.h \
-	alloc/calloc.c \
-	alloc/calloc.h \
-	alloc/malloc.c \
-	alloc/malloc.h \
-	alloc/realloc.c \
-	alloc/realloc.h \
-	alloc/reallocf.c \
-	alloc/reallocf.h \
+	alloc/alloc.c \
+	alloc/alloc.h \
 	atoi/a2i.c \
 	atoi/a2i.h \
 	atoi/getnum.c \

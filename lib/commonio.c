@@ -20,7 +20,7 @@
 #include <stdlib.h>
 #include <utime.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "atoi/getnum.h"
 #include "commonio.h"
 #include "defines.h"

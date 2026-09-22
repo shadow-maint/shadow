@@ -19,7 +19,7 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include "alloc/reallocf.h"
+#include "alloc/alloc.h"
 #include "io/fprintf.h"
 #include "search/l/lsearch.h"
 #include "shadow/grp/agetgroups.h"
