@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: shadow 4.20.0-rc2\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2026-06-22 21:41-0500\n"
-"PO-Revision-Date: 2026-09-17 00:00+0000\n"
+"PO-Revision-Date: 2026-09-22 02:00+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
-"X-Bugs: Report translation errors to the Language-Team address.\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: lib/addgrps.c:64
@@ -67,7 +67,7 @@ msgstr "Kan inte öppna granskningsgränssnittet – avbryter.\n"
 #: lib/chowntty.c:58
 #, c-format
 msgid "Unable to change owner or mode of tty stdin: %s"
-msgstr "Kunde inte ändra ägare eller rättigheter för tty standard in: %s"
+msgstr "Kunde inte ändra ägare eller behörigheter för TTY-standard in: %s"
 
 #: lib/cleanup_group.c:178 lib/cleanup_group.c:200 lib/cleanup_user.c:101
 #: lib/cleanup_user.c:122 src/chage.c:102 src/chage.c:109 src/chage.c:582
@@ -136,11 +136,11 @@ msgid_plural ""
 "%d failures since last login.\n"
 "Last was %s on %s.\n"
 msgstr[0] ""
-"%d misslyckade sedan förra inloggningen\n"
-"Senast var %s den %s.\n"
+"%d misslyckat inloggningsförsök sedan senaste inloggningen.\n"
+"Det senaste var %s på %s.\n"
 msgstr[1] ""
-"%d misslyckanden sedan förra inloggningen\n"
-"Senast var %s den %s.\n"
+"%d misslyckade inloggningsförsök sedan senaste inloggningen.\n"
+"Det senaste var %s på %s.\n"
 
 #: lib/find_new_gid.c:62
 #, c-format
@@ -155,7 +155,7 @@ msgstr "%s: Ogiltig konfiguration: GID_MIN (%lu), GID_MAX (%lu)\n"
 #: lib/find_new_gid.c:214
 #, c-format
 msgid "%s: Encountered error attempting to use preferred GID: %s\n"
-msgstr "%s: Ett fel uppstod vid försök att använda föredraget GID: %s\n"
+msgstr "%s: Ett fel uppstod när det föredragna GID:t skulle användas: %s\n"
 
 #: lib/find_new_gid.c:244 lib/find_new_uid.c:243 src/usermod.c:377
 #, c-format
@@ -165,17 +165,17 @@ msgstr "%s: misslyckades att allokera minne: %s\n"
 #: lib/find_new_gid.c:326 lib/find_new_gid.c:372
 #, c-format
 msgid "%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
-msgstr "%s: Kan inte få unikt system-GID (%s). Undertrycker ytterligare meddelanden.\n"
+msgstr "%s: Kan inte hitta ett unikt system-GID (%s). Undertrycker ytterligare meddelanden.\n"
 
 #: lib/find_new_gid.c:435 lib/find_new_gid.c:481
 #, c-format
 msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
-msgstr "%s: Kan inte få unikt GID (%s). Undertrycker ytterligare meddelanden.\n"
+msgstr "%s: Kan inte hitta ett unikt GID (%s). Undertrycker ytterligare meddelanden.\n"
 
 #: lib/find_new_gid.c:500
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
-msgstr "%s: Kan inte få unik GID (inga fler tillgängliga GID)\n"
+msgstr "%s: Kan inte hitta ett unikt GID (inga fler tillgängliga GID:n)\n"
 
 #: lib/find_new_sub_gids.c:77
 #, c-format
@@ -240,27 +240,27 @@ msgstr "%s: Ogiltig konfiguration: UID_MIN (%lu), UID_MAX (%lu)\n"
 #: lib/find_new_uid.c:213
 #, c-format
 msgid "%s: Encountered error attempting to use preferred UID: %s\n"
-msgstr "%s: Ett fel uppstod vid försök att använda föredraget UID: %s\n"
+msgstr "%s: Ett fel uppstod när det föredragna UID:t skulle användas: %s\n"
 
 #: lib/find_new_uid.c:325 lib/find_new_uid.c:371
 #, c-format
 msgid "%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
-msgstr "%s: Kan inte få unikt system-UID (%s). Undertrycker ytterligare meddelanden.\n"
+msgstr "%s: Kan inte hitta ett unikt system-UID (%s). Undertrycker ytterligare meddelanden.\n"
 
 #: lib/find_new_uid.c:434 lib/find_new_uid.c:480
 #, c-format
 msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
-msgstr "%s: Kan inte få unikt UID (%s). Undertrycker ytterligare meddelanden.\n"
+msgstr "%s: Kan inte hitta ett unikt UID (%s). Undertrycker ytterligare meddelanden.\n"
 
 #: lib/find_new_uid.c:499
 #, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
-msgstr "%s: Kan inte få unikt UID (inga fler tillgängliga UID)\n"
+msgstr "%s: Kan inte hitta ett unikt UID (inga fler tillgängliga UID:n)\n"
 
 #: lib/getdef.c:264 lib/getdef.c:298 lib/getdef.c:331 lib/getdef.c:363
 #, c-format
 msgid "configuration error - cannot parse %s value: '%s'"
-msgstr "konfigurationsfel - kan inte tolka %s-värde: \"%s\""
+msgstr "konfigurationsfel – kan inte tolka värdet för %s: ”%s”"
 
 #: lib/getdef.c:398
 msgid "Could not allocate space for config info.\n"
@@ -269,7 +269,7 @@ msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
 #: lib/getdef.c:444
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "konfigurationsfel - okänd post \"%s\" (informera administratören)\n"
+msgstr "konfigurationsfel – okänd inställning ”%s” (informera administratören)\n"
 
 #: lib/idmapping.c:52
 #, c-format
@@ -279,12 +279,12 @@ msgstr "%s: Minnesallokeringen misslyckades\n"
 #: lib/idmapping.c:62 lib/idmapping.c:68 lib/idmapping.c:74
 #, c-format
 msgid "%s: subuid overflow detected.\n"
-msgstr "%s: överskridning av subuid upptäcktes.\n"
+msgstr "%s: subuid-överflöde upptäcktes.\n"
 
 #: lib/idmapping.c:146
 #, c-format
 msgid "%s: Invalid map file %s specified\n"
-msgstr "%s: Ogiltig angiven mappningsfil %s\n"
+msgstr "%s: Ogiltig mappningsfil %s angavs\n"
 
 #: lib/idmapping.c:153
 #, c-format
@@ -294,7 +294,7 @@ msgstr "%s: Kunde inte anropa prctl(PR_SET_KEEPCAPS)\n"
 #: lib/idmapping.c:158
 #, c-format
 msgid "%s: Could not seteuid to %d\n"
-msgstr "%s: Kunde inte anropa seteuid för %d\n"
+msgstr "%s: Kunde inte ange effektivt UID till %d\n"
 
 #: lib/idmapping.c:174
 #, c-format
@@ -309,21 +309,21 @@ msgstr "%s: seprintf misslyckades!\n"
 #: lib/idmapping.c:200
 #, c-format
 msgid "%s: open of %s failed: %s\n"
-msgstr "%s: öppning av %s misslyckades: %s\n"
+msgstr "%s: kunde inte öppna %s: %s\n"
 
 #: lib/idmapping.c:205
 #, c-format
 msgid "%s: write to %s failed: %s\n"
-msgstr "%s: skrivning till %s misslyckades: %s\n"
+msgstr "%s: kunde inte skriva till %s: %s\n"
 
 #: lib/idmapping.c:210
 #, c-format
 msgid "%s: closing %s failed: %s\n"
-msgstr "%s: stängning av %s misslyckades: %s\n"
+msgstr "%s: kunde inte stänga %s: %s\n"
 
 #: lib/limits.c:463
 msgid "Too many logins.\n"
-msgstr "För många inloggningsförsök.\n"
+msgstr "För många inloggningar.\n"
 
 #: lib/loginprompt.c:77
 #, c-format
@@ -336,15 +336,15 @@ msgstr ""
 
 #: lib/mail.c:43 lib/mail.c:61
 msgid "You have new mail."
-msgstr "Du har ny post."
+msgstr "Du har ny e-post."
 
 #: lib/mail.c:57
 msgid "No mail."
-msgstr "Ingen post."
+msgstr "Ingen e-post."
 
 #: lib/mail.c:59
 msgid "You have mail."
-msgstr "Du har post."
+msgstr "Du har e-post."
 
 #: lib/nscd.c:36
 #, c-format
@@ -362,11 +362,11 @@ msgstr "ingen ändring"
 
 #: lib/obscure.c:99
 msgid "a palindrome"
-msgstr "en palindrom"
+msgstr "ett palindrom"
 
 #: lib/obscure.c:101
 msgid "case changes only"
-msgstr "endast ändring av gemener/versaler"
+msgstr "endast ändringar av gemener/versaler"
 
 #: lib/obscure.c:103
 msgid "too similar"
@@ -401,7 +401,7 @@ msgstr "passwd: lösenordet är oförändrat\n"
 
 #: lib/pam_pass.c:56
 msgid "passwd: password updated successfully\n"
-msgstr "passwd: uppdatering av lösenord lyckades\n"
+msgstr "passwd: lösenordet har uppdaterats\n"
 
 #: lib/pam_pass_non_interactive.c:64
 #, c-format
@@ -434,7 +434,7 @@ msgstr "Lösenord: "
 #: lib/pwauth.c:39
 #, c-format
 msgid "%s's Password: "
-msgstr "%s lösenord: "
+msgstr "Lösenord för %s: "
 
 #: lib/pwdcheck.c:35 src/passwd.c:229
 #, c-format
@@ -444,17 +444,17 @@ msgstr "Felaktigt lösenord för %s.\n"
 #: lib/root_flag.c:50
 #, c-format
 msgid "%s: multiple --root options\n"
-msgstr "%s: flera --root-alternativ\n"
+msgstr "%s: flera --root-flaggor\n"
 
 #: lib/root_flag.c:59
 #, c-format
 msgid "%s: option '%s' requires an argument\n"
-msgstr "%s: alternativet '%s' kräver ett argument\n"
+msgstr "%s: flaggan ”%s” kräver ett argument\n"
 
 #: lib/root_flag.c:78 src/chage.c:780
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: misslyckades med att kasta rättigheterna (%s)\n"
+msgstr "%s: misslyckades med att släppa privilegierna (%s)\n"
 
 #: lib/root_flag.c:85
 #, c-format
@@ -469,12 +469,12 @@ msgstr "%s: kan inte komma åt chroot-katalogen %s: %s\n"
 #: lib/root_flag.c:99
 #, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
-msgstr "%s: kan inte utföra chroot till katalogen %s: %s\n"
+msgstr "%s: kan inte ändra rotkatalog till %s: %s\n"
 
 #: lib/root_flag.c:106
 #, c-format
 msgid "%s: cannot chdir in chroot directory %s: %s\n"
-msgstr "%s: kan inte utföra chdir i chroot-katalogen %s: %s\n"
+msgstr "%s: kan inte byta aktuell katalog i chroot-katalogen %s: %s\n"
 
 #: lib/salt.c:391
 #, c-format
@@ -512,12 +512,12 @@ msgstr "Kan inte skapa hanteringshandtag för SELinux\n"
 #: lib/semanage.c:74
 #, c-format
 msgid "SELinux policy not managed\n"
-msgstr "SELinux-policy hanteras inte\n"
+msgstr "SELinux-policyn hanteras inte\n"
 
 #: lib/semanage.c:80
 #, c-format
 msgid "Cannot read SELinux policy store\n"
-msgstr "Kan inte läsa SELinux-policyarkivet\n"
+msgstr "Kan inte läsa SELinux-policyförrådet\n"
 
 #: lib/semanage.c:87
 #, c-format
@@ -532,7 +532,7 @@ msgstr "Kan inte påbörja SELinux-transaktion\n"
 #: lib/semanage.c:119
 #, c-format
 msgid "Could not query seuser for %s\n"
-msgstr "Kunde inte fråga efter seuser för %s\n"
+msgstr "Kunde inte slå upp seuser för %s\n"
 
 #: lib/semanage.c:128 lib/semanage.c:189
 #, c-format
@@ -602,7 +602,7 @@ msgstr "Kan inte verkställa SELinux-transaktion\n"
 #: lib/semanage.c:321
 #, c-format
 msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr "Inloggningsmappning för %s är inte definierad, OK om standardmappningen användes\n"
+msgstr "Inloggningsmappning för %s är inte definierad, vilket är okej om standardmappningen användes\n"
 
 #: lib/semanage.c:336
 #, c-format
@@ -621,17 +621,17 @@ msgstr "Kunde inte byta katalog till \"%s\"\n"
 
 #: lib/setupenv.c:122
 msgid "No directory, logging in with HOME=/"
-msgstr "Ingen katalog, loggar in med HOME=/"
+msgstr "Ingen hemkatalog, loggar in med HOME=/"
 
 #: lib/shell.c:77
 #, c-format
 msgid "Cannot execute %s"
-msgstr "Kunde inte starta %s"
+msgstr "Kan inte köra %s"
 
 #: lib/sub.c:38
 #, c-format
 msgid "Maximum subsystem depth reached\n"
-msgstr "Maximalt systemdjup har nåtts\n"
+msgstr "Maximalt delsystemsdjup har nåtts\n"
 
 #: lib/sub.c:49
 #, c-format
@@ -646,23 +646,23 @@ msgstr "Kan inte ändra rotkatalog till \"%s\"\n"
 #: lib/tcbfuncs.c:67 lib/xgetXXbyYY.c:116 src/passwd.c:491
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s: slut på minne\n"
+msgstr "%s: minnet är slut\n"
 
 #: lib/tcbfuncs.c:106 lib/tcbfuncs.c:190 lib/tcbfuncs.c:310 lib/tcbfuncs.c:476
 #: lib/tcbfuncs.c:561
 #, c-format
 msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: Kan inte ta status på %s: %s\n"
+msgstr "%s: Kan inte hämta status för %s: %s\n"
 
 #: lib/tcbfuncs.c:122
 #, c-format
 msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s: %s är varken en katalog eller symbolisk länk.\n"
+msgstr "%s: %s är varken en katalog eller en symbolisk länk.\n"
 
 #: lib/tcbfuncs.c:129
 #, c-format
 msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s: Kan inte läsa symboliska länken %s: %s\n"
+msgstr "%s: Kan inte läsa den symboliska länken %s: %s\n"
 
 #: lib/tcbfuncs.c:203
 #, c-format
@@ -673,13 +673,13 @@ msgstr "%s: Kan inte skapa katalogen %s: %s\n"
 #: lib/tcbfuncs.c:610
 #, c-format
 msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s: Kan inte byta ägare för %s: %s\n"
+msgstr "%s: Kan inte ändra ägare på %s: %s\n"
 
 #: lib/tcbfuncs.c:215 lib/tcbfuncs.c:488 lib/tcbfuncs.c:520 lib/tcbfuncs.c:536
 #: lib/tcbfuncs.c:604 lib/tcbfuncs.c:616
 #, c-format
 msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s: Kan inte ändra rättigheter för %s: %s\n"
+msgstr "%s: Kan inte ändra behörigheter på %s: %s\n"
 
 #: lib/tcbfuncs.c:246
 #, c-format
@@ -704,12 +704,12 @@ msgstr "%s: Kan inte ta bort %s: %s\n"
 #: lib/tcbfuncs.c:361
 #, c-format
 msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s: Kan inte skapa symboliska länken %s: %s\n"
+msgstr "%s: Kan inte skapa en symbolisk länk %s: %s\n"
 
 #: lib/tcbfuncs.c:482
 #, c-format
 msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s: Kan inte byta ägare för %s: %s\n"
+msgstr "%s: Kan inte ändra ägare på %s: %s\n"
 
 #: lib/tcbfuncs.c:495
 #, c-format
@@ -719,7 +719,7 @@ msgstr "%s: Kan inte lstat %s: %s\n"
 #: lib/tcbfuncs.c:500
 #, c-format
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: Varning, användaren %s har ingen tcb shadow-fil.\n"
+msgstr "%s: Varning: användaren %s har ingen tcb-skuggfil.\n"
 
 #: lib/tcbfuncs.c:506
 #, c-format
@@ -727,8 +727,8 @@ msgid ""
 "%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
 "The account is left locked.\n"
 msgstr ""
-"%s: Nödläge:  tcb shadow för %s är inte en vanlig fil med st_nlink=1.\n"
-"Kontot lämnas kvar som låst.\n"
+"%s: Nödläge: tcb-skuggfilen för %s är inte en vanlig fil med st_nlink=1.\n"
+"Kontot förblir låst.\n"
 
 #: lib/tcbfuncs.c:586
 #, c-format
@@ -765,13 +765,13 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Användning: %s [flaggor] INLOGGNINGSNAMN\n"
+"Användning: %s [flaggor] ANVÄNDARNAMN\n"
 "\n"
 "Flaggor:\n"
 
 #: src/chage.c:139
 msgid "  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"
-msgstr "  -d, --lastday SISTA_DAG       ställ in datum för sista lösenordsändring till SISTA_DAG\n"
+msgstr "  -d, --lastday SENASTE_DAG     ställ in datumet för senaste lösenordsändringen till SENASTE_DAG\n"
 
 #: src/chage.c:140
 msgid "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
@@ -795,28 +795,28 @@ msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -I, --inactive INAKTIV        ställ in lösenordet till inaktivt efter utgång\n"
-"                                till INAKTIV\n"
+"  -I, --inactive INAKTIV_DAGAR  ställ in antal dagar efter utgång innan\n"
+"                                lösenordet blir inaktivt till INAKTIV_DAGAR\n"
 
 #: src/chage.c:145
 msgid "  -l, --list                    show account aging information\n"
-msgstr "  -l, --list                    visa åldringsinformation om kontot\n"
+msgstr "  -l, --list                    visa information om kontots giltighetstider\n"
 
 #: src/chage.c:146
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -m, --mindays MIN_DAGAR       ställ in minimum antal dagar innan lösenords-\n"
-"                                ändring till MIN_DAGAR\n"
+"  -m, --mindays MIN_DAGAR       ställ in minsta antalet dagar före\n"
+"                                lösenordsändring till MIN_DAGAR\n"
 
 #: src/chage.c:148
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -M, --maxdays MAX_DAGAR       ställ in maximalt antal dagar innan lösenords-\n"
-"                                ändring till MAX_DAGAR\n"
+"  -M, --maxdays MAX_DAGAR       ställ in högsta antalet dagar före\n"
+"                                lösenordsändring till MAX_DAGAR\n"
 
 #: src/chage.c:150 src/chfn.c:115 src/chgpasswd.c:129 src/chpasswd.c:131
 #: src/chsh.c:111 src/faillog.c:85 src/groupadd.c:120 src/groupdel.c:84
@@ -825,27 +825,29 @@ msgstr ""
 #: src/pwconv.c:118 src/pwunconv.c:78 src/useradd.c:933 src/userdel.c:150
 #: src/usermod.c:449 src/vipw.c:95
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -R, --root CHROOT_DIR         katalog att chroot:a till\n"
+msgstr "  -R, --root ROT_KATALOG        katalog att använda som rotkatalog\n"
 
 #: src/chage.c:151 src/chpasswd.c:132 src/groupadd.c:121 src/passwd.c:171
 msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
-msgstr "  -P, --prefix PREFIX_DIR       katalogprefix\n"
+msgstr "  -P, --prefix PREFIX_KATALOG   katalogprefix\n"
 
 #: src/chage.c:152
 msgid "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-msgstr "  -W, --warndays VARN_DAGAR     ställ in dagar för utgångsvarning till VARN_DAGAR\n"
+msgstr ""
+"  -W, --warndays VARN_DAGAR     ställ in antal dagar för varning före utgång\n"
+"                                till VARN_DAGAR\n"
 
 #: src/chage.c:170 src/chfn.c:180 src/chsh.c:125
 msgid "Enter the new value, or press ENTER for the default"
-msgstr "Ange det nya värdet eller tryck ENTER för standardvärdet"
+msgstr "Ange det nya värdet eller tryck på RETUR för standardvärdet"
 
 #: src/chage.c:174
 msgid "Minimum Password Age"
-msgstr "Minimum lösenordsålder"
+msgstr "Minsta lösenordsålder"
 
 #: src/chage.c:179
 msgid "Maximum Password Age"
-msgstr "Maximum lösenordsålder"
+msgstr "Högsta lösenordsålder"
 
 #: src/chage.c:188
 msgid "Last Password Change (YYYY-MM-DD)"
@@ -853,7 +855,7 @@ msgstr "Senaste lösenordsändringen (ÅÅÅÅ-MM-DD)"
 
 #: src/chage.c:200
 msgid "Password Expiration Warning"
-msgstr "Utlöpsvarning för lösenord"
+msgstr "Varning om lösenordets utgång"
 
 #: src/chage.c:205
 msgid "Password Inactive"
@@ -885,7 +887,7 @@ msgstr "Lösenordet löper ut\t\t\t\t\t: "
 
 #: src/chage.c:302
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Lösenordet inaktivt\t\t\t\t\t: "
+msgstr "Inaktivt lösenord\t\t\t\t\t: "
 
 #: src/chage.c:320
 msgid "Account expires\t\t\t\t\t\t: "
@@ -894,17 +896,17 @@ msgstr "Kontot löper ut\t\t\t\t\t\t: "
 #: src/chage.c:330
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr "Minimum antal dagar mellan lösenordsändringar\t\t: %ld\n"
+msgstr "Minsta antal dagar mellan lösenordsändringar\t\t: %ld\n"
 
 #: src/chage.c:332
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr "Maximum antal dagar mellan lösenordsändringar\t\t: %ld\n"
+msgstr "Största antal dagar mellan lösenordsändringar\t\t: %ld\n"
 
 #: src/chage.c:334
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr "Antal dagar med varningar före lösenordet löper ut\t: %ld\n"
+msgstr "Antal varningsdagar innan lösenordet löper ut\t: %ld\n"
 
 #: src/chage.c:372 src/chage.c:382 src/useradd.c:1253 src/usermod.c:1119
 #, c-format
@@ -1014,7 +1016,7 @@ msgstr "%s: användaren \"%s\" finns inte i %s\n"
 #: src/chage.c:823
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "Ändrar åldersinformationen för %s\n"
+msgstr "Ändrar information om giltighetstider för %s\n"
 
 #: src/chage.c:826
 #, c-format
@@ -1028,25 +1030,25 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Användning: %s [flaggor] [INLOGGNINGSNAMN]\n"
+"Användning: %s [flaggor] [ANVÄNDARNAMN]\n"
 "\n"
 "Flaggor:\n"
 
 #: src/chfn.c:111
 msgid "  -f, --full-name FULL_NAME     change user's full name\n"
-msgstr "  -f, --full-name FULL_NAME     ändra användarens fullständiga namn\n"
+msgstr "  -f, --full-name FULLSTÄNDIGT_NAMN     ändra användarens fullständiga namn\n"
 
 #: src/chfn.c:112
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
-msgstr "  -h, --home-phone HOME_PHONE   ändra användarens hemtelefonnummer\n"
+msgstr "  -h, --home-phone HEMTELEFON   ändra användarens hemtelefonnummer\n"
 
 #: src/chfn.c:113
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
-msgstr "  -o, --other OTHER_INFO        ändra användarens övriga GECOS-information\n"
+msgstr "  -o, --other ÖVRIG_INFORMATION        ändra användarens övriga GECOS-information\n"
 
 #: src/chfn.c:114
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
-msgstr "  -r, --room ROOM_NUMBER        ändra användarens rumsnummer\n"
+msgstr "  -r, --room RUMSNUMMER        ändra användarens rumsnummer\n"
 
 #: src/chfn.c:116
 msgid "  -u, --help                    display this help message and exit\n"
@@ -1054,11 +1056,11 @@ msgstr "  -u, --help                    visa detta hjälpmeddelande och avsluta\
 
 #: src/chfn.c:117
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
-msgstr "  -w, --work-phone WORK_PHONE   ändra användarens arbetstelefonnummer\n"
+msgstr "  -w, --work-phone ARBETSTELEFON   ändra användarens arbetstelefonnummer\n"
 
 #: src/chfn.c:183 src/chfn.c:185
 msgid "Full Name"
-msgstr "Helt namn"
+msgstr "Fullständigt namn"
 
 #: src/chfn.c:185 src/chfn.c:191 src/chfn.c:197 src/chfn.c:203
 #, c-format
@@ -1071,11 +1073,11 @@ msgstr "Rumsnummer"
 
 #: src/chfn.c:195 src/chfn.c:197
 msgid "Work Phone"
-msgstr "Telefonnummer (arbete)"
+msgstr "Arbetstelefonnummer"
 
 #: src/chfn.c:201 src/chfn.c:203
 msgid "Home Phone"
-msgstr "Telefonnummer (hem)"
+msgstr "Hemtelefonnummer"
 
 #: src/chfn.c:207
 msgid "Other"
@@ -1084,7 +1086,7 @@ msgstr "Övrigt"
 #: src/chfn.c:267 src/chfn.c:664
 #, c-format
 msgid "%s: fields too long\n"
-msgstr "%s: fälten för långa\n"
+msgstr "%s: fälten är för långa\n"
 
 #: src/chfn.c:357 src/chfn.c:622 src/chsh.c:335 src/chsh.c:511
 #: src/gpasswd.c:917 src/newgidmap.c:183 src/newgrp.c:440 src/newuidmap.c:117
@@ -1096,7 +1098,7 @@ msgstr "%s: Kan inte fastställa ditt användarnamn.\n"
 #: src/chfn.c:373 src/chsh.c:351
 #, c-format
 msgid "%s: PAM: %s\n"
-msgstr "%s: %s\n"
+msgstr "%s: PAM: %s\n"
 
 #: src/chfn.c:405 src/chsh.c:386 src/gpasswd.c:1092 src/passwd.c:1201
 msgid "Cannot change ID to root.\n"
@@ -1125,12 +1127,12 @@ msgstr "%s: ogiltigt rumsnummer: \"%s\"\n"
 #: src/chfn.c:534
 #, c-format
 msgid "%s: invalid work phone: '%s'\n"
-msgstr "%s: ogiltigt telefonnummer (arbete): \"%s\"\n"
+msgstr "%s: ogiltigt arbetstelefonnummer: \"%s\"\n"
 
 #: src/chfn.c:539
 #, c-format
 msgid "%s: invalid home phone: '%s'\n"
-msgstr "%s: ogiltigt telefonnummer (hem): \"%s\"\n"
+msgstr "%s: ogiltigt hemtelefonnummer: \"%s\"\n"
 
 #: src/chfn.c:545
 #, c-format
@@ -1174,7 +1176,7 @@ msgstr ""
 #: src/chgpasswd.c:117 src/chpasswd.c:119 src/newusers.c:133
 #, c-format
 msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
-msgstr "  -c, --crypt-method METHOD     krypteringsmetoden (en av %s)\n"
+msgstr "  -c, --crypt-method METOD     krypteringsmetoden (en av %s)\n"
 
 #: src/chgpasswd.c:127 src/chpasswd.c:129
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -1191,7 +1193,7 @@ msgstr ""
 #: src/chgpasswd.c:176
 #, c-format
 msgid "%s: no crypt method defined\n"
-msgstr "%s: ingen krypteringsmetod definierad\n"
+msgstr "%s: ingen krypteringsmetod har definierats\n"
 
 #: src/chgpasswd.c:222 src/chpasswd.c:223 src/newusers.c:732 src/useradd.c:1465
 #: src/useradd.c:1471 src/useradd.c:1496 src/usermod.c:1371 src/usermod.c:1378
@@ -1218,7 +1220,7 @@ msgstr "%s: rad %jd: raden är för lång\n"
 #: src/chgpasswd.c:409 src/chpasswd.c:460
 #, c-format
 msgid "%s: line %jd: missing new password\n"
-msgstr "%s: rad %jd: saknar nytt lösenord\n"
+msgstr "%s: rad %jd: nytt lösenord saknas\n"
 
 #: src/chgpasswd.c:440 src/chpasswd.c:502 src/gpasswd.c:850 src/newusers.c:457
 #: src/newusers.c:534 src/newusers.c:584 src/passwd.c:347
@@ -1240,7 +1242,7 @@ msgstr "%s: rad %jd: kunde inte förbereda den nya %s-posten '%s'\n"
 #: src/chgpasswd.c:542 src/chpasswd.c:616
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: ett fel upptäcktes, ändringar ignorerade\n"
+msgstr "%s: ett fel upptäcktes, ändringarna ignoreras\n"
 
 #: src/chpasswd.c:471 src/newusers.c:1246
 #, c-format
@@ -1259,7 +1261,7 @@ msgstr "%s: rad %jd: användaren '%s' finns inte\n"
 
 #: src/chsh.c:112 src/usermod.c:450
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
-msgstr "  -s, --shell SHELL             nytt inloggningsskal för användarkontot\n"
+msgstr "  -s, --shell SKAL             nytt inloggningsskal för användarkontot\n"
 
 #: src/chsh.c:126
 msgid "Login Shell"
@@ -1316,7 +1318,7 @@ msgstr "  -a, --all                     visa faillog-poster för alla användare
 
 #: src/faillog.c:82
 msgid "  -l, --lock-secs SEC           after failed login lock account for SEC seconds\n"
-msgstr "  -l, --lock-secs S             efter misslyckad inloggning lås kontot i S sekunder\n"
+msgstr "  -l, --lock-secs SEK           lås kontot i SEK sekunder efter misslyckad inloggning\n"
 
 #: src/faillog.c:83
 msgid "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
@@ -1324,11 +1326,11 @@ msgstr "  -m, --maximum MAX             ställ in maximalt antal misslyckade inl
 
 #: src/faillog.c:84
 msgid "  -r, --reset                   reset the counters of login failures\n"
-msgstr "  -r, --reset                   nollställd räknarna för inloggningsfel\n"
+msgstr "  -r, --reset                   nollställ räknarna för inloggningsfel\n"
 
 #: src/faillog.c:86
 msgid "  -t, --time DAYS               display faillog records more recent than DAYS\n"
-msgstr "  -t, --time DAYS               visa faillog-poster nyare än DAYS\n"
+msgstr "  -t, --time DAGAR               visa faillog-poster nyare än DAGAR\n"
 
 #: src/faillog.c:87
 msgid ""
@@ -1336,14 +1338,15 @@ msgid ""
 "                                counters and limits (if used with -r, -m,\n"
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
-"  -u, --user LOGIN/RANGE        visa faillog-post eller underhåll\n"
-"                                räknare och gränser för misslyckanden (med -r, -m,\n"
-"                                eller -l) endast för angivna LOGIN\n"
+"  -u, --user ANVÄNDARNAMN/INTERVALL\n"
+"                                visa faillog-posten eller underhåll räknare och\n"
+"                                gränser för misslyckanden (med -r, -m eller -l)\n"
+"                                endast för angivna ANVÄNDARNAMN\n"
 
 #: src/faillog.c:105 src/faillog.c:121 src/lastlog.c:126
 #, c-format
 msgid "%s: Failed to get the entry for UID %lu\n"
-msgstr "%s: Misslyckades med att få posten för UID %lu\n"
+msgstr "%s: Kunde inte hämta posten för UID %lu\n"
 
 #: src/faillog.c:168
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -1357,12 +1360,12 @@ msgstr " [%lus kvar]"
 #: src/faillog.c:189
 #, c-format
 msgid " [%lds lock]"
-msgstr " [%lds låsta]"
+msgstr " [%lds låstid kvar]"
 
 #: src/faillog.c:255
 #, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
-msgstr "%s: Misslyckades med att ställa in låstid för UID %lu\n"
+msgstr "%s: Kunde inte nollställa räknaren för misslyckade inloggningar för UID %lu\n"
 
 #: src/faillog.c:351
 #, c-format
@@ -1387,7 +1390,7 @@ msgstr "%s: oväntat argument: %s\n"
 #: src/faillog.c:650 src/lastlog.c:441
 #, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
-msgstr "%s: Kan inte få storleken för %s: %s\n"
+msgstr "%s: Kan inte hämta storleken på %s: %s\n"
 
 #: src/faillog.c:677
 #, c-format
@@ -1415,7 +1418,7 @@ msgstr "  -d, --delete ANVÄNDARE        ta bort ANVÄNDARE från GRUPP\n"
 
 #: src/gpasswd.c:135
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -Q, --root CHROOT_DIR         katalog att chroot:a till\n"
+msgstr "  -Q, --root ROT_KATALOG         katalog att byta rotkatalog till\n"
 
 #: src/gpasswd.c:136
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -1427,19 +1430,19 @@ msgstr "  -R, --restrict                begränsa åtkomst till GRUPP till dess 
 
 #: src/gpasswd.c:138
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
-msgstr "  -M, --members ANVÄNDARE,...   ställ in listan för medlemmar av GRUPP\n"
+msgstr "  -M, --members ANVÄNDARE,...   ställ in medlemslistan för GRUPP\n"
 
 #: src/gpasswd.c:140
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
 msgstr ""
-"  -A, --administrators ADMIN,...\n"
-"                                ställ in listan för administratörer för GRUPP\n"
+"  -A, --administrators ADMINISTRATÖR,...\n"
+"                                ställ in listan med administratörer för GRUPP\n"
 
 #: src/gpasswd.c:142
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
-msgstr "Förutom för flaggorna -A och -M, flaggorna kan inte kombineras.\n"
+msgstr "Med undantag för flaggorna -A och -M kan flaggorna inte kombineras.\n"
 
 #: src/gpasswd.c:144
 msgid "The options cannot be combined.\n"
@@ -1458,7 +1461,7 @@ msgstr "%s: gruppen \"%s\" finns inte i %s\n"
 #: src/gpasswd.c:740 src/gpasswd.c:776
 #, c-format
 msgid "%s: failure while closing read-only %s\n"
-msgstr "%s: fel vid stängning av skrivskyddad %s\n"
+msgstr "%s: fel vid stängning av den skrivskyddade %s\n"
 
 #: src/gpasswd.c:811
 #, c-format
@@ -1475,7 +1478,7 @@ msgstr "Ange nytt lösenord igen: "
 
 #: src/gpasswd.c:836
 msgid "They don't match; try again"
-msgstr "De stämde inte överens, försök igen"
+msgstr "De stämmer inte överens, försök igen"
 
 #: src/gpasswd.c:841
 #, c-format
@@ -1490,12 +1493,12 @@ msgstr "Lägger till användaren %s till gruppen %s\n"
 #: src/gpasswd.c:1010
 #, c-format
 msgid "Removing user %s from group %s\n"
-msgstr "Ta bort användaren %s från gruppen %s\n"
+msgstr "Tar bort användaren %s från gruppen %s\n"
 
 #: src/gpasswd.c:1026
 #, c-format
 msgid "%s: user '%s' is not a member of '%s'\n"
-msgstr "%s: användaren \"%s\" är inte en medlem av \"%s\"\n"
+msgstr "%s: användaren \"%s\" är inte medlem i \"%s\"\n"
 
 #: src/gpasswd.c:1065
 #, c-format
@@ -1535,11 +1538,11 @@ msgid ""
 "                                (non-unique) GID\n"
 msgstr ""
 "  -o, --non-unique              tillåt att skapa grupper med duplicerade\n"
-"                                (icke-unika) GID\n"
+"                                (icke-unika) GID:n\n"
 
 #: src/groupadd.c:118
 msgid "  -p, --password PASSWORD       use this encrypted password for the new group\n"
-msgstr "  -p, --password LÖSENORD       använd detta krypterade lösenord för nya gruppen\n"
+msgstr "  -p, --password LÖSENORD       använd detta krypterade lösenord för den nya gruppen\n"
 
 #: src/groupadd.c:119
 msgid "  -r, --system                  create a system group\n"
@@ -1550,7 +1553,7 @@ msgid ""
 "  -U, --users USERS             comma-separated list of users to add as\n"
 "\t                         members of this group\n"
 msgstr ""
-"  -U, --users USERS             kommaseparerad lista över användare som ska läggas till\n"
+"  -U, --users ANVÄNDARE             kommaseparerad lista över användare som ska läggas till\n"
 "\t                         som medlemmar i denna grupp\n"
 
 #: src/groupadd.c:220 src/groupmod.c:283
@@ -1572,12 +1575,12 @@ msgstr "%s: kan inte öppna %s: %s\n"
 #: src/groupadd.c:435 src/groupmod.c:436 src/newusers.c:247 src/newusers.c:266
 #, c-format
 msgid "%s: invalid group ID '%s'\n"
-msgstr "%s: ogiltigt grupp-id \"%s\"\n"
+msgstr "%s: ogiltigt grupp-ID \"%s\"\n"
 
 #: src/groupadd.c:452 src/useradd.c:1343
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
-msgstr "%s: -K kräver KEY=VÄRDE\n"
+msgstr "%s: -K kräver NYCKEL=VÄRDE\n"
 
 #: src/groupadd.c:520 src/groupmod.c:395
 #, c-format
@@ -1597,11 +1600,11 @@ msgstr "%s: Kan inte konfigurera rensningstjänsten.\n"
 #: src/groupdel.c:85 src/groupmod.c:133 src/useradd.c:934 src/userdel.c:151
 #: src/usermod.c:445
 msgid "  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files\n"
-msgstr "  -P, --prefix PREFIX_DIR       prefixkatalog där /etc/*-filerna finns\n"
+msgstr "  -P, --prefix PREFIX_KATALOG       prefixkatalog där /etc/*-filerna finns\n"
 
 #: src/groupdel.c:86
 msgid "  -f, --force                   delete group even if it is the primary group of a user\n"
-msgstr "  -f, --force                   ta bort grupp även om den är en användares primära grupp\n"
+msgstr "  -f, --force                   ta bort gruppen även om den är en användares primära grupp\n"
 
 #: src/groupdel.c:124 src/groupdel.c:136 src/groupmod.c:307 src/groupmod.c:328
 #: src/grpconv.c:195 src/pwconv.c:229 src/userdel.c:351 src/userdel.c:369
@@ -1613,7 +1616,7 @@ msgstr "%s: kan inte ta bort posten \"%s\" från %s\n"
 #: src/groupdel.c:294
 #, c-format
 msgid "%s: cannot remove the primary group of user '%s'\n"
-msgstr "%s: kan inte ta bort primära gruppen för användaren \"%s\"\n"
+msgstr "%s: kan inte ta bort användaren \"%s\"s primära grupp\n"
 
 #: src/groupdel.c:395 src/groupmod.c:810 src/newgrp.c:611 src/useradd.c:374
 #: src/useradd.c:813 src/useradd.c:1306 src/usermod.c:276 src/usermod.c:1143
@@ -1626,12 +1629,12 @@ msgid ""
 "  -a, --append                  append the users mentioned by -U option to the group \n"
 "                                without removing existing user members\n"
 msgstr ""
-"  -a, --append                  lägg till användarna som anges med -U i gruppen\n"
-"                                utan att ta bort befintliga användarmedlemmar\n"
+"  -a, --append                  lägg till användarna som anges med flaggan -U i gruppen\n"
+"                                utan att ta bort befintliga medlemmar\n"
 
 #: src/groupmod.c:126
 msgid "  -g, --gid GID                 change the group ID to GID\n"
-msgstr "  -g, --gid GID                 ändra grupp-id till GID\n"
+msgstr "  -g, --gid GID                 ändra grupp-ID till GID\n"
 
 #: src/groupmod.c:128
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
@@ -1639,7 +1642,7 @@ msgstr "  -n, --new-name NY_GRUPP       ändra namnet till NY_GRUPP\n"
 
 #: src/groupmod.c:129
 msgid "  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
-msgstr "  -o, --non-unique              tillåt användning av duplicerade (icke-unika) GID\n"
+msgstr "  -o, --non-unique              tillåt användning av ett duplicerat (icke-unikt) GID\n"
 
 #: src/groupmod.c:130
 msgid ""
@@ -1654,7 +1657,7 @@ msgid ""
 "  -U, --users USERS             comma-separated list of users to add as\n"
 "                                members of this group\n"
 msgstr ""
-"  -U, --users USERS             kommaseparerad lista över användare som ska läggas till\n"
+"  -U, --users ANVÄNDARE             kommaseparerad lista över användare som ska läggas till\n"
 "                                som medlemmar i denna grupp\n"
 
 #: src/groupmod.c:387 src/newusers.c:293
@@ -1707,18 +1710,18 @@ msgstr "%s: -s och -r är inkompatibla\n"
 
 #: src/grpck.c:509
 msgid "invalid group file entry"
-msgstr "ogiltig post i gruppfil"
+msgstr "ogiltig post i gruppfilen"
 
 #: src/grpck.c:510 src/grpck.c:569 src/grpck.c:711 src/grpck.c:770
 #: src/grpck.c:788 src/pwck.c:413 src/pwck.c:474 src/pwck.c:738 src/pwck.c:799
 #: src/pwck.c:821
 #, c-format
 msgid "delete line '%s'? "
-msgstr "ta bort rad \"%s\"? "
+msgstr "ta bort raden \"%s\"? "
 
 #: src/grpck.c:568
 msgid "duplicate group entry"
-msgstr "dubblerade grupposter"
+msgstr "duplicerad gruppost"
 
 #: src/grpck.c:585
 #, c-format
@@ -1728,17 +1731,17 @@ msgstr "ogiltigt gruppnamn \"%s\"\n"
 #: src/grpck.c:592
 #, c-format
 msgid "invalid group ID '%lu'\n"
-msgstr "ogiltigt grupp-id \"%lu\"\n"
+msgstr "ogiltigt grupp-ID \"%lu\"\n"
 
 #: src/grpck.c:609
 #, c-format
 msgid "group %s: no user %s\n"
-msgstr "grupp %s: ingen användare %s\n"
+msgstr "grupp %s: användaren %s finns inte\n"
 
 #: src/grpck.c:610 src/grpck.c:821
 #, c-format
 msgid "delete member '%s'? "
-msgstr "ta bort medlem \"%s\"? "
+msgstr "ta bort medlemmen \"%s\"? "
 
 #: src/grpck.c:626 src/grpck.c:786
 #, c-format
@@ -1757,26 +1760,26 @@ msgstr "gruppen %s har en post i %s, men dess lösenordsfält i %s är inte inst
 
 #: src/grpck.c:710
 msgid "invalid shadow group file entry"
-msgstr "ogiltig post i fil för skuggrupper"
+msgstr "ogiltig post i skuggruppsfilen"
 
 #: src/grpck.c:769
 msgid "duplicate shadow group entry"
-msgstr "duplicerade poster i skugggrupp"
+msgstr "duplicerad post i skuggruppsfilen"
 
 #: src/grpck.c:807
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "skuggrupp %s: ingen administrativ användare %s\n"
+msgstr "skuggrupp %s: den administrativa användaren %s finns inte\n"
 
 #: src/grpck.c:808
 #, c-format
 msgid "delete administrative member '%s'? "
-msgstr "ta bort administrativ medlem \"%s\"? "
+msgstr "ta bort den administrativa medlemmen \"%s\"? "
 
 #: src/grpck.c:820
 #, c-format
 msgid "shadow group %s: no user %s\n"
-msgstr "skuggrupp %s: ingen användare %s\n"
+msgstr "skuggrupp %s: användaren %s finns inte\n"
 
 #: src/grpck.c:889 src/pwck.c:910
 #, c-format
@@ -1803,19 +1806,19 @@ msgstr "  -C, --clear                   rensa en användares lastlog-post (kan b
 
 #: src/lastlog.c:79
 msgid "  -S, --set                     set lastlog record to current time (usable only with -u)\n"
-msgstr "  -S, --set                     ange lastlog-post till aktuell tid (kan bara användas med -u)\n"
+msgstr "  -S, --set                     ställ in lastlog-posten till aktuell tid (kan bara användas med -u)\n"
 
 #: src/lastlog.c:80
 msgid "  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
-msgstr "  -t, --time DAGAR              skriv endast ut lastlog-information senare än DAGAR\n"
+msgstr "  -t, --time DAGAR              skriv endast ut lastlog-information från de senaste DAGAR dagarna\n"
 
 #: src/lastlog.c:81
 msgid "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-msgstr "  -u, --user LOGIN              skriv ut lastlog-information för angiven LOGIN\n"
+msgstr "  -u, --user ANVÄNDARNAMN              skriv ut lastlog-information för angivet ANVÄNDARNAMN\n"
 
 #: src/lastlog.c:82
 msgid "  -a, --active                  print lastlog excluding '**Never logged in**' users"
-msgstr "  -a, --active                  skriv ut lastlog utan användare som '**aldrig loggat in**'"
+msgstr "  -a, --active                  skriv ut lastlog utan användare som '**aldrig har loggat in**'"
 
 #: src/lastlog.c:151
 #, c-format
@@ -1836,7 +1839,7 @@ msgid ""
 "%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
 "\tthe output might be incorrect.\n"
 msgstr ""
-"%s: Valda UID är högre än LASTLOG_UID_MAX (%lu),\n"
+"%s: Valda UID:n är högre än LASTLOG_UID_MAX (%lu),\n"
 "\tutdata kan vara felaktig.\n"
 
 #: src/lastlog.c:251
@@ -1850,7 +1853,7 @@ msgid ""
 "%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
 "\tthey will not be updated.\n"
 msgstr ""
-"%s: Valda UID är högre än LASTLOG_UID_MAX (%lu),\n"
+"%s: Valda UID:n är högre än LASTLOG_UID_MAX (%lu),\n"
 "\tde kommer inte att uppdateras.\n"
 
 #: src/lastlog.c:289
@@ -1861,12 +1864,12 @@ msgstr "%s: Kunde inte uppdatera lastlog-filen\n"
 #: src/lastlog.c:420
 #, c-format
 msgid "%s: Option -C cannot be used together with option -S\n"
-msgstr "%s: Alternativet -C kan inte användas tillsammans med alternativet -S\n"
+msgstr "%s: Flaggan -C kan inte användas tillsammans med flaggan -S\n"
 
 #: src/lastlog.c:426
 #, c-format
 msgid "%s: Options -C and -S require option -u to specify the user\n"
-msgstr "%s: Alternativen -C och -S kräver alternativet -u för att ange användaren\n"
+msgstr "%s: Flaggorna -C och -S kräver flaggan -u för att ange användaren\n"
 
 #: src/login.c:139
 #, c-format
@@ -1881,7 +1884,7 @@ msgstr "       %s [-p] [-h värd] [-f namn]\n"
 #: src/login.c:181 src/login.c:187
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
-msgstr "konfigurationsfel - kan inte tolka %s-värde: \"%d\""
+msgstr "konfigurationsfel – kan inte tolka värdet för %s: ”%d”"
 
 #: src/login.c:207
 msgid "Invalid login time"
@@ -1893,7 +1896,7 @@ msgid ""
 "System closed for routine maintenance"
 msgstr ""
 "\n"
-"Systemet nedstängt för rutinmässigt underhåll"
+"Systemet är stängt för rutinunderhåll"
 
 #: src/login.c:254
 msgid ""
@@ -1906,7 +1909,7 @@ msgstr ""
 #: src/login.c:499
 #, c-format
 msgid "%s: Cannot possibly work without effective root\n"
-msgstr "%s: Kan inte fungera utan en användbar root\n"
+msgstr "%s: Kan inte fungera utan effektiva rootbehörigheter\n"
 
 #: src/login.c:608
 #, c-format
@@ -1915,34 +1918,34 @@ msgid ""
 "Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
-"Inloggningen översteg tidsgränsen efter %u sekunder.\n"
+"Tidsgränsen för inloggningen överskreds efter %u sekunder.\n"
 
 #: src/login.c:622
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr "login: PAM misslyckades, avbryter: %s\n"
+msgstr "login: PAM-fel, avbryter: %s\n"
 
 #: src/login.c:652
 #, c-format
 msgid "%s login: "
-msgstr "%s inloggning: "
+msgstr "%s användarnamn: "
 
 #: src/login.c:654
 msgid "login: "
-msgstr "inloggning: "
+msgstr "användarnamn: "
 
 #: src/login.c:698 src/login.c:742
 #, c-format
 msgid "Maximum number of tries exceeded (%u)\n"
-msgstr "Maximalt antal försök har överstigits (%u)\n"
+msgstr "Maximalt antal försök har överskridits (%u)\n"
 
 #: src/login.c:704
 msgid "login: abort requested by PAM\n"
-msgstr "login: avbryt begärdes av PAM\n"
+msgstr "login: PAM begärde avbrott\n"
 
 #: src/login.c:735 src/login.c:985 src/sulogin.c:174
 msgid "Login incorrect"
-msgstr "Inloggning misslyckad"
+msgstr "Felaktiga inloggningsuppgifter"
 
 #: src/login.c:783
 #, c-format
@@ -1952,7 +1955,7 @@ msgstr "Kan inte hitta användaren (%s)\n"
 #: src/login.c:1097
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr "%s: fel vid processdelning: %s"
+msgstr "%s: kunde inte skapa underprocess: %s"
 
 #: src/login.c:1118
 #, c-format
@@ -1961,7 +1964,7 @@ msgstr "TIOCSCTTY misslyckades på %s"
 
 #: src/login.c:1192
 msgid "Warning: login re-enabled after temporary lockout."
-msgstr "Varning: inloggning återaktiverad efter temporär nedstängning."
+msgstr "Varning: inloggning har återaktiverats efter tillfällig spärr."
 
 #: src/login.c:1208
 #, c-format
@@ -1976,12 +1979,12 @@ msgstr " från %.*s"
 #: src/newgidmap.c:63
 #, c-format
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
-msgstr "%s: gid-intervall [%lu-%lu) -> [%lu-%lu) tillåts inte\n"
+msgstr "%s: GID-intervall [%lu-%lu) -> [%lu-%lu) tillåts inte\n"
 
 #: src/newgidmap.c:76
 #, c-format
 msgid "usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
-msgstr "användning: %s [<pid|fd:<pidfd>] <gid> <lägregid> <antal> [ <gid> <lägregid> <antal> ] ... \n"
+msgstr "användning: %s [<PID|FD:<PIDFD>>] <GID> <LÄGRE_GID> <ANTAL> [ <GID> <LÄGRE_GID> <ANTAL> ] ... \n"
 
 #: src/newgidmap.c:103
 #, c-format
@@ -2038,7 +2041,7 @@ msgstr "Ogiltigt lösenord.\n"
 #: src/newgrp.c:298
 #, c-format
 msgid "%s: failure forking: %s\n"
-msgstr "%s: fel vid processgrening: %s\n"
+msgstr "%s: kunde inte skapa underprocess: %s\n"
 
 #: src/newgrp.c:485 src/newgrp.c:521
 #, c-format
@@ -2053,12 +2056,12 @@ msgstr "%s: GID \"%lu\" finns inte\n"
 #: src/newuidmap.c:58
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
-msgstr "%s: uid-intervall [%lu-%lu) -> [%lu-%lu) tillåts inte\n"
+msgstr "%s: UID-intervall [%lu-%lu) -> [%lu-%lu) tillåts inte\n"
 
 #: src/newuidmap.c:71
 #, c-format
 msgid "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
-msgstr "användning: %s [<pid>|fd:<pidfd>] <uid> <lägreuid> <antal> [ <uid> <lägreuid> <antal> ] ... \n"
+msgstr "användning: %s [<PID>|FD:<PIDFD>] <UID> <LÄGRE_UID> <ANTAL> [ <UID> <LÄGRE_UID> <ANTAL> ] ... \n"
 
 #: src/newusers.c:130 src/pwck.c:140 src/usermod.c:430
 msgid "  -b, --badname                 allow bad names\n"
@@ -2076,7 +2079,7 @@ msgstr "%s: gruppen \"%s\" är en skuggrupp men den finns inte i /etc/group\n"
 #: src/newusers.c:351 src/useradd.c:1413 src/usermod.c:1227
 #, c-format
 msgid "%s: invalid user ID '%s'\n"
-msgstr "%s: ogiltigt användar-id \"%s\"\n"
+msgstr "%s: ogiltigt användar-ID \"%s\"\n"
 
 #: src/newusers.c:391 src/useradd.c:1523 src/usermod.c:1165
 #, c-format
@@ -2106,12 +2109,12 @@ msgstr "%s: kan inte uppdatera posten för användaren %s (finns inte i passwd-d
 #: src/newusers.c:1054 src/newusers.c:1089
 #, c-format
 msgid "%s: line %jd: can't create user\n"
-msgstr "%s: rad %jd: kan inte skapa användare\n"
+msgstr "%s: rad %jd: kan inte skapa användaren\n"
 
 #: src/newusers.c:1074
 #, c-format
 msgid "%s: line %jd: can't create group\n"
-msgstr "%s: rad %jd: kan inte skapa grupp\n"
+msgstr "%s: rad %jd: kan inte skapa gruppen\n"
 
 #: src/newusers.c:1101
 #, c-format
@@ -2126,7 +2129,7 @@ msgstr "%s: rad %jd: %s\n"
 #: src/newusers.c:1123
 #, c-format
 msgid "%s: line %jd: can't update password\n"
-msgstr "%s: rad %jd: kan inte uppdatera lösenord\n"
+msgstr "%s: rad %jd: kan inte uppdatera lösenordet\n"
 
 #: src/newusers.c:1146
 #, c-format
@@ -2146,7 +2149,7 @@ msgstr "%s: rad %jd: chown %s misslyckades: %s\n"
 #: src/newusers.c:1172
 #, c-format
 msgid "%s: line %jd: can't update entry\n"
-msgstr "%s: rad %jd: kan inte uppdatera post\n"
+msgstr "%s: rad %jd: kan inte uppdatera posten\n"
 
 #: src/newusers.c:1187
 #, c-format
@@ -2156,7 +2159,7 @@ msgstr "%s: kan inte hitta intervall för underordnad användare: %s\n"
 #: src/newusers.c:1196 src/newusers.c:1218
 #, c-format
 msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s: kunde inte förbereda ny %s-post\n"
+msgstr "%s: kunde inte förbereda en ny %s-post\n"
 
 #: src/newusers.c:1210
 #, c-format
@@ -2173,19 +2176,19 @@ msgstr "  -d, --delete                  ta bort lösenordet för angivet konto\n
 
 #: src/passwd.c:160
 msgid "  -e, --expire                  force expire the password for the named account\n"
-msgstr "  -e, --expire                  tvinga utgång för lösenordet för det angivna kontot\n"
+msgstr "  -e, --expire                  tvinga lösenordet för det angivna kontot att löpa ut\n"
 
 #: src/passwd.c:162
 msgid "  -k, --keep-tokens             change password only if expired\n"
-msgstr "  -k, --keep-tokens             ändra lösenord endast om utgånget\n"
+msgstr "  -k, --keep-tokens             ändra lösenordet endast om det har löpt ut\n"
 
 #: src/passwd.c:163
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -i, --inactive INAKTIV        ställ in lösenordet som inaktivt efter utgång\n"
-"                                till INAKTIV\n"
+"  -i, --inactive INAKTIV_DAGAR        gör lösenordet inaktivt efter INAKTIV_DAGAR dagar\n"
+"                                från utgången\n"
 
 #: src/passwd.c:165
 msgid "  -l, --lock                    lock the password of the named account\n"
@@ -2196,8 +2199,8 @@ msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -n, --mindays MIN_DAGAR       ställ in minsta antal dagar innan lösenords-\n"
-"                                ändring till MIN_DAGAR\n"
+"  -n, --mindays MIN_DAGAR       ställ in minsta antal dagar innan lösenordet får\n"
+"                                ändras till MIN_DAGAR\n"
 
 #: src/passwd.c:168 src/vipw.c:94
 msgid "  -q, --quiet                   quiet mode\n"
@@ -2217,15 +2220,15 @@ msgstr "  -u, --unlock                  lås upp lösenordet för det angivna ko
 
 #: src/passwd.c:174
 msgid "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-msgstr "  -w, --warndays VARN_DAGAR     ställ in dagar för utgångsvarning till VARN_DAGAR\n"
+msgstr "  -w, --warndays VARN_DAGAR     ställ in antal dagar för utgångsvarning till VARN_DAGAR\n"
 
 #: src/passwd.c:175
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -x, --maxdays MAX_DAGAR       ställ in maximalt antal dagar innan lösenords-\n"
-"                                ändring till MAX_DAGAR\n"
+"  -x, --maxdays MAX_DAGAR       ställ in största antal dagar innan lösenordet måste\n"
+"                                ändras till MAX_DAGAR\n"
 
 #: src/passwd.c:177
 msgid "  -s, --stdin                   read new token from stdin\n"
@@ -2241,7 +2244,7 @@ msgid ""
 "Enter the new password (minimum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Ange det nya lösenordet (minimum %d tecken)\n"
+"Ange det nya lösenordet (minst %d tecken)\n"
 "Använd en kombination av stora och små bokstäver samt siffror.\n"
 
 #: src/passwd.c:257
@@ -2250,7 +2253,7 @@ msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Ange det nya lösenordet (minimum %d, maximum %d tecken)\n"
+"Ange det nya lösenordet (minst %d och högst %d tecken)\n"
 "Använd en kombination av gemener, versaler och siffror.\n"
 
 #: src/passwd.c:274 src/passwd.c:293
@@ -2275,7 +2278,7 @@ msgstr ""
 
 #: src/passwd.c:323
 msgid "They don't match; try again.\n"
-msgstr "De stämde inte, försök igen.\n"
+msgstr "De stämmer inte överens, försök igen.\n"
 
 #: src/passwd.c:394
 #, c-format
@@ -2298,18 +2301,18 @@ msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock the password of this account.\n"
 msgstr ""
-"%s: upplåsning av lösenordet kommer att resultera i ett konto utan lösenord.\n"
+"%s: Att låsa upp lösenordet skulle leda till ett konto utan lösenord.\n"
 "Du bör ange ett lösenord med usermod -p för att låsa upp lösenordet för detta konto.\n"
 
 #: src/passwd.c:922
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s: repository %s stöds inte\n"
+msgstr "%s: förrådet %s stöds inte\n"
 
 #: src/passwd.c:967
 #, c-format
 msgid "%s: only root can use --stdin/-s option\n"
-msgstr "%s: endast root kan använda alternativet --stdin/-s\n"
+msgstr "%s: endast root kan använda flaggan --stdin/-s\n"
 
 #: src/passwd.c:1094
 #, c-format
@@ -2319,7 +2322,7 @@ msgstr "%s: root är inte behörig enligt SELinux att ändra lösenordet för %s
 #: src/passwd.c:1112
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "%s: Du kan inte visa eller modifiera lösenordsinformationen för %s.\n"
+msgstr "%s: Du kan inte visa eller ändra lösenordsinformationen för %s.\n"
 
 #: src/passwd.c:1159
 #, c-format
@@ -2354,7 +2357,7 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Användning: %s [flaggor] [lösenord [skugga]]\n"
+"Användning: %s [flaggor] [lösenord [skuggfil]]\n"
 "\n"
 "Flaggor:\n"
 
@@ -2365,15 +2368,15 @@ msgstr "  -q, --quiet                   rapportera endast fel\n"
 #: src/pwck.c:228
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
-msgstr "%s: ingen alternativ shadow-fil tillåts när USE_TCB är aktiverad.\n"
+msgstr "%s: ingen alternativ skuggfil tillåts när USE_TCB är aktiverad.\n"
 
 #: src/pwck.c:412
 msgid "invalid password file entry"
-msgstr "ogiltig post i lösenordsfil"
+msgstr "ogiltig post i lösenordsfilen"
 
 #: src/pwck.c:473
 msgid "duplicate password entry"
-msgstr "duplicerade lösenordsposter"
+msgstr "duplicerad lösenordspost"
 
 #: src/pwck.c:491
 #, c-format
@@ -2388,12 +2391,12 @@ msgstr "ogiltigt användarnamn '%s'\n"
 #: src/pwck.c:504
 #, c-format
 msgid "invalid user ID '%lu'\n"
-msgstr "ogiltigt användar-id \"%lu\"\n"
+msgstr "ogiltigt användar-ID \"%lu\"\n"
 
 #: src/pwck.c:518
 #, c-format
 msgid "user '%s': no group %lu\n"
-msgstr "användare \"%s\": ingen grupp %lu\n"
+msgstr "användare \"%s\": gruppen %lu finns inte\n"
 
 #: src/pwck.c:537
 #, c-format
@@ -2428,12 +2431,12 @@ msgstr "%s: kan inte låsa %s.\n"
 #: src/pwck.c:612 src/pwck.c:819
 #, c-format
 msgid "no matching password file entry in %s\n"
-msgstr "ingen matchande lösenordfilpost i %s\n"
+msgstr "ingen motsvarande lösenordsfilspost i %s\n"
 
 #: src/pwck.c:614
 #, c-format
 msgid "add user '%s' in %s? "
-msgstr "lägg till grupp \"%s\" i %s? "
+msgstr "lägg till användaren \"%s\" i %s? "
 
 #: src/pwck.c:663
 #, c-format
@@ -2442,16 +2445,16 @@ msgstr "användaren %s har en post i %s, men dess lösenordsfält i %s är inte 
 
 #: src/pwck.c:737
 msgid "invalid shadow password file entry"
-msgstr "ogiltig post i skugglösenordsfil"
+msgstr "ogiltig post i skugglösenordsfilen"
 
 #: src/pwck.c:798
 msgid "duplicate shadow password entry"
-msgstr "duplikat post för skugglösenord"
+msgstr "duplicerad post för skugglösenord"
 
 #: src/pwck.c:839
 #, c-format
 msgid "user %s: last password change in the future\n"
-msgstr "användare %s: senaste lösenordsändringen i framtiden\n"
+msgstr "användare %s: senaste lösenordsändringen ligger i framtiden\n"
 
 #: src/pwck.c:877 src/pwck.c:884
 #, c-format
@@ -2470,7 +2473,7 @@ msgstr "%s: misslyckades med att ändra rättigheter för %s till 0600\n"
 
 #: src/suauth.c:111
 msgid "Access to su to that account DENIED.\n"
-msgstr "Tillgång med su till det kontot NEKAS.\n"
+msgstr "Åtkomst till kontot med su NEKAS.\n"
 
 #: src/suauth.c:119
 msgid "Password authentication bypassed.\n"
@@ -2478,11 +2481,11 @@ msgstr "Lösenordsautentisering har kringgåtts.\n"
 
 #: src/suauth.c:126
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "Vänligen ange ditt EGNA lösenord för autentisering.\n"
+msgstr "Ange ditt EGNA lösenord för autentisering.\n"
 
 #: src/su.c:174
 msgid " ...killed.\n"
-msgstr " ...dödad.\n"
+msgstr " …dödad.\n"
 
 #: src/su.c:297 src/su.c:347 src/su.c:403
 #, c-format
@@ -2492,7 +2495,7 @@ msgstr "%s: fel i signalmaskering\n"
 #: src/su.c:310
 #, c-format
 msgid "%s: Cannot fork user shell\n"
-msgstr "%s: Kan inte grena användarskal\n"
+msgstr "%s: Kan inte skapa underprocess för användarskalet\n"
 
 #: src/su.c:322
 #, c-format
@@ -2501,11 +2504,11 @@ msgstr "%s: signalfel\n"
 
 #: src/su.c:395
 msgid "Session terminated, terminating shell..."
-msgstr "Sessionen terminerad, terminerar skal..."
+msgstr "Sessionen terminerad, terminerar skal…"
 
 #: src/su.c:426
 msgid " ...terminated.\n"
-msgstr " ...terminerad.\n"
+msgstr " …terminerad.\n"
 
 #: src/su.c:432 src/su.c:477 src/su.c:494 src/su.c:502 src/su.c:1046
 #: src/su.c:1107 src/su.c:1115
@@ -2525,7 +2528,7 @@ msgstr ""
 
 #: src/su.c:457
 msgid "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
-msgstr "  -c, --command COMMAND         skicka COMMAND till det anropade skalet\n"
+msgstr "  -c, --command KOMMANDO         skicka KOMMANDO till det anropade skalet\n"
 
 #: src/su.c:459
 msgid "  -, -l, --login                make the shell a login shell\n"
@@ -2543,7 +2546,7 @@ msgstr ""
 
 #: src/su.c:463
 msgid "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-msgstr "  -s, --shell SHELL             använd SHELL i stället för standarden i passwd\n"
+msgstr "  -s, --shell SKAL             använd SKAL i stället för standarden i passwd\n"
 
 #: src/su.c:465
 msgid "If no username is given, assume root.\n"
@@ -2571,11 +2574,11 @@ msgstr "Lösenordsfältet är tomt, vilket är förbjudet för superanvändaren.
 #: src/su.c:558 src/su.c:582
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "Du är inte bemyndigad att su %s\n"
+msgstr "Du har inte behörighet att använda su för %s\n"
 
 #: src/su.c:577
 msgid "(Enter your own password)"
-msgstr "(Ange ditt egna lösenord)"
+msgstr "(Ange ditt eget lösenord)"
 
 #: src/su.c:601
 #, c-format
@@ -2615,7 +2618,7 @@ msgstr "%s: Kan inte släppa den styrande terminalen\n"
 #: src/su.c:1232
 #, c-format
 msgid "Cannot execute %s\n"
-msgstr "Kunde inte starta %s\n"
+msgstr "Kan inte köra %s\n"
 
 #: src/sulogin.c:96
 msgid "No password file"
@@ -2636,12 +2639,12 @@ msgid ""
 "(or give root password for system maintenance):"
 msgstr ""
 "\n"
-"Tryck Control-D för att fortsätta med normal uppstart,\n"
+"Tryck Ctrl-D för att fortsätta med normal uppstart,\n"
 "(eller ange root-lösenordet för systemunderhåll):"
 
 #: src/sulogin.c:181
 msgid "Entering System Maintenance Mode"
-msgstr "Går över till läge för systemunderhåll"
+msgstr "Växlar till systemunderhållsläge"
 
 #: src/useradd.c:271
 #, c-format
@@ -2661,32 +2664,32 @@ msgstr "%s: konfigurationen '%s=' i %s har en ogiltig grupp; ignorerar den felak
 #: src/useradd.c:550 src/useradd.c:559
 #, c-format
 msgid "%s: cannot create new defaults file: %s\n"
-msgstr "%s: kan inte skapa ny standardfil: %s\n"
+msgstr "%s: kan inte skapa en ny standardfil: %s\n"
 
 #: src/useradd.c:568 src/useradd.c:577
 #, c-format
 msgid "%s: cannot create directory for defaults file\n"
-msgstr "%s: kan inte skapa katalog för standardfil\n"
+msgstr "%s: kan inte skapa katalog för standardfilen\n"
 
 #: src/useradd.c:588
 #, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: kan inte öppna ny fil med standardvärden\n"
+msgstr "%s: kan inte öppna en ny fil med standardvärden\n"
 
 #: src/useradd.c:613
 #, c-format
 msgid "%s: line too long in %s: %s..."
-msgstr "%s: raden är för lång i %s: %s..."
+msgstr "%s: raden är för lång i %s: %s…"
 
 #: src/useradd.c:718
 #, c-format
 msgid "%s: Cannot create backup file (%s): %s\n"
-msgstr "%s: Kan inte skapa säkerhetskopia (%s): %s\n"
+msgstr "%s: Kan inte skapa en säkerhetskopia (%s): %s\n"
 
 #: src/useradd.c:729
 #, c-format
 msgid "%s: rename: %s: %s\n"
-msgstr "%s: byt namn: %s: %s\n"
+msgstr "%s: namnbyte: %s: %s\n"
 
 #: src/useradd.c:828 src/usermod.c:291
 #, c-format
@@ -2696,7 +2699,7 @@ msgstr "%s: för många grupper angivna (max %zu).\n"
 #: src/useradd.c:878
 #, c-format
 msgid "%s: Out of memory. Cannot find group '%s'.\n"
-msgstr "%s: Slut på minne. Kan inte hitta gruppen '%s'.\n"
+msgstr "%s: Minnet är slut. Kan inte hitta gruppen '%s'.\n"
 
 #: src/useradd.c:894
 #, c-format
@@ -2707,7 +2710,7 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Användning: %s [flaggor] INLOGGNINGSNAMN\n"
+"Användning: %s [flaggor] ANVÄNDARNAMN\n"
 "            %s -D\n"
 "            %s -D [flaggor]\n"
 "\n"
@@ -2731,11 +2734,11 @@ msgstr "      --btrfs-subvolume-home    använd BTRFS-delvolym för hemkatalogen
 
 #: src/useradd.c:906
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
-msgstr "  -c, --comment KOMMENTAR       GECOS-fält för det nya kontot\n"
+msgstr "  -c, --comment KOMMENTAR       GECOS-fältet för det nya kontot\n"
 
 #: src/useradd.c:907
 msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
-msgstr "  -d, --home-dir HEM_KAT        hemkatalog för det nya kontot\n"
+msgstr "  -d, --home-dir HEM_KATALOG       hemkatalogen för det nya kontot\n"
 
 #: src/useradd.c:908
 msgid "  -D, --defaults                print or change default useradd configuration\n"
@@ -2747,7 +2750,7 @@ msgstr "  -e, --expiredate UTGÅNGSDATUM utgångsdatum för det nya kontot\n"
 
 #: src/useradd.c:910
 msgid "  -f, --inactive INACTIVE       password inactivity period of the new account\n"
-msgstr "  -f, --inactive INAKTIV        lösenordets inaktivitetsperiod för det nya kontot\n"
+msgstr "  -f, --inactive INAKTIV_DAGAR  lösenordets inaktivitetsperiod för det nya kontot\n"
 
 #: src/useradd.c:912
 msgid "  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a system user\n"
@@ -2766,12 +2769,12 @@ msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
 msgstr ""
-"  -G, --groups GROUPS           lista över ytterligare grupper för det nya\n"
+"  -G, --groups GRUPPER           lista över ytterligare grupper för det nya\n"
 "                                kontot\n"
 
 #: src/useradd.c:919
 msgid "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
-msgstr "  -k, --skel SKEL-KAT           använd denna alternativa skelett-katalog\n"
+msgstr "  -k, --skel SKEL_KAT           använd denna alternativa skelettkatalog\n"
 
 #: src/useradd.c:922
 msgid ""
@@ -2803,7 +2806,7 @@ msgid ""
 "                                (non-unique) UID\n"
 msgstr ""
 "  -o, --non-unique              tillåt att skapa användare med duplicerade\n"
-"                                (icke-unika) UID\n"
+"                                (icke-unika) UID:n\n"
 
 #: src/useradd.c:931
 msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
@@ -2819,7 +2822,7 @@ msgstr "  -s, --shell SKAL              inloggningsskal för det nya kontot\n"
 
 #: src/useradd.c:936
 msgid "  -u, --uid UID                 user ID of the new account\n"
-msgstr "  -u, --uid UID                 användare-ID för det nya kontot\n"
+msgstr "  -u, --uid UID                 användar-ID för det nya kontot\n"
 
 #: src/useradd.c:937
 msgid "  -U, --user-group              create a group with the same name as the user\n"
@@ -2837,7 +2840,7 @@ msgstr "      --selinux-range SERANGE   använd ett särskilt MLS-intervall för
 #: src/usermod.c:772 src/usermod.c:909
 #, c-format
 msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr "%s: Slut på minne. Kan inte uppdatera %s.\n"
+msgstr "%s: Minnet är slut. Kan inte uppdatera %s.\n"
 
 #: src/useradd.c:1208
 #, c-format
@@ -2877,7 +2880,7 @@ msgstr "%s: ogiltigt skal \"%s\"\n"
 #: src/useradd.c:1402 src/usermod.c:1217
 #, c-format
 msgid "%s: Warning: missing or non-executable shell '%s'\n"
-msgstr "%s: Varning: saknat eller icke-körbart skal '%s'\n"
+msgstr "%s: Varning: skalet \"%s\" saknas eller är inte körbart\n"
 
 #: src/useradd.c:1426 src/userdel.c:966 src/usermod.c:1284
 #, c-format
@@ -2962,7 +2965,7 @@ msgstr "%s: kunde inte skapa BTRFS-delvolym: %s\n"
 #: src/useradd.c:2300
 #, c-format
 msgid "%s: cannot create directory %s\n"
-msgstr "%s: kan inte skapa katalog %s\n"
+msgstr "%s: kan inte skapa katalogen %s\n"
 
 #: src/useradd.c:2307
 #, c-format
@@ -2972,7 +2975,7 @@ msgstr "%s: varning: chown på `%s' misslyckades: %m\n"
 #: src/useradd.c:2312
 #, c-format
 msgid "%s: warning: chmod on `%s' failed: %m\n"
-msgstr "%s: varning: chown på '%s' misslyckades: %m\n"
+msgstr "%s: varning: chmod på `%s' misslyckades: %m\n"
 
 #: src/useradd.c:2322
 #, c-format
@@ -2991,7 +2994,7 @@ msgstr "%s: kan inte ange SELinux-kontext för postlådefilen %s\n"
 
 #: src/useradd.c:2394
 msgid "Creating mailbox file"
-msgstr "Skapar postlådefil"
+msgstr "Skapar en postlådefil"
 
 #: src/useradd.c:2400
 msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
@@ -2999,15 +3002,15 @@ msgstr "Gruppen \"mail\" hittades inte. Skapar användarens postlådefil med lä
 
 #: src/useradd.c:2412
 msgid "Setting mailbox file permissions"
-msgstr "Ställer in rättigheter för postlådefil"
+msgstr "Ställer in behörigheter för postlådefilen"
 
 #: src/useradd.c:2416
 msgid "Synchronize mailbox file"
-msgstr "Synkronisera postlådefil"
+msgstr "Synkroniserar postlådefilen"
 
 #: src/useradd.c:2419
 msgid "Closing mailbox file"
-msgstr "Stänger postlådefil"
+msgstr "Stänger postlådefilen"
 
 #: src/useradd.c:2441
 #, c-format
@@ -3032,7 +3035,7 @@ msgstr "%s: gruppen %s finns redan - om du vill lägga till denna användare til
 #: src/useradd.c:2624
 #, c-format
 msgid "%s: can't create user\n"
-msgstr "%s: kan inte skapa användare\n"
+msgstr "%s: kan inte skapa användaren\n"
 
 #: src/useradd.c:2630
 #, c-format
@@ -3047,7 +3050,7 @@ msgstr "%s: Misslyckades med att skapa tcb-katalog för %s\n"
 #: src/useradd.c:2656
 #, c-format
 msgid "%s: can't create group\n"
-msgstr "%s: kan inte skapa grupp\n"
+msgstr "%s: kan inte skapa gruppen\n"
 
 #: src/useradd.c:2667
 #, c-format
@@ -3071,7 +3074,7 @@ msgid ""
 "%s: Not copying any file from skel directory into it.\n"
 msgstr ""
 "%s: varning: hemkatalogen %s finns redan.\n"
-"%s: Kopierar ingen fil från skel-katalogen till den.\n"
+"%s: Kopierar ingen fil från skelettkatalogen till den.\n"
 
 #: src/userdel.c:144
 msgid ""
@@ -3124,7 +3127,7 @@ msgstr "%s: varning: kan inte ta bort %s: %s\n"
 #: src/userdel.c:815 src/userdel.c:1080
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %s ägs inte av %s, tar inte bort\n"
+msgstr "%s: %s ägs inte av %s och tas inte bort\n"
 
 #: src/userdel.c:867
 #, c-format
@@ -3154,7 +3157,7 @@ msgstr "%s: %s hemkatalogen (%s) hittades inte\n"
 #: src/userdel.c:1106
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
-msgstr "%s: tar inte bort katalogen %s (skulle ta bort hemmet för användaren %s)\n"
+msgstr "%s: tar inte bort katalogen %s (skulle ta bort hemkatalogen för användaren %s)\n"
 
 #: src/userdel.c:1128
 #, c-format
@@ -3178,8 +3181,8 @@ msgid ""
 "                                the user from other groups\n"
 msgstr ""
 "  -a, --append                  lägg till användaren till ytterligare GRUPPER\n"
-"                                som nämns av flaggan -G utan att ta bort\n"
-"                                honom/henne från andra grupper\n"
+"                                som anges med flaggan -G utan att ta bort\n"
+"                                användaren från andra grupper\n"
 
 #: src/usermod.c:431
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
@@ -3187,7 +3190,7 @@ msgstr "  -c, --comment KOMMENTAR       nytt värde för GECOS-fältet\n"
 
 #: src/usermod.c:432
 msgid "  -d, --home HOME_DIR           new home directory for the user account\n"
-msgstr "  -d, --home HEMKAT             ny hemkatalog för användarkontot\n"
+msgstr "  -d, --home HEM_KATALOG        ny hemkatalog för användarkontot\n"
 
 #: src/usermod.c:433
 msgid "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
@@ -3198,8 +3201,8 @@ msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -f, --inactive INAKTIV        ställ in lösenordet som inaktivt efter\n"
-"                                utgångsdatum till INAKTIV\n"
+"  -f, --inactive INAKTIV_DAGAR  gör lösenordet inaktivt efter INAKTIV_DAGAR dagar\n"
+"                                från utgången\n"
 
 #: src/usermod.c:436
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
@@ -3211,7 +3214,7 @@ msgstr "  -G, --groups GRUPPER          ny lista över ytterligare GRUPPER\n"
 
 #: src/usermod.c:439
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
-msgstr "  -l, --login NYTT_NAMN         nytt värde för inloggningsnamnet\n"
+msgstr "  -l, --login NYTT_ANVÄNDARNAMN         nytt värde för inloggningsnamnet\n"
 
 #: src/usermod.c:440
 msgid "  -L, --lock                    lock the user account\n"
@@ -3227,7 +3230,7 @@ msgstr ""
 
 #: src/usermod.c:443
 msgid "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-msgstr "  -o, --non-unique              tillåt användning av duplicerade (icke-unika) UID\n"
+msgstr "  -o, --non-unique              tillåt användning av ett duplicerat (icke-unikt) UID\n"
 
 #: src/usermod.c:444
 msgid "  -p, --password PASSWORD       use encrypted password for the new password\n"
@@ -3240,8 +3243,8 @@ msgid ""
 "                                the user from other groups\n"
 msgstr ""
 "  -r, --remove                  ta bort användaren endast från de ytterligare\n"
-"GRUPPER som anges med -G utan att ta bort användaren från\n"
-"                                andra grupper\n"
+"                                GRUPPER som anges med flaggan -G utan att ta bort\n"
+"                                användaren från andra grupper\n"
 
 #: src/usermod.c:451
 msgid "  -u, --uid UID                 new UID for the user account\n"
@@ -3253,19 +3256,19 @@ msgstr "  -U, --unlock                  lås upp användarkontot\n"
 
 #: src/usermod.c:454
 msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
-msgstr "  -v, --add-subuids FIRST-LAST  lägg till intervall med underordnade UID:er\n"
+msgstr "  -v, --add-subuids FÖRSTA-SISTA  lägg till intervall med underordnade UID:n\n"
 
 #: src/usermod.c:455
 msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
-msgstr "  -V, --del-subuids FIRST-LAST  ta bort intervall med underordnade UID:er\n"
+msgstr "  -V, --del-subuids FÖRSTA-SISTA  ta bort intervall med underordnade UID:n\n"
 
 #: src/usermod.c:456
 msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
-msgstr "  -w, --add-subgids FIRST-LAST  lägg till intervall med underordnade GID:er\n"
+msgstr "  -w, --add-subgids FÖRSTA-SISTA  lägg till intervall med underordnade GID:n\n"
 
 #: src/usermod.c:457
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
-msgstr "  -W, --del-subgids FIRST-LAST  ta bort intervall med underordnade GID:er\n"
+msgstr "  -W, --del-subgids FÖRSTA-SISTA  ta bort intervall med underordnade GID:n\n"
 
 #: src/usermod.c:458
 msgid "  -S, --add-subids              add entries to sub[ud]id based on system defaults\n"
@@ -3285,8 +3288,8 @@ msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock this user's password.\n"
 msgstr ""
-"%s: upplåsning av användarens lösenord skulle resultera i ett konto utan lösenord.\n"
-"Du bör ställa in ett lösenord med usermod -p för att låsa upp användarens lösenord.\n"
+"%s: Att låsa upp användarens lösenord skulle leda till ett konto utan lösenord.\n"
+"Du bör ange ett lösenord med usermod -p för att låsa upp användarens lösenord.\n"
 
 #: src/usermod.c:523 src/usermod.c:609
 #, c-format
@@ -3311,7 +3314,7 @@ msgstr "%s: ogiltigt intervall för underordnad GID '%s'\n"
 #: src/usermod.c:1365
 #, c-format
 msgid "%s: no options\n"
-msgstr "%s: inga alternativ\n"
+msgstr "%s: inga flaggor\n"
 
 #: src/usermod.c:1385
 #, c-format
@@ -3321,7 +3324,7 @@ msgstr "%s: %s och %s är ömsesidigt uteslutande flaggor\n"
 #: src/usermod.c:1392
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
-msgstr "%s: flaggorna -L, -p och -U är uteslutande\n"
+msgstr "%s: flaggorna -L, -p och -U kan inte användas samtidigt\n"
 
 #: src/usermod.c:1464
 #, c-format
@@ -3346,7 +3349,7 @@ msgstr "%s: katalogen %s finns redan\n"
 #: src/usermod.c:1862
 #, c-format
 msgid "%s: The previous home directory (%s) was not a directory. It is not removed and no home directories are created.\n"
-msgstr "%s: Tidigare hemkatalogen (%s) var inte en katalog. Den har inte tagits bort och inga hemkataloger har skapats.\n"
+msgstr "%s: Den tidigare hemkatalogen (%s) var inte en katalog. Den tas inte bort och inga hemkataloger skapas.\n"
 
 #: src/usermod.c:1885 src/usermod.c:2428
 #, c-format
@@ -3400,21 +3403,21 @@ msgstr "%s: varning: %s ägs inte av %s\n"
 
 #: src/usermod.c:2138
 msgid "failed to change mailbox owner"
-msgstr "misslyckades med att byta ägare på postlåda"
+msgstr "kunde inte byta ägare på postlådan"
 
 #: src/usermod.c:2162
 msgid "failed to rename mailbox"
-msgstr "misslyckades med att byta namn på postlåda"
+msgstr "kunde inte byta namn på postlådan"
 
 #: src/usermod.c:2254
 #, c-format
 msgid "%s: unable to find new subordinate uid range: %s\n"
-msgstr "%s: kan inte hitta nytt intervall för underordnad UID: %s\n"
+msgstr "%s: kan inte hitta ett nytt intervall för underordnade UID:n: %s\n"
 
 #: src/usermod.c:2262
 #, c-format
 msgid "%s: unable to find new subordinate gid range: %s\n"
-msgstr "%s: kan inte hitta nytt intervall för underordnad GID: %s\n"
+msgstr "%s: kan inte hitta ett nytt intervall för underordnade GID:n: %s\n"
 
 #: src/usermod.c:2278
 #, c-format
@@ -3444,16 +3447,16 @@ msgid ""
 "Please use the command '%s' to do so.\n"
 msgstr ""
 "Du har ändrat %s.\n"
-"Du kan behöva ändra %s för att stämma överens.\n"
+"Du kan behöva ändra %s för att upprätthålla konsekvensen.\n"
 "Använd kommandot \"%s\" för att göra det.\n"
 
 #: src/vipw.c:91
 msgid "  -g, --group                   edit group database\n"
-msgstr "  -g, --group                   redigera gruppdatabas\n"
+msgstr "  -g, --group                   redigera gruppdatabasen\n"
 
 #: src/vipw.c:93
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr "  -p, --passwd                  redigera lösenordsdatabas\n"
+msgstr "  -p, --passwd                  redigera lösenordsdatabasen\n"
 
 #: src/vipw.c:96
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
@@ -3461,7 +3464,7 @@ msgstr "  -s, --shadow                  redigera shadow- eller gshadow-databasen
 
 #: src/vipw.c:98
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
-msgstr "  -u, --user                    vilken användares tcb shadow-fil att redigera\n"
+msgstr "  -u, --user                    ange vilken användares tcb-shadowfil som ska redigeras\n"
 
 #: src/vipw.c:100
 msgid "\n"
@@ -3475,7 +3478,7 @@ msgstr "%s: misslyckades med att ta bort %s\n"
 #: src/vipw.c:184
 #, c-format
 msgid "%s: %s is unchanged\n"
-msgstr "%s: %s är oförändrad\n"
+msgstr "%s: %s har inte ändrats\n"
 
 #: src/vipw.c:214
 msgid "failed to create scratch directory"
@@ -3499,7 +3502,7 @@ msgstr "misslyckades med att få privilegier"
 
 #: src/vipw.c:257
 msgid "Couldn't lock file"
-msgstr "Kunde inte låsa fil"
+msgstr "Kunde inte låsa filen"
 
 #: src/vipw.c:279
 msgid "Couldn't make backup"
@@ -3522,15 +3525,15 @@ msgstr "%s: %s dödades av signal %d\n"
 
 #: src/vipw.c:418
 msgid "failed to open scratch file"
-msgstr "kunde inte öppna arbetsfil"
+msgstr "kunde inte öppna arbetsfilen"
 
 #: src/vipw.c:421
 msgid "failed to unlink scratch file"
-msgstr "kunde inte avlänka arbetsfil"
+msgstr "kunde inte ta bort arbetsfilen"
 
 #: src/vipw.c:427
 msgid "failed to stat edited file"
-msgstr "misslyckades med att ta status på redigerade filen"
+msgstr "kunde inte hämta filstatus för den redigerade filen"
 
 #: src/vipw.c:431
 msgid "aprintf() failed"
@@ -3538,7 +3541,7 @@ msgstr "aprintf() misslyckades"
 
 #: src/vipw.c:435
 msgid "failed to create backup file"
-msgstr "misslyckades med att skapa säkerhetskopia"
+msgstr "kunde inte skapa en säkerhetskopia"
 
 #: src/vipw.c:448
 #, c-format
@@ -3548,7 +3551,7 @@ msgstr "%s: kan inte återställa %s: %s (dina ändringar finns i %s)\n"
 #: src/vipw.c:577
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
-msgstr "%s: misslyckades med att hitta tcb-katalog för %s\n"
+msgstr "%s: kunde inte hitta tcb-katalogen för %s\n"
 
 #, fuzzy
 #~| msgid ""
