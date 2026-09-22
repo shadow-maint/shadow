@@ -91,14 +91,14 @@
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #endif /* !USE_XCRYPT_GENSALT */
 static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds);
-static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long rounds);
+static /*@observer@*/void SHA_salt_rounds_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long rounds);
 #ifdef USE_BCRYPT
 static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *prefered_rounds);
-static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long rounds);
+static /*@observer@*/void BCRYPT_salt_rounds_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *prefered_cost);
-static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost);
+static /*@observer@*/void YESCRYPT_salt_cost_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long cost);
 #endif /* USE_YESCRYPT */
 
 
@@ -144,7 +144,8 @@ SHA_get_salt_rounds(/*@null@*/const int *prefered_rounds)
  * Fill a salt prefix specifying the rounds number for the SHA crypt methods
  * to a buffer.
  */
-static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long rounds)
+static /*@observer@*/void
+SHA_salt_rounds_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long rounds)
 {
 	const size_t buf_begin = strlen (buf);
 
@@ -220,7 +221,8 @@ BCRYPT_get_salt_rounds(/*@null@*/const int *prefered_rounds)
  * Fill a salt prefix specifying the rounds number for the BCRYPT method
  * to a buffer.
  */
-static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long rounds)
+static /*@observer@*/void
+BCRYPT_salt_rounds_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long rounds)
 {
 	const size_t buf_begin = strlen (buf);
 
@@ -268,7 +270,7 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
  * Fill a salt prefix specifying the cost for the YESCRYPT method
  * to a buffer.
  */
-static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost)
+static /*@observer@*/void YESCRYPT_salt_cost_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long cost)
 {
 	const size_t buf_begin = strlen (buf);
 	char  *p;
