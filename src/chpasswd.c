@@ -324,28 +324,25 @@ static void close_files(const struct option_flags *flags)
 
 static const char *get_salt(void)
 {
-	void *arg = NULL;
+	const long  *arg = NULL;
 
 	if (eflg || IS_CRYPT_METHOD("NONE")) {
 		return NULL;
 	}
 
 	if (sflg) {
-		if (IS_CRYPT_METHOD("SHA256") || IS_CRYPT_METHOD("SHA512")) {
+		if (IS_CRYPT_METHOD("SHA256") || IS_CRYPT_METHOD("SHA512"))
 			arg = &sha_rounds;
-		}
 #if defined(USE_BCRYPT)
-		if (IS_CRYPT_METHOD("BCRYPT")) {
+		if (IS_CRYPT_METHOD("BCRYPT"))
 			arg = &bcrypt_rounds;
-		}
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
-		if (IS_CRYPT_METHOD("YESCRYPT")) {
+		if (IS_CRYPT_METHOD("YESCRYPT"))
 			arg = &yescrypt_cost;
-		}
 #endif				/* USE_YESCRYPT */
 	}
-	return crypt_make_salt (crypt_method, arg);
+	return crypt_make_salt(crypt_method, arg);
 }
 
 int main (int argc, char **argv)
