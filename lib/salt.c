@@ -348,11 +348,9 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg)
 {
 	size_t         salt_len;
-	static char result[GENSALT_SETTING_SIZE];
+	static char    result[GENSALT_SETTING_SIZE];
 	const char *method;
 	unsigned long rounds = 0;
-
-	bzero(result, GENSALT_SETTING_SIZE);
 
 	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
