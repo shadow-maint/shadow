@@ -132,7 +132,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 		 * as if we were reading an non existing entry in the
 		 * sparse lastlog file).
 		 */
-		memzero(&ll, sizeof(ll));
+		memzero_T(&ll, struct lastlog);
 	}
 
 	/* Filter out entries that do not match with the -t or -b options */
@@ -223,7 +223,7 @@ static void update_one (/*@null@*/const struct passwd *pw)
 	err = fseeko (lastlogfile, offset, SEEK_SET);
 	assert (0 == err);
 
-	memzero(&ll, sizeof(ll));
+	memzero_T(&ll, struct lastlog);
 
 	if (Sflg) {
 		ll.ll_time = NOW;
