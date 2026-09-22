@@ -397,26 +397,24 @@ int main (int argc, char **argv)
 		newpwd = cp;
 		if (   (!eflg)
 		    && (   (NULL == crypt_method)
-		        || !streq(crypt_method, "NONE"))) {
-			void *arg = NULL;
+		        || !streq(crypt_method, "NONE")))
+		{
+			const long *arg = NULL;
 			const char *salt;
+
 			if (sflg) {
-				if (   streq(crypt_method, "SHA256")
-					|| streq(crypt_method, "SHA512")) {
+				if (streq(crypt_method, "SHA256") || streq(crypt_method, "SHA512"))
 					arg = &sha_rounds;
-				}
 #if defined(USE_BCRYPT)
-				if (streq(crypt_method, "BCRYPT")) {
+				if (streq(crypt_method, "BCRYPT"))
 					arg = &bcrypt_rounds;
-				}
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
-				if (streq(crypt_method, "YESCRYPT")) {
+				if (streq(crypt_method, "YESCRYPT"))
 					arg = &yescrypt_cost;
-				}
 #endif				/* USE_YESCRYPT */
 			}
-			salt = crypt_make_salt (crypt_method, arg);
+			salt = crypt_make_salt(crypt_method, arg);
 			cp = pw_encrypt (newpwd, salt);
 			if (NULL == cp) {
 				eprinte(_("%s: failed to crypt password with salt '%s'"),
