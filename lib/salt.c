@@ -44,7 +44,7 @@
 #ifdef USE_BCRYPT
 /* Use $2b$ as prefix for compatibility with OpenBSD's bcrypt. */
 #define BCRYPTMAGNUM(buf)     strcpy(buf, "$2b$")
-#define BCRYPT_SALT_SIZE 22
+#define BCRYPT_SALT_LEN 22
 /* Default number of rounds if not explicitly specified.  */
 #define B_ROUNDS_DEFAULT 13
 /* Minimum number of rounds.  */
@@ -54,7 +54,7 @@
 #endif /* USE_BCRYPT */
 
 /* Fixed salt len for sha{256,512}crypt. */
-#define SHA_CRYPT_SALT_SIZE 16
+#define SHA_CRYPT_SALT_LEN 16
 /* Default number of rounds if not explicitly specified.  */
 #define SHA_ROUNDS_DEFAULT 5000
 /* Minimum number of rounds.  */
@@ -70,7 +70,7 @@
  * represented by the same number of base64 characters without padding
  * issue, even with a non-standard base64 encoding scheme.
  */
-#define YESCRYPT_SALT_SIZE 24
+#define YESCRYPT_SALT_LEN 24
 /* Default cost if not explicitly specified.  */
 #define Y_COST_DEFAULT 5
 /* Minimum cost.  */
@@ -79,16 +79,15 @@
 #define Y_COST_MAX 11
 #endif
 
-/* Generate salt of size salt_size. */
-#define MAX_SALT_SIZE 44
-#define MIN_SALT_SIZE 8
+#define MAX_SALT_LEN 44
+#define MIN_SALT_LEN 8
 
 /* Maximum size of the generated salt string. */
 #define GENSALT_SETTING_SIZE 100
 
 /* local function prototypes */
 #if !USE_XCRYPT_GENSALT
-static /*@observer@*/const char *gensalt (size_t salt_size);
+static /*@observer@*/const char *gensalt (size_t len);
 #endif /* !USE_XCRYPT_GENSALT */
 static /*@observer@*/unsigned long SHA_get_salt_rounds(/*@null@*/const long *prefered_rounds);
 static /*@observer@*/const char *SHA_salt_rounds(unsigned long rounds);
@@ -288,17 +287,17 @@ static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost)
 #endif /* USE_YESCRYPT */
 
 #if !USE_XCRYPT_GENSALT
-static /*@observer@*/const char *gensalt (size_t salt_size)
+static /*@observer@*/const char *gensalt (size_t len)
 {
-	static char salt[MAX_SALT_SIZE + 6];
+	static char salt[MAX_SALT_LEN + 6];
 
-	assert(salt_size >= MIN_SALT_SIZE && salt_size <= MAX_SALT_SIZE);
+	assert(len >= MIN_SALT_LEN && len <= MAX_SALT_LEN);
 
 	strcpy(salt, "");
-	while (strlen(salt) < salt_size)
+	while (strlen(salt) < len)
 		strcat(salt, l64a(csrand()));
 
-	stpcpy(&salt[salt_size], "");
+	stpcpy(&salt[len], "");
 
 	return salt;
 }
@@ -330,27 +329,27 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *meth, /*@null@*/const long *
 
 	if (streq(method, "SHA256")) {
 		MAGNUM(result, '5');
-		salt_len = SHA_CRYPT_SALT_SIZE;
+		salt_len = SHA_CRYPT_SALT_LEN;
 		rounds = SHA_get_salt_rounds(arg);
 		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		BCRYPTMAGNUM(result);
-		salt_len = BCRYPT_SALT_SIZE;
+		salt_len = BCRYPT_SALT_LEN;
 		rounds = BCRYPT_get_salt_rounds(arg);
 		assert(strtcat_a(result, BCRYPT_salt_rounds(rounds)) != -1);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (streq(method, "YESCRYPT")) {
 		MAGNUM(result, 'y');
-		salt_len = YESCRYPT_SALT_SIZE;
+		salt_len = YESCRYPT_SALT_LEN;
 		rounds = YESCRYPT_get_salt_cost(arg);
 		assert(strtcat_a(result, YESCRYPT_salt_cost(rounds)) != -1);
 #endif /* USE_YESCRYPT */
 	} else if (streq(method, "SHA512")) {
 sha512:
 		MAGNUM(result, '6');
-		salt_len = SHA_CRYPT_SALT_SIZE;
+		salt_len = SHA_CRYPT_SALT_LEN;
 		rounds = SHA_get_salt_rounds(arg);
 		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
 	} else {
