@@ -13,6 +13,7 @@
 
 #include "attr.h"
 #include "cast.h"
+#include "pragma.h"
 
 
 // string prefix
@@ -31,6 +32,9 @@
 })
 
 
+ATTR_DEPRECATED typeof(strncmp)  strncmp;
+
+
 ATTR_STRING(1)
 ATTR_STRING(2)
 inline const char *strprefix_(const char *s, const char *prefix);
@@ -43,7 +47,7 @@ inline const char *strprefix_(const char *s, const char *prefix);
 inline const char *
 strprefix_(const char *s, const char *prefix)
 {
-	if (strncmp(s, prefix, strlen(prefix)) != 0)
+	if (DEPRECATED(strncmp(s, prefix, strlen(prefix))) != 0)
 		return NULL;
 
 	return s + strlen(prefix);

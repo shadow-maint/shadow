@@ -16,13 +16,15 @@
 #include <sys/types.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
 // strtcpy_a - string truncate copy array
-#define strtcpy_a(dst, src)  strtcpy(dst, src, countof(dst))
+#define strtcpy_a(dst, src)  DEPRECATED(strtcpy(dst, src, countof(dst)))
 
 
+ATTR_DEPRECATED
 ATTR_STRING(2)
 inline ssize_t strtcpy(char *restrict dst, const char *restrict src,
     size_t dsize);
