@@ -11,6 +11,8 @@
 #include <search.h>
 #include <stddef.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "search/cmp/cmp.h"
 #include "sizeof.h"
 
@@ -21,12 +23,16 @@
 ({                                                                    \
 	_Generic(k, T *: (void)0, const T *: (void)0);                \
 	_Generic(a, T *: (void)0, const T *: (void)0);                \
-	(T *){lfind_(k, a, n, sizeof(T), cmp)};                       \
+	(T *){DEPRECATED(lfind_(k, a, n, sizeof(T), cmp))};           \
 })
 
 #define LFIND(T, ...)  lfind_T(T, __VA_ARGS__, CMP(T))
 
 
+ATTR_DEPRECATED typeof(lfind)  lfind;
+
+
+ATTR_DEPRECATED
 inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
     typeof(int (const void *k, const void *elt)) *cmp);
 
@@ -36,7 +42,7 @@ lfind_(const void *k, const void *a, size_t n, size_t ksize,
     typeof(int (const void *k, const void *elt)) *cmp)
 {
 	// lfind(3) wants a pointer to n for historic reasons.
-	return lfind(k, a, &n, ksize, cmp);
+	return DEPRECATED(lfind(k, a, &n, ksize, cmp));
 }
 
 
