@@ -91,14 +91,14 @@
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #endif /* !USE_XCRYPT_GENSALT */
 static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds);
-static /*@observer@*/void SHA_salt_rounds_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long rounds);
+static /*@observer@*/const char *SHA_salt_rounds(unsigned long rounds);
 #ifdef USE_BCRYPT
 static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *prefered_rounds);
-static /*@observer@*/void BCRYPT_salt_rounds_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long rounds);
+static /*@observer@*/const char *BCRYPT_salt_rounds(unsigned long rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *prefered_cost);
-static /*@observer@*/void YESCRYPT_salt_cost_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long cost);
+static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost);
 #endif /* USE_YESCRYPT */
 
 
@@ -139,30 +139,27 @@ SHA_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 }
 
 /*
- * Fill a salt prefix specifying the rounds number for the SHA crypt methods
- * to a buffer.
+ * Create a salt prefix specifying the rounds number for the SHA crypt methods.
  */
-static /*@observer@*/void
-SHA_salt_rounds_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long rounds)
+static /*@observer@*/const char *
+SHA_salt_rounds(unsigned long rounds)
 {
-	const size_t buf_begin = strlen (buf);
+	static char  buf[18];
 
 	/* Nothing to do here if SHA_ROUNDS_DEFAULT is used. */
-	if (rounds == SHA_ROUNDS_DEFAULT) {
-		return;
-	}
+	if (rounds == SHA_ROUNDS_DEFAULT)
+		return strcpy(buf, "");
 
 	/*
-	 * Check if the result buffer is long enough.
 	 * We are going to write a maximum of 17 bytes,
 	 * plus one byte for the terminator.
 	 *    rounds=XXXXXXXXX$
 	 *    00000000011111111
 	 *    12345678901234567
 	 */
-	assert (GENSALT_SETTING_SIZE > buf_begin + 17);
+	assert(stprintf_a(buf, "rounds=%lu$", rounds) != -1);
 
-	stprintf(buf + buf_begin, 18, "rounds=%lu$", rounds);
+	return buf;
 }
 
 #ifdef USE_BCRYPT
@@ -214,25 +211,23 @@ BCRYPT_get_salt_rounds(/*@null@*/const int *prefered_rounds)
 }
 
 /*
- * Fill a salt prefix specifying the rounds number for the BCRYPT method
- * to a buffer.
+ * Create a salt prefix specifying the rounds number for the BCRYPT method.
  */
-static /*@observer@*/void
-BCRYPT_salt_rounds_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long rounds)
+static /*@observer@*/const char *
+BCRYPT_salt_rounds(unsigned long rounds)
 {
-	const size_t buf_begin = strlen (buf);
+	static char  buf[4];
 
 	/*
-	 * Check if the result buffer is long enough.
 	 * We are going to write three bytes,
 	 * plus one byte for the terminator.
 	 *    XX$
 	 *    000
 	 *    123
 	 */
-	assert (GENSALT_SETTING_SIZE > buf_begin + 3);
+	assert(stprintf_a(buf, "%2.2lu$", rounds) != -1);
 
-	stprintf(buf + buf_begin, 4, "%2.2lu$", rounds);
+	return buf;
 }
 #endif /* USE_BCRYPT */
 
@@ -260,25 +255,22 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 }
 
 /*
- * Fill a salt prefix specifying the cost for the YESCRYPT method
- * to a buffer.
+ * Create a salt prefix specifying the cost for the YESCRYPT method.
  */
-static /*@observer@*/void YESCRYPT_salt_cost_to_buf(char buf[GENSALT_SETTING_SIZE], unsigned long cost)
+static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost)
 {
-	const size_t buf_begin = strlen (buf);
-	char  *p;
+	char         *p;
+	static char  buf[4];
 
 	/*
-	 * Check if the result buffer is long enough.
 	 * We are going to write four bytes,
 	 * plus one byte for the terminator.
 	 *    jXX$
 	 *    0000
 	 *    1234
 	 */
-	assert (GENSALT_SETTING_SIZE > buf_begin + 4);
 
-	p = &buf[buf_begin];
+	p = buf;
 	p = stpcpy(p, "j");
 	if (cost < 3)
 		*p++ = 0x36 + cost;
@@ -289,6 +281,8 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf(char buf[GENSALT_SETTING_SIZ
 
 	p = stpcpy(p, (cost >= 3) ? "T" : "5");
 	stpcpy(p, "$");
+
+	return buf;
 }
 #endif /* USE_YESCRYPT */
 
@@ -335,27 +329,27 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		MAGNUM(result, '5');
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);
-		SHA_salt_rounds_to_buf (result, rounds);
+		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		BCRYPTMAGNUM(result);
 		salt_len = BCRYPT_SALT_SIZE;
 		rounds = BCRYPT_get_salt_rounds (arg);
-		BCRYPT_salt_rounds_to_buf (result, rounds);
+		assert(strtcat_a(result, BCRYPT_salt_rounds(rounds)) != -1);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (streq(method, "YESCRYPT")) {
 		MAGNUM(result, 'y');
 		salt_len = YESCRYPT_SALT_SIZE;
 		rounds = YESCRYPT_get_salt_cost (arg);
-		YESCRYPT_salt_cost_to_buf (result, rounds);
+		assert(strtcat_a(result, YESCRYPT_salt_cost(rounds)) != -1);
 #endif /* USE_YESCRYPT */
 	} else if (streq(method, "SHA512")) {
 sha512:
 		MAGNUM(result, '6');
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);
-		SHA_salt_rounds_to_buf (result, rounds);
+		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
 	} else {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
