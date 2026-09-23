@@ -9,10 +9,17 @@
 #include "config.h"
 
 #include <shadow.h>
+#include <stddef.h>
 
 
 #if !defined(HAVE_SGETSPENT)
 struct spwd *sgetspent(const char *s);
+#endif
+
+#if !defined(HAVE_SGETSPENT_R)
+int sgetspent_r(size_t size;
+    const char *restrict s, struct spwd *spent, char buf[size], size_t size,
+    struct spwd **dummy);
 #endif
 
 
