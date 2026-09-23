@@ -44,10 +44,11 @@ list(char *s)
 
 	free(members);
 
-	members = astrsep2ls(s, ",", &n);
+	members = astrsep2ls(s, ",");
 	if (members == NULL)
 		return NULL;
 
+	n = lslen(members);
 	if (streq(members[n-1], ""))
 		members[n-1] = NULL;
 
