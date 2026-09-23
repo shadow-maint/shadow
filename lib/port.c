@@ -102,17 +102,9 @@ static void endportent (void)
 static struct port *
 getportent(void)
 {
-	int   dtime;
-	int   i, j;
-	int   saveerr;
-	char  *cp;
-	char  *fields[3];
+	int  saveerr;
 
-	static char            buf[BUFSIZ];
-	static char            *ttys[PORT_TTY + 1];
-	static char            *users[PORT_IDS + 1];
-	static struct port     port;
-	static struct pt_time  ptimes[PORT_TIMES + 1];
+	static char  buf[BUFSIZ];
 
 	saveerr = errno;
 
@@ -141,6 +133,16 @@ getportent(void)
 	 */
 
 	while (fgets_a(buf, ports) != NULL) {
+		int   dtime;
+		int   i, j;
+		char  *cp;
+		char  *fields[3];
+
+		static char            *ttys[PORT_TTY + 1];
+		static char            *users[PORT_IDS + 1];
+		static struct port     port;
+		static struct pt_time  ptimes[PORT_TIMES + 1];
+
 		if (strprefix(buf, "#"))
 			continue;
 
