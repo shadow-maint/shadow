@@ -128,6 +128,14 @@ memory/ - memory operations
     memcpy_a()
 	Like memcpy(3), but takes two arrays.
 
+    memmove_T()
+	Like memmove(3), but type safe.
+
+    mempmove()
+	Like memmove(3), but return an offset pointer.
+    mempmove_T()
+	Like mempmove(), but type safe.
+
 string/ - string operations
   ctype/ - Character classification and conversion functions
 
@@ -201,6 +209,10 @@ string/ - string operations
 	Like strsfx(), but ignore upper-/lower-case.
 
   strcpy/ - String copying
+
+    strmove()
+	Like memmove(3), for strings.  It takes the length of the string
+	internally with strlen(3).
 
     strtcpy()
 	Copy from a string into another string with truncation.

@@ -8,9 +8,14 @@
 
 #include "config.h"
 
+#include <stddef.h>
+#include <string.h>
+
 #include "alloc/malloc.h"
-#include "prototypes.h"
+#include "alloc/realloc.h"
 #include "defines.h"
+#include "memory/memcpy/memmove.h"
+#include "prototypes.h"
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
@@ -20,18 +25,16 @@
 #include <assert.h>
 
 
+static size_t lslen(char *const ls[]);
+
+
 /*
  * add_list - add a member to a list of group members
- *
- *	the array of member names is searched for the new member
- *	name, and if not present it is added to a freshly allocated
- *	list of users.
  */
 /*@only@*/char **
 add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
 	int i;
-	char **tmp;
 
 	assert (NULL != member);
 	assert (NULL != list);
@@ -40,97 +43,41 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	 * Scan the list for the new name.  Return the original list
 	 * pointer if it is present.
 	 */
-
 	for (i = 0; list[i] != NULL; i++) {
 		if (streq(list[i], member)) {
 			return list;
 		}
 	}
 
-	/*
-	 * Allocate a new list pointer large enough to hold all the
-	 * old entries, and the new entries as well.
-	 */
+	list = xrealloc_T(list, i + 2, char *);
+	list[i] = xstrdup(member);
+	list[i+1] = NULL;
 
-	tmp = xmalloc_T(i + 2, char *);
-
-	/*
-	 * Copy the original list to the new list, then append the
-	 * new member and NULL terminate the result.  This new list
-	 * is returned to the invoker.
-	 */
-
-	for (i = 0; list[i] != NULL; i++) {
-		tmp[i] = list[i];
-	}
-
-	tmp[i] = xstrdup (member);
-	tmp[i+1] = NULL;
-
-	free (list);
-
-	return tmp;
+	return list;
 }
 
 /*
  * del_list - delete a member from a list of group members
- *
- *	the array of member names is searched for the old member
- *	name, and if present it is deleted from a freshly allocated
- *	list of users.
  */
-
 /*@only@*/char **
 del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
-	int i, j;
-	char **tmp;
+	size_t  n, m;
 
 	assert (NULL != member);
 	assert (NULL != list);
 
-	/*
-	 * Scan the list for the old name.  Return the original list
-	 * pointer if it is not present.
-	 */
-
-	for (i = j = 0; list[i] != NULL; i++) {
-		if (!streq(list[i], member)) {
-			j++;
-		}
+	for (;;) {
+		n = lslen(list);
+		for (m = 0; m < n && !streq(list[m], member); m++)
+			continue;
+		if (m == n)
+			break;
+		free(list[m]);
+		memmove_T(&list[m], &list[m+1], n-m, char *);
 	}
 
-	if (j == i) {
-		return list;
-	}
-
-	/*
-	 * Allocate a new list pointer large enough to hold all the
-	 * old entries.
-	 */
-
-	tmp = xmalloc_T(j + 1, char *);
-
-	/*
-	 * Copy the original list except the deleted members to the
-	 * new list, then NULL terminate the result.  This new list
-	 * is returned to the invoker.
-	 */
-
-	for (i = j = 0; list[i] != NULL; i++) {
-		if (!streq(list[i], member)) {
-			tmp[j] = list[i];
-			j++;
-		} else {
-			free (list[i]);
-		}
-	}
-
-	tmp[j] = NULL;
-
-	free (list);
-
-	return tmp;
+	return xrealloc_T(list, n+1, char *);
 }
 
 /*
@@ -236,3 +183,13 @@ comma_to_list(const char *comma)
 	return array;
 }
 
+
+static size_t
+lslen(char *const ls[])
+{
+	size_t  i;
+
+	for (i = 0; ls[i] != NULL; i++)
+		continue;
+	return i;
+}
