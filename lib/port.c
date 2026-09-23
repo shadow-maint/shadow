@@ -140,19 +140,14 @@ getportent(void)
 	 *      - parse off a list of days and times
 	 */
 
-next:
-	{
-		if (fgets_a(buf, ports) == NULL) {
-			errno = saveerr;
-			return NULL;
-		}
+	while (fgets_a(buf, ports) != NULL) {
 		if (strprefix(buf, "#"))
-			goto next;
+			continue;
 
 		stpsep(buf, "\n");
 
 		if (strsep2arr_a(buf, ":", fields) == -1)
-			goto next;
+			continue;
 
 		/*
 		 * Get the name of the TTY device.  It is the first colon
@@ -162,7 +157,7 @@ next:
 		 */
 		port.pt_names = ttys;
 		if (strsep2ls_a(fields[0], ",", ttys) == -1)
-			goto next;
+			continue;
 
 		/*
 		 * Get the list of user names.  It is the second colon
@@ -172,7 +167,7 @@ next:
 		 */
 		port.pt_users = users;
 		if (strsep2ls_a(fields[1], ",", users) == -1)
-			goto next;
+			continue;
 
 		/*
 		 * Get the list of valid times.  The times field is the third
@@ -295,7 +290,12 @@ next:
 		port.pt_times[j].t_start = port.pt_times[j].t_end = -1;
 
 		return &port;
+next:
+		continue;
 	}
+
+	errno = saveerr;
+	return NULL;
 }
 
 /*
