@@ -81,11 +81,8 @@ login_prompt(char *name, int namesize)
 	 * Read the user's response.  The trailing newline will be
 	 * removed.
 	 */
-
-	memzero_a(buf);
 	if (fgets_a(buf, stdin) == NULL)
 		exit (EXIT_FAILURE);
-
 	if (stpsep(buf, "\n") == NULL)
 		exit(EXIT_FAILURE);
 

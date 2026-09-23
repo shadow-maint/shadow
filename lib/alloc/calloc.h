@@ -10,7 +10,9 @@
 
 #include <stdlib.h>
 
+#include "attr.h"
 #include "exit_if_null.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
@@ -18,12 +20,15 @@
 #define calloc_T(n, T)   calloc_T_(n, typeas(T))
 #define calloc_T_(n, T)                                               \
 ({                                                                    \
-	(T *){calloc(n, sizeof(T))};                                  \
+	(T *){DEPRECATED(calloc(n, sizeof(T)))};                      \
 })
 
 
 // xcalloc_T - exit-on-error calloc type-safe
 #define xcalloc_T(n, T)  exit_if_null(calloc_T(n, T))
+
+
+ATTR_DEPRECATED typeof(calloc)  calloc;
 
 
 #endif  // include guard

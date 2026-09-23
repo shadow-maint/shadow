@@ -15,10 +15,15 @@
 
 #include "attr.h"
 #include "exit_if_null.h"
+#include "pragma.h"
 
 
 // exit-on-error allocate print formatted
 #define xaprintf(...)  exit_if_null(aprintf(__VA_ARGS__))
+
+
+ATTR_DEPRECATED typeof(asprintf)   asprintf;
+ATTR_DEPRECATED typeof(vasprintf)  vasprintf;
 
 
 ATTR_MALLOC(free)
@@ -52,7 +57,7 @@ vaprintf(const char *restrict fmt, va_list ap)
 {
 	char  *p;
 
-	if (vasprintf(&p, fmt, ap) == -1)
+	if (DEPRECATED(vasprintf(&p, fmt, ap)) == -1)
 		return NULL;
 
 	return p;

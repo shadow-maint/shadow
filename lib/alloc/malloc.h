@@ -12,6 +12,7 @@
 
 #include "attr.h"
 #include "exit_if_null.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
@@ -19,7 +20,7 @@
 #define malloc_T(n, T)   malloc_T_(n, typeas(T))
 #define malloc_T_(n, T)                                               \
 ({                                                                    \
-	(T *){mallocarray(n, sizeof(T))};                             \
+	(T *){DEPRECATED(mallocarray(n, sizeof(T)))};                 \
 })
 
 
@@ -27,7 +28,11 @@
 #define xmalloc_T(n, T)  exit_if_null(malloc_T(n, T))
 
 
+ATTR_DEPRECATED typeof(malloc)  malloc;
+
+
 // mallocarray - malloc array
+ATTR_DEPRECATED
 ATTR_ALLOC_SIZE(1, 2)
 ATTR_MALLOC(free)
 inline void *mallocarray(size_t nmemb, size_t size);
@@ -36,7 +41,7 @@ inline void *mallocarray(size_t nmemb, size_t size);
 inline void *
 mallocarray(size_t nmemb, size_t size)
 {
-	return reallocarray(NULL, nmemb, size);
+	return DEPRECATED(reallocarray(NULL, nmemb, size));
 }
 
 

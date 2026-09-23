@@ -15,6 +15,9 @@
 #include <string.h>
 #include <syslog.h>
 
+#include "attr.h"
+#include "pragma.h"
+
 
 #ifndef LOG_WARN
 #define LOG_WARN LOG_WARNING
@@ -30,7 +33,7 @@
 #elif defined(ENABLE_NLS)
 # define SYSLOG_(...)  SYSLOG_C(__VA_ARGS__)
 #else
-# define SYSLOG_(...)  syslog(__VA_ARGS__)
+# define SYSLOG_(...)  DEPRECATED(syslog(__VA_ARGS__))
 #endif
 
 #define SYSLOG(...)  do                                               \
@@ -88,11 +91,14 @@
 	if (NULL != l_)                                               \
 		setlocale(LC_ALL, "C");                               \
 	                                                              \
-	syslog(__VA_ARGS__);                                          \
+	DEPRECATED(syslog(__VA_ARGS__));                              \
 	                                                              \
 	setlocale(LC_ALL, l_);                                        \
 	free(l_);                                                     \
 } while (0)
+
+
+ATTR_DEPRECATED typeof(syslog)  syslog;
 
 
 #endif  // include guard

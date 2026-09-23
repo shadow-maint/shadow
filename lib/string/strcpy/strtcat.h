@@ -11,15 +11,17 @@
 #include <stddef.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
 #include "string/strcpy/stpecpy.h"
 
 
 // strtcat_a - string truncate catenate array
-#define strtcat_a(dst, src)  strtcat(dst, src, countof(dst))
+#define strtcat_a(dst, src)  DEPRECATED(strtcat(dst, src, countof(dst)))
 
 
+ATTR_DEPRECATED
 ATTR_STRING(2)
 inline ssize_t strtcat(char *restrict dst, const char *restrict src,
     size_t dsize);

@@ -12,6 +12,7 @@
 #include <stddef.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "string/sprintf/stprintf.h"
 
 
@@ -54,7 +55,7 @@ vseprintf(char *dst, const char *end, const char *restrict fmt, va_list ap)
 		return NULL;
 
 	size = end - dst;
-	len = vstprintf(dst, size, fmt, ap);
+	len = DEPRECATED(vstprintf(dst, size, fmt, ap));
 	if (len == -1)
 		return NULL;
 
