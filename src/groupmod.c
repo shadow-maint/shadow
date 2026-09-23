@@ -716,7 +716,7 @@ static void open_files (void)
 	if (gflg) {
 		if (pw_open (O_CREAT | O_RDWR) == 0) {
 			eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
-			SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
+			SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 			exit (E_GRP_UPDATE);
 		}
 	}
