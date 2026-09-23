@@ -6,8 +6,5 @@
 
 #include "string/strtok/astrsep2ls.h"
 
-#include <stddef.h>
 
-
-extern inline char **astrsep2ls(char *restrict s, const char *restrict delim,
-    size_t *restrict np);
+extern inline char **astrsep2ls(char *restrict s, const char *restrict delim);
