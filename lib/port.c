@@ -96,7 +96,7 @@ static void endportent (void)
  *	the next line in /etc/porttime is converted to a (struct port)
  *	and a pointer to a static (struct port) is returned to the
  *	invoker.  NULL is returned on either EOF or error.  errno is
- *	set to EINVAL on error to distinguish the two conditions.
+ *	set on error to distinguish the two conditions.
  */
 
 static struct port *
@@ -106,21 +106,18 @@ getportent(void)
 
 	static char  buf[BUFSIZ];
 
-	saveerr = errno;
 
 	/*
 	 * If the ports file is not open, open the file.  Do not rewind
 	 * since we want to search from the beginning each time.
 	 */
 
-	if (NULL == ports) {
-		setportent ();
-	}
-
-	if (NULL == ports) {
-		errno = saveerr;
+	saveerr = errno;
+	if (NULL == ports)
+		setportent();
+	errno = saveerr;
+	if (NULL == ports)
 		return NULL;
-	}
 
 	/*
 	 * Common point for beginning a new line -
@@ -296,7 +293,6 @@ next:
 		continue;
 	}
 
-	errno = saveerr;
 	return NULL;
 }
 
