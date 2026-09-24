@@ -66,7 +66,6 @@ struct itemdef {
 	{"PASS_ALWAYS_WARN", NULL},		\
 	{"PASS_CHANGE_TRIES", NULL},		\
 	{"PASS_MIN_LEN", NULL},			\
-	{"PORTTIME_CHECKS_ENAB", NULL},		\
 	{"QUOTAS_ENAB", NULL},			\
 	{"SU_WHEEL_ONLY", NULL},		\
 	{"ULIMIT", NULL},
