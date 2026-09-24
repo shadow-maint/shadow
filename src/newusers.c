@@ -17,8 +17,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -58,8 +56,9 @@
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
-#include "string/strtok/stpsep.h"
-#include "string/strtok/strsep2arr.h"
+#include "string/strsep/stpsep.h"
+#include "string/strsep/strsep2arr.h"
+
 
 struct option_flags {
 	bool chroot;
