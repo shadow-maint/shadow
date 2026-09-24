@@ -597,20 +597,6 @@ static void check_perms_nopam (const struct passwd *pw)
 	if (NULL != spwd) {
 		(void) expire (pw, spwd);
 	}
-
-	/*
-	 * Check to see if the account permits "su". root gets to ignore any
-	 * restricted accounts, but normal users can't become a user if
-	 * there is a "SU" entry in the /etc/porttime file denying access to
-	 * the account.
-	 */
-	if (!isttytime (name, "SU", time (NULL))) {
-		SYSLOG(pw->pw_uid ? LOG_WARN : LOG_CRIT,
-		       "SU by %s to restricted account %s", caller_name, name);
-		eprintf(_("%s: You are not authorized to su at that time\n"),
-		         Prog);
-		su_failure (caller_tty, 0 == pw->pw_uid);
-	}
 }
 #endif				/* !USE_PAM */
 
