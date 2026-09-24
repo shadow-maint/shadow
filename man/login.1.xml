@@ -32,7 +32,6 @@
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MOTD_FILE             SYSTEM "login.defs.d/MOTD_FILE.xml">
 <!ENTITY NOLOGINS_FILE         SYSTEM "login.defs.d/NOLOGINS_FILE.xml">
-<!ENTITY PORTTIME_CHECKS_ENAB  SYSTEM "login.defs.d/PORTTIME_CHECKS_ENAB.xml">
 <!ENTITY QUOTAS_ENAB           SYSTEM "login.defs.d/QUOTAS_ENAB.xml">
 <!ENTITY TTYGROUP              SYSTEM "login.defs.d/TTYGROUP.xml">
 <!ENTITY TTYTYPE_FILE          SYSTEM "login.defs.d/TTYTYPE_FILE.xml">
@@ -292,7 +291,6 @@
       <phrase condition="no_pam">&MAIL_DIR;</phrase>
       &MOTD_FILE;
       &NOLOGINS_FILE;
-      &PORTTIME_CHECKS_ENAB;
       &QUOTAS_ENAB;
       &TTYGROUP; <!-- documents also TTYPERM -->
       &TTYTYPE_FILE;
