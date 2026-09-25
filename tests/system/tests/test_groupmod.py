@@ -4,8 +4,12 @@ Test groupmod
 
 from __future__ import annotations
 
-import pytest
+import re
 
+import pytest
+from passlib.hash import sha512_crypt
+
+from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -313,3 +317,75 @@ def test_groupmod__change_group_name(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
         assert old_gshadow_entry is None, "gshadow entry should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__set_password_no_gshadow_entry(shadow: Shadow):
+    """
+    :title: Set password for group with no corresponding gshadow entry
+    :setup:
+        1. Create group
+        2. Remove gshadow entry manually
+    :steps:
+        1. Set password for group
+        2. Check group entry
+        3. Check gshadow entry
+    :expectedresults:
+        1. Password is set successfully for group
+        2. Group entry is found
+        3. gshadow entry is recreated with new password
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.fs.sed("/^tgroup:/d", "/etc/gshadow", args=["-i"])
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.groupmod(f"-p '{password_hash}' tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+        assert gshadow_entry.password is not None, "Password should not be None"
+        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__set_password_no_gshadow_file(shadow: Shadow):
+    """
+    :title: Set password for group when no gshadow file exists
+    :setup:
+        1. Create group
+        2. Remove /etc/gshadow file
+        3. Set FORCE_SHADOW=no in /etc/login.defs
+    :steps:
+        1. Set password for group
+        2. Check group entry
+        3. Verify that gshadow file doesn't exist
+    :expectedresults:
+        1. Password is set successfully for group
+        2. Group entry is found with new password
+        3. No gshadow file is found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.fs.rm("/etc/gshadow")
+    shadow.login_defs["FORCE_SHADOW"] = "no"
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.groupmod(f"-p '{password_hash}' tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.password is not None, "Password should not be None"
+    assert re.match(shadow_password_pattern(), group_entry.password), "Incorrect password"
+
+    gshadow_file = shadow.fs.exists("/etc/gshadow")
+    assert not gshadow_file, "/etc/gshadow file should not be found"
