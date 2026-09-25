@@ -17,6 +17,7 @@
 #include <sys/param.h>
 #include <pwd.h>
 #include <ctype.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <stdint.h>
 #include <string.h>
@@ -851,6 +852,44 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 	return find_free_range(&subordinate_gid_db, min, max, count);
 }
 
+static int
+errno_of_status(enum subid_status status)
+{
+	switch (status) {
+	case SUBID_STATUS_UNKNOWN_USER:
+		return ENOENT;
+	case SUBID_STATUS_ERROR_CONN:
+		return EAGAIN;
+	default:
+		return EIO;
+	}
+}
+
+static int
+lookup_owner(const char *owner)
+{
+	int  e;
+
+	e = errno;
+	errno = 0;
+	if (getpw_uid_or_nam(owner) != NULL) {
+		errno = e;
+		return 0;
+	}
+	switch (errno) {
+	case 0:
+		errno = e;
+		return 0;
+	case ENOMEM:
+	case EMFILE:
+	case ENFILE:
+		return -1;
+	default:
+		errno = EAGAIN;
+		return -1;
+	}
+}
+
 /*
  * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
  *
@@ -863,8 +902,9 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
  * UID number.  If id_type is UID, then subuids are returned, else
  * subgids are given.
  *
- * Returns the number of ranges found, or < 0 on error.  An empty result
- * is a zero-length allocation, so *in_ranges is NULL only on error.
+ * Returns the number of ranges found, or -1 on failure with errno set.
+ * An empty result is a zero-length allocation, so *in_ranges is NULL
+ * only on failure.
  *
  * The caller must free the subordinate range list.
  */
@@ -884,8 +924,10 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		struct subid_range  *r;
 
 		status = h->list_owner_ranges(owner, id_type, &r, &count);
-		if (status != SUBID_STATUS_SUCCESS)
+		if (status != SUBID_STATUS_SUCCESS) {
+			errno = errno_of_status(status);
 			return -1;
+		}
 		if (count == 0)
 			ranges = malloc_T(0, struct subid_range);
 		else
@@ -897,20 +939,26 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		return count;
 	}
 
+	if (lookup_owner(owner) == -1)
+		return -1;
+
 	switch (id_type) {
 	case ID_TYPE_UID:
 		if (!sub_uid_open(O_RDONLY)) {
+			errno = EIO;
 			return -1;
 		}
 		db = &subordinate_uid_db;
 		break;
 	case ID_TYPE_GID:
 		if (!sub_gid_open(O_RDONLY)) {
+			errno = EIO;
 			return -1;
 		}
 		db = &subordinate_gid_db;
 		break;
 	default:
+		errno = EINVAL;
 		return -1;
 	}
 
@@ -951,14 +999,31 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 			// should not happen
 			free(*uids);
 			*uids = NULL;
+			errno = EIO;
 			return -1;
 		}
 	} else {
-		struct passwd *pwd = getpwnam(owner);
+		int            err;
+		struct passwd  *pwd;
+
+		errno = 0;
+		pwd = getpwnam(owner);
+		err = errno;
 		if (NULL == pwd) {
-			/* Username not defined in /etc/passwd, or error occurred during lookup */
 			free(*uids);
 			*uids = NULL;
+			switch (err) {
+			case ENOMEM:
+			case EMFILE:
+			case ENFILE:
+				break;
+			case 0:
+				err = EIO;
+				break;
+			default:
+				err = EAGAIN;
+			}
+			errno = err;
 			return -1;
 		}
 		owner_uid = pwd->pw_uid;
@@ -992,8 +1057,10 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 		uid_t  *r;
 
 		status = h->find_subid_owners(id, id_type, &r, &n);
-		if (status != SUBID_STATUS_SUCCESS)
+		if (status != SUBID_STATUS_SUCCESS) {
+			errno = errno_of_status(status);
 			return -1;
+		}
 		if (n == 0)
 			*uids = malloc_T(0, uid_t);
 		else
@@ -1007,17 +1074,20 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 	switch (id_type) {
 	case ID_TYPE_UID:
 		if (!sub_uid_open(O_RDONLY)) {
+			errno = EIO;
 			return -1;
 		}
 		db = &subordinate_uid_db;
 		break;
 	case ID_TYPE_GID:
 		if (!sub_gid_open(O_RDONLY)) {
+			errno = EIO;
 			return -1;
 		}
 		db = &subordinate_gid_db;
 		break;
 	default:
+		errno = EINVAL;
 		return -1;
 	}
 
