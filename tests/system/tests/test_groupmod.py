@@ -465,6 +465,42 @@ def test_groupmod__set_password_no_gshadow_entry(shadow: Shadow):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__set_password_no_gshadow_file(shadow: Shadow):
+    """
+    :title: Set password for group when no gshadow file exists
+    :setup:
+        1. Create group
+        2. Remove /etc/gshadow file
+        3. Set FORCE_SHADOW=no in /etc/login.defs
+    :steps:
+        1. Set password for group
+        2. Check group entry
+        3. Verify that gshadow file doesn't exist
+    :expectedresults:
+        1. Password is set successfully for group
+        2. Group entry is found with new password
+        3. No gshadow file is found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.fs.rm("/etc/gshadow")
+    shadow.login_defs["FORCE_SHADOW"] = "no"
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.groupmod(f"-p '{password_hash}' tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.password is not None, "Password should not be None"
+    assert re.match(shadow_password_pattern(), group_entry.password), "Incorrect password"
+
+    gshadow_file = shadow.fs.exists("/etc/gshadow")
+    assert not gshadow_file, "/etc/gshadow file should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
 def test_groupmod__change_gid_for_unknown_group(shadow: Shadow):
     """
     :title: Changing GID of unknown group fails
