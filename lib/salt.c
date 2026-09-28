@@ -82,6 +82,7 @@ enum encrypt_method {
 
 /* local function prototypes */
 static unsigned long get_salt_cost(enum encrypt_method m, const long *preferred_cost);
+static const char *salt_cost(enum encrypt_method m, unsigned long cost);
 static const char *magnum(enum encrypt_method m);
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt(enum encrypt_method m);
@@ -302,6 +303,24 @@ get_salt_cost(enum encrypt_method m, const long *preferred_cost)
 }
 
 static const char *
+salt_cost(enum encrypt_method m, unsigned long cost)
+{
+	switch (m) {
+	case ENCRYPT_METHOD_SHA256:
+	case ENCRYPT_METHOD_SHA512:
+		return SHA_salt_rounds(cost);
+#ifdef USE_BCRYPT
+	case ENCRYPT_METHOD_BCRYPT:
+		return BCRYPT_salt_rounds(cost);
+#endif
+#ifdef USE_YESCRYPT
+	case ENCRYPT_METHOD_YESCRYPT:
+		return YESCRYPT_salt_cost(cost);
+#endif
+	}
+}
+
+static const char *
 magnum(enum encrypt_method m)
 {
 	switch (m) {
@@ -393,27 +412,27 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 		m = ENCRYPT_METHOD_SHA256;
 		strcpy(result, magnum(m));
 		cost = get_salt_cost(m, arg);
-		assert(strtcat_a(result, SHA_salt_rounds(cost)) != -1);
+		assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		m = ENCRYPT_METHOD_BCRYPT;
 		strcpy(result, magnum(m));
 		cost = get_salt_cost(m, arg);
-		assert(strtcat_a(result, BCRYPT_salt_rounds(cost)) != -1);
+		assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (streq(method, "YESCRYPT")) {
 		m = ENCRYPT_METHOD_YESCRYPT;
 		strcpy(result, magnum(m));
 		cost = get_salt_cost(m, arg);
-		assert(strtcat_a(result, YESCRYPT_salt_cost(cost)) != -1);
+		assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 #endif /* USE_YESCRYPT */
 	} else if (streq(method, "SHA512")) {
 sha512:
 		m = ENCRYPT_METHOD_SHA512;
 		strcpy(result, magnum(m));
 		cost = get_salt_cost(m, arg);
-		assert(strtcat_a(result, SHA_salt_rounds(cost)) != -1);
+		assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 	} else {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
