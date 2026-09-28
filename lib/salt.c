@@ -355,7 +355,7 @@ gensalt(enum encrypt_method m)
  * If NULL, the method will be defined according to the ENCRYPT_METHOD
  * variable, which can be set inside the login.defs file.
  *
- * If 'method' is specified, an additional parameter can be provided.
+ * An additional parameter is provided.
  *  * For the SHA256 and SHA512 method, this specifies the number of rounds
  *    (if not NULL).
  *  * For the YESCRYPT method, this specifies the cost factor (if not NULL).
