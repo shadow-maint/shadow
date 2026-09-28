@@ -410,36 +410,27 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 
 	if (streq(method, "SHA256")) {
 		m = ENCRYPT_METHOD_SHA256;
-		strcpy(result, magnum(m));
-		cost = get_salt_cost(m, arg);
-		assert(strtcat_a(result, salt_cost(m, cost)) != -1);
+	} else if (streq(method, "SHA512")) {
+		m = ENCRYPT_METHOD_SHA512;
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		m = ENCRYPT_METHOD_BCRYPT;
-		strcpy(result, magnum(m));
-		cost = get_salt_cost(m, arg);
-		assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (streq(method, "YESCRYPT")) {
 		m = ENCRYPT_METHOD_YESCRYPT;
-		strcpy(result, magnum(m));
-		cost = get_salt_cost(m, arg);
-		assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 #endif /* USE_YESCRYPT */
-	} else if (streq(method, "SHA512")) {
-sha512:
-		m = ENCRYPT_METHOD_SHA512;
-		strcpy(result, magnum(m));
-		cost = get_salt_cost(m, arg);
-		assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 	} else {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
 			   "Defaulting to SHA512.\n"),
 			 method);
-		goto sha512;
+		m = ENCRYPT_METHOD_SHA512;
 	}
+
+	strcpy(result, magnum(m));
+	cost = get_salt_cost(m, arg);
+	assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 
 #if USE_XCRYPT_GENSALT
 	char *retval = crypt_gensalt(result, cost, NULL, 0);
