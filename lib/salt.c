@@ -39,12 +39,7 @@
 #define USE_XCRYPT_GENSALT 0
 #endif
 
-/* Add the salt prefix. */
-#define MAGNUM(buf, c)        sprintf(buf, "$%c$", c)
-
 #ifdef USE_BCRYPT
-/* Use $2b$ as prefix for compatibility with OpenBSD's bcrypt. */
-#define BCRYPTMAGNUM(buf)     strcpy(buf, "$2b$")
 /* Default number of rounds if not explicitly specified.  */
 #define B_ROUNDS_DEFAULT 13
 /* Minimum number of rounds.  */
@@ -86,6 +81,7 @@ enum encrypt_method {
 
 
 /* local function prototypes */
+static const char *magnum(enum encrypt_method m);
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt(enum encrypt_method m);
 #endif /* !USE_XCRYPT_GENSALT */
@@ -286,6 +282,25 @@ static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost)
 }
 #endif /* USE_YESCRYPT */
 
+static const char *
+magnum(enum encrypt_method m)
+{
+	switch (m) {
+	case ENCRYPT_METHOD_SHA256:
+		return "$5$";
+	case ENCRYPT_METHOD_SHA512:
+		return "$6$";
+#ifdef USE_BCRYPT
+	case ENCRYPT_METHOD_BCRYPT:
+		return "$2b$";
+#endif
+#ifdef USE_YESCRYPT
+	case ENCRYPT_METHOD_YESCRYPT:
+		return "$y$";
+#endif
+	}
+}
+
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *
 gensalt(enum encrypt_method m)
@@ -358,27 +373,27 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *meth, /*@null@*/const long *
 
 	if (streq(method, "SHA256")) {
 		m = ENCRYPT_METHOD_SHA256;
-		MAGNUM(result, '5');
+		strcpy(result, magnum(m));
 		rounds = SHA_get_salt_rounds(arg);
 		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		m = ENCRYPT_METHOD_BCRYPT;
-		BCRYPTMAGNUM(result);
+		strcpy(result, magnum(m));
 		rounds = BCRYPT_get_salt_rounds(arg);
 		assert(strtcat_a(result, BCRYPT_salt_rounds(rounds)) != -1);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (streq(method, "YESCRYPT")) {
 		m = ENCRYPT_METHOD_YESCRYPT;
-		MAGNUM(result, 'y');
+		strcpy(result, magnum(m));
 		rounds = YESCRYPT_get_salt_cost(arg);
 		assert(strtcat_a(result, YESCRYPT_salt_cost(rounds)) != -1);
 #endif /* USE_YESCRYPT */
 	} else if (streq(method, "SHA512")) {
 sha512:
 		m = ENCRYPT_METHOD_SHA512;
-		MAGNUM(result, '6');
+		strcpy(result, magnum(m));
 		rounds = SHA_get_salt_rounds(arg);
 		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
 	} else {
