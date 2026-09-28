@@ -24,6 +24,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/stprintf.h"
+#include "string/strcpy/stpecpy.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcat.h"
 
@@ -290,13 +291,14 @@ static /*@observer@*/const char *gensalt (size_t len)
 {
 	static char  salt[MAX_SALT_LEN + 1];
 
+	char  *p, *e;
+
 	assert(len <= MAX_SALT_LEN);
+	p = salt;
+	e = &salt[len];
 
-	strcpy(salt, "");
-	while (strlen(salt) < len)
-		strtcat_a(salt, l64a(csrand()));
-
-	stpcpy(&salt[len], "");
+	while (p != NULL)
+		p = stpecpy(p, e, l64a(csrand()));
 
 	return salt;
 }
