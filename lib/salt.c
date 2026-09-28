@@ -351,25 +351,24 @@ gensalt(enum encrypt_method m)
  * Generate 8 base64 ASCII characters of random salt.
  * Methods can be set with ENCRYPT_METHOD
  *
- * The method can be forced with the meth parameter.
+ * The method can be forced with the 'method' parameter.
  * If NULL, the method will be defined according to the ENCRYPT_METHOD
  * variable, which can be set inside the login.defs file.
  *
- * If meth is specified, an additional parameter can be provided.
+ * If 'method' is specified, an additional parameter can be provided.
  *  * For the SHA256 and SHA512 method, this specifies the number of rounds
  *    (if not NULL).
  *  * For the YESCRYPT method, this specifies the cost factor (if not NULL).
  */
 /*@observer@*/
 const char *
-crypt_make_salt(/*@null@*//*@observer@*/const char *meth, /*@null@*/const long *arg)
+crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long *arg)
 {
-	const char           *method;
 	static char          result[GENSALT_SETTING_SIZE];
 	unsigned long        rounds;
 	enum encrypt_method  m;
 
-	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
+	method = method ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
 	if (streq(method, "SHA256")) {
 		m = ENCRYPT_METHOD_SHA256;
