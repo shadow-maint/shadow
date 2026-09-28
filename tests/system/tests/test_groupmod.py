@@ -4,8 +4,12 @@ Test groupmod
 
 from __future__ import annotations
 
-import pytest
+import re
 
+import pytest
+from passlib.hash import sha512_crypt
+
+from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -387,3 +391,37 @@ def test_groupmod__change_groupname_no_gshadow_file(shadow: Shadow):
 
     gshadow_file = shadow.fs.exists("/etc/gshadow")
     assert not gshadow_file, "/etc/gshadow file should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__set_password(shadow: Shadow):
+    """
+    :title: Set password for group
+    :setup:
+        1. Create group
+    :steps:
+        1. Set password for group
+        2. Check group entry
+        3. Check gshadow entry
+    :expectedresults:
+        1. Password is set successfully for group
+        2. Group is found
+        3. gshadow entry contains new password
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.groupmod(f"-p '{password_hash}' tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+        assert gshadow_entry.password is not None, "Password should not be None"
+        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
