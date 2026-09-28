@@ -300,6 +300,7 @@ get_salt_cost(enum encrypt_method m, const long *preferred_cost)
 		return YESCRYPT_get_salt_cost(preferred_cost);
 #endif
 	}
+	assert(0);
 }
 
 static const char *
@@ -318,6 +319,7 @@ salt_cost(enum encrypt_method m, unsigned long cost)
 		return YESCRYPT_salt_cost(cost);
 #endif
 	}
+	assert(0);
 }
 
 static const char *
@@ -337,6 +339,7 @@ magnum(enum encrypt_method m)
 		return "$y$";
 #endif
 	}
+	assert(0);
 }
 
 #if !USE_XCRYPT_GENSALT
