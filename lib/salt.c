@@ -365,7 +365,7 @@ const char *
 crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long *arg)
 {
 	static char          result[GENSALT_SETTING_SIZE];
-	unsigned long        rounds;
+	unsigned long        cost;
 	enum encrypt_method  m;
 
 	method = method ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
@@ -373,28 +373,28 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 	if (streq(method, "SHA256")) {
 		m = ENCRYPT_METHOD_SHA256;
 		strcpy(result, magnum(m));
-		rounds = SHA_get_salt_rounds(arg);
-		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
+		cost = SHA_get_salt_rounds(arg);
+		assert(strtcat_a(result, SHA_salt_rounds(cost)) != -1);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		m = ENCRYPT_METHOD_BCRYPT;
 		strcpy(result, magnum(m));
-		rounds = BCRYPT_get_salt_rounds(arg);
-		assert(strtcat_a(result, BCRYPT_salt_rounds(rounds)) != -1);
+		cost = BCRYPT_get_salt_rounds(arg);
+		assert(strtcat_a(result, BCRYPT_salt_rounds(cost)) != -1);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (streq(method, "YESCRYPT")) {
 		m = ENCRYPT_METHOD_YESCRYPT;
 		strcpy(result, magnum(m));
-		rounds = YESCRYPT_get_salt_cost(arg);
-		assert(strtcat_a(result, YESCRYPT_salt_cost(rounds)) != -1);
+		cost = YESCRYPT_get_salt_cost(arg);
+		assert(strtcat_a(result, YESCRYPT_salt_cost(cost)) != -1);
 #endif /* USE_YESCRYPT */
 	} else if (streq(method, "SHA512")) {
 sha512:
 		m = ENCRYPT_METHOD_SHA512;
 		strcpy(result, magnum(m));
-		rounds = SHA_get_salt_rounds(arg);
-		assert(strtcat_a(result, SHA_salt_rounds(rounds)) != -1);
+		cost = SHA_get_salt_rounds(arg);
+		assert(strtcat_a(result, SHA_salt_rounds(cost)) != -1);
 	} else {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
@@ -404,7 +404,7 @@ sha512:
 	}
 
 #if USE_XCRYPT_GENSALT
-	char *retval = crypt_gensalt (result, rounds, NULL, 0);
+	char *retval = crypt_gensalt(result, cost, NULL, 0);
 
 	/* Should not happen, but... */
 	if (NULL == retval) {
