@@ -313,3 +313,40 @@ def test_groupmod__change_group_name(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
         assert old_gshadow_entry is None, "gshadow entry should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+@pytest.mark.builtwith(shadow="gshadow")
+def test_groupmod__change_groupname_no_gshadow_entry(shadow: Shadow):
+    """
+    :title: Rename group with no corresponding gshadow entry
+    :setup:
+        1. Create group
+        2. Remove gshadow entry manually
+    :steps:
+        1. Rename group
+        2. Check group and gshadow entry for tgroup2
+        3. Check group and gshadow entry for tgroup1
+    :expectedresults:
+        1. Group is renamed successfully
+        2. Group entry is found with new name and without gshadow entry
+        3. Group and gshadow entry are not found anymore
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+    shadow.fs.sed("/^tgroup1:/d", "/etc/gshadow", args=["-i"])
+
+    shadow.groupmod("-n tgroup2 tgroup1")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+
+    gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+    assert gshadow_entry is None, "Group should not be found"
+
+    old_group_entry = shadow.tools.getent.group("tgroup1")
+    assert old_group_entry is None, "Group should not be found"
+
+    old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+    assert old_gshadow_entry is None, "gshadow entry should not be found"
