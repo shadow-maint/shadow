@@ -350,3 +350,40 @@ def test_groupmod__change_groupname_no_gshadow_entry(shadow: Shadow):
 
     old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
     assert old_gshadow_entry is None, "gshadow entry should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_groupname_no_gshadow_file(shadow: Shadow):
+    """
+    :title: Rename group when no gshadow file exists
+    :setup:
+        1. Create group
+        2. Remove gshadow file
+        3. Set FORCE_SHADOW=no in /etc/login.defs
+    :steps:
+        1. Rename group
+        2. Check group entry for tgroup2
+        3. Check group entry for tgroup1
+        4. Verify that gshadow file doesn't exist
+    :expectedresults:
+        1. Group is renamed successfully
+        2. Group is found with new name
+        3. Group is not found anymore
+        4. No gshadow file is found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+    shadow.fs.rm("/etc/gshadow")
+    shadow.login_defs["FORCE_SHADOW"] = "no"
+
+    shadow.groupmod("-n tgroup2 tgroup1")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+
+    old_group_entry = shadow.tools.getent.group("tgroup1")
+    assert old_group_entry is None, "Group should not be found"
+
+    gshadow_file = shadow.fs.exists("/etc/gshadow")
+    assert not gshadow_file, "/etc/gshadow file should not be found"
