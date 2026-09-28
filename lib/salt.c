@@ -81,6 +81,7 @@ enum encrypt_method {
 
 
 /* local function prototypes */
+static unsigned long get_salt_cost(enum encrypt_method m, const long *preferred_cost);
 static const char *magnum(enum encrypt_method m);
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt(enum encrypt_method m);
@@ -282,6 +283,24 @@ static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost)
 }
 #endif /* USE_YESCRYPT */
 
+static unsigned long
+get_salt_cost(enum encrypt_method m, const long *preferred_cost)
+{
+	switch (m) {
+	case ENCRYPT_METHOD_SHA256:
+	case ENCRYPT_METHOD_SHA512:
+		return SHA_get_salt_rounds(preferred_cost);
+#ifdef USE_BCRYPT
+	case ENCRYPT_METHOD_BCRYPT:
+		return BCRYPT_get_salt_rounds(preferred_cost);
+#endif
+#ifdef USE_YESCRYPT
+	case ENCRYPT_METHOD_YESCRYPT:
+		return YESCRYPT_get_salt_cost(preferred_cost);
+#endif
+	}
+}
+
 static const char *
 magnum(enum encrypt_method m)
 {
@@ -373,27 +392,27 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 	if (streq(method, "SHA256")) {
 		m = ENCRYPT_METHOD_SHA256;
 		strcpy(result, magnum(m));
-		cost = SHA_get_salt_rounds(arg);
+		cost = get_salt_cost(m, arg);
 		assert(strtcat_a(result, SHA_salt_rounds(cost)) != -1);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		m = ENCRYPT_METHOD_BCRYPT;
 		strcpy(result, magnum(m));
-		cost = BCRYPT_get_salt_rounds(arg);
+		cost = get_salt_cost(m, arg);
 		assert(strtcat_a(result, BCRYPT_salt_rounds(cost)) != -1);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (streq(method, "YESCRYPT")) {
 		m = ENCRYPT_METHOD_YESCRYPT;
 		strcpy(result, magnum(m));
-		cost = YESCRYPT_get_salt_cost(arg);
+		cost = get_salt_cost(m, arg);
 		assert(strtcat_a(result, YESCRYPT_salt_cost(cost)) != -1);
 #endif /* USE_YESCRYPT */
 	} else if (streq(method, "SHA512")) {
 sha512:
 		m = ENCRYPT_METHOD_SHA512;
 		strcpy(result, magnum(m));
-		cost = SHA_get_salt_rounds(arg);
+		cost = get_salt_cost(m, arg);
 		assert(strtcat_a(result, SHA_salt_rounds(cost)) != -1);
 	} else {
 		fprintf (log_get_logfd(),
