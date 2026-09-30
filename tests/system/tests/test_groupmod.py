@@ -8,6 +8,7 @@ import re
 
 import pytest
 from passlib.hash import sha512_crypt
+from pytest_mh.conn import ProcessError
 
 from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
@@ -425,3 +426,32 @@ def test_groupmod__set_password(shadow: Shadow):
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
         assert gshadow_entry.password is not None, "Password should not be None"
         assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_for_unknown_group(shadow: Shadow):
+    """
+    :title: Changing GID of unknown group fails
+    :setup:
+        1. None required
+    :steps:
+        1. Attempt to change GID for unknown group
+        2. Verify that groupmod command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. GID is not changed
+        2. groupmod command fails with error (group does not exist)
+        3. No group or gshadow entries are found
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupmod("-g 1500 tgroup")
+
+    assert exc_info.value.rc == 6, f"Expected return code 6 (group does not exist), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is None, "Group should not be found"
