@@ -502,3 +502,48 @@ def test_groupmod__change_gid_to_existing_gid(shadow: Shadow):
         gshadow_entry2 = shadow.tools.getent.gshadow("tgroup2")
         assert gshadow_entry2 is not None, "Group should be found"
         assert gshadow_entry2.name == "tgroup2", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_groupname_to_existing_name(shadow: Shadow):
+    """
+    :title: Renaming group fails when specified groupname already exists
+    :setup:
+        1. Create two groups
+    :steps:
+        1. Attempt to rename group to existing groupname
+        2. Verify that groupmod command fails
+        3. Check group and gshadow entries for tgroup1
+        4. Check group and gshadow entries for tgroup2
+    :expectedresults:
+        1. Group is not renamed
+        2. groupmod command fails with error (group name already exists)
+        3. Group and gshadow entries are found unchanged
+        4. Group and gshadow entries are still found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+    shadow.groupadd("tgroup2")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupmod("-n tgroup2 tgroup1")
+
+    assert exc_info.value.rc == 9, f"Expected return code 9 (group name already exists), got {exc_info.value.rc}"
+
+    group_entry1 = shadow.tools.getent.group("tgroup1")
+    assert group_entry1 is not None, "Group should be found"
+    assert group_entry1.name == "tgroup1", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry1 = shadow.tools.getent.gshadow("tgroup1")
+        assert gshadow_entry1 is not None, "Group should be found"
+        assert gshadow_entry1.name == "tgroup1", "Incorrect groupname"
+
+    group_entry2 = shadow.tools.getent.group("tgroup2")
+    assert group_entry2 is not None, "Group should be found"
+    assert group_entry2.name == "tgroup2", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry2 = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry2 is not None, "Group should be found"
+        assert gshadow_entry2.name == "tgroup2", "Incorrect groupname"
