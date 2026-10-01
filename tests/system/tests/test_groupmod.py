@@ -547,3 +547,36 @@ def test_groupmod__change_groupname_to_existing_name(shadow: Shadow):
         gshadow_entry2 = shadow.tools.getent.gshadow("tgroup2")
         assert gshadow_entry2 is not None, "Group should be found"
         assert gshadow_entry2.name == "tgroup2", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_groupname_to_invalid_name(shadow: Shadow):
+    """
+    :title: Renaming group fails when invalid name is specified
+    :setup:
+        1. Create group
+    :steps:
+        1. Attempt to rename group to invalid name
+        2. Verify that groupmod command fails
+        3. Check group and gshadow entry
+    :expectedresults:
+        1. Group is not renamed
+        2. groupmod command fails with error (invalid argument)
+        3. group and gshadow entries are found unchanged
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupmod("-n -invalid tgroup")
+
+    assert exc_info.value.rc == 3, f"Expected return code 3 (invalid argument), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
