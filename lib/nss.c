@@ -12,7 +12,6 @@
 #include "alloc/malloc.h"
 #include "io/fprintf.h"
 #include "prototypes.h"
-#include "../libsubid/subid.h"
 #include "shadowlog.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/strcaseprefix.h"
@@ -20,6 +19,8 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
+
+#include "../libsubid/subid.h"
 
 
 #define NSSWITCH "/etc/nsswitch.conf"
@@ -71,9 +72,9 @@ nss_init(const char *nsswitch_path) {
 	// read nsswitch.conf to check for a line like:
 	//   subid:	files
 	nssfp = fopen(nsswitch_path, "r");
-	if (!nssfp) {
+	if (nssfp == NULL) {
 		if (errno != ENOENT)
-			fprinte(log_get_logfd(), "Failed opening %s", nsswitch_path);
+			fprinte(log_get_logfd(), "fopen(\"%s\")", nsswitch_path);
 
 		atomic_store(&nss_init_completed, true);
 		return;
