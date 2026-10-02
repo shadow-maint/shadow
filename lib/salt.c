@@ -21,6 +21,7 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "memory/memset/memzero.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/stprintf.h"
@@ -317,7 +318,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 {
 	static char salt[MAX_SALT_SIZE + 6];
 
-	bzero(salt, MAX_SALT_SIZE + 6);
+	bzero_a(salt);
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
@@ -352,7 +353,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	const char *method;
 	unsigned long rounds = 0;
 
-	bzero(result, GENSALT_SETTING_SIZE);
+	bzero_a(result);
 
 	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
