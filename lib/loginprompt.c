@@ -19,6 +19,7 @@
 #include "io/fgets/fgets.h"
 #include "memory/memset/memzero.h"
 #include "prototypes.h"
+#include "string/ctype/isascii.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
@@ -94,7 +95,7 @@ login_prompt(char *name, int namesize)
 	 * Then copy the rest (up to the end) into the username.
 	 */
 
-	cp = stpspn(buf, " \t");
+	cp = stpspn(buf, CTYPE_BLANK_C);
 	strtcpy(name, cp, namesize);
 
 	/*
