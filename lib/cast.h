@@ -9,7 +9,7 @@
 #include "config.h"
 
 
-#define const_cast(T, p)  _Generic(p, const T:  (T) (p))
+#define const_cast(T, p)  _Generic(p, const T: (T) (p), default: (p))
 
 
 #endif  // include guard
