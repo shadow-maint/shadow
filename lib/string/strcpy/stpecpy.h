@@ -14,6 +14,7 @@
 #include <string.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "string/strcpy/strtcpy.h"
 
 
@@ -33,7 +34,7 @@ stpecpy(char *dst, const char *end, const char *restrict src)
 	if (dst == NULL)
 		return NULL;
 
-	dlen = strtcpy(dst, src, end - dst);
+	dlen = DEPRECATED(strtcpy(dst, src, end - dst));
 	if (dlen == -1)
 		return NULL;
 

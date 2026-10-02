@@ -1903,7 +1903,7 @@ static void update_lastlog (void)
 		if (   (lseek (fd, off_newuid, SEEK_SET) == off_newuid)
 		    && (read(fd, &ll, sizeof(ll)) == (ssize_t) sizeof(ll))) {
 			/* Reset the new uid's lastlog entry */
-			memzero(&ll, sizeof(ll));
+			memzero_T(&ll, struct lastlog);
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write_full(fd, &ll, sizeof(ll)) == -1)
 			    || (fsync (fd) != 0)) {
@@ -1963,7 +1963,7 @@ static void update_faillog (void)
 		if (   (lseek (fd, off_newuid, SEEK_SET) == off_newuid)
 		    && (read(fd, &fl, sizeof(fl)) == (ssize_t) sizeof(fl))) {
 			/* Reset the new uid's faillog entry */
-			memzero(&fl, sizeof(fl));
+			memzero_T(&fl, struct faillog);
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write_full(fd, &fl, sizeof(fl)) == -1))
 			{

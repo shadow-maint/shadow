@@ -323,7 +323,7 @@ static int new_password (const struct passwd *pw)
 	/*
 	 * Encrypt the password, then wipe the cleartext password.
 	 */
-	salt = crypt_make_salt (NULL, NULL);
+	salt = crypt_make_salt(NULL, NULL);
 	cp = pw_encrypt (pass, salt);
 	memzero_a(pass);
 

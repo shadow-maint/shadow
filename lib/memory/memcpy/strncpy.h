@@ -10,11 +10,16 @@
 
 #include <memory.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
 // strncpy_a - nonstring copy array
-#define strncpy_a(dst, src)  strncpy(dst, src, countof(dst))
+#define strncpy_a(dst, src)  DEPRECATED(strncpy(dst, src, countof(dst)))
+
+
+ATTR_DEPRECATED typeof(strncpy)  strncpy;
 
 
 #endif  // include guard

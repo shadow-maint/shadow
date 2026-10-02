@@ -144,6 +144,7 @@ libshadow_la_SOURCES = \
 	pam_pass_non_interactive.c \
 	port.c \
 	port.h \
+	pragma.h \
 	prefix_flag.c \
 	prototypes.h \
 	pwauth.c \

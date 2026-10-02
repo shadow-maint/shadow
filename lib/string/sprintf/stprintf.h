@@ -15,21 +15,24 @@
 #include <sys/types.h>
 
 #include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
 // stprintf_a - string truncate print formatted array
 #define stprintf_a(s, fmt, ...)                                       \
 (                                                                     \
-	stprintf(s, countof(s), fmt __VA_OPT__(,) __VA_ARGS__)        \
+	DEPRECATED(stprintf(s, countof(s), fmt __VA_OPT__(,) __VA_ARGS__)) \
 )
 
 
 // stprintf - string truncate print formatted
+ATTR_DEPRECATED
 format_attr(printf, 3, 4)
 inline int stprintf(char *restrict s, ssize_t size,
     const char *restrict fmt, ...);
 // vstprintf - va_list string truncate print formatted
+ATTR_DEPRECATED
 format_attr(printf, 3, 0)
 inline int vstprintf(char *restrict s, ssize_t size,
     const char *restrict fmt, va_list ap);
@@ -42,7 +45,7 @@ stprintf(char *restrict s, ssize_t size, const char *restrict fmt, ...)
 	va_list  ap;
 
 	va_start(ap, fmt);
-	len = vstprintf(s, size, fmt, ap);
+	len = DEPRECATED(vstprintf(s, size, fmt, ap));
 	va_end(ap);
 
 	return len;
