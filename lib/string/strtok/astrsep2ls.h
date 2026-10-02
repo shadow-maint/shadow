@@ -18,18 +18,17 @@
 
 
 // xastrsep2ls - exit-on-error allocate string separate to list-of-strings
-#define xastrsep2ls(s, delim, np)  exit_if_null(astrsep2ls(s, delim, np))
+#define xastrsep2ls(s, delim)  exit_if_null(astrsep2ls(s, delim))
 
 
-ATTR_ACCESS(read_write, 1) ATTR_ACCESS(write_only, 3)
+ATTR_ACCESS(read_write, 1)
 ATTR_STRING(1) ATTR_STRING(2)
-inline char **astrsep2ls(char *restrict s, const char *restrict delim,
-    size_t *restrict np);
+inline char **astrsep2ls(char *restrict s, const char *restrict delim);
 
 
 // astrsep2ls - allocate string separate to list-of-strings
 inline char **
-astrsep2ls(char *s, const char *restrict delim, size_t *restrict np)
+astrsep2ls(char *s, const char *restrict delim)
 {
 	char     **ls;
 	ssize_t  n;
@@ -40,14 +39,10 @@ astrsep2ls(char *s, const char *restrict delim, size_t *restrict np)
 	if (ls == NULL)
 		return NULL;
 
-	n = strsep2ls(s, delim, n, ls);
-	if (n == -1) {
+	if (strsep2ls(s, delim, n, ls) == -1) {
 		free(ls);
 		return NULL;
 	}
-
-	if (np != NULL)
-		*np = n;
 
 	return ls;
 }
