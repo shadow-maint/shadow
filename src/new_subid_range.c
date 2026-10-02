@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 	range.start = getdef_ulong ("SUB_UID_MIN", 100000UL);
 	range.count = getdef_ulong ("SUB_UID_COUNT", 65536);
 	if (argc > 1)
-		str2ul(&range.count, argv[1]);
+		a2i(unsigned long, &range.count, argv[1], NULL, 0,,);
 	if (group)
 		ok = subid_grant_gid_range(&range, !makenew);
 	else
