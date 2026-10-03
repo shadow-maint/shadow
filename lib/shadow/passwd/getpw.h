@@ -8,7 +8,9 @@
 
 #include "config.h"
 
+#include <errno.h>
 #include <pwd.h>
+#include <stdbool.h>
 #include <sys/types.h>
 
 #include "atoi/getnum.h"
@@ -21,9 +23,15 @@ inline const struct passwd *getpw_uid_or_nam(const char *u);
 inline const struct passwd *
 getpw_uid_or_nam(const char *u)
 {
+	int    e;
+	bool   isuid;
 	uid_t  uid;
 
-	return get_uid(u, &uid) == 0 ? getpwuid(uid) : getpwnam(u);
+	e = errno;
+	isuid = get_uid(u, &uid) == 0;
+	errno = e;
+
+	return isuid ? getpwuid(uid) : getpwnam(u);
 }
 
 

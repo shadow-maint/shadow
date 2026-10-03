@@ -71,55 +71,65 @@ bool subid_init(const char *progname, FILE *logfd);
  */
 void subid_free(void *ptr);
 
-/*
- * subid_get_uid_ranges: return a list of UID ranges for a user
- *
- * @owner: username being queried
- * @ranges: a pointer to an array of subid_range structs in which the result
- *          will be returned.
- *
- * The caller must free(ranges) when done.
- *
- * returns: number of ranges found, ir < 0 on error.
- */
-int subid_get_uid_ranges(const char *owner, struct subid_range **ranges);
+#if defined(__GNUC__) && (__GNUC__ >= 11) \
+    && !defined(__clang__) && !defined(__MCST__)
+# define SUBID_ATTR_MALLOC(dealloc)  __attribute__((__malloc__(dealloc)))
+#else
+# define SUBID_ATTR_MALLOC(dealloc)
+#endif
 
 /*
- * subid_get_gid_ranges: return a list of GID ranges for a user
+ * subid_get_uid_ranges: return the UID ranges of a user
  *
  * @owner: username being queried
- * @ranges: a pointer to an array of subid_range structs in which the result
- *          will be returned.
+ * @count: set to the number of ranges returned.
  *
- * The caller must free(ranges) when done.
+ * Returns an array of *count ranges, or NULL on failure with errno set:
+ * ENOENT when the backend does not know the user, EAGAIN when it could
+ * not be reached, ENOMEM, EMFILE or ENFILE when memory or file
+ * descriptors ran out, and EIO for any other failure.  When the backend
+ * finds no range for the user, the array is a zero-length allocation,
+ * so NULL always means failure.  A subid NSS module may report an
+ * unknown user for a user without ranges as well as for one it does
+ * not know.
  *
- * returns: number of ranges found, ir < 0 on error.
+ * The caller must subid_free() the array.
  */
-int subid_get_gid_ranges(const char *owner, struct subid_range **ranges);
+SUBID_ATTR_MALLOC(subid_free)
+struct subid_range *subid_get_uid_ranges(const char *owner, int *count);
 
 /*
- * subid_get_uid_owners: return a list of uids to which the given uid has been
- *                    delegated.
+ * subid_get_gid_ranges: return the GID ranges of a user
+ *
+ * See subid_get_uid_ranges().
+ */
+SUBID_ATTR_MALLOC(subid_free)
+struct subid_range *subid_get_gid_ranges(const char *owner, int *count);
+
+/*
+ * subid_get_uid_owners: return the users a subordinate UID is delegated to
  *
  * @uid: the subuid being queried
- * @owners: a pointer to an array of uids into which the results are placed.
- *          The returned array must be freed by the caller.
+ * @count: set to the number of owners returned.
  *
- * Returns the number of uids returned, or < 0 on error.
+ * Returns an array of *count UIDs, or NULL on failure with errno set:
+ * EAGAIN when the backend could not be reached, ENOMEM, EMFILE or
+ * ENFILE when memory or file descriptors ran out, and EIO for any
+ * other failure.  When nobody owns the ID, the array is a zero-length
+ * allocation, so NULL always means failure.
+ *
+ * The caller must subid_free() the array.
  */
-int subid_get_uid_owners(uid_t uid, uid_t **owner);
+SUBID_ATTR_MALLOC(subid_free)
+uid_t *subid_get_uid_owners(uid_t uid, int *count);
 
 /*
- * subid_get_gid_owners: return a list of uids to which the given gid has been
- *                    delegated.
+ * subid_get_gid_owners: return the users a subordinate GID is delegated to
  *
- * @uid: the subgid being queried
- * @owners: a pointer to an array of uids into which the results are placed.
- *          The returned array must be freed by the caller.
- *
- * Returns the number of uids returned, or < 0 on error.
+ * See subid_get_uid_owners().
  */
-int subid_get_gid_owners(gid_t gid, uid_t **owner);
+SUBID_ATTR_MALLOC(subid_free)
+uid_t *subid_get_gid_owners(gid_t gid, int *count);
 
 /*
  * subid_grant_uid_range: assign a subuid range to a user
