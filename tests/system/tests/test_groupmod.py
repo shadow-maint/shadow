@@ -679,7 +679,14 @@ def test_groupmod__change_gid_success_locked_gshadow_file(shadow: Shadow):
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
-def test_groupmod__change_gid_error_invalid_gid(shadow: Shadow):
+@pytest.mark.parametrize(
+    "gid_value",
+    [
+        pytest.param("1500x", id="invalid_gid"),
+        pytest.param("-1500", id="negative_gid"),
+    ],
+)
+def test_groupmod__change_gid_error_invalid_gid(shadow: Shadow, gid_value: str):
     """
     :title: Changing GID fails if invalid GID is specified
     :setup:
@@ -697,7 +704,7 @@ def test_groupmod__change_gid_error_invalid_gid(shadow: Shadow):
     shadow.groupadd("tgroup")
 
     with pytest.raises(ProcessError) as exc_info:
-        shadow.groupmod("-g 1500x tgroup")
+        shadow.groupmod(f"-g {gid_value} tgroup")
 
     assert exc_info.value.rc == 3, f"Expected return code 3 (invalid argument), got {exc_info.value.rc}"
 
