@@ -643,3 +643,36 @@ def test_groupmod__change_gid_error_locked_group_file(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_success_locked_gshadow_file(shadow: Shadow):
+    """
+    :title: Changing GID succeeds even if /etc/gshadow file is locked
+    :setup:
+        1. Create group
+        2. Create lock file /etc/gshadow.lock
+    :steps:
+        1. Attempt to change GID
+        2. Check group entry
+        3. Check gshadow entry
+    :expectedresults:
+        1. GID is successfully changed
+        2. Group entry is found with new GID
+        3. gshadow entry is found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.fs.touch("/etc/gshadow.lock")
+
+    shadow.groupmod("-g 1500 tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1500, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
