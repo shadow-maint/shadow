@@ -717,3 +717,23 @@ def test_groupmod__change_gid_error_invalid_gid(shadow: Shadow, gid_value: str):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_error_no_group(shadow: Shadow):
+    """
+    :title: Changing GID fails if no group is specified
+    :setup:
+        1. None required
+    :steps:
+        1. Attempt to change GID
+        2. Verify that groupmod command fails
+    :expectedresults:
+        1. GID is not changed
+        2. groupmod command fails with error (invalid usage)
+    :customerscenario: False
+    """
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupmod("-g 1500")
+
+    assert exc_info.value.rc == 2, f"Expected return code 2 (invalid usage), got {exc_info.value.rc}"
