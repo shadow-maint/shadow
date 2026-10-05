@@ -738,6 +738,9 @@ main(int argc, char **argv)
 	const struct spwd *sp;	/* Shadow file entry for user   */
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
+#ifdef USE_PAM
+	struct sigaction sa_int = {};
+#endif
 
 	sanitize_env ();
 	check_fds ();
@@ -1079,9 +1082,16 @@ main(int argc, char **argv)
 	/*
 	 * Before going any further, raise the ulimit to prevent colliding
 	 * into a lowered ulimit, and set the real UID to root to protect
-	 * against unexpected signals. Any keyboard signals are set to be
-	 * ignored.
+	 * against unexpected signals. pwd_init() ignores keyboard signals;
+	 * see below for SIGINT.
 	 */
+#ifdef USE_PAM
+	/*
+	 * pwd_init() ignores SIGINT.  Remember the inherited disposition so
+	 * that it can be put back while PAM prompts for the new password.
+	 */
+	sigaction (SIGINT, NULL, &sa_int);
+#endif
 	pwd_init ();
 
 #ifdef USE_PAM
@@ -1097,6 +1107,13 @@ main(int argc, char **argv)
 			do_pam_passwd_non_interactive ("passwd", name, cp);
 			erase_pass (cp);
 		} else {
+			/*
+			 * The only prompt that runs after pwd_init() is the one
+			 * in pam_chauthtok().  Leave SIGINT as inherited there,
+			 * so that Ctrl-C can abort the prompt.  The other
+			 * signals stay ignored.
+			 */
+			sigaction (SIGINT, &sa_int, NULL);
 			do_pam_passwd (name, qflg, kflg);
 		}
 		exit (E_SUCCESS);
