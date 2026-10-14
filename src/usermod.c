@@ -1109,9 +1109,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 				eflg = true;
 				break;
 			case 'f':
-				if (a2sl(&user_newinactive, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
+				if (a2sl(&user_newinactive, optarg, NULL, 0, -1,) == -1) {
 					eprintf(_("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
