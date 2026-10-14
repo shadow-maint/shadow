@@ -52,7 +52,4 @@ int nscd_flush_cache (const char *service)
 
 	return 0;
 }
-#else				/* USE_NSCD */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* USE_NSCD */
-

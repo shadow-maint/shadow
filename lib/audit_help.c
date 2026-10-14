@@ -128,8 +128,4 @@ void audit_logger_message (const char *message, shadow_audit_result result)
 		                        result);
 	}
 }
-
-#else				/* WITH_AUDIT */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* WITH_AUDIT */
-

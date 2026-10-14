@@ -51,7 +51,4 @@
 
 	return result;
 }
-#else				/* !USE_PAM */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !USE_PAM */
-
