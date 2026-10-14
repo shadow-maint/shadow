@@ -16,6 +16,9 @@
 #include "sizeof.h"
 
 
+// bzero_a - byte zero array
+#define bzero_a(a)  bzero(a, sizeof_a(a))
+
 // memzero_a - memory zero (explicit) array
 #define memzero_a(arr)  memzero(arr, sizeof_a(arr))
 
