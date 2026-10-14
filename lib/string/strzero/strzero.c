@@ -5,6 +5,3 @@
 #include "config.h"
 
 #include "string/strzero/strzero.h"
-
-
-extern inline char *strzero(char *s);

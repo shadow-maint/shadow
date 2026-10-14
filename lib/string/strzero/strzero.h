@@ -14,15 +14,13 @@
 #include "memory/memset/memzero.h"
 
 
-inline char *strzero(char *s);
-
-
 // strzero - string zero (explicit)
-inline char *
-strzero(char *s)
-{
-	return memzero(s, strlen(s));
-}
+#define strzero(s)                                                    \
+({                                                                    \
+	VQChar_of(s)  *s_ = s;                                        \
+	                                                              \
+	memzero(s_, strlen(s_));                                      \
+})
 
 
 #endif  // include guard
