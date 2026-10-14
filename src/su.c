@@ -34,6 +34,7 @@
 
 #include <getopt.h>
 #include <grp.h>
+#include <paths.h>
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
@@ -263,7 +264,7 @@ static void execve_shell (const char *shellname,
 			n_args--;
 		}
 
-		(void) execve (SHELL, targs, envp);
+		(void) execve(_PATH_BSHELL, targs, envp);
 	} else {
 		errno = err;
 	}
@@ -1078,7 +1079,7 @@ int main (int argc, char **argv)
 	 * Set the default shell.
 	 */
 	if ((NULL == shellstr) || streq(shellstr, "")) {
-		shellstr = SHELL;
+		shellstr = _PATH_BSHELL;
 	}
 
 	sulog (caller_tty, true, caller_name, name);	/* save SU information */
