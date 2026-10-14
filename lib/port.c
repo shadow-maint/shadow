@@ -96,39 +96,28 @@ static void endportent (void)
  *	the next line in /etc/porttime is converted to a (struct port)
  *	and a pointer to a static (struct port) is returned to the
  *	invoker.  NULL is returned on either EOF or error.  errno is
- *	set to EINVAL on error to distinguish the two conditions.
+ *	set on error to distinguish the two conditions.
  */
 
 static struct port *
 getportent(void)
 {
-	int   dtime;
-	int   i, j;
-	int   saveerr;
-	char  *cp;
-	char  *fields[3];
+	int  saveerr;
 
-	static char            buf[BUFSIZ];
-	static char            *ttys[PORT_TTY + 1];
-	static char            *users[PORT_IDS + 1];
-	static struct port     port;
-	static struct pt_time  ptimes[PORT_TIMES + 1];
+	static char  buf[BUFSIZ];
 
-	saveerr = errno;
 
 	/*
 	 * If the ports file is not open, open the file.  Do not rewind
 	 * since we want to search from the beginning each time.
 	 */
 
-	if (NULL == ports) {
-		setportent ();
-	}
-
-	if (NULL == ports) {
-		errno = saveerr;
+	saveerr = errno;
+	if (NULL == ports)
+		setportent();
+	errno = saveerr;
+	if (NULL == ports)
 		return NULL;
-	}
 
 	/*
 	 * Common point for beginning a new line -
@@ -140,160 +129,171 @@ getportent(void)
 	 *      - parse off a list of days and times
 	 */
 
-next:
-	if (fgets_a(buf, ports) == NULL) {
-		errno = saveerr;
-		return NULL;
-	}
-	if (strprefix(buf, "#"))
-		goto next;
+	while (fgets_a(buf, ports) != NULL) {
+		int   dtime;
+		int   i, j;
+		char  *cp;
+		char  *fields[3];
 
-	stpsep(buf, "\n");
+		static char            *ttys[PORT_TTY + 1];
+		static char            *users[PORT_IDS + 1];
+		static struct port     port;
+		static struct pt_time  ptimes[PORT_TIMES + 1];
 
-	if (strsep2arr_a(buf, ":", fields) == -1)
-		goto next;
+		if (strprefix(buf, "#"))
+			continue;
 
-	/*
-	 * Get the name of the TTY device.  It is the first colon
-	 * separated field, and is the name of the TTY with no
-	 * leading "/dev".  The entry '*' is used to specify all
-	 * TTY devices.
-	 */
-	port.pt_names = ttys;
-	if (strsep2ls_a(fields[0], ",", ttys) == -1)
-		goto next;
+		stpsep(buf, "\n");
 
-	/*
-	 * Get the list of user names.  It is the second colon
-	 * separated field, and is a comma separated list of user
-	 * names.  The entry '*' is used to specify all usernames.
-	 * The last entry in the list is a NULL pointer.
-	 */
-	port.pt_users = users;
-	if (strsep2ls_a(fields[1], ",", users) == -1)
-		goto next;
-
-	/*
-	 * Get the list of valid times.  The times field is the third
-	 * colon separated field and is a list of days of the week and
-	 * times during which this port may be used by this user.  The
-	 * valid days are 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', and 'Sa'.
-	 *
-	 * In addition, the value 'Al' represents all 7 days, and 'Wk'
-	 * represents the 5 weekdays.
-	 *
-	 * Times are given as HHMM-HHMM.  The ending time may be before
-	 * the starting time.  Days are presumed to wrap at 0000.
-	 */
-
-	cp = fields[2];
-
-	if (streq(cp, "")) {
-		port.pt_times = NULL;
-		return &port;
-	}
-
-	port.pt_times = ptimes;
-
-	/*
-	 * Get the next comma separated entry
-	 */
-
-	for (j = 0; !streq(cp, "") && (j < PORT_TIMES); j++) {
+		if (strsep2arr_a(buf, ":", fields) == -1)
+			continue;
 
 		/*
-		 * Start off with no days of the week
+		 * Get the name of the TTY device.  It is the first colon
+		 * separated field, and is the name of the TTY with no
+		 * leading "/dev".  The entry '*' is used to specify all
+		 * TTY devices.
 		 */
-
-		port.pt_times[j].t_days = 0;
+		port.pt_names = ttys;
+		if (strsep2ls_a(fields[0], ",", ttys) == -1)
+			continue;
 
 		/*
-		 * Check each two letter sequence to see if it is
-		 * one of the abbreviations for the days of the
-		 * week or the other two values.
+		 * Get the list of user names.  It is the second colon
+		 * separated field, and is a comma separated list of user
+		 * names.  The entry '*' is used to specify all usernames.
+		 * The last entry in the list is a NULL pointer.
+		 */
+		port.pt_users = users;
+		if (strsep2ls_a(fields[1], ",", users) == -1)
+			continue;
+
+		/*
+		 * Get the list of valid times.  The times field is the third
+		 * colon separated field and is a list of days of the week and
+		 * times during which this port may be used by this user.  The
+		 * valid days are 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', and 'Sa'.
+		 *
+		 * In addition, the value 'Al' represents all 7 days, and 'Wk'
+		 * represents the 5 weekdays.
+		 *
+		 * Times are given as HHMM-HHMM.  The ending time may be before
+		 * the starting time.  Days are presumed to wrap at 0000.
 		 */
 
-		for (i = 0; isalpha_c(cp[i]) && ('\0' != cp[i + 1]); i += 2) {
-			switch ((cp[i] << 8) | (cp[i + 1])) {
-			case ('S' << 8) | 'u':
-				port.pt_times[j].t_days |= 01;
-				break;
-			case ('M' << 8) | 'o':
-				port.pt_times[j].t_days |= 02;
-				break;
-			case ('T' << 8) | 'u':
-				port.pt_times[j].t_days |= 04;
-				break;
-			case ('W' << 8) | 'e':
-				port.pt_times[j].t_days |= 010;
-				break;
-			case ('T' << 8) | 'h':
-				port.pt_times[j].t_days |= 020;
-				break;
-			case ('F' << 8) | 'r':
-				port.pt_times[j].t_days |= 040;
-				break;
-			case ('S' << 8) | 'a':
-				port.pt_times[j].t_days |= 0100;
-				break;
-			case ('W' << 8) | 'k':
-				port.pt_times[j].t_days |= 076;
-				break;
-			case ('A' << 8) | 'l':
-				port.pt_times[j].t_days |= 0177;
-				break;
-			default:
-				errno = EINVAL;
-				return NULL;
+		cp = fields[2];
+
+		if (streq(cp, "")) {
+			port.pt_times = NULL;
+			return &port;
+		}
+
+		port.pt_times = ptimes;
+
+		/*
+		 * Get the next comma separated entry
+		 */
+
+		for (j = 0; !streq(cp, "") && (j < PORT_TIMES); j++) {
+
+			/*
+			 * Start off with no days of the week
+			 */
+
+			port.pt_times[j].t_days = 0;
+
+			/*
+			 * Check each two letter sequence to see if it is
+			 * one of the abbreviations for the days of the
+			 * week or the other two values.
+			 */
+
+			for (i = 0; isalpha_c(cp[i]) && ('\0' != cp[i + 1]); i += 2) {
+				switch ((cp[i] << 8) | (cp[i + 1])) {
+				case ('S' << 8) | 'u':
+					port.pt_times[j].t_days |= 01;
+					break;
+				case ('M' << 8) | 'o':
+					port.pt_times[j].t_days |= 02;
+					break;
+				case ('T' << 8) | 'u':
+					port.pt_times[j].t_days |= 04;
+					break;
+				case ('W' << 8) | 'e':
+					port.pt_times[j].t_days |= 010;
+					break;
+				case ('T' << 8) | 'h':
+					port.pt_times[j].t_days |= 020;
+					break;
+				case ('F' << 8) | 'r':
+					port.pt_times[j].t_days |= 040;
+					break;
+				case ('S' << 8) | 'a':
+					port.pt_times[j].t_days |= 0100;
+					break;
+				case ('W' << 8) | 'k':
+					port.pt_times[j].t_days |= 076;
+					break;
+				case ('A' << 8) | 'l':
+					port.pt_times[j].t_days |= 0177;
+					break;
+				default:
+					errno = EINVAL;
+					return NULL;
+				}
 			}
+
+			/*
+			 * The default is 'Al' if no days were seen.
+			 */
+
+			if (0 == i) {
+				port.pt_times[j].t_days = 0177;
+			}
+
+			/*
+			 * The start and end times are separated from each
+			 * other by a '-'.  The times are four digit numbers
+			 * representing the times of day.
+			 */
+
+			for (dtime = 0; isdigit_c(cp[i]); i++) {
+				dtime = dtime * 10 + cp[i] - '0';
+			}
+
+			if (('-' != cp[i]) || (dtime > 2400) || ((dtime % 100) > 59)) {
+				goto next;
+			}
+			port.pt_times[j].t_start = dtime;
+			cp = cp + i + 1;
+
+			for (dtime = 0, i = 0; isdigit_c(cp[i]); i++) {
+				dtime = dtime * 10 + cp[i] - '0';
+			}
+
+			if (   ((',' != cp[i]) && ('\0' != cp[i]))
+			    || (dtime > 2400)
+			    || ((dtime % 100) > 59)) {
+				goto next;
+			}
+
+			port.pt_times[j].t_end = dtime;
+			cp = cp + i + 1;
 		}
 
 		/*
-		 * The default is 'Al' if no days were seen.
+		 * The end of the list is indicated by a pair of -1's for the
+		 * start and end times.
 		 */
 
-		if (0 == i) {
-			port.pt_times[j].t_days = 0177;
-		}
+		port.pt_times[j].t_start = port.pt_times[j].t_end = -1;
 
-		/*
-		 * The start and end times are separated from each
-		 * other by a '-'.  The times are four digit numbers
-		 * representing the times of day.
-		 */
-
-		for (dtime = 0; isdigit_c(cp[i]); i++) {
-			dtime = dtime * 10 + cp[i] - '0';
-		}
-
-		if (('-' != cp[i]) || (dtime > 2400) || ((dtime % 100) > 59)) {
-			goto next;
-		}
-		port.pt_times[j].t_start = dtime;
-		cp = cp + i + 1;
-
-		for (dtime = 0, i = 0; isdigit_c(cp[i]); i++) {
-			dtime = dtime * 10 + cp[i] - '0';
-		}
-
-		if (   ((',' != cp[i]) && ('\0' != cp[i]))
-		    || (dtime > 2400)
-		    || ((dtime % 100) > 59)) {
-			goto next;
-		}
-
-		port.pt_times[j].t_end = dtime;
-		cp = cp + i + 1;
+		return &port;
+next:
+		continue;
 	}
 
-	/*
-	 * The end of the list is indicated by a pair of -1's for the
-	 * start and end times.
-	 */
-
-	port.pt_times[j].t_start = port.pt_times[j].t_end = -1;
-
-	return &port;
+	return NULL;
 }
 
 /*
