@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+cd $(dirname $0)
+
+. ../../common/config.sh
+. ../../common/log.sh
+
+log_start "$0" "an interrupt cancels the password change"
+
+save_config
+
+# restore the files on exit
+trap 'log_status "$0" "FAILURE"; restore_config' 0
+
+change_config
+
+./passwd.exp
+
+echo -n "Check the shadow file is unchanged after the cancel..."
+../../common/compare_file.pl config/etc/shadow /etc/shadow
+echo "OK"
+
+log_status "$0" "SUCCESS"
+restore_config
+trap '' 0

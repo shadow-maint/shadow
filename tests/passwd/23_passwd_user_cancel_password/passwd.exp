@@ -1,0 +1,46 @@
+#!/usr/bin/expect
+
+#
+# Regression test for shadow#319: "passwd blocks interrupt signal".
+#
+# passwd used to ignore SIGINT while changing a password, so
+# pressing Ctrl-C at the prompt did nothing and the user was stuck waiting
+# for the "Authentication failure" message.  This test sends Ctrl-C at the
+# password prompt and asserts that passwd is interrupted (control returns to
+# the shell, or the process exits) instead of ignoring the signal.
+#
+# Because the change is cancelled, the shadow file must stay unchanged.
+
+set timeout 5
+
+spawn /bin/sh
+send "PS1='# '\r"
+expect "# "
+send "\r"
+expect "# "
+
+send "passwd\r"
+# PAM prompts "New password: ", the non-PAM code "Enter new UNIX password: ".
+expect -re "(New|Enter new UNIX) password: "
+
+# Ctrl-C: previously ignored by passwd (shadow#319).
+send "\003"
+
+# passwd must not stay stuck at the prompt. Either control returns to the
+# shell prompt, or the process exits.  A timeout means SIGINT was ignored.
+expect {
+    "# " {
+        # interrupted, control returned to the shell
+    }
+    eof {
+        # interrupted, process exited
+    }
+    timeout {
+        puts stderr "FAIL: passwd ignored SIGINT at the password prompt (shadow#319)"
+        exit 1
+    }
+}
+
+send "exit\r"
+puts "OK\n"
+exit 0
