@@ -16,12 +16,11 @@
 #include "sizeof.h"
 
 
-#define addsl(a, b, ...)                                                      \
-({                                                                            \
-	long  addend_[] = {a, b, __VA_ARGS__};                                \
-                                                                              \
-	addslN(countof(addend_), addend_);                                    \
-})
+// addsl - add with-saturation long
+#define addsl(a, b, ...)  addslN_a(((long []){a, b, __VA_ARGS__}))
+
+
+#define addslN_a(a)       addslN(countof(a), a)
 
 
 inline long addsl2(long a, long b);

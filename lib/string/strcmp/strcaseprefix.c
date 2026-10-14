@@ -5,6 +5,3 @@
 #include "config.h"
 
 #include "string/strcmp/strcaseprefix.h"
-
-
-extern inline const char *strcaseprefix_(const char *s, const char *prefix);

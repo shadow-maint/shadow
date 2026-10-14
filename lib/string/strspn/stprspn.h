@@ -15,11 +15,10 @@
 
 
 // stprspn - string returns-pointer rear span
-#define stprspn(s, accept)                                            \
-({                                                                    \
-	__auto_type  s_ = (s);                                        \
-	                                                              \
-	strnul(s_) - strrspn_(s_, accept);                            \
+#define stprspn                                                       \
+((static inline auto *(auto *s, const char *accept))                  \
+{                                                                     \
+	return strnul(s) - strrspn_(s, accept);                       \
 })
 
 

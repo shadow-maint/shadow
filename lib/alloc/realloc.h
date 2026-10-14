@@ -15,14 +15,12 @@
 
 
 // realloc_T - realloc type-safe
-#define realloc_T(p, n, T)   realloc_T_(p, n, typeas(T))
-#define realloc_T_(p, n, T)                                           \
-({                                                                    \
-	_Generic(p, T *: (void)0);                                    \
-	(T *){reallocarray_(p, n, sizeof(T))};                        \
-})
-
-#define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
+#define realloc_T(p, n, T)  realloc_T_(typeas(T), p, n)
+#define realloc_T_(T, ...)                                            \
+((static inline T *(T *p, size_t n))                                  \
+{                                                                     \
+	return reallocarray(p, n ?: 1, sizeof(T));                    \
+}(__VA_ARGS__))
 
 
 // xrealloc_T - exit-on-error realloc type-safe

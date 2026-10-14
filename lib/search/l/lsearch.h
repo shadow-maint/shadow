@@ -9,19 +9,20 @@
 #include "config.h"
 
 #include <search.h>
+#include <stddef.h>
 
-#include "search/cmp/cmp.h"
 #include "sizeof.h"
 
 
 // lsearch_T - linear search-and-insert type-safe
 #define lsearch_T(T, ...)            lsearch_T_(typeas(T), __VA_ARGS__)
-#define lsearch_T_(T, k, a, n, cmp)  do                               \
+#define lsearch_T_(T, ...)                                            \
+((static inline void                                                  \
+  (size_t *n;                                                         \
+   const T *k, T a[*n], size_t *n, int (*cmp)(const T *, const T *))) \
 {                                                                     \
-	_Generic(k, T *: (void)0, const T *: (void)0);                \
-	_Generic(a, T *: (void)0);                                    \
 	lsearch(k, a, n, sizeof(T), cmp);                             \
-} while (0)
+}(__VA_ARGS__))
 
 #define LSEARCH(T, ...)  lsearch_T(T, __VA_ARGS__, CMP(T))
 
