@@ -15,6 +15,17 @@
 #include "string/strchr/strnul.h"
 
 
+// stprspn - string returns-pointer rear span
+// Available in Oracle Solaris as strrspn(3GEN).
+// <https://docs.oracle.com/cd/E36784_01/html/E36877/strrspn-3gen.html>
+#define stprspn(s, accept)                                            \
+({                                                                    \
+	__auto_type  s_ = (s);                                        \
+	                                                              \
+	strnul(s_) - strrspn_(s_, accept);                            \
+})
+
+
 ATTR_STRING(1)
 ATTR_STRING(2)
 inline size_t strrspn_(const char *s, const char *accept);

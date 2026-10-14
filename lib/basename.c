@@ -17,7 +17,7 @@
 #include <stdlib.h>
 
 #include "prototypes.h"
-#include "string/strspn/stprcspn.h"
+#include "string/strspn/strrcspn.h"
 
 
 /*@observer@*/const char *

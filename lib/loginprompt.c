@@ -20,7 +20,7 @@
 #include "memory/memset/memzero.h"
 #include "prototypes.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strspn/stpspn.h"
+#include "string/strspn/strspn.h"
 #include "string/strtok/stpsep.h"
 
 
