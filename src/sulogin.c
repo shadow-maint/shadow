@@ -18,10 +18,10 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
-#include "agetpass.h"
 #include "attr.h"
 #include "defines.h"
 #include "getdef.h"
+#include "pass.h"
 #include "prototypes.h"
 #include "pwauth.h"
 /*@-exitarg@*/
@@ -60,6 +60,7 @@ int
 main(int argc, char *argv[])
 {
 	int            err = 0;
+	pass_t         *pass;
 	char           **envp = environ;
 	TERMIO         termio;
 	struct passwd  pwent = {};
@@ -130,8 +131,10 @@ main(int argc, char *argv[])
 	(void) signal (SIGALRM, catch_signals);	/* exit if the timer expires */
 	(void) alarm (ALARM);		/* only wait so long ... */
 
+	pass = passalloca();
 	do {			/* repeatedly get login/password pairs */
-		char *pass;
+		const char  *prompt;
+
 		if (pw_entry("root", &pwent) == -1) {	/* get entry from password file */
 			/*
 			 * Fail secure
@@ -144,20 +147,22 @@ main(int argc, char *argv[])
 		 * Here we prompt for the root password, or if no password
 		 * is given we just exit.
 		 */
-
-		/* get a password for root */
-		pass = agetpass (_(
+		prompt = _(
 "\n"
 "Type control-d to proceed with normal startup,\n"
-"(or give root password for system maintenance):"));
+"(or give root password for system maintenance):");
+
+		/* get a password for root */
+		pass = getpass2(pass, prompt);
+
 		/*
 		 * XXX - can't enter single user mode if root password is
 		 * empty.  I think this doesn't happen very often :-). But
 		 * it will work with standard getpass() (no NULL on EOF).
 		 * --marekm
 		 */
-		if ((NULL == pass) || streq(pass, "")) {
-			erase_pass (pass);
+		if (NULL == pass || streq(*pass, "")) {
+			passzero(pass);
 			(void) puts ("");
 #ifdef	TELINIT
 			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) NULL);
@@ -165,8 +170,8 @@ main(int argc, char *argv[])
 			exit (0);
 		}
 
-		done = valid(pass, &pwent);
-		erase_pass (pass);
+		done = valid(*pass, &pwent);
+		pass = passzero(pass);
 
 		if (!done) {	/* check encrypted passwords ... */
 			/* ... encrypted passwords did not match */
