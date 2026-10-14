@@ -23,11 +23,11 @@
 #include "shadow/gshadow/endsgent.h"
 
 
-#ident "$Id$"
-
-#ifndef PASSWD_PROGRAM
-#define PASSWD_PROGRAM "/bin/passwd"
+#ifndef PATH_PASSWD
+#define PATH_PASSWD "/bin/passwd"
 #endif
+
+
 /*
  * expire - force password change if password expired
  *
@@ -116,9 +116,9 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 			_exit (126);
 		}
 
-		(void) execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) NULL);
+		(void) execl(PATH_PASSWD, PATH_PASSWD, pw->pw_name, (char *) NULL);
 		err = errno;
-		perror ("Can't execute " PASSWD_PROGRAM);
+		perror("Can't execute " PATH_PASSWD);
 		_exit ((ENOENT == err) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	} else if ((pid_t) -1 == pid) {
 		perror ("fork");
