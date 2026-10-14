@@ -300,9 +300,6 @@ extern size_t pass_min_len(void);
 extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
 #endif
 
-/* port.c */
-extern bool isttytime (const char *, const char *, time_t);
-
 /* prefix_flag.c */
 extern const char* process_prefix_flag (const char* short_opt, int argc, char **argv);
 extern struct group *prefix_getgrnam(const char *name);

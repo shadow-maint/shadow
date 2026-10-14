@@ -54,11 +54,6 @@ MAIL_CHECK_ENAB		yes
 OBSCURE_CHECKS_ENAB	yes
 
 #
-# Enable checking of time restrictions specified in /etc/porttime.
-#
-PORTTIME_CHECKS_ENAB	yes
-
-#
 # Enable setting of ulimit, umask, and niceness from passwd(5) gecos field.
 #
 QUOTAS_ENAB		yes
