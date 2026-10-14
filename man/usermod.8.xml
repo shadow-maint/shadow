@@ -149,32 +149,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Defines the number of days after a password exceeds its maximum age
-	    during which the user can still log in by immediately changing their password.
-	    If the user does not change their password within this period of time,
-	    their account becomes inactive.
-	    This value is stored in the shadow password file.
-	  </para>
-	  <para>
-	    A value of 0 disables the account when the password expires, with no delay.
-	    </para>
-	  <para>
-	    A value of -1 empties the respective field in the shadow password file,
-	    which means that the inactivity period is not enforced.
-	  </para>
-	  <para>
-	    This option requires the <filename>/etc/shadow</filename> file.
-	    If no entry exist in the <filename>/etc/shadow</filename> file,
-	    the system will automatically create one.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>
 	</term>
 	<listitem>

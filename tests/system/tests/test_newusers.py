@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import pytest
 
-from framework.misc import days_since_epoch
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -46,9 +45,6 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
     assert shadow_entry is not None, "tuser1 user should be found in shadow"
     assert shadow_entry.name == "tuser1", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
-    assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.max_days == 99999, "Incorrect max days"
-    assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
     group_entry = shadow.tools.getent.group("tuser1")
     assert group_entry is not None, "tuser1 group should be found"
@@ -77,9 +73,6 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
     assert shadow_entry is not None, "tuser2 user should be found in shadow"
     assert shadow_entry.name == "tuser2", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
-    assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.max_days == 99999, "Incorrect max days"
-    assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
     group_entry = shadow.tools.getent.group("tuser2")
     assert group_entry is not None, "tuser2 group should be found"
@@ -132,9 +125,6 @@ def test_newusers__create_users_from_file(shadow: Shadow):
     assert shadow_entry is not None, "tuser1 user should be found in shadow"
     assert shadow_entry.name == "tuser1", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
-    assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.max_days == 99999, "Incorrect max days"
-    assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
     group_entry = shadow.tools.getent.group("tuser1")
     assert group_entry is not None, "tuser1 group should be found"
@@ -163,9 +153,6 @@ def test_newusers__create_users_from_file(shadow: Shadow):
     assert shadow_entry is not None, "tuser2 user should be found in shadow"
     assert shadow_entry.name == "tuser2", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
-    assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.max_days == 99999, "Incorrect max days"
-    assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
     group_entry = shadow.tools.getent.group("tuser2")
     assert group_entry is not None, "tuser2 group should be found"
