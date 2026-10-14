@@ -570,7 +570,7 @@ static void update_age (/*@null@*/const struct spwd *sp,
 	if (NULL == sp) {
 		struct passwd pwent = *pw;
 
-		memzero(&spwent, sizeof(spwent));
+		memzero_T(&spwent, struct spwd);
 		spwent.sp_namp = pwent.pw_name;
 		spwent.sp_pwdp = pwent.pw_passwd;
 		spwent.sp_flag = SHADOW_SP_FLAG_UNSET;

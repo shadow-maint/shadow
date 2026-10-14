@@ -21,7 +21,7 @@ inline char *strzero(char *s);
 inline char *
 strzero(char *s)
 {
-	return memzero(s, strlen(s));
+	return DEPRECATED(memzero(s, strlen(s)));
 }
 
 

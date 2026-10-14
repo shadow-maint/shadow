@@ -950,7 +950,7 @@ static void usage (int status)
  */
 static void new_pwent (struct passwd *pwent)
 {
-	memzero(pwent, sizeof(*pwent));
+	memzero_T(pwent, struct passwd);
 	pwent->pw_name = (char *) user_name;
 	if (is_shadow_pwd) {
 		pwent->pw_passwd = (char *) SHADOW_PASSWD_STRING;
@@ -973,7 +973,7 @@ static void new_pwent (struct passwd *pwent)
  */
 static void new_spent (struct spwd *spent)
 {
-	memzero(spent, sizeof(*spent));
+	memzero_T(spent, struct spwd);
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
 	spent->sp_lstchg = gettime () / DAY;
@@ -1835,7 +1835,7 @@ static char *empty_list = NULL;
 
 static void new_grent (struct group *grent)
 {
-	memzero(grent, sizeof(*grent));
+	memzero_T(grent, struct group);
 	grent->gr_name = (char *) user_name;
 #ifdef  SHADOWGRP
 	if (is_shadow_grp) {
@@ -1859,7 +1859,7 @@ static void new_grent (struct group *grent)
 
 static void new_sgent (struct sgrp *sgent)
 {
-	memzero(sgent, sizeof(*sgent));
+	memzero_T(sgent, struct sgrp);
 	sgent->sg_namp = (char *) user_name;
 	sgent->sg_passwd = "!";	/* XXX warning: const */
 	sgent->sg_adm = &empty_list;
@@ -1941,7 +1941,7 @@ static void faillog_reset (uid_t uid)
 		return;
 	}
 
-	memzero(&fl, sizeof(fl));
+	memzero_T(&fl, struct faillog);
 
 	fd = open (FAILLOG_FILE, O_RDWR);
 	if (-1 == fd) {
@@ -1983,7 +1983,7 @@ static void lastlog_reset (uid_t uid)
 		return;
 	}
 
-	memzero(&ll, sizeof(ll));
+	memzero_T(&ll, struct lastlog);
 
 	fd = open(_PATH_LASTLOG, O_RDWR);
 	if (-1 == fd) {

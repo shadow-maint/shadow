@@ -354,7 +354,7 @@ extern int remove_tree (const char *root, bool remove_root);
 extern void process_root_flag (const char* short_opt, int argc, char **argv);
 
 /* salt.c */
-extern /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg);
+extern /*@observer@*/const char *crypt_make_salt(/*@null@*//*@observer@*/const char *meth, /*@null@*/const long *arg);
 
 /* selinux.c */
 #ifdef WITH_SELINUX
