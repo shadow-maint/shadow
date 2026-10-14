@@ -2,6 +2,7 @@
 
 #include "chkhash.h"
 
+#include <locale.h>
 #include <regex.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -19,13 +20,26 @@ match_regex(const char *pattern, const char *string)
 {
 	regex_t regex;
 	int result;
+	locale_t l, c;
 
-	if (regcomp(&regex, pattern, REG_EXTENDED) != 0)
+	c = newlocale(LC_ALL_MASK, "C", (locale_t) 0);
+	if (c == (locale_t) 0) {
 		return false;
+	}
+	l = uselocale(c);
+	if (l == (locale_t) 0) {
+		freelocale(c);
+		return false;
+	}
 
-	result = regexec(&regex, string, 0, NULL, 0);
-	regfree(&regex);
+	result = REG_NOMATCH;
+	if (regcomp(&regex, pattern, REG_EXTENDED) == 0) {
+		result = regexec(&regex, string, 0, NULL, 0);
+		regfree(&regex);
+	}
 
+	uselocale(l);
+	freelocale(c);
 	return result == 0;
 }
 
