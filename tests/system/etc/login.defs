@@ -143,7 +143,7 @@ HUSHLOGIN_FILE	.hushlogin
 # If defined, either a TZ environment parameter spec or the
 # fully-rooted pathname of a file containing such a spec.
 #
-#ENV_TZ		TZ=CST6CDT
+#ENV_TZ		TZ=UTC
 #ENV_TZ		/etc/tzname
 
 #

@@ -145,10 +145,14 @@ next:
 		errno = saveerr;
 		return NULL;
 	}
+
+	if (stpsep(buf, "\n") == NULL) {
+		errno = EINVAL;
+		return NULL;
+	}
+
 	if (strprefix(buf, "#"))
 		goto next;
-
-	stpsep(buf, "\n");
 
 	if (strsep2arr_a(buf, ":", fields) == -1)
 		goto next;

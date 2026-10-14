@@ -76,7 +76,10 @@ bool hushed (const char *username)
 		return false;
 	}
 	for (found = false; !found && (fgets_a(buf, fp) != NULL);) {
-		stpsep(buf, "\n");
+		if (stpsep(buf, "\n") == NULL) {
+			fclose(fp);
+			return false;
+		}
 		found = streq(buf, pw->pw_shell) ||
 		        streq(buf, pw->pw_name);
 	}
