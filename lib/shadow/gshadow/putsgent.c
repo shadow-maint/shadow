@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "prototypes.h"
 #include "shadow/gshadow/sgrp.h"
 

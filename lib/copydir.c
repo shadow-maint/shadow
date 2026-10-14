@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "fs/readlink/areadlink.h"
 #include "io/fprintf.h"

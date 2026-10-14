@@ -16,7 +16,7 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
