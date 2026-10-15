@@ -774,3 +774,45 @@ def test_groupmod__change_gid_and_group_name(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
         assert old_gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_and_group_name_and_password(shadow: Shadow):
+    """
+    :title: Change GID, name and password of group
+    :setup:
+        1. Create group
+    :steps:
+        1. Change GID, name and password
+        2. Check group and gshadow entry for tgroup2
+        3. Check group and gshadow entry for tgroup1
+    :expectedresults:
+        1. GID and group name is changed
+        2. Group and gshadow entries are found with new GID, name and password
+        3. Group and gshadow entries are not found anymore
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.groupmod(f"-g 1500 -n tgroup2 -p '{password_hash}' tgroup1")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+    assert group_entry.gid == 1500, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
+        assert gshadow_entry.password is not None, "Password should not be None"
+        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+
+    old_group_entry = shadow.tools.getent.group("tgroup1")
+    assert old_group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert old_gshadow_entry is None, "Group should not be found"
