@@ -899,3 +899,42 @@ def test_groupmod__change_gid_change_primary_group_error_locked_passwd(shadow: S
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_group_name_success_locked_passwd(shadow: Shadow):
+    """
+    :title: Renaming group suceeds even if /etc/passwd is locked
+    :setup:
+       1. Create group
+       2. Create lock file /etc/passwd.lock
+    :steps:
+       1. Attempt to rename the group
+       2. Check group and gshadow entries for tgroup2
+       3. Check group and gshadow entries for tgroup1
+    :expectedresults:
+       1. Group is renamed successfully
+       2. Group and gshadow entries are found with new name
+       3. Group and gshadow entries are not found anymore
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+    shadow.fs.touch("/etc/passwd.lock")
+
+    shadow.groupmod("-n tgroup2 tgroup1")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
+
+    old_group_entry = shadow.tools.getent.group("tgroup1")
+    assert old_group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert old_gshadow_entry is None, "Group should not be found"
