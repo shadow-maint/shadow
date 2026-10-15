@@ -684,6 +684,7 @@ def test_groupmod__change_gid_success_locked_gshadow_file(shadow: Shadow):
     [
         pytest.param("1500x", id="invalid_gid"),
         pytest.param("-1500", id="negative_gid"),
+        pytest.param("4294967295", id="exceeds_maximum_gid"),
     ],
 )
 def test_groupmod__change_gid_error_invalid_gid(shadow: Shadow, gid_value: str):
