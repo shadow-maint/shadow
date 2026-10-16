@@ -15,8 +15,8 @@
 /*
  * match_regex - return true if match, false if not
  */
-bool 
-match_regex(const char *pattern, const char *string) 
+bool
+match_regex(const char *pattern, const char *string)
 {
 	regex_t regex;
 	int result;
@@ -49,8 +49,8 @@ match_regex(const char *pattern, const char *string)
  *
  * regex from: https://man.archlinux.org/man/crypt.5.en
  */
-bool 
-is_valid_hash(const char *hash) 
+bool
+is_valid_hash(const char *hash)
 {
 	// Password temporarily locked
 	hash = strprefix(hash, "!") ?: hash;
