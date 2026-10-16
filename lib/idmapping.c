@@ -12,12 +12,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <strings.h>
-#if __has_include(<sys/capability.h>)
-# include <sys/capability.h>
-#endif
-#if __has_include(<sys/prctl.h>)
-# include <sys/prctl.h>
-#endif
+#include <linux/capability.h>
+#include <sys/prctl.h>
+#include <sys/syscall.h>
+#include <unistd.h>
 
 #include "alloc/calloc.h"
 #include "alloc/malloc.h"
@@ -90,7 +88,6 @@ get_map_ranges(int ranges, int argc, char **argv)
  */
 #define ULONG_DIGITS (((WIDTHOF(unsigned long) + 9)/10)*3)
 
-#if __has_include(<sys/capability.h>)
 static inline bool maps_lower_root(int cap, int ranges, const struct map_range *mappings)
 {
 	int idx;
@@ -107,7 +104,6 @@ static inline bool maps_lower_root(int cap, int ranges, const struct map_range *
 
 	return false;
 }
-#endif
 
 void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings,
 	const char *map_file, MAYBE_UNUSED uid_t ruid)
@@ -118,7 +114,6 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	char *buf, *pos, *end;
 	int fd;
 
-#if __has_include(<sys/capability.h>)
 	int cap;
 	struct __user_cap_header_struct hdr = {_LINUX_CAPABILITY_VERSION_3, 0};
 	struct __user_cap_data_struct data[2] = {{0}};
@@ -180,11 +175,10 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	if (maps_lower_root(cap, ranges, mappings))
 		data[0].effective |= CAP_TO_MASK(CAP_SETFCAP);
 	data[0].permitted = data[0].effective;
-	if (capset(&hdr, data) < 0) {
+	if (syscall(SYS_capset, &hdr, data) < 0) {
 		fprintf(log_get_logfd(), _("%s: Could not set caps\n"), log_get_progname());
 		exit(EXIT_FAILURE);
 	}
-#endif
 
 	bufsize = (ULONG_DIGITS + 1) * 3 * ranges + 1;
 	pos = buf = xmalloc_T(bufsize, char);
