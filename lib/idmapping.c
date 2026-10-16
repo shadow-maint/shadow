@@ -109,21 +109,6 @@ static inline bool maps_lower_root(int cap, int ranges, const struct map_range *
 }
 #endif
 
-/*
- * The ruid refers to the caller's uid and is used to reset the effective uid
- * back to the callers real uid.
- * This clutch mainly exists for setuid-based new{g,u}idmap binaries that are
- * called in contexts where all capabilities other than the necessary
- * CAP_SET{G,U}ID capabilities are dropped. Since the kernel will require
- * assurance that the caller holds CAP_SYS_ADMIN over the target user namespace
- * the only way it can confirm is in this case is if the effective uid is
- * equivalent to the uid owning the target user namespace.
- * Note, we only support this when a) new{g,u}idmap is not called by root and
- * b) if the caller's uid and the uid retrieved via system appropriate means
- * (shadow file or other) are identical. Specifically, this does not support
- * when the root user calls the new{g,u}idmap binary for an unprivileged user.
- * If this is wanted: use file capabilities!
- */
 void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings,
 	const char *map_file, MAYBE_UNUSED uid_t ruid)
 {
@@ -147,7 +132,32 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 		exit(EXIT_FAILURE);
 	}
 
-	/* Align setuid- and fscaps-based new{g,u}idmap behavior. */
+	/*
+	 * In order to write an idmap, we need to "have capabiilties
+	 * in the *target* userns" -- this is ns_capable or file_ns_capable
+	 * in the Linux sources.  Depending on exactly what mapping we're
+	 * writing, this is CAP_SYS_ADMIN and/or CAP_SETFCAP.  We can
+	 * have these capabilities in one of two ways: we can hold them
+	 * on our own effective capability set or we can have
+	 * euid == the namespace owner.  There is no special case for euid == 0
+	 * in that check/
+	 *
+	 * It's rather popular to run inside an outer "container" with
+	 * CAP_SYS_ADMIN and CAP_SETFCAP removed from its
+	 * bounding set and to have newuidmap be setuid root.
+	 *
+	 * Usually we will be run by the namespace owner, so ruid will
+	 * equal the target namespace owner.  Setting euid back to ruid
+	 * will restore our capabilities over the target in case we
+	 * don't have CAP_SYS_ADMIN.  It also hardens us a bit in that we
+	 * should really not be using our euid==0 to accidentally have capabilites
+	 * in the target namespace if that namespace is owned by uid 0 and our
+	 * ruid != 0.  (Note that this is just hardening -- we are quite careful
+	 * not to make this mistake in the first place.)
+	 *
+	 * This also serves to align setuid- and fscaps-based
+	 * new{g,u}idmap behavior.
+	 */
 	if (geteuid() == 0 && geteuid() != ruid) {
 		if (prctl(PR_SET_KEEPCAPS, 1L) == -1) {
 			fprintf(log_get_logfd(), _("%s: Could not prctl(PR_SET_KEEPCAPS)\n"), log_get_progname());
