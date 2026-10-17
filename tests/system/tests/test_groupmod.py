@@ -684,6 +684,7 @@ def test_groupmod__change_gid_success_locked_gshadow_file(shadow: Shadow):
     [
         pytest.param("1500x", id="invalid_gid"),
         pytest.param("-1500", id="negative_gid"),
+        pytest.param("4294967295", id="exceeds_maximum_gid"),
     ],
 )
 def test_groupmod__change_gid_error_invalid_gid(shadow: Shadow, gid_value: str):
@@ -737,3 +738,204 @@ def test_groupmod__change_gid_error_no_group(shadow: Shadow):
         shadow.groupmod("-g 1500")
 
     assert exc_info.value.rc == 2, f"Expected return code 2 (invalid usage), got {exc_info.value.rc}"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_and_group_name(shadow: Shadow):
+    """
+    :title: Change GID and name of group
+    :setup:
+        1. Create group
+    :steps:
+        1. Change GID and group name
+        2. Check group and gshadow entry for tgroup2
+        3. Check group and gshadow entry for tgroup1
+    :expectedresults:
+        1. GID and group name is changed
+        2. Group and gshadow entries are found with new name
+        3. Group and gshadow entries are not found anymore
+    """
+    shadow.groupadd("tgroup1")
+
+    shadow.groupmod("-g 1500 -n tgroup2 tgroup1")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+    assert group_entry.gid == 1500, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
+
+    old_group_entry = shadow.tools.getent.group("tgroup1")
+    assert old_group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert old_gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_and_group_name_and_password(shadow: Shadow):
+    """
+    :title: Change GID, name and password of group
+    :setup:
+        1. Create group
+    :steps:
+        1. Change GID, name and password
+        2. Check group and gshadow entry for tgroup2
+        3. Check group and gshadow entry for tgroup1
+    :expectedresults:
+        1. GID and group name is changed
+        2. Group and gshadow entries are found with new GID, name and password
+        3. Group and gshadow entries are not found anymore
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.groupmod(f"-g 1500 -n tgroup2 -p '{password_hash}' tgroup1")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+    assert group_entry.gid == 1500, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
+        assert gshadow_entry.password is not None, "Password should not be None"
+        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+
+    old_group_entry = shadow.tools.getent.group("tgroup1")
+    assert old_group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert old_gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_and_groupname_error_locked_gshadow(shadow: Shadow):
+    """
+    :title: Changing GID and name of group fails when /etc/gshadow is locked
+    :setup:
+        1. Create group
+        2. Create lock file /etc/gshadow.lock
+    :steps:
+        1. Attempt to change GID and group name
+        2. Verify that groupmod command fails
+        3. Check group and gshadow entries
+    :expectedresults:
+        1. GID and group name are not changed
+        2. groupmod command fails with error (cannot lock file)
+        3. Group and gshadow entries are found unchanged
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+    shadow.fs.touch("/etc/gshadow.lock")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupmod("-g 1500 -n tgroup2 tgroup1")
+
+    assert exc_info.value.rc == 10, f"Expected return code 10 (cannot lock file), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup1")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup1", "Incorrect groupname"
+    assert group_entry.gid == 1001, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup1", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_gid_change_primary_group_error_locked_passwd(shadow: Shadow):
+    """
+    :title: Changing GID for primary group for user fails when /etc/passwd is locked
+    :setup:
+        1. Create group
+        2. Create user with group as primary group
+        3. Create lock file /etc/passwd.lock
+    :steps:
+        1. Attempt to change GID of group
+        2. Verify that groupmod command fails
+        3. Check group entry
+        4. Check user's primary GID
+        5. Check gshadow entry
+    :expectedresults:
+        1. GID is not changed
+        2. groupmod command fails error (cannot lock file)
+        3. Group entry is found unchanged
+        4. Passwd entry exists with unchanged GID
+        5. gshadow entry is found unchanged
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.useradd("-g tgroup tuser")
+    shadow.fs.touch("/etc/passwd.lock")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupmod("-g 1500 tgroup")
+
+    assert exc_info.value.rc == 10, f"Expected return code 10 (cannot lock file), got {exc_info.value.rc}"
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1001, "Incorrect GID"
+
+    passwd_entry = shadow.tools.getent.passwd("tuser")
+    assert passwd_entry is not None, "User should be found"
+    assert passwd_entry.name == "tuser", "Incorrect username"
+    assert passwd_entry.gid == 1001, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__change_group_name_success_locked_passwd(shadow: Shadow):
+    """
+    :title: Renaming group suceeds even if /etc/passwd is locked
+    :setup:
+       1. Create group
+       2. Create lock file /etc/passwd.lock
+    :steps:
+       1. Attempt to rename the group
+       2. Check group and gshadow entries for tgroup2
+       3. Check group and gshadow entries for tgroup1
+    :expectedresults:
+       1. Group is renamed successfully
+       2. Group and gshadow entries are found with new name
+       3. Group and gshadow entries are not found anymore
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+    shadow.fs.touch("/etc/passwd.lock")
+
+    shadow.groupmod("-n tgroup2 tgroup1")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
+
+    old_group_entry = shadow.tools.getent.group("tgroup1")
+    assert old_group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert old_gshadow_entry is None, "Group should not be found"
