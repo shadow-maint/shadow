@@ -209,6 +209,7 @@ grp_update(void)
 #ifdef	SHADOWGRP
 	struct sgrp sgrp;
 	const struct sgrp *osgrp = NULL;
+	bool sgrp_is_new = false;
 #endif				/* SHADOWGRP */
 
 	/*
@@ -241,7 +242,11 @@ grp_update(void)
 			sgrp.sg_namp   = xstrdup (grp.gr_name);
 			sgrp.sg_passwd = xstrdup (grp.gr_passwd);
 			sgrp.sg_adm    = &empty;
-			sgrp.sg_mem    = grp.gr_mem;
+			/* grp.gr_mem is owned by the group entry that gr_update()
+			 * below replaces (and frees) before sgr_update() runs.
+			 */
+			sgrp.sg_mem    = dup_list(grp.gr_mem);
+			sgrp_is_new = true;
 			new_sgent (&sgrp);
 			osgrp = &sgrp; /* entry needs to be committed */
 		}
@@ -264,9 +269,13 @@ grp_update(void)
 #ifdef	SHADOWGRP
 		if (NULL != osgrp) {
 			if (!aflg) {
+				if (sgrp_is_new) {
+					free_list(sgrp.sg_mem);
+					free(sgrp.sg_mem);
+				}
 				sgrp.sg_mem = xmalloc_T(1, char *);
 				sgrp.sg_mem[0] = NULL;
-			} else {
+			} else if (!sgrp_is_new) {
 				sgrp.sg_mem = dup_list(sgrp.sg_mem);
 			}
 		}
@@ -328,13 +337,13 @@ grp_update(void)
 	if (NULL != user_list) {
 		free_list(grp.gr_mem);
 		free(grp.gr_mem);
-#ifdef	SHADOWGRP
-		if (NULL != osgrp) {
-			free_list(sgrp.sg_mem);
-			free(sgrp.sg_mem);
-		}
-#endif				/* SHADOWGRP */
 	}
+#ifdef	SHADOWGRP
+	if (NULL != osgrp && (NULL != user_list || sgrp_is_new)) {
+		free_list(sgrp.sg_mem);
+		free(sgrp.sg_mem);
+	}
+#endif				/* SHADOWGRP */
 }
 
 /*
