@@ -2,6 +2,7 @@
 
 #include "chkhash.h"
 
+#include <locale.h>
 #include <regex.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -14,18 +15,37 @@
 /*
  * match_regex - return true if match, false if not
  */
-bool 
-match_regex(const char *pattern, const char *string) 
+bool
+match_regex(const char *pattern, const char *string)
 {
 	regex_t regex;
-	int result;
+	int result = REG_NOMATCH;
+	locale_t current_locale;
+	locale_t c_locale;
 
-	if (regcomp(&regex, pattern, REG_EXTENDED) != 0)
+	/*
+	 * Some locales collate the Latin letters so that some characters fall
+	 * outside [a-z]/[A-Za-z], (for example, 'tr_TR' and 'i'/'I')
+	 * and this wrongly rejects valid hashes.
+	 * Force the C locale for both compiling and executing the regex.
+	 */
+	c_locale = newlocale(LC_ALL_MASK, "C", (locale_t) 0);
+	if (c_locale == (locale_t) 0) {
 		return false;
+	}
+	current_locale = uselocale(c_locale);
+	if (current_locale == (locale_t) 0) {
+		freelocale(c_locale);
+		return false;
+	}
 
-	result = regexec(&regex, string, 0, NULL, 0);
-	regfree(&regex);
+	if (regcomp(&regex, pattern, REG_EXTENDED) == 0) {
+		result = regexec(&regex, string, 0, NULL, 0);
+		regfree(&regex);
+	}
 
+	uselocale(current_locale);
+	freelocale(c_locale);
 	return result == 0;
 }
 
@@ -35,8 +55,8 @@ match_regex(const char *pattern, const char *string)
  *
  * regex from: https://man.archlinux.org/man/crypt.5.en
  */
-bool 
-is_valid_hash(const char *hash) 
+bool
+is_valid_hash(const char *hash)
 {
 	// Password temporarily locked
 	hash = strprefix(hash, "!") ?: hash;
