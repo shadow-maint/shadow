@@ -4,6 +4,7 @@
 
 #include "config.h"
 
+#include <locale.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -161,6 +162,30 @@ test_is_valid_hash_edge_account_locks(MAYBE_UNUSED void ** _1)
 
 
 static void
+test_is_valid_hash_turkish_locale(MAYBE_UNUSED void ** _1)
+{
+	char *saved;
+
+	saved = setlocale(LC_ALL, NULL);
+	if (saved != NULL) {
+		saved = strdup(saved);
+	}
+
+	// Turkish locale has 'i'/'I' outside the [a-z]/[A-Za-z] ranges
+	if (setlocale(LC_ALL, "tr_TR.UTF-8") == NULL &&
+		setlocale(LC_ALL, "tr_TR") == NULL) {
+		free(saved);
+		skip();  // locale not available on this system
+	}
+
+	assert_true(is_valid_hash("$y$j9T$lChB5KbMj.6n51V3DjPfn0$6WyruF4YWm9GDgKx2mik5QEHE6J4m2RVXXegiqrfjI8"));
+
+	setlocale(LC_ALL, (saved != NULL) ? saved : "C");
+	free(saved);
+}
+
+
+static void
 test_is_invalid_algorithm(MAYBE_UNUSED void ** _1)
 {
 	assert_false(is_valid_hash("$7$salt$hash"));
@@ -221,6 +246,7 @@ main(void)
         cmocka_unit_test(test_is_valid_hash_ok_special),
         cmocka_unit_test(test_is_valid_hash_edge_salt_chars),
         cmocka_unit_test(test_is_valid_hash_edge_account_locks),
+        cmocka_unit_test(test_is_valid_hash_turkish_locale),
         cmocka_unit_test(test_is_invalid_algorithm),
         cmocka_unit_test(test_is_invalid_hash_length),
         cmocka_unit_test(test_is_invalid_delimeters),
