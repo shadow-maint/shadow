@@ -807,7 +807,7 @@ int main (int argc, char **argv)
 	while (true) {	/* repeatedly get login/password pairs */
 		bool failed;
 		/* user_passwd is always a pointer to this constant string
-		 * or a passwd or shadow password that will be memzero by
+		 * or a passwd or shadow password that will be memzero_explicit by
 		 * pw_free / spw_free.
 		 * Do not free() user_passwd. */
 		const char *user_passwd = "!";

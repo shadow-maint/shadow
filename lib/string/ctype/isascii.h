@@ -8,8 +8,11 @@
 
 #include "config.h"
 
+#include <ctype.h>
 #include <string.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
 
@@ -54,6 +57,20 @@
 
 // strchriscntrl_c - string character is [:cntrl:] C-locale
 #define strchriscntrl_c(s)  (!!strpbrk(s, CTYPE_CNTRL_C))
+
+
+ATTR_DEPRECATED typeof(isascii)  isascii;
+ATTR_DEPRECATED typeof(iscntrl)  iscntrl;
+ATTR_DEPRECATED typeof(islower)  islower;
+ATTR_DEPRECATED typeof(isupper)  isupper;
+ATTR_DEPRECATED typeof(isdigit)  isdigit;
+ATTR_DEPRECATED typeof(ispunct)  ispunct;
+ATTR_DEPRECATED typeof(isspace)  isspace;
+ATTR_DEPRECATED typeof(isalpha)  isalpha;
+ATTR_DEPRECATED typeof(isalnum)  isalnum;
+ATTR_DEPRECATED typeof(isgraph)  isgraph;
+ATTR_DEPRECATED typeof(isprint)  isprint;
+ATTR_DEPRECATED typeof(isxdigit)  isxdigit;
 
 
 #endif  // include guard

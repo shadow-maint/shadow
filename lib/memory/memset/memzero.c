@@ -9,4 +9,4 @@
 #include "memory/memset/memzero.h"
 
 
-extern inline void *memzero(void *ptr, size_t size);
+extern inline void *memzero_explicit(void *ptr, size_t size);

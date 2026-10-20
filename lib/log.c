@@ -74,7 +74,7 @@ void dolastlog (
 	 */
 
 	if (read(fd, &newlog, sizeof(newlog)) != (ssize_t) sizeof(newlog)) {
-		memzero(&newlog, sizeof(newlog));
+		memzero_explicit_T(&newlog, 1, struct lastlog);
 	}
 	if (NULL != ll) {
 		*ll = newlog;

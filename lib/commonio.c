@@ -859,7 +859,7 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 		goto fail;
 	}
 
-	memzero(&sb, sizeof(sb));
+	memzero_explicit_T(&sb, 1, struct stat);
 	if (NULL != db->fp) {
 		if (fstat (fileno (db->fp), &sb) != 0) {
 			(void) fclose (db->fp);
