@@ -10,7 +10,7 @@
 #include <sys/types.h>
 
 
-extern inline int stprintf(char *restrict s, ssize_t size,
-    const char *restrict fmt, ...);
-extern inline int vstprintf(char *restrict s, ssize_t size,
-    const char *restrict fmt, va_list ap);
+extern inline int stprintf(ssize_t size;
+    char s[restrict size], ssize_t size, const char *restrict fmt, ...);
+extern inline int vstprintf(ssize_t size;
+    char s[restrict size], ssize_t size, const char *restrict fmt, va_list ap);
