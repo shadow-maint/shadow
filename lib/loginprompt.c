@@ -82,7 +82,7 @@ login_prompt(char *name, int namesize)
 	 * removed.
 	 */
 
-	memzero_a(buf);
+	memzero_explicit_a(buf);
 	if (fgets_a(buf, stdin) == NULL)
 		exit (EXIT_FAILURE);
 

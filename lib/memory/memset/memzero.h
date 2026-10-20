@@ -16,16 +16,16 @@
 #include "sizeof.h"
 
 
-// memzero_a - memory zero (explicit) array
-#define memzero_a(arr)  memzero(arr, sizeof_a(arr))
+// memzero_explicit_a - memory zero explicit array
+#define memzero_explicit_a(arr)  memzero_explicit(arr, sizeof_a(arr))
 
 
-inline void *memzero(void *ptr, size_t size);
+inline void *memzero_explicit(void *ptr, size_t size);
 
 
-// memzero - memory zero (explicit)
+// memzero_explicit - memory zero explicit
 inline void *
-memzero(void *ptr, size_t size)
+memzero_explicit(void *ptr, size_t size)
 {
 #if defined(HAVE_MEMSET_EXPLICIT)
 	memset_explicit(ptr, 0, size);
