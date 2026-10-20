@@ -80,10 +80,10 @@ Specific guidelines:
 memory/ - memory operations
   memset/ - Memory setting
 
-    memzero()
+    memzero_explicit()
 	Synonym of explicit_bzero(3).
-    memzero_a()
-	Like memzero(), but takes an array.
+    memzero_explicit_a()
+	Like memzero_explicit(), but takes an array.
 
   memcmp/ - Memory comparison
 
@@ -162,7 +162,7 @@ string/ - string operations
   strzero/ - String zeroing
 
     strzero()
-	Like memzero(), but takes a string.
+	Like memzero_explicit(), but takes a string.
 
   strchr/ - Character search and counting
 
