@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.69])
-m4_define([libsubid_abi_major], [6])
+m4_define([libsubid_abi_major], [7])
 m4_define([libsubid_abi_minor], [0])
 m4_define([libsubid_abi_micro], [0])
 
