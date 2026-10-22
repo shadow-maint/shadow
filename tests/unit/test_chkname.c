@@ -17,7 +17,7 @@
 #include <stdint.h>  // Required by <cmocka.h>
 #include <cmocka.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "chkname.h"
 #include "attr.h"
 

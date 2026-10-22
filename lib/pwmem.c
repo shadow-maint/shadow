@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-#include "alloc/calloc.h"
+#include "alloc/alloc.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "pwio.h"

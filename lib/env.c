@@ -13,8 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "alloc/malloc.h"
-#include "alloc/realloc.h"
+#include "alloc/alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "shadowlog.h"

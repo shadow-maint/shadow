@@ -13,7 +13,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 
 

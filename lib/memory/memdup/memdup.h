@@ -12,7 +12,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "sizeof.h"
 
