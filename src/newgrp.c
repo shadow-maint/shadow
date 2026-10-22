@@ -25,6 +25,7 @@
 #include "exitcodes.h"
 #include "getdef.h"
 #include "io/fprintf.h"
+#include "list.h"
 #include "prototypes.h"
 #include "search/l/lfind.h"
 #include "search/l/lsearch.h"
