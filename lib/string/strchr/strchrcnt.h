@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2026, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -9,24 +9,24 @@
 #include "config.h"
 
 #include <stddef.h>
+#include <string.h>
 
 #include "attr.h"
-#include "string/strcmp/streq.h"
 
 
 ATTR_STRING(1)
 inline size_t strchrcnt(const char *s, char c);
 
 
-// string character count
+// strchrcnt - string character count
 inline size_t
 strchrcnt(const char *s, char c)
 {
 	size_t  n = 0;
 
-	for (; !streq(s, ""); s++) {
-		if (*s == c)
-			n++;
+	while (NULL != (s = strchr(s, c))) {
+		n++;
+		s++;
 	}
 
 	return n;
