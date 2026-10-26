@@ -27,6 +27,7 @@
 #include "atoi/getnum.h"
 #include "memory/memdup/memdup.h"
 #include "shadow/passwd/getpw.h"
+#include "sizeof.h"
 #include "string/ctype/isascii.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
@@ -101,7 +102,7 @@ subordinate_parse(const char *line)
 	 * Copy the string to a temporary buffer so the substrings can
 	 * be modified to be NULL terminated.
 	 */
-	if (strlen(line) >= sizeof(rangebuf))
+	if (strlen(line) >= countof(rangebuf))
 		return NULL;	/* fail if too long */
 	strcpy (rangebuf, line);
 
