@@ -35,7 +35,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strspn/strrcspn.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 #include "sysconf.h"
 
 
