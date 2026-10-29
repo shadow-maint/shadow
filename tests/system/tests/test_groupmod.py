@@ -1097,3 +1097,31 @@ def test_groupmod__no_op_same_gid_and_name(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__same_gid(shadow: Shadow):
+    """
+    :title: Changing group GID succeeds when same GID is specified
+    :setup:
+        1. Create group
+    :steps:
+        1. Change group GID to same GID
+        2. Check group and gshadow entries
+    :expectedresults:
+        1. groupmod command exits successfully keeping same GID
+        2. Group and gshadow entries are found with same GID
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.groupmod("-g 1001 tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1001, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
