@@ -1011,3 +1011,24 @@ def test_groupmod__change_group_name_success_locked_passwd(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
         assert old_gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__usage(shadow: Shadow):
+    """
+    :title: Groupmod command displays usage
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupmod command
+        2. Verify that groupmod command exits successfully
+        3. Check usage information
+    :expectedresults:
+        1. Command runs successfully
+        2. groupmod command completes without any error
+        3. Usage information is displayed
+    :customerscenario: False
+    """
+    result = shadow.groupmod("-h")
+    assert result.rc == 0, f"Expected return code 0(success), got {result.rc}"
+    assert "Usage: groupmod [options] GROUP" in result.stdout
