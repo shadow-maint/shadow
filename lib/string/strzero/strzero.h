@@ -21,7 +21,7 @@ inline char *strzero(char *s);
 inline char *
 strzero(char *s)
 {
-	return memzero_explicit(s, strlen(s));
+	return memzero_explicit_T(s, strlen(s), char);
 }
 
 

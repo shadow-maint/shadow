@@ -10,11 +10,16 @@
 
 #include <time.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
 // strftime_a - string format time array
-#define strftime_a(dst, fmt, tm)  strftime(dst, countof(dst), fmt, tm)
+#define strftime_a(dst, fmt, tm)  DEPRECATED(strftime(dst, countof(dst), fmt, tm))
+
+
+ATTR_DEPRECATED typeof(strftime)  strftime;
 
 
 #endif  // include guard

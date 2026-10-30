@@ -11,15 +11,18 @@
 
 #include <time.h>
 
+#include "attr.h"
 #include "defines.h"
+#include "pragma.h"
 #include "sizeof.h"
 #include "string/strcpy/strtcpy.h"
 
 
 // day_to_str_a - day-since-Epoch to string array
-#define day_to_str_a(str, day)  day_to_str(countof(str), str, day)
+#define day_to_str_a(str, day)  DEPRECATED(day_to_str(countof(str), str, day))
 
 
+ATTR_DEPRECATED
 inline void day_to_str(size_t size, char buf[size], long day);
 
 
