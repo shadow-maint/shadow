@@ -15,8 +15,10 @@
 #include "atoi/strtoi/strtoi.h"
 #include "atoi/strtoi/strtou.h"
 #include "attr.h"
+#include "pragma.h"
 
 
+ATTR_DEPRECATED
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 6)
 inline uintmax_t strtou_noneg(const char *s, char **restrict endp,
     int base, uintmax_t min, uintmax_t max, int *restrict status);
@@ -30,10 +32,10 @@ strtou_noneg(const char *s, char **restrict endp, int base,
 
 	if (status == NULL)
 		status = &st;
-	if (strtoi_(s, endp, base, 0, 1, status) == 0 && *status == ERANGE)
+	if (DEPRECATED(strtoi_)(s, endp, base, 0, 1, status) == 0 && *status == ERANGE)
 		return min;
 
-	return strtou_(s, endp, base, min, max, status);
+	return DEPRECATED(strtou_)(s, endp, base, min, max, status);
 }
 
 
