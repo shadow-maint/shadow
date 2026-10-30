@@ -28,6 +28,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "atoi/a2i.h"
 #include "defines.h"
 #include "chkname.h"
 #include "sizeof.h"
@@ -46,13 +47,15 @@
 static bool
 is_valid_name(const char *name, bool badnames)
 {
+	const char  *end;
+
 	if (streq(name, "")
 	 || streq(name, ".")
 	 || streq(name, "..")
 	 || strspn(name, "-")
 	 || strpbrk(name, " \"#',/:;")
 	 || strchriscntrl_c(name)
-	 || strisdigit_c(name))
+	 || a2i(int, &(int){0}, name, &end, 0,,) == 0 || streq(end, ""))
 	{
 		errno = EINVAL;
 		return false;
