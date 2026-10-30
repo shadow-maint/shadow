@@ -16,8 +16,15 @@
 #include <sys/param.h>
 
 #include "attr.h"
+#include "pragma.h"
 
 
+ATTR_DEPRECATED typeof(strtoul)    strtoul;
+ATTR_DEPRECATED typeof(strtoull)   strtoull;
+ATTR_DEPRECATED typeof(strtoumax)  strtoumax;
+
+
+ATTR_DEPRECATED
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 6)
 inline uintmax_t strtou_(const char *s, char **restrict endp, int base,
     uintmax_t min, uintmax_t max, int *restrict status);
@@ -44,7 +51,7 @@ strtou_(const char *s, char **restrict endp, int base,
 	e = errno;
 	errno = 0;
 
-	n = strtoumax(s, endp, base);
+	n = DEPRECATED(strtoumax)(s, endp, base);
 
 	if (*endp == s)
 		*status = ECANCELED;
