@@ -1011,3 +1011,159 @@ def test_groupmod__change_group_name_success_locked_passwd(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
         assert old_gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__usage(shadow: Shadow):
+    """
+    :title: Groupmod command displays usage
+    :setup:
+        1. None required
+    :steps:
+        1. Run groupmod command
+        2. Verify that groupmod command exits successfully
+        3. Check usage information
+    :expectedresults:
+        1. Command runs successfully
+        2. groupmod command completes without any error
+        3. Usage information is displayed
+    :customerscenario: False
+    """
+    result = shadow.groupmod("-h")
+    assert result.rc == 0, f"Expected return code 0(success), got {result.rc}"
+    assert "Usage: groupmod [options] GROUP" in result.stdout
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__same_gid_new_name(shadow: Shadow):
+    """
+    :title: Renaming group succeeds when same GID is specified
+    :setup:
+        1. Create group
+    :steps:
+        1. Rename group while specifying same GID
+        2. Check group and gshadow entries for tgroup2
+        3. Check group and gshadow entries for tgroup1
+    :expectedresults:
+        1. Group is renamed successfully keeping same GID
+        2. Group and gshadow entries are found with new name and same GID
+        3. Group and gshadow entries are not found anymore
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+    shadow.groupmod("-n tgroup2 -g 1001 tgroup1")
+
+    group_entry = shadow.tools.getent.group("tgroup2")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup2", "Incorrect groupname"
+    assert group_entry.gid == 1001, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
+
+    old_group_entry = shadow.tools.getent.group("tgroup1")
+    assert old_group_entry is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        old_gshadow_entry = shadow.tools.getent.gshadow("tgroup1")
+        assert old_gshadow_entry is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__no_op_same_gid_and_name(shadow: Shadow):
+    """
+    :title: Renaming group succeeds when same name and GID are specified
+    :setup:
+        1. Create group
+    :steps:
+        1. Rename group to same name while specifying same GID
+        2. Check group and gshadow entries for tgroup
+    :expectedresults:
+        1. groupmod command exits successfully keeping same name and GID
+        2. Group and gshadow entries are found with same name and GID
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.groupmod("-n tgroup -g 1001 tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1001, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__same_gid(shadow: Shadow):
+    """
+    :title: Changing group GID succeeds when same GID is specified
+    :setup:
+        1. Create group
+    :steps:
+        1. Change group GID to same GID
+        2. Check group and gshadow entries
+    :expectedresults:
+        1. groupmod command exits successfully keeping same GID
+        2. Group and gshadow entries are found with same GID
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.groupmod("-g 1001 tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1001, "Incorrect GID"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__non_unique_requires_gid(shadow: Shadow):
+    """
+    :title: Groupmod command fails when non-unique option is used without GID
+    :setup:
+        1. Create group
+    :steps:
+        1. Attempt to rename group
+        2. Verify that groupmod command fails
+        3. Check group and gshadow entries for tgroup1
+        4. Check group and gshadow entries for tgroup2
+    :expectedresults:
+        1. Group is not renamed
+        2. groupmod command fails with error (invalid usage)
+        3. Group or gshadow entries are found without any change
+        4. Group or gshadow entries are not found
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup1")
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.groupmod("-o -n tgroup2 tgroup1")
+
+    assert exc_info.value.rc == 2, f"Expected return code 2 (invalid usage), got {exc_info.value.rc}"
+
+    group_entry1 = shadow.tools.getent.group("tgroup1")
+    assert group_entry1 is not None, "Group should be found"
+    assert group_entry1.name == "tgroup1", "Incorrect groupname"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry1 = shadow.tools.getent.gshadow("tgroup1")
+        assert gshadow_entry1 is not None, "Group should be found"
+        assert gshadow_entry1.name == "tgroup1", "Incorrect groupname"
+
+    group_entry2 = shadow.tools.getent.group("tgroup2")
+    assert group_entry2 is None, "Group should not be found"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry2 = shadow.tools.getent.gshadow("tgroup2")
+        assert gshadow_entry2 is None, "Group should not be found"
