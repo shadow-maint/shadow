@@ -2485,7 +2485,7 @@ msgstr ""
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
 msgstr ""
-" -, --lock                      verrouiller le mot de passe du compte "
+" -l, --lock                     verrouiller le mot de passe du compte "
 "mentionné\n"
 
 #: src/passwd.c:164 src/vipw.c:94
