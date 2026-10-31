@@ -317,7 +317,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 {
 	static char salt[MAX_SALT_SIZE + 6];
 
-	bzero(salt, MAX_SALT_SIZE + 6);
+	strcpy(salt, "");
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
@@ -348,9 +348,9 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg)
 {
 	size_t         salt_len;
+	const char     *method;
 	static char    result[GENSALT_SETTING_SIZE];
-	const char *method;
-	unsigned long rounds = 0;
+	unsigned long  rounds;
 
 	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
