@@ -1167,3 +1167,43 @@ def test_groupmod__non_unique_requires_gid(shadow: Shadow):
     if shadow.host.features["gshadow"]:
         gshadow_entry2 = shadow.tools.getent.gshadow("tgroup2")
         assert gshadow_entry2 is None, "Group should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_groupmod__set_password_non_shadow_password(shadow: Shadow):
+    """
+    :title: Set password for group when password is stored in /etc/group
+    :setup:
+        1. Create group
+        2. Replace password field 'x' with plain-text password in /etc/group
+        3. Replace '!' with '*' in /etc/gshadow file
+    :steps:
+        1. Set password for the group
+        2. Check group entry
+        3. Check gshadow entry
+    :expectedresults:
+        1. Password is set successfully for group
+        2. Group entry is found with new password
+        3. gshadow entry is found with new password
+    :customerscenario: False
+    """
+    shadow.groupadd("tgroup")
+    shadow.fs.sed("s/^tgroup:x:/tgroup:oldpass:/", "/etc/group", args=["-i"])
+    shadow.fs.sed("s/^tgroup:!:/tgroup:*:/", "/etc/gshadow", args=["-i"])
+
+    password = "Secret123"
+    password_hash = sha512_crypt.hash(password)
+    shadow.groupmod(f"-p '{password_hash}' tgroup")
+
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.password is not None, "Password should not be None"
+    assert re.match(shadow_password_pattern(), group_entry.password), "Incorrect password"
+
+    if shadow.host.features["gshadow"]:
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "gshadow entry should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+        assert gshadow_entry.password is not None, "Password should not be None"
+        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
