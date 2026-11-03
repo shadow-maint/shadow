@@ -40,3 +40,4 @@ nogroup:x:65534:
 crontab:x:101:
 Debian-exim:x:102:
 myuser:x:424242:
+testsuite:x:424243:
