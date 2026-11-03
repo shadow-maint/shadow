@@ -21,11 +21,11 @@ spawn /bin/su testsuite
 expect "$ "			;# Wait for the prompt
 
 send_user "\n# make sure we are now 'testsuite'"
-send_user "\n# id should return 'uid=424243(testsuite) gid=424243 groups=424243'"
+send_user "\n# id should return 'uid=424243(testsuite) gid=424243(testsuite) groups=424243(testsuite)'"
 send "\r"			;# restore the prompt for the logs
 send "id\r"			;# Verify we are really testsuite
 
-expect "uid=424243(testsuite) gid=424243 groups=424243\r"
+expect "uid=424243(testsuite) gid=424243(testsuite) groups=424243(testsuite)\r"
 
 expect "$ "			;# Wait for the prompt
 
@@ -51,7 +51,7 @@ send "\r"			;# restore the prompt for the logs
 expect "$ "			;# Wait for the prompt
 send "id\r"			;# Verify we are really testsuite
 
-expect "uid=424243(testsuite) gid=424243 groups=424243\r"
+expect "uid=424243(testsuite) gid=424243(testsuite) groups=424243(testsuite)\r"
 expect "$ "			;# Wait for the prompt
 send "exit\r"
 puts "\nPASS"

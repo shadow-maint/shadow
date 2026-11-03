@@ -21,7 +21,7 @@ spawn /bin/su testsuite
 expect "$ "			;# Wait for the prompt
 
 send_user "\n# make sure we are now 'testsuite'"
-send_user "\n# id should return 'uid=424243(testsuite) gid=424243 groups=424243'"
+send_user "\n# id should return 'uid=424243(testsuite) gid=424243(testsuite) groups=424243(testsuite)'"
 send "\r"			;# restore the prompt for the logs
 send "id\r"			;# Verify we are really testsuite
 
@@ -30,7 +30,7 @@ expect {
 		puts "\ntimeout...FAIL"
 		exit 1
 	}
-	"uid=424243(testsuite) gid=424243 groups=424243"
+	"uid=424243(testsuite) gid=424243(testsuite) groups=424243(testsuite)"
 }
 
 expect "$ "			;# Wait for the prompt
