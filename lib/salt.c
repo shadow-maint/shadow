@@ -87,25 +87,25 @@ static const char *magnum(enum encrypt_method m);
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt(enum encrypt_method m);
 #endif /* !USE_XCRYPT_GENSALT */
-static /*@observer@*/unsigned long SHA_get_salt_rounds(/*@null@*/const long *prefered_rounds);
+static /*@observer@*/unsigned long SHA_get_salt_rounds(/*@null@*/const long *preferred_rounds);
 static /*@observer@*/const char *SHA_salt_rounds(unsigned long rounds);
 #ifdef USE_BCRYPT
-static /*@observer@*/unsigned long BCRYPT_get_salt_rounds(/*@null@*/const long *prefered_rounds);
+static /*@observer@*/unsigned long BCRYPT_get_salt_rounds(/*@null@*/const long *preferred_rounds);
 static /*@observer@*/const char *BCRYPT_salt_rounds(unsigned long rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
-static /*@observer@*/unsigned long YESCRYPT_get_salt_cost(/*@null@*/const long *prefered_cost);
+static /*@observer@*/unsigned long YESCRYPT_get_salt_cost(/*@null@*/const long *preferred_cost);
 static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost);
 #endif /* USE_YESCRYPT */
 
 
 /* Return the the rounds number for the SHA crypt methods. */
 static /*@observer@*/unsigned long
-SHA_get_salt_rounds(/*@null@*/const long *prefered_rounds)
+SHA_get_salt_rounds(/*@null@*/const long *preferred_rounds)
 {
 	unsigned long  rounds;
 
-	if (NULL == prefered_rounds) {
+	if (NULL == preferred_rounds) {
 		long  min = getdef_long("SHA_CRYPT_MIN_ROUNDS", -1);
 		long  max = getdef_long("SHA_CRYPT_MAX_ROUNDS", -1);
 
@@ -122,7 +122,7 @@ SHA_get_salt_rounds(/*@null@*/const long *prefered_rounds)
 			rounds = csrand_interval(min, max);
 		}
 	} else {
-		rounds = prefered_rounds[0] ?: SHA_ROUNDS_DEFAULT;
+		rounds = preferred_rounds[0] ?: SHA_ROUNDS_DEFAULT;
 	}
 
 	/* Sanity checks. The libc should also check this, but this
@@ -162,11 +162,11 @@ SHA_salt_rounds(unsigned long rounds)
 #ifdef USE_BCRYPT
 /* Return the the rounds number for the BCRYPT method. */
 static /*@observer@*/unsigned long
-BCRYPT_get_salt_rounds(/*@null@*/const long *prefered_rounds)
+BCRYPT_get_salt_rounds(/*@null@*/const long *preferred_rounds)
 {
 	unsigned long  rounds;
 
-	if (NULL == prefered_rounds) {
+	if (NULL == preferred_rounds) {
 		long  min = getdef_long ("BCRYPT_MIN_ROUNDS", -1);
 		long  max = getdef_long ("BCRYPT_MAX_ROUNDS", -1);
 
@@ -183,7 +183,7 @@ BCRYPT_get_salt_rounds(/*@null@*/const long *prefered_rounds)
 			rounds = csrand_interval(min, max);
 		}
 	} else {
-		rounds = prefered_rounds[0] ?: B_ROUNDS_DEFAULT;
+		rounds = preferred_rounds[0] ?: B_ROUNDS_DEFAULT;
 	}
 
 	/* Sanity checks. */
@@ -231,14 +231,14 @@ BCRYPT_salt_rounds(unsigned long rounds)
 #ifdef USE_YESCRYPT
 /* Return the the cost number for the YESCRYPT method. */
 static /*@observer@*/unsigned long
-YESCRYPT_get_salt_cost(/*@null@*/const long *prefered_cost)
+YESCRYPT_get_salt_cost(/*@null@*/const long *preferred_cost)
 {
 	unsigned long cost;
 
-	if (NULL == prefered_cost)
+	if (NULL == preferred_cost)
 		cost = getdef_num ("YESCRYPT_COST_FACTOR", Y_COST_DEFAULT);
 	else
-		cost = prefered_cost[0] ?: Y_COST_DEFAULT;
+		cost = preferred_cost[0] ?: Y_COST_DEFAULT;
 
 	/* Sanity checks. */
 	if (cost < Y_COST_MIN) {
