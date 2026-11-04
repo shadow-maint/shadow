@@ -10,7 +10,7 @@
 
 #include <stddef.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "exit_if_null.h"
 #include "string/strchr/strchrscnt.h"

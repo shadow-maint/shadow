@@ -12,8 +12,7 @@
 
 #include <stdio.h>
 
-#include "alloc/calloc.h"
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "commonio.h"
 #include "defines.h"
 #include "fields.h"

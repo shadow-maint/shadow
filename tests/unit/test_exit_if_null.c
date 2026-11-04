@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 
 #include <setjmp.h>
 #include <stdint.h>

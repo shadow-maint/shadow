@@ -16,7 +16,7 @@
 
 #ident "$Id$"
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 
 #if WITH_LIBBSD == 0
 #include "freezero.h"

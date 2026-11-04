@@ -12,8 +12,7 @@
 
 #ident "$Id$"
 
-#include "alloc/calloc.h"
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "groupio.h"
