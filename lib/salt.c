@@ -269,7 +269,7 @@ static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost)
 	 */
 
 	p = buf;
-	p = stpcpy(p, "j");
+	p = stpcpy(p, "j");  // 'j' == YESCRYPT_DEFAULTS
 	if (cost < 3)
 		*p++ = 0x36 + cost;
 	else if (cost < 6)
