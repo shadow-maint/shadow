@@ -61,9 +61,6 @@
 #define Y_COST_MAX 11
 #endif
 
-/* Maximum size of the generated salt string. */
-#define GENSALT_SETTING_SIZE 100
-
 
 enum encrypt_method {
 	ENCRYPT_METHOD_SHA256,
@@ -79,18 +76,14 @@ enum encrypt_method {
 
 /* local function prototypes */
 static unsigned long get_salt_cost(enum encrypt_method m, const long *preferred_cost);
-static const char *salt_cost(enum encrypt_method m, unsigned long cost);
 static const char *magnum(enum encrypt_method m);
 static /*@observer@*/unsigned long SHA_get_salt_rounds(/*@null@*/const long *preferred_rounds);
-static /*@observer@*/const char *SHA_salt_rounds(unsigned long rounds);
 #ifdef USE_BCRYPT
 static /*@observer@*/unsigned long BCRYPT_get_salt_rounds(/*@null@*/const long *preferred_rounds);
-static /*@observer@*/const char *BCRYPT_salt_rounds(unsigned long rounds);
-#endif /* USE_BCRYPT */
+#endif
 #ifdef USE_YESCRYPT
 static /*@observer@*/unsigned long YESCRYPT_get_salt_cost(/*@null@*/const long *preferred_cost);
-static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost);
-#endif /* USE_YESCRYPT */
+#endif
 
 
 /* Return the the rounds number for the SHA crypt methods. */
@@ -129,30 +122,6 @@ SHA_get_salt_rounds(/*@null@*/const long *preferred_rounds)
 	return rounds;
 }
 
-/*
- * Create a salt prefix specifying the rounds number for the SHA crypt methods.
- */
-static /*@observer@*/const char *
-SHA_salt_rounds(unsigned long rounds)
-{
-	static char  buf[18];
-
-	/* Nothing to do here if SHA_ROUNDS_DEFAULT is used. */
-	if (rounds == SHA_ROUNDS_DEFAULT)
-		return strcpy(buf, "");
-
-	/*
-	 * We are going to write a maximum of 17 bytes,
-	 * plus one byte for the terminator.
-	 *    rounds=XXXXXXXXX$
-	 *    00000000011111111
-	 *    12345678901234567
-	 */
-	assert(stprintf_a(buf, "rounds=%lu$", rounds) != -1);
-
-	return buf;
-}
-
 #ifdef USE_BCRYPT
 /* Return the the rounds number for the BCRYPT method. */
 static /*@observer@*/unsigned long
@@ -189,26 +158,6 @@ BCRYPT_get_salt_rounds(/*@null@*/const long *preferred_rounds)
 
 	return rounds;
 }
-
-/*
- * Create a salt prefix specifying the rounds number for the BCRYPT method.
- */
-static /*@observer@*/const char *
-BCRYPT_salt_rounds(unsigned long rounds)
-{
-	static char  buf[4];
-
-	/*
-	 * We are going to write three bytes,
-	 * plus one byte for the terminator.
-	 *    XX$
-	 *    000
-	 *    123
-	 */
-	assert(stprintf_a(buf, "%2.2lu$", rounds) != -1);
-
-	return buf;
-}
 #endif /* USE_BCRYPT */
 
 #ifdef USE_YESCRYPT
@@ -234,37 +183,6 @@ YESCRYPT_get_salt_cost(/*@null@*/const long *preferred_cost)
 
 	return cost;
 }
-
-/*
- * Create a salt prefix specifying the cost for the YESCRYPT method.
- */
-static /*@observer@*/const char *YESCRYPT_salt_cost(unsigned long cost)
-{
-	char         *p;
-	static char  buf[5];
-
-	/*
-	 * We are going to write four bytes,
-	 * plus one byte for the terminator.
-	 *    jXX$
-	 *    0000
-	 *    1234
-	 */
-
-	p = buf;
-	p = stpcpy(p, "j");  // 'j' == YESCRYPT_DEFAULTS
-	if (cost < 3)
-		*p++ = 0x36 + cost;
-	else if (cost < 6)
-		*p++ = 0x34 + cost;
-	else
-		*p++ = 0x3b + cost;
-
-	p = stpcpy(p, (cost >= 3) ? "T" : "5");
-	stpcpy(p, "$");
-
-	return buf;
-}
 #endif /* USE_YESCRYPT */
 
 static unsigned long
@@ -281,25 +199,6 @@ get_salt_cost(enum encrypt_method m, const long *preferred_cost)
 #ifdef USE_YESCRYPT
 	case ENCRYPT_METHOD_YESCRYPT:
 		return YESCRYPT_get_salt_cost(preferred_cost);
-#endif
-	}
-	assert(0);
-}
-
-static const char *
-salt_cost(enum encrypt_method m, unsigned long cost)
-{
-	switch (m) {
-	case ENCRYPT_METHOD_SHA256:
-	case ENCRYPT_METHOD_SHA512:
-		return SHA_salt_rounds(cost);
-#ifdef USE_BCRYPT
-	case ENCRYPT_METHOD_BCRYPT:
-		return BCRYPT_salt_rounds(cost);
-#endif
-#ifdef USE_YESCRYPT
-	case ENCRYPT_METHOD_YESCRYPT:
-		return YESCRYPT_salt_cost(cost);
 #endif
 	}
 	assert(0);
@@ -342,7 +241,7 @@ magnum(enum encrypt_method m)
 const char *
 crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long *arg)
 {
-	static char          result[GENSALT_SETTING_SIZE];
+	const char           *s;
 	unsigned long        cost;
 	enum encrypt_method  m;
 
@@ -368,23 +267,18 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 		m = ENCRYPT_METHOD_SHA512;
 	}
 
-	strcpy(result, magnum(m));
 	cost = get_salt_cost(m, arg);
-	assert(strtcat_a(result, salt_cost(m, cost)) != -1);
-
-	char *retval = crypt_gensalt(result, cost, NULL, 0);
-
-	/* Should not happen, but... */
-	if (NULL == retval) {
+	s = crypt_gensalt(magnum(m), cost, NULL, 0);
+	if (s == NULL) {
 		fprintf (log_get_logfd(),
-			 _("Unable to generate a salt from setting "
-			   "\"%s\", check your settings in "
+			 _("Unable to generate a salt from prefix "
+			   "\"%s\" and cost %lu, check your settings in "
 			   "ENCRYPT_METHOD and the corresponding "
 			   "configuration for your selected hash "
-			   "method.\n"), result);
+			   "method.\n"), magnum(m), cost);
 
 		exit (1);
 	}
 
-	return retval;
+	return s;
 }
