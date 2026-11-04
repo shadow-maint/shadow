@@ -85,16 +85,22 @@ enum encrypt_method {
 
 /* local function prototypes */
 static unsigned long get_salt_cost(enum encrypt_method m, const long *preferred_cost);
+#if !USE_XCRYPT_GENSALT
 static const char *salt_cost(enum encrypt_method m, unsigned long cost);
+#endif
 static const char *magnum(enum encrypt_method m);
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt(enum encrypt_method m);
 #endif /* !USE_XCRYPT_GENSALT */
 static /*@observer@*/unsigned long SHA_get_salt_rounds(/*@null@*/const long *preferred_rounds);
+# if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *SHA_salt_rounds(unsigned long rounds);
+# endif
 #ifdef USE_BCRYPT
 static /*@observer@*/unsigned long BCRYPT_get_salt_rounds(/*@null@*/const long *preferred_rounds);
+# if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *BCRYPT_salt_rounds(unsigned long rounds);
+# endif
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 static /*@observer@*/unsigned long YESCRYPT_get_salt_cost(/*@null@*/const long *preferred_cost);
@@ -137,6 +143,7 @@ SHA_get_salt_rounds(/*@null@*/const long *preferred_rounds)
 	return rounds;
 }
 
+#if !USE_XCRYPT_GENSALT
 /*
  * Create a salt prefix specifying the rounds number for the SHA crypt methods.
  */
@@ -160,6 +167,7 @@ SHA_salt_rounds(unsigned long rounds)
 
 	return buf;
 }
+#endif
 
 #ifdef USE_BCRYPT
 /* Return the the rounds number for the BCRYPT method. */
@@ -209,6 +217,7 @@ BCRYPT_get_salt_rounds(/*@null@*/const long *preferred_rounds)
 	return rounds;
 }
 
+# if !USE_XCRYPT_GENSALT
 /*
  * Create a salt prefix specifying the rounds number for the BCRYPT method.
  */
@@ -228,6 +237,7 @@ BCRYPT_salt_rounds(unsigned long rounds)
 
 	return buf;
 }
+# endif
 #endif /* USE_BCRYPT */
 
 #ifdef USE_YESCRYPT
@@ -274,6 +284,7 @@ get_salt_cost(enum encrypt_method m, const long *preferred_cost)
 	assert(0);
 }
 
+#if !USE_XCRYPT_GENSALT
 static const char *
 salt_cost(enum encrypt_method m, unsigned long cost)
 {
@@ -285,13 +296,10 @@ salt_cost(enum encrypt_method m, unsigned long cost)
 	case ENCRYPT_METHOD_BCRYPT:
 		return BCRYPT_salt_rounds(cost);
 #endif
-#ifdef USE_YESCRYPT
-	case ENCRYPT_METHOD_YESCRYPT:
-		return "";  // rely on crypt_gensalt to populate the cost
-#endif
 	}
 	assert(0);
 }
+#endif
 
 static const char *
 magnum(enum encrypt_method m)
@@ -397,7 +405,6 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 
 	strcpy(result, magnum(m));
 	cost = get_salt_cost(m, arg);
-	assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 
 #if USE_XCRYPT_GENSALT
 	char *retval = crypt_gensalt(result, cost, NULL, 0);
@@ -417,6 +424,7 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 	return retval;
 #else /* USE_XCRYPT_GENSALT */
 
+	assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 	assert(strtcat_a(result, gensalt(m)) != -1);
 
 	return result;
