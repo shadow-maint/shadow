@@ -32,11 +32,8 @@
 #include <assert.h>
 
 
-#if (defined CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY && \
-     CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY)
-#define USE_XCRYPT_GENSALT 1
-#else
-#define USE_XCRYPT_GENSALT 0
+#if !CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY
+# error "!CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY"
 #endif
 
 #ifdef USE_BCRYPT
@@ -84,9 +81,6 @@ enum encrypt_method {
 static unsigned long get_salt_cost(enum encrypt_method m, const long *preferred_cost);
 static const char *salt_cost(enum encrypt_method m, unsigned long cost);
 static const char *magnum(enum encrypt_method m);
-#if !USE_XCRYPT_GENSALT
-static /*@observer@*/const char *gensalt(enum encrypt_method m);
-#endif /* !USE_XCRYPT_GENSALT */
 static /*@observer@*/unsigned long SHA_get_salt_rounds(/*@null@*/const long *preferred_rounds);
 static /*@observer@*/const char *SHA_salt_rounds(unsigned long rounds);
 #ifdef USE_BCRYPT
@@ -190,19 +184,8 @@ BCRYPT_get_salt_rounds(/*@null@*/const long *preferred_rounds)
 	if (rounds < B_ROUNDS_MIN)
 		rounds = B_ROUNDS_MIN;
 
-#if USE_XCRYPT_GENSALT
 	if (rounds > B_ROUNDS_MAX)
 		rounds = B_ROUNDS_MAX;
-#else /* USE_XCRYPT_GENSALT */
-	/*
-	 * Use 19 as an upper bound for now,
-	 * because musl doesn't allow rounds >= 20.
-	 * If musl ever supports > 20 rounds,
-	 * rounds should be set to B_ROUNDS_MAX.
-	 */
-	if (rounds > 19)
-		rounds = 19;
-#endif /* USE_XCRYPT_GENSALT */
 
 	return rounds;
 }
@@ -342,53 +325,6 @@ magnum(enum encrypt_method m)
 	assert(0);
 }
 
-#if !USE_XCRYPT_GENSALT
-static /*@observer@*/const char *
-gensalt(enum encrypt_method m)
-{
-	enum salt_len {
-		SALT_LEN_SHA = 16,
-#ifdef USE_BCRYPT
-		SALT_LEN_BCRYPT = 22,
-#endif
-#ifdef USE_YESCRYPT
-		SALT_LEN_YESCRYPT = 24,
-#endif
-
-		SALT_SIZE_MAX  // XXX: Keep the above sorted!
-	};
-
-	static char  salt[SALT_SIZE_MAX];
-
-	char    *p, *e;
-	size_t  len;
-
-	switch (m) {
-	case ENCRYPT_METHOD_SHA256:
-	case ENCRYPT_METHOD_SHA512:
-		len = SALT_LEN_SHA;
-		break;
-#ifdef USE_BCRYPT
-	case ENCRYPT_METHOD_BCRYPT:
-		len = SALT_LEN_BCRYPT;
-		break;
-#endif
-#ifdef USE_YESCRYPT
-	case ENCRYPT_METHOD_YESCRYPT:
-		len = SALT_LEN_YESCRYPT;
-		break;
-#endif
-	}
-
-	p = salt;
-	e = &salt[len];
-	while (p != NULL)
-		p = stpecpy(p, e, l64a(csrand()));
-
-	return salt;
-}
-#endif /* !USE_XCRYPT_GENSALT */
-
 /*
  * Generate 8 base64 ASCII characters of random salt.
  * Methods can be set with ENCRYPT_METHOD
@@ -436,7 +372,6 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 	cost = get_salt_cost(m, arg);
 	assert(strtcat_a(result, salt_cost(m, cost)) != -1);
 
-#if USE_XCRYPT_GENSALT
 	char *retval = crypt_gensalt(result, cost, NULL, 0);
 
 	/* Should not happen, but... */
@@ -452,10 +387,4 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 	}
 
 	return retval;
-#else /* USE_XCRYPT_GENSALT */
-
-	assert(strtcat_a(result, gensalt(m)) != -1);
-
-	return result;
-#endif /* USE_XCRYPT_GENSALT */
 }
