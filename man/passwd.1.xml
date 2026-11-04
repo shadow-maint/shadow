@@ -13,7 +13,6 @@
 <!ENTITY PASS_CHANGE_TRIES     SYSTEM "login.defs.d/PASS_CHANGE_TRIES.xml">
 <!ENTITY PASS_MIN_LEN          SYSTEM "login.defs.d/PASS_MIN_LEN.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
-<!ENTITY YESCRYPT_COST_FACTOR  SYSTEM "login.defs.d/YESCRYPT_COST_FACTOR.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='passwd.1'>

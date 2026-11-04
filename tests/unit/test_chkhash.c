@@ -19,31 +19,6 @@
 #include "chkhash.h"
 #include "attr.h"
 
-static void
-test_is_valid_hash_ok_yescrypt(MAYBE_UNUSED void ** _1)
-{
-	// Basic yescrypt hash: $y$ + params + $ + salt + $ + 43 character hash
-	assert_true(is_valid_hash("$y$j9T$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
-
-	// Yescrypt with longer salt
-	assert_true(is_valid_hash("$y$j9T$longsalt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
-
-	// Yescrypt with maximum salt length (86 characters)
-	assert_true(is_valid_hash("$y$j9T$abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890123456789012$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
-
-	// Yescrypt with minimum salt length (1 character)
-	assert_true(is_valid_hash("$y$j9T$a$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
-
-	// Yescrypt with different parameter configuration
-	assert_true(is_valid_hash("$y$v1.jCf$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
-
-	// Yescrypt with numeric parameters and mixed case salt
-	assert_true(is_valid_hash("$y$123$SaLt123$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
-
-	// Yescrypt with special characters in salt (./A-Za-z0-9 charset)
-	assert_true(is_valid_hash("$y$j9T$salt./ABC123$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
-}
-
 
 static void
 test_is_valid_hash_ok_bcrypt(MAYBE_UNUSED void ** _1)
@@ -125,9 +100,6 @@ test_is_valid_hash_ok_special(MAYBE_UNUSED void ** _1)
 
 	// Leading ! prefix - temporarily locked account with SHA-512 hash
 	assert_true(is_valid_hash("!$6$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
-
-	// Leading ! prefix - temporarily locked account with yescrypt hash
-	assert_true(is_valid_hash("!$y$j9T$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
 }
 
 
@@ -178,8 +150,6 @@ test_is_valid_hash_turkish_locale(MAYBE_UNUSED void ** _1)
 		skip();  // locale not available on this system
 	}
 
-	assert_true(is_valid_hash("$y$j9T$lChB5KbMj.6n51V3DjPfn0$6WyruF4YWm9GDgKx2mik5QEHE6J4m2RVXXegiqrfjI8"));
-
 	setlocale(LC_ALL, (saved != NULL) ? saved : "C");
 	free(saved);
 }
@@ -197,7 +167,6 @@ test_is_invalid_algorithm(MAYBE_UNUSED void ** _1)
 static void
 test_is_invalid_hash_length(MAYBE_UNUSED void ** _1)
 {
-	assert_false(is_valid_hash("$y$j9T$salt$tooshort"));
 	assert_false(is_valid_hash("$2a$12$tooshort"));
 	assert_false(is_valid_hash("$6$salt$tooshort"));
 	assert_false(is_valid_hash("$5$salt$tooshort"));
@@ -239,7 +208,6 @@ int
 main(void)
 {
     const struct CMUnitTest tests[] = {
-        cmocka_unit_test(test_is_valid_hash_ok_yescrypt),
         cmocka_unit_test(test_is_valid_hash_ok_bcrypt),
         cmocka_unit_test(test_is_valid_hash_ok_sha512),
         cmocka_unit_test(test_is_valid_hash_ok_sha256),

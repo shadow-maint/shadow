@@ -56,9 +56,6 @@ static long sha_rounds = 5000;
 #ifdef USE_BCRYPT
 static long bcrypt_rounds = 13;
 #endif
-#ifdef USE_YESCRYPT
-static long yescrypt_cost = 5;
-#endif
 
 #ifdef SHADOWGRP
 static bool is_shadow_grp;
@@ -119,15 +116,12 @@ usage (int status)
 #if defined(USE_BCRYPT)
 	                " BCRYPT"
 #endif
-#if defined(USE_YESCRYPT)
-	                " YESCRYPT"
-#endif
 	               );
 	(void) fputs (_("  -e, --encrypted               supplied passwords are encrypted\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
-	                "                                or YESCRYPT crypt algorithms\n"),
+	(void) fputs (_("  -s, --sha-rounds              number of rounds for the SHA or BCRYPT\n"
+	                "                                crypt algorithms\n"),
 	              usageout);
 	(void) fputs ("\n", usageout);
 
@@ -185,12 +179,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				bad_s = 1;
 			}
 #endif				/* USE_BCRYPT */
-#if defined(USE_YESCRYPT)
-			if (  (   streq(crypt_method, "YESCRYPT")
-			       && (-1 == str2sl(&yescrypt_cost, optarg)))) {
-				bad_s = 1;
-			}
-#endif				/* USE_YESCRYPT */
 			if (bad_s != 0) {
 				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
@@ -232,9 +220,6 @@ static void check_flags (void)
 #ifdef USE_BCRYPT
 		    && !streq(crypt_method, "BCRYPT")
 #endif				/* USE_BCRYPT */
-#ifdef USE_YESCRYPT
-		    && !streq(crypt_method, "YESCRYPT")
-#endif				/* USE_YESCRYPT */
 		    ) {
 			eprintf(_("%s: unsupported crypt method: %s\n"),
 			         Prog, crypt_method);
@@ -409,10 +394,6 @@ int main (int argc, char **argv)
 				if (streq(crypt_method, "BCRYPT"))
 					arg = &bcrypt_rounds;
 #endif				/* USE_BCRYPT */
-#if defined(USE_YESCRYPT)
-				if (streq(crypt_method, "YESCRYPT"))
-					arg = &yescrypt_cost;
-#endif				/* USE_YESCRYPT */
 			}
 			salt = crypt_make_salt(crypt_method, arg);
 			cp = pw_encrypt (newpwd, salt);

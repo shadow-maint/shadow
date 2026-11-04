@@ -1155,8 +1155,8 @@ msgstr ""
 
 #: src/chgpasswd.c:129 src/chpasswd.c:132 src/newusers.c:148
 msgid ""
-"  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
-"                                or YESCRYPT crypt algorithms\n"
+"  -s, --sha-rounds              number of rounds for the SHA or BCRYPT\n"
+"                                crypt algorithms\n"
 msgstr ""
 
 #: src/chgpasswd.c:174

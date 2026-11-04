@@ -59,7 +59,7 @@ def shadow_password_pattern() -> str:
     Returns the shadow password regex pattern.
 
     This pattern matches encrypted password hashes stored in /etc/shadow files,
-    including common formats like MD5, SHA-256, SHA-512, and yescrypt. The pattern
+    including common formats like MD5, SHA-256, and SHA-512.  The pattern
     expects the standard Unix crypt format: $algorithm$salt$hash with optional parameters.
     """
     return r"^\$(?:\w)\$[^$]*\$[\w./]+(?:\$[\w./]+)?$"

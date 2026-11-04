@@ -55,18 +55,6 @@
 /* Maximum number of rounds.  */
 #define SHA_ROUNDS_MAX 999999999
 
-#ifdef USE_YESCRYPT
-# if !USE_XCRYPT_GENSALT
-#  error "yescrypt reqires crypt_gensalt"
-# endif
-/* Default cost if not explicitly specified.  */
-#define Y_COST_DEFAULT 5
-/* Minimum cost.  */
-#define Y_COST_MIN 1
-/* Maximum cost.  */
-#define Y_COST_MAX 11
-#endif
-
 /* Maximum size of the generated salt string. */
 #define GENSALT_SETTING_SIZE 100
 
@@ -76,9 +64,6 @@ enum encrypt_method {
 	ENCRYPT_METHOD_SHA512,
 #ifdef USE_BCRYPT
 	ENCRYPT_METHOD_BCRYPT,
-#endif
-#ifdef USE_YESCRYPT
-	ENCRYPT_METHOD_YESCRYPT,
 #endif
 };
 
@@ -102,9 +87,6 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds(/*@null@*/const long *
 static /*@observer@*/const char *BCRYPT_salt_rounds(unsigned long rounds);
 # endif
 #endif /* USE_BCRYPT */
-#ifdef USE_YESCRYPT
-static /*@observer@*/unsigned long YESCRYPT_get_salt_cost(/*@null@*/const long *preferred_cost);
-#endif /* USE_YESCRYPT */
 
 
 /* Return the the rounds number for the SHA crypt methods. */
@@ -240,31 +222,6 @@ BCRYPT_salt_rounds(unsigned long rounds)
 # endif
 #endif /* USE_BCRYPT */
 
-#ifdef USE_YESCRYPT
-/* Return the the cost number for the YESCRYPT method. */
-static /*@observer@*/unsigned long
-YESCRYPT_get_salt_cost(/*@null@*/const long *preferred_cost)
-{
-	unsigned long cost;
-
-	if (NULL == preferred_cost)
-		cost = getdef_num ("YESCRYPT_COST_FACTOR", Y_COST_DEFAULT);
-	else
-		cost = preferred_cost[0] ?: Y_COST_DEFAULT;
-
-	/* Sanity checks. */
-	if (cost < Y_COST_MIN) {
-		cost = Y_COST_MIN;
-	}
-
-	if (cost > Y_COST_MAX) {
-		cost = Y_COST_MAX;
-	}
-
-	return cost;
-}
-#endif /* USE_YESCRYPT */
-
 static unsigned long
 get_salt_cost(enum encrypt_method m, const long *preferred_cost)
 {
@@ -275,10 +232,6 @@ get_salt_cost(enum encrypt_method m, const long *preferred_cost)
 #ifdef USE_BCRYPT
 	case ENCRYPT_METHOD_BCRYPT:
 		return BCRYPT_get_salt_rounds(preferred_cost);
-#endif
-#ifdef USE_YESCRYPT
-	case ENCRYPT_METHOD_YESCRYPT:
-		return YESCRYPT_get_salt_cost(preferred_cost);
 #endif
 	}
 	assert(0);
@@ -312,10 +265,6 @@ magnum(enum encrypt_method m)
 #ifdef USE_BCRYPT
 	case ENCRYPT_METHOD_BCRYPT:
 		return "$2b$";
-#endif
-#ifdef USE_YESCRYPT
-	case ENCRYPT_METHOD_YESCRYPT:
-		return "$y$";
 #endif
 	}
 	assert(0);
@@ -371,7 +320,6 @@ gensalt(enum encrypt_method m)
  * An additional parameter is provided.
  *  * For the SHA256 and SHA512 method, this specifies the number of rounds
  *    (if not NULL).
- *  * For the YESCRYPT method, this specifies the cost factor (if not NULL).
  */
 /*@observer@*/
 const char *
@@ -391,10 +339,6 @@ crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long
 	} else if (streq(method, "BCRYPT")) {
 		m = ENCRYPT_METHOD_BCRYPT;
 #endif /* USE_BCRYPT */
-#ifdef USE_YESCRYPT
-	} else if (streq(method, "YESCRYPT")) {
-		m = ENCRYPT_METHOD_YESCRYPT;
-#endif /* USE_YESCRYPT */
 	} else {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"

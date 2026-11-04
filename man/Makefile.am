@@ -185,8 +185,7 @@ login_defs_v = \
 	SUB_UID_COUNT.xml \
 	SUB_UID_STORE_BY_UID.xml \
 	SYS_GID_MAX.xml \
-	SYS_UID_MAX.xml \
-	YESCRYPT_COST_FACTOR.xml
+	SYS_UID_MAX.xml
 
 EXTRA_DIST = \
 	$(man_MANS) \

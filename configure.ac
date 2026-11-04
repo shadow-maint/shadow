@@ -180,9 +180,6 @@ AC_ARG_WITH([tcb],
 AC_ARG_WITH([bcrypt],
 	[AS_HELP_STRING([--with-bcrypt], [allow the bcrypt password encryption algorithm @<:@default=no@:>@])],
 	[with_bcrypt=$withval], [with_bcrypt=no])
-AC_ARG_WITH([yescrypt],
-	[AS_HELP_STRING([--with-yescrypt], [allow the yescrypt password encryption algorithm @<:@default=no@:>@])],
-	[with_yescrypt=$withval], [with_yescrypt=no])
 AC_ARG_WITH([nscd],
 	[AS_HELP_STRING([--with-nscd], [enable support for nscd @<:@default=yes@:>@])],
 	[with_nscd=$withval], [with_nscd=yes])
@@ -213,11 +210,6 @@ AS_VAR_IF([enable_syslog],["yes"],[AC_DEFINE([USE_SYSLOG], [1], [Define to use s
 AM_CONDITIONAL([USE_BCRYPT], [test "x$with_bcrypt" = "xyes"])
 if test "X$with_bcrypt" = "Xyes"; then
 	AC_DEFINE([USE_BCRYPT], [1], [Define to allow the bcrypt password encryption algorithm])
-fi
-
-AM_CONDITIONAL([USE_YESCRYPT], [test "x$with_yescrypt" = "xyes"])
-if test "X$with_yescrypt" = "Xyes"; then
-	AC_DEFINE([USE_YESCRYPT], [1], [Define to allow the yescrypt password encryption algorithm])
 fi
 
 if test "X$with_nscd" = "Xyes"; then
@@ -629,7 +621,6 @@ AC_MSG_NOTICE([shadow ${PACKAGE_VERSION} has been configured with the following 
 	shadow group support:		$enable_shadowgrp
 	S/Key support:			$with_skey
 	bcrypt passwords encryption:	$with_bcrypt
-	yescrypt passwords encryption:	$with_yescrypt
 	nscd support:			$with_nscd
 	sssd support:			$with_sssd
 	subordinate IDs support:	$enable_subids
