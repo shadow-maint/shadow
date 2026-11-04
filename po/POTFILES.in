@@ -41,7 +41,6 @@ lib/nscd.c
 lib/obscure.c
 lib/pam_pass.c
 lib/pam_pass_non_interactive.c
-lib/port.c
 lib/pwauth.c
 lib/pwd_init.c
 lib/pwd2spwd.c

@@ -117,7 +117,6 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 #ifndef USE_PAM
 static struct faillog faillog;
 
-static void bad_time_notify (void);
 static void check_nologin (bool login_to_root);
 #else
 static void get_pam_user (char **ptr_pam_user);
@@ -197,15 +196,6 @@ static void setup_tty (void)
 
 
 #ifndef USE_PAM
-/*
- * Tell the user that this is not the right time to login at this tty
- */
-static void bad_time_notify (void)
-{
-	(void) puts (_("Invalid login time"));
-	(void) fflush (stdout);
-}
-
 static void check_nologin (bool login_to_root)
 {
 	const char *fname;
@@ -990,20 +980,6 @@ int main (int argc, char **argv)
 	(void) alarm (0);		/* turn off alarm clock */
 
 #ifndef USE_PAM			/* PAM does this */
-	/*
-	 * porttime checks moved here, after the user has been
-	 * authenticated. now prints a message, as suggested
-	 * by Ivan Nejgebauer <ian@unsux.ns.ac.yu>.  --marekm
-	 */
-	if (   getdef_bool ("PORTTIME_CHECKS_ENAB")
-	    && !isttytime (username, tty, time (NULL))) {
-		SYSLOG(LOG_WARN, "invalid login time for '%s'%s",
-		       username, fromhost);
-		closelog ();
-		bad_time_notify ();
-		exit (1);
-	}
-
 	check_nologin (pwd->pw_uid == 0);
 #endif
 
