@@ -53,6 +53,7 @@
     ./autogen.sh
     --disable-man
     --disable-nls
+    --with-bcrypt
     --without-selinux
   args:
     chdir: /usr/local/src/shadow/
