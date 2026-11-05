@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
     image:
-      fedora: registry.fedoraproject.org/fedora:latest
+      fedora: registry.fedoraproject.org/fedora:44
       alpine: docker.io/library/alpine:latest
       debian: docker.io/library/debian:latest
       opensuse: docker.io/opensuse/tumbleweed:latest
