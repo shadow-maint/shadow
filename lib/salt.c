@@ -63,6 +63,9 @@
 #define SHA_ROUNDS_MAX 999999999
 
 #ifdef USE_YESCRYPT
+# if !USE_XCRYPT_GENSALT
+#  error "yescrypt reqires crypt_gensalt"
+# endif
 /*
  * Default number of base64 characters used for the salt.
  * 24 characters gives a 144 bits (18 bytes) salt. Unlike the more
@@ -98,7 +101,6 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long ro
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *prefered_cost);
-static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost);
 #endif /* USE_YESCRYPT */
 
 
@@ -278,38 +280,6 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 
 	return cost;
 }
-
-/*
- * Fill a salt prefix specifying the cost for the YESCRYPT method
- * to a buffer.
- */
-static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost)
-{
-	const size_t buf_begin = strlen (buf);
-	char  *p;
-
-	/*
-	 * Check if the result buffer is long enough.
-	 * We are going to write four bytes,
-	 * plus one byte for the terminator.
-	 *    jXX$
-	 *    0000
-	 *    1234
-	 */
-	assert (GENSALT_SETTING_SIZE > buf_begin + 4);
-
-	p = &buf[buf_begin];
-	p = stpcpy(p, "j");
-	if (cost < 3) {
-		*p++ = 0x36 + cost;
-	} else if (cost < 6) {
-		*p++ = 0x34 + cost;
-	} else {
-		*p++ = 0x3b + cost;
-	}
-	p = stpcpy(p, (cost >= 3) ? "T" : "5");
-	stpcpy(p, "$");
-}
 #endif /* USE_YESCRYPT */
 
 #if !USE_XCRYPT_GENSALT
@@ -371,7 +341,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		MAGNUM(result, 'y');
 		salt_len = YESCRYPT_SALT_SIZE;
 		rounds = YESCRYPT_get_salt_cost (arg);
-		YESCRYPT_salt_cost_to_buf (result, rounds);
+		/* rely on crypt_gensalt to populate the cost */
 #endif /* USE_YESCRYPT */
 	} else if (streq(method, "SHA512")) {
 sha512:
