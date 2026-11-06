@@ -9,7 +9,6 @@
 <!ENTITY BCRYPT_MIN_ROUNDS     SYSTEM "login.defs.d/BCRYPT_MIN_ROUNDS.xml">
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
-<!ENTITY YESCRYPT_COST_FACTOR  SYSTEM "login.defs.d/YESCRYPT_COST_FACTOR.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 
@@ -120,8 +119,7 @@
 	    <replaceable>BCRYPT</replaceable>,</phrase>
 	    <replaceable>SHA256</replaceable>,
 	    <replaceable>SHA512</replaceable>,
-	    <phrase condition="yescrypt">
-	    <replaceable>YESCRYPT</replaceable></phrase> and
+	    and
 	    <replaceable>NONE</replaceable>
 	    if your libc supports these methods.
 	  </para>
@@ -196,8 +194,6 @@
 	    <replaceable>BCRYPT</replaceable></phrase>
 	    <replaceable>SHA256</replaceable>
 	    <replaceable>SHA512</replaceable>
-	    <phrase condition="yescrypt">
-	    <replaceable>YESCRYPT</replaceable></phrase>
 	  </para>
 	  <para condition="bcrypt">
 	    By default, the number of rounds for BCRYPT is defined by the
@@ -217,14 +213,6 @@
 	    A minimal value of 1000 and a maximal value of 999,999,999
 	    will be enforced for SHA256 and SHA512. The default number of rounds
 	    is 5000.
-	  </para>
-	  <para condition="yescrypt">
-	    By default, the number of rounds for YESCRYPT is defined by the
-	    YESCRYPT_COST_FACTOR in <filename>/etc/login.defs</filename>.
-	  </para>
-	  <para condition="yescrypt">
-	    A minimal value of 1 and a maximal value of 11
-	    will be enforced for YESCRYPT. The default number of rounds is 5.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -252,7 +240,6 @@
     <variablelist>
       &BCRYPT_MIN_ROUNDS; <!--documents also BCRYPT_MAX_ROUNDS-->
       &SHA_CRYPT_MIN_ROUNDS; <!--documents also SHA_CRYPT_MAX_ROUNDS-->
-      &YESCRYPT_COST_FACTOR;
     </variablelist>
   </refsect1>
 

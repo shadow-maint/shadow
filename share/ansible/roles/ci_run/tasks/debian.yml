@@ -52,7 +52,6 @@
   ansible.builtin.command: >
     ./autogen.sh
     --enable-man
-    --with-yescrypt
     --without-selinux
   args:
     chdir: /usr/local/src/shadow/

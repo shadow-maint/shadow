@@ -20,7 +20,6 @@
 <!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
-<!ENTITY YESCRYPT_COST_FACTOR  SYSTEM "login.defs.d/YESCRYPT_COST_FACTOR.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 
@@ -330,8 +329,6 @@
 	    <replaceable>BCRYPT</replaceable></phrase>
 	    <replaceable>SHA256</replaceable>
 	    <replaceable>SHA512</replaceable>
-	    <phrase condition="yescrypt">
-	    <replaceable>YESCRYPT</replaceable></phrase>
 	  </para>
 	  <para condition="bcrypt">
 	    By default, the number of rounds for BCRYPT is defined by the
@@ -350,14 +347,6 @@
 	  <para>
 	    A minimal value of 1000 and a maximal value of 999,999,999
 	    will be enforced for SHA256 and SHA512. The default is 5000.
-	  </para>
-	  <para condition="yescrypt">
-	    By default, the number of rounds for YESCRYPT is defined by the
-	    YESCRYPT_COST_FACTOR in <filename>/etc/login.defs</filename>.
-	  </para>
-	  <para condition="yescrypt">
-	    A minimal value of 1 and a maximal value of 11
-	    will be enforced for YESCRYPT. The default is 5.
 	  </para>
 	</listitem>
       </varlistentry>

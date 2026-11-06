@@ -67,10 +67,6 @@ is_valid_hash(const char *hash)
 	if (strlen(hash) < 48)
 		return false;
 
-	// Yescrypt: $y$ + algorithm parameters + $ + salt + $ + 43-char hash
-	if (match_regex("^\\$y\\$[./A-Za-z0-9]+\\$[./A-Za-z0-9]{1,86}\\$[./A-Za-z0-9]{43}$", hash))
-		return true;
-
 	// Bcrypt: $2[abxy]$ + 2-digit cost + $ + 53-char hash
 	if (match_regex("^\\$2[abxy]\\$[0-9]{2}\\$[./A-Za-z0-9]{53}$", hash))
 		return true;

@@ -13,9 +13,7 @@
       It can take one of these values: <phrase condition="bcrypt">
       <replaceable>BCRYPT</replaceable>,</phrase>
       <replaceable>SHA256</replaceable>,
-      <replaceable>SHA512</replaceable> (default),
-      <phrase condition="yescrypt">
-      <replaceable>YESCRYPT</replaceable></phrase>.
+      <replaceable>SHA512</replaceable> (default).
       See
       <refentrytitle>crypt</refentrytitle><manvolnum>5</manvolnum>
       for recommendations.

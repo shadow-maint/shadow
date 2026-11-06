@@ -34,7 +34,7 @@ The first step is to configure it. You can use the
 `autogen.sh` script provided by the project. Example:
 
 ```
-./autogen.sh --without-selinux --enable-man --with-yescrypt
+./autogen.sh --without-selinux --enable-man
 ```
 
 ### Build

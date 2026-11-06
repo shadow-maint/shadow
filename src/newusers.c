@@ -81,9 +81,6 @@ static long sha_rounds = 5000;
 #ifdef USE_BCRYPT
 static long bcrypt_rounds = 13;
 #endif				/* USE_BCRYPT */
-#ifdef USE_YESCRYPT
-static long yescrypt_cost = 5;
-#endif				/* USE_YESCRYPT */
 #endif				/* !USE_PAM */
 
 static bool is_shadow;
@@ -136,17 +133,14 @@ static void usage (int status)
 #if defined(USE_BCRYPT)
 	                " BCRYPT"
 #endif
-#if defined(USE_YESCRYPT)
-	                " YESCRYPT"
-#endif
 	               );
 #endif				/* !USE_PAM */
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -r, --system                  create system accounts\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 #ifndef USE_PAM
-	(void) fputs (_("  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
-	                "                                or YESCRYPT crypt algorithms\n"),
+	(void) fputs (_("  -s, --sha-rounds              number of rounds for the SHA or BCRYPT\n"
+	                "                                crypt algorithms\n"),
 	              usageout);
 #endif				/* !USE_PAM */
 	(void) fputs ("\n", usageout);
@@ -423,12 +417,6 @@ static int update_passwd (struct passwd *pwd, const char *password)
 				crypt_arg = &bcrypt_rounds;
 		}
 #endif				/* USE_BCRYPT */
-#if defined(USE_YESCRYPT)
-		if (sflg) {
-			if (streq(crypt_method, "YESCRYPT"))
-				crypt_arg = &yescrypt_cost;
-		}
-#endif				/* USE_YESCRYPT */
 	}
 
 	if ((NULL != crypt_method) && streq(crypt_method, "NONE")) {
@@ -474,12 +462,6 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 				crypt_arg = &bcrypt_rounds;
 		}
 #endif				/* USE_BCRYPT */
-#if defined(USE_YESCRYPT)
-		if (sflg) {
-			if (streq(crypt_method, "YESCRYPT"))
-				crypt_arg = &yescrypt_cost;
-		}
-#endif				/* USE_PAM */
 	}
 
 	/*
@@ -657,12 +639,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				bad_s = 1;
 			}
 #endif				/* USE_BCRYPT */
-#if defined(USE_YESCRYPT)
-			if (  (   streq(crypt_method, "YESCRYPT")
-			       && (-1 == str2sl(&yescrypt_cost, optarg)))) {
-				bad_s = 1;
-			}
-#endif				/* USE_YESCRYPT */
 			if (bad_s != 0) {
 				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
@@ -716,9 +692,6 @@ static void check_flags (void)
 #ifdef USE_BCRYPT
 		    && !streq(crypt_method, "BCRYPT")
 #endif				/* USE_BCRYPT */
-#ifdef USE_YESCRYPT
-		    && !streq(crypt_method, "YESCRYPT")
-#endif				/* USE_YESCRYPT */
 		    ) {
 			eprintf(_("%s: unsupported crypt method: %s\n"),
 			         Prog, crypt_method);

@@ -924,11 +924,6 @@ msgstr ""
 msgid "SHA512"
 msgstr ""
 
-#. (itstool) path: phrase/replaceable
-#. (itstool) path: para/replaceable
-msgid "YESCRYPT"
-msgstr ""
-
 #. (itstool) path: para/replaceable
 msgid "NONE"
 msgstr ""
@@ -988,18 +983,6 @@ msgstr ""
 msgid ""
 "A minimal value of 1000 and a maximal value of 999,999,999 will be enforced "
 "for SHA256 and SHA512. The default number of rounds is 5000."
-msgstr ""
-
-#. (itstool) path: listitem/para
-msgid ""
-"By default, the number of rounds for YESCRYPT is defined by the "
-"YESCRYPT_COST_FACTOR in <_:filename-1/>."
-msgstr ""
-
-#. (itstool) path: listitem/para
-msgid ""
-"A minimal value of 1 and a maximal value of 11 will be enforced for "
-"YESCRYPT. The default number of rounds is 5."
 msgstr ""
 
 #. (itstool) path: refsect1/title
@@ -1165,11 +1148,6 @@ msgstr ""
 
 #. (itstool) path: listitem/para
 msgid "The values must be inside the 1000-999,999,999 range."
-msgstr ""
-
-#. (itstool) path: term/option
-#. (itstool) path: para/phrase
-msgid "YESCRYPT_COST_FACTOR"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -5243,12 +5221,6 @@ msgstr ""
 msgid ""
 "A minimal value of 1000 and a maximal value of 999,999,999 will be enforced "
 "for SHA256 and SHA512. The default is 5000."
-msgstr ""
-
-#. (itstool) path: listitem/para
-msgid ""
-"A minimal value of 1 and a maximal value of 11 will be enforced for "
-"YESCRYPT. The default is 5."
 msgstr ""
 
 #. (itstool) path: refsect1/para
