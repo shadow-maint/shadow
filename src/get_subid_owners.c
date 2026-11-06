@@ -31,21 +31,21 @@ int main(int argc, char *argv[])
 	}
 	if (argc == 3 && streq(argv[1], "-g")) {
 		get_uid(argv[2], &u);
-		n = subid_get_gid_owners(u, &uids);
+		uids = subid_get_gid_owners(u, &n);
 	} else if (argc == 2 && streq(argv[1], "-h")) {
 		usage();
 	} else {
 		get_gid(argv[1], &u);
-		n = subid_get_uid_owners(u, &uids);
+		uids = subid_get_uid_owners(u, &n);
 	}
-	if (n < 0) {
-		eprintf("No owners found\n");
+	if (uids == NULL) {
+		eprinte("%s: cannot list the owners", Prog);
 		exit(1);
 	}
 	for (i = 0; i < n; i++) {
 		printf("%d\n", uids[i]);
 	}
-	free(uids);
+	subid_free(uids);
 	return 0;
 }
 
