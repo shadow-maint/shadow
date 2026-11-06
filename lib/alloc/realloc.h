@@ -10,7 +10,9 @@
 
 #include <stdlib.h>
 
+#include "attr.h"
 #include "exit_if_null.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
@@ -19,7 +21,7 @@
 #define realloc_T_(p, n, T)                                           \
 ({                                                                    \
 	_Generic(p, T *: (void)0);                                    \
-	(T *){reallocarray_(p, n, sizeof(T))};                        \
+	(T *){DEPRECATED(reallocarray_(p, n, sizeof(T)))};            \
 })
 
 #define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
@@ -27,6 +29,10 @@
 
 // xrealloc_T - exit-on-error realloc type-safe
 #define xrealloc_T(p, n, T)  exit_if_null(realloc_T(p, n, T))
+
+
+ATTR_DEPRECATED typeof(realloc)       realloc;
+ATTR_DEPRECATED typeof(reallocarray)  reallocarray;
 
 
 #endif  // include guard
