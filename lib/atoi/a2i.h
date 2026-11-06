@@ -13,6 +13,7 @@
 
 #include "atoi/strtoi/strtoi.h"
 #include "atoi/strtoi/strtou_noneg.h"
+#include "pragma.h"
 #include "typetraits.h"
 
 
@@ -27,14 +28,14 @@
 	int  status;                                                  \
 	                                                              \
 	*n_ = _Generic((T){0},                                        \
-		short:              strtoi_,                          \
-		int:                strtoi_,                          \
-		long:               strtoi_,                          \
-		long long:          strtoi_,                          \
-		unsigned short:     strtou_noneg,                     \
-		unsigned int:       strtou_noneg,                     \
-		unsigned long:      strtou_noneg,                     \
-		unsigned long long: strtou_noneg                      \
+		short:              DEPRECATED(strtoi_),              \
+		int:                DEPRECATED(strtoi_),              \
+		long:               DEPRECATED(strtoi_),              \
+		long long:          DEPRECATED(strtoi_),              \
+		unsigned short:     DEPRECATED(strtou_noneg),         \
+		unsigned int:       DEPRECATED(strtou_noneg),         \
+		unsigned long:      DEPRECATED(strtou_noneg),         \
+		unsigned long long: DEPRECATED(strtou_noneg)          \
 	)(s, (char **) endp_, base, min_, max_, &status);             \
 	                                                              \
 	if (status != 0)                                              \
