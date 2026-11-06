@@ -22,6 +22,7 @@
 #include <signal.h>
 #include <paths.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -2183,8 +2184,7 @@ want_btrfs_subvolume(const char *path)
  */
 static void create_home(const struct option_flags *flags)
 {
-	char    path[strlen(prefix_user_home) + 2];
-	char    *bhome, *cp;
+	char    *bhome, *cp, *path;
 	mode_t  mode;
 	bool    process_selinux;
 
@@ -2193,7 +2193,6 @@ static void create_home(const struct option_flags *flags)
 	if (access (prefix_user_home, F_OK) == 0)
 		return;
 
-	strcpy(path, "");
 	bhome = strdup(prefix_user_home);
 	if (!bhome) {
 		eprintf(_("%s: error while duplicating string %s\n"),
@@ -2215,6 +2214,9 @@ static void create_home(const struct option_flags *flags)
 	   exists. If not, create it with permissions 755 and
 	   owner root:root.
 	 */
+
+	path = strcpy(xmalloc_T(strlen(prefix_user_home) + 2, char), "");
+
 	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
 		bool  dir_created;
 
@@ -2276,6 +2278,7 @@ static void create_home(const struct option_flags *flags)
 	if (chmod(prefix_user_home, mode))
 		eprinte("%s: %s: chmod(%s)", Prog, _("warning"), path);
 
+	free(path);
 	home_added = true;
 #ifdef WITH_AUDIT
 	audit_logger(AUDIT_USER_MGMT, "add-home-dir",
@@ -2300,7 +2303,7 @@ static void create_home(const struct option_flags *flags)
  *	exist. It will be created mode 660 owned by the user and group
  *	'mail'
  */
-static void create_mail(const struct option_flags *flags)
+static void create_mail(MAYBE_UNUSED const struct option_flags *flags)
 {
 	int           fd;
 	char          *file;
@@ -2308,9 +2311,9 @@ static void create_mail(const struct option_flags *flags)
 	mode_t        mode;
 	const char    *spool;
 	struct group  *gr;
-	bool          process_selinux;
-
-	process_selinux = !flags->chroot && !flags->prefix;
+#ifdef WITH_SELINUX
+	bool          process_selinux = !flags->chroot && !flags->prefix;
+#endif
 
 	if (!strcaseeq(create_mail_spool, "yes"))
 		return;
@@ -2389,14 +2392,16 @@ static void check_uid_range(bool sys_user, uid_t uid)
 	if (sys_user) {
 		uid_max = getdef_ulong("SYS_UID_MAX",getdef_ulong("UID_MIN",1000UL)-1);
 		if (uid > uid_max) {
-			eprintf(_("%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"), Prog, user_name, uid, uid_max);
+			eprintf(_("%s warning: %s's uid %jd is greater than SYS_UID_MAX %jd\n"),
+			        Prog, user_name, (intmax_t) uid, (intmax_t) uid_max);
 		}
 	}else{
 		uid_min = getdef_ulong("UID_MIN", 1000UL);
 		uid_max = getdef_ulong("UID_MAX", 6000UL);
 		if (uid_min <= uid_max) {
 			if (uid < uid_min || uid > uid_max)
-				eprintf(_("%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"), Prog, user_name, uid, uid_min, uid_max);
+				eprintf(_("%s warning: %s's uid %jd outside of the UID_MIN %jd and UID_MAX %jd range.\n"),
+				        Prog, user_name, (intmax_t) uid, (intmax_t) uid_min, (intmax_t) uid_max);
 		}
 	}
 
