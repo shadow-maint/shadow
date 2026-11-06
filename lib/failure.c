@@ -68,7 +68,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 		 * might reset the counter. But the new failure will be
 		 * logged.
 		 */
-		memzero_explicit(fl, sizeof(*fl));
+		memzero_explicit_T(fl, 1, struct faillog);
 	}
 
 	/*
