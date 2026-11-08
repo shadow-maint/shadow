@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man 4.20.0-rc2\n"
 "POT-Creation-Date: 2026-06-22 21:39-0500\n"
-"PO-Revision-Date: 2026-11-03 11:39+0200\n"
+"PO-Revision-Date: 2026-11-07 20:26+0200\n"
 "Last-Translator: Rihards Priedītis <rprieditis@gmail.com>\n"
-"Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
+"Language-Team: Latvian <translation-team-lv@googlegroups.com>\n"
 "Language: lv\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "MIME-Version: 1.0\n"
@@ -103,7 +103,7 @@ msgstr "opcijas"
 #. (itstool) path: term/replaceable
 #. (itstool) path: para/emphasis
 msgid "LOGIN"
-msgstr "PIETEIKŠANĀS"
+msgstr "LIETOTĀJVĀRDS"
 
 #. (itstool) path: refsect1/title
 msgid "DESCRIPTION"
@@ -174,7 +174,7 @@ msgstr "EXPIRE_DATE"
 
 #. (itstool) path: listitem/para
 msgid "Set the date on which the user's password expires and their account will no longer be accessible. The value can be specified as a date in the YYYY-MM-DD format or as a number of days since 1970-01-01. The date is interpreted using the UTC timezone. If the password expires, the user must contact the system administrator to regain access to the system."
-msgstr "Iestatīt datumu, kurā beidzas lietotāja parole un konts vairs nebūs pieejams. Vērtību var norādīt kā datumu formātā YYYY-MM-DD vai kā dienu skaitu kopš 1970-01-01. Datums tiek interpretēts, izmantojot UTC laika joslu. Ja parole beidzas, lietotājam jāsazinās ar sistēmas administratoru, lai atgūtu piekļuvi sistēmai."
+msgstr "Iestatīt datumu, kurā beidzas lietotāja parole un konts vairs nebūs pieejams. Vērtību var norādīt kā datumu formātā GGGG-MM-DD vai kā dienu skaitu kopš 1970-01-01. Datums tiek interpretēts, izmantojot UTC laika joslu. Ja parole beidzas, lietotājam jāsazinās ar sistēmas administratoru, lai atgūtu piekļuvi sistēmai."
 
 #. (itstool) path: listitem/para
 msgid "For example, the following command sets an account to expire in 180 days:"
@@ -216,7 +216,7 @@ msgstr "--iso8601"
 
 #. (itstool) path: listitem/para
 msgid "When printing dates, use YYYY-MM-DD format."
-msgstr "Izvadot datumus, izmantot YYYY-MM-DD formātu."
+msgstr "Izvadot datumus, izmantot GGGG-MM-DD formātu."
 
 #. (itstool) path: term/option
 msgid "-I"
@@ -330,7 +330,7 @@ msgstr "PREFIX_DIR"
 
 #. (itstool) path: listitem/para
 msgid "Apply changes to configuration files under the root filesystem found under the directory <_:replaceable-1/>. This option does not chroot and is intended for preparing a cross-compilation target. Some limitations: NIS and LDAP users/groups are not verified. No SELINUX support."
-msgstr "Piemērot izmaiņas konfigurācijas failos saknes failusistēmā, kas atrodas direktorijā <_:replaceable-1/>. Šī opcija neveic chroot un ir paredzēta šķērskompilācijas mērķa sagatavošanai. Daži ierobežojumi: NIS un LDAP lietotāji/grupas netiek pārbaudīti. Nav SELINUX atbalsta."
+msgstr "Piemērot izmaiņas konfigurācijas failos saknes failu sistēmā, kas atrodas direktorijā <_:replaceable-1/>. Šī opcija neveic chroot un ir paredzēta šķērskompilācijas mērķa sagatavošanai. Daži ierobežojumi: NIS un LDAP lietotāji/grupas netiek pārbaudīti. Nav SELINUX atbalsta."
 
 #. (itstool) path: term/option
 msgid "--warndays"
@@ -380,7 +380,7 @@ msgstr "Programma <_:command-1/> arī neziņos par neatbilstībām starp shadow 
 
 #. (itstool) path: refsect1/para
 msgid "The <_:command-1/> command is restricted to the root user, except for the <_:option-2/> option, which may be used by an unprivileged user to determine when their password or account is due to expire."
-msgstr "Komanda <_:command-1/> ir pieejama tikai root lietotājam, izņemot opciju <_:option-2/>, ko var izmantot nepriviliģēts lietotājs, lai noskaidrotu, kad beidzas viņa paroles vai konta derīguma termiņš."
+msgstr "Komanda <_:command-1/> ir pieejama tikai root lietotājam, izņemot opciju <_:option-2/>, ko var izmantot neprivileģēts lietotājs, lai noskaidrotu, kad beidzas viņa paroles vai konta derīguma termiņš."
 
 #. (itstool) path: refsect1/title
 msgid "CONFIGURATION"
@@ -419,7 +419,7 @@ msgstr "Aizsargāta lietotāju kontu informācija."
 
 #. (itstool) path: refsect1/title
 msgid "EXIT VALUES"
-msgstr "IZIEŠANAS VĒRTĪBAS"
+msgstr "IZPILDES VĒRTĪBAS"
 
 #. (itstool) path: listitem/para
 msgid "success"
@@ -444,7 +444,7 @@ msgstr "15"
 
 #. (itstool) path: listitem/para
 msgid "can't find the shadow password file"
-msgstr "neizdevās atrast ēnoto paroļu failu"
+msgstr "neizdevās atrast ēnu paroļu failu"
 
 #. (itstool) path: refsect1/para
 msgid "The <_:command-1/> command exits with the following values: <_:variablelist-2/>"
@@ -602,7 +602,7 @@ msgstr "--work-phone"
 
 #. (itstool) path: term/replaceable
 msgid "WORK_PHONE"
-msgstr "DARBA_TELEFONS"
+msgstr "DARBA_TĀLRUNIS"
 
 #. (itstool) path: listitem/para
 msgid "Change the user's office phone number."
@@ -704,7 +704,7 @@ msgstr "-c"
 
 #. (itstool) path: refsect1/para
 msgid "The default encryption algorithm can be defined for the system with the <_:option-1/> variable of <_:filename-2/>, and can be overwritten with the <_:option-3/> or <_:option-4/> options."
-msgstr "Noklusējuma šifrēšanas algoritmu sistēmai var definēt ar faila <_:filename-2/> mainīgo <_:option-1/>, un to var pārrakstīt ar opcijām <_:option-3/> vai <_:option-4/>."
+msgstr "Noklusējuma šifrēšanas algoritmu sistēmai var definēt ar faila <_:filename-2/> mainīgo <_:option-1/>, un to var aizstāt ar opcijām <_:option-3/> vai <_:option-4/>."
 
 #. (itstool) path: refsect1/para
 msgid "This command is intended to be used in a large system environment where many accounts are created at a single time."
@@ -793,7 +793,7 @@ msgstr "Pēc noklusējuma SHA256 vai SHA512 raundu skaitu nosaka mainīgie SHA_C
 
 #. (itstool) path: listitem/para
 msgid "A minimal value of 1000 and a maximal value of 999,999,999 will be enforced for SHA256 and SHA512. The default number of rounds is 5000."
-msgstr "SHA256 un SHA512 tiks piemērota minimālā vērtība 1000 un maksimālā vērtība 999,999,999. Noklusējuma raundu skaits ir 5000."
+msgstr "SHA256 un SHA512 tiks piemērota minimālā vērtība 1000 un maksimālā vērtība 999 999 999. Noklusējuma raundu skaits ir 5000."
 
 #. (itstool) path: listitem/para
 msgid "By default, the number of rounds for YESCRYPT is defined by the YESCRYPT_COST_FACTOR in <_:filename-1/>."
@@ -834,7 +834,7 @@ msgstr "/etc/gshadow"
 
 #. (itstool) path: listitem/para
 msgid "Secure group account information."
-msgstr "Droša grupu kontu informācija."
+msgstr "Aizsargāta grupu kontu informācija."
 
 #. (itstool) path: citerefentry/refentrytitle
 #. (itstool) path: refmeta/refentrytitle
@@ -913,7 +913,7 @@ msgstr "Pēc noklusējuma (ja nav norādīta neviena no <_:option-1/> vai <_:opt
 
 #. (itstool) path: listitem/para
 msgid "Apply changes to configuration files under the root filesystem found under the directory <_:replaceable-1/>. This option does not chroot and is intended for preparing a cross-compilation target. Some limitations: NIS and LDAP users/groups are not verified. PAM authentication is using the host files. No SELINUX support."
-msgstr "Piemērot izmaiņas konfigurācijas failiem saknes failusistēmā, kas atrodas direktorijā <_:replaceable-1/>. Šī opcija neveic chroot un ir paredzēta šķērskompilācijas mērķa sagatavošanai. Daži ierobežojumi: NIS un LDAP lietotāji/grupas netiek pārbaudīti. PAM autentifikācija izmanto resursdatora failus. Nav SELINUX atbalsta."
+msgstr "Piemērot izmaiņas konfigurācijas failiem saknes failu sistēmā, kas atrodas direktorijā <_:replaceable-1/>. Šī opcija neveic chroot un ir paredzēta šķērskompilācijas mērķa sagatavošanai. Daži ierobežojumi: NIS un LDAP lietotāji/grupas netiek pārbaudīti. PAM autentifikācija izmanto resursdatora failus. Nav SELINUX atbalsta."
 
 #. (itstool) path: term/replaceable
 msgid "ROUNDS"
@@ -1131,7 +1131,7 @@ msgstr "-t"
 
 #. (itstool) path: listitem/para
 msgid "With the <_:option-1/>, <_:option-2/>, <_:option-3/>, <_:option-4/> options, the users' records are changed, even if the user does not exist on the system. This is useful to reset records of users that have been deleted or to set a policy in advance for a range of users."
-msgstr "Ar opcijām <_:option-1/>, <_:option-2/>, <_:option-3/>, <_:option-4/> lietotāju ieraksti tiek mainīti, pat ja lietotājs sistēmā nepastāv. Tas ir noderīgi, lai atiestatītu dzēsto lietotāju ierakstus vai iepriekš iestatītu kārtulu lietotāju diapazonam."
+msgstr "Ar opcijām <_:option-1/>, <_:option-2/>, <_:option-3/>, <_:option-4/> lietotāju ieraksti tiek mainīti, pat ja lietotājs sistēmā nepastāv. Tas ir noderīgi, lai atiestatītu dzēsto lietotāju ierakstus vai iepriekš iestatītu politiku lietotāju diapazonam."
 
 #. (itstool) path: term/option
 msgid "--lock-secs"
@@ -1173,7 +1173,7 @@ msgstr "root"
 
 #. (itstool) path: listitem/para
 msgid "The maximum failure count should always be 0 for <_:emphasis-1/> to prevent a denial of services attack against the system."
-msgstr "Lietotājam <_:emphasis-1/> maksimālajam kļūdu skaitam vienmēr jābūt 0, lai novērstu pakalpojumatteices uzbrukumu sistēmai."
+msgstr "Lietotājam <_:emphasis-1/> maksimālajam kļūdu skaitam vienmēr jābūt 0, lai novērstu pakalpojuma atteices uzbrukumu sistēmai."
 
 #. (itstool) path: term/option
 msgid "--reset"
@@ -1236,7 +1236,7 @@ msgstr "Ja netiek izmantota neviena no opcijām <_:option-1/>, <_:option-2/> vai
 
 #. (itstool) path: refsect1/para
 msgid "<_:command-1/> only prints out users with no successful login since the last failure. To print out a user who has had a successful login since their last failure, you must explicitly request the user with the <_:option-2/> flag, or print out all users with the <_:option-3/> flag."
-msgstr "<_:command-1/> izvada tikai tos lietotājus, kuriem nav bijusi veiksmīga pieteikšanās kopš pēdējās neveiksmes. Lai izvadītu lietotāju, kuram ir bijusi veiksmīga pieteikšanās kopš pēdējās neveiksmes, tas ir skaidri jānorāda ar karodziņu <_:option-2/> vai jāizvada visi lietotāji ar karodziņu <_:option-3/>."
+msgstr "<_:command-1/> izvada tikai tos lietotājus, kuriem nav bijusi veiksmīga pieteikšanās kopš pēdējās neveiksmes. Lai izvadītu lietotāju, kuram ir bijusi veiksmīga pieteikšanās kopš pēdējās neveiksmes, tas ir eksplicīti jānorāda ar karogu <_:option-2/> vai jāizvada visi lietotāji ar karogu <_:option-3/>."
 
 #. (itstool) path: citerefentry/refentrytitle
 #. (itstool) path: para/command
@@ -1245,7 +1245,7 @@ msgstr "<_:command-1/> izvada tikai tos lietotājus, kuriem nav bijusi veiksmīg
 #. (itstool) path: cmdsynopsis/command
 #. (itstool) path: varlistentry/term
 msgid "login"
-msgstr "pieteikšanās"
+msgstr "login"
 
 #. (itstool) path: author/firstname
 msgid "Rafal"
@@ -1289,7 +1289,7 @@ msgstr "administratori,"
 
 #. (itstool) path: refsect1/para
 msgid "The <_:command-1/> command is used to administer <_:filename-2/><_:phrase-3/>. Every group can have <_:phrase-4/> members and a password."
-msgstr "Komandu <_:command-1/> izmanto, lai pārvaldītu <_:filename-2/><_:phrase-3/>. Katrai grupai var būt <_:phrase-4/> dalībnieki un parole."
+msgstr "Komandu <_:command-1/> izmanto, lai pārvaldītu <_:filename-2/><_:phrase-3/>. Katrai grupai var būt <_:phrase-4/> locekļi un parole."
 
 #. (itstool) path: para/option
 #. (itstool) path: term/option
@@ -1298,7 +1298,7 @@ msgstr "-A"
 
 #. (itstool) path: refsect1/para
 msgid "System administrators can use the <_:option-1/> option to define group administrator(s) and the <_:option-2/> option to define members. They have all rights of group administrators and members."
-msgstr "Sistēmas administratori var izmantot opciju <_:option-1/>, lai definētu grupas administratoru(s), un opciju <_:option-2/>, lai definētu dalībniekus. Viņiem ir visas grupas administratoru un dalībnieku tiesības."
+msgstr "Sistēmas administratori var izmantot opciju <_:option-1/>, lai definētu grupas administratoru(s), un opciju <_:option-2/>, lai definētu locekļus. Viņiem ir visas grupas administratoru un locekļu tiesības."
 
 #. (itstool) path: para/phrase
 msgid "a group administrator"
@@ -1322,7 +1322,7 @@ msgstr "newgrp"
 
 #. (itstool) path: refsect1/para
 msgid "If a password is set the members can still use <_:citerefentry-1/> without a password, and non-members must supply the password."
-msgstr "Ja parole ir iestatīta, dalībnieki joprojām var izmantot <_:citerefentry-1/> bez paroles, bet nedalībniekiem ir jānorāda parole."
+msgstr "Ja parole ir iestatīta, locekļi joprojām var izmantot <_:citerefentry-1/> bez paroles, bet nelocekļiem ir jānorāda parole."
 
 #. (itstool) path: refsect2/title
 msgid "Notes about group passwords"
@@ -1371,7 +1371,7 @@ msgstr "--remove-password"
 
 #. (itstool) path: listitem/para
 msgid "Remove the password from the named <_:replaceable-1/>. The group password will be empty. Only group members will be allowed to use <_:command-2/> to join the named <_:replaceable-3/>."
-msgstr "Noņem paroli no norādītā <_:replaceable-1/>. Grupas parole būs tukša. Tikai grupas dalībnieki drīkstēs izmantot <_:command-2/>, lai pievienotos norādītajam <_:replaceable-3/>."
+msgstr "Noņemt paroli no norādītā <_:replaceable-1/>. Grupas parole būs tukša. Tikai grupas locekļi drīkstēs izmantot <_:command-2/>, lai pievienotos norādītajam <_:replaceable-3/>."
 
 #. (itstool) path: term/option
 msgid "--restrict"
@@ -1379,7 +1379,7 @@ msgstr "--restrict"
 
 #. (itstool) path: listitem/para
 msgid "Restrict the access to the named <_:replaceable-1/>. The group password is set to \"!\". Only group members with a password will be allowed to use <_:command-2/> to join the named <_:replaceable-3/>."
-msgstr "Ierobežo piekļuvi norādītajam <_:replaceable-1/>. Grupas parole tiek iestatīta uz \"!\". Tikai grupas dalībnieki ar paroli drīkstēs izmantot <_:command-2/>, lai pievienotos norādītajam <_:replaceable-3/>."
+msgstr "Ierobežot piekļuvi norādītajam <_:replaceable-1/>. Grupas parole tiek iestatīta uz \"!\". Tikai grupas locekļi ar paroli drīkstēs izmantot <_:command-2/>, lai pievienotos norādītajam <_:replaceable-3/>."
 
 #. (itstool) path: term/option
 msgid "--administrators"
@@ -1399,7 +1399,7 @@ msgstr "--members"
 
 #. (itstool) path: listitem/para
 msgid "Set the list of group members."
-msgstr "Iestatīt grupas dalībnieku sarakstu."
+msgstr "Iestatīt grupas locekļu sarakstu."
 
 #. (itstool) path: para/phrase
 msgid "and <_:filename-1/> files."
@@ -1462,7 +1462,7 @@ msgstr "izveidot jaunu grupu"
 #. (itstool) path: arg/replaceable
 #. (itstool) path: para/replaceable
 msgid "NEWGROUP"
-msgstr "JAUNAGRUPA"
+msgstr "JAUNĀ_GRUPA"
 
 #. (itstool) path: refsect1/para
 msgid "The <_:command-1/> command creates a new group account using the values specified on the command line plus the default values from the system. The new group will be entered into the system files as needed."
@@ -1487,7 +1487,7 @@ msgstr "-g"
 
 #. (itstool) path: listitem/para
 msgid "This option causes the command to simply exit with success status if the specified group already exists. When used with <_:option-1/>, and the specified GID already exists, another (unique) GID is chosen (i.e. <_:option-2/> is turned off)."
-msgstr "Šī opcija liek komandai vienkārši beigt darbu ar veiksmes statusu, ja norādītā grupa jau pastāv. Izmantojot to kopā ar <_:option-1/> un ja norādītais GID jau pastāv, tiek izvēlēts cits (unikāls) GID (t. i., <_:option-2/> tiek atslēgta)."
+msgstr "Šī opcija liek komandai vienkārši beigt darbu ar veiksmes statusu, ja norādītā grupa jau pastāv. Izmantojot to kopā ar <_:option-1/> un ja norādītais GID jau pastāv, tiek izvēlēts cits (unikāls) GID (t. i., <_:option-2/> tiek atspējota)."
 
 #. (itstool) path: term/option
 msgid "--gid"
@@ -1602,7 +1602,7 @@ msgstr "definē grupas konta sākotnējo paroli. Paredzēts, ka PAROLE būs šif
 
 #. (itstool) path: listitem/para
 msgid "Without this option, the group account will be locked and with no password defined, i.e. a single exclamation mark in the respective field of ths system account file <_:filename-1/> or <_:filename-2/>."
-msgstr "Bez šīs opcijas grupas konts tiks bloķēts un būs bez definētas paroles, t.i., viena izsaukuma zīme attiecīgajā sistēmas konta faila <_:filename-1/> vai <_:filename-2/> laukā."
+msgstr "Bez šīs opcijas grupas konts tiks bloķēts un būs bez definētas paroles, t. i., viena izsaukuma zīme attiecīgajā sistēmas konta faila <_:filename-1/> vai <_:filename-2/> laukā."
 
 #. (itstool) path: para/emphasis
 msgid "Note:"
@@ -1647,7 +1647,7 @@ msgstr "--users"
 
 #. (itstool) path: listitem/para
 msgid "A comma-separated list of usernames to add as members of the group."
-msgstr "Ar komatiem atdalīts lietotājvārdu saraksts, kurus pievienot par grupas dalībniekiem."
+msgstr "Ar komatiem atdalīts lietotājvārdu saraksts, kurus pievienot par grupas locekļiem."
 
 #. (itstool) path: para/option
 #. (itstool) path: term/option
@@ -1739,7 +1739,7 @@ msgstr "Šī opcija piespiedu kārtā dzēš grupu, pat ja kādam lietotājam t�
 
 #. (itstool) path: listitem/para
 msgid "Apply changes in the <_:replaceable-1/> directory and use the configuration files from the <_:replaceable-2/> directory. This option does not chroot and is intended for preparing a cross-compilation target. Some limitations: NIS and LDAP users/groups are not verified. PAM authentication is using the host files. No SELINUX support."
-msgstr "Lietot izmaiņas <_:replaceable-1/> direktorijā un izmantot konfigurācijas failus no <_:replaceable-2/> direktorijas. Šī opcija neizmanto chroot un ir paredzēta šķērskompilācijas mērķa sagatavošanai. Daži ierobežojumi: NIS un LDAP lietotāji/grupas netiek pārbaudīti. PAM autentifikācija izmanto resursdatora failus. Nav SELINUX atbalsta."
+msgstr "Piemērot izmaiņas <_:replaceable-1/> direktorijā un izmantot konfigurācijas failus no <_:replaceable-2/> direktorijas. Šī opcija neveic chroot un ir paredzēta šķērskompilācijas mērķa sagatavošanai. Daži ierobežojumi: NIS un LDAP lietotāji/grupas netiek pārbaudīti. PAM autentifikācija izmanto resursdatora failus. Nav SELINUX atbalsta."
 
 #. (itstool) path: refsect1/para
 msgid "You may not remove the primary group of any existing user. You must remove the user before you remove the group."
@@ -1779,7 +1779,7 @@ msgstr "--append"
 
 #. (itstool) path: listitem/para
 msgid "If group members are specified with -U, append them to the existing member list, rather than replacing it."
-msgstr "Ja grupas dalībnieki ir norādīti ar -U, pievienot tos esošajam dalībnieku sarakstam, nevis to aizstāt."
+msgstr "Ja grupas locekļi ir norādīti ar -U, pievienot tos esošajam locekļu sarakstam, nevis to aizstāt."
 
 #. (itstool) path: listitem/para
 msgid "The group ID of the given <_:replaceable-1/> will be changed to <_:replaceable-2/>."
@@ -1880,7 +1880,7 @@ msgstr "13"
 
 #. (itstool) path: listitem/para
 msgid "E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message"
-msgstr "E_PAM_ERROR: PAM atgrieza kļūdu; skatiet syslog resursa ID groupmod, lai uzzinātu PAM kļūdas ziņojumu"
+msgstr "E_PAM_ERROR: PAM atgrieza kļūdu; skatiet syslog kategorijas ID groupmod, lai uzzinātu PAM kļūdas ziņojumu"
 
 #. (itstool) path: author/contrib
 msgid "Creation, 1992"
@@ -1924,7 +1924,7 @@ msgstr "un administratori"
 
 #. (itstool) path: listitem/para
 msgid "a valid list of members <_:phrase-1/>"
-msgstr "derīgs dalībnieku saraksts <_:phrase-1/>"
+msgstr "derīgs locekļu saraksts <_:phrase-1/>"
 
 #. (itstool) path: listitem/para
 msgid "a corresponding entry in the <_:filename-1/> file (respectively <_:filename-2/> for the <_:filename-3/> checks)"
@@ -1988,7 +1988,7 @@ msgstr "/etc/ghadow"
 
 #. (itstool) path: listitem/para
 msgid "Suppress more controversial warnings, in particular warnings about inconsistency between group members listed in <_:filename-1/> and <_:filename-2/>."
-msgstr "Apspiest strīdīgākos brīdinājumus, it īpaši brīdinājumus par neatbilstībām starp grupas dalībniekiem, kas uzskaitīti <_:filename-1/> un <_:filename-2/>."
+msgstr "Apspiest strīdīgākos brīdinājumus, it īpaši brīdinājumus par neatbilstībām starp grupas locekļiem, kas uzskaitīti <_:filename-1/> un <_:filename-2/>."
 
 #. (itstool) path: para/phrase
 msgid "parameter."
@@ -2065,15 +2065,15 @@ msgstr "Plašāku informāciju par to, kā šī virkne tiek interpretēta, skati
 
 #. (itstool) path: listitem/para
 msgid "If the password field contains some string that is not a valid result of <_:citerefentry-1/>, for instance ! or *, users will not be able to use a unix password to access the group (but group members do not need the password)."
-msgstr "Ja paroles lauks satur virkni, kas nav derīgs <_:citerefentry-1/> rezultāts, piemēram, ! vai *, lietotāji nevarēs izmantot Unix paroli, lai piekļūtu grupai (bet grupas dalībniekiem parole nav nepieciešama)."
+msgstr "Ja paroles lauks satur virkni, kas nav derīgs <_:citerefentry-1/> rezultāts, piemēram, ! vai *, lietotāji nevarēs izmantot Unix paroli, lai piekļūtu grupai (bet grupas locekļiem parole nav nepieciešama)."
 
 #. (itstool) path: listitem/para
 msgid "The password is used when a user who is not a member of the group wants to gain the permissions of this group (see <_:citerefentry-1/>)."
-msgstr "Paroli izmanto, kad lietotājs, kurš nav grupas dalībnieks, vēlas iegūt šīs grupas atļaujas (skatiet <_:citerefentry-1/>)."
+msgstr "Paroli izmanto, kad lietotājs, kurš nav grupas loceklis, vēlas iegūt šīs grupas atļaujas (skatiet <_:citerefentry-1/>)."
 
 #. (itstool) path: listitem/para
 msgid "This field may be empty, in which case only the group members can gain the group permissions."
-msgstr "Šis lauks var būt tukšs, un tādā gadījumā tikai grupas dalībnieki var iegūt grupas atļaujas."
+msgstr "Šis lauks var būt tukšs, un tādā gadījumā tikai grupas locekļi var iegūt grupas atļaujas."
 
 #. (itstool) path: listitem/para
 msgid "A password field which starts with an exclamation mark means that the password is locked. The remaining characters on the line represent the password field before the password was locked."
@@ -2093,19 +2093,19 @@ msgstr "Tam jābūt ar komatiem atdalītam lietotājvārdu sarakstam."
 
 #. (itstool) path: listitem/para
 msgid "Administrators can change the password or the members of the group."
-msgstr "Administratori var mainīt paroli vai grupas dalībniekus."
+msgstr "Administratori var mainīt paroli vai grupas locekļus."
 
 #. (itstool) path: listitem/para
 msgid "Administrators also have the same permissions as the members (see below)."
-msgstr "Administratoriem ir arī tādas pašas atļaujas kā dalībniekiem (skatiet zemāk)."
+msgstr "Administratoriem ir arī tādas pašas atļaujas kā locekļiem (skatiet zemāk)."
 
 #. (itstool) path: term/emphasis
 msgid "members"
-msgstr "dalībnieki"
+msgstr "locekļi"
 
 #. (itstool) path: listitem/para
 msgid "Members can access the group without being prompted for a password."
-msgstr "Dalībnieki var piekļūt grupai bez paroles pieprasīšanas."
+msgstr "Locekļi var piekļūt grupai bez paroles pieprasīšanas."
 
 #. (itstool) path: listitem/para
 msgid "You should use the same list of users as in <_:filename-1/>."
@@ -2151,11 +2151,11 @@ msgstr "ports"
 
 #. (itstool) path: para/emphasis
 msgid "last login time"
-msgstr "pēdējās pieslēgšanās laiks"
+msgstr "pēdējās pieteikšanās laiks"
 
 #. (itstool) path: refsect1/para
 msgid "<_:command-1/> formats and prints the contents of the last login log <_:filename-2/> file. The <_:emphasis-3/>, <_:emphasis-4/>, and <_:emphasis-5/> will be printed. The default (no flags) causes lastlog entries to be printed, sorted by their order in <_:filename-6/>."
-msgstr "<_:command-1/> formatē un izvada pēdējās pieslēgšanās žurnāla <_:filename-2/> faila saturu. Tiks izvadīti <_:emphasis-3/>, <_:emphasis-4/> un <_:emphasis-5/>. Pēc noklusējuma (bez karodziņiem) tiek izvadīti lastlog ieraksti, sakārtoti pēc to secības <_:filename-6/>."
+msgstr "<_:command-1/> formatē un izvada pēdējās pieteikšanās žurnāla <_:filename-2/> faila saturu. Tiks izvadīti <_:emphasis-3/>, <_:emphasis-4/> un <_:emphasis-5/>. Pēc noklusējuma (bez karogiem) tiek izvadīti lastlog ieraksti, sakārtoti pēc to secības <_:filename-6/>."
 
 #. (itstool) path: term/option
 msgid "-b"
@@ -2199,15 +2199,15 @@ msgstr "Izvadīt norādītā(-o) lietotāja(-u) lastlog ierakstu(-us)."
 
 #. (itstool) path: listitem/para
 msgid "Print the lastlog records of the users that have logged in at least once. Excludes records for users with '**Never logged in**'."
-msgstr "Izvadīt lastlog ierakstus lietotājiem, kuri ir pieslēgušies vismaz vienu reizi. Izslēdz ierakstus lietotājiem ar '**Nekad nav pieslēdzies**'."
+msgstr "Izvadīt lastlog ierakstus lietotājiem, kuri ir pieteikušies vismaz vienu reizi. Izslēdz ierakstus lietotājiem ar '**Nekad nav pieteicies**'."
 
 #. (itstool) path: para/emphasis
 msgid "** Never logged in**"
-msgstr "** Nekad nav pieslēdzies**"
+msgstr "** Nekad nav pieteicies**"
 
 #. (itstool) path: refsect1/para
 msgid "If the user has never logged in the message <_:emphasis-1/> will be displayed instead of the port and time."
-msgstr "Ja lietotājs nekad nav pieslēdzies, porta un laika vietā tiks parādīts ziņojums <_:emphasis-1/>."
+msgstr "Ja lietotājs nekad nav pieteicies, porta un laika vietā tiks parādīts ziņojums <_:emphasis-1/>."
 
 #. (itstool) path: refsect1/para
 msgid "Only the entries for the current users of the system will be displayed. Other entries may exist for users that were deleted previously."
@@ -2223,15 +2223,15 @@ msgstr "ls -s"
 
 #. (itstool) path: refsect1/para
 msgid "The <_:filename-1/> file is a database which contains info on the last login of each user. You should not rotate it. It is a sparse file, so its size on the disk is usually much smaller than the one shown by \"<_:command-2/>\" (which can indicate a really big file if you have in <_:filename-3/> users with a high UID). You can display its real size with \"<_:command-4/>\"."
-msgstr "Fails <_:filename-1/> ir datubāze, kas satur informāciju par katra lietotāja pēdējo pieslēgšanos. To nevajadzētu rotēt. Tas ir retināts fails, tāpēc tā izmērs diskā parasti ir daudz mazāks par to, ko uzrāda \"<_:command-2/>\" (kas var norādīt uz ļoti lielu failu, ja failā <_:filename-3/> ir lietotāji ar lielu UID). Tā faktisko izmēru var parādīt ar \"<_:command-4/>\"."
+msgstr "Fails <_:filename-1/> ir datubāze, kas satur informāciju par katra lietotāja pēdējo pieteikšanos. To nevajadzētu rotēt. Tas ir retināts fails, tāpēc tā izmērs diskā parasti ir daudz mazāks par to, ko uzrāda \"<_:command-2/>\" (kas var norādīt uz ļoti lielu failu, ja failā <_:filename-3/> ir lietotāji ar lielu UID). Tā faktisko izmēru var parādīt ar \"<_:command-4/>\"."
 
 #. (itstool) path: listitem/para
 msgid "Database times of previous user logins."
-msgstr "Lietotāju iepriekšējo pieslēgšanos laiku datubāze."
+msgstr "Lietotāju iepriekšējo pieteikšanos laiku datubāze."
 
 #. (itstool) path: refsect1/para
 msgid "Large gaps in UID numbers will cause the lastlog program to run longer with no output to the screen (i.e. if in lastlog database there is no entries for users with UID between 170 and 800 lastlog will appear to hang as it processes entries with UIDs 171-799)."
-msgstr "Lieli robi UID numuros liks programmai lastlog darboties ilgāk bez izvades uz ekrāna (t.i., ja lastlog datubāzē nav ierakstu lietotājiem ar UID no 170 līdz 800, lastlog šķitīs iesprūdis, apstrādājot ierakstus ar UID no 171 līdz 799)."
+msgstr "Lieli robi UID numuros liks programmai lastlog darboties ilgāk bez izvades uz ekrāna (t. i., ja lastlog datubāzē nav ierakstu lietotājiem ar UID no 170 līdz 800, lastlog šķitīs iesprūdis, apstrādājot ierakstus ar UID no 171 līdz 799)."
 
 #. (itstool) path: refsect1/para
 msgid "Having high UIDs can create problems when handling the <_:filename-1/> with external tools. Although the actual file is sparse and does not use too much space, certain applications are not designed to identify sparse files by default and may require a specific option to handle them."
@@ -2253,7 +2253,7 @@ msgstr "Izveide, 1997"
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: para/emphasis
 msgid "limits"
-msgstr "ierobežojumi"
+msgstr "limits"
 
 #. (itstool) path: refnamediv/refpurpose
 msgid "resource limits definition"
@@ -2406,7 +2406,7 @@ msgstr "noklusējums"
 
 #. (itstool) path: para/emphasis
 msgid "LIMITS_FILE"
-msgstr "IEROBEŽOJUMA_FAILS"
+msgstr "LIMITS_FILE"
 
 #. (itstool) path: refsect1/para
 msgid "The default entry is denoted by username \"<_:emphasis-1/>\". If you have multiple <_:emphasis-2/> entries in your <_:emphasis-3/>, then the last one will be used as the default entry."
@@ -2418,7 +2418,7 @@ msgstr "@group"
 
 #. (itstool) path: refsect1/para
 msgid "The limits specified in the form \"<_:replaceable-1/>\" apply to the members of the specified <_:replaceable-2/>."
-msgstr "Ierobežojumi, kas norādīti formā \"<_:replaceable-1/>\", attiecas uz norādītās <_:replaceable-2/> dalībniekiem."
+msgstr "Ierobežojumi, kas norādīti formā \"<_:replaceable-1/>\", attiecas uz norādītās <_:replaceable-2/> locekļiem."
 
 #. (itstool) path: refsect1/para
 msgid "If more than one line with limits for a user exist, only the first line for this user will be considered."
@@ -2426,7 +2426,7 @@ msgstr "Ja lietotājam pastāv vairāk nekā viena rinda ar ierobežojumiem, tik
 
 #. (itstool) path: refsect1/para
 msgid "If no lines are specified for a user, the last <_:replaceable-1/> line matching a group whose the user is a member of will be considered, or the last line with default limits if no groups contain the user."
-msgstr "Ja lietotājam nav norādīta neviena rinda, tiks ņemta vērā pēdējā <_:replaceable-1/> rinda, kas atbilst grupai, kuras dalībnieks ir šis lietotājs, vai arī pēdējā rinda ar noklusējuma ierobežojumiem, ja lietotājs nepieder nevienai grupai."
+msgstr "Ja lietotājam nav norādīta neviena rinda, tiks ņemta vērā pēdējā <_:replaceable-1/> rinda, kas atbilst grupai, kuras loceklis ir šis lietotājs, vai arī pēdējā rinda ar noklusējuma ierobežojumiem, ja lietotājs nepieder nevienai grupai."
 
 #. (itstool) path: para/emphasis
 #. (itstool) path: para/replaceable
@@ -2447,7 +2447,7 @@ msgstr "Lai lietotājam atspējotu ierobežojumu, šī ierobežojuma skaitliskā
 
 #. (itstool) path: refsect1/para
 msgid "Also, please note that all limit settings are set PER LOGIN. They are not global, nor are they permanent. Perhaps global limits will come, but for now this will have to do ;)"
-msgstr "Tāpat, lūdzu, ņemiet vērā, ka visi ierobežojumu iestatījumi tiek iestatīti KATRAI PIERAKSTĪŠANĀS REIZEI. Tie nav nedz globāli, nedz pastāvīgi. Iespējams, globālie ierobežojumi tiks ieviesti vēlāk, bet pagaidām būs jāiztiek ar šo ;)"
+msgstr "Tāpat, lūdzu, ņemiet vērā, ka visi ierobežojumu iestatījumi tiek iestatīti KATRAI PIETEIKŠANĀS REIZEI. Tie nav nedz globāli, nedz pastāvīgi. Iespējams, globālie ierobežojumi tiks ieviesti vēlāk, bet pagaidām būs jāiztiek ar šo ;)"
 
 #. (itstool) path: citerefentry/refentrytitle
 msgid "setrlimit"
@@ -2475,7 +2475,7 @@ msgstr "-r <_:replaceable-1/>"
 
 #. (itstool) path: para/emphasis
 msgid "login:"
-msgstr "pierakstīšanās:"
+msgstr "pieteikšanās:"
 
 #. (itstool) path: para/emphasis
 msgid "exec login"
@@ -2487,7 +2487,7 @@ msgstr "Programmu <_:command-1/> izmanto, lai izveidotu jaunu sesiju ar sistēmu
 
 #. (itstool) path: refsect1/para
 msgid "The user is then prompted for a password, where appropriate. Echoing is disabled to prevent revealing the password. Only a small number of password failures are permitted before <_:command-1/> exits and the communications link is severed."
-msgstr "Pēc tam lietotājam vajadzības gadījumā tiek vaicāta parole. Atbalsošana tiek atspējota, lai neizpaustu paroli. Ir atļauts tikai neliels skaits neveiksmīgu paroles mēģinājumu, pirms <_:command-1/> beidz darbu un sakaru savienojums tiek pārtraukts."
+msgstr "Pēc tam lietotājam vajadzības gadījumā tiek vaicāta parole. Atbalss tiek atspējota, lai neizpaustu paroli. Ir atļauts tikai neliels skaits neveiksmīgu paroles mēģinājumu, pirms <_:command-1/> beidz darbu un sakaru savienojums tiek pārtraukts."
 
 #. (itstool) path: refsect1/para
 msgid "If password aging has been enabled for your account, you may be prompted for a new password before proceeding. You will be forced to provide your old password and the new password before continuing. Please refer to <_:citerefentry-1/> for more information."
@@ -2516,7 +2516,7 @@ msgstr "Nav pasta."
 
 #. (itstool) path: refsect1/para
 msgid "After a successful login, you will be informed of any system messages and the presence of mail. You may turn off the printing of the system message file, <_:filename-1/>, by creating a zero-length file <_:filename-2/> in your login directory. The mail message will be one of \"<_:emphasis-3/>\", \"<_:emphasis-4/>\", or \"<_:emphasis-5/>\" according to the condition of your mailbox."
-msgstr "Pēc veiksmīgas pieteikšanās jūs tiksiet informēts par sistēmas paziņojumiem un pasta esamību. Sistēmas paziņojumu faila <_:filename-1/> izvadīšanu var atslēgt, izveidojot nulles garuma failu <_:filename-2/> savā pieteikšanās direktorijā. Pasta paziņojums būs viens no: \"<_:emphasis-3/>\", \"<_:emphasis-4/>\" vai \"<_:emphasis-5/>\" atkarībā no pastkastes stāvokļa."
+msgstr "Pēc veiksmīgas pieteikšanās jūs tiksiet informēts par sistēmas paziņojumiem un pasta esamību. Sistēmas paziņojumu faila <_:filename-1/> izvadīšanu var atspējot, izveidojot nulles garuma failu <_:filename-2/> savā pieteikšanās direktorijā. Pasta paziņojums būs viens no: \"<_:emphasis-3/>\", \"<_:emphasis-4/>\" vai \"<_:emphasis-5/>\" atkarībā no pastkastes stāvokļa."
 
 #. (itstool) path: para/envar
 msgid "$HOME"
@@ -2654,7 +2654,7 @@ msgstr "Apspiest sistēmas ziņojumu izvadi."
 
 #. (itstool) path: citerefentry/refentrytitle
 msgid "mail"
-msgstr "pasts"
+msgstr "mail"
 
 #. (itstool) path: citerefentry/refentrytitle
 msgid "sh"
@@ -2733,7 +2733,7 @@ msgstr "+"
 
 #. (itstool) path: para/emphasis
 msgid "ALL"
-msgstr "VISI"
+msgstr "ALL"
 
 #. (itstool) path: para/literal
 msgid "."
@@ -2741,7 +2741,7 @@ msgstr "."
 
 #. (itstool) path: para/emphasis
 msgid "LOCAL"
-msgstr "VIETĒJS"
+msgstr "LOCAL"
 
 #. (itstool) path: refsect1/para
 msgid "The first field should be a \"<_:emphasis-1/>\" (access granted) or \"<_:emphasis-2/>\" (access denied) character. The second field should be a list of one or more login names, group names, or <_:emphasis-3/> (always matches). The third field should be a list of one or more tty names (for non-networked logins), host names, domain names (begin with \"<_:literal-4/>\"), host addresses, internet network numbers (end with \"<_:literal-5/>\"), <_:emphasis-6/> (always matches) or <_:emphasis-7/> (matches any string that does not contain a \"<_:literal-8/>\" character). If you run NIS you can use @netgroupname in host or user patterns."
@@ -2749,7 +2749,7 @@ msgstr "Pirmajā laukā jābūt rakstzīmei \"<_:emphasis-1/>\" (piekļuve atļa
 
 #. (itstool) path: para/emphasis
 msgid "EXCEPT"
-msgstr "IZŅEMOT"
+msgstr "EXCEPT"
 
 #. (itstool) path: refsect1/para
 msgid "The <_:emphasis-1/> operator makes it possible to write very compact rules."
@@ -2822,7 +2822,7 @@ msgstr "KRUSTISKĀS ATSAUCES"
 
 #. (itstool) path: refsect1/para
 msgid "The following cross references show which programs in the shadow password suite use which parameters."
-msgstr "Turpmākās krustsaites parāda, kuras ēnu paroļu komplekta programmas izmanto kurus parametrus."
+msgstr "Turpmākās krustiskās atsauces parāda, kuras ēnu paroļu komplekta programmas izmanto kurus parametrus."
 
 #. (itstool) path: listitem/para
 #. (itstool) path: para/phrase
@@ -2884,7 +2884,7 @@ msgstr "LASTLOG_UID_MAX"
 
 #. (itstool) path: para/phrase
 msgid "CONSOLE"
-msgstr "KONSOLE"
+msgstr "CONSOLE"
 
 #. (itstool) path: para/phrase
 msgid "ENV_HZ ENV_PATH ENV_SUPATH ENV_TZ ENVIRON_FILE"
@@ -3031,19 +3031,19 @@ msgstr "<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:citere
 
 #. (itstool) path: refnamediv/refpurpose
 msgid "log in to a new group"
-msgstr "pierakstīties jaunā grupā"
+msgstr "pieteikties jaunā grupā"
 
 #. (itstool) path: refsect1/para
 msgid "The <_:command-1/> command is used to change the current group ID during a login session. If the optional <_:option-2/> flag is given, the user's environment will be reinitialized as though the user had logged in, otherwise the current environment, including current working directory, remains unchanged."
-msgstr "Komandu <_:command-1/> izmanto, lai mainītu pašreizējo grupas ID pierakstīšanās sesijas laikā. Ja ir norādīts neobligātais karodziņš <_:option-2/>, lietotāja vide tiks atkārtoti inicializēta, it kā lietotājs būtu pierakstījies; pretējā gadījumā pašreizējā vide, tostarp pašreizējā darba direktorija, paliek nemainīga."
+msgstr "Komandu <_:command-1/> izmanto, lai mainītu pašreizējo grupas ID pieteikšanās sesijas laikā. Ja ir norādīts neobligātais karogs <_:option-2/>, lietotāja vide tiks atkārtoti inicializēta, it kā lietotājs būtu pieteicies; pretējā gadījumā pašreizējā vide, tostarp pašreizējā darba direktorija, paliek nemainīga."
 
 #. (itstool) path: refsect1/para
 msgid "<_:command-1/> changes the current real group ID to the named group, or to the default group listed in <_:filename-2/> if no group name is given. <_:command-3/> also tries to add the group to the user groupset. If not root, the user will be prompted for a password if she does not have a password (in <_:filename-4/> if this user has an entry in the shadowed password file, or in <_:filename-5/> otherwise) and the group does, or if the user is not listed as a member and the group has a password. The user will be denied access if the group password is empty and the user is not listed as a member."
-msgstr "<_:command-1/> maina pašreizējo reālo grupas ID uz norādīto grupu vai uz noklusējuma grupu, kas norādīta <_:filename-2/>, ja grupas nosaukums nav norādīts. <_:command-3/> arī mēģina pievienot grupu lietotāja grupu kopai. Ja lietotājs nav root, tam tiks prasīta parole, ja lietotājam nav paroles (failā <_:filename-4/>, ja šim lietotājam ir ieraksts ēnoto paroļu failā, vai pretējā gadījumā failā <_:filename-5/>), bet grupai tāda ir, vai arī ja lietotājs nav norādīts kā dalībnieks un grupai ir parole. Lietotājam tiks liegta piekļuve, ja grupas parole ir tukša un lietotājs nav norādīts kā dalībnieks."
+msgstr "<_:command-1/> maina pašreizējo reālo grupas ID uz norādīto grupu vai uz noklusējuma grupu, kas norādīta <_:filename-2/>, ja grupas nosaukums nav norādīts. <_:command-3/> arī mēģina pievienot grupu lietotāja grupu kopai. Ja lietotājs nav root, tam tiks prasīta parole, ja lietotājam nav paroles (failā <_:filename-4/>, ja šim lietotājam ir ieraksts ēnu paroļu failā, vai pretējā gadījumā failā <_:filename-5/>), bet grupai tāda ir, vai arī ja lietotājs nav norādīts kā loceklis un grupai ir parole. Lietotājam tiks liegta piekļuve, ja grupas parole ir tukša un lietotājs nav norādīts kā loceklis."
 
 #. (itstool) path: refsect1/para
 msgid "If there is an entry for this group in <_:filename-1/>, then the list of members and the password of this group will be taken from this file, otherwise, the entry in <_:filename-2/> is considered."
-msgstr "Ja šai grupai ir ieraksts failā <_:filename-1/>, tad šīs grupas dalībnieku saraksts un parole tiks ņemti no šī faila, pretējā gadījumā tiks ņemts vērā ieraksts failā <_:filename-2/>."
+msgstr "Ja šai grupai ir ieraksts failā <_:filename-1/>, tad šīs grupas locekļu saraksts un parole tiks ņemti no šī faila, pretējā gadījumā tiks ņemts vērā ieraksts failā <_:filename-2/>."
 
 #. (itstool) path: citerefentry/refentrytitle
 msgid "id"
@@ -3327,7 +3327,7 @@ msgstr "Pēc tam lietotājam divreiz tiek lūgts ievadīt jauno paroli. Otrā ie
 
 #. (itstool) path: refsect2/para
 msgid "Then, the password is tested for complexity. <_:command-1/> rejects passwords that do not meet the complexity requirements. Do not include the system default erase or kill characters."
-msgstr "Pēc tam tiek pārbaudīta paroles sarežģītība. <_:command-1/> noraida paroles, kas neatbilst sarežģītības prasībām. Neiekļaujiet sistēmas noklusējuma dzēšanas vai iznīcināšanas rakstzīmes."
+msgstr "Pēc tam tiek pārbaudīta paroles sarežģītība. <_:command-1/> noraida paroles, kas neatbilst sarežģītības prasībām. Neiekļaujiet sistēmas noklusējuma dzēšanas (erase) vai rindas dzēšanas (kill) rakstzīmes."
 
 #. (itstool) path: refsect2/title
 msgid "Hints for user passwords"
@@ -3359,7 +3359,7 @@ msgstr "Šo opciju var izmantot tikai kopā ar <_:option-1/>, un tā parāda vis
 
 #. (itstool) path: listitem/para
 msgid "Deletes a user's password, making it empty. This command sets the account to be passwordless."
-msgstr "Dzēš lietotāja paroli, padarot to tukšu. Šī komanda iestata kontu lietošanai bez paroles."
+msgstr "Dzēst lietotāja paroli, padarot to tukšu. Šī komanda iestata kontu lietošanai bez paroles."
 
 #. (itstool) path: term/option
 msgid "--expire"
@@ -3367,7 +3367,7 @@ msgstr "--expire"
 
 #. (itstool) path: listitem/para
 msgid "Immediately expire an account's password. This in effect can force a user to change their password at the user's next login."
-msgstr "Nekavējoties izbeidz konta paroles derīgumu. Tas faktiski liek lietotājam nomainīt paroli nākamajā pieteikšanās reizē."
+msgstr "Nekavējoties beigt konta paroles derīgumu. Tas faktiski liek lietotājam nomainīt paroli nākamajā pieteikšanās reizē."
 
 #. (itstool) path: listitem/para
 msgid "This option is used to disable an account after the password has been expired for a number of days. After a user account has had an expired password for <_:replaceable-1/> days, the user may no longer sign on to the account."
@@ -3392,7 +3392,7 @@ msgstr "--lock"
 
 #. (itstool) path: listitem/para
 msgid "Lock the password of the named account. This option disables a password by changing it to a value which matches no possible encrypted value (it adds a ´!´ at the beginning of the password)."
-msgstr "Bloķē norādītā konta paroli. Šī opcija atspējo paroli, nomainot to uz vērtību, kas neatbilst nevienai iespējamai šifrētajai vērtībai (tā pievieno ´!´ paroles sākumā)."
+msgstr "Bloķēt norādītā konta paroli. Šī opcija atspējo paroli, nomainot to uz vērtību, kas neatbilst nevienai iespējamai šifrētajai vērtībai (tā pievieno ´!´ paroles sākumā)."
 
 #. (itstool) path: para/command
 msgid "usermod --expiredate 1"
@@ -3433,7 +3433,7 @@ msgstr "mainīt paroli <_:replaceable-1/> repozitorijā"
 
 #. (itstool) path: listitem/para
 msgid "Apply changes to configuration files under the root filesystem found under the directory <_:replaceable-1/>. This option does not chroot and is intended for preparing a cross-compilation target. Some limitations: NIS and LDAP users/groups are not verified. No PAM support. No SELINUX support."
-msgstr "Piemērot izmaiņas konfigurācijas failiem saknes failusistēmā, kas atrodas direktorijā <_:replaceable-1/>. Šī opcija neveic chroot un ir paredzēta šķērskompilācijas mērķa sagatavošanai. Daži ierobežojumi: NIS un LDAP lietotāji/grupas netiek pārbaudīti. Nav PAM atbalsta. Nav SELINUX atbalsta."
+msgstr "Piemērot izmaiņas konfigurācijas failiem saknes failu sistēmā, kas atrodas direktorijā <_:replaceable-1/>. Šī opcija neveic chroot un ir paredzēta šķērskompilācijas mērķa sagatavošanai. Daži ierobežojumi: NIS un LDAP lietotāji/grupas netiek pārbaudīti. Nav PAM atbalsta. Nav SELINUX atbalsta."
 
 #. (itstool) path: term/option
 msgid "--status"
@@ -3469,7 +3469,7 @@ msgstr "--stdin"
 
 #. (itstool) path: listitem/para
 msgid "This option is used to indicate that passwd should read the new password from standard input, which can be a pipe."
-msgstr "Šī opcija norāda, ka passwd jānolasa jaunā parole no standarta ievades, kas var būt konveijers."
+msgstr "Šī opcija norāda, ka passwd jānolasa jaunā parole no standarta ievades, kas var būt cauruļvads."
 
 #. (itstool) path: refsect1/para
 msgid "Password complexity checking may vary from site to site. The user is urged to select a password as complex as he or she feels comfortable with."
@@ -3517,7 +3517,7 @@ msgstr "<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:citere
 
 #. (itstool) path: refsect1/para
 msgid "The following web page comically (yet correctly) compares the strength of two different methods for choosing a password: \"https://xkcd.com/936/\""
-msgstr "Sekojošā tīmekļa lapa komiski (tomēr pareizi) salīdzina divu dažādu paroļu izvēles metožu stiprumu: \"https://xkcd.com/936/\""
+msgstr "Šī tīmekļa lapa komiski (tomēr pareizi) salīdzina divu dažādu paroļu izvēles metožu stiprumu: \"https://xkcd.com/936/\""
 
 #. (itstool) path: refnamediv/refpurpose
 msgid "the password file"
@@ -3656,39 +3656,39 @@ msgstr "Katrs ieraksts sastāv no trim ar kolu atdalītiem laukiem. Pirmais lauk
 
 #. (itstool) path: para/emphasis
 msgid "Su"
-msgstr "Sv"
+msgstr "Su"
 
 #. (itstool) path: para/emphasis
 msgid "Mo"
-msgstr "Pi"
+msgstr "Mo"
 
 #. (itstool) path: para/emphasis
 msgid "Tu"
-msgstr "Ot"
+msgstr "Tu"
 
 #. (itstool) path: para/emphasis
 msgid "We"
-msgstr "Tr"
+msgstr "We"
 
 #. (itstool) path: para/emphasis
 msgid "Th"
-msgstr "Ce"
+msgstr "Th"
 
 #. (itstool) path: para/emphasis
 msgid "Fr"
-msgstr "Pk"
+msgstr "Fr"
 
 #. (itstool) path: para/emphasis
 msgid "Sa"
-msgstr "Ss"
+msgstr "Sa"
 
 #. (itstool) path: para/emphasis
 msgid "Wk"
-msgstr "Ned"
+msgstr "Wk"
 
 #. (itstool) path: para/emphasis
 msgid "Al"
-msgstr "Viss"
+msgstr "Al"
 
 #. (itstool) path: refsect1/para
 msgid "Each access time entry consists of zero or more days of the week, abbreviated <_:emphasis-1/>, <_:emphasis-2/>, <_:emphasis-3/>, <_:emphasis-4/>, <_:emphasis-5/>, <_:emphasis-6/>, and <_:emphasis-7/>, followed by a pair of times separated by a hyphen. The abbreviation <_:emphasis-8/> may be used to represent Monday thru Friday, and <_:emphasis-9/> may be used to indicate every day. If no days are given, <_:emphasis-10/> is assumed."
@@ -3794,7 +3794,7 @@ msgstr "derīga pieteikšanās čaula"
 
 #. (itstool) path: refsect1/para
 msgid "Checks for shadowed password information are enabled when the second file parameter <_:replaceable-1/> is specified or when <_:filename-2/> exists on the system."
-msgstr "Ēnoto paroļu informācijas pārbaudes tiek iespējotas, ja ir norādīts otrais faila parametrs <_:replaceable-1/> vai ja sistēmā pastāv <_:filename-2/>."
+msgstr "Ēnu paroļu informācijas pārbaudes tiek iespējotas, ja ir norādīts otrais faila parametrs <_:replaceable-1/> vai ja sistēmā pastāv <_:filename-2/>."
 
 #. (itstool) path: refsect1/para
 msgid "These checks are the following:"
@@ -3916,7 +3916,7 @@ msgstr "Šīs četras programmas visas darbojas ar parastajiem un ēnotajiem par
 
 #. (itstool) path: refsect1/para
 msgid "Each program acquires the necessary locks before conversion. <_:command-1/> and <_:command-2/> are similar. First, entries in the shadowed file which don't exist in the plain file are removed. Then, entries in the shadowed file which don't have `x' as the password in plain file are updated. Any missing shadowed entries are added. Finally, passwords in the plain file are replaced with `x'. These programs can be used for initial conversion as well to update the shadowed file if the plain file has been edited by hand."
-msgstr "Katra programma pirms konvertēšanas iegūst nepieciešamos bloķējumus. <_:command-1/> un <_:command-2/> ir līdzīgas. Vispirms tiek noņemti ieraksti ēnotajā failā, kuru nav vienkāršajā failā. Pēc tam tiek atjaunināti ieraksti ēnotajā failā, kuriem vienkāršajā failā kā parole nav norādīts `x`. Trūkstošie ēnotie ieraksti tiek pievienoti. Visbeidzot paroles vienkāršajā failā tiek aizstātas ar `x`. Šīs programmas var izmantot gan sākotnējai konvertēšanai, gan ēnotā faila atjaunināšanai, ja vienkāršais fails ir rediģēts manuāli."
+msgstr "Katra programma pirms konvertēšanas iegūst nepieciešamos bloķējumus. <_:command-1/> un <_:command-2/> ir līdzīgas. Vispirms tiek noņemti ieraksti ēnotajā failā, kuru nav vienkāršajā failā. Pēc tam tiek atjaunināti ieraksti ēnotajā failā, kuriem vienkāršajā failā kā parole nav norādīts `x'. Trūkstošie ēnotie ieraksti tiek pievienoti. Visbeidzot paroles vienkāršajā failā tiek aizstātas ar `x'. Šīs programmas var izmantot gan sākotnējai konvertēšanai, gan ēnotā faila atjaunināšanai, ja vienkāršais fails ir rediģēts manuāli."
 
 #. (itstool) path: refsect1/para
 msgid "<_:command-1/> will use the values of <_:emphasis-2/>, <_:emphasis-3/>, and <_:emphasis-4/> from <_:filename-5/> when adding new entries to <_:filename-6/>."
@@ -3932,7 +3932,7 @@ msgstr "Opcijas, kas attiecas uz komandām <_:command-1/>, <_:command-2/>, <_:co
 
 #. (itstool) path: refsect1/para
 msgid "Errors in the password or group files (such as invalid or duplicate entries) may cause these programs to loop forever or fail in other strange ways. Please run <_:command-1/> and <_:command-2/> to correct any such errors before converting to or from shadowed files."
-msgstr "Kļūdas paroļu vai grupu failos (piemēram, nederīgi vai dublēti ieraksti) var izraisīt šo programmu bezgalīgu ciklošanos vai kļūmes citos dīvainos veidos. Lūdzu, palaidiet <_:command-1/> un <_:command-2/>, lai izlabotu šādas kļūdas pirms konvertēšanas uz vai no ēnotajiem failiem."
+msgstr "Kļūdas paroļu vai grupu failos (piemēram, nederīgi vai dublēti ieraksti) var likt šīm programmām nonākt bezgalīgā ciklā vai citādi dīvaini kļūdīties. Lūdzu, palaidiet <_:command-1/> un <_:command-2/>, lai izlabotu šādas kļūdas pirms konvertēšanas uz vai no ēnotajiem failiem."
 
 #. (itstool) path: refsect1/para
 msgid "The following configuration variable in <_:filename-1/> changes the behavior of <_:command-2/> and <_:command-3/>:"
@@ -4021,7 +4021,7 @@ msgstr "*p,"
 
 #. (itstool) path: para/emphasis
 msgid "FILE"
-msgstr "FAILS"
+msgstr "FILE"
 
 #. (itstool) path: para/emphasis
 msgid "int lckpwdf();"
@@ -4101,15 +4101,15 @@ msgstr "sgetspent"
 
 #. (itstool) path: para/emphasis
 msgid "struct spwd"
-msgstr "struktūra spwd"
+msgstr "struct spwd"
 
 #. (itstool) path: para/emphasis
 msgid "name"
-msgstr "vārds"
+msgstr "name"
 
 #. (itstool) path: refsect1/para
 msgid "<_:emphasis-1/>, <_:emphasis-2/>, <_:emphasis-3/>, and <_:emphasis-4/> each return a pointer to a <_:emphasis-5/>. <_:emphasis-6/> returns the next entry from the file, and <_:emphasis-7/> returns the next entry from the given stream, which is assumed to be a file of the proper format. <_:emphasis-8/> returns a pointer to a <_:emphasis-9/> using the provided string as input. <_:emphasis-10/> searches from the current position in the file for an entry matching <_:emphasis-11/>."
-msgstr "<_:emphasis-1/>, <_:emphasis-2/>, <_:emphasis-3/> un <_:emphasis-4/> katrs atgriež rādītāju uz <_:emphasis-5/>. <_:emphasis-6/> atgriež nākamo ierakstu no faila, un <_:emphasis-7/> atgriež nākamo ierakstu no dotās plūsmas, kas tiek uzskatīta par pareiza formāta failu. <_:emphasis-8/> atgriež rādītāju uz <_:emphasis-9/>, izmantojot norādīto virkni kā ievadi. <_:emphasis-10/> failā no pašreizējās pozīcijas meklē ierakstu, kas atbilst <_:emphasis-11/>."
+msgstr "<_:emphasis-1/>, <_:emphasis-2/>, <_:emphasis-3/> un <_:emphasis-4/> katrs atgriež rādītāju uz <_:emphasis-5/>. <_:emphasis-6/> atgriež nākamo ierakstu no faila, un <_:emphasis-7/> atgriež nākamo ierakstu no dotās straumes, kas tiek uzskatīta par pareiza formāta failu. <_:emphasis-8/> atgriež rādītāju uz <_:emphasis-9/>, izmantojot norādīto virkni kā ievadi. <_:emphasis-10/> failā no pašreizējās pozīcijas meklē ierakstu, kas atbilst <_:emphasis-11/>."
 
 #. (itstool) path: para/emphasis
 msgid "setspent"
@@ -4157,7 +4157,7 @@ msgstr "Rutīnas atgriež NULL, ja vairs nav pieejamu ierakstu vai apstrādes la
 
 #. (itstool) path: refsect1/para
 msgid "These routines may only be used by the superuser as access to the shadow password file is restricted."
-msgstr "Šīs rutīnas var izmantot tikai superlietotājs, jo piekļuve ēnparoļu failam ir ierobežota."
+msgstr "Šīs rutīnas var izmantot tikai superlietotājs, jo piekļuve ēnu paroļu failam ir ierobežota."
 
 #. (itstool) path: citerefentry/refentrytitle
 msgid "getpwent"
@@ -4165,7 +4165,7 @@ msgstr "getpwent"
 
 #. (itstool) path: refnamediv/refpurpose
 msgid "shadowed password file"
-msgstr "ēnparoļu fails"
+msgstr "ēnu paroļu fails"
 
 #. (itstool) path: refsect1/para
 msgid "<_:filename-1/> is a file which contains the password information for the system's accounts and optional aging information."
@@ -4369,7 +4369,7 @@ msgstr "/sbin:/bin:/usr/sbin:/usr/bin"
 
 #. (itstool) path: para/option
 msgid "ENV_PATH"
-msgstr "VIDES_CEĻŠ"
+msgstr "ENV_PATH"
 
 #. (itstool) path: para/option
 msgid "ENV_SUPATH"
@@ -4389,7 +4389,7 @@ msgstr "KOMANDA"
 
 #. (itstool) path: listitem/para
 msgid "The executed command will have no controlling terminal. This option cannot be used to execute interactive programs which need a controlling TTY."
-msgstr "Izpildītajai komandai nebūs vadības termināļa. Šo opciju nevar izmantot, lai izpildītu interaktīvas programmas, kurām nepieciešams vadības TTY."
+msgstr "Izpildītajai komandai nebūs vadošā termināļa. Šo opciju nevar izmantot, lai izpildītu interaktīvas programmas, kurām nepieciešams vadošais TTY."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -4402,7 +4402,7 @@ msgstr "<_:option-1/>, <_:option-2/>, <_:option-3/>"
 
 #. (itstool) path: listitem/para
 msgid "Provide an environment similar to what the user would expect had the user logged in directly."
-msgstr "Nodrošina tādu vidi, kādu lietotājs sagaidītu, ja būtu pieteicies tieši."
+msgstr "Nodrošināt tādu vidi, kādu lietotājs sagaidītu, ja būtu pieteicies tieši."
 
 #. (itstool) path: listitem/para
 msgid "When <_:option-1/> is used, it must be specified before any <_:option-2/>. For portability it is recommended to use it as last option, before any <_:option-3/>. The other forms (<_:option-4/> and <_:option-5/>) do not have this restriction."
@@ -4439,7 +4439,7 @@ msgstr "Izsauktā čaula tiek izvēlēta no (sākot ar augstāko prioritāti): <
 
 #. (itstool) path: listitem/para
 msgid "If the target user has a restricted shell (i.e. the shell field of this user's entry in <_:filename-1/> is not listed in <_:filename-2/>), then the <_:option-3/> option or the <_:envar-4/> environment variable won't be taken into account, unless <_:command-5/> is called by root."
-msgstr "Ja mērķa lietotājam ir ierobežota čaula (t.i., šī lietotāja ieraksta čaulas lauks failā <_:filename-1/> nav norādīts failā <_:filename-2/>), tad opcija <_:option-3/> vai vides mainīgais <_:envar-4/> netiks ņemts vērā, ja vien <_:command-5/> neizsauc root."
+msgstr "Ja mērķa lietotājam ir ierobežota čaula (t. i., šī lietotāja ieraksta čaulas lauks failā <_:filename-1/> nav norādīts failā <_:filename-2/>), tad opcija <_:option-3/> vai vides mainīgais <_:envar-4/> netiks ņemts vērā, ja vien <_:command-5/> neizsauc root."
 
 #. (itstool) path: listitem/para
 msgid "reset according to the <_:filename-1/> options <_:option-2/> or <_:option-3/> (see below);"
@@ -4540,7 +4540,7 @@ msgstr "Ņemiet vērā, ka vides noklusējuma uzvedība ir šāda: <_:variableli
 
 #. (itstool) path: refsect1/para
 msgid "On success, <_:command-1/> returns the exit value of the command it executed."
-msgstr "Veiksmes gadījumā <_:command-1/> atgriež izpildītās komandas beigu vērtību."
+msgstr "Veiksmes gadījumā <_:command-1/> atgriež izpildītās komandas izpildes statusu."
 
 #. (itstool) path: refsect1/para
 msgid "If this command was terminated by a signal, <_:command-1/> returns the number of this signal plus 128."
@@ -4548,7 +4548,7 @@ msgstr "Ja šo komandu pārtrauca signāls, <_:command-1/> atgriež šī signāl
 
 #. (itstool) path: refsect1/para
 msgid "If su has to kill the command (because it was asked to terminate, and the command did not terminate in time), <_:command-1/> returns 255."
-msgstr "Ja su nākas nogalināt komandu (jo tika pieprasīta tās pārtraukšana un komanda laikus nepārtrauca darbību), <_:command-1/> atgriež 255."
+msgstr "Ja su nākas nobeigt komandu (jo tika pieprasīta tās pārtraukšana un komanda laikus nepārtrauca darbību), <_:command-1/> atgriež 255."
 
 #. (itstool) path: listitem/para
 msgid "success (<_:option-1/> only)"
@@ -4576,7 +4576,7 @@ msgstr "Pieprasīto komandu neizdevās izpildīt"
 
 #. (itstool) path: refsect1/para
 msgid "Some exit values from <_:command-1/> are independent from the executed command: <_:variablelist-2/>"
-msgstr "Dažas <_:command-1/> izejas vērtības nav atkarīgas no izpildītās komandas: <_:variablelist-2/>"
+msgstr "Dažas <_:command-1/> izpildes vērtības nav atkarīgas no izpildītās komandas: <_:variablelist-2/>"
 
 #. (itstool) path: refsect1/para
 msgid "<_:citerefentry-1/>, <_:citerefentry-2/>, <_:citerefentry-3/>, <_:citerefentry-4/>."
@@ -4607,7 +4607,7 @@ msgstr "1) lietotāja, uz kuru su ir vērsta"
 
 #. (itstool) path: refsect1/para
 msgid "2) the user executing the su command (or any groups he might be a member of)"
-msgstr "2) lietotāja, kurš izpilda komandu su (vai jebkuras grupas, kuras dalībnieks viņš ir)"
+msgstr "2) lietotāja, kurš izpilda komandu su (vai jebkuras grupas, kuras loceklis viņš ir)"
 
 #. (itstool) path: refsect1/para
 msgid "The file is formatted like this, with lines starting with a # being treated as comment lines and ignored;"
@@ -4675,7 +4675,7 @@ msgstr "# /etc/suauth faila paraugs # # Dažiem lietotājiem ar privilēģijām 
 
 #. (itstool) path: refsect1/para
 msgid "There could be plenty lurking. The file parser is particularly unforgiving about syntax errors, expecting no spurious whitespace (apart from beginning and end of lines), and a specific token delimiting different things."
-msgstr "To varētu slēpties daudz. Faila parsētājs ir īpaši neiecietīgs pret sintakses kļūdām, nepieļaujot liekas atstarpes (izņemot rindu sākumā un beigās) un pieprasot konkrētu marķieri dažādu vienumu atdalīšanai."
+msgstr "Kļūdu var būt daudz. Faila parsētājs ir īpaši neiecietīgs pret sintakses kļūdām, nepieļaujot liekas atstarpes (izņemot rindu sākumā un beigās) un pieprasot konkrētu marķieri dažādu vienumu atdalīšanai."
 
 #. (itstool) path: citerefentry/refentrytitle
 msgid "syslogd"
@@ -4757,7 +4757,7 @@ msgstr "Ja šī opcija nav norādīta, <_:command-1/> izmantos noklusēto darbī
 
 #. (itstool) path: listitem/para
 msgid "When the <_:option-1/> command-line option is specified, a Btrfs subvolume is created regardless of any configuration file settings."
-msgstr "Ja ir norādīta komandrindas opcija <_:option-1/>, Btrfs apakšvolums tiek izveidots neatkarīgi no konfigurācijas faila iestatījumiem."
+msgstr "Ja ir norādīta komandrindas opcija <_:option-1/>, Btrfs apakšsējums tiek izveidots neatkarīgi no konfigurācijas faila iestatījumiem."
 
 #. (itstool) path: para/emphasis
 msgid "not"
@@ -4769,7 +4769,7 @@ msgstr "LOG_WARN"
 
 #. (itstool) path: listitem/para
 msgid "If the parent directory of the user's home directory is <_:emphasis-1/> on a Btrfs filesystem, <_:command-2/> will <_:emphasis-3/> create a subvolume. Instead, it creates a regular directory, prints a warning to standard error, and logs the event via syslog at level <_:constant-4/>. The user account is still created successfully."
-msgstr "Ja lietotāja mājas direktorijas vecākdirektorija atrodas <_:emphasis-1/> Btrfs failu sistēmā, <_:command-2/> apakšvolumu <_:emphasis-3/>izveidos. Tā vietā tā izveido parastu direktoriju, standarta kļūdu straumē izvada brīdinājumu un reģistrē notikumu, izmantojot syslog līmenī <_:constant-4/>. Lietotāja konts tomēr tiek veiksmīgi izveidots."
+msgstr "Ja lietotāja mājas direktorijas vecākdirektorija <_:emphasis-1/>atrodas Btrfs failu sistēmā, <_:command-2/> apakšsējumu <_:emphasis-3/>izveidos. Tā vietā tā izveido parastu direktoriju, standarta kļūdu straumē izvada brīdinājumu un reģistrē notikumu, izmantojot syslog līmenī <_:constant-4/>. Lietotāja konts tomēr tiek veiksmīgi izveidots."
 
 #. (itstool) path: citerefentry/refentrytitle
 msgid "statfs"
@@ -4806,7 +4806,7 @@ msgstr "CREATE_HOME"
 
 #. (itstool) path: listitem/para
 msgid "The new user will be created using <_:replaceable-1/> as the value for the user's login directory. The default is to append the <_:replaceable-2/> name to <_:replaceable-3/> and use that as the login directory name. The directory <_:replaceable-4/> is not created by default. However it will be created for non-system users if either the <_:option-5/> flag is specified or <_:replaceable-6/> in <_:filename-7/> is set to true. However, it will never be created if the <_:option-8/> flag is specified."
-msgstr "Jaunais lietotājs tiks izveidots, izmantojot <_:replaceable-1/> kā lietotāja pieteikšanās direktorijas vērtību. Pēc noklusējuma pie <_:replaceable-3/> tiek pievienots <_:replaceable-2/> nosaukums un izmantots kā pieteikšanās direktorijas nosaukums. Direktorija <_:replaceable-4/> pēc noklusējuma netiek izveidota. Tomēr tā tiks izveidota nesistēmas lietotājiem, ja ir norādīts karodziņš <_:option-5/> vai arī <_:replaceable-6/> failā <_:filename-7/> ir iestatīts uz true. Tomēr tā nekad netiks izveidota, ja ir norādīts karodziņš <_:option-8/>."
+msgstr "Jaunais lietotājs tiks izveidots, izmantojot <_:replaceable-1/> kā lietotāja pieteikšanās direktorijas vērtību. Pēc noklusējuma pie <_:replaceable-3/> tiek pievienots <_:replaceable-2/> nosaukums un izmantots kā pieteikšanās direktorijas nosaukums. Direktorija <_:replaceable-4/> pēc noklusējuma netiek izveidota. Tomēr tā tiks izveidota nesistēmas lietotājiem, ja ir norādīts karogs <_:option-5/> vai arī <_:replaceable-6/> failā <_:filename-7/> ir iestatīts uz true. Tomēr tā nekad netiks izveidota, ja ir norādīts karogs <_:option-8/>."
 
 #. (itstool) path: term/option
 msgid "--defaults"
@@ -4818,7 +4818,7 @@ msgstr "Skatīt zemāk apakšsadaļu \"Noklusējuma vērtību maiņa\"."
 
 #. (itstool) path: listitem/para
 msgid "Sets the date on which the user account will be disabled. The value can be specified as a date in the YYYY-MM-DD format or as a number of days since 1970-01-01. The date is interpreted using the UTC timezone."
-msgstr "Iestata datumu, kurā lietotāja konts tiks deaktivizēts. Vērtību var norādīt kā datumu formātā YYYY-MM-DD vai kā dienu skaitu kopš 1970-01-01. Datums tiek interpretēts, izmantojot UTC laika joslu."
+msgstr "Iestata datumu, kurā lietotāja konts tiks deaktivizēts. Vērtību var norādīt kā datumu formātā GGGG-MM-DD vai kā dienu skaitu kopš 1970-01-01. Datums tiek interpretēts, izmantojot UTC laika joslu."
 
 #. (itstool) path: para/option
 msgid "EXPIRE"
@@ -4904,7 +4904,7 @@ msgstr "GRUPAS"
 
 #. (itstool) path: listitem/para
 msgid "A list of supplementary groups which the user is also a member of. Each group is separated from the next by a comma, with no intervening whitespace. The groups are subject to the same restrictions as the group given with the <_:option-1/> option. The default is for the user to belong only to the initial group. In addition to passing in the -G flag, you can add the option <_:option-2/> to the file <_:filename-3/> which in turn will add all users to those supplementary groups."
-msgstr "Papildu grupu saraksts, kuru dalībnieks ir arī lietotājs. Grupas citu no citas atdala ar komatu, bez atstarpēm. Uz grupām attiecas tie paši ierobežojumi, kas uz grupu, kura norādīta ar opciju <_:option-1/>. Pēc noklusējuma lietotājs pieder tikai sākotnējai grupai. Papildus -G karodziņa norādīšanai failā <_:filename-3/> var pievienot opciju <_:option-2/>, kas savukārt visus lietotājus pievienos šīm papildu grupām."
+msgstr "Papildu grupu saraksts, kuru loceklis ir arī lietotājs. Grupas citu no citas atdala ar komatu, bez atstarpēm. Uz grupām attiecas tie paši ierobežojumi, kas uz grupu, kura norādīta ar opciju <_:option-1/>. Pēc noklusējuma lietotājs pieder tikai sākotnējai grupai. Papildus -G karoga norādīšanai failā <_:filename-3/> var pievienot opciju <_:option-2/>, kas savukārt visus lietotājus pievienos šīm papildu grupām."
 
 #. (itstool) path: term/option
 msgid "--skel"
@@ -4941,7 +4941,7 @@ msgstr "Ja šī opcija nav iestatīta, skeleta direktoriju nosaka mainīgais <_:
 
 #. (itstool) path: listitem/para
 msgid "Absolute symlinks that link back to the skel directory will have the <_:filename-1/> prefix replaced with the user's home directory."
-msgstr "Absolūtajās simboliskajās saitēs, kas norāda atpakaļ uz skeleta direktoriju, prefikss <_:filename-1/> tiks aizstāts ar lietotāja mājas direktoriju."
+msgstr "Absolūtajās simboliskajās saitēs, kas norāda atpakaļ uz skeleta direktoriju, priedēklis <_:filename-1/> tiks aizstāts ar lietotāja mājas direktoriju."
 
 #. (itstool) path: listitem/para
 msgid "If possible, the ACLs and extended attributes are copied."
@@ -4953,11 +4953,11 @@ msgstr "UMASK"
 
 #. (itstool) path: listitem/para
 msgid "Overrides <_:filename-1/> defaults (<_:option-2/>, <_:option-3/>, <_:option-4/>, <_:option-5/> and others)."
-msgstr "Pārraksta <_:filename-1/> noklusējuma vērtības (<_:option-2/>, <_:option-3/>, <_:option-4/>, <_:option-5/> un citas)."
+msgstr "Aizstāj <_:filename-1/> noklusējuma vērtības (<_:option-2/>, <_:option-3/>, <_:option-4/>, <_:option-5/> un citas)."
 
 #. (itstool) path: listitem/para
 msgid "Example: <_:option-1/> <_:replaceable-2/>=<_:replaceable-3/> can be used when creating an account to turn off password aging. Multiple <_:option-4/> options can be specified, e.g.: <_:option-5/> <_:replaceable-6/> =<_:replaceable-7/> <_:option-8/> <_:replaceable-9/>=<_:replaceable-10/>"
-msgstr "Piemērs: <_:option-1/> <_:replaceable-2/>=<_:replaceable-3/> var izmantot, veidojot kontu, lai atslēgtu paroles novecošanu. Var norādīt vairākas <_:option-4/> opcijas, piemēram: <_:option-5/> <_:replaceable-6/> =<_:replaceable-7/> <_:option-8/> <_:replaceable-9/>=<_:replaceable-10/>"
+msgstr "Piemērs: <_:option-1/> <_:replaceable-2/>=<_:replaceable-3/> var izmantot, veidojot kontu, lai atspējotu paroles novecošanu. Var norādīt vairākas <_:option-4/> opcijas, piemēram: <_:option-5/> <_:replaceable-6/> =<_:replaceable-7/> <_:option-8/> <_:replaceable-9/>=<_:replaceable-10/>"
 
 #. (itstool) path: term/option
 msgid "--no-log-init"
@@ -5017,11 +5017,11 @@ msgstr "Šī opcija ir derīga tikai kopā ar opciju <_:option-1/>. Tā kā liet
 
 #. (itstool) path: listitem/para
 msgid "defines an initial password for the account. PASSWORD is expected to be encrypted, as returned by <_:citerefentry-1/>. Within a shell script, this option allows to create efficiently batches of users."
-msgstr "definē konta sākotnējo paroli. Paredzams, ka PAROLE būs šifrēta, kā to atgriež <_:citerefentry-1/>. Čaulas skriptā šī opcija ļauj efektīvi izveidot lietotāju paketes."
+msgstr "definē konta sākotnējo paroli. Paredzams, ka PAROLE būs šifrēta, kā to atgriež <_:citerefentry-1/>. Čaulas skriptā šī opcija ļauj efektīvi izveidot lietotājus masveidā."
 
 #. (itstool) path: listitem/para
 msgid "Without this option, the new account will be locked and with no password defined, i.e. a single exclamation mark in the respective field of <_:filename-1/>. This is a state where the user won't be able to access the account or to define a password himself."
-msgstr "Bez šīs opcijas jaunais konts būs bloķēts un bez definētas paroles, t.i., ar vienu izsaukuma zīmi attiecīgajā faila <_:filename-1/> laukā. Šādā stāvoklī lietotājs nevarēs piekļūt kontam vai pats iestatīt paroli."
+msgstr "Bez šīs opcijas jaunais konts būs bloķēts un bez definētas paroles, t. i., ar vienu izsaukuma zīmi attiecīgajā faila <_:filename-1/> laukā. Šādā stāvoklī lietotājs nevarēs piekļūt kontam vai pats iestatīt paroli."
 
 #. (itstool) path: listitem/para
 msgid "<_:emphasis-1/>Avoid this option on the command line because the password (or encrypted password) will be visible by users listing the processes."
@@ -5103,7 +5103,7 @@ msgstr "Ja izsaukts tikai ar opciju <_:option-1/>, <_:command-2/> parādīs paš
 
 #. (itstool) path: listitem/para
 msgid "sets the path prefix for a new user's home directory. The user's name will be affixed to the end of <_:replaceable-1/> to form the new user's home directory name, if the <_:option-2/> option is not used when creating a new account."
-msgstr "iestata ceļa prefiksu jauna lietotāja mājas direktorijai. Lietotāja vārds tiks pievienots <_:replaceable-1/> beigās, veidojot jaunā lietotāja mājas direktorijas nosaukumu, ja konta izveides laikā netiek izmantota opcija <_:option-2/>."
+msgstr "iestata ceļa priedēkli jauna lietotāja mājas direktorijai. Lietotāja vārds tiks pievienots <_:replaceable-1/> beigās, veidojot jaunā lietotāja mājas direktorijas nosaukumu, ja konta izveides laikā netiek izmantota opcija <_:option-2/>."
 
 #. (itstool) path: listitem/para
 msgid "This option sets the <_:option-1/> variable in <_:filename-2/>."
@@ -5200,7 +5200,7 @@ msgstr "Direktorija, kurā atrodas noklusējuma faili."
 
 #. (itstool) path: listitem/para
 msgid "can't update password file"
-msgstr "neizdevās atjaunināt paroles failu"
+msgstr "neizdevās atjaunināt paroļu failu"
 
 #. (itstool) path: listitem/para
 msgid "UID already in use (and no <_:option-1/>)"
@@ -5292,7 +5292,7 @@ msgstr "norādītais lietotājs neeksistē"
 
 #. (itstool) path: listitem/para
 msgid "user currently logged in"
-msgstr "lietotājs pašlaik ir pieslēdzies"
+msgstr "lietotājs pašlaik ir pieteicies"
 
 #. (itstool) path: listitem/para
 msgid "can't remove home directory"
@@ -5300,7 +5300,7 @@ msgstr "neizdevās noņemt mājas direktoriju"
 
 #. (itstool) path: refsect1/para
 msgid "<_:command-1/> will not allow you to remove an account if there are running processes which belong to this account. In that case, you may have to kill those processes or lock the user's password or account and remove the account later. The <_:option-2/> option can force the deletion of this account."
-msgstr "<_:command-1/> neļaus dzēst kontu, ja darbojas šim kontam piederoši procesi. Tādā gadījumā var nākties pārtraukt šos procesus vai bloķēt lietotāja paroli vai kontu un dzēst kontu vēlāk. Opcija <_:option-2/> var piespiest šī konta dzēšanu."
+msgstr "<_:command-1/> neļaus dzēst kontu, ja darbojas šim kontam piederoši procesi. Tādā gadījumā var nākties nobeigt šos procesus vai bloķēt lietotāja paroli vai kontu un dzēst kontu vēlāk. Opcija <_:option-2/> var piespiest šī konta dzēšanu."
 
 #. (itstool) path: refsect1/para
 msgid "You should manually check all file systems to ensure that no files remain owned by this user."
@@ -5349,11 +5349,11 @@ msgstr "Ja norādīta opcija <_:option-1/>, pašreizējās mājas direktorijas s
 
 #. (itstool) path: listitem/para
 msgid "Specifies the date on which the user account will be disabled. The value can be specified as a date in the YYYY-MM-DD format or as a number of days since 1970-01-01. The date is interpreted using the UTC timezone."
-msgstr "Norāda datumu, kurā lietotāja konts tiks atspējots. Vērtību var norādīt kā datumu formātā GGGG-MM-DD vai kā dienu skaitu kopš 1970-01-01. Datums tiek interpretēts, izmantojot UTC laika zonu."
+msgstr "Norāda datumu, kurā lietotāja konts tiks atspējots. Vērtību var norādīt kā datumu formātā GGGG-MM-DD vai kā dienu skaitu kopš 1970-01-01. Datums tiek interpretēts, izmantojot UTC laika joslu."
 
 #. (itstool) path: listitem/para
 msgid "An input of -1 or an empty string blanks the account expiration field in the shadow password file. The account will remain available with no expiration date."
-msgstr "Ievade -1 vai tukša virkne notīra konta derīguma termiņa lauku ēnoto paroļu failā. Konts paliks pieejams bez derīguma termiņa."
+msgstr "Ievade -1 vai tukša virkne notīra konta derīguma termiņa lauku ēnu paroļu failā. Konts paliks pieejams bez derīguma termiņa."
 
 #. (itstool) path: listitem/para
 msgid "This option requires the <_:filename-1/> file. If no entry exists in the <_:filename-2/> file, the system will automatically create one."
@@ -5389,11 +5389,11 @@ msgstr "Grupas piederības maiņa failiem lietotāja mājas direktorijā netiek 
 
 #. (itstool) path: listitem/para
 msgid "A list of supplementary groups which the user is also a member of. Each group is separated from the next by a comma, with no intervening whitespace. The groups must exist."
-msgstr "Papildu grupu saraksts, kuru dalībnieks ir arī šis lietotājs. Katra grupa no nākamās tiek atdalīta ar komatu, bez atstarpēm starp tām. Grupām jāpastāv."
+msgstr "Papildu grupu saraksts, kuru loceklis ir arī šis lietotājs. Katra grupa no nākamās tiek atdalīta ar komatu, bez atstarpēm starp tām. Grupām jāpastāv."
 
 #. (itstool) path: listitem/para
 msgid "If the user is currently a member of a group which is not listed, the user will be removed from the group. This behaviour can be changed via the <_:option-1/> option, which appends the user to the current supplementary group list."
-msgstr "Ja lietotājs pašlaik ir tādas grupas dalībnieks, kas nav norādīta sarakstā, lietotājs no šīs grupas tiks izņemts. Šo uzvedību var mainīt, izmantojot opciju <_:option-1/>, kas pievieno lietotāju pašreizējam papildu grupu sarakstam."
+msgstr "Ja lietotājs pašlaik ir tādas grupas loceklis, kas nav norādīta sarakstā, lietotājs no šīs grupas tiks izņemts. Šo uzvedību var mainīt, izmantojot opciju <_:option-1/>, kas pievieno lietotāju pašreizējam papildu grupu sarakstam."
 
 #. (itstool) path: term/replaceable
 #. (itstool) path: para/replaceable
@@ -5411,7 +5411,7 @@ msgstr "-L"
 
 #. (itstool) path: listitem/para
 msgid "Lock a user's password. This puts a '!' in front of the encrypted password, effectively disabling the password. You can't use this option with <_:option-1/> or <_:option-2/>."
-msgstr "Bloķē lietotāja paroli. Tas ievieto '!' pirms šifrētās paroles, faktiski to atspējojot. Šo opciju nevar izmantot kopā ar <_:option-1/> vai <_:option-2/>."
+msgstr "Bloķēt lietotāja paroli. Tas ievieto '!' pirms šifrētās paroles, faktiski to atspējojot. Šo opciju nevar izmantot kopā ar <_:option-1/> vai <_:option-2/>."
 
 #. (itstool) path: listitem/para
 msgid "Note: if you wish to lock the account (not only access with a password), you should also set the <_:replaceable-1/> to <_:replaceable-2/>."
@@ -5607,7 +5607,7 @@ msgstr "definē SELinux lietotāju, kas tiks piesaistīts <_:replaceable-1/>. Tu
 
 #. (itstool) path: listitem/para
 msgid "defines the SELinux MLS range for the new account. Note that the shadow system doesn't store the selinux-range, it uses <_:citerefentry-1/> for that."
-msgstr "definē jaunā konta SELinux MLS diapazonu. Ņemiet vērā, ka ēnu sistēma nesaglabā selinux-range, tam tiek izmantots <_:citerefentry-1/>."
+msgstr "definē jaunā konta SELinux MLS diapazonu. Ņemiet vērā, ka shadow sistēma nesaglabā selinux-range, tam tiek izmantots <_:citerefentry-1/>."
 
 #. (itstool) path: refsect1/para
 msgid "You must make certain that the named user is not executing any processes when this command is being executed if the user's numerical user ID, the user's name, or the user's home directory is being changed. <_:command-1/> checks this on Linux. On other operating systems it only uses utmp to check if the user is logged in."
@@ -5635,7 +5635,7 @@ msgstr "Grupas konta informācija"
 
 #. (itstool) path: listitem/para
 msgid "Secure group account information"
-msgstr "Drošās grupas konta informācija"
+msgstr "Aizsargāta grupas konta informācija"
 
 #. (itstool) path: listitem/para
 msgid "Shadow password suite configuration"
@@ -5647,7 +5647,7 @@ msgstr "Lietotāja konta informācija"
 
 #. (itstool) path: listitem/para
 msgid "Secure user account information"
-msgstr "Droša lietotāja konta informācija"
+msgstr "Aizsargāta lietotāja konta informācija"
 
 #. (itstool) path: listitem/para
 msgid "Per user subordinate group IDs"
@@ -5681,7 +5681,7 @@ msgstr "vi"
 
 #. (itstool) path: refsect1/para
 msgid "The <_:command-1/> and <_:command-2/> commands edit the files <_:filename-3/> and <_:filename-4/>, respectively. With the <_:option-5/> flag, they will edit the shadow versions of those files, <_:filename-6/> and <_:filename-7/>, respectively. The programs will set the appropriate locks to prevent file corruption. When looking for an editor, the programs will first try the environment variable <_:envar-8/>, then the environment variable <_:envar-9/>, and finally the default editor, <_:citerefentry-10/>."
-msgstr "Komandas <_:command-1/> un <_:command-2/> attiecīgi rediģē failus <_:filename-3/> un <_:filename-4/>. Izmantojot karodziņu <_:option-5/>, tās rediģēs šo failu ēnu versijas — attiecīgi <_:filename-6/> un <_:filename-7/>. Programmas iestatīs atbilstošus bloķējumus, lai novērstu failu bojājumus. Meklējot redaktoru, programmas vispirms mēģinās izmantot vides mainīgo <_:envar-8/>, pēc tam vides mainīgo <_:envar-9/> un visbeidzot noklusējuma redaktoru <_:citerefentry-10/>."
+msgstr "Komandas <_:command-1/> un <_:command-2/> attiecīgi rediģē failus <_:filename-3/> un <_:filename-4/>. Izmantojot karogu <_:option-5/>, tās rediģēs šo failu ēnu versijas — attiecīgi <_:filename-6/> un <_:filename-7/>. Programmas iestatīs atbilstošus bloķējumus, lai novērstu failu bojājumus. Meklējot redaktoru, programmas vispirms mēģinās izmantot vides mainīgo <_:envar-8/>, pēc tam vides mainīgo <_:envar-9/> un visbeidzot noklusējuma redaktoru <_:citerefentry-10/>."
 
 #. (itstool) path: refsect1/para
 msgid "The options which apply to the <_:command-1/> and <_:command-2/> commands are:"
