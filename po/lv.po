@@ -1,24 +1,23 @@
 # Latvian translation for shadow.
 # Copyright (C) 2026 the authors of Shadow (msgids)
 # This file is distributed under the same license as the shadow package.
-# Rihards Prieditis <rprieditis@gmail.com>, 2026.
+# Rihards Priedītis <rprieditis@gmail.com>, 2026.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.20.0-rc2\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2026-06-22 21:41-0500\n"
-"PO-Revision-Date: 2026-10-03 10:50+0300\n"
-"Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
-"Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2026-11-07 20:26+0200\n"
+"Last-Translator: Rihards Priedītis <rprieditis@gmail.com>\n"
+"Language-Team: Latvian <translation-team-lv@googlegroups.com>\n"
 "Language: lv\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==0 || (n%100>=11 && n%100<=19) ? 0 : n%10==1 && n%100!=11 ? 1 : 2);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #: lib/addgrps.c:64
 #, c-format
@@ -27,7 +26,7 @@ msgstr "Brīdinājums: nezināma grupa %s\n"
 
 #: lib/age.c:57
 msgid "Your password has expired."
-msgstr "Jūsu parole vairs nav derīga."
+msgstr "Jūsu paroles derīguma termiņš ir beidzies."
 
 #: lib/age.c:60
 msgid "Your password is inactive."
@@ -98,7 +97,7 @@ msgstr "Neizdevās mainīt tty stdin īpašnieku vai režīmu: %s"
 #: src/usermod.c:1593 src/usermod.c:1609 src/vipw.c:168 src/vipw.c:468
 #, c-format
 msgid "%s: failed to unlock %s\n"
-msgstr "%s: neizdevās atslēgt %s\n"
+msgstr "%s: neizdevās atbloķēt %s\n"
 
 #: lib/commonio.c:616
 #, c-format
@@ -122,12 +121,12 @@ msgstr ": "
 #: lib/encrypt.c:68
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr "kriptēšanas metode nav atbalstīta libcrypt? (%s)\n"
+msgstr "šifrēšanas metode netiek atbalstīta libcrypt? (%s)\n"
 
 #: lib/env.c:186
 #, c-format
 msgid "You may not change $%s\n"
-msgstr "Jums nav tiesību mainīt $%s\n"
+msgstr "Jūs nedrīkstat mainīt $%s\n"
 
 #: lib/failure.c:258
 #, c-format
@@ -141,11 +140,11 @@ msgstr[0] ""
 "%d nesekmīgu mēģinājumu pieteikties kopš pēdējās pieteikšanās reizes.\n"
 "Pēdējais bija %s, %s.\n"
 msgstr[1] ""
-"%d nesekmīgs mēģinājums pieteikties kopš pēdējās pieteikšanās reizes.\r\n"
-"Pēdējais bija %s, %s.\r\n"
+"%d nesekmīgs mēģinājums pieteikties kopš pēdējās pieteikšanās reizes.\n"
+"Pēdējais bija %s, %s.\n"
 msgstr[2] ""
-"%d nesekmīgi mēģinājumi pieteikties kopš pēdējās pieteikšanās reizes.\r\n"
-"Pēdējais bija %s, %s.\r\n"
+"%d nesekmīgi mēģinājumi pieteikties kopš pēdējās pieteikšanās reizes.\n"
+"Pēdējais bija %s, %s.\n"
 
 #: lib/find_new_gid.c:62
 #, c-format
@@ -255,12 +254,12 @@ msgstr "%s: Neizdevās iegūt unikālu sistēmas UID (%s). Papildu ziņojumi tie
 #: lib/find_new_uid.c:434 lib/find_new_uid.c:480
 #, c-format
 msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
-msgstr "%s: Nevar iegūt unikālo UID (%s). Tiek nomākti papildu ziņojumi.\n"
+msgstr "%s: Neizdevās iegūt unikālu UID (%s). Papildu ziņojumi tiek apspiesti.\n"
 
 #: lib/find_new_uid.c:499
 #, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
-msgstr "%s: Nevar iegūt unikālo UID (vairs nav pieejamu UID)\n"
+msgstr "%s: Neizdevās iegūt unikālu UID (vairs nav pieejamu UID)\n"
 
 #: lib/getdef.c:264 lib/getdef.c:298 lib/getdef.c:331 lib/getdef.c:363
 #, c-format
@@ -284,7 +283,7 @@ msgstr "%s: Atmiņas piešķiršanas kļūda\n"
 #: lib/idmapping.c:62 lib/idmapping.c:68 lib/idmapping.c:74
 #, c-format
 msgid "%s: subuid overflow detected.\n"
-msgstr "%s: konstatēta subuid pārpildīšanās.\n"
+msgstr "%s: konstatēta subuid pārpilde.\n"
 
 #: lib/idmapping.c:146
 #, c-format
@@ -375,20 +374,20 @@ msgstr "tikai reģistra maiņa"
 
 #: lib/obscure.c:103
 msgid "too similar"
-msgstr "pārāk līdzīgs"
+msgstr "pārāk līdzīga"
 
 #: lib/obscure.c:105
 msgid "rotated"
-msgstr "pagriezts"
+msgstr "cikliski nobīdīta"
 
 #: lib/obscure.c:129
 msgid "too short"
-msgstr "pārāk īss"
+msgstr "pārāk īsa"
 
 #: lib/obscure.c:188
 #, c-format
 msgid "Bad password: %s.  "
-msgstr "Nepareiza parole: %s.  "
+msgstr "Nepiemērota parole: %s.  "
 
 #: lib/pam_pass.c:44
 #, c-format
@@ -411,7 +410,7 @@ msgstr "passwd: parole veiksmīgi atjaunināta\n"
 #: lib/pam_pass_non_interactive.c:64
 #, c-format
 msgid "%s: PAM modules requesting echoing are not supported.\n"
-msgstr "%s: PAM moduļi, kas pieprasa ievades atbalsošanu, nav atbalstīti.\n"
+msgstr "%s: PAM moduļi, kas pieprasa ievades atbalsi, netiek atbalstīti.\n"
 
 #: lib/pam_pass_non_interactive.c:89
 #, c-format
@@ -459,7 +458,7 @@ msgstr "%s: opcijai '%s' nepieciešams arguments\n"
 #: lib/root_flag.c:78 src/chage.c:780
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: neizdevās atsaukt privilēģijas (%s)\n"
+msgstr "%s: neizdevās atteikties no privilēģijām (%s)\n"
 
 #: lib/root_flag.c:85
 #, c-format
@@ -567,7 +566,7 @@ msgstr "Neizdevās iestatīt %s nosaukumu\n"
 #: lib/semanage.c:199
 #, c-format
 msgid "Could not set SELinux user for %s\n"
-msgstr "Neizdevās iestatīt SELinux lietotāju pieteikumam %s\n"
+msgstr "Neizdevās iestatīt SELinux lietotāju lietotājam %s\n"
 
 #: lib/semanage.c:208
 #, c-format
@@ -724,7 +723,7 @@ msgstr "%s: Neizdevās iegūt informāciju par %s: %s\n"
 #: lib/tcbfuncs.c:500
 #, c-format
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: Brīdinājums, lietotājam %s nav tcb ēnas faila.\n"
+msgstr "%s: Brīdinājums, lietotājam %s nav tcb ēnu faila.\n"
 
 #: lib/tcbfuncs.c:506
 #, c-format
@@ -748,7 +747,7 @@ msgstr "%s: Neizdevās atvērt %s: %s\n"
 #: lib/user_busy.c:84
 #, c-format
 msgid "%s: user %s is currently logged in\n"
-msgstr "%s: lietotājs %s pašlaik ir pieslēdzies\n"
+msgstr "%s: lietotājs %s pašlaik ir pieteicies\n"
 
 #: lib/user_busy.c:234 lib/user_busy.c:257
 #, c-format
@@ -770,17 +769,21 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Lietošana: %s [opcijas] PIEEJA\n"
+"Lietošana: %s [opcijas] LIETOTĀJVĀRDS\n"
 "\n"
 "Opcijas:\n"
 
 #: src/chage.c:139
 msgid "  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"
-msgstr "  -d, --lastday PĒDĒJĀ_DIENA        iestatīt pēdējās paroles maiņas datumu uz PĒDĒJĀ_DIENA\n"
+msgstr ""
+"  -d, --lastday PĒDĒJĀ_DIENA    iestatīt pēdējās paroles maiņas datumu uz\n"
+"                                PĒDĒJĀ_DIENA\n"
 
 #: src/chage.c:140
 msgid "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr "  -E, --expiredate BEIGU_DATUMS  iestatīt konta beigu datumu uz BEIGU_DATUMS\n"
+msgstr ""
+"  -E, --expiredate BEIGU_DATUMS\n"
+"                                iestatīt konta beigu datumu uz BEIGU_DATUMS\n"
 
 #: src/chage.c:141 src/chgpasswd.c:128 src/chpasswd.c:130 src/chsh.c:110
 #: src/faillog.c:81 src/gpasswd.c:134 src/groupadd.c:114 src/groupdel.c:83
@@ -812,7 +815,7 @@ msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -m, --mindays MIN_DIENAS        iestatīt minimālo dienu skaitu pirms paroles\n"
+"  -m, --mindays MIN_DIENAS      iestatīt minimālo dienu skaitu pirms paroles\n"
 "                                maiņas uz MIN_DIENAS\n"
 
 #: src/chage.c:148
@@ -820,7 +823,7 @@ msgid ""
 "  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -M, --maxdays MAKS_DIENAS        iestatīt maksimālo dienu skaitu pirms paroles\n"
+"  -M, --maxdays MAKS_DIENAS     iestatīt maksimālo dienu skaitu pirms paroles\n"
 "                                maiņas uz MAKS_DIENAS\n"
 
 #: src/chage.c:150 src/chfn.c:115 src/chgpasswd.c:129 src/chpasswd.c:131
@@ -830,15 +833,18 @@ msgstr ""
 #: src/pwconv.c:118 src/pwunconv.c:78 src/useradd.c:933 src/userdel.c:150
 #: src/usermod.c:449 src/vipw.c:95
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -R, --root CHROOT_DIREKTORIJA         direktorija, kurā veikt chroot\n"
+msgstr "  -R, --root CHROOT_DIR         direktorija, kurā veikt chroot\n"
 
 #: src/chage.c:151 src/chpasswd.c:132 src/groupadd.c:121 src/passwd.c:171
 msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
-msgstr "  -P, --prefix PREFIKSA_DIREKTORIJA       direktorijas prefikss\n"
+msgstr "  -P, --prefix PRIEDĒKĻA_DIR    direktorijas priedēklis\n"
 
 #: src/chage.c:152
 msgid "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-msgstr "  -W, --warndays BRĪDINĀJUMA_DIENAS      iestatīt derīguma brīdinājuma dienas uz BRĪDINĀJUMA_DIENAS\n"
+msgstr ""
+"  -W, --warndays BRĪDINĀJUMA_DIENAS\n"
+"                                iestatīt derīguma brīdinājuma dienas uz\n"
+"                                BRĪDINĀJUMA_DIENAS\n"
 
 #: src/chage.c:170 src/chfn.c:180 src/chsh.c:125
 msgid "Enter the new value, or press ENTER for the default"
@@ -874,11 +880,11 @@ msgstr "nekad"
 
 #: src/chage.c:242 src/chage.c:247 src/chage.c:252
 msgid "future"
-msgstr "nākotne"
+msgstr "nākotnē"
 
 #: src/chage.c:273
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Pēdējā paroles maiņa\t\t\t\t: "
+msgstr "Pēdējā paroles maiņa\t\t\t\t\t: "
 
 #: src/chage.c:275 src/chage.c:286 src/chage.c:304
 msgid "password must be changed"
@@ -886,15 +892,15 @@ msgstr "parole jānomaina"
 
 #: src/chage.c:284
 msgid "Password expires\t\t\t\t\t: "
-msgstr "Paroles derīgums beidzas\t\t\t\t\t: "
+msgstr "Paroles derīgums beidzas\t\t\t\t: "
 
 #: src/chage.c:302
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Parole neaktīva\t\t\t\t\t: "
+msgstr "Parole neaktīva\t\t\t\t\t\t: "
 
 #: src/chage.c:320
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Konta derīguma termiņa beigas\t\t\t\t\t\t: "
+msgstr "Konta derīguma termiņa beigas\t\t\t\t: "
 
 #: src/chage.c:330
 #, c-format
@@ -928,7 +934,7 @@ msgstr "%s: nederīgs skaitliskais arguments '%s'\n"
 #: src/chage.c:464
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: neizmantojiet \"l\" kopā ar citām karogiem\n"
+msgstr "%s: neizmantojiet \"l\" kopā ar citiem karogiem\n"
 
 #: src/chage.c:492 src/chage.c:810 src/chfn.c:243 src/chfn.c:252 src/chfn.c:261
 #: src/chfn.c:275 src/chfn.c:290 src/chfn.c:325 src/chfn.c:336
@@ -990,7 +996,7 @@ msgstr "%s: nevar atvērt %s\n"
 #: src/usermod.c:1586 src/usermod.c:1602
 #, c-format
 msgid "%s: failure while writing changes to %s\n"
-msgstr "%s: kļūme, rakstot izmaiņas %s\n"
+msgstr "%s: kļūme, rakstot izmaiņas failā %s\n"
 
 #: src/chage.c:622 src/chage.c:645 src/chfn.c:455 src/chsh.c:434
 #: src/gpasswd.c:683 src/gpasswd.c:690 src/groupadd.c:237 src/groupadd.c:247
@@ -1008,18 +1014,18 @@ msgstr "%s: neizdevās sagatavot jauno %s ierakstu '%s'\n"
 #: src/chage.c:769
 #, c-format
 msgid "%s: the shadow password file is not present\n"
-msgstr "%s: nav paroļu ēnas faila\n"
+msgstr "%s: nav paroļu ēnu faila\n"
 
 #: src/chage.c:787 src/chfn.c:437 src/chsh.c:416 src/groupmod.c:749
 #: src/passwd.c:626 src/passwd.c:675 src/usermod.c:1753
 #, c-format
 msgid "%s: user '%s' does not exist in %s\n"
-msgstr "%s: lietotājs '%s' nav atrodams %s\n"
+msgstr "%s: lietotājs '%s' nav atrodams failā %s\n"
 
 #: src/chage.c:823
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "Maina novecošanas informāciju %s\n"
+msgstr "Maina novecošanas informāciju lietotājam %s\n"
 
 #: src/chage.c:826
 #, c-format
@@ -1039,19 +1045,21 @@ msgstr ""
 
 #: src/chfn.c:111
 msgid "  -f, --full-name FULL_NAME     change user's full name\n"
-msgstr "  -f, --full-name PILNS_VĀRDS     maina lietotāja pilno vārdu\n"
+msgstr "  -f, --full-name PILNS_VĀRDS   mainīt lietotāja pilno vārdu\n"
 
 #: src/chfn.c:112
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
-msgstr "  -h, --home-phone MĀJAS_TĀLRUNIS   maina lietotāja mājas tālruni\n"
+msgstr ""
+"  -h, --home-phone MĀJAS_TĀLRUNIS\n"
+"                                mainīt lietotāja mājas tālruni\n"
 
 #: src/chfn.c:113
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
-msgstr "  -o, --other CITS_INFO        mainīt lietotāja citu GECOS informāciju\n"
+msgstr "  -o, --other CITS_INFO         mainīt lietotāja citu GECOS informāciju\n"
 
 #: src/chfn.c:114
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
-msgstr "  -r, --room TELPAS_NR        nomaina lietotāja telpas numuru\n"
+msgstr "  -r, --room TELPAS_NR          mainīt lietotāja telpas numuru\n"
 
 #: src/chfn.c:116
 msgid "  -u, --help                    display this help message and exit\n"
@@ -1059,7 +1067,9 @@ msgstr "  -u, --help                    parādīt šo palīdzības ziņojumu un 
 
 #: src/chfn.c:117
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
-msgstr "  -w, --work-phone DARBA_TĀLRUNIS   mainīt lietotāja darba tālruni\n"
+msgstr ""
+"  -w, --work-phone DARBA_TĀLRUNIS\n"
+"                                mainīt lietotāja darba tālruni\n"
 
 #: src/chfn.c:183 src/chfn.c:185
 msgid "Full Name"
@@ -1084,7 +1094,7 @@ msgstr "Mājas tālrunis"
 
 #: src/chfn.c:207
 msgid "Other"
-msgstr "Citi"
+msgstr "Cits"
 
 #: src/chfn.c:267 src/chfn.c:664
 #, c-format
@@ -1208,7 +1218,7 @@ msgstr "%s: karogu %s drīkst lietot tikai kopā ar karogu %s\n"
 #: src/chgpasswd.c:229 src/chpasswd.c:230
 #, c-format
 msgid "%s: the -c and -e flags are exclusive\n"
-msgstr "%s: karodziņus -c un -e nevar lietot kopā\n"
+msgstr "%s: karogi -c un -e ir savstarpēji izslēdzoši\n"
 
 #: src/chgpasswd.c:248 src/chpasswd.c:249 src/newusers.c:751
 #, c-format
@@ -1264,11 +1274,11 @@ msgstr "%s: rinda %jd: lietotājs '%s' neeksistē\n"
 
 #: src/chsh.c:112 src/usermod.c:450
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
-msgstr "  -s, --shell SHELL             jauna ielogošanās čaula lietotāja kontam\n"
+msgstr "  -s, --shell ČAULA             jauna pieteikšanās čaula lietotāja kontam\n"
 
 #: src/chsh.c:126
 msgid "Login Shell"
-msgstr "Ielogošanās čaula"
+msgstr "Pieteikšanās čaula"
 
 #: src/chsh.c:173
 #, c-format
@@ -1288,7 +1298,7 @@ msgstr "Jums nav atļauts mainīt čaulu lietotājam '%s'.\n"
 #: src/chsh.c:535
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "Maina ielogošanās čaulu lietotājam %s\n"
+msgstr "Maina pieteikšanās čaulu lietotājam %s\n"
 
 #: src/chsh.c:546
 #, c-format
@@ -1317,15 +1327,21 @@ msgstr "%s: Brīdinājums: %s nav izpildāms\n"
 
 #: src/faillog.c:80
 msgid "  -a, --all                     display faillog records for all users\n"
-msgstr "  -a, --all                     parādīt visu lietotāju neveiksmīgu pieteikšanos ierakstus\n"
+msgstr ""
+"  -a, --all                     parādīt visu lietotāju neveiksmīgu pieteikšanos\n"
+"                                ierakstus\n"
 
 #: src/faillog.c:82
 msgid "  -l, --lock-secs SEC           after failed login lock account for SEC seconds\n"
-msgstr "  -l, --lock-secs SEK           pēc neveiksmīgas pieteikšanās bloķēt kontu uz SEK sekundēm\n"
+msgstr ""
+"  -l, --lock-secs SEK           pēc neveiksmīgas pieteikšanās bloķēt kontu uz\n"
+"                                SEK sekundēm\n"
 
 #: src/faillog.c:83
 msgid "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
-msgstr "  -m, --maximum MAX             iestatīt maksimālo neveiksmīgo pieteikšanās reižu skaitu uz MAX\n"
+msgstr ""
+"  -m, --maximum MAX             iestatīt maksimālo neveiksmīgo pieteikšanās\n"
+"                                reižu skaitu uz MAX\n"
 
 #: src/faillog.c:84
 msgid "  -r, --reset                   reset the counters of login failures\n"
@@ -1333,7 +1349,9 @@ msgstr "  -r, --reset                   atiestatīt pieteikšanās neveiksmju sk
 
 #: src/faillog.c:86
 msgid "  -t, --time DAYS               display faillog records more recent than DAYS\n"
-msgstr "  -t, --time DIENAS               parādīt neveiksmju žurnāla ierakstus, kas jaunāki par DIENAS dienām\n"
+msgstr ""
+"  -t, --time DIENAS             parādīt neveiksmju žurnāla ierakstus, kas\n"
+"                                jaunāki par DIENAS dienām\n"
 
 #: src/faillog.c:87
 msgid ""
@@ -1341,9 +1359,11 @@ msgid ""
 "                                counters and limits (if used with -r, -m,\n"
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
-"  -u, --user LIETOTĀJS/DIAPAZONS        parādīt faillog ierakstu vai uzturēt nesekmīgo\n"
-"                                mēģinājumu skaitītājus un ierobežojumus (ja izmanto ar -r, -m vai -l)\n"
-"                                 tikai norādītajam (-ajiem) LIETOTĀJAM (-IEM)\n"
+"  -u, --user LIETOTĀJS/DIAPAZONS\n"
+"                                parādīt faillog ierakstu vai uzturēt nesekmīgo\n"
+"                                mēģinājumu skaitītājus un ierobežojumus (ja\n"
+"                                izmanto ar -r, -m vai -l) tikai\n"
+"                                norādītajam(-iem) LIETOTĀJAM(-IEM)\n"
 
 #: src/faillog.c:105 src/faillog.c:121 src/lastlog.c:126
 #, c-format
@@ -1406,7 +1426,7 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Lietojums: %s [opcija] GRUPA\n"
+"Lietošana: %s [opcija] GRUPA\n"
 "\n"
 "Opcijas:\n"
 
@@ -1424,15 +1444,17 @@ msgstr "  -Q, --root CHROOT_DIR         direktorija, kurā veikt chroot\n"
 
 #: src/gpasswd.c:136
 msgid "  -r, --remove-password         remove the GROUP's password\n"
-msgstr "  -r, --remove-password         noņemt grupas GROUP paroli\n"
+msgstr "  -r, --remove-password         noņemt GRUPAS paroli\n"
 
 #: src/gpasswd.c:137
 msgid "  -R, --restrict                restrict access to GROUP to its members\n"
-msgstr "  -R, --restrict                ierobežot piekļuvi grupai GROUP, atļaujot to tikai tās dalībniekiem\n"
+msgstr ""
+"  -R, --restrict                ierobežot piekļuvi GRUPAI, atļaujot to tikai tās\n"
+"                                locekļiem\n"
 
 #: src/gpasswd.c:138
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
-msgstr "  -M, --members USER,...        iestatīt grupas GROUP dalībnieku sarakstu\n"
+msgstr "  -M, --members LIETOTĀJS,...   iestatīt GRUPAS locekļu sarakstu\n"
 
 #: src/gpasswd.c:140
 msgid ""
@@ -1440,7 +1462,7 @@ msgid ""
 "                                set the list of administrators for GROUP\n"
 msgstr ""
 "  -A, --administrators ADMIN,...\n"
-"                                iestatīt grupas GROUP administratoru sarakstu\n"
+"                                iestatīt GRUPAS administratoru sarakstu\n"
 
 #: src/gpasswd.c:142
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
@@ -1500,7 +1522,7 @@ msgstr "Noņem lietotāju %s no grupas %s\n"
 #: src/gpasswd.c:1026
 #, c-format
 msgid "%s: user '%s' is not a member of '%s'\n"
-msgstr "%s: lietotājs '%s' nav grupas '%s' dalībnieks\n"
+msgstr "%s: lietotājs '%s' nav grupas '%s' loceklis\n"
 
 #: src/gpasswd.c:1065
 #, c-format
@@ -1514,7 +1536,7 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Lietojums: %s [opcijas] GRUPA\n"
+"Lietošana: %s [opcijas] GRUPA\n"
 "\n"
 "Opcijas:\n"
 
@@ -1523,7 +1545,7 @@ msgid ""
 "  -f, --force                   exit successfully if the group already exists,\n"
 "                                and cancel -g if the GID is already used\n"
 msgstr ""
-"  -f, --force                   pabeigt darbību, ja grupa jau pastāv,\n"
+"  -f, --force                   veiksmīgi beigt darbu, ja grupa jau pastāv,\n"
 "                                un atcelt -g, ja GID jau tiek izmantots\n"
 
 #: src/groupadd.c:113
@@ -1532,7 +1554,7 @@ msgstr "  -g, --gid GID                 izmantot GID jaunajai grupai\n"
 
 #: src/groupadd.c:115 src/useradd.c:920
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
-msgstr "  -K, --key KEY=VALUE           pārrakstīt /etc/login.defs noklusējuma vērtības\n"
+msgstr "  -K, --key ATSLĒGA=VĒRTĪBA     aizstāt /etc/login.defs noklusējuma vērtības\n"
 
 #: src/groupadd.c:116
 msgid ""
@@ -1544,7 +1566,7 @@ msgstr ""
 
 #: src/groupadd.c:118
 msgid "  -p, --password PASSWORD       use this encrypted password for the new group\n"
-msgstr "  -p, --password PASSWORD       izmantot šo šifrēto paroli jaunajai grupai\n"
+msgstr "  -p, --password PAROLE         izmantot šo šifrēto paroli jaunajai grupai\n"
 
 #: src/groupadd.c:119
 msgid "  -r, --system                  create a system group\n"
@@ -1555,13 +1577,14 @@ msgid ""
 "  -U, --users USERS             comma-separated list of users to add as\n"
 "\t                         members of this group\n"
 msgstr ""
-"  -U, --users USERS             ar komatiem atdalīts lietotāju saraksts, ko pievienot\n"
-"\t                         šai grupai par dalībniekiem\n"
+"  -U, --users LIETOTĀJI         ar komatiem atdalīts lietotāju saraksts, ko\n"
+"                                pievienot\n"
+"\t                         šai grupai kā locekļus\n"
 
 #: src/groupadd.c:220 src/groupmod.c:283
 #, c-format
 msgid "Invalid member username %s\n"
-msgstr "Nederīgs dalībnieka lietotājvārds %s\n"
+msgstr "Nederīgs locekļa lietotājvārds %s\n"
 
 #: src/groupadd.c:264
 #, c-format
@@ -1582,7 +1605,7 @@ msgstr "%s: nederīgs grupas ID '%s'\n"
 #: src/groupadd.c:452 src/useradd.c:1343
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
-msgstr "%s: opcijai -K nepieciešams KEY=VALUE\n"
+msgstr "%s: opcijai -K nepieciešams ATSLĒGA=VĒRTĪBA\n"
 
 #: src/groupadd.c:520 src/groupmod.c:395
 #, c-format
@@ -1602,7 +1625,7 @@ msgstr "%s: Neizdevās iestatīt tīrīšanas pakalpojumu.\n"
 #: src/groupdel.c:85 src/groupmod.c:133 src/useradd.c:934 src/userdel.c:151
 #: src/usermod.c:445
 msgid "  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files\n"
-msgstr "  -P, --prefix PREFIX_DIR       prefiksa direktorija, kurā atrodas /etc/* faili\n"
+msgstr "  -P, --prefix PRIEDĒKĻA_DIR    priedēkļa direktorija, kurā atrodas /etc/* faili\n"
 
 #: src/groupdel.c:86
 msgid "  -f, --force                   delete group even if it is the primary group of a user\n"
@@ -1632,7 +1655,7 @@ msgid ""
 "                                without removing existing user members\n"
 msgstr ""
 "  -a, --append                  pievienot grupai ar -U norādītos lietotājus,\n"
-"                                nenoņemot esošos dalībniekus\n"
+"                                nenoņemot esošos locekļus\n"
 
 #: src/groupmod.c:126
 msgid "  -g, --gid GID                 change the group ID to GID\n"
@@ -1640,7 +1663,7 @@ msgstr "  -g, --gid GID                 mainīt grupas ID uz GID\n"
 
 #: src/groupmod.c:128
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
-msgstr "  -n, --new-name JAUNĀ_GRUPA      nomainīt nosaukumu uz JAUNĀ_GRUPA\n"
+msgstr "  -n, --new-name JAUNĀ_GRUPA    nomainīt nosaukumu uz JAUNĀ_GRUPA\n"
 
 #: src/groupmod.c:129
 msgid "  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
@@ -1651,7 +1674,7 @@ msgid ""
 "  -p, --password PASSWORD       change the password to this (encrypted)\n"
 "                                PASSWORD\n"
 msgstr ""
-"  -p, --password PAROLE       mainīt paroli uz šo (šifrēto)\n"
+"  -p, --password PAROLE         mainīt paroli uz šo (šifrēto)\n"
 "                                PAROLI\n"
 
 #: src/groupmod.c:134
@@ -1659,8 +1682,8 @@ msgid ""
 "  -U, --users USERS             comma-separated list of users to add as\n"
 "                                members of this group\n"
 msgstr ""
-"  -U, --users LIETOTĀJI             ar komatiem atdalīts lietotāju saraksts,\n"
-"                                ko pievienot par šīs grupas dalībniekiem\n"
+"  -U, --users LIETOTĀJI         ar komatiem atdalīts lietotāju saraksts,\n"
+"                                ko pievienot kā šīs grupas locekļus\n"
 
 #: src/groupmod.c:387 src/newusers.c:293
 #, c-format
@@ -1743,7 +1766,7 @@ msgstr "grupā %s: nav lietotāja %s\n"
 #: src/grpck.c:610 src/grpck.c:821
 #, c-format
 msgid "delete member '%s'? "
-msgstr "dzēst dalībnieku '%s'? "
+msgstr "dzēst locekli '%s'? "
 
 #: src/grpck.c:626 src/grpck.c:786
 #, c-format
@@ -1753,12 +1776,12 @@ msgstr "failā %s nav atbilstoša grupas faila ieraksta\n"
 #: src/grpck.c:628
 #, c-format
 msgid "add group '%s' in %s? "
-msgstr "pievienot grupu '%s' %s? "
+msgstr "pievienot grupu '%s' failā %s? "
 
 #: src/grpck.c:673
 #, c-format
 msgid "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
-msgstr "grupai %s ir ieraksts %s, bet tās paroles lauks %s nav iestatīts uz 'x'\n"
+msgstr "grupai %s ir ieraksts failā %s, bet tās paroles lauks failā %s nav iestatīts uz 'x'\n"
 
 #: src/grpck.c:710
 msgid "invalid shadow group file entry"
@@ -1776,7 +1799,7 @@ msgstr "ēnu grupa %s: nav administratīvā lietotāja %s\n"
 #: src/grpck.c:808
 #, c-format
 msgid "delete administrative member '%s'? "
-msgstr "dzēst administratīvo dalībnieku '%s'? "
+msgstr "dzēst administratīvo locekli '%s'? "
 
 #: src/grpck.c:820
 #, c-format
@@ -1800,7 +1823,9 @@ msgstr "%s: neizdevās dzēst %s\n"
 
 #: src/lastlog.c:75
 msgid "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-msgstr "  -b, --before DIENAS             izvadīt tikai lastlog ierakstus, kas ir vecāki par DIENĀM\n"
+msgstr ""
+"  -b, --before DIENAS           izvadīt tikai lastlog ierakstus, kas ir vecāki\n"
+"                                par DIENAS dienām\n"
 
 #: src/lastlog.c:76
 msgid "  -C, --clear                   clear lastlog record of a user (usable only with -u)\n"
@@ -1812,11 +1837,13 @@ msgstr "  -S, --set                     iestatīt lastlog ierakstu uz pašreizē
 
 #: src/lastlog.c:80
 msgid "  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
-msgstr "  -t, --time DIENAS               izvadīt tikai lastlog ierakstus, kas ir jaunāki par DIENĀM\n"
+msgstr ""
+"  -t, --time DIENAS             izvadīt tikai lastlog ierakstus, kas ir jaunāki\n"
+"                                par DIENAS dienām\n"
 
 #: src/lastlog.c:81
 msgid "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-msgstr "  -u, --user LIETOTĀJVĀRDS     izvadīt norādītā LIETOTĀJVĀRDA lastlog ierakstu\n"
+msgstr "  -u, --user LIETOTĀJVĀRDS      izvadīt norādītā LIETOTĀJVĀRDA lastlog ierakstu\n"
 
 #: src/lastlog.c:82
 msgid "  -a, --active                  print lastlog excluding '**Never logged in**' users"
@@ -1825,7 +1852,7 @@ msgstr "  -a, --active                  izvadīt lastlog, izslēdzot lietotājus
 #: src/lastlog.c:151
 #, c-format
 msgid "Username         Port     From%*sLatest\n"
-msgstr "Lietotājvārds    Ports     No%*sPēdējais\n"
+msgstr "Lietotājvārds    Ports    No%*sPēdējais\n"
 
 #: src/lastlog.c:153
 msgid "Username                Port     Latest"
@@ -1957,12 +1984,12 @@ msgstr "Neizdevās atrast lietotāju (%s)\n"
 #: src/login.c:1097
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr "%s: neizdevās izveidot procesa kopiju: %s"
+msgstr "%s: neizdevās izveidot atzaru (fork): %s"
 
 #: src/login.c:1118
 #, c-format
 msgid "TIOCSCTTY failed on %s"
-msgstr "TIOCSCTTY neizdevās ar %s"
+msgstr "TIOCSCTTY neizdevās ierīcei %s"
 
 #: src/login.c:1192
 msgid "Warning: login re-enabled after temporary lockout."
@@ -1971,7 +1998,7 @@ msgstr "Brīdinājums: pieteikšanās atkal iespējota pēc īslaicīgas bloķē
 #: src/login.c:1208
 #, c-format
 msgid "Last login: %s on %s"
-msgstr "Pēdējā pieteikšanās: %s no %s"
+msgstr "Pēdējā pieteikšanās: %s ierīcē %s"
 
 #: src/login.c:1212
 #, c-format
@@ -1986,7 +2013,7 @@ msgstr "%s: gid diapazons [%lu-%lu) -> [%lu-%lu) nav atļauts\n"
 #: src/newgidmap.c:76
 #, c-format
 msgid "usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
-msgstr "lietošana: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ...\n"
+msgstr "lietošana: %s [<pid|fd:<pidfd>] <gid> <lowergid> <skaits> [ <gid> <lowergid> <skaits> ] ... \n"
 
 #: src/newgidmap.c:103
 #, c-format
@@ -2006,7 +2033,7 @@ msgstr "%s: neizdevās nolasīt setgroups: %s\n"
 #: src/newgidmap.c:126
 #, c-format
 msgid "%s: failed to seek setgroups: %s\n"
-msgstr "%s: neizdevās meklēt setgroups: %s\n"
+msgstr "%s: neizdevās pārvietoties setgroups: %s\n"
 
 #: src/newgidmap.c:131
 #, c-format
@@ -2016,7 +2043,7 @@ msgstr "%s: neizdevās iestatīt setgroups %s politiku: %s\n"
 #: src/newgidmap.c:193 src/newuidmap.c:127
 #, c-format
 msgid "%s: Could not stat directory for target process: %s\n"
-msgstr "%s: neizdevās iegūt informāciju par direktoriju mērķa procesam: %s\n"
+msgstr "%s: neizdevās izpildīt stat mērķa procesa direktorijai: %s\n"
 
 #: src/newgidmap.c:206 src/newuidmap.c:140
 #, c-format
@@ -2043,7 +2070,7 @@ msgstr "Nederīga parole.\n"
 #: src/newgrp.c:298
 #, c-format
 msgid "%s: failure forking: %s\n"
-msgstr "%s: neizdevās izveidot procesa kopiju: %s\n"
+msgstr "%s: neizdevās izveidot atzaru (fork): %s\n"
 
 #: src/newgrp.c:485 src/newgrp.c:521
 #, c-format
@@ -2063,11 +2090,11 @@ msgstr "%s: UID diapazons [%lu-%lu) -> [%lu-%lu) nav atļauts\n"
 #: src/newuidmap.c:71
 #, c-format
 msgid "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
-msgstr "lietošana: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ...\n"
+msgstr "lietošana: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <skaits> [ <uid> <loweruid> <skaits> ] ... \n"
 
 #: src/newusers.c:130 src/pwck.c:140 src/usermod.c:430
 msgid "  -b, --badname                 allow bad names\n"
-msgstr "  -b, --badname                  atļaut nekorektus nosaukumus\n"
+msgstr "  -b, --badname                 atļaut nekorektus nosaukumus\n"
 
 #: src/newusers.c:145
 msgid "  -r, --system                  create system accounts\n"
@@ -2086,7 +2113,7 @@ msgstr "%s: nederīgs lietotāja ID '%s'\n"
 #: src/newusers.c:391 src/useradd.c:1523 src/usermod.c:1165
 #, c-format
 msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: nederīgs lietotājvārds '%s': lietojiet --badname, lai ignorētu\n"
+msgstr "%s: nederīgs lietotājvārds '%s': izmantojiet --badname, lai ignorētu\n"
 
 #: src/newusers.c:395 src/useradd.c:1527 src/usermod.c:1169
 #, c-format
@@ -2096,7 +2123,7 @@ msgstr "%s: nederīgs lietotājvārds '%s'\n"
 #: src/newusers.c:669
 #, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
-msgstr "%s: Norādiet '--crypt-method' pirms iterāciju skaita\n"
+msgstr "%s: Norādiet '--crypt-method' pirms raundu skaita\n"
 
 #: src/newusers.c:1035
 #, c-format
@@ -2151,7 +2178,7 @@ msgstr "%s: rinda %jd: chown %s neizdevās: %s\n"
 #: src/newusers.c:1172
 #, c-format
 msgid "%s: line %jd: can't update entry\n"
-msgstr "%s: rinda %jd: neizdevās atjaunot ierakstu\n"
+msgstr "%s: rinda %jd: neizdevās atjaunināt ierakstu\n"
 
 #: src/newusers.c:1187
 #, c-format
@@ -2170,7 +2197,7 @@ msgstr "%s: neizdevās atrast pakārtoto grupu diapazonu: %s\n"
 
 #: src/passwd.c:158
 msgid "  -a, --all                     report password status on all accounts\n"
-msgstr "  -a, --all                     pārskatīt paroles statusu visos kontos\n"
+msgstr "  -a, --all                     ziņot par paroles statusu visiem kontiem\n"
 
 #: src/passwd.c:159
 msgid "  -d, --delete                  delete the password for the named account\n"
@@ -2178,11 +2205,15 @@ msgstr "  -d, --delete                  dzēst norādītā konta paroli\n"
 
 #: src/passwd.c:160
 msgid "  -e, --expire                  force expire the password for the named account\n"
-msgstr "  -e, --expire                  piespiedu kārtā beigt norādītā konta paroles derīgumu\n"
+msgstr ""
+"  -e, --expire                  piespiedu kārtā beigt norādītā konta paroles\n"
+"                                derīgumu\n"
 
 #: src/passwd.c:162
 msgid "  -k, --keep-tokens             change password only if expired\n"
-msgstr "  -k, --keep-tokens             mainīt paroli tikai, ja tās derīguma termiņš ir beidzies\n"
+msgstr ""
+"  -k, --keep-tokens             mainīt paroli tikai tad, ja tās derīguma termiņš\n"
+"                                ir beidzies\n"
 
 #: src/passwd.c:163
 msgid ""
@@ -2201,8 +2232,8 @@ msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -n, --mindays MIN_DIENAS        iestatīt minimālo dienu skaitu pirms paroles\n"
-"                                maiņas uz MIN_DIENĀM\n"
+"  -n, --mindays MIN_DIENAS      iestatīt minimālo dienu skaitu pirms paroles\n"
+"                                maiņas uz MIN_DIENAS\n"
 
 #: src/passwd.c:168 src/vipw.c:94
 msgid "  -q, --quiet                   quiet mode\n"
@@ -2210,11 +2241,11 @@ msgstr "  -q, --quiet                   klusais režīms\n"
 
 #: src/passwd.c:169
 msgid "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-msgstr "  -r, --repository KRĀTUVE      nomainīt paroli KRĀTUVE krātuvē\n"
+msgstr "  -r, --repository KRĀTUVE      nomainīt paroli krātuvē KRĀTUVE\n"
 
 #: src/passwd.c:172
 msgid "  -S, --status                  report password status on the named account\n"
-msgstr "  -S, --status                  pārskatīt norādītā konta paroles statusu\n"
+msgstr "  -S, --status                  ziņot par norādītā konta paroles statusu\n"
 
 #: src/passwd.c:173
 msgid "  -u, --unlock                  unlock the password of the named account\n"
@@ -2222,15 +2253,18 @@ msgstr "  -u, --unlock                  atbloķēt norādītā konta paroli\n"
 
 #: src/passwd.c:174
 msgid "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-msgstr "  -w, --warndays BRĪDINĀJUMA_DIENAS  iestatīt brīdinājuma dienu skaitu pirms derīguma termiņa beigām uz BRĪDINĀJUMA_DIENAS\n"
+msgstr ""
+"  -w, --warndays BRĪDINĀJUMA_DIENAS\n"
+"                                iestatīt brīdinājuma dienu skaitu pirms derīguma\n"
+"                                termiņa beigām uz BRĪDINĀJUMA_DIENAS\n"
 
 #: src/passwd.c:175
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -x, --maxdays MAKS_DIENAS    iestatīt maksimālo dienu skaitu līdz\n"
-"                              paroles maiņai uz MAKS_DIENAS\n"
+"  -x, --maxdays MAKS_DIENAS     iestatīt maksimālo dienu skaitu pirms paroles\n"
+"                                maiņas uz MAKS_DIENAS\n"
 
 #: src/passwd.c:177
 msgid "  -s, --stdin                   read new token from stdin\n"
@@ -2255,7 +2289,7 @@ msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Ievadiet jauno paroli (vismaz %d, maksimāli %d rakstzīmes).\n"
+"Ievadiet jauno paroli (vismaz %d, maksimāli %d rakstzīmes)\n"
 "Lūdzu, izmantojiet lielo un mazo burtu un ciparu kombināciju.\n"
 
 #: src/passwd.c:274 src/passwd.c:293
@@ -2303,13 +2337,13 @@ msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock the password of this account.\n"
 msgstr ""
-"%s: paroles atslēgšana radītu kontu bez paroles.\n"
-"Lai atslēgtu šī konta paroli, jums jāiestata parole ar usermod -p.\n"
+"%s: paroles atbloķēšana radītu kontu bez paroles.\n"
+"Lai atbloķētu šī konta paroli, iestatiet paroli ar usermod -p.\n"
 
 #: src/passwd.c:922
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s: krātuve %s netiek atbalstīts\n"
+msgstr "%s: krātuve %s netiek atbalstīta\n"
 
 #: src/passwd.c:967
 #, c-format
@@ -2348,7 +2382,7 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Lietojums: %s [opcijas] [parole]\n"
+"Lietošana: %s [opcijas] [passwd]\n"
 "\n"
 "Opcijas:\n"
 
@@ -2359,7 +2393,7 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
-"Lietojums: %s [opcijas] [parole [ēna]]\n"
+"Lietošana: %s [opcijas] [passwd [shadow]]\n"
 "\n"
 "Opcijas:\n"
 
@@ -2370,7 +2404,7 @@ msgstr "  -q, --quiet                   ziņot tikai par kļūdām\n"
 #: src/pwck.c:228
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
-msgstr "%s: alternatīvs ēnu fails nav atļauts, ja ir ieslēgts USE_TCB.\n"
+msgstr "%s: alternatīvs ēnu fails nav atļauts, ja ir iespējots USE_TCB.\n"
 
 #: src/pwck.c:412
 msgid "invalid password file entry"
@@ -2428,7 +2462,7 @@ msgstr "neizdevās izveidot tcb direktoriju lietotājam %s\n"
 #: src/pwck.c:585
 #, c-format
 msgid "%s: cannot lock %s.\n"
-msgstr "%s: neizdevās nobloķēt %s.\n"
+msgstr "%s: neizdevās bloķēt %s.\n"
 
 #: src/pwck.c:612 src/pwck.c:819
 #, c-format
@@ -2438,12 +2472,12 @@ msgstr "failā %s nav atbilstoša paroles ieraksta\n"
 #: src/pwck.c:614
 #, c-format
 msgid "add user '%s' in %s? "
-msgstr "pievienot lietotāju '%s' iekš %s? "
+msgstr "pievienot lietotāju '%s' failā %s? "
 
 #: src/pwck.c:663
 #, c-format
 msgid "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
-msgstr "lietotājam %s ir ieraksts %s, bet tā paroles lauks %s nav iestatīts uz 'x'\n"
+msgstr "lietotājam %s ir ieraksts failā %s, bet tā paroles lauks failā %s nav iestatīts uz 'x'\n"
 
 #: src/pwck.c:737
 msgid "invalid shadow password file entry"
@@ -2461,12 +2495,12 @@ msgstr "lietotājs %s: pēdējā paroles maiņa ir nākotnē\n"
 #: src/pwck.c:877 src/pwck.c:884
 #, c-format
 msgid "%s: cannot sort entries in %s\n"
-msgstr "%s: neizdevās sakārtot ierakstus iekš %s\n"
+msgstr "%s: neizdevās sakārtot ierakstus failā %s\n"
 
 #: src/pwconv.c:184 src/pwunconv.c:143
 #, c-format
 msgid "%s: can't work with tcb enabled\n"
-msgstr "%s: nevar strādāt ar ieslēgtu tcb\n"
+msgstr "%s: nevar strādāt ar iespējotu tcb\n"
 
 #: src/pwconv.c:305
 #, c-format
@@ -2487,7 +2521,7 @@ msgstr "Lūdzu, ievadiet SAVU paroli autentifikācijai.\n"
 
 #: src/su.c:174
 msgid " ...killed.\n"
-msgstr "  ...nogalināts.\n"
+msgstr " ...nobeigta.\n"
 
 #: src/su.c:297 src/su.c:347 src/su.c:403
 #, c-format
@@ -2543,16 +2577,18 @@ msgid ""
 "                                keep the same shell\n"
 msgstr ""
 "  -m, -p,\n"
-"  --preserve-environment        neatstatīt vides mainīgos un\n"
+"  --preserve-environment        neatiestatīt vides mainīgos un\n"
 "                                saglabāt to pašu čaulu\n"
 
 #: src/su.c:463
 msgid "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-msgstr "  -s, --shell ČAULA             lietot ČAULU, nevis `passwd` norādīto noklusējuma\n"
+msgstr ""
+"  -s, --shell ČAULA             izmantot ČAULU, nevis passwd norādīto\n"
+"                                noklusējuma čaulu\n"
 
 #: src/su.c:465
 msgid "If no username is given, assume root.\n"
-msgstr "Ja lietotājvārds nav norādīts, tiek pieņemts `root`.\n"
+msgstr "Ja lietotājvārds nav norādīts, tiek pieņemts root.\n"
 
 #: src/su.c:486
 #, c-format
@@ -2571,7 +2607,7 @@ msgstr "Paroles lauks ir tukšs; tas ir aizliegts visiem kontiem.\n"
 #: src/su.c:531
 #, c-format
 msgid "Password field is empty, this is forbidden for super-user.\n"
-msgstr "Paroles lauks ir tukšs, tas ir aizliegts superlietotājam.\n"
+msgstr "Paroles lauks ir tukšs; tas ir aizliegts superlietotājam.\n"
 
 #: src/su.c:558 src/su.c:582
 #, c-format
@@ -2641,7 +2677,7 @@ msgid ""
 "(or give root password for system maintenance):"
 msgstr ""
 "\n"
-"Nospiediet control-d, lai turpinātu normālu palaišanu,\n"
+"Nospiediet Control-D, lai turpinātu normālu palaišanu,\n"
 "(vai ievadiet root paroli sistēmas uzturēšanai):"
 
 #: src/sulogin.c:181
@@ -2681,12 +2717,12 @@ msgstr "%s: neizdevās atvērt jaunu noklusējuma failu\n"
 #: src/useradd.c:613
 #, c-format
 msgid "%s: line too long in %s: %s..."
-msgstr "%s: rinda pārāk gara %s: %s..."
+msgstr "%s: rinda pārāk gara failā %s: %s..."
 
 #: src/useradd.c:718
 #, c-format
 msgid "%s: Cannot create backup file (%s): %s\n"
-msgstr "%s: Neizdevās izveidot rezerves kopiju (%s): %s\n"
+msgstr "%s: Neizdevās izveidot dublējumfailu (%s): %s\n"
 
 #: src/useradd.c:729
 #, c-format
@@ -2727,8 +2763,8 @@ msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
 "                                new account\n"
 msgstr ""
-"  -b, --base-dir BĀZES_DIR       bāzes direktorijs jaunā konta mājas\n"
-"                                direktorijam\n"
+"  -b, --base-dir BĀZES_DIR      bāzes direktorija jaunā konta mājas\n"
+"                                direktorijai\n"
 
 #: src/useradd.c:904
 msgid "      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
@@ -2736,23 +2772,29 @@ msgstr "      --btrfs-subvolume-home    izmantot BTRFS apakšsējumu mājas dire
 
 #: src/useradd.c:906
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
-msgstr "  -c, --comment KOMENTĀRS      jaunā konta GECOS lauks\n"
+msgstr "  -c, --comment KOMENTĀRS       jaunā konta GECOS lauks\n"
 
 #: src/useradd.c:907
 msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
-msgstr "  -d, --home-dir MĀJAS_DIR      jaunā konta mājas direktorijs\n"
+msgstr ""
+"  -d, --home-dir MĀJAS_DIREKTORIJA\n"
+"                                jaunā konta mājas direktorija\n"
 
 #: src/useradd.c:908
 msgid "  -D, --defaults                print or change default useradd configuration\n"
-msgstr "  -D, --defaults                izvadīt vai mainīt useradd noklusējuma konfigurāciju\n"
+msgstr ""
+"  -D, --defaults                parādīt vai mainīt useradd noklusējuma\n"
+"                                konfigurāciju\n"
 
 #: src/useradd.c:909
 msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
-msgstr "  -e, --expiredate DERĪGUMA_DATUMS  jaunā konta derīguma termiņa datums\n"
+msgstr ""
+"  -e, --expiredate DERĪGUMA_DATUMS\n"
+"                                jaunā konta derīguma termiņa datums\n"
 
 #: src/useradd.c:910
 msgid "  -f, --inactive INACTIVE       password inactivity period of the new account\n"
-msgstr "  -f, --inactive NEAKTĪVS      jaunā konta paroles neaktivitātes periods\n"
+msgstr "  -f, --inactive NEAKTĪVS       jaunā konta paroles neaktivitātes periods\n"
 
 #: src/useradd.c:912
 msgid "  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a system user\n"
@@ -2768,7 +2810,7 @@ msgstr "  -g, --gid GRUPA               jaunā konta primārās grupas nosaukums
 msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
-msgstr "  -G, --groups GRUPA           jaunā konta papildu grupu saraksts\n"
+msgstr "  -G, --groups GRUPAS           jaunā konta papildu grupu saraksts\n"
 
 #: src/useradd.c:919
 msgid "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
@@ -2824,7 +2866,9 @@ msgstr "  -u, --uid UID                 jaunā konta lietotāja ID\n"
 
 #: src/useradd.c:937
 msgid "  -U, --user-group              create a group with the same name as the user\n"
-msgstr "  -U, --user-group              izveidot grupu ar tādu pašu nosaukumu kā lietotājs\n"
+msgstr ""
+"  -U, --user-group              izveidot grupu ar tādu pašu nosaukumu kā\n"
+"                                lietotājs\n"
 
 #: src/useradd.c:939
 msgid "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n"
@@ -2898,37 +2942,37 @@ msgstr "%s: opcijas %s un %s ir pretrunā\n"
 #: src/useradd.c:1992
 #, c-format
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
-msgstr "%s: neizdevās atvērt kļūdu žurnāla failu lietotājam ar UID %lu: %s\n"
+msgstr "%s: neizdevās atvērt faillog failu UID %lu: %s\n"
 
 #: src/useradd.c:2001
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
-msgstr "%s: neizdevās atiestatīt kļūdu žurnāla ierakstu lietotājam ar UID %lu: %s\n"
+msgstr "%s: neizdevās atiestatīt faillog ierakstu UID %lu: %s\n"
 
 #: src/useradd.c:2007
 #, c-format
 msgid "%s: failed to close the faillog file for UID %lu: %s\n"
-msgstr "%s: neizdevās aizvērt kļūdu žurnāla failu lietotājam ar UID %lu: %s\n"
+msgstr "%s: neizdevās aizvērt faillog failu UID %lu: %s\n"
 
 #: src/useradd.c:2037
 #, c-format
 msgid "%s: failed to open the lastlog file for UID %lu: %s\n"
-msgstr "%s: neizdevās atvērt pēdējās pieslēgšanās žurnāla failu lietotājam ar UID %lu: %s\n"
+msgstr "%s: neizdevās atvērt lastlog failu UID %lu: %s\n"
 
 #: src/useradd.c:2046
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
-msgstr "%s: neizdevās atiestatīt pēdējās pieslēgšanās žurnāla ierakstu lietotājam ar UID %lu: %s\n"
+msgstr "%s: neizdevās atiestatīt lastlog ierakstu UID %lu: %s\n"
 
 #: src/useradd.c:2053
 #, c-format
 msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
-msgstr "%s: neizdevās aizvērt pēdējās pieslēgšanās žurnāla failu lietotājam ar UID %lu: %s\n"
+msgstr "%s: neizdevās aizvērt lastlog failu UID %lu: %s\n"
 
 #: src/useradd.c:2098
 #, c-format
 msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
-msgstr "%s: neizdevās atiestatīt skaitītāja žurnāla ierakstu lietotājam \"%s\"\n"
+msgstr "%s: neizdevās atiestatīt tallylog ierakstu lietotājam \"%s\"\n"
 
 #: src/useradd.c:2178 src/useradd.c:2185
 #, c-format
@@ -2968,17 +3012,17 @@ msgstr "%s: neizdevās izveidot direktoriju %s\n"
 #: src/useradd.c:2307
 #, c-format
 msgid "%s: warning: chown on `%s' failed: %m\n"
-msgstr "%s: brīdinājums: chown operācija `%s' neizdevās: %m\n"
+msgstr "%s: brīdinājums: chown `%s' neizdevās: %m\n"
 
 #: src/useradd.c:2312
 #, c-format
 msgid "%s: warning: chmod on `%s' failed: %m\n"
-msgstr "%s: brīdinājums: neizdevās mainīt piekļuves tiesības `%s': %m\n"
+msgstr "%s: brīdinājums: chmod `%s' neizdevās: %m\n"
 
 #: src/useradd.c:2322
 #, c-format
 msgid "%s: warning: chown on '%s' failed: %m\n"
-msgstr "%s: brīdinājums: neizdevās mainīt īpašnieku '%s': %m\n"
+msgstr "%s: brīdinājums: chown '%s' neizdevās: %m\n"
 
 #: src/useradd.c:2335 src/useradd.c:2426
 #, c-format
@@ -3013,12 +3057,12 @@ msgstr "Aizver pastkastes failu"
 #: src/useradd.c:2441
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
-msgstr "%s brīdinājums: %s lietotāja ID %d pārsniedz SYS_UID_MAX %d\n"
+msgstr "%s brīdinājums: lietotāja %s uid %d pārsniedz SYS_UID_MAX %d\n"
 
 #: src/useradd.c:2448
 #, c-format
 msgid "%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
-msgstr "%s brīdinājums: %s lietotāja ID %d atrodas ārpus UID_MIN %d un UID_MAX %d diapazona.\n"
+msgstr "%s brīdinājums: lietotāja %s uid %d atrodas ārpus UID_MIN %d un UID_MAX %d diapazona.\n"
 
 #: src/useradd.c:2587 src/usermod.c:1472
 #, c-format
@@ -3028,7 +3072,7 @@ msgstr "%s: lietotājs '%s' jau pastāv\n"
 #: src/useradd.c:2601
 #, c-format
 msgid "%s: group %s exists - if you want to add this user to that group, use -g.\n"
-msgstr "%s: grupa %s pastāv - ja vēlaties pievienot šo lietotāju šai grupai, izmantojiet -g.\n"
+msgstr "%s: grupa %s pastāv — ja vēlaties pievienot šo lietotāju šai grupai, izmantojiet -g.\n"
 
 #: src/useradd.c:2624
 #, c-format
@@ -3081,8 +3125,9 @@ msgid ""
 "                                or files, even if not owned by the user\n"
 msgstr ""
 "  -f, --force                   piespiest veikt darbības, kas citādi neizdotos,\n"
-"                                piemēram, dzēst lietotāju, kurš joprojām ir pieteicies,\n"
-"                                vai failus, pat ja tie nepieder lietotājam\n"
+"                                piemēram, dzēst lietotāju, kurš joprojām ir\n"
+"                                pieteicies, vai failus, pat ja tie nepieder\n"
+"                                lietotājam\n"
 
 #: src/userdel.c:149
 msgid "  -r, --remove                  remove home directory and mail spool\n"
@@ -3100,7 +3145,7 @@ msgstr "%s: grupa %s netika noņemta, jo tā nav lietotāja %s primārā grupa.\
 #: src/userdel.c:319
 #, c-format
 msgid "%s: group %s not removed because it has other members.\n"
-msgstr "%s: grupa %s netika noņemta, jo tai ir citi biedri.\n"
+msgstr "%s: grupa %s netika noņemta, jo tai ir citi locekļi.\n"
 
 #: src/userdel.c:336
 #, c-format
@@ -3125,7 +3170,7 @@ msgstr "%s: brīdinājums: neizdevās noņemt %s: %s\n"
 #: src/userdel.c:815 src/userdel.c:1080
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %s nepieder %s, netiek dzēsts\n"
+msgstr "%s: %s nepieder lietotājam %s, netiek dzēsts\n"
 
 #: src/userdel.c:867
 #, c-format
@@ -3135,7 +3180,7 @@ msgstr "%s: Neizdevās piešķirt atmiņu, tādēļ lietotāja %s tcb ieraksts n
 #: src/userdel.c:872
 #, c-format
 msgid "%s: Cannot drop privileges: %s\n"
-msgstr "%s: Neizdevās atmest privilēģijas: %s\n"
+msgstr "%s: Neizdevās atteikties no privilēģijām: %s\n"
 
 #: src/userdel.c:882
 #, c-format
@@ -3178,29 +3223,34 @@ msgid ""
 "                                mentioned by the -G option without removing\n"
 "                                the user from other groups\n"
 msgstr ""
-"  -a, --append                  pievienot lietotāju papildu grupām GROUPA,\n"
+"  -a, --append                  pievienot lietotāju papildu GRUPĀM,\n"
 "                                kas norādītas ar opciju -G, neizņemot\n"
 "                                lietotāju no citām grupām\n"
 
 #: src/usermod.c:431
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
-msgstr "  -c, --comment KOMENTĀRS         jauna GECOS lauka vērtība\n"
+msgstr "  -c, --comment KOMENTĀRS       GECOS lauka jaunā vērtība\n"
 
 #: src/usermod.c:432
 msgid "  -d, --home HOME_DIR           new home directory for the user account\n"
-msgstr "  -d, --home MĀJS_DIR           jauna mājas direktorija lietotāja kontam\n"
+msgstr ""
+"  -d, --home MĀJAS_DIREKTORIJA\n"
+"                                jauna mājas direktorija lietotāja kontam\n"
 
 #: src/usermod.c:433
 msgid "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr "  -e, --expiredate IZTECĒJUMA_DATUMA  iestatīt konta derīguma termiņu uz IZTECĒJUMA_DATUMA\n"
+msgstr ""
+"  -e, --expiredate DERĪGUMA_DATUMS\n"
+"                                iestatīt konta derīguma termiņu uz\n"
+"                                DERĪGUMA_DATUMS\n"
 
 #: src/usermod.c:434
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -f, --inactive NEAKTĪVS       iestatīt neaktivitātes periodu pēc paroles derīguma beigām\n"
-"                                uz NEAKTĪVS\n"
+"  -f, --inactive NEAKTĪVS       iestatīt neaktivitātes periodu pēc paroles\n"
+"                                derīguma beigām uz NEAKTĪVS\n"
 
 #: src/usermod.c:436
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
@@ -3208,11 +3258,11 @@ msgstr "  -g, --gid GRUPA               noteikt GRUPU kā jauno primāro grupu\n
 
 #: src/usermod.c:437
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-msgstr "  -G, --groups GRUPA           jauns papildu grupu saraksts GRUPĀM\n"
+msgstr "  -G, --groups GRUPAS           jauns papildu GRUPU saraksts\n"
 
 #: src/usermod.c:439
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
-msgstr "  -l, --login JAUNA_PIETEIKŠANĀS         jauna pieteikšanās vārda vērtība\n"
+msgstr "  -l, --login JAUNAIS_VĀRDS     jauna pieteikšanās vārda vērtība\n"
 
 #: src/usermod.c:440
 msgid "  -L, --lock                    lock the user account\n"
@@ -3232,7 +3282,7 @@ msgstr "  -o, --non-unique              atļaut izmantot dublētu (neunikālu) U
 
 #: src/usermod.c:444
 msgid "  -p, --password PASSWORD       use encrypted password for the new password\n"
-msgstr "  -p, --password PAROLE       lietot šifrētu paroli PAROLI kā jauno paroli\n"
+msgstr "  -p, --password PAROLE         izmantot šifrētu paroli kā jauno paroli\n"
 
 #: src/usermod.c:446
 msgid ""
@@ -3240,7 +3290,7 @@ msgid ""
 "                                mentioned by the -G option without removing\n"
 "                                the user from other groups\n"
 msgstr ""
-"  -r, --remove                  noņemt lietotāju tikai no papildu grupām GRUPAS,\n"
+"  -r, --remove                  noņemt lietotāju tikai no papildu GRUPĀM,\n"
 "                                kas norādītas ar opciju -G, nenoņemot\n"
 "                                lietotāju no citām grupām\n"
 
@@ -3254,19 +3304,27 @@ msgstr "  -U, --unlock                  atbloķēt lietotāja kontu\n"
 
 #: src/usermod.c:454
 msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
-msgstr "  -v, --add-subuids PIRMAIS-PĒDĒJAIS  pievienot pakārtoto UIDu diapazonu\n"
+msgstr ""
+"  -v, --add-subuids PIRMAIS-PĒDĒJAIS\n"
+"                                pievienot pakārtoto UID diapazonu\n"
 
 #: src/usermod.c:455
 msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
-msgstr "  -V, --del-subuids PIRMAIS-PĒDĒJAIS  noņemt pakārtoto UIDu diapazonu\n"
+msgstr ""
+"  -V, --del-subuids PIRMAIS-PĒDĒJAIS\n"
+"                                noņemt pakārtoto UID diapazonu\n"
 
 #: src/usermod.c:456
 msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
-msgstr "  -w, --add-subgids PIRMAIS-PĒDĒJAIS  pievienot pakārtoto GIDu diapazonu\n"
+msgstr ""
+"  -w, --add-subgids PIRMAIS-PĒDĒJAIS\n"
+"                                pievienot pakārtoto GID diapazonu\n"
 
 #: src/usermod.c:457
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
-msgstr "  -W, --del-subgids PIRMAIS-PĒDĒJAIS  noņemt pakārtoto GIDu diapazonu\n"
+msgstr ""
+"  -W, --del-subgids PIRMAIS-PĒDĒJAIS\n"
+"                                noņemt pakārtoto GID diapazonu\n"
 
 #: src/usermod.c:458
 msgid "  -S, --add-subids              add entries to sub[ud]id based on system defaults\n"
@@ -3274,11 +3332,13 @@ msgstr "  -S, --add-subids              pievienot ierakstus sub[ud]id, pamatojot
 
 #: src/usermod.c:461
 msgid "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account\n"
-msgstr "  -Z, --selinux-user SEUSER     jauna SELinux lietotāja kartēšana lietotāja kontam\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     jauna SELinux lietotāja kartēšana lietotāja\n"
+"                                kontam\n"
 
 #: src/usermod.c:462
 msgid "      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
-msgstr "  --selinux-range SERANGE   jauns SELinux MLS diapazons lietotāja kontam\n"
+msgstr "      --selinux-range SERANGE   jauns SELinux MLS diapazons lietotāja kontam\n"
 
 #: src/usermod.c:485
 #, c-format
@@ -3286,13 +3346,13 @@ msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock this user's password.\n"
 msgstr ""
-"%s: atslēdzot lietotāja paroli, konts paliks bez paroles.\n"
-"Lai atslēgtu šī lietotāja paroli, iestatiet to ar usermod -p.\n"
+"%s: atbloķējot lietotāja paroli, konts paliktu bez paroles.\n"
+"Lai atbloķētu šī lietotāja paroli, iestatiet to ar usermod -p.\n"
 
 #: src/usermod.c:523 src/usermod.c:609
 #, c-format
 msgid "%s: user '%s' already exists in %s\n"
-msgstr "%s: lietotājs '%s' jau eksistē %s\n"
+msgstr "%s: lietotājs '%s' jau eksistē failā %s\n"
 
 #: src/usermod.c:1110
 #, c-format
@@ -3327,7 +3387,7 @@ msgstr "%s: opcijas -L, -p un -U ir savstarpēji izslēdzošas\n"
 #: src/usermod.c:1464
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: ēnotās paroles ir nepieciešamas opcijām -e un -f\n"
+msgstr "%s: opcijām -e un -f nepieciešamas ēnu paroles\n"
 
 #: src/usermod.c:1480
 #, c-format
@@ -3377,7 +3437,7 @@ msgstr "%s: Iepriekšējā mājas direktorija (%s) neeksistē vai nav pieejama. 
 #: src/usermod.c:1971 src/usermod.c:1983 src/usermod.c:1999
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
-msgstr "%s: neizdevās nokopēt lietotāja %lu lastlog ierakstu uz lietotāju %lu: %s\n"
+msgstr "%s: neizdevās nokopēt lietotāja %lu lastlog ierakstu lietotājam %lu: %s\n"
 
 #: src/usermod.c:2007
 #, c-format
@@ -3397,15 +3457,15 @@ msgstr "%s: neizdevās nokopēt lietotāja %ju faillog ierakstu lietotājam %ju:
 #: src/usermod.c:2130
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
-msgstr "%s: brīdinājums: %s nepieder %s\n"
+msgstr "%s: brīdinājums: %s nepieder lietotājam %s\n"
 
 #: src/usermod.c:2138
 msgid "failed to change mailbox owner"
-msgstr "neizdevās nomainīt pastkastītes īpašnieku"
+msgstr "neizdevās nomainīt pastkastes īpašnieku"
 
 #: src/usermod.c:2162
 msgid "failed to rename mailbox"
-msgstr "neizdevās pārdēvēt pastkastīti"
+msgstr "neizdevās pārdēvēt pastkasti"
 
 #: src/usermod.c:2254
 #, c-format
@@ -3462,7 +3522,7 @@ msgstr "  -s, --shadow                  rediģēt shadow vai gshadow datubāzi\n
 
 #: src/vipw.c:98
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
-msgstr "  -u, --user                    norāda lietotāju, kura TCB shadow failu rediģēt\n"
+msgstr "  -u, --user                    norāda lietotāju, kura tcb shadow failu rediģēt\n"
 
 #: src/vipw.c:100
 msgid "\n"
@@ -3484,7 +3544,7 @@ msgstr "neizdevās izveidot pagaidu direktoriju"
 
 #: src/vipw.c:217 src/vipw.c:262 src/vipw.c:424
 msgid "failed to drop privileges"
-msgstr "neizdevās atsaukt privilēģijas"
+msgstr "neizdevās atteikties no privilēģijām"
 
 #: src/vipw.c:242
 msgid "Couldn't get file context"
@@ -3500,7 +3560,7 @@ msgstr "neizdevās iegūt privilēģijas"
 
 #: src/vipw.c:257
 msgid "Couldn't lock file"
-msgstr "Neizdevās nobloķēt failu"
+msgstr "Neizdevās bloķēt failu"
 
 #: src/vipw.c:279
 msgid "Couldn't make backup"
@@ -3514,12 +3574,12 @@ msgstr "%s: %s: %s\n"
 #: src/vipw.c:321
 #, c-format
 msgid "%s: %s returned with status %d\n"
-msgstr "%s: %s atgriezās ar statusu %d\n"
+msgstr "%s: %s atgrieza statusu %d\n"
 
 #: src/vipw.c:325 src/vipw.c:388
 #, c-format
 msgid "%s: %s killed by signal %d\n"
-msgstr "%s: %s nogalināts ar signālu %d\n"
+msgstr "%s: %s nobeigts ar signālu %d\n"
 
 #: src/vipw.c:418
 msgid "failed to open scratch file"
@@ -3531,7 +3591,7 @@ msgstr "neizdevās atsaistīt pagaidu failu"
 
 #: src/vipw.c:427
 msgid "failed to stat edited file"
-msgstr "neizdevās iegūt rediģētā faila statistikas datus"
+msgstr "neizdevās izpildīt stat rediģētajam failam"
 
 #: src/vipw.c:431
 msgid "aprintf() failed"
@@ -3539,7 +3599,7 @@ msgstr "aprintf() neizdevās"
 
 #: src/vipw.c:435
 msgid "failed to create backup file"
-msgstr "neizdevās izveidot dublējuma failu"
+msgstr "neizdevās izveidot dublējumfailu"
 
 #: src/vipw.c:448
 #, c-format
