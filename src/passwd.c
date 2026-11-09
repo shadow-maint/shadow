@@ -1090,12 +1090,16 @@ main(int argc, char **argv)
 	 */
 	if (!anyflag && use_pam) {
 		if (sflg) {
+			int ret;
+
 			cp = agetpass_stdin ();
 			if (cp == NULL) {
 				exit (E_FAILURE);
 			}
-			do_pam_passwd_non_interactive ("passwd", name, cp);
+			ret = do_pam_passwd_non_interactive ("passwd", name, cp);
 			erase_pass (cp);
+			if (ret == 0 && !qflg)
+				printf(_("passwd: password updated successfully\n"));
 		} else {
 			do_pam_passwd (name, qflg, kflg);
 		}
