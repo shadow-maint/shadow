@@ -1098,7 +1098,9 @@ main(int argc, char **argv)
 			}
 			ret = do_pam_passwd_non_interactive ("passwd", name, cp);
 			erase_pass (cp);
-			if (ret == 0 && !qflg)
+			if (ret != 0)
+				exit(E_PAM_ERR);
+			if (!qflg)
 				printf(_("passwd: password updated successfully\n"));
 		} else {
 			do_pam_passwd (name, qflg, kflg);
