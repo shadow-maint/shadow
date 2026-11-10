@@ -10,7 +10,6 @@ Options:
   -d, --home-dir HOME_DIR       home directory of the new account
   -D, --defaults                print or change default useradd configuration
   -e, --expiredate EXPIRE_DATE  expiration date of the new account
-  -f, --inactive INACTIVE       password inactivity period of the new account
   -g, --gid GROUP               name or ID of the primary group of the new
                                 account
   -G, --groups GROUPS           list of supplementary groups of the new

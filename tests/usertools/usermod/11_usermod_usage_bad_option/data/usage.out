@@ -5,8 +5,6 @@ Options:
   -c, --comment COMMENT         new value of the GECOS field
   -d, --home HOME_DIR           new home directory for the user account
   -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE
-  -f, --inactive INACTIVE       set password inactive after expiration
-                                to INACTIVE
   -g, --gid GROUP               force use GROUP as new primary group
   -G, --groups GROUPS           new list of supplementary GROUPS
   -a, --append                  append the user to the supplemental GROUPS
