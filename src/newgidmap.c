@@ -16,6 +16,7 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "fs/open/open.h"
 #include "idmapping.h"
 #include "io/fprintf.h"
 #include "prototypes.h"
@@ -93,7 +94,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 	if (allow_setgroups)
 		return;
 
-	setgroups_fd = openat(proc_dir_fd, "setgroups", O_RDWR|O_CLOEXEC);
+	setgroups_fd = samedev_openat(proc_dir_fd, "setgroups", O_RDWR|O_CLOEXEC);
 	if (setgroups_fd < 0) {
 		/*
 		 * If it's an ENOENT then we are on too old a kernel for the setgroups
