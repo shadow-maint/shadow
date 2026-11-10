@@ -1085,6 +1085,7 @@ run_test ./passwd/19_passwd_user_change_password/passwd.test
 run_test ./passwd/20_passwd_user_change_password_same_user/passwd.test
 run_test ./passwd/21_passwd_user_change_password_other_user/passwd.test
 run_test ./passwd/22_passwd_usage/passwd.test
+run_test ./passwd/23_passwd_user_cancel_password/passwd.test
 run_test ./login/01_login_prompt/login.test
 run_test ./login/02_login_user/login.test
 run_test ./login/03_login_check_tty/login.test
