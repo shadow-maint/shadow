@@ -87,6 +87,8 @@ libshadow_la_SOURCES = \
 	fs/mkstemp/fmkomstemp.h \
 	fs/mkstemp/mkomstemp.c \
 	fs/mkstemp/mkomstemp.h \
+	fs/open/open.c \
+	fs/open/open.h \
 	fs/readlink/areadlink.c \
 	fs/readlink/areadlink.h \
 	fs/readlink/readlinknul.c \
