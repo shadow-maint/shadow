@@ -13,4 +13,4 @@
 #include <stddef.h>
 
 
-extern inline void *mallocarray(size_t nmemb, size_t size);
+extern inline void *mallocarray(size_t n, size_t size);
