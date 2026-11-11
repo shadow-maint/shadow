@@ -166,9 +166,6 @@ string/ - string operations
 
   strchr/ - Character search and counting
 
-    strchrcnt()
-	Count the number of occurrences of a given character in a string.
-
     strchrscnt()
 	Count the number of occurrences of several characters.
 

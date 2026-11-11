@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2026, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -9,10 +9,9 @@
 #include "config.h"
 
 #include <stddef.h>
+#include <string.h>
 
 #include "attr.h"
-#include "string/strchr/strchrcnt.h"
-#include "string/strcmp/streq.h"
 
 
 ATTR_STRING(1)
@@ -20,15 +19,16 @@ ATTR_STRING(2)
 inline size_t strchrscnt(const char *s, const char *c);
 
 
-// string characters count
-// Similar to strchrcnt(), but search for multiple characters.
+// strchrscnt - string characters count
 inline size_t
 strchrscnt(const char *s, const char *c)
 {
 	size_t  n = 0;
 
-	for (; !streq(c, ""); c++)
-		n += strchrcnt(s, *c);
+	while (NULL != (s = strpbrk(s, c))) {
+		n++;
+		s++;
+	}
 
 	return n;
 }

@@ -11,7 +11,7 @@
 #include "alloc/malloc.h"
 #include "prototypes.h"
 #include "defines.h"
-#include "string/strchr/strchrcnt.h"
+#include "string/strchr/strchrscnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 #include "string/strtok/strsep2ls.h"
@@ -218,7 +218,7 @@ comma_to_list(const char *comma)
 	 * n: number of delimiters + last element + NULL
 	 */
 
-	n = strchrcnt(members, ',') + 2;
+	n = strchrscnt(members, ",") + 2;
 	array = xmalloc_T(n, char *);
 
 	/*
