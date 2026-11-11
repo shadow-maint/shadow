@@ -18,9 +18,9 @@
 #include "atoi/strtoi/strtou_noneg.h"
 #include "attr.h"
 
-static void test_strtoi(MAYBE_UNUSED void ** _1);
-static void test_strtou(MAYBE_UNUSED void ** _1);
-static void test_strtou_noneg(MAYBE_UNUSED void ** _1);
+static void test_strtoi(void **);
+static void test_strtou(void **);
+static void test_strtou_noneg(void **);
 
 
 int
@@ -37,7 +37,7 @@ main(void)
 
 
 static void
-test_strtoi(MAYBE_UNUSED void ** _1)
+test_strtoi(void **)
 {
 	int   status;
 	char  *end;
@@ -78,7 +78,7 @@ test_strtoi(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_strtou(MAYBE_UNUSED void ** _1)
+test_strtou(void **)
 {
 	int   status;
 	char  *end;
@@ -119,7 +119,7 @@ test_strtou(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_strtou_noneg(MAYBE_UNUSED void ** _1)
+test_strtou_noneg(void **)
 {
 	int   status;
 	char  *end;

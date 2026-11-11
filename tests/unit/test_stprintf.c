@@ -18,8 +18,8 @@
 #include "string/sprintf/stprintf.h"
 
 
-static void test_stprintf_a_trunc(MAYBE_UNUSED void ** _1);
-static void test_stprintf_a_ok(MAYBE_UNUSED void ** _1);
+static void test_stprintf_a_trunc(void **);
+static void test_stprintf_a_ok(void **);
 
 
 int
@@ -35,7 +35,7 @@ main(void)
 
 
 static void
-test_stprintf_a_trunc(MAYBE_UNUSED void ** _1)
+test_stprintf_a_trunc(void **)
 {
 	char  buf[countof("foo")];
 
@@ -49,7 +49,7 @@ test_stprintf_a_trunc(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_stprintf_a_ok(MAYBE_UNUSED void ** _1)
+test_stprintf_a_ok(void **)
 {
 	char  buf[countof("foo")];
 

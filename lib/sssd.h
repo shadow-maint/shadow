@@ -13,7 +13,7 @@
 extern int sssd_flush_cache (int dbflags);
 #else
 static inline int
-sssd_flush_cache(MAYBE_UNUSED int _1)
+sssd_flush_cache(int)
 {
 	return 0;
 }
