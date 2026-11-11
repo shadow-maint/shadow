@@ -377,9 +377,9 @@ int main (int argc, char **argv)
 	process_flags (argc, argv, &flags);
 	process_selinux = !flags.chroot && !flags.prefix;
 
-	salt = get_salt();
 	process_root_flag ("-R", argc, argv);
 	prefix = process_prefix_flag ("-P", argc, argv);
+	salt = get_salt();
 
 #ifdef USE_PAM
 	if (eflg || cflg || prefix[0]) {
