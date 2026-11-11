@@ -162,7 +162,6 @@ login_defs_v = \
 	PASS_MAX_DAYS.xml \
 	PASS_MIN_LEN.xml \
 	PASS_WARN_AGE.xml \
-	PORTTIME_CHECKS_ENAB.xml \
 	QUOTAS_ENAB.xml \
 	SHA_CRYPT_MIN_ROUNDS.xml \
 	SULOG_FILE.xml \
