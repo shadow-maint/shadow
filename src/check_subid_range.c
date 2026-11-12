@@ -43,7 +43,7 @@ main(int argc, char **argv)
 	check_uids = strprefix(argv[2], "u");
 	if (get_uid(argv[3], &start) == -1)
 		exit(1);
-	if (str2ul(&count, argv[4]) == -1)
+	if (a2i(unsigned long, &count, argv[4], NULL, 0,,) == -1)
 		exit(1);
 	if (check_uids) {
 		if (have_sub_uids(owner, start, count))
