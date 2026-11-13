@@ -18,38 +18,6 @@
 #include "string/sprintf/stprintf.h"
 
 
-/*
- * If use passed in fd:4 as an argument, then return the
- * value '4', the fd to use.
- * On error, return -1.
- */
-int get_pidfd_from_fd(const char *pidfdstr)
-{
-	int          pidfd;
-	struct stat  st;
-	dev_t proc_st_dev, proc_st_rdev;
-
-	if (get_fd(pidfdstr, &pidfd) == -1)
-		return -1;
-
-	if (stat("/proc/self/uid_map", &st) < 0) {
-		return -1;
-	}
-
-	proc_st_dev = st.st_dev;
-	proc_st_rdev = st.st_rdev;
-
-	if (fstat(pidfd, &st) < 0) {
-		return -1;
-	}
-
-	if (st.st_dev != proc_st_dev || st.st_rdev != proc_st_rdev) {
-		return -1;
-	}
-
-	return pidfd;
-}
-
 int open_pidfd(const char *pidstr)
 {
 	int    proc_dir_fd;

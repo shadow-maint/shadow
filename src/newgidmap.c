@@ -74,7 +74,7 @@ static void verify_ranges(struct passwd *pw, int ranges,
 
 static void usage(void)
 {
-	eprintf(_("usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"), Prog);
+	eprintf(_("usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"), Prog);
 	exit(EXIT_FAILURE);
 }
 
@@ -162,17 +162,10 @@ int main(int argc, char **argv)
 	 */
 
 	target_str = argv[1];
-	if (strlen(target_str) > 3 && strprefix(target_str, "fd:")) {
-		/* the user passed in a /proc/pid fd for the process */
-		target_str = &target_str[3];
-		proc_dir_fd = get_pidfd_from_fd(target_str);
-		if (proc_dir_fd < 0)
-			usage();
-	} else {
-		proc_dir_fd = open_pidfd(target_str);
-		if (proc_dir_fd < 0)
-			usage();
-	}
+	proc_dir_fd = open_pidfd(target_str);
+	if (proc_dir_fd < 0)
+		usage();
+
 	/* Who am I? */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
