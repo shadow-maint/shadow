@@ -245,7 +245,8 @@ static int gr_cmp (const void *p1, const void *p2)
 }
 
 /* Sort entries by GID */
-int gr_sort ()
+int
+gr_sort(void)
 {
 	return commonio_sort (&group_db, gr_cmp);
 }
