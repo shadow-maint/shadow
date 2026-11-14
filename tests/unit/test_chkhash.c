@@ -20,7 +20,7 @@
 #include "attr.h"
 
 static void
-test_is_valid_hash_ok_yescrypt(MAYBE_UNUSED void ** _1)
+test_is_valid_hash_ok_yescrypt(void **)
 {
 	// Basic yescrypt hash: $y$ + params + $ + salt + $ + 43 character hash
 	assert_true(is_valid_hash("$y$j9T$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
@@ -46,7 +46,7 @@ test_is_valid_hash_ok_yescrypt(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_ok_bcrypt(MAYBE_UNUSED void ** _1)
+test_is_valid_hash_ok_bcrypt(void **)
 {
 	// Basic bcrypt hash: $2a$ + cost + $ + 53 character hash
 	assert_true(is_valid_hash("$2a$12$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
@@ -66,7 +66,7 @@ test_is_valid_hash_ok_bcrypt(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_ok_sha512(MAYBE_UNUSED void ** _1)
+test_is_valid_hash_ok_sha512(void **)
 {
 	// Basic SHA-512 hash: $6$ + salt + $ + 86 character hash
 	assert_true(is_valid_hash("$6$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
@@ -89,7 +89,7 @@ test_is_valid_hash_ok_sha512(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_ok_sha256(MAYBE_UNUSED void ** _1)
+test_is_valid_hash_ok_sha256(void **)
 {
 	// Basic SHA-256 hash: $5$ + salt + $ + 43 character hash
 	assert_true(is_valid_hash("$5$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
@@ -112,7 +112,7 @@ test_is_valid_hash_ok_sha256(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_ok_special(MAYBE_UNUSED void ** _1)
+test_is_valid_hash_ok_special(void **)
 {
 	// Empty string - passwordless account
 	assert_true(is_valid_hash(""));
@@ -132,7 +132,7 @@ test_is_valid_hash_ok_special(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_edge_salt_chars(MAYBE_UNUSED void ** _1)
+test_is_valid_hash_edge_salt_chars(void **)
 {
 	// SHA-512 with backslash in salt
 	assert_true(is_valid_hash("$6$sa\\lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
@@ -149,7 +149,7 @@ test_is_valid_hash_edge_salt_chars(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_edge_account_locks(MAYBE_UNUSED void ** _1)
+test_is_valid_hash_edge_account_locks(void **)
 {
 	// Complex ! prefix scenarios with various hash types should work
 	assert_true(is_valid_hash("!$2a$12$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
@@ -162,7 +162,7 @@ test_is_valid_hash_edge_account_locks(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_turkish_locale(MAYBE_UNUSED void ** _1)
+test_is_valid_hash_turkish_locale(void **)
 {
 	char *saved;
 
@@ -186,7 +186,7 @@ test_is_valid_hash_turkish_locale(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_invalid_algorithm(MAYBE_UNUSED void ** _1)
+test_is_invalid_algorithm(void **)
 {
 	assert_false(is_valid_hash("$7$salt$hash"));
 	assert_false(is_valid_hash("$2z$12$hash"));
@@ -195,7 +195,7 @@ test_is_invalid_algorithm(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_invalid_hash_length(MAYBE_UNUSED void ** _1)
+test_is_invalid_hash_length(void **)
 {
 	assert_false(is_valid_hash("$y$j9T$salt$tooshort"));
 	assert_false(is_valid_hash("$2a$12$tooshort"));
@@ -205,7 +205,7 @@ test_is_invalid_hash_length(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_invalid_delimeters(MAYBE_UNUSED void ** _1)
+test_is_invalid_delimeters(void **)
 {
 	// Missing delimiters
 	assert_false(is_valid_hash("$6salt$hash"));
@@ -218,7 +218,7 @@ test_is_invalid_delimeters(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_invalid_salt_chars(MAYBE_UNUSED void ** _1)
+test_is_invalid_salt_chars(void **)
 {
 	assert_false(is_valid_hash("$6$sa:lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
 	assert_false(is_valid_hash("$6$sa$lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
@@ -227,7 +227,7 @@ test_is_invalid_salt_chars(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_invalid_rounds(MAYBE_UNUSED void ** _1)
+test_is_invalid_rounds(void **)
 {
 	assert_false(is_valid_hash("$6$rounds=abc$salt$hash")); // Non-numeric rounds
 	assert_false(is_valid_hash("$6$rounds=0$salt$hash")); // Invalid rounds (must start with 1-9)

@@ -111,7 +111,7 @@ static inline int my_capset(cap_user_header_t hdrp, const cap_user_data_t datap)
 }
 
 void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings,
-	const char *map_file, MAYBE_UNUSED uid_t ruid)
+	const char *map_file, uid_t ruid)
 {
 	int idx;
 	const struct map_range *mapping;
