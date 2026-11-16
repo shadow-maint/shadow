@@ -303,6 +303,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		if (NULL != sg) {
 			eprintf(_("%s: group '%s' is a shadow group, but does not exist in /etc/group\n"),
 			         Prog, grent.gr_name);
+			free (grent.gr_name);
 			return -1;
 		}
 	}
@@ -320,15 +321,18 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		sgrent.sg_mem = members;
 
 		if (sgr_update (&sgrent) == 0) {
+			free (grent.gr_name);
 			return -1;
 		}
 	}
 #endif
 
 	if (gr_update (&grent) == 0) {
+		free (grent.gr_name);
 		return -1;
 	}
 
+	free (grent.gr_name);
 	return 0;
 }
 
