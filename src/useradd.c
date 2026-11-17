@@ -255,6 +255,7 @@ static void tallylog_reset (const char *);
 static void usr_update (unsigned long subuid_count, unsigned long subgid_count,
                         const struct option_flags *flags);
 static void create_home(const struct option_flags *flags);
+static int copy_skel(const char *, const char *, uid_t, gid_t);
 static void create_mail(const struct option_flags *flags);
 static void check_uid_range(bool sys_user, uid_t uid);
 
@@ -2292,6 +2293,26 @@ static void create_home(const struct option_flags *flags)
 }
 
 /*
+ * copy_skel - copy a skeleton directory into the new home directory
+ *
+ *	A missing skeleton directory is not an error; every other copy
+ *	failure is reported to the caller.
+ */
+static int copy_skel(const char *src, const char *dst, uid_t uid, gid_t gid)
+{
+	struct stat sb;
+	int ret;
+
+	ret = stat(src, &sb);
+	if (ret != 0) {
+		return 0;
+	}
+
+	ret = copy_tree(src, dst, false, (uid_t)-1, uid, (gid_t)-1, gid);
+	return ret;
+}
+
+/*
  * create_mail - create the user's mail spool
  *
  *	create_mail() creates the user's mail spool if it does not already
@@ -2659,13 +2680,25 @@ int main (int argc, char **argv)
 #endif				/* WITH_SELINUX */
 
 	if (mflg) {
+		int ret;
+
 		create_home (&flags);
 		if (home_added) {
-			copy_tree (def_template, prefix_user_home, false,
-			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
+			ret = copy_skel(def_template, prefix_user_home,
+			                user_id, user_gid);
+			if (ret != 0) {
+				eprintf(_("%s: failed to copy files from %s to %s\n"),
+				        Prog, def_template, prefix_user_home);
+				fail_exit (E_HOMEDIR, process_selinux);
+			}
 			if (streq(def_template, default_skel)) {
-				copy_tree(def_usrtemplate, prefix_user_home, false,
-				           (uid_t)-1, user_id, (gid_t)-1, user_gid);
+				ret = copy_skel(def_usrtemplate, prefix_user_home,
+				                user_id, user_gid);
+				if (ret != 0) {
+					eprintf(_("%s: failed to copy files from %s to %s\n"),
+					        Prog, def_usrtemplate, prefix_user_home);
+					fail_exit (E_HOMEDIR, process_selinux);
+				}
 			}
 		} else {
 			eprintf(_("%s: warning: the home directory %s already exists.\n"
