@@ -15,7 +15,7 @@ To verify signatures on releases, use the following keys under keys/ :
 
 * Serge Hallyn: keys/66D0387DB85D320F8408166DB175CFA98F192AF2.asc
 * Christian Brauner: keys/4880B8C9BD0E5106FC070F4F7B3C391EFEA93624.asc
-* Iker Pedrosa: keys/4E80EF49C7987B6DE2F81F5005079C6C3A653E57.asc
+* Iker Pedrosa: keys/1BB7739C1CF369642247AABC2E6927AE42B2A83F.asc
 * Alejandro Colomar: keys/A9348594CE31283A826FBDD8D57633D441E25BB5.asc
 
 # Authors and contributors
