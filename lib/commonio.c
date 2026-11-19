@@ -26,6 +26,7 @@
 #include "defines.h"
 #include "fs/mkstemp/fmkomstemp.h"
 #include "io/fprintf.h"
+#include "lsm/selinux/selinux.h"
 #include "memory/memset/memzero.h"
 #include "nscd.h"
 #ifdef WITH_TCB

@@ -1,10 +1,10 @@
-/*
- * SPDX-FileCopyrightText: 2011       , Peter Vrabec <pvrabec@redhat.com>
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2011, Peter Vrabec <pvrabec@redhat.com>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include "config.h"
+
+#include "lsm/selinux/selinux.h"
 
 #ifdef WITH_SELINUX
 
@@ -25,6 +25,7 @@ static bool selinux_checked = false;
 static bool selinux_enabled;
 static /*@null@*/struct selabel_handle *selabel_hnd = NULL;
 
+
 static void cleanup(void)
 {
 	if (selabel_hnd) {
@@ -32,6 +33,7 @@ static void cleanup(void)
 		selabel_hnd = NULL;
 	}
 }
+
 
 void reset_selinux_handle (void)
 {
@@ -202,7 +204,6 @@ int check_selinux_permit (const char *perm_name)
 	freecon (user_context_raw);
 	return r;
 }
-
 #else				/* !WITH_SELINUX */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !WITH_SELINUX */

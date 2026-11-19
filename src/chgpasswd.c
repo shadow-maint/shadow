@@ -22,6 +22,7 @@
 #include "defines.h"
 #include "groupio.h"
 #include "io/fprintf.h"
+#include "lsm/selinux/selinux.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"

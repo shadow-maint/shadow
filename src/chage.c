@@ -23,6 +23,7 @@
 #include "defines.h"
 #include "fields.h"
 #include "io/fprintf.h"
+#include "lsm/selinux/selinux.h"
 #include "memory/memset/memzero.h"
 #include "prototypes.h"
 #include "pwio.h"

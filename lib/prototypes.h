@@ -356,14 +356,6 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv);
 /* salt.c */
 extern /*@observer@*/const char *crypt_make_salt(/*@null@*//*@observer@*/const char *method, /*@null@*/const long *arg);
 
-/* selinux.c */
-#ifdef WITH_SELINUX
-extern int set_selinux_file_context (const char *dst_name, mode_t mode);
-extern void reset_selinux_handle (void);
-extern int reset_selinux_file_context (void);
-extern int check_selinux_permit (const char *perm_name);
-#endif
-
 /* semanage.c */
 #ifdef WITH_SELINUX
 extern int set_seuser(const char *login_name, const char *seuser_name, const char *serange);
