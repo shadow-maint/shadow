@@ -24,7 +24,7 @@
 #include "fields.h"
 #include "getdef.h"
 #include "io/fprintf.h"
-#include "lsm/selinux/selinux.h"
+#include "lsm/selinux/check.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"

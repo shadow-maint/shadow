@@ -44,7 +44,7 @@
 #include "io/fgets/fgets.h"
 #include "io/fprintf.h"
 #include "io/syslog.h"
-#include "lsm/selinux/selinux.h"
+#include "lsm/selinux/context.h"
 #include "memory/memset/memzero.h"
 #include "nscd.h"
 #include "prototypes.h"

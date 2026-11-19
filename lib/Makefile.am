@@ -114,8 +114,10 @@ libshadow_la_SOURCES = \
 	list.c \
 	lockpw.c \
 	loginprompt.c \
-	lsm/selinux/selinux.c \
-	lsm/selinux/selinux.h \
+	lsm/selinux/check.c \
+	lsm/selinux/check.h \
+	lsm/selinux/context.c \
+	lsm/selinux/context.h \
 	macro.h \
 	mail.c \
 	memory/memcmp/memeq.c \

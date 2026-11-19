@@ -22,7 +22,7 @@
 #include <semanage/semanage.h>
 
 #include "attr.h"
-#include "lsm/selinux/selinux.h"
+#include "lsm/selinux/context.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
