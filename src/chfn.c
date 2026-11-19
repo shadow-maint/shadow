@@ -507,8 +507,8 @@ static void check_fields (bool process_selinux)
 	if (err > 0) {
 		eprintf(_("%s: name with non-ASCII characters: '%s'\n"), Prog, fullnm);
 	} else if (err < 0) {
-		fail_exit (E_NOPERM, process_selinux);
 		eprintf(_("%s: invalid name: '%s'\n"), Prog, fullnm);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	err = valid_field (roomno, ":,=\n");
 	if (err > 0) {
