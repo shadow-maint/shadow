@@ -33,6 +33,7 @@
 #include "atoi/a2i.h"
 #include "io/fgets/fgets.h"
 #include "memory/memset/memzero.h"
+#include "session_management.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
