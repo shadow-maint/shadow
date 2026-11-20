@@ -2183,8 +2183,7 @@ want_btrfs_subvolume(const char *path)
  */
 static void create_home(const struct option_flags *flags)
 {
-	char    path[strlen(prefix_user_home) + 1];
-	char    *bhome, *cp;
+	char    *path, *bhome, *cp;
 	mode_t  mode;
 	bool    process_selinux;
 
@@ -2193,6 +2192,11 @@ static void create_home(const struct option_flags *flags)
 	if (access (prefix_user_home, F_OK) == 0)
 		return;
 
+	path = strdup(prefix_user_home);
+	if (path == NULL) {
+		eprinte("%s: strdup", Prog);
+		fail_exit(E_HOMEDIR, process_selinux);
+	}
 	strcpy(path, "");
 
 	bhome = strdup(prefix_user_home);
