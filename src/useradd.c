@@ -2193,10 +2193,10 @@ static void create_home(const struct option_flags *flags)
 		return;
 
 	strcpy(path, "");
+
 	bhome = strdup(prefix_user_home);
-	if (!bhome) {
-		eprintf(_("%s: error while duplicating string %s\n"),
-			Prog, user_home);
+	if (bhome == NULL) {
+		eprinte("%s: strdup", Prog);
 		fail_exit(E_HOMEDIR, process_selinux);
 	}
 
