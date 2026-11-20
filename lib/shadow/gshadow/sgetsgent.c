@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "prototypes.h"
 #include "shadow/gshadow/sgrp.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/astrsep2ls.h"
@@ -65,8 +66,9 @@ build_list(char *s)
 	char    **l;
 	size_t  n;
 
-	l = xastrsep2ls(s, ",", &n);
+	l = xastrsep2ls(s, ",");
 
+	n = lslen(l);
 	if (streq(l[n-1], ""))
 		l[n-1] = NULL;
 
