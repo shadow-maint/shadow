@@ -10,6 +10,8 @@
 
 #include <stdlib.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "search/cmp/cmp.h"
 #include "sizeof.h"
 
@@ -19,10 +21,13 @@
 #define qsort_T_(T, a, n, cmp)  do                                    \
 {                                                                     \
 	_Generic(a, T *: (void)0);                                    \
-	qsort(a, n, sizeof(T), cmp);                                  \
+	DEPRECATED(qsort(a, n, sizeof(T), cmp));                      \
 } while (0)
 
 #define QSORT(T, ...)  qsort_T(T, __VA_ARGS__, CMP(T))
+
+
+ATTR_DEPRECATED typeof(qsort)  qsort;
 
 
 #endif  // include guard

@@ -13,6 +13,7 @@
 
 #include "attr.h"
 #include "cast.h"
+#include "pragma.h"
 
 
 // string case-insensitive prefix
@@ -31,6 +32,9 @@
 })
 
 
+ATTR_DEPRECATED typeof(strncasecmp)  strncasecmp;
+
+
 ATTR_STRING(1) ATTR_STRING(2)
 inline const char *strcaseprefix_(const char *s, const char *prefix);
 
@@ -39,7 +43,7 @@ inline const char *strcaseprefix_(const char *s, const char *prefix);
 inline const char *
 strcaseprefix_(const char *s, const char *prefix)
 {
-	if (strncasecmp(s, prefix, strlen(prefix)) != 0)
+	if (DEPRECATED(strncasecmp(s, prefix, strlen(prefix))) != 0)
 		return NULL;
 
 	return s + strlen(prefix);

@@ -10,11 +10,16 @@
 
 #include <stdio.h>
 
+#include "attr.h"
+#include "pragma.h"
 #include "sizeof.h"
 
 
 // fgets_a - FILE get string array-safe
-#define fgets_a(buf, stream)  fgets(buf, countof(buf), stream)
+#define fgets_a(buf, stream)  DEPRECATED(fgets(buf, countof(buf), stream))
+
+
+ATTR_DEPRECATED typeof(fgets)  fgets;
 
 
 #endif  // include guard
