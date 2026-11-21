@@ -21,9 +21,9 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/stpsep.h"
-#include "string/strtok/strsep2arr.h"
-#include "string/strtok/astrsep2ls.h"
+#include "string/strsep/stpsep.h"
+#include "string/strsep/strsep2arr.h"
+#include "string/strsep/astrsep2ls.h"
 
 
 /*
