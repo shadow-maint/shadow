@@ -271,7 +271,7 @@ int main (int argc, char **argv)
 }
 #else				/* !SHADOWGRP */
 int
-main(MAYBE_UNUSED int _1, char **argv)
+main(int, char **argv)
 {
 	eprintf("%s: not configured for shadow group support.\n", argv[0]);
 	exit (1);

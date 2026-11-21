@@ -109,14 +109,14 @@ static void update_group (struct group *gr);
 static void change_passwd (struct group *gr);
 #endif
 static void log_gpasswd_failure (const char *suffix);
-static void log_gpasswd_failure_system (/*@null@*/MAYBE_UNUSED void *_1);
-static void log_gpasswd_failure_group (/*@null@*/MAYBE_UNUSED void *_1);
+static void log_gpasswd_failure_system (/*@null@*/void *);
+static void log_gpasswd_failure_group (/*@null@*/void *);
 #ifdef SHADOWGRP
-static void log_gpasswd_failure_gshadow (/*@null@*/MAYBE_UNUSED void *_1);
+static void log_gpasswd_failure_gshadow (/*@null@*/void *);
 #endif
 static void log_gpasswd_success (const char *suffix);
-static void log_gpasswd_success_system (/*@null@*/MAYBE_UNUSED void *_1);
-static void log_gpasswd_success_group (/*@null@*/MAYBE_UNUSED void *_1);
+static void log_gpasswd_success_system (/*@null@*/void *);
+static void log_gpasswd_success_group (/*@null@*/void *);
 
 /*
  * usage - display usage message
@@ -458,13 +458,13 @@ static void log_gpasswd_failure (const char *suffix)
 }
 
 static void
-log_gpasswd_failure_system(MAYBE_UNUSED void *_1)
+log_gpasswd_failure_system(void *)
 {
 	log_gpasswd_failure ("");
 }
 
 static void
-log_gpasswd_failure_group(MAYBE_UNUSED void *_1)
+log_gpasswd_failure_group(void *)
 {
 	char  buf[1024];
 
@@ -474,7 +474,7 @@ log_gpasswd_failure_group(MAYBE_UNUSED void *_1)
 
 #ifdef SHADOWGRP
 static void
-log_gpasswd_failure_gshadow(MAYBE_UNUSED void *_1)
+log_gpasswd_failure_gshadow(void *)
 {
 	char  buf[1024];
 
@@ -565,13 +565,13 @@ static void log_gpasswd_success (const char *suffix)
 }
 
 static void
-log_gpasswd_success_system(MAYBE_UNUSED void *_1)
+log_gpasswd_success_system(void *)
 {
 	log_gpasswd_success ("");
 }
 
 static void
-log_gpasswd_success_group(MAYBE_UNUSED void *_1)
+log_gpasswd_success_group(void *)
 {
 	char  buf[1024];
 

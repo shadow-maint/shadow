@@ -20,13 +20,13 @@
  * WRAPPERS
  **********************/
 struct passwd *
-__wrap_prefix_getpwnam(MAYBE_UNUSED uid_t _1)
+__wrap_prefix_getpwnam(uid_t)
 {
     return (struct passwd*) mock();
 }
 
 int
-__wrap_sd_uid_get_sessions(MAYBE_UNUSED uid_t _1, MAYBE_UNUSED int _2, MAYBE_UNUSED char ***_3)
+__wrap_sd_uid_get_sessions(uid_t, int, char ***)
 {
     return mock();
 }
@@ -34,7 +34,7 @@ __wrap_sd_uid_get_sessions(MAYBE_UNUSED uid_t _1, MAYBE_UNUSED int _2, MAYBE_UNU
 /***********************
  * TEST
  **********************/
-static void test_active_sessions_count_return_ok(MAYBE_UNUSED void ** _1)
+static void test_active_sessions_count_return_ok(void **)
 {
     int count;
     struct passwd *pw = malloc(sizeof(struct passwd));
@@ -47,7 +47,7 @@ static void test_active_sessions_count_return_ok(MAYBE_UNUSED void ** _1)
     assert_int_equal(count, 1);
 }
 
-static void test_active_sessions_count_prefix_getpwnam_failure(MAYBE_UNUSED void ** _1)
+static void test_active_sessions_count_prefix_getpwnam_failure(void **)
 {
     int count;
     struct passwd *pw = NULL;

@@ -14,8 +14,8 @@
 #include "attr.h"
 
 
-static void test_maxof(MAYBE_UNUSED void ** _1);
-static void test_minof(MAYBE_UNUSED void ** _1);
+static void test_maxof(void **);
+static void test_minof(void **);
 
 
 int
@@ -31,7 +31,7 @@ main(void)
 
 
 static void
-test_maxof(MAYBE_UNUSED void ** _1)
+test_maxof(void **)
 {
 	assert_true(maxof(long) == LONG_MAX);
 	assert_true(maxof(unsigned long) == ULONG_MAX);
@@ -44,7 +44,7 @@ test_maxof(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_minof(MAYBE_UNUSED void ** _1)
+test_minof(void **)
 {
 	assert_true(minof(long) == LONG_MIN);
 	assert_true(minof(unsigned long) == 0);
