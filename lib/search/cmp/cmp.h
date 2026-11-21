@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -12,6 +12,7 @@
 #define CMP(T)                                                        \
 (                                                                     \
 	_Generic((T){0},                                              \
+		short:          cmp_short,                            \
 		int:            cmp_int,                              \
 		long:           cmp_long,                             \
 		unsigned int:   cmp_uint,                             \
@@ -21,10 +22,25 @@
 
 
 /* Compatible with bsearch(3), lfind(3), and qsort(3).  */
+inline int cmp_short(const void *key, const void *elt);
 inline int cmp_int(const void *key, const void *elt);
 inline int cmp_long(const void *key, const void *elt);
 inline int cmp_uint(const void *key, const void *elt);
 inline int cmp_ulong(const void *key, const void *elt);
+
+
+inline int
+cmp_short(const void *key, const void *elt)
+{
+	const short  *k = key;
+	const short  *e = elt;
+
+	if (*k < *e)
+		return -1;
+	if (*k > *e)
+		return +1;
+	return 0;
+}
 
 
 inline int
