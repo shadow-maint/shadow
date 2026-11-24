@@ -8,11 +8,8 @@
     use_backend: dnf4
     name:
       - btrfs-progs
-      - cracklib-dicts
-      - dnf-plugins-core
       - expect
       - gawk
-      - libcmocka-devel
       - systemd-devel
     state: present
 
