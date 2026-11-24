@@ -20,6 +20,7 @@
 #include "attr.h"
 #include "fs/readlink/areadlink.h"
 #include "io/fprintf.h"
+#include "lsm/selinux/context.h"
 #include "prototypes.h"
 #include "defines.h"
 #ifdef WITH_SELINUX

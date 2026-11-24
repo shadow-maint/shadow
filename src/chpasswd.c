@@ -27,6 +27,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "io/fprintf.h"
+#include "lsm/selinux/check.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"

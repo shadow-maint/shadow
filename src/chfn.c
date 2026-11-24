@@ -26,6 +26,7 @@
 #include "fields.h"
 #include "getdef.h"
 #include "io/fprintf.h"
+#include "lsm/selinux/check.h"
 #include "nscd.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
