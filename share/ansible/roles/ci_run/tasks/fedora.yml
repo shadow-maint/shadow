@@ -50,7 +50,6 @@
     --with-sha-crypt
     --with-yescrypt
     --without-libbsd
-    --without-libcrack
     --without-sssd
   args:
     chdir: /usr/local/src/shadow/
