@@ -10,6 +10,18 @@
     command: "sleep 1d"
     privileged: "{{ privileged | default(false) }}"
 
+- name: Install Python 3.14 in Fedora container for Ansible compatibility
+  ansible.builtin.shell: podman exec {{ container_name | default('builder') }} dnf install -y python3.14
+  when: distribution == 'fedora'
+  args:
+    executable: /bin/bash
+
+- name: Set Python 3.14 as default for Fedora container
+  ansible.builtin.shell: podman exec {{ container_name | default('builder') }} ln -sf /usr/bin/python3.14 /usr/bin/python3
+  when: distribution == 'fedora'
+  args:
+    executable: /bin/bash
+
 - name: Prepare source tree
   ansible.builtin.shell: |
     podman exec {{ container_name | default('builder') }} rm -rf /usr/local/src/shadow

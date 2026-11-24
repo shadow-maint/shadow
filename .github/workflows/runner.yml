@@ -97,6 +97,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get -y install ansible
+        ansible --version
 
     - name: "Build container (${{ matrix.privileged && 'privileged' || 'unprivileged'}})"
       run: |

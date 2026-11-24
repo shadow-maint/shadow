@@ -71,7 +71,6 @@
     --with-selinux
     --with-sha-crypt
     --without-libbsd
-    --without-libcrack
     --without-sssd
   args:
     chdir: /usr/local/src/shadow/
