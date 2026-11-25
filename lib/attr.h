@@ -10,6 +10,12 @@
 #endif
 
 
+#if __has_c_attribute(deprecated)
+# define ATTR_DEPRECATED             [[deprecated]]
+#else
+# define ATTR_DEPRECATED
+#endif
+
 #if __has_c_attribute(maybe_unused)
 # define MAYBE_UNUSED                [[maybe_unused]]
 #else
