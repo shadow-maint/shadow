@@ -222,8 +222,6 @@ libshadow_la_SOURCES = \
 	string/sprintf/seprintf.h \
 	string/sprintf/stprintf.c \
 	string/sprintf/stprintf.h \
-	string/strchr/strchrcnt.c \
-	string/strchr/strchrcnt.h \
 	string/strchr/strchrscnt.c \
 	string/strchr/strchrscnt.h \
 	string/strchr/strnul.c \
