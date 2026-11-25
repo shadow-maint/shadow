@@ -8,6 +8,8 @@ import jc
 from pytest_mh import MultihostHost, MultihostUtility
 from pytest_mh.conn import Process
 
+from .password import Algorithm, PasswordUtils
+
 __all__ = [
     "UnixObject",
     "UnixUser",
@@ -22,6 +24,8 @@ __all__ = [
     "LinuxToolsUtils",
     "KillCommand",
     "GetentUtils",
+    "PasswordUtils",
+    "Algorithm",
 ]
 
 
@@ -564,6 +568,7 @@ class LinuxToolsUtils(MultihostUtility[MultihostHost]):
         super().__init__(host)
 
         self.getent: GetentUtils = GetentUtils(host)
+        self.password: PasswordUtils = PasswordUtils()
         """
         Run ``getent`` command.
         """
