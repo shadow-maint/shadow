@@ -197,7 +197,7 @@ static bool shell_is_listed (const char *sh, bool process_selinux)
 
 #else /* without HAVE_VENDORDIR */
 
-static bool shell_is_listed (const char *sh, MAYBE_UNUSED bool _1)
+static bool shell_is_listed (const char *sh, bool)
 {
 	bool found = false;
 	char *cp;

@@ -25,7 +25,7 @@
 
 
 static void
-login_exit(MAYBE_UNUSED int _1)
+login_exit(int)
 {
 	_exit (EXIT_FAILURE);
 }
