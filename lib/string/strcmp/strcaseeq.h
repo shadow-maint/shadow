@@ -10,9 +10,15 @@
 
 #include <strings.h>
 
+#include "attr.h"
+#include "pragma.h"
+
 
 // strcaseeq - strings case-insensitive equal
-#define strcaseeq(s1, s2)  (!strcasecmp(s1, s2))
+#define strcaseeq(s1, s2)  (DEPRECATED(strcasecmp(s1, s2)) == 0)
+
+
+ATTR_DEPRECATED typeof(strcasecmp)  strcasecmp;
 
 
 #endif  // include guard

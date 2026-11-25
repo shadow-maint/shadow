@@ -13,6 +13,9 @@
 #include "attr.h"
 
 
+ATTR_DEPRECATED typeof(strtok)  strtok;
+
+
 ATTR_STRING(1) ATTR_STRING(2)
 inline char *stpsep(char *s, const char *delim);
 

@@ -37,7 +37,7 @@ areadlink(const char *link)
 		if (NULL == buf)
 			return NULL;
 
-		len = readlinknul(link, buf, size);
+		len = DEPRECATED(readlinknul(link, buf, size));
 		if (len != -1)
 			return buf;
 
