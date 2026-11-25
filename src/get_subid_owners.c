@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 
 
+#include <stdint.h>
 #include <stdio.h>
 
 #include "atoi/getnum.h"
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	for (i = 0; i < n; i++) {
-		printf("%d\n", uids[i]);
+		printf("%jd\n", (intmax_t) uids[i]);
 	}
 	free(uids);
 	return 0;
