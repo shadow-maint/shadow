@@ -52,7 +52,6 @@
 <!ENTITY PASS_MIN_LEN          SYSTEM "login.defs.d/PASS_MIN_LEN.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
-<!ENTITY PORTTIME_CHECKS_ENAB  SYSTEM "login.defs.d/PORTTIME_CHECKS_ENAB.xml">
 <!ENTITY QUOTAS_ENAB           SYSTEM "login.defs.d/QUOTAS_ENAB.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
 <!ENTITY SULOG_FILE            SYSTEM "login.defs.d/SULOG_FILE.xml">
@@ -221,7 +220,6 @@
         existing accounts.
       </para>
       &PASS_MIN_LEN;
-      &PORTTIME_CHECKS_ENAB;
       &QUOTAS_ENAB;
       &SHA_CRYPT_MIN_ROUNDS; <!-- documents also SHA_CRYPT_MAX_ROUNDS -->
       &SULOG_FILE;
@@ -387,7 +385,7 @@
 	    <phrase condition="no_pam">LOGIN_STRING</phrase>
 	    LOGIN_TIMEOUT LOG_OK_LOGINS LOG_UNKFAIL_ENAB
 	    <phrase condition="no_pam">MAIL_CHECK_ENAB MAIL_DIR MAIL_FILE
-	    MOTD_FILE NOLOGINS_FILE PORTTIME_CHECKS_ENAB
+	    MOTD_FILE NOLOGINS_FILE
 	    QUOTAS_ENAB</phrase>
 	    TTYGROUP TTYPERM TTYTYPE_FILE
 	    <phrase condition="no_pam">ULIMIT UMASK</phrase>
