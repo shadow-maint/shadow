@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_STRTOK_ASTRSEP2LS_H_
-#define SHADOW_INCLUDE_LIB_STRING_STRTOK_ASTRSEP2LS_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_STRSEP_ASTRSEP2LS_H_
+#define SHADOW_INCLUDE_LIB_STRING_STRSEP_ASTRSEP2LS_H_
 
 
 #include "config.h"
@@ -14,7 +14,7 @@
 #include "attr.h"
 #include "exit_if_null.h"
 #include "string/strchr/strchrscnt.h"
-#include "string/strtok/strsep2ls.h"
+#include "string/strsep/strsep2ls.h"
 
 
 // xastrsep2ls - exit-on-error allocate string separate to list-of-strings
