@@ -4,13 +4,10 @@ Test groupadd
 
 from __future__ import annotations
 
-import re
-
 import pytest
 from passlib.hash import sha512_crypt
 from pytest_mh.conn import ProcessError
 
-from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -40,7 +37,7 @@ def test_groupadd__add_group(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
-        assert gshadow_entry.password == "!", "Incorrect password"
+        shadow.tools.password.assert_locked(gshadow_entry.password)
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
@@ -119,7 +116,7 @@ def test_groupadd__set_password(shadow: Shadow):
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
         assert gshadow_entry.password is not None, "Password should not be None"
-        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+        shadow.tools.password.assert_hash(gshadow_entry.password)
 
 
 @pytest.mark.topology(KnownTopology.Shadow)

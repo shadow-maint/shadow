@@ -4,12 +4,11 @@ Test pwconv
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 import pytest
 
-from framework.misc import days_since_epoch, shadow_password_pattern
+from framework.misc import days_since_epoch
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -43,7 +42,7 @@ def test_pwconv__basic_conversion(shadow: Shadow):
 
     passwd_entry = shadow.tools.getent.passwd("tuser1")
     assert passwd_entry is not None, "tuser1 should still exist in passwd"
-    assert passwd_entry.password == "x", "tuser1 passwd should have 'x' after pwconv"
+    shadow.tools.password.assert_in_shadow(passwd_entry.password)
 
     assert shadow.host.fs.exists("/etc/shadow"), "/etc/shadow should exist"
     shadow_stat = shadow.host.fs.stat("/etc/shadow")
@@ -54,7 +53,7 @@ def test_pwconv__basic_conversion(shadow: Shadow):
     assert shadow_root is not None, "User should be found"
     assert shadow_root.name == "root", "Incorrect username"
     assert shadow_root.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), shadow_root.password), "Incorrect password"
+    shadow.tools.password.assert_hash(shadow_root.password)
     assert shadow_root.last_changed == days_since_epoch(), "Incorrect last changed"
     assert shadow_root.max_days == 99999, "Incorrect max days"
     assert shadow_root.warn_days == 7, "Incorrect warn days"
@@ -62,7 +61,7 @@ def test_pwconv__basic_conversion(shadow: Shadow):
     shadow_daemon = shadow.tools.getent.shadow("daemon")
     assert shadow_daemon is not None, "User should be found"
     assert shadow_daemon.name == "daemon", "Incorrect username"
-    assert shadow_daemon.password == "*", "Incorrect password"
+    shadow.tools.password.assert_no_password(shadow_daemon.password)
     assert shadow_daemon.last_changed == days_since_epoch(), "Incorrect last changed"
     assert shadow_daemon.max_days == 99999, "Incorrect max days"
     assert shadow_daemon.warn_days == 7, "Incorrect warn days"
@@ -71,7 +70,7 @@ def test_pwconv__basic_conversion(shadow: Shadow):
     assert shadow_tuser1 is not None, "User should be found"
     assert shadow_tuser1.name == "tuser1", "Incorrect username"
     assert shadow_tuser1.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), shadow_tuser1.password), "Incorrect password"
+    shadow.tools.password.assert_hash(shadow_tuser1.password)
     assert shadow_tuser1.last_changed == days_since_epoch(), "Incorrect last changed"
     assert shadow_tuser1.max_days == 99999, "Incorrect max days"
     assert shadow_tuser1.warn_days == 7, "Incorrect warn days"

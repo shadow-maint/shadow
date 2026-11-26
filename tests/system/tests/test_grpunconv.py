@@ -4,12 +4,10 @@ Test grpunconv
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 import pytest
 
-from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -48,18 +46,18 @@ def test_grpunconv__basic_conversion(shadow: Shadow):
     group_root = shadow.tools.getent.group("root")
     assert group_root is not None, "root should exist in group"
     assert group_root.name == "root", "Incorrect groupname"
-    assert group_root.password == "*", "Incorrect password"
+    shadow.tools.password.assert_no_password(group_root.password)
     assert group_root.gid == 0, "Incorrect GID"
 
     group_daemon = shadow.tools.getent.group("daemon")
     assert group_daemon is not None, "daemon should exist in group"
     assert group_daemon.name == "daemon", "Incorrect groupname"
-    assert group_daemon.password == "*", "Incorrect password"
+    shadow.tools.password.assert_no_password(group_daemon.password)
     assert group_daemon.gid == 1, "Incorrect GID"
 
     group_tgroup1 = shadow.tools.getent.group("tgroup1")
     assert group_tgroup1 is not None, "tgroup1 should exist in group"
     assert group_tgroup1.name == "tgroup1", "Incorrect groupname"
     assert group_tgroup1.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), group_tgroup1.password), "Incorrect password"
+    shadow.tools.password.assert_hash(group_tgroup1.password)
     assert group_tgroup1.gid == 1001, "Incorrect GID"

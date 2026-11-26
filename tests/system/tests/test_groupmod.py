@@ -4,13 +4,10 @@ Test groupmod
 
 from __future__ import annotations
 
-import re
-
 import pytest
 from passlib.hash import sha512_crypt
 from pytest_mh.conn import ProcessError
 
-from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -42,7 +39,7 @@ def test_groupmod__change_gid(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
-        assert gshadow_entry.password == "!", "Incorrect password"
+        shadow.tools.password.assert_locked(gshadow_entry.password)
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
@@ -425,7 +422,7 @@ def test_groupmod__set_password(shadow: Shadow):
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
         assert gshadow_entry.password is not None, "Password should not be None"
-        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+        shadow.tools.password.assert_hash(gshadow_entry.password)
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
@@ -461,7 +458,7 @@ def test_groupmod__set_password_no_gshadow_entry(shadow: Shadow):
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
         assert gshadow_entry.password is not None, "Password should not be None"
-        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+        shadow.tools.password.assert_hash(gshadow_entry.password)
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
@@ -494,7 +491,7 @@ def test_groupmod__set_password_no_gshadow_file(shadow: Shadow):
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tgroup", "Incorrect groupname"
     assert group_entry.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), group_entry.password), "Incorrect password"
+    shadow.tools.password.assert_hash(group_entry.password)
 
     gshadow_file = shadow.fs.exists("/etc/gshadow")
     assert not gshadow_file, "/etc/gshadow file should not be found"
@@ -881,7 +878,7 @@ def test_groupmod__change_gid_and_group_name_and_password(shadow: Shadow):
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup2", "Incorrect groupname"
         assert gshadow_entry.password is not None, "Password should not be None"
-        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+        shadow.tools.password.assert_hash(gshadow_entry.password)
 
     old_group_entry = shadow.tools.getent.group("tgroup1")
     assert old_group_entry is None, "Group should not be found"
@@ -1199,14 +1196,14 @@ def test_groupmod__set_password_non_shadow_password(shadow: Shadow):
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tgroup", "Incorrect groupname"
     assert group_entry.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), group_entry.password), "Incorrect password"
+    shadow.tools.password.assert_hash(group_entry.password)
 
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")
         assert gshadow_entry is not None, "gshadow entry should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
         assert gshadow_entry.password is not None, "Password should not be None"
-        assert re.match(shadow_password_pattern(), gshadow_entry.password), "Incorrect password"
+        shadow.tools.password.assert_hash(gshadow_entry.password)
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
@@ -1239,7 +1236,7 @@ def test_groupmod__set_password_non_shadow_password_no_gshadow_entry(shadow: Sha
     assert group_entry is not None, "Group should be found"
     assert group_entry.name == "tgroup", "Incorrect groupname"
     assert group_entry.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), group_entry.password), "Incorrect password"
+    shadow.tools.password.assert_hash(group_entry.password)
 
     if shadow.host.features["gshadow"]:
         gshadow_entry = shadow.tools.getent.gshadow("tgroup")

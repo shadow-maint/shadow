@@ -4,12 +4,10 @@ Test pwunconv
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 import pytest
 
-from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -48,7 +46,7 @@ def test_pwunconv__basic_conversion(shadow: Shadow):
     assert passwd_root is not None, "root should exist in passwd"
     assert passwd_root.name == "root", "Incorrect username"
     assert passwd_root.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), passwd_root.password), "Incorrect password"
+    shadow.tools.password.assert_hash(passwd_root.password)
     assert passwd_root.uid == 0, "Incorrect UID"
     assert passwd_root.gid == 0, "Incorrect GID"
     assert passwd_root.home == "/root", "Incorrect home"
@@ -57,7 +55,7 @@ def test_pwunconv__basic_conversion(shadow: Shadow):
     passwd_daemon = shadow.tools.getent.passwd("daemon")
     assert passwd_daemon is not None, "daemon should exist in passwd"
     assert passwd_daemon.name == "daemon", "Incorrect username"
-    assert passwd_daemon.password == "*", "Incorrect password"
+    shadow.tools.password.assert_no_password(passwd_daemon.password)
     assert passwd_daemon.uid == 1, "Incorrect UID"
     assert passwd_daemon.gid == 1, "Incorrect GID"
     assert passwd_daemon.home == "/usr/sbin", "Incorrect home"
@@ -67,7 +65,7 @@ def test_pwunconv__basic_conversion(shadow: Shadow):
     assert passwd_tuser1 is not None, "tuser1 should exist in passwd"
     assert passwd_tuser1.name == "tuser1", "Incorrect username"
     assert passwd_tuser1.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), passwd_tuser1.password), "Incorrect password"
+    shadow.tools.password.assert_hash(passwd_tuser1.password)
     assert passwd_tuser1.uid == 1001, "Incorrect UID"
     assert passwd_tuser1.gid == 1001, "Incorrect GID"
     assert passwd_tuser1.home == "/home/tuser1", "Incorrect home"

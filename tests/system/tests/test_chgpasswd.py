@@ -4,11 +4,8 @@ Test chgpasswd
 
 from __future__ import annotations
 
-import re
-
 import pytest
 
-from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -38,13 +35,13 @@ def test_chgpasswd__change_passwords_interactive(shadow: Shadow):
     assert gshadow_entry1 is not None, "tgroup1 should be found"
     assert gshadow_entry1.name == "tgroup1", "Incorrect groupname"
     assert gshadow_entry1.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), gshadow_entry1.password), "Incorrect password"
+    shadow.tools.password.assert_hash(gshadow_entry1.password)
 
     gshadow_entry2 = shadow.tools.getent.gshadow("tgroup2")
     assert gshadow_entry2 is not None, "tgroup2 should be found"
     assert gshadow_entry2.name == "tgroup2", "Incorrect groupname"
     assert gshadow_entry2.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), gshadow_entry2.password), "Incorrect password"
+    shadow.tools.password.assert_hash(gshadow_entry2.password)
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
@@ -74,10 +71,10 @@ def test_chgpasswd__change_passwords_from_file(shadow: Shadow):
     assert gshadow_entry1 is not None, "tgroup1 should be found"
     assert gshadow_entry1.name == "tgroup1", "Incorrect groupname"
     assert gshadow_entry1.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), gshadow_entry1.password), "Incorrect password"
+    shadow.tools.password.assert_hash(gshadow_entry1.password)
 
     gshadow_entry2 = shadow.tools.getent.gshadow("tgroup2")
     assert gshadow_entry2 is not None, "tgroup2 should be found"
     assert gshadow_entry2.name == "tgroup2", "Incorrect groupname"
     assert gshadow_entry2.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), gshadow_entry2.password), "Incorrect password"
+    shadow.tools.password.assert_hash(gshadow_entry2.password)

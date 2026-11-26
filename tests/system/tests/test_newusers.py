@@ -35,7 +35,7 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
     passwd_entry = shadow.tools.getent.passwd("tuser1")
     assert passwd_entry is not None, "tuser1 user should be found in passwd"
     assert passwd_entry.name == "tuser1", "Incorrect username"
-    assert passwd_entry.password == "x", "Incorrect password"
+    shadow.tools.password.assert_in_shadow(passwd_entry.password)
     assert passwd_entry.uid == 1001, "Incorrect UID"
     assert passwd_entry.gid == 1001, "Incorrect GID"
     assert passwd_entry.gecos == "Test User One", "Incorrect GECOS"
@@ -59,14 +59,14 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tuser1")
         assert gshadow_entry is not None, "tuser1 group should be found"
         assert gshadow_entry.name == "tuser1", "Incorrect group name"
-        assert gshadow_entry.password == "*", "Incorrect password"
+        shadow.tools.password.assert_no_password(gshadow_entry.password)
 
     assert shadow.fs.exists("/home/tuser1"), "tuser1 home folder should exist"
 
     passwd_entry = shadow.tools.getent.passwd("tuser2")
     assert passwd_entry is not None, "tuser2 user should be found in passwd"
     assert passwd_entry.name == "tuser2", "Incorrect username"
-    assert passwd_entry.password == "x", "Incorrect password"
+    shadow.tools.password.assert_in_shadow(passwd_entry.password)
     assert passwd_entry.uid == 1002, "Incorrect UID"
     assert passwd_entry.gid == 1002, "Incorrect GID"
     assert passwd_entry.gecos == "Test User Two", "Incorrect GECOS"
@@ -90,7 +90,7 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tuser2")
         assert gshadow_entry is not None, "tuser2 group should be found"
         assert gshadow_entry.name == "tuser2", "Incorrect group name"
-        assert gshadow_entry.password == "*", "Incorrect password"
+        shadow.tools.password.assert_no_password(gshadow_entry.password)
 
     assert shadow.fs.exists("/home/tuser2"), "tuser2 home folder should exist"
 
@@ -121,7 +121,7 @@ def test_newusers__create_users_from_file(shadow: Shadow):
     passwd_entry = shadow.tools.getent.passwd("tuser1")
     assert passwd_entry is not None, "tuser1 user should be found in passwd"
     assert passwd_entry.name == "tuser1", "Incorrect username"
-    assert passwd_entry.password == "x", "Incorrect password"
+    shadow.tools.password.assert_in_shadow(passwd_entry.password)
     assert passwd_entry.uid == 1001, "Incorrect UID"
     assert passwd_entry.gid == 1001, "Incorrect GID"
     assert passwd_entry.gecos == "Test User One", "Incorrect GECOS"
@@ -145,14 +145,14 @@ def test_newusers__create_users_from_file(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tuser1")
         assert gshadow_entry is not None, "tuser1 group should be found"
         assert gshadow_entry.name == "tuser1", "Incorrect group name"
-        assert gshadow_entry.password == "*", "Incorrect password"
+        shadow.tools.password.assert_no_password(gshadow_entry.password)
 
     assert shadow.fs.exists("/home/tuser1"), "tuser1 home folder should exist"
 
     passwd_entry = shadow.tools.getent.passwd("tuser2")
     assert passwd_entry is not None, "tuser2 user should be found in passwd"
     assert passwd_entry.name == "tuser2", "Incorrect username"
-    assert passwd_entry.password == "x", "Incorrect password"
+    shadow.tools.password.assert_in_shadow(passwd_entry.password)
     assert passwd_entry.uid == 1002, "Incorrect UID"
     assert passwd_entry.gid == 1002, "Incorrect GID"
     assert passwd_entry.gecos == "Test User Two", "Incorrect GECOS"
@@ -176,6 +176,6 @@ def test_newusers__create_users_from_file(shadow: Shadow):
         gshadow_entry = shadow.tools.getent.gshadow("tuser2")
         assert gshadow_entry is not None, "tuser2 group should be found"
         assert gshadow_entry.name == "tuser2", "Incorrect group name"
-        assert gshadow_entry.password == "*", "Incorrect password"
+        shadow.tools.password.assert_no_password(gshadow_entry.password)
 
     assert shadow.fs.exists("/home/tuser2"), "tuser2 home folder should exist"
