@@ -19,10 +19,6 @@ AC_SUBST([LIBSUBID_ABI_MAJOR], [libsubid_abi_major])
 AC_SUBST([LIBSUBID_ABI_MINOR], [libsubid_abi_minor])
 AC_SUBST([LIBSUBID_ABI_MICRO], [libsubid_abi_micro])
 
-dnl Some hacks...
-test "x$prefix" = "xNONE" && prefix="/usr"
-test "X$prefix" = "X/usr" && exec_prefix=""
-
 AC_USE_SYSTEM_EXTENSIONS
 
 AC_ENABLE_STATIC
@@ -96,9 +92,6 @@ AC_CACHE_CHECK([location of faillog/lastlog/wtmp], [shadow_cv_logdir],
 done])
 AC_DEFINE_UNQUOTED([FAILLOG_FILE], ["$shadow_cv_logdir/faillog"],
 	[Path for faillog file.])
-
-AC_DEFINE_UNQUOTED([PASSWD_PROGRAM], ["$exec_prefix/bin/passwd"],
-	[Path to passwd program.])
 
 AC_ARG_ENABLE([shadowgrp],
 	[AS_HELP_STRING([--enable-shadowgrp], [enable shadow group support @<:@default=yes@:>@])],

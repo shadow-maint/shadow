@@ -2,13 +2,13 @@
 EXTRA_DIST = \
 	.indent.pro
 
-ubindir = ${prefix}/bin
-usbindir = ${prefix}/sbin
+ubindir = $(exec_prefix)/bin
+usbindir = $(exec_prefix)/sbin
 suidperms = 4755
 sgidperms = 2755
 
 AM_CPPFLAGS = \
-	-I${top_srcdir}/lib \
+	-I$(top_srcdir)/lib \
 	-I$(top_srcdir) \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
 	$(ECONF_CPPFLAGS)
@@ -24,7 +24,7 @@ AM_CFLAGS = $(LIBBSD_CFLAGS)
 #
 # also /lib/libshadow.so.x.xx (if any) could be moved to /usr/lib
 # and installation would be much simpler (just two directories,
-# $prefix/bin and $prefix/sbin, no install-data hacks...)
+# $exec_prefix/bin and $exec_prefix/sbin, no install-data hacks...)
 
 bin_PROGRAMS   = login
 sbin_PROGRAMS  = nologin
