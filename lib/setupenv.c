@@ -25,6 +25,7 @@
 #include "getdef.h"
 #include "io/fgets/fgets.h"
 #include "shadowlog.h"
+#include "string/ctype/isascii.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -60,7 +61,7 @@ static void read_env_file (const char *filename)
 
 		cp = buf;
 		/* ignore whitespace and comments */
-		cp = stpspn(cp, " \t");
+		cp = stpspn(cp, CTYPE_BLANK_C);
 		if (streq(cp, "") || strprefix(cp, "#")) {
 			continue;
 		}
@@ -72,7 +73,7 @@ static void read_env_file (const char *filename)
 		val = stpsep(cp, "=");
 		if (val == NULL)
 			continue;
-		if (strpbrk(name, " \t"))
+		if (strpbrk(name, CTYPE_BLANK_C))
 			continue;
 		/*
 		 * XXX - should handle quotes, backslash escapes, etc.

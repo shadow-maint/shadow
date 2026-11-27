@@ -23,7 +23,8 @@
 #define CTYPE_UPPER_C     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 #define CTYPE_DIGIT_C     "0123456789"
 #define CTYPE_PUNCT_C     "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
-#define CTYPE_SPACE_C     " \t\n\v\f\r"
+#define CTYPE_BLANK_C     " \t"
+#define CTYPE_SPACE_C     CTYPE_BLANK_C "\n\v\f\r"
 #define CTYPE_ALPHA_C     CTYPE_LOWER_C CTYPE_UPPER_C
 #define CTYPE_ALNUM_C     CTYPE_ALPHA_C CTYPE_DIGIT_C
 #define CTYPE_GRAPH_C     CTYPE_ALNUM_C CTYPE_PUNCT_C
@@ -39,6 +40,7 @@
 #define isupper_c(c)      (!streq(strchrnul(CTYPE_UPPER_C, c), ""))
 #define isdigit_c(c)      (!streq(strchrnul(CTYPE_DIGIT_C, c), ""))
 #define ispunct_c(c)      (!streq(strchrnul(CTYPE_PUNCT_C, c), ""))
+#define isblank_c(c)      (!streq(strchrnul(CTYPE_BLANK_C, c), ""))
 #define isspace_c(c)      (!streq(strchrnul(CTYPE_SPACE_C, c), ""))
 #define isalpha_c(c)      (!streq(strchrnul(CTYPE_ALPHA_C, c), ""))
 #define isalnum_c(c)      (!streq(strchrnul(CTYPE_ALNUM_C, c), ""))
