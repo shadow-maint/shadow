@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 #include "defines.h"
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "fs/readlink/readlinknul.h"
 

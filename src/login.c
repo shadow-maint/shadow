@@ -26,7 +26,7 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "chkname.h"
 #include "defines.h"

@@ -21,7 +21,7 @@
 #include <sys/types.h>
 
 #include "agetpass.h"
-#include "alloc/malloc.h"
+#include "alloc/alloc.h"
 #include "attr.h"
 #include "defines.h"
 /*@-exitarg@*/

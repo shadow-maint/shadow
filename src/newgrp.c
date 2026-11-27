@@ -17,8 +17,7 @@
 #include <sys/types.h>
 
 #include "agetpass.h"
-#include "alloc/malloc.h"
-#include "alloc/realloc.h"
+#include "alloc/alloc.h"
 #include "chkname.h"
 #include "defines.h"
 /*@-exitarg@*/
