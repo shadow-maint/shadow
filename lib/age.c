@@ -166,7 +166,7 @@ void agecheck (/*@null@*/const struct spwd *sp)
 		return;
 	}
 
-	remain = addsl(sp->sp_lstchg, sp->sp_max, -now);
+	remain = adds_T(long, sp->sp_lstchg, sp->sp_max, -now);
 
 	if (remain <= sp->sp_warn) {
 		if (remain > 1) {

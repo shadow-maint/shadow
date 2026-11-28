@@ -75,7 +75,7 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	if (   (sp->sp_lstchg > 0)
 	    && (sp->sp_max >= 0)
 	    && (sp->sp_inact >= 0)
-	    && (now >= addsl(sp->sp_lstchg, sp->sp_max, sp->sp_inact)))
+	    && (now >= adds_T(long, sp->sp_lstchg, sp->sp_max, sp->sp_inact)))
 	{
 		return 2;
 	}
@@ -96,7 +96,7 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	 * the password has expired.
 	 */
 
-	if (now >= addsl(sp->sp_lstchg, sp->sp_max))
+	if (now >= adds_T(long, sp->sp_lstchg, sp->sp_max))
 		return 1;
 
 	return 0;
