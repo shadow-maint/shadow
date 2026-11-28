@@ -29,7 +29,7 @@ def test_vipw__add_user_to_passwd(shadow: Shadow):
     passwd_entry = shadow.tools.getent.passwd("tuser")
     assert passwd_entry is not None, "User should be found"
     assert passwd_entry.name == "tuser", "Incorrect username"
-    assert passwd_entry.password == "x", "Incorrect password"
+    shadow.tools.password.assert_in_shadow(passwd_entry.password)
     assert passwd_entry.uid == 1001, "Incorrect UID"
     assert passwd_entry.gid == 1001, "Incorrect GID"
     assert passwd_entry.home == "/home/tuser", "Incorrect home"
@@ -56,7 +56,7 @@ def test_vipw__add_user_to_shadow(shadow: Shadow):
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.name == "tuser", "Incorrect username"
     assert shadow_entry.password is not None, "Password should not be None"
-    assert shadow_entry.password == "!", "Incorrect password"
+    shadow.tools.password.assert_locked(shadow_entry.password)
     assert shadow_entry.last_changed == 20342, "Incorrect last changed"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
@@ -104,4 +104,4 @@ def test_vipw__add_group_to_gshadow(shadow: Shadow):
     gshadow_entry = shadow.tools.getent.gshadow("tgroup")
     assert gshadow_entry is not None, "Group should be found"
     assert gshadow_entry.name == "tgroup", "Incorrect groupname"
-    assert gshadow_entry.password == "!", "Incorrect password"
+    shadow.tools.password.assert_locked(gshadow_entry.password)

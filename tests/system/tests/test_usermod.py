@@ -265,7 +265,7 @@ def test_usermod__unlock_password(shadow: Shadow):
     shadow_entry = shadow.tools.getent.shadow("tuser1")
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.password is not None, "Password should not be None"
-    assert shadow_entry.password.startswith("!"), "Password should be locked with ! prefix"
+    shadow.tools.password.assert_locked_hash(shadow_entry.password)
     assert shadow_entry.password == f"!{password_hash}", "Password should have ! prefix when locked"
 
     shadow.usermod("-U tuser1")

@@ -4,11 +4,9 @@ Test passwd
 
 from __future__ import annotations
 
-import re
-
 import pytest
 
-from framework.misc import days_since_epoch, shadow_password_pattern
+from framework.misc import days_since_epoch
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -35,7 +33,7 @@ def test_passwd__change_password_as_root_with_stdin(shadow: Shadow):
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.name == "tuser", "Incorrect username"
     assert shadow_entry.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), shadow_entry.password), "Incorrect password"
+    shadow.tools.password.assert_hash(shadow_entry.password)
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
@@ -63,7 +61,7 @@ def test_passwd__change_password_as_root_interactive(shadow: Shadow):
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.name == "tuser", "Incorrect username"
     assert shadow_entry.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), shadow_entry.password), "Incorrect password"
+    shadow.tools.password.assert_hash(shadow_entry.password)
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
@@ -91,4 +89,4 @@ def test_passwd__lock_password(shadow: Shadow):
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.name == "tuser", "Incorrect username"
     assert shadow_entry.password is not None, "Password should not be None"
-    assert shadow_entry.password.startswith("!"), "Password should be locked"
+    shadow.tools.password.assert_locked(shadow_entry.password)

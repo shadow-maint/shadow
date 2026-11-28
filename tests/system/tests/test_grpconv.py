@@ -4,12 +4,10 @@ Test grpconv
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 import pytest
 
-from framework.misc import shadow_password_pattern
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -45,7 +43,7 @@ def test_grpconv__basic_conversion(shadow: Shadow):
     group_entry = shadow.tools.getent.group("tgroup1")
     assert group_entry is not None, "tgroup1 should exist in group"
     assert group_entry.name == "tgroup1", "Incorrect groupname"
-    assert group_entry.password == "x", "tgroup1 group should have 'x' after grpconv"
+    shadow.tools.password.assert_in_shadow(group_entry.password)
     assert group_entry.gid == 1001, "Incorrect GID"
 
     assert shadow.host.fs.exists("/etc/gshadow"), "/etc/gshadow should exist"
@@ -56,15 +54,15 @@ def test_grpconv__basic_conversion(shadow: Shadow):
     gshadow_root = shadow.tools.getent.gshadow("root")
     assert gshadow_root is not None, "root should exist in gshadow"
     assert gshadow_root.name == "root", "Incorrect groupname"
-    assert gshadow_root.password == "*", "Incorrect password"
+    shadow.tools.password.assert_no_password(gshadow_root.password)
 
     gshadow_daemon = shadow.tools.getent.gshadow("daemon")
     assert gshadow_daemon is not None, "daemon should exist in gshadow"
     assert gshadow_daemon.name == "daemon", "Incorrect groupname"
-    assert gshadow_daemon.password == "*", "Incorrect password"
+    shadow.tools.password.assert_no_password(gshadow_daemon.password)
 
     gshadow_tgroup1 = shadow.tools.getent.gshadow("tgroup1")
     assert gshadow_tgroup1 is not None, "tgroup1 should exist in gshadow"
     assert gshadow_tgroup1.name == "tgroup1", "Incorrect groupname"
     assert gshadow_tgroup1.password is not None, "Password should not be None"
-    assert re.match(shadow_password_pattern(), gshadow_tgroup1.password), "Incorrect password"
+    shadow.tools.password.assert_hash(gshadow_tgroup1.password)
