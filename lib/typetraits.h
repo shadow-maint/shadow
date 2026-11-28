@@ -35,15 +35,16 @@
 )
 
 
-#define CQchar_of(s)  typeof                                          \
+#define Qchar_of(Q, s)   typeof                                       \
 (                                                                     \
 	_Generic(s,                                                   \
-		const char *:  (const char){0},                       \
-		const void *:  (const char){0},                       \
-		char *:        (char){0},                             \
-		void *:        (char){0}                              \
+		Q char *:  (Q char){0},                               \
+		Q void *:  (Q char){0},                               \
+		char *:    (char){0},                                 \
+		void *:    (char){0}                                  \
 	)                                                             \
 )
+#define CQchar_of(s)     Qchar_of(const, s)
 
 
 #endif  // include guard
