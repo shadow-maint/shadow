@@ -11,30 +11,25 @@
 
 #include <memory.h>
 #include <stddef.h>
-#include <strings.h>
 
 #include "sizeof.h"
+#include "typetraits.h"
 
 
 // memzero_explicit_a - memory zero explicit array
 #define memzero_explicit_a(arr)  memzero_explicit(arr, sizeof_a(arr))
 
-
-inline void *memzero_explicit(void *ptr, size_t size);
-
-
 // memzero_explicit - memory zero explicit
-inline void *
-memzero_explicit(void *ptr, size_t size)
+#define memzero_explicit(p, ...)  ((QVoid_of(p) *) memzero_explicit_(p, __VA_ARGS__))
+
+
+inline volatile void *memzero_explicit_(volatile void *ptr, size_t size);
+
+
+inline volatile void *
+memzero_explicit_(volatile void *ptr, size_t size)
 {
-#if defined(HAVE_MEMSET_EXPLICIT)
-	memset_explicit(ptr, 0, size);
-#elif defined(HAVE_EXPLICIT_BZERO)
-	explicit_bzero(ptr, size);
-#else
-	bzero(ptr, size);
-	__asm__ __volatile__ ("" : : "r"(ptr) : "memory");
-#endif
+	explicit_bzero((void *) ptr, size);
 	return ptr;
 }
 

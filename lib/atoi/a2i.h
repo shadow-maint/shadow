@@ -20,10 +20,10 @@
 // a2i - alpha to integer
 #define a2i(T, n, s, endp, base, min, max)                            \
 ({                                                                    \
-	T            *n_ = n;                                         \
-	QChar_of(s)  **endp_ = endp;                                  \
-	T            min_ = DEFARG(minof(T), min);                    \
-	T            max_ = DEFARG(maxof(T), max);                    \
+	T             *n_ = n;                                        \
+	CQchar_of(s)  **endp_ = endp;                                 \
+	T             min_ = DEFARG(minof(T), min);                   \
+	T             max_ = DEFARG(maxof(T), max);                   \
 	                                                              \
 	int  status;                                                  \
 	                                                              \
