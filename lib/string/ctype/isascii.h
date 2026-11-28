@@ -11,7 +11,7 @@
 #include <string.h>
 
 #include "string/strcmp/streq.h"
-#include "string/strspn/stpspn.h"
+#include "string/strspn/strspn.h"
 
 
 #define CTYPE_CNTRL_C                                                 \
