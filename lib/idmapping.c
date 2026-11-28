@@ -21,6 +21,7 @@
 #include "alloc/malloc.h"
 #include "atoi/a2i.h"
 #include "attr.h"
+#include "fs/open/open.h"
 #include "idmapping.h"
 #include "io/fprintf.h"
 #include "prototypes.h"
@@ -207,7 +208,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	}
 
 	/* Write the mapping to the mapping file */
-	fd = openat(proc_dir_fd, map_file, O_WRONLY);
+	fd = samedev_openat(proc_dir_fd, map_file, O_WRONLY);
 	if (fd < 0) {
 		fprinte(log_get_logfd(), _("%s: open of %s failed"),
 			log_get_progname(), map_file);
